@@ -30,8 +30,10 @@ def create_story(item):
         item['linkurl'] = item.get('url')
         item['slug'] = slug
         item['tags'] = []
-        del item['time']
-        del item['url']
+        if item.get('time', None):
+            del item['time']
+        if item.get('url', None):
+            del item['url']
         f.write(TEMPLATE.format(front_matter=yaml.dump(item).strip(), content=""))
 
 
