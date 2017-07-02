@@ -1,25 +1,19 @@
 {{ define "title" }}{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ end }}
-
 {{ define "main" }}
-<div class="row">
-  <div class="col-md-8">
-
-    {{ if not .IsHome }}
-    <header class="page-header">
-      <h1>{{ .Title }}</h1>
-    </header>
-    {{ end }}
-
-    <ul class="p-articles">
-      {{ range (.Paginate .Data.Pages).Pages }}
-      <li>{{ .Render "li" }}</li>
-      {{ end }}
-    </ul>
-
-    {{ partial "pagination.html" . }}
-  </div>
-  <div class="col-md-4">
-    {{ partial "sidebar.html" . }}
-  </div>
-</div>
+<section>
+    <div class="column">
+        {{ if not .IsHome }}
+            <header class="page-header">
+                <h1>{{ .Title }}</h1>
+            </header>
+        {{ end }}
+        {{ range (.Paginate .Data.Pages).Pages }}
+            {{ .Render "article-excerpt" }}
+        {{ end }}
+        {{ partial "pagination.html" . }}
+    </div>
+    <div class="column">
+        {{ partial "sidebar.html" . }}
+    </div>
+</section>
 {{ end }}
