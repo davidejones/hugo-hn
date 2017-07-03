@@ -39,7 +39,7 @@ def create_story(item):
 
 def hugo_build():
     completed = subprocess.run(
-        ['./bin/hugo-linux64'],
+        ['./bin/hugo-linux64 --baseURL=http://davidejones.github.io/hugo-hn/'],
         stdout=subprocess.PIPE,
     )
     print('{}'.format(completed.stdout.decode('utf-8')))
