@@ -3,12 +3,12 @@
 <section>
     <div class="column">
         {{ if not .IsHome }}
-            <header class="page-header">
-                <h1>{{ .Title }}</h1>
-            </header>
+        <header class="page-header">
+            <h1>{{ .Title }}</h1>
+        </header>
         {{ end }}
         {{ range (where .Paginator.Pages.ByDate.Reverse ".Type" "==" "post") }}
-            {{ .Render "article-excerpt" }}
+        {{ .Render "article-excerpt" }}
         {{ end }}
         {{ partial "pagination.html" . }}
     </div>
