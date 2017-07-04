@@ -7,8 +7,9 @@
             <h1>{{ .Title }}</h1>
         </header>
         {{ end }}
-        {{ range (where .Paginator.Pages.ByDate.Reverse ".Type" "==" "post") }}
-        {{ .Render "article-excerpt" }}
+        {{ $term := .Data.Term }}
+        {{ range .Site.Taxonomies.categories.$term }}
+            {{ .Render "article-excerpt" }}
         {{ end }}
         {{ partial "pagination.html" . }}
     </div>

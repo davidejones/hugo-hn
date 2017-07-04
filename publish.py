@@ -36,7 +36,7 @@ def create_item(item):
         if item.get('url', None):
             del item['url']
         if item.get('type', None):
-            item['categories'] = [ item.get('type') ]
+            item['categories'] = [ "{}".format(item.get('type')) ]
             del item['type']
         f.write(TEMPLATE.format(front_matter=yaml.dump(item).strip(), content=""))
 
