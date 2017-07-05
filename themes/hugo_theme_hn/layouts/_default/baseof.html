@@ -22,6 +22,11 @@
                 {{ end }}
             </ul>
         </nav>
+        <select onchange="myChangeHandler(this)">
+            {{ range .Site.Menus.main }}
+                <option value="{{ .URL }}">{{ .Name }}</option>
+            {{ end }}
+        </select>
     </header>
     <main>
         {{ block "main" . }}{{ end }}

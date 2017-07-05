@@ -1,31 +1,27 @@
+<h3>Latest Stories</h3>
+<ul>
+    {{ range first 3 .Site.Taxonomies.categories.story }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+    {{ end }}
+</ul>
 
-<aside>
+<h3>Latest Ask HN</h3>
+<ul>
+    {{ range first 3 .Site.Taxonomies.categories.ask }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+    {{ end }}
+</ul>
 
-    <h3>Latest</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eleifend lorem in tempor. Nunc arcu leo, eleifend ac molestie at, imperdiet ac augue. Sed ac tristique nibh. Aliquam erat volutpat. Vestibulum gravida nibh velit, sit amet eleifend lacus posuere vel. Nullam vulputate dictum dolor ac sagittis. Morbi lorem ligula, luctus id porta eget, laoreet ut leo. Sed vitae dapibus enim. Donec condimentum, justo vitae facilisis tempus, elit sapien rhoncus leo, in maximus ipsum sem ac massa. Praesent eu elit tempor, congue tellus id, pretium mi. Nulla nec purus mauris. Fusce ac enim sed purus varius aliquam eget sodales justo. Duis vel leo eu nunc accumsan lobortis. Ut diam ex, dictum eget elementum nec, tincidunt non ante. </p>
-  <!--<section class="panel panel-default">
-    <div class="panel-heading">
-      <div class="panel-title">LATESTS</div>
-    </div>
-    <div class="list-group">
-      {{ range first 10 .Site.Pages }}
-      <a href="{{ .Permalink }}" class="list-group-item">{{ .Title }}</a>
-      {{ end }}
-    </div>
-  </section>
+<h3>Latest Show HN</h3>
+<ul>
+    {{ range first 3 .Site.Taxonomies.categories.show }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+    {{ end }}
+</ul>
 
-  {{ range $key, $value := .Site.Taxonomies }}
-  <section class="panel panel-default">
-    <div class="panel-heading">
-      <div class="panel-title">{{ $key | singularize | upper }}</div>
-    </div>
-    <div class="list-group">
-      {{ range first 10 $value.ByCount }}
-      <a href="{{ $.Site.BaseURL}}{{ $key }}/{{ .Name | urlize }}" class="list-group-item">{{ .Name }}</a>
-      {{ end }}
-    </div>
-  </section>
-  {{ end }}-->
-
-</aside>
-
+<h3>Latest Jobs</h3>
+<ul>
+    {{ range first 3 .Site.Taxonomies.categories.job }}
+    <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
+    {{ end }}
+</ul>

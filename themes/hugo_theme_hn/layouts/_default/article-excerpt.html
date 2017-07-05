@@ -1,7 +1,6 @@
 <article>
   <header>
-      <h2 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-      <!--<time datetime="{{ .Lastmod.Format "2006-01-02T15:04:05JST" }}">{{ .Lastmod.Format ( .Site.Params.dateformat | default "Jan 2, 2006") }}</time>-->
+      <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
       <span>{{ .Params.score }} points by {{ .Params.by }} <span class="timeago" data-date="{{ .Params.date }}">{{ .Params.date }}</span> | <a href="{{ .Permalink }}">{{ if .Params.descendants }}{{ .Params.descendants }}{{ else }}0{{ end }} comments</a></span>
   </header>
 </article>

@@ -31,3 +31,7 @@ for (var i = 0; i < elements.length; ++i) {
     var dt = new Date(b[0],b[1]-1,b[2],b[3],b[4],b[5]);
     el.innerHTML = timeSince(dt);
 }
+
+function myChangeHandler(el) {
+    window.location.assign(el.options[el.selectedIndex].value);
+}
