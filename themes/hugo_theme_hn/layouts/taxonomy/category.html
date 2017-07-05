@@ -2,13 +2,9 @@
 {{ define "main" }}
 <section>
     <div class="column">
-        {{ if not .IsHome }}
-        <header class="page-header">
-            <h1>{{ .Title }}</h1>
-        </header>
-        {{ end }}
         {{ $term := .Data.Term }}
-        {{ range .Site.Taxonomies.categories.$term }}
+        {{ $taxonomy := index .Site.Taxonomies.categories $term }}
+        {{ range $taxonomy.Pages.ByDate.Reverse }}
             {{ .Render "article-excerpt" }}
         {{ end }}
         {{ partial "pagination.html" . }}

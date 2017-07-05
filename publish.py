@@ -51,12 +51,13 @@ def hugo_build():
 
 def main():
     print("Generating hacker news content...")
-    end_points = ['topstories', 'askstories', 'showstories', 'jobstories']
-    for point in end_points:
+    end_points = { 'topstories': 'story', 'askstories': 'ask', 'showstories': 'show', 'jobstories': 'job'}
+    for point, type in end_points.items():
         items_request = requests.get('https://hacker-news.firebaseio.com/v0/{}.json'.format(point))
         for id in items_request.json():
             item_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(id))
             item = item_request.json()
+            item['type'] = type
             create_item(item)
     hugo_build()
 
