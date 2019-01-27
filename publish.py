@@ -53,12 +53,13 @@ def create_item(item):
     :param item: dict of article data
     """
     yml = {}
+    slug = slugify(item.get('title'))
     makedirs('./content/post/', exist_ok=True)
     file_name = './content/post/{}.md'.format(slug)
     with open(file=file_name, mode='w', encoding='utf-8') as f:
         yml['date'] = datetime.fromtimestamp(item.get('time')).isoformat()
         yml['linkurl'] = item.get('url')
-        yml['slug'] = slugify(item.get('title'))
+        yml['slug'] = slug
         yml['tags'] = []
         yml['categories'] = ["{}".format(item.get('type'))] if item.get('type', None) else []
         f.write(TEMPLATE.format(front_matter=yaml.dump(yml).strip(), content=""))
