@@ -31,7 +31,7 @@ def timing(f):
     """
     def wrap():
         start = time.time()
-        f(x)
+        f()
         end = time.time()
         logger.info(f"{f.__name__} took {end - start!r}")
     return wrap
