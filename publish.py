@@ -145,7 +145,7 @@ def main():
     for item in responses:
         create_item(item)
 
-    #hugo_build()
+    hugo_build()
 
 
 if __name__ == '__main__':
