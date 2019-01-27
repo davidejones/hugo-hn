@@ -3,7 +3,10 @@ from datetime import datetime
 import requests
 import yaml
 import re
-import subprocess
+import sh
+import sys
+import logging
+from pathlib import Path
 
 
 TEMPLATE = """\
@@ -14,6 +17,8 @@ TEMPLATE = """\
 {content}
 """
 
+ROOT_DIR = Path.cwd()
+logger = logging.getLogger(__name__)
 
 def slugify(name):
     out = re.sub(r'[^\w\d\s]', '', name)
@@ -42,15 +47,12 @@ def create_item(item):
 
 
 def hugo_build():
-    completed = subprocess.run(
-        ['./bin/hugo-linux64', '--baseURL=https://davidejones.github.io/hugo-hn/'],
-        stdout=subprocess.PIPE,
-    )
-    print('{}'.format(completed.stdout.decode('utf-8')))
+    hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
+    hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
 
 
 def main():
-    print("Generating hacker news content...")
+    logger.info("Generating hacker news content...")
     end_points = { 'topstories': 'story', 'askstories': 'ask', 'showstories': 'show', 'jobstories': 'job'}
     for point, type in end_points.items():
         items_request = requests.get('https://hacker-news.firebaseio.com/v0/{}.json'.format(point))

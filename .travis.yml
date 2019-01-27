@@ -2,11 +2,13 @@ language: python
 python:
   - "3.6"
 cache: pip
-#virtualenv:
-#  system_site_packages: true
+env:
+  - HUGO_VERSION="0.53"
 before_install:
   - chmod +x ./publish.py
-  - chmod +x ./bin/hugo-linux64
+  - curl -sL https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_$HUGO_VERSION_Linux-64bit.tar.gz
+  - tar -xzvf hugo_$HUGO_VERSION_Linux-64bit.tar.gz -C /usr/local/bin
+  - chmod +x /usr/local/bin/hugo
 install:
   - "pip install -r requirements.txt"
 script: python ./publish.py
