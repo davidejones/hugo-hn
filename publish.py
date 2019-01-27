@@ -3,7 +3,7 @@ import asyncio
 import logging
 import re
 import requests
-#import sh
+import sh
 import sys
 import time
 import yaml
