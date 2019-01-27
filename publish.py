@@ -20,8 +20,8 @@ TEMPLATE = """\
 """
 
 ROOT_DIR = Path.cwd()
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 
 def timing(f):
