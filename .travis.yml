@@ -8,7 +8,7 @@ before_install:
   - chmod +x ./publish.py
   - curl -sL "https://github.com/gohugoio/hugo/releases/download/v0.53/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" -o /tmp/hugo.tar.gz
   - sudo tar -xvf /tmp/hugo.tar.gz -C /usr/local/bin
-  - chmod +x /usr/local/bin/hugo
+  - sudo chmod +x /usr/local/bin/hugo
 install:
   - "pip install -r requirements.txt"
 script: python ./publish.py
