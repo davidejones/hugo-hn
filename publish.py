@@ -21,7 +21,7 @@ TEMPLATE = """\
 
 ROOT_DIR = Path.cwd()
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 def timing(f):
