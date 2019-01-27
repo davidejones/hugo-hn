@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-
+import asyncio
 import logging
 import re
 import requests
-import sh
+#import sh
 import sys
 import time
 import yaml
 from datetime import datetime
 from os import makedirs
 from pathlib import Path
+from aiohttp import ClientSession
 
 TEMPLATE = """\
 ---
@@ -76,20 +77,75 @@ def hugo_build():
     hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
 
 
+def get_content_sync(data):
+    """
+    Synchronously hit each hacker news article item for download.
+    :param data: tuple of url and article type
+    :return: list of json responses
+    """
+    responses = []
+    for url, article_type in data:
+        response = requests.get(url)
+        for article_id in response.json():
+            item_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(article_id))
+            item = item_request.json()
+            item['type'] = article_type
+            responses.append(item)
+    return responses
+
+
+async def get_content_async(data):
+    """
+    Asynchronously hit each hacker news article item for download.
+    :param data: tuple of url and article type
+    :return: list of json responses
+    """
+    parent_tasks = []
+    child_tasks = []
+    async with ClientSession(loop=asyncio.get_event_loop()) as session:
+        for url, article_type in data:
+            parent_tasks.append(asyncio.create_task(fetch(url, session)))
+        results = await asyncio.gather(*parent_tasks)
+        for index, section in enumerate(results):
+            _, article_type = data[index]
+            for article_id in section:
+                child_tasks.append(asyncio.create_task(
+                    fetch(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json', session, article_type)))
+        return await asyncio.gather(*child_tasks)
+
+
+async def fetch(url, session, article_type=None):
+    """
+    Async fetch returning
+    :param url: url to hit
+    :param session: open session to make calls with
+    :param article_type: the type name of the article for front matter
+    :return: json response
+    """
+    async with session.get(url) as response:
+        data = await response.json()
+        if article_type:
+            data['type'] = article_type
+        return data
+
+
 @timing
 def main():
     """
     Entry function that grabs hacker news content saves it and builds the html site
     """
-    end_points = {'topstories': 'story', 'askstories': 'ask', 'showstories': 'show', 'jobstories': 'job'}
-    for point, type in end_points.items():
-        items_request = requests.get('https://hacker-news.firebaseio.com/v0/{}.json'.format(point))
-        for id in items_request.json():
-            item_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(id))
-            item = item_request.json()
-            item['type'] = type
-            create_item(item)
-    hugo_build()
+    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story'),
+               ('https://hacker-news.firebaseio.com/v0/askstories.json', 'ask'),
+               ('https://hacker-news.firebaseio.com/v0/showstories.json', 'show'),
+               ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
+
+    # responses = get_content_sync(id_data)
+    responses = asyncio.run(get_content_async(id_data))
+
+    for item in responses:
+        create_item(item)
+
+    #hugo_build()
 
 
 if __name__ == '__main__':
