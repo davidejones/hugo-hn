@@ -130,7 +130,7 @@ async def fetch(url, session, article_type=None):
     """
     async with session.get(url) as response:
         data = await response.json()
-        if article_type:
+        if data and article_type:
             data['type'] = article_type
         return data
 
