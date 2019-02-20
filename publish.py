@@ -99,13 +99,12 @@ def get_content_sync(data):
     return responses
 
 
-def create_comment(comment_id):
-    comment_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(comment_id))
-    comment = comment_request.json()
-    item_id = comment.get('id')
-    file_name = './data/post/{}.yaml'.format(item_id)
-    with open(file=file_name, mode='w', encoding='utf-8') as f:
-        f.write(yaml.dump(comment).strip())
+def create_comment(comment):
+    if comment:
+        item_id = comment.get('id')
+        file_name = f'./data/post/{item_id}.yaml'
+        with open(file=file_name, mode='w', encoding='utf-8') as f:
+            f.write(yaml.dump(comment))
 
 
 async def get_content_async(data):
@@ -126,6 +125,19 @@ async def get_content_async(data):
                 child_tasks.append(asyncio.create_task(
                     fetch(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json', session, article_type)))
         return await asyncio.gather(*child_tasks)
+
+
+async def get_comments_async(data):
+    """
+    Asynchronously hit each hacker news comment item for download.
+    :param data: list of comment ids
+    :return: list of json responses
+    """
+    tasks = []
+    async with ClientSession(loop=asyncio.get_event_loop()) as session:
+        for comment_id in data:
+            tasks.append(asyncio.create_task(fetch(f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
+        return await asyncio.gather(*tasks)
 
 
 async def fetch(url, session, article_type=None):
@@ -167,9 +179,10 @@ def main():
         comment_ids.extend(item.get("kids", []))
         create_item(item)
 
-    logger.info("Creating comments...")
-    for comment_id in comment_ids:
-        create_comment(comment_id)
+    logger.info("Creating {} comments...".format(len(comment_ids)))
+    comments = asyncio.run(get_comments_async(comment_ids))
+    for comment in comments:
+        create_comment(comment)
 
     logger.info("Building site...")
     hugo_build()
