@@ -56,7 +56,6 @@ def create_item(item):
     :param item: dict of article data
     """
     slug = slugify(item.get('title'))
-    makedirs('./content/post/', exist_ok=True)
     file_name = './content/post/{}.md'.format(slug)
     with open(file=file_name, mode='w', encoding='utf-8') as f:
         item['date'] = datetime.fromtimestamp(item.get('time')).isoformat()
@@ -100,6 +99,15 @@ def get_content_sync(data):
     return responses
 
 
+def create_comment(comment_id):
+    comment_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(comment_id))
+    comment = comment_request.json()
+    item_id = comment.get('id')
+    file_name = './data/post/{}.yaml'.format(item_id)
+    with open(file=file_name, mode='w', encoding='utf-8') as f:
+        f.write(yaml.dump(comment).strip())
+
+
 async def get_content_async(data):
     """
     Asynchronously hit each hacker news article item for download.
@@ -111,8 +119,8 @@ async def get_content_async(data):
     async with ClientSession(loop=asyncio.get_event_loop()) as session:
         for url, article_type in data:
             parent_tasks.append(asyncio.create_task(fetch(url, session)))
-        results = await asyncio.gather(*parent_tasks)
-        for index, section in enumerate(results):
+        parent_results = await asyncio.gather(*parent_tasks)
+        for index, section in enumerate(parent_results):
             _, article_type = data[index]
             for article_id in section:
                 child_tasks.append(asyncio.create_task(
@@ -140,6 +148,7 @@ def main():
     """
     Entry function that grabs hacker news content saves it and builds the html site
     """
+    logger.info("Starting publish...")
     id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story'),
                ('https://hacker-news.firebaseio.com/v0/askstories.json', 'ask'),
                ('https://hacker-news.firebaseio.com/v0/showstories.json', 'show'),
@@ -148,9 +157,21 @@ def main():
     # responses = get_content_sync(id_data)
     responses = asyncio.run(get_content_async(id_data))
 
+    # create dirs
+    makedirs('./content/post/', exist_ok=True)
+    makedirs('./data/post/', exist_ok=True)
+
+    logger.info("Creating posts...")
+    comment_ids = []
     for item in responses:
+        comment_ids.extend(item.get("kids", []))
         create_item(item)
 
+    logger.info("Creating comments...")
+    for comment_id in comment_ids:
+        create_comment(comment_id)
+
+    logger.info("Building site...")
     hugo_build()
 
 
