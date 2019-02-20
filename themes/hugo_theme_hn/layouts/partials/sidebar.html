@@ -1,27 +1,35 @@
 <h3>Latest Stories</h3>
+{{ if .Site.Taxonomies.categories.story }}
 <ul>
     {{ range first 3 .Site.Taxonomies.categories.story }}
     <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
     {{ end }}
 </ul>
+{{ end }}
 
 <h3>Latest Ask HN</h3>
+{{ if .Site.Taxonomies.categories.ask }}
 <ul>
     {{ range first 3 .Site.Taxonomies.categories.ask }}
     <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
     {{ end }}
 </ul>
+{{ end }}
 
 <h3>Latest Show HN</h3>
+{{ if .Site.Taxonomies.categories.show }}
 <ul>
     {{ range first 3 .Site.Taxonomies.categories.show }}
     <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
     {{ end }}
 </ul>
+{{ end }}
 
 <h3>Latest Jobs</h3>
+{{ if .Site.Taxonomies.categories.job }}
 <ul>
     {{ range first 3 .Site.Taxonomies.categories.job }}
     <li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a></li>
     {{ end }}
 </ul>
+{{ end }}
