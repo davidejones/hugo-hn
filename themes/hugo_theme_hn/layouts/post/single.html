@@ -14,14 +14,33 @@
         <!--<p>Posted by: Damian Wielgosik</p>-->
     </header>
 
+    <style>
+        .comment {
+            margin:0 0 10px 0;
+        }
+        .comment {
+            font-size: 15px;
+            color: #000;
+            padding:0 0 5px 0;
+            margin:0;
+        }
+        .comment .body {
+            font-size: 15px;
+            color: #000;
+        }
+        .comment .body p:last-child {
+            padding-bottom:0;
+            margin-bottom:0;
+        }
+    </style>
+
     {{ range $index, $id := .Params.kids}}
         {{ $d := (index $.Site.Data.post $id) }}
-        <div>
-            <div>
+        <div class="comment">
+            <p><a href="https://news.ycombinator.com/user?id={{$d.by}}" target="_blank">{{$d.by}}</a> {{$time := time (int $d.time)}} {{ $time }} [ - ]</p>
+            <div class="body">
                 {{ $d.text | safeHTML }}
             </div>
-            <p>By {{$d.by}} at {{$time := time (int $d.time)}} {{ $time }}</p>
-            <hr/>
         </div>
     {{ end }}
 </article>
