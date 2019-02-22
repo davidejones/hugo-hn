@@ -8,7 +8,7 @@
         </div>
         <div class="children">
             {{ range $index, $childid := .kids }}
-                {{ partial "comment" (dict "id" $childid "parent" $id) }}
+                {{ partial "comment" (dict "ctx" .ctx "id" $childid "parent" $id) }}
             {{ end }}
         </div>
     </div>
