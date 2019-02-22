@@ -3,7 +3,7 @@ import asyncio
 import logging
 import re
 import requests
-#import sh
+import sh
 import sys
 import time
 import yaml
@@ -78,9 +78,8 @@ def hugo_build():
     Builds the hugo site
     We overwrite the baseurl all other settings are fine
     """
-    pass
-    #hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
-    #hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
+    hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
+    hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
 
 
 def get_content_sync(data):
