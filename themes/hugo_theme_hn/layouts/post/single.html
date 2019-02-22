@@ -13,15 +13,8 @@
         <h1><a href="{{.Params.linkurl}}">{{ .Title }}</a></h1>
         <!--<p>Posted by: Damian Wielgosik</p>-->
     </header>
-
     {{ range $index, $id := .Params.kids}}
-        {{ $d := (index $.Site.Data.post $id) }}
-        <div class="comment">
-            <p><a href="https://news.ycombinator.com/user?id={{$d.by}}" target="_blank">{{$d.by}}</a>  {{$time := time (int $d.time)}} <span class="timeago" data-date="{{ $time }}">{{ $time }}</span> [ - ]</p>
-            <div class="body">
-                {{ $d.text | safeHTML }}
-            </div>
-        </div>
+        {{ partial "comment" (dict "id" $id "parent" "") }}
     {{ end }}
 </article>
 {{ end }}
