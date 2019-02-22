@@ -1,3 +1,4 @@
+{{ $ctx := .ctx }}
 {{ $id := .id }}
 {{ if (fileExists (print "data/post/" $id ".yaml")) }}
     {{ $d := (index .ctx.Site.Data.post $id) }}
@@ -8,7 +9,7 @@
         </div>
         <div class="children">
             {{ range $index, $childid := $d.kids }}
-                {{ partial "comment" (dict "ctx" .ctx "id" $childid "parent" $id) }}
+                {{ partial "comment" (dict "ctx" $ctx "id" $childid "parent" $id) }}
             {{ end }}
         </div>
     </div>
