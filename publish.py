@@ -3,7 +3,7 @@ import asyncio
 import logging
 import re
 import requests
-import sh
+#import sh
 import sys
 import time
 import yaml
@@ -78,8 +78,9 @@ def hugo_build():
     Builds the hugo site
     We overwrite the baseurl all other settings are fine
     """
-    hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
-    hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
+    pass
+    #hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
+    #hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
 
 
 def get_content_sync(data):
@@ -155,16 +156,19 @@ async def fetch(url, session, article_type=None):
         return data
 
 
-def get_c(comment_ids):
+def recurse_comments(comment_ids):
+    ret = []
     if comment_ids:
         logger.info("Creating {} comments...".format(len(comment_ids)))
         comments = asyncio.run(get_comments_async(comment_ids))
+        ret.extend(comments)
         kids = []
         for comment in comments:
             if comment:
-                comment_ids.extend(comment.get("kids", []))
-                create_comment(comment)
-        get_c(kids)
+                kids.extend(comment.get("kids", []))
+                # create_comment(comment)
+        ret.extend(recurse_comments(kids))
+    return ret
 
 
 @timing
@@ -173,10 +177,7 @@ def main():
     Entry function that grabs hacker news content saves it and builds the html site
     """
     logger.info("Starting publish...")
-    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story'),
-               ('https://hacker-news.firebaseio.com/v0/askstories.json', 'ask'),
-               ('https://hacker-news.firebaseio.com/v0/showstories.json', 'show'),
-               ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
+    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story')]
 
     # responses = get_content_sync(id_data)
     responses = asyncio.run(get_content_async(id_data))
@@ -191,7 +192,9 @@ def main():
         comment_ids.extend(item.get("kids", []))
         create_item(item)
 
-    get_c(comment_ids)
+    comments = recurse_comments(comment_ids)
+    for comment in comments:
+        create_comment(comment)
 
     logger.info("Building site...")
     hugo_build()
