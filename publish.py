@@ -176,7 +176,10 @@ def main():
     Entry function that grabs hacker news content saves it and builds the html site
     """
     logger.info("Starting publish...")
-    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story')]
+    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story'),
+               ('https://hacker-news.firebaseio.com/v0/askstories.json', 'ask'),
+               ('https://hacker-news.firebaseio.com/v0/showstories.json', 'show'),
+               ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
 
     # responses = get_content_sync(id_data)
     responses = asyncio.run(get_content_async(id_data))
