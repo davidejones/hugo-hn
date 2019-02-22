@@ -1,5 +1,5 @@
 {{ $ctx := .ctx }}
-{{ $id := .id }}
+{{ $id := (string .id) }}
 {{ if (fileExists (print "data/post/" $id ".yaml")) }}
     {{ $d := (index .ctx.Site.Data.post $id) }}
     <div class="comment {{if $d.kids}}hasChildren{{end}}">
