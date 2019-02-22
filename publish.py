@@ -155,6 +155,18 @@ async def fetch(url, session, article_type=None):
         return data
 
 
+def get_c(comment_ids):
+    if comment_ids:
+        logger.info("Creating {} comments...".format(len(comment_ids)))
+        comments = asyncio.run(get_comments_async(comment_ids))
+        kids = []
+        for comment in comments:
+            if comment:
+                comment_ids.extend(comment.get("kids", []))
+                create_comment(comment)
+        get_c(kids)
+
+
 @timing
 def main():
     """
@@ -179,10 +191,7 @@ def main():
         comment_ids.extend(item.get("kids", []))
         create_item(item)
 
-    logger.info("Creating {} comments...".format(len(comment_ids)))
-    comments = asyncio.run(get_comments_async(comment_ids))
-    for comment in comments:
-        create_comment(comment)
+    get_c(comment_ids)
 
     logger.info("Building site...")
     hugo_build()
