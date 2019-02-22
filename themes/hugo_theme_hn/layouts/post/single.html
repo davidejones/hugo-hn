@@ -13,8 +13,12 @@
         <h1><a href="{{.Params.linkurl}}">{{ .Title }}</a></h1>
         <!--<p>Posted by: Damian Wielgosik</p>-->
     </header>
-    {{ range $index, $id := .Params.kids}}
-        {{ partial "comment" (dict "ctx" $ "id" $id "parent" "") }}
+    {{ if .Params.kids }}
+        {{ range $index, $id := .Params.kids}}
+            {{ partial "comment" (dict "ctx" $ "id" $id "parent" "") }}
+        {{ end }}
+    {{ else }}
+        <p>There are no comments yet.</p>
     {{ end }}
 </article>
 {{ end }}
