@@ -5,7 +5,7 @@ Hacker News site built with Hugo http://davidejones.github.io/hugo-hn
 
 [![screenshot](https://raw.githubusercontent.com/davidejones/hugo-hn/master/screen.png)](http://davidejones.github.io/hugo-hn)
 
-# Asset Workflow
+## Asset Workflow
 
 - Make changes in `src/`
 - Build js and css using `yarn run webpack`
