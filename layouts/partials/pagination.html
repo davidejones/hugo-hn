@@ -1,3 +1,8 @@
+<style>
+    section {
+        counter-increment: section {{ mul (sub .Paginator.PageNumber 1) .Paginator.PageSize }};
+    }
+</style>
 {{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
 <nav>
   <ul class="pager">
