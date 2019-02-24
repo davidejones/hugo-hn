@@ -1,8 +1,9 @@
+{{ define "bodyClass"}}post{{ end }}
 {{ define "title" }}{{ if not .IsHome }}{{ .Title }} - {{ end }}{{ end }}
 {{ define "main" }}
 <article>
     {{ if $.Site.Data.post }}
-        {{ range sort $.Site.Data.post | first 10 }}
+        {{ range sort $.Site.Data.post "time" "desc" | first 50 }}
             {{ $d := . }}
             <div class="comment">
                 <p><a href="https://news.ycombinator.com/user?id={{$d.by}}" target="_blank">{{$d.by}}</a>  {{$time := time (int $d.time)}} <span class="timeago" data-date="{{ $time }}">{{ $time }}</span> [ - ]</p>
