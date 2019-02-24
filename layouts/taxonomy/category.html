@@ -4,7 +4,7 @@
     <div class="column">
         {{ $term := .Data.Term }}
         {{ $taxonomy := index .Site.Taxonomies.categories $term }}
-        {{ range $taxonomy.Pages.ByDate.Reverse }}
+        {{ range (.Paginate $taxonomy.Pages.ByDate.Reverse).Pages }}
             {{ .Render "article-excerpt" }}
         {{ end }}
         {{ partial "pagination.html" . }}
