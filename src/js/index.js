@@ -1,6 +1,8 @@
+import '../scss/styles.scss';
+
 function timeSince(date) {
-    var seconds = Math.floor((new Date() - date) / 1000);
-    var interval = Math.floor(seconds / 31536000);
+    let seconds = Math.floor((new Date() - date) / 1000);
+    let interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
         return interval + " years ago";
     }
@@ -23,12 +25,12 @@ function timeSince(date) {
     return Math.floor(seconds) + " seconds ago";
 }
 
-var elements = document.getElementsByClassName('timeago');
-for (var i = 0; i < elements.length; ++i) {
-    var el = elements[i];
-    var dtString = el.getAttribute('data-date');
-    var b = dtString.split(/\D/);
-    var dt = new Date(b[0],b[1]-1,b[2],b[3],b[4],b[5]);
+let elements = document.getElementsByClassName('timeago');
+for (let i = 0; i < elements.length; ++i) {
+    let el = elements[i];
+    let dtString = el.getAttribute('data-date');
+    let b = dtString.split(/\D/);
+    let dt = new Date(b[0],b[1]-1,b[2],b[3],b[4],b[5]);
     el.innerHTML = timeSince(dt);
 }
 

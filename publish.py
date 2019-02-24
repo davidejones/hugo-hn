@@ -73,6 +73,18 @@ def create_item(item):
         f.write(TEMPLATE.format(front_matter=yaml.dump(item).strip(), content=""))
 
 
+def create_comment(comment):
+    """
+    Takes a hacker news json object comment and creates a hugo data yaml file for it
+    :param comment: dict of comment data
+    """
+    if comment:
+        item_id = comment.get('id')
+        file_name = f'./data/post/{item_id}.yaml'
+        with open(file=file_name, mode='w', encoding='utf-8') as f:
+            f.write(yaml.dump(comment))
+
+
 def hugo_build():
     """
     Builds the hugo site
@@ -97,14 +109,6 @@ def get_content_sync(data):
             item['type'] = article_type
             responses.append(item)
     return responses
-
-
-def create_comment(comment):
-    if comment:
-        item_id = comment.get('id')
-        file_name = f'./data/post/{item_id}.yaml'
-        with open(file=file_name, mode='w', encoding='utf-8') as f:
-            f.write(yaml.dump(comment))
 
 
 async def get_content_async(data):
@@ -156,6 +160,13 @@ async def fetch(url, session, article_type=None):
 
 
 def recurse_comments(comment_ids):
+    """
+    Run the async get comments against a list of comment ids
+    After getting the comments pass those comment child id back through the same function
+    until we have no more to download
+    :param comment_ids: a list of integer ids for comments to retrieve
+    :return: list of comment objects
+    """
     ret = []
     if comment_ids:
         logger.info("Creating {} comments...".format(len(comment_ids)))
