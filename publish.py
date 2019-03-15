@@ -175,7 +175,7 @@ def recurse_comments(comment_ids):
         kids = []
         for comment in comments:
             if comment:
-                kids.extend(comment.get("kids", []))
+                kids.extend(comment.get("kids", []) or [])
                 # create_comment(comment)
         ret.extend(recurse_comments(kids))
     return ret
@@ -202,7 +202,7 @@ def main():
     logger.info("Creating posts...")
     comment_ids = []
     for item in responses:
-        comment_ids.extend(item.get("kids", []))
+        comment_ids.extend(item.get("kids", []) or [])
         create_item(item)
 
     comments = recurse_comments(comment_ids)
