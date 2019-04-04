@@ -10,7 +10,7 @@ import yaml
 from datetime import datetime
 from os import makedirs
 from pathlib import Path
-from aiohttp import ClientSession
+from aiohttp import ClientSession, ClientTimeout
 
 TEMPLATE = """\
 ---
@@ -119,7 +119,8 @@ async def get_content_async(data):
     """
     parent_tasks = []
     child_tasks = []
-    async with ClientSession(loop=asyncio.get_event_loop()) as session:
+    timeout = ClientTimeout(total=7*60)
+    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
         for url, article_type in data:
             parent_tasks.append(asyncio.create_task(fetch(url, session)))
         parent_results = await asyncio.gather(*parent_tasks)
@@ -138,7 +139,8 @@ async def get_comments_async(data):
     :return: list of json responses
     """
     tasks = []
-    async with ClientSession(loop=asyncio.get_event_loop()) as session:
+    timeout = ClientTimeout(total=7*60)
+    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
         for comment_id in data:
             tasks.append(asyncio.create_task(fetch(f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
         return await asyncio.gather(*tasks)
