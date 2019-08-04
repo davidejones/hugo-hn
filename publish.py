@@ -197,7 +197,7 @@ def main():
                ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
 
     # responses = get_content_sync(id_data)
-    sem = asyncio.Semaphore(100)
+    sem = asyncio.Semaphore(1000)
     responses = asyncio.run(get_content_async(sem, id_data))
 
     # create dirs
