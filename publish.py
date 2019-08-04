@@ -111,7 +111,7 @@ def get_content_sync(data):
     return responses
 
 
-async def get_content_async(data):
+async def get_content_async(sem, data):
     """
     Asynchronously hit each hacker news article item for download.
     :param data: tuple of url and article type
@@ -120,19 +120,20 @@ async def get_content_async(data):
     parent_tasks = []
     child_tasks = []
     timeout = ClientTimeout(total=7*60)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
-        for url, article_type in data:
-            parent_tasks.append(asyncio.create_task(fetch(url, session)))
-        parent_results = await asyncio.gather(*parent_tasks)
-        for index, section in enumerate(parent_results):
-            _, article_type = data[index]
-            for article_id in section:
-                child_tasks.append(asyncio.create_task(
-                    fetch(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json', session, article_type)))
-        return await asyncio.gather(*child_tasks)
+    async with sem:
+        async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
+            for url, article_type in data:
+                parent_tasks.append(asyncio.create_task(fetch(url, session)))
+            parent_results = await asyncio.gather(*parent_tasks)
+            for index, section in enumerate(parent_results):
+                _, article_type = data[index]
+                for article_id in section:
+                    child_tasks.append(asyncio.create_task(
+                        fetch(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json', session, article_type)))
+            return await asyncio.gather(*child_tasks)
 
 
-async def get_comments_async(data):
+async def get_comments_async(sem, data):
     """
     Asynchronously hit each hacker news comment item for download.
     :param data: list of comment ids
@@ -140,10 +141,11 @@ async def get_comments_async(data):
     """
     tasks = []
     timeout = ClientTimeout(total=7*60)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
-        for comment_id in data:
-            tasks.append(asyncio.create_task(fetch(f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
-        return await asyncio.gather(*tasks)
+    async with sem:
+        async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
+            for comment_id in data:
+                tasks.append(asyncio.create_task(fetch(f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
+            return await asyncio.gather(*tasks)
 
 
 async def fetch(url, session, article_type=None):
@@ -161,7 +163,7 @@ async def fetch(url, session, article_type=None):
         return data
 
 
-def recurse_comments(comment_ids):
+def recurse_comments(sem, comment_ids):
     """
     Run the async get comments against a list of comment ids
     After getting the comments pass those comment child id back through the same function
@@ -172,14 +174,14 @@ def recurse_comments(comment_ids):
     ret = []
     if comment_ids:
         logger.info("Creating {} comments...".format(len(comment_ids)))
-        comments = asyncio.run(get_comments_async(comment_ids))
+        comments = asyncio.run(get_comments_async(sem, comment_ids))
         ret.extend(comments)
         kids = []
         for comment in comments:
             if comment:
                 kids.extend(comment.get("kids", []) or [])
                 # create_comment(comment)
-        ret.extend(recurse_comments(kids))
+        ret.extend(recurse_comments(sem, kids))
     return ret
 
 
@@ -195,7 +197,8 @@ def main():
                ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
 
     # responses = get_content_sync(id_data)
-    responses = asyncio.run(get_content_async(id_data))
+    sem = asyncio.Semaphore(100)
+    responses = asyncio.run(get_content_async(sem, id_data))
 
     # create dirs
     makedirs('./content/post/', exist_ok=True)
@@ -207,7 +210,7 @@ def main():
         comment_ids.extend(item.get("kids", []) or [])
         create_item(item)
 
-    comments = recurse_comments(comment_ids)
+    comments = recurse_comments(sem, comment_ids)
     for comment in comments:
         create_comment(comment)
 
