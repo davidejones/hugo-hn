@@ -10,7 +10,7 @@ import yaml
 from datetime import datetime
 from os import makedirs
 from pathlib import Path
-from aiohttp import ClientSession, ClientTimeout
+from aiohttp import ClientSession, ClientTimeout, TCPConnector
 
 TEMPLATE = """\
 ---
@@ -120,7 +120,8 @@ async def get_content_async(data):
     parent_tasks = []
     child_tasks = []
     timeout = ClientTimeout(total=7*60)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
+    connector = TCPConnector(ssl=False)
+    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
         for url, article_type in data:
             parent_tasks.append(asyncio.create_task(fetch(url, session)))
         parent_results = await asyncio.gather(*parent_tasks)
@@ -140,8 +141,9 @@ async def get_comments_async(data):
     """
     tasks = []
     timeout = ClientTimeout(total=7*60)
+    connector = TCPConnector(ssl=False)
     sem = asyncio.Semaphore(100)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout) as session:
+    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
         for comment_id in data:
             tasks.append(asyncio.create_task(bound_fetch(sem, f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
         return await asyncio.gather(*tasks)
@@ -221,8 +223,9 @@ def main():
     logger.info("Creating posts...")
     comment_ids = []
     for item in responses:
-        comment_ids.extend(item.get("kids", []) or [])
-        create_item(item)
+        if item:
+            comment_ids.extend(item.get("kids", []) or [])
+            create_item(item)
 
     comments = recurse_comments(comment_ids)
     for comment in comments:
