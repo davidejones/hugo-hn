@@ -2,6 +2,8 @@
 import asyncio
 import logging
 import re
+import socket
+
 import requests
 import sh
 import sys
@@ -120,7 +122,7 @@ async def get_content_async(data):
     parent_tasks = []
     child_tasks = []
     timeout = ClientTimeout(total=7*60)
-    connector = TCPConnector(ssl=False)
+    connector = TCPConnector(ssl=False, family=socket.AF_INET)
     async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
         for url, article_type in data:
             parent_tasks.append(asyncio.create_task(fetch(url, session)))
@@ -141,7 +143,7 @@ async def get_comments_async(data):
     """
     tasks = []
     timeout = ClientTimeout(total=7*60)
-    connector = TCPConnector(ssl=False)
+    connector = TCPConnector(ssl=False, family=socket.AF_INET)
     sem = asyncio.Semaphore(100)
     async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
         for comment_id in data:
