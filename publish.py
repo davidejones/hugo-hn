@@ -58,7 +58,7 @@ def create_item(item):
     :param item: dict of article data
     """
     slug = slugify(item.get('title'))
-    file_name = './content/post/{}.md'.format(slug)
+    file_name = './content/en/post/{}.md'.format(slug)
     with open(file=file_name, mode='w', encoding='utf-8') as f:
         item['date'] = datetime.fromtimestamp(item.get('time')).isoformat()
         item['linkurl'] = item.get('url')
@@ -219,7 +219,7 @@ def main():
     responses = asyncio.run(get_content_async(id_data))
 
     # create dirs
-    makedirs('./content/post/', exist_ok=True)
+    makedirs('./content/en/post/', exist_ok=True)
     makedirs('./data/post/', exist_ok=True)
 
     logger.info("Creating posts...")
