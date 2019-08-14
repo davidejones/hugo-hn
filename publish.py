@@ -93,7 +93,7 @@ def hugo_build():
     We overwrite the baseurl all other settings are fine
     """
     hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
-    hugo('--baseURL=https://davidejones.github.io/hugo-hn/', [], _out=sys.stdout)
+    hugo('--verbose', [], _out=sys.stdout)
 
 
 def get_content_sync(data):
