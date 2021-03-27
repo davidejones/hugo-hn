@@ -1,3 +1,4 @@
+{{- $isProd := hugo.IsProduction | or (eq .Site.Params.env "prod") -}}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,15 @@
     {{ block "meta" . }}{{ end }}
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="{{ $.Site.BaseURL }}css/main.css" rel="stylesheet" />
+
+    {{ $optionsToCSS := (dict "targetPath" "style.css" "outputStyle" "compressed" "enableSourceMap" (not $isProd)) }}
+    {{ $main := resources.Get "scss/styles.scss" }}
+    {{ $css := $main | resources.ToCSS $optionsToCSS }}
+    {{ if $isProd }}
+        {{ $css = $css | resources.Minify }}
+    {{ end }}
+    {{ $css = $css | resources.Fingerprint "sha512" }}
+    <link href="{{ $css.Permalink }}" rel="stylesheet" />
 </head>
 <body class="{{ block "bodyClass" . }}{{ end }}">
     <header>
@@ -29,7 +38,7 @@
     </main>
     <footer>
         {{ with .Site.Copyright }}{{ . | safeHTML }}{{ else }}<span class="h-logo">&copy; {{ .Site.Title }}</span>{{end }}<br/>
-        Site created By <a href="http://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
         <ul>
             {{ range .Site.Menus.foot }}
                 <li><a href="{{ .URL }}">{{ .Name }}</a></li>
@@ -37,8 +46,13 @@
         </ul>
     </footer>
 
-
-    <script src="{{ $.Site.BaseURL }}js/main.js"></script>
+    {{ $externals := slice }}
+    {{ $node_env := cond ($isProd) "production" "development" }}
+    {{ $defines := dict "process.env.NODE_ENV" $node_env }}
+    {{ $opts := dict "targetPath" "main.js" "externals" $externals "defines" $defines "minify" $isProd }}
+    {{ $js := resources.Get "js/index.js" | js.Build $opts }}
+    {{ $js = $js | fingerprint "sha512" }}
+    <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous" defer></script>
 </body>
 </html>
 
