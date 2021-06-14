@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/guix-unifying-provisioning-deployment-and-management-in-the-age-of-containers/">
+
+
+    <title>Guix: Unifying provisioning, deployment, and management in the age of containers - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Guix: Unifying provisioning, deployment, and management in the age of containers - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/guix-unifying-provisioning-deployment-and-management-in-the-age-of-containers/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/guix-unifying-provisioning-deployment-and-management-in-the-age-of-containers/">
+<meta name="twitter:title" content="Guix: Unifying provisioning, deployment, and management in the age of containers - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Guix: Unifying provisioning, deployment, and management in the age of containers - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T19:02:23JST",
+    "dateModified": "2021-06-11T19:02:23JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://archive.fosdem.org/2020/schedule/event/guix/">Guix: Unifying provisioning, deployment, and management in the age of containers</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cedricgle" target="_blank">cedricgle</a>   <span class="timeago" data-date="2021-06-11 23:16:14 &#43;0000 UTC">2021-06-11 23:16:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Guix use Scheme&#x2F;Guile. It&#x27;s way saner that the Nix custom language. The biggest pro&#x2F;cons is that they are flexible dynamic languages. So when you define your deployment, you need to code very defensively because no type system will support you and find mistakes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=takeda" target="_blank">takeda</a>   <span class="timeago" data-date="2021-06-12 07:03:01 &#43;0000 UTC">2021-06-12 07:03:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a lot of bashing of Nix language, but frankly I don&#x27;t think Nix really is a problem. The language is fairly simple.<p>What might throw people off is that it is functional (which applies to Scheme&#x2F;Guile as well).<p>I think the biggest problem of Nix is that the area it covers is so vast and because of that it is suffering from not having enough people working on it, which also affects the quality of the documentation. I don&#x27;t know where Guix is in this area.<p>Regarding the language being dynamic, I recently found that there&#x27;s work on making a typed language: <a href="https:&#x2F;&#x2F;github.com&#x2F;tweag&#x2F;nickel" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;tweag&#x2F;nickel</a><p>Perhaps it can solve this problem.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arximboldi" target="_blank">arximboldi</a>   <span class="timeago" data-date="2021-06-12 10:11:51 &#43;0000 UTC">2021-06-12 10:11:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree with you.<p>When I got into Nix and Guix I tried both and I leaned towards Guix because &quot;it&#x27;s scheme&quot; but ended up sticking to Nix because of maturity, Darwing support and it being way more performant.<p>In the end I realized that I actually prefer Nix as a language.  I like that it&#x27;s a very simple and limited language, with, for example, no way of performing side-effects.  It is tailored towards it&#x27;s purpose and, while not perfect, it does the job well.<p>As other point out, Nixpkgs and the Nix toolchain in general just uses very weird names for everything, plus the docs.  That&#x27;s the difficult bit.  It&#x27;s slightly improving over time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rgoulter" target="_blank">rgoulter</a>   <span class="timeago" data-date="2021-06-12 08:40:50 &#43;0000 UTC">2021-06-12 08:40:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t see that Nix would be more widespread if it used (say) JavaScript instead of Nix-lang for its expressions.<p>When you face problems, I&#x27;m sure it&#x27;s more likely that you won&#x27;t know how to do it with NixOS&#x2F;Nixpkgs, rather than you&#x27;ll know exactly what needs to be done but don&#x27;t know how to express it in Nix-lang.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-06-12 08:18:27 &#43;0000 UTC">2021-06-12 08:18:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I program in a half-dozen common languages and read ten more, and have been doing so for decades and the Nix DSL still confuses me. I would not say it is fairly simple.<p>Perhaps this will change with more doc reading, but it is anything but intuitive (coming from a C, Perl, Java, JS, PHP, Python, Go, et c background).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jorams" target="_blank">jorams</a>   <span class="timeago" data-date="2021-06-12 08:36:34 &#43;0000 UTC">2021-06-12 08:36:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not familiar with the Nix language, but GP said:<p>&gt; What might throw people off is that it is functional<p>None of the languages you list are functional, so that could still explain it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-06-12 08:48:01 &#43;0000 UTC">2021-06-12 08:48:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me it&#x27;s an issue primarily with syntax; I am aware of FP concepts and can recognize and understand their use.<p>I&#x27;m still sort of confused why it needed its own DSL and couldn&#x27;t have just reused an existing language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Ericson2314" target="_blank">Ericson2314</a>   <span class="timeago" data-date="2021-06-12 13:42:23 &#43;0000 UTC">2021-06-12 13:42:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Other languages were deemed too big, especially in 2003 when Nix was started. Nix is a strict diet. Perhaps something else could be used, but I can assure you Nixpkgs would be a completely failed experiment drowning in its own complexity if there were side effects.<p>Also, I don&#x27;t understand how people can say the semantics is fine but the syntax is challenging. Syntax is entirely superficial. And if you are having trouble reading the syntax, how can you be sure the semantics isn&#x27;t challenging?<p>There are a lot of funny fixed points used in Nixpkgs and that is challenging to think about.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=takeda" target="_blank">takeda</a>   <span class="timeago" data-date="2021-06-12 17:17:31 &#43;0000 UTC">2021-06-12 17:17:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Nix properties fit ideally with the domain it tries to solve:<p>- functional with no side effects (for the same imput you always supposed to get the exact same output); derivation is function of its inputs (e.g. source code, dependencies, compiler flags, architecture and so on) if none of them changes you&#x27;re expecting to get the same file. Introducing side effects would remove this guarantee, and introduce bugs.
+- lazily evaluated - you can specify multiple things but Nix will process only the ones that are referenced, this makes weird experience that the code isn&#x27;t executed from top to bottom (as most people would expect)<p>Those two things essentially makes the derivation declarative. You specify what derivation you want and what it needs (like dependencies) you can also use the language to transform the inputs to the way you like and still preserving the guarantee that if one dependency changes the project needs to be rebuilt.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=novok" target="_blank">novok</a>   <span class="timeago" data-date="2021-06-12 19:03:04 &#43;0000 UTC">2021-06-12 19:03:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Those are all the same language, that are different dialects of each other.  Conceptually they are all very similar, and once you know one well, you understand %90 of the other ones.  Java, C &amp; Golang are the only ones that are bit different with static typing, manual memory management (C) and language level concurrency.<p>Nix DSL, Haskell, OCaml, declarative UI libraries, Rx and other declarative paradigms are fairly different and do require a bit of new learning.  They go way beyond functional programing basics like map and filter.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soraminazuki" target="_blank">soraminazuki</a>   <span class="timeago" data-date="2021-06-12 16:10:52 &#43;0000 UTC">2021-06-12 16:10:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can&#x27;t disagree more. All of the languages you have listed are well known for having complex semantics. This is totally expected of any general purpose programming language, of course. But the Nix expression language, though Turing-complete, isn&#x27;t meant to be a general purpose programming language. It&#x27;s a configuration DSL for defining packages. As such, it has a much smaller feature set with fewer confusing semantics.<p>The Nix expression language is in essence just JSON with functions comprising of the following building blocks:<p>* Primitive values (strings, numbers, paths, booleans, null)<p>* Lists and sets<p>* Variables<p>* Functions<p>* Conditionals<p>* Assertions<p>* Arithmetic operators<p>And that&#x27;s basically it. All of this is succinctly explained in the official documentation[1].<p>[1]: <a href="https:&#x2F;&#x2F;nixos.org&#x2F;manual&#x2F;nix&#x2F;stable&#x2F;#ch-expression-language" rel="nofollow">https:&#x2F;&#x2F;nixos.org&#x2F;manual&#x2F;nix&#x2F;stable&#x2F;#ch-expression-language</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=novok" target="_blank">novok</a>   <span class="timeago" data-date="2021-06-12 19:06:27 &#43;0000 UTC">2021-06-12 19:06:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bazel has starlark, which is reduced python, which I&#x27;ve found in practice fairly easy to understand.  Do you think the nix DSL could of been replaced with bazel&#x27;s model of doing things and would meet the same functionality?  I&#x27;m not very familiar with nix.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-12 14:05:24 &#43;0000 UTC">2021-06-12 14:05:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With some Haskell knowledge, it is much easier to grasp.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dansvo" target="_blank">dansvo</a>   <span class="timeago" data-date="2021-06-12 14:18:04 &#43;0000 UTC">2021-06-12 14:18:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really hope nickel takes off.<p>As a nix-lang fan, I&#x27;ve been using dhall as a nix-like build system configuration language when I need to work outside of the nix ecosystem. I love its use of static typing, but it&#x27;s not without its rough edges. Defining recursive types is not simple and writing configs which need to mix rigidly-typed domain knowledge with arbitrary loose json data can be very tricky.<p>It looks nickel&#x27;s authors have these use cases in mind. I&#x27;m excited to keep an eye on this project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=takeda" target="_blank">takeda</a>   <span class="timeago" data-date="2021-06-12 16:55:31 &#43;0000 UTC">2021-06-12 16:55:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Nickel author is the Nix author or at least one of contributors (Eelco Dolstra) so as long as the project is successful it will likely be introduced back to Nix.<p>Edit: actually looking at contributions Yann Hamdaoui seems like the main contributor, but I saw Eelco contributing to it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mirekrusin" target="_blank">mirekrusin</a>   <span class="timeago" data-date="2021-06-12 08:25:00 &#43;0000 UTC">2021-06-12 08:25:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is cuelang already, and it’s quite frankly fantastic (we use it in prod).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soraminazuki" target="_blank">soraminazuki</a>   <span class="timeago" data-date="2021-06-12 16:37:01 &#43;0000 UTC">2021-06-12 16:37:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cuelang may be nice for some domains, but it&#x27;s not a sensible replacement for the Nix language. If it was ever replaced by Cuelang, fundamental Nix abstractions would go missing or become awkward to deal with due to lack of expressiveness.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Shoue" target="_blank">Shoue</a>   <span class="timeago" data-date="2021-06-12 08:45:19 &#43;0000 UTC">2021-06-12 08:45:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Nix language is functionally a Lisp. It just has curly braces for sets&#x2F;records, and like five keywords (e.g. with, inherit). If you learn a Lisp you&#x27;ll basically know how to use Nix after reading about the syntactic differences. You can learn it in a day or two if you put in the effort, it&#x27;s really not complex.<p>I think what people actually mean is that Nixpkgs is confusing, because that has a ton of weird utility&#x2F;helper functions that you just need to know, esp. when it comes to what argument they take (which being dynamic doesn&#x27;t help with at all) and Nixpkgs functions have historically had bad documentation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=otabdeveloper4" target="_blank">otabdeveloper4</a>   <span class="timeago" data-date="2021-06-12 07:11:08 &#43;0000 UTC">2021-06-12 07:11:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  It&#x27;s way saner that the Nix custom language.<p>Strongly disagree. The Nix custom language is just basically JSON + lambda functions. Way easier to deal with and understand then the mess of the Scheme ecosystem(s).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thinkyfish" target="_blank">thinkyfish</a>   <span class="timeago" data-date="2021-06-11 23:15:25 &#43;0000 UTC">2021-06-11 23:15:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I honestly believe that Guix will eventually pull out ahead of NixOS, simply because its going to be part of Debian 11.  NixOS is a bit easier to set up and use for now, especially for provisioning simple linux servers around commonly used packages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=1MachineElf" target="_blank">1MachineElf</a>   <span class="timeago" data-date="2021-06-12 01:20:20 &#43;0000 UTC">2021-06-12 01:20:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I feel the same way.<p>One interesting architectural difference between Guix and Nix is there is no separation in Guix like what you see with Nix and nixpkgs. Guix and the packages are all just one massive repo of scheme. For Guix this tighter integration can be a development advantage. I cannot imagine how this can benefit targeting multiple platforms, which Nix is able to do with Linux, Mac, FreeBSD (as of 2020), yet somehow, Guix is able to pull off cross-platform support for GNU Hurd.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-12 14:07:05 &#43;0000 UTC">2021-06-12 14:07:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; there is no separation in Guix like what you see with Nix and nixpkgs.<p>What separation is there in Nix? The whole system is just a big derivation the same way as a small package is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Ericson2314" target="_blank">Ericson2314</a>   <span class="timeago" data-date="2021-06-12 15:27:40 &#43;0000 UTC">2021-06-12 15:27:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Layering between Nix, Nixpkgs, NixOS. And within Nix more emphasis on layering too (store vs nix language0.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nitia" target="_blank">nitia</a>   <span class="timeago" data-date="2021-06-12 00:28:18 &#43;0000 UTC">2021-06-12 00:28:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Im not sure. Ive switched from nixos to guix, and i think nix&#x27;s main advantage is just &quot;a **tonne of code&quot; for a wide variety of services, but guix allows new services and things much easier imo
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gautamcgoel" target="_blank">gautamcgoel</a>   <span class="timeago" data-date="2021-06-11 23:28:30 &#43;0000 UTC">2021-06-11 23:28:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you elaborate on this? Are you saying vanilla Debian will use Guix?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thinkyfish" target="_blank">thinkyfish</a>   <span class="timeago" data-date="2021-06-11 23:38:23 &#43;0000 UTC">2021-06-11 23:38:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I heard somewhere that they are going to include it in the distro, so no guix deploy afaik, just the package manager itself as a package you can install.  This should bring a lot more attention to the project at least.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mauricioc" target="_blank">mauricioc</a>   <span class="timeago" data-date="2021-06-11 23:52:28 &#43;0000 UTC">2021-06-11 23:52:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nix will also be in Debian Bullseye: <a href="https:&#x2F;&#x2F;packages.debian.org&#x2F;bullseye&#x2F;nix-setup-systemd" rel="nofollow">https:&#x2F;&#x2F;packages.debian.org&#x2F;bullseye&#x2F;nix-setup-systemd</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uncletaco" target="_blank">uncletaco</a>   <span class="timeago" data-date="2021-06-12 07:00:16 &#43;0000 UTC">2021-06-12 07:00:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you have the guix package manager you also have `guix deploy`
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inciampati" target="_blank">inciampati</a>   <span class="timeago" data-date="2021-06-12 06:42:37 &#43;0000 UTC">2021-06-12 06:42:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Guix is now in debian and apt-installable in ubuntu 21.04. Installation was the biggest hurdle, and there are still some quirks even with the debian installation--- you&#x27;ve got to set up your shell environment correctly to use it--- but in general it&#x27;s super easy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ssivark" target="_blank">ssivark</a>   <span class="timeago" data-date="2021-06-11 23:19:48 &#43;0000 UTC">2021-06-11 23:19:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Practical questions: I’d love to try this out for my personal desktop&#x2F;laptop, but I’ve been <i>really pampered</i> by the Arch repositories. What is the extent of completeness in supporting practically important daily use software? Are there parallel repositories supporting the non-libre packages that one might occasionally need? Is there an easy way to construct Guix recipes from another Linux system — say Debian, or Fedora or Arch?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=roptat" target="_blank">roptat</a>   <span class="timeago" data-date="2021-06-12 00:05:55 &#43;0000 UTC">2021-06-12 00:05:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The main guix &quot;channel&quot; (that&#x27;s what it&#x27;s called) contains more than 17.000 packages. Some software is hard to package, but I can&#x27;t think of anything that&#x27;s missing from the repository. You can have a look at the list of packages at <a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;packages&#x2F;" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;packages&#x2F;</a> (note that firefox for instance is called icecat and based on the ESR version).<p>There are no other official channels, but a bunch of people have their own channels with additional packages. The most popular is probably nonguix (<a href="https:&#x2F;&#x2F;gitlab.com&#x2F;nonguix&#x2F;nonguix" rel="nofollow">https:&#x2F;&#x2F;gitlab.com&#x2F;nonguix&#x2F;nonguix</a>) which provides some popular nonfree packages.<p>Creating a recipe is generally easy (it&#x27;s just a bunch of metadata) and even easier if it&#x27;s supported by one of the importers (python, perl, emacs, ...). You can use guix on any other Linux system if you&#x27;re not ready to install the complete system. The only difference is that your system is not managed by guix, and you can&#x27;t run &quot;guix system reconfigure&quot;, but the experience is otherwise the same. Make sure to follow the additional steps from the manual.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xelxebar" target="_blank">xelxebar</a>   <span class="timeago" data-date="2021-06-12 05:22:44 &#43;0000 UTC">2021-06-12 05:22:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use Guix as my daily driver and do occassionally come across software that hasn&#x27;t been packaged. The big ones for my work that immediately come to mind are:<p>- slack<p>- kubectl<p>- terraform<p>- azure-cli<p>- cscope<p>There have been a several other missing tools for personal use that I just ended up packaging and sharing upstream. For the ones listed above, though, I just haven&#x27;t gotten around to it, so I let Nix fill in the gap, hehe. FWIW, Guix already has Nix packaged and available as a service, so having parallel stores is really straightforward.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=taeric" target="_blank">taeric</a>   <span class="timeago" data-date="2021-06-12 02:27:00 &#43;0000 UTC">2021-06-12 02:27:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How in the world would I have discovered Firefox by that name?  In retro, I find the trusted words kind of fun.  But... How?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=caslon" target="_blank">caslon</a>   <span class="timeago" data-date="2021-06-12 02:52:51 &#43;0000 UTC">2021-06-12 02:52:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Icecat is a fork of Firefox to rid it of proprietary services and DRM. It&#x27;s got a different name because Mozilla forbids (or used to forbid) redistribution with patches.<p>Debian also used to do this until Mozilla changed their tune on a few things. Debian&#x27;s version and Icecat both used to be named Ice<i>Weasel</i>, though, making fun of Mozilla.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nitia" target="_blank">nitia</a>   <span class="timeago" data-date="2021-06-12 03:49:57 &#43;0000 UTC">2021-06-12 03:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Icecat is woefully out of date and contains a bunch of intrusive addons that break most sites, by default. YMMV.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uncletaco" target="_blank">uncletaco</a>   <span class="timeago" data-date="2021-06-12 07:13:30 &#43;0000 UTC">2021-06-12 07:13:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Icecat tracks The latest ESR and is up to date.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ssivark" target="_blank">ssivark</a>   <span class="timeago" data-date="2021-06-12 00:28:50 &#43;0000 UTC">2021-06-12 00:28:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks; great to hear about the 17k packages and the &quot;nonguix&quot; channel!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=e3bc54b2" target="_blank">e3bc54b2</a>   <span class="timeago" data-date="2021-06-12 02:00:26 &#43;0000 UTC">2021-06-12 02:00:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Guix is pretty cool, and I&#x27;ll probably switch to it one day.<p>But as of now, it lacks some basic stuff like KDE suit. The nonguix channel AFAIK doesn&#x27;t have binary builds so you&#x27;ll be building quite a few packages yourself. Using nonguix also means you can&#x27;t expect support in official support channels. Just something to know before you start.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CameronNemo" target="_blank">CameronNemo</a>   <span class="timeago" data-date="2021-06-12 02:49:20 &#43;0000 UTC">2021-06-12 02:49:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Using nonguix also means you can&#x27;t expect support in official support channels. Just something to know before you start.</i><p>If this is true, it is a deal breaker for me. I try to buy open source hardware when I can, but even systems like the Pinebook Pro will have their functionality significantly limited by the absence of the linux-firmware package. It is a simple fact that most common WiFi chipset require non-free firmware.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=roptat" target="_blank">roptat</a>   <span class="timeago" data-date="2021-06-12 13:11:42 &#43;0000 UTC">2021-06-12 13:11:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not true. You get support for the part of the guix system that is free software from guix, and support for what comes from nonguix, from nonguix. So if you have issues with the proprietary driver, you talk about it on #nonguix, but if you have troubles with guix, you talk about it on official channels like #guix.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CameronNemo" target="_blank">CameronNemo</a>   <span class="timeago" data-date="2021-06-12 16:34:32 &#43;0000 UTC">2021-06-12 16:34:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the clarification. That sounds like a much more reasonable policy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slim" target="_blank">slim</a>   <span class="timeago" data-date="2021-06-12 05:59:09 &#43;0000 UTC">2021-06-12 05:59:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  nonguix channel AFAIK doesn&#x27;t have binary builds so you&#x27;ll be building quite a few packages yourself
+</code></pre>
+To be more accurate <i>guix</i> will be building the package for you. The only difference for the user is the time it takes to install the package.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nitia" target="_blank">nitia</a>   <span class="timeago" data-date="2021-06-12 02:49:18 &#43;0000 UTC">2021-06-12 02:49:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a nonguix substitution server - <a href="https:&#x2F;&#x2F;mirror.brielmaier.net" rel="nofollow">https:&#x2F;&#x2F;mirror.brielmaier.net</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=e3bc54b2" target="_blank">e3bc54b2</a>   <span class="timeago" data-date="2021-06-12 04:08:29 &#43;0000 UTC">2021-06-12 04:08:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for this! Missing KDE is a dealbreaker for primary system, but I can start using nonguix for older systems now.<p>Edit: I&#x27;m not sure if I&#x27;m reading this right, but the job says 0 builds (eg. <a href="https:&#x2F;&#x2F;mirror.brielmaier.net&#x2F;eval&#x2F;97958?status=succeeded&amp;paginate=0" rel="nofollow">https:&#x2F;&#x2F;mirror.brielmaier.net&#x2F;eval&#x2F;97958?status=succeeded&amp;pa...</a>). I&#x27;m not familiar with how guix works, but where can I see list of actual built derivations for a particular job?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soraminazuki" target="_blank">soraminazuki</a>   <span class="timeago" data-date="2021-06-12 03:40:11 &#43;0000 UTC">2021-06-12 03:40:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It depends on your priorities. If you care about package availability and the broader ecosystem, Nix would be a better choice[1]. Nix has a larger community size, lower barrier for participation, and is more forgiving regarding non-free software. Its package count likely exceeds the AUR too, if you exclude duplicates.<p>Guix, on the other hand, is better suited for the more adventurous folks. It&#x27;s built on Scheme, which many find appealing.<p>Both Nix and Guix can be installed on other Linux distros. Both are now available in the official Debian repository. Additionally, Nix supports macOS quite well. It even supports FreeBSD and Cygwin too, although it&#x27;s probably not as mature.<p>[1]: <a href="https:&#x2F;&#x2F;repology.org&#x2F;repositories&#x2F;graphs" rel="nofollow">https:&#x2F;&#x2F;repology.org&#x2F;repositories&#x2F;graphs</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inciampati" target="_blank">inciampati</a>   <span class="timeago" data-date="2021-06-12 06:55:22 &#43;0000 UTC">2021-06-12 06:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Guix combines the specification language, API, and base distribution into a single monorepo. This makes it a bit like the linux kernel in terms of scope and ability to adapt and update itself without external dependencies. My understanding was that this wasn&#x27;t quite the same for Nix, and that&#x27;s led to some trickiness in the way that the project evolves. What do you think?<p>As a user who occasionally makes my own packages for software deployment, I can learn very quickly how to write a package description by grepping through the guix main repo and looking at how other packages are written. That&#x27;s probably similar for Nix, but it&#x27;s something that I found refreshingly clean and flat in guix and I&#x27;m frankly hooked.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=foolmeonce" target="_blank">foolmeonce</a>   <span class="timeago" data-date="2021-06-12 09:31:45 &#43;0000 UTC">2021-06-12 09:31:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Guix and guile are in separate repositories just like nixpkgs and nix.. It wouldn&#x27;t be nice to mix these. The difference is really about the amount of coevolving the language can make to the specific tasks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-06-12 00:06:05 &#43;0000 UTC">2021-06-12 00:06:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can run guix on top of Arch, which would let you try it with really easy fallback, at the expense of duplicate disk use and maintenance.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ssivark" target="_blank">ssivark</a>   <span class="timeago" data-date="2021-06-12 00:28:00 &#43;0000 UTC">2021-06-12 00:28:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks; this sounds interesting. Could you please link to any documentation or HOWTO?<p>Considering I have all my daily use software already installed in Arch, if I attempted to re-install them with Guix in parallel, would that lead to namespace collisions? (i.e. would I have to uninstall currently installed software before I re-install them with Guix?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=milkey_mouse" target="_blank">milkey_mouse</a>   <span class="timeago" data-date="2021-06-12 00:42:30 &#43;0000 UTC">2021-06-12 00:42:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Could you please link to any documentation or HOWTO?<p>Here you go:
+<a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Binary-Installation.html#Binary-Installation" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Binary-Installation...</a><p>&gt; if I attempted to re-install software with Guix in parallel, would that lead to namespace collisions?<p>It shouldn&#x27;t. That&#x27;s one thing Guix (and Nix) excel at: packages only refer to specific versions of their inputs, so you can even install multiple versions of the same package at once if you want.<p>In terms of Guix shadowing packages installed by Arch, you can put $HOME&#x2F;.guix-profile either at the front or the end of your $PATH depending on whether you want to prioritize Guix or Arch packages. When I was getting my feet wet with Guix, I ran Guix on top of Gentoo (doing basically what you suggested, gradually shadowing Gentoo packages with Guix ones) for a few months without any significant problems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-06-12 01:13:15 &#43;0000 UTC">2021-06-12 01:13:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I ran Guix on top of Gentoo<p>Could I ask you to compare guix and portage? I&#x27;m not an expert in either, but it looks like guix provides very similar source builds with easier binary caching&#x2F;substitution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nitia" target="_blank">nitia</a>   <span class="timeago" data-date="2021-06-12 01:28:51 &#43;0000 UTC">2021-06-12 01:28:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can compare. Ebuilds are nothing in comparison, and guix is much more flexible. What portage has over guix is the wealth of premade packages (for now)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-06-12 00:46:01 &#43;0000 UTC">2021-06-12 00:46:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Installation.html" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Installation.html</a><p>Namespacing in this case is just adding the guix bin directory to your PATH; put it in front of your existing path to default to guix programs, or at the end to default to Arch. You can also just use an ad-hoc environment (<a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Invoking-guix-environment.html" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Invoking-guix-envir...</a>) to call guix packages at will without really installing them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dangom" target="_blank">dangom</a>   <span class="timeago" data-date="2021-06-11 22:43:02 &#43;0000 UTC">2021-06-11 22:43:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is anyone there using Guix as a daily driver? Is it stable? Would love to hear some user experiences.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eointierney" target="_blank">eointierney</a>   <span class="timeago" data-date="2021-06-12 01:01:45 &#43;0000 UTC">2021-06-12 01:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I oscillate back and forth between guix and nix. They both do the same thing really well. Nix is more mature, has some amazing capabilities, and is kinda annoying in spots such as documentation. I end up browsing users&#x27; repos for both.<p>Guix is more elegant in ways such as guile versus nix the dsl, although the haskell underpinning of nix is very useful.<p>If you&#x27;re a linux user willing to put in the time and play around then both are perfectly usable as daily drivers but they&#x27;re both learning experiences as well.<p>Hard to say which will win out, probably both, with excellent interoperability.<p>They really are the future of os managment, they simplify abstractions of state and naming
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=e3bc54b2" target="_blank">e3bc54b2</a>   <span class="timeago" data-date="2021-06-12 04:19:25 &#43;0000 UTC">2021-06-12 04:19:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What kind of interoperability should I expect between Guix and Nix going forward? As I understand, Nix is pretty heavily reliant on systemd for running services while Guix has its own pid1. Last I read Guix was also replacing the daemon with one written in scheme. I think Guix used Nix package format (nar) at one point but not sure if that holds anymore either.<p>The idea of two functional, declarative package&#x2F;system managers being interoperable is very exciting for  me, if it meant I can use full breadth of Nixpkgs with system config declared in Guile. But is that something I can look forward to or is it too much?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uncletaco" target="_blank">uncletaco</a>   <span class="timeago" data-date="2021-06-12 10:19:08 &#43;0000 UTC">2021-06-12 10:19:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nix exists as a service for guix. All my system declarations include the nix service. But as far as interop goes I’m not really sure of the value. I think it just sounds neat but hasn’t really been thought through in terms of exactly what that would look like.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yawaramin" target="_blank">yawaramin</a>   <span class="timeago" data-date="2021-06-12 03:53:54 &#43;0000 UTC">2021-06-12 03:53:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; although the haskell underpinning of nix is very useful.<p>I thought Nix was written in C++?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=e3bc54b2" target="_blank">e3bc54b2</a>   <span class="timeago" data-date="2021-06-12 04:21:04 &#43;0000 UTC">2021-06-12 04:21:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nix itself is written in C++, but Nix the language borrows multiple characteristics from Haskell. Nix community and Haskell community are also very comfortable and comingled with each other and Nix is one of the recommended ways to manage Haskell project dependencies.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=momentoftop" target="_blank">momentoftop</a>   <span class="timeago" data-date="2021-06-12 08:34:40 &#43;0000 UTC">2021-06-12 08:34:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Haskell and the Nix language are both pure and lazy extensions of lambda calculus, but that&#x27;s an enormous language space, and Nix&#x27;s lack of static types makes them pretty distant.<p>For many Haskellers, I believe the interest stems from how Haskell&#x27;s &quot;cabal-install&quot; (its closest equivalent to pip, cargo etc) used to be pretty broken. There wasn&#x27;t universal interest in fixing this, with some insisting that installing dependencies is the job of your distro&#x27;s package manager, not your language&#x27;s ecosystem.<p>Gentoo did an okay job at having coverage of Haskell dependencies, but Nix was the clear leader ever since they could auto-import the hackage database. It&#x27;s for this sole reason that I moved from Gentoo to Nix.<p>This pipeline I came through doesn&#x27;t really exist now, because the Haskell community has endorsed Stackage, and cabal has fixed its core problems by copying the nix solution.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=R0b0t1" target="_blank">R0b0t1</a>   <span class="timeago" data-date="2021-06-11 23:09:34 &#43;0000 UTC">2021-06-11 23:09:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually with esoteric distros you run into problems with binary packages and packages based on uncommonly used languages.<p>It&#x27;ll probably work as a daily driver if you mainly live in a web browser and don&#x27;t do GPGPU&#x2F;games&#x2F;new languages&#x2F;etc. If you don&#x27;t mind building from source you can even do most of those.<p>For what it&#x27;s worth the project seems very well structured and the contributors very competent and motivated. I am tracking the project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=milkey_mouse" target="_blank">milkey_mouse</a>   <span class="timeago" data-date="2021-06-12 00:46:01 &#43;0000 UTC">2021-06-12 00:46:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if you mainly live in a web browser and don&#x27;t do GPGPU<p>For what it&#x27;s worth, I use Guix and I&#x27;ve been able to do everything but CUDA just fine. (CUDA will never be supported in Guix as it requires proprietary drivers to function.) There are opencl packages, for example. It works well enough to run an Ethereum miner, Blender, and even games in WINE. I&#x27;ve been meaning to package AMD ROCm for better GPU compute support.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jhgorrell" target="_blank">jhgorrell</a>   <span class="timeago" data-date="2021-06-12 02:10:47 &#43;0000 UTC">2021-06-12 02:10:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I, for one, would be happy to see that package.
+Took a try at it awhile back and found it rather bumpy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=supportlocal4h" target="_blank">supportlocal4h</a>   <span class="timeago" data-date="2021-06-12 02:43:37 &#43;0000 UTC">2021-06-12 02:43:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the issues I&#x27;ve run into with Nix was lack of OpenGL. Does Guix have similar issues?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=neonfuz" target="_blank">neonfuz</a>   <span class="timeago" data-date="2021-06-12 03:46:08 &#43;0000 UTC">2021-06-12 03:46:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nix has OpenGL it just doesn&#x27;t know how to find the driver on non NixOS distros by default, can fix it with this: <a href="https:&#x2F;&#x2F;github.com&#x2F;guibou&#x2F;nixGL" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;guibou&#x2F;nixGL</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=snicker7" target="_blank">snicker7</a>   <span class="timeago" data-date="2021-06-12 04:22:39 &#43;0000 UTC">2021-06-12 04:22:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use it as a package manager on another distro (in my case, popos; that&#x27;s how a lot of people use it afaik). Considering using it as a VM. It works quite well as a supplementary package manager, but has glaring deficiencies with some languages &#x2F; build systems (gradle, npm,  Julia, etc.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uncletaco" target="_blank">uncletaco</a>   <span class="timeago" data-date="2021-06-12 10:20:10 &#43;0000 UTC">2021-06-12 10:20:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What’s wrong with the julia build system in guix?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=snicker7" target="_blank">snicker7</a>   <span class="timeago" data-date="2021-06-13 23:07:41 &#43;0000 UTC">2021-06-13 23:07:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nothing afaict. But only a small number of packages are supported.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nitia" target="_blank">nitia</a>   <span class="timeago" data-date="2021-06-11 23:11:38 &#43;0000 UTC">2021-06-11 23:11:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I do. See also #guix and #nonguix on libera
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nickik" target="_blank">nickik</a>   <span class="timeago" data-date="2021-06-12 13:04:28 &#43;0000 UTC">2021-06-12 13:04:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been wanting to try this for years, the idea of being able to easily move my complete daily machine to a new laptop sound pretty interesting.<p>What the best guide or documentation if that would be a my goal?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tremon" target="_blank">tremon</a>   <span class="timeago" data-date="2021-06-12 14:44:23 &#43;0000 UTC">2021-06-12 14:44:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re new to Guix, you probably want to start with the Guix Cookbook: <a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;blog&#x2F;tags&#x2F;cookbook&#x2F;en&#x2F;guix-cookbook.html" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;blog&#x2F;tags&#x2F;cookbook&#x2F;en&#x2F;guix-cookbook....</a> -- although I&#x27;ve never read it front-to-back myself, just skimmed it and used it as a reference thereafter.<p>Not sure if there&#x27;s a full howto for your purpose, but you&#x27;d want to look into manifests: <a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;blog&#x2F;2019&#x2F;guix-profiles-in-practice&#x2F;" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;en&#x2F;blog&#x2F;2019&#x2F;guix-profiles-in-practice&#x2F;</a><p>There is a guix command for generating a manifest from the current profile as well, but it&#x27;s not mentioned in the above link: guix package --export-manifest
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mtreis86" target="_blank">mtreis86</a>   <span class="timeago" data-date="2021-06-12 10:23:59 &#43;0000 UTC">2021-06-12 10:23:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is Guix pronounced? Gicks or g-u-i-x or gooey-x?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=icot" target="_blank">icot</a>   <span class="timeago" data-date="2021-06-12 11:08:19 &#43;0000 UTC">2021-06-12 11:08:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;geeks&quot; -&gt; <a href="https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Introduction.html#DOCF1" rel="nofollow">https:&#x2F;&#x2F;guix.gnu.org&#x2F;manual&#x2F;en&#x2F;html_node&#x2F;Introduction.html#D...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 11:25:23 &#43;0000 UTC">2021-06-12 11:25:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

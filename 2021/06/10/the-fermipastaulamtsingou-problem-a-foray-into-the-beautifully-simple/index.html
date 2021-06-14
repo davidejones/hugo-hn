@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/10/the-fermipastaulamtsingou-problem-a-foray-into-the-beautifully-simple/">
+
+
+    <title>The Fermi-Pasta-Ulam-Tsingou problem: A foray into the beautifully simple - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="The Fermi-Pasta-Ulam-Tsingou problem: A foray into the beautifully simple - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/the-fermipastaulamtsingou-problem-a-foray-into-the-beautifully-simple/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/the-fermipastaulamtsingou-problem-a-foray-into-the-beautifully-simple/">
+<meta name="twitter:title" content="The Fermi-Pasta-Ulam-Tsingou problem: A foray into the beautifully simple - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "The Fermi-Pasta-Ulam-Tsingou problem: A foray into the beautifully simple - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-10T21:05:21JST",
+    "dateModified": "2021-06-10T21:05:21JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://3quarksdaily.com/3quarksdaily/2020/01/the-fermi-pasta-ulam-tsingou-problem-a-foray-into-the-beautifully-simple-and-the-simply-beautiful.html">The Fermi-Pasta-Ulam-Tsingou problem: A foray into the beautifully simple</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=c1ccccc1" target="_blank">c1ccccc1</a>   <span class="timeago" data-date="2021-06-11 04:52:38 &#43;0000 UTC">2021-06-11 04:52:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a strange pattern in figures 1 and 2 of the paper [1], showing the energy distribution between modes as a function of time. Rescale time so that the energy peaks of mode 1 happen at t=0 and t=1. Then the energy peaks of mode 2 happen at t=1&#x2F;2, the energy peaks of mode 3 happen at t=1&#x2F;3 and t=2&#x2F;3, the energy peaks of mode 4 happen at t=1&#x2F;4 and t=3&#x2F;4, and so on. The peaks of mode N seem to happen at t=m&#x2F;N where m&#x2F;N is a fraction in lowest form.<p>I have to believe Fermi would have noticed this pattern, but there seems to be little comment on it either in the paper, or in the linked article. Perhaps the reason for it is so obvious that he thought it not worth publishing. I just wish I knew what it was.<p>This is an unrelated but nice quote:<p>&gt; &quot;In the compound pendulum problem, one has a transfer of energy from one degree of freedom to another and back again, and not a continually increasing sharing of energy between the two. What is perhaps surprising in our problem is that this kind of behaviour still appears in systems with, say, 16 or more degrees of freedom.&quot;<p>[1] <a href="http:&#x2F;&#x2F;www.physics.utah.edu&#x2F;~detar&#x2F;phys6720&#x2F;handouts&#x2F;fpu&#x2F;FermiCollectedPapers1965.pdf" rel="nofollow">http:&#x2F;&#x2F;www.physics.utah.edu&#x2F;~detar&#x2F;phys6720&#x2F;handouts&#x2F;fpu&#x2F;Fer...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=versteegen" target="_blank">versteegen</a>   <span class="timeago" data-date="2021-06-11 09:58:31 &#43;0000 UTC">2021-06-11 09:58:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m confident that they did not know the reason, as if the dynamics were that well understood there would be no &quot;problem&quot; to be solved. I have no idea when&#x2F;if it was later explained.<p>Also worth noting that the graph isn&#x27;t perfectly symmetric but this is presumably just due to accumulation of numerical errors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=exdsq" target="_blank">exdsq</a>   <span class="timeago" data-date="2021-06-10 22:04:50 &#43;0000 UTC">2021-06-10 22:04:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably an amazing site but holy s** the number of adverts is insane.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lecarore" target="_blank">lecarore</a>   <span class="timeago" data-date="2021-06-11 11:20:52 &#43;0000 UTC">2021-06-11 11:20:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The reading experience on mobile Firefox with JS off is perfect.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sroussey" target="_blank">sroussey</a>   <span class="timeago" data-date="2021-06-10 22:28:33 &#43;0000 UTC">2021-06-10 22:28:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I only saw one (iPhone here)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GuB-42" target="_blank">GuB-42</a>   <span class="timeago" data-date="2021-06-11 02:58:59 &#43;0000 UTC">2021-06-11 02:58:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On desktop, I see 3 of them with the ad blocker turned on (1st party ads about books), plus self-promotion. The blocker blocked several advertising networks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=riffraff" target="_blank">riffraff</a>   <span class="timeago" data-date="2021-06-11 03:55:37 &#43;0000 UTC">2021-06-11 03:55:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same for me on android, i only got some video overlay I could get rid of.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/post-mortem-incorrect-cache-configuration-exposes-personal-information/">
+
+
+    <title>Post Mortem: Incorrect Cache Configuration Exposes Personal Information - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Post Mortem: Incorrect Cache Configuration Exposes Personal Information - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/post-mortem-incorrect-cache-configuration-exposes-personal-information/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/post-mortem-incorrect-cache-configuration-exposes-personal-information/">
+<meta name="twitter:title" content="Post Mortem: Incorrect Cache Configuration Exposes Personal Information - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Post Mortem: Incorrect Cache Configuration Exposes Personal Information - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T12:54:06JST",
+    "dateModified": "2021-06-11T12:54:06JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.klarna.com/us/blog/detailed-incident-report-incorrect-cache-configuration-leading-to-klarna-app-exposing-personal-information/">Post Mortem: Incorrect Cache Configuration Exposes Personal Information</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=irjustin" target="_blank">irjustin</a>   <span class="timeago" data-date="2021-06-11 13:17:14 &#43;0000 UTC">2021-06-11 13:17:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We talked about this during the outage before but any API requests related to account information should not be going through a cacheable CDN.<p>At the mild end, you could get stale data. Deposit some money and the cache doesn&#x27;t reflect making you wonder whether the deposit happened or not.<p>On the worst end, you get this - all users get exposed the most recently requested data.<p>All this to save... a few kB?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=glenngillen" target="_blank">glenngillen</a>   <span class="timeago" data-date="2021-06-11 14:07:35 &#43;0000 UTC">2021-06-11 14:07:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Whether a CDN is caching or not could itself just be a misconfiguration.<p>Passing dynamic non-cached requests through a CDN isn’t about saving a few kB for the server (by definition it still has to generate it). It’s about improving end-user performance through things like having edge termination of TLS.<p>So it’s not so easy to have such a blanket statement as no API requests should go through a CDN. While it’s all too easy to inadvertently turn on the caching of requests.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ownagefool" target="_blank">ownagefool</a>   <span class="timeago" data-date="2021-06-11 14:33:05 &#43;0000 UTC">2021-06-11 14:33:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It’s about improving end-user performance through things like having edge termination of TLS.<p>Err, wouldn&#x27;t the CDN itself still need to do the same TLS handsake with the end server?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q3k" target="_blank">q3k</a>   <span class="timeago" data-date="2021-06-11 14:47:46 &#43;0000 UTC">2021-06-11 14:47:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most CDNs out there maintain a pool of HTTPS keep-alive&#x27;d connections to backing services. This eliminates the roundtrip needed for establishing a TCP connection and the roundtrip (or two) needed for setting up TLS.<p>Another reason a no-caching CDN can help is when that CDN has a higher quality connection to the backing service than the user has. A lot of eyeball networks out there might have terrible transit connectivity to the global Internet during peak hours (because that cost money), but generally have high quality settlement-free peering with CDNs. By paying a CDN, you&#x27;re effectively paying them to provide better Internet connectivity to your users.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nrmitchi" target="_blank">nrmitchi</a>   <span class="timeago" data-date="2021-06-11 14:58:28 &#43;0000 UTC">2021-06-11 14:58:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is, unfortunately, such a good point that I hadn&#x27;t considered in the past.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=glenngillen" target="_blank">glenngillen</a>   <span class="timeago" data-date="2021-06-12 07:46:32 &#43;0000 UTC">2021-06-12 07:46:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A somewhat (I’m clutching approximate recollections from memory) relevant example from a customer I was helping while at a previous employer:<p>All infrastructure ran in us-east-1. A considerable percentage (but not the majority) of their customers were based in Australia, and quite a few of them were complaining about sluggish performance. HTTP&#x2F;1.1 + TLS meant connection handshake alone took over 5 seconds! Before the first useful bit of content was sent. Add in the additional pain of a web framework that was still splitting assets across multiple asset hosts (to compensate for old browser “feature” that limited the number of concurrent requests to a single domain”). Over 30 seconds of connection setup, some of it in parallels, almost all of it blocking page render because it was for HTML or dependent scripts.<p>Add in a CDN (no caching) and edge termination meant single-digit millisecond handshakes to a POP in the closest major city. Also had the ability enable HTTP&#x2F;2 at the edge without needing to change anything else which meant improved connection pooling for clients and less connection setup overhead. Backhaul connection reuse also has the benefit of pooling all requests via a specific POP rather than each individual client. We got rid of the asset host thing while we were at it. Just a CDN, no caching, and a greater than ~30000ms reduction in request times for anyone far from us-east-1!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=q3k" target="_blank">q3k</a>   <span class="timeago" data-date="2021-06-11 15:09:01 &#43;0000 UTC">2021-06-11 15:09:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mind you though, I&#x27;m not blindly advocating for CDNs. :)<p>In fact, I think that the performance gain is not worth the extra complexity for most sites out there. The recent fastly outage, klarna outage, ... all show that CDNs are no silver bullet.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tailspin2019" target="_blank">tailspin2019</a>   <span class="timeago" data-date="2021-06-11 14:46:39 &#43;0000 UTC">2021-06-11 14:46:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my case I use Cloudflare Tunnel [0] which is an actual agent installed on my web servers that creates a reverse tunnel back to Cloudflare&#x27;s network.<p>This creates a complete disconnection between whatever TLS handshakes are happening between the client and my CDN (Cloudflare) and whatever&#x27;s going on locally between the tunnel daemon and my local web server process.<p>For example you can choose to run these tunnels without HTTPS at all on your local webserver (bearing in mind that you have no inbound firewall ports open to the webserver box - no traffic leaves that box unencrypted), the daemon directly proxies your local-only HTTP port on the machine over an encrypted tunnel to Cloudflare and via whatever flavour of Cloudflare TLS you like to your end-users.<p>[0] <a href="https:&#x2F;&#x2F;www.cloudflare.com&#x2F;en-gb&#x2F;products&#x2F;tunnel&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.cloudflare.com&#x2F;en-gb&#x2F;products&#x2F;tunnel&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=otterley" target="_blank">otterley</a>   <span class="timeago" data-date="2021-06-11 14:38:12 &#43;0000 UTC">2021-06-11 14:38:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CDN edge servers maintain a warm pool of TCP&#x2F;TLS connections to origin servers, which eliminates the need for a handshake and significantly improves performance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CogitoCogito" target="_blank">CogitoCogito</a>   <span class="timeago" data-date="2021-06-11 14:38:48 &#43;0000 UTC">2021-06-11 14:38:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not an expert, but if the TLS handshake occurs closer (as in latency) to the client and the actual request&#x2F;response payload is small (or if the CDN&#x27;s network is better), then it seems like terminating in a CDN could certainly be better than not.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cthulhu_" target="_blank">Cthulhu_</a>   <span class="timeago" data-date="2021-06-11 14:14:50 &#43;0000 UTC">2021-06-11 14:14:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And CDN&#x27;s offer flood &#x2F; ddos protection as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dijit" target="_blank">dijit</a>   <span class="timeago" data-date="2021-06-11 13:32:13 &#43;0000 UTC">2021-06-11 13:32:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree.<p>I&#x27;ve run some eCommerce sites before, we were PCI Tier 1, roughly 1% of web traffic: but nowhere _near_ the level of security Klarna should have; we had the CDN&#x27;s activated only on subdomains... always.<p>Usually static.&lt;site&gt;.com or whatever..<p>This has the added benefit of not <i>sending cookies</i> to the CDN, because that can affect latency and is also a bit less secure because a static image&#x2F;css&#x2F;js does not need the cookie. (and bandwidth, before we were charged per byte (and that&#x27;s egress now anyway in most cases, god I&#x27;m old.)).<p>If I had to venture a guess, they&#x27;re probably scared of getting slammed with a DDoS so they &quot;guard&quot; everything behind the CDN, it&#x27;s not about caching.<p>We got slammed with DDoS&#x27;s too so we had to have systems in place to push BGP routes via verisign to &quot;scrub&quot; the traffic... we didn&#x27;t even have that many &quot;credits&quot; and it cost millions...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=notyourday" target="_blank">notyourday</a>   <span class="timeago" data-date="2021-06-11 14:40:10 &#43;0000 UTC">2021-06-11 14:40:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We talked about this during the outage before but any API requests related to account information should not be going through a cacheable CDN.<p>That is simply not correct.<p>The entire reason why Fastly is so popular is because it lets you cache the API using cache-bust on write. Between the request collapsing, shielding, and a near immediate cache invalidation caching API allows one to accept enormous spikes of traffic that normally would bring down the origins.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=johbjo" target="_blank">johbjo</a>   <span class="timeago" data-date="2021-06-11 13:34:49 &#43;0000 UTC">2021-06-11 13:34:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suspect the background is the app is showing html-views rendered on the server, and they are sharing as much infrastructure as possible. To make it easier on the app team.<p>If they separated app&#x2F;cdn&#x2F;web with different SSL certificates, something like this wouldn&#x27;t be possible even when developers eff up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gherkinnn" target="_blank">gherkinnn</a>   <span class="timeago" data-date="2021-06-11 13:26:55 &#43;0000 UTC">2021-06-11 13:26:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unrelated to the incident, but to Klarna.<p>What is Klarna _for_? What does Klarna do that others don&#x27;t? They brand themselves as &quot;We enable you to buy hip shit you don&#x27;t have the money for [and will become irrelevant before you payed off your debt]&quot;. Almost literally [0]<p>Is it more of the same but dressed pretty or am I missing something?<p>That said, sometimes a common thing done up well will be successful. Looking at you, Slack.<p>0 - <a href="https:&#x2F;&#x2F;www.klarna.com&#x2F;us&#x2F;pay-in-4&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.klarna.com&#x2F;us&#x2F;pay-in-4&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ullevaal" target="_blank">ullevaal</a>   <span class="timeago" data-date="2021-06-11 13:56:47 &#43;0000 UTC">2021-06-11 13:56:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Europe, strong customer authentication is now required when making credit card purchases <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Strong_customer_authentication" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Strong_customer_authentication</a><p>So Klarna delays having to authenticate with the bank which issued your credit card from the time of purchase, to the time of paying your Klarna &quot;credit card bill&quot;.<p>They also delay sending your invoice until the item is actually shipped, and you then have a 14 day due date. This means returns and refunds have no money exchanged from any of your own accounts, so you don&#x27;t have to worry about how long it takes for the refund to enter your credit card.<p>Edit: They also remember you address based on your email and name, across any vendors, so check out is really quick even if it is the first time you shop at a specific site. This is of course great for smaller vendors.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_mitsuhiko" target="_blank">the_mitsuhiko</a>   <span class="timeago" data-date="2021-06-11 14:02:08 &#43;0000 UTC">2021-06-11 14:02:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Klarna in Europe I think for most people I know is a &quot;i made this mistake once&quot; experience. I know nobody who picked the Klarna transaction type more than once.<p>The checkout is super quick only to be frustrated with the payment process later.  And since it&#x27;s Klarna that comes after you to collect payment it can eventually backfire on the business that you ordered from as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ullevaal" target="_blank">ullevaal</a>   <span class="timeago" data-date="2021-06-11 14:27:00 &#43;0000 UTC">2021-06-11 14:27:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s wrong with the payment process in your country? Where I am it&#x27;s as easy as paying any invoice I get from a credit card company or I can by with debit card.<p>Also in my country, in Europe, Klarna is mentioned more and more in news articles about consumer debt and predatory lending, so I think their market share among people who keep credit card balances is increasing. They have stopped or kept pending unusually large purchases by me pending a credit check, but they could probably do a lot more to not get a reputation as lumped together with the most predatory consumer loan banks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_mitsuhiko" target="_blank">the_mitsuhiko</a>   <span class="timeago" data-date="2021-06-11 17:21:47 &#43;0000 UTC">2021-06-11 17:21:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The issue is you order something, your significant other unpacks the thing and disposes the paper which includes the invoice to be paid. Only weeks later you get notified that you did not pay.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyldum" target="_blank">tyldum</a>   <span class="timeago" data-date="2021-06-11 20:49:51 &#43;0000 UTC">2021-06-11 20:49:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could be different in your country, but here in Norway there wouldn&#x27;t be an invoice in the box.
+The whole idea is that payment is totally separate. Email invoice or separate invoice per post, unless you pay immediately when ordering.<p>The shop you ordered from does not know or care how the transaction is done between you and Klarna.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the_mitsuhiko" target="_blank">the_mitsuhiko</a>   <span class="timeago" data-date="2021-06-12 11:01:11 &#43;0000 UTC">2021-06-12 11:01:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quite honestly I don&#x27;t care enough to give it another try. Credit cards work just fine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 13:31:19 &#43;0000 UTC">2021-06-11 13:31:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, they are all in one payment processor, loan institute and debt collector with terrible record, with some questionable business practices.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=__alexs" target="_blank">__alexs</a>   <span class="timeago" data-date="2021-06-11 13:32:29 &#43;0000 UTC">2021-06-11 13:32:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are an elaborate pay day loans company.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samhw" target="_blank">samhw</a>   <span class="timeago" data-date="2021-06-11 14:14:34 &#43;0000 UTC">2021-06-11 14:14:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I would agree with that: it&#x27;s payday loans with a friendly face. I once worked with someone who had previously been an exec at Klarna, and he had some &#x27;interesting&#x27; stories about how they did credit decisioning. One of the examples that always stuck in my mind[0] was declining people with five or more vowels in their last name, because it was an effective proxy for West African people. (I remember that one because it also picks up my somewhat posh double-barrelled English surname, so I suppose I would have been collateral damage.)<p>[0] I should say I can&#x27;t remember for sure if this was from his time at Klarna or somewhere else, but it was at least illustrative of the kind of people and the culture there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rightbyte" target="_blank">rightbyte</a>   <span class="timeago" data-date="2021-06-11 14:01:50 &#43;0000 UTC">2021-06-11 14:01:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Their main selling point is offering high interestrate credit to sites customers and paying the site the money directly, taking the risk.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jbwyme" target="_blank">jbwyme</a>   <span class="timeago" data-date="2021-06-11 13:30:30 &#43;0000 UTC">2021-06-11 13:30:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe their value lies in their e-commerce partnerships. You can effectively check out (almost) as seamlessly as a using  a credit card on partner sites. I used Klarna when I bought new golf clubs. They show up right on the checkout screen. I can afford to buy them outright but it was an interest free loan for two years so it made logical sense to me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zibzab" target="_blank">zibzab</a>   <span class="timeago" data-date="2021-06-11 13:52:39 &#43;0000 UTC">2021-06-11 13:52:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a payment solution like PayPal but with better integration, and less evil.<p>There are options for paying first after you receive the goods, and this is all handled by klarna so its a huge win for the sellers.<p>I don&#x27;t know how they operate in US but in EU-land they have been pretty awesome. Probably 80% of online stores in Scandinavia use them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 14:30:21 &#43;0000 UTC">2021-06-11 14:30:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s interesting how the experience of global companies varies across countries. In Germany, it&#x27;s quite the opposite. Klarna has an abysmal reputation for buyers, while PayPal is seamless, trusted and popular.<p>On the flip side, they may have been doing something super awesome for the vendors, since it&#x27;s so widespread that it&#x27;s used on almost any web site.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lbhdc" target="_blank">lbhdc</a>   <span class="timeago" data-date="2021-06-11 15:06:26 &#43;0000 UTC">2021-06-11 15:06:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used to work for a competitor to Klarna, and looked fairly closely into how their services work. My understanding is Klarna was originally built on BankId in Sweeden, which is a pervasive gov backed payment id. Since they are working with an established system, the friction is lower for customers there.<p>I found my experiences more in line with yours, payment is clunky, and seems dubious.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zibzab" target="_blank">zibzab</a>   <span class="timeago" data-date="2021-06-11 14:47:19 &#43;0000 UTC">2021-06-11 14:47:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not my experience with PayPal and I&#x27;m very happy that we now have another option.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brtkdotse" target="_blank">brtkdotse</a>   <span class="timeago" data-date="2021-06-11 15:17:06 &#43;0000 UTC">2021-06-11 15:17:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s a convenience factor at play. A lot, if not all, e-commerce sites in Sweden have a nice big fat “pay with Klarna” button and it’s a one click purchase. No filling in addresses, getting your credit card out etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-06-11 14:47:34 &#43;0000 UTC">2021-06-11 14:47:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks distressingly similar to <a href="https:&#x2F;&#x2F;blog.zulip.com&#x2F;2021&#x2F;03&#x2F;20&#x2F;zulip-cloud-security-incident&#x2F;" rel="nofollow">https:&#x2F;&#x2F;blog.zulip.com&#x2F;2021&#x2F;03&#x2F;20&#x2F;zulip-cloud-security-incid...</a> .<p>Klarna: <i>Our app is configured specifically to avoid inadvertent caching through the use of cache control directives found in the HTTP standard (no-cache, no-store, must-revalidate). However, the CDN configuration can at times override the app configuration.</i><p>Zulip: <i>Zulip separately marks its responses as non-cacheable, both to prevent private data from being sent to the wrong user, and also to prevent stale data from being sent even to the right user. Indicating that a response is not cacheable is the purpose of Zulip’s Cache-Control header: max-age=0 [...] no-cache [...] no-store [...] must-revalidate [...] private [...] CloudFront usually respects the Cache-Control and Expires headers, but with one critical exception when receiving multiple similar requests at roughly the same time</i><p>It looks like Klarna&#x27;s main website uses CloudFront, so I bet this was the exact same thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 12:57:34 &#43;0000 UTC">2021-06-11 12:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s funny that I haven&#x27;t heard about it before, although I live in Germany and Klarna is probably the biggest payment processor in Germany.<p>Luckily, I haven&#x27;t used it. I never liked that one need to provide his bank login data to Klarna &#x2F; Sofort to use it. How is that even legal?<p>EDIT: I haven&#x27;t heard about Klarna outage, Klarna is well known.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=julianlam" target="_blank">julianlam</a>   <span class="timeago" data-date="2021-06-11 13:46:56 &#43;0000 UTC">2021-06-11 13:46:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I never liked that one need to provide his bank login data to Klarna &#x2F; Sofort to use it. How is that even legal?<p>I am parroting other HN comments here, but the reason this is necessary is because banks do not provide a public (or private) API except between other banks. Therefore the only avenue for integration would be directly accessing the account.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tainnor" target="_blank">Tainnor</a>   <span class="timeago" data-date="2021-06-11 14:11:10 &#43;0000 UTC">2021-06-11 14:11:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really true in Germany where FinTS and its precursor HBCI have been supported by many banks since the 90s or so. Ironically, it&#x27;s typically the hip start-up banks like N26 that don&#x27;t support this standard.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ludamad" target="_blank">ludamad</a>   <span class="timeago" data-date="2021-06-11 13:52:29 &#43;0000 UTC">2021-06-11 13:52:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish this wasn&#x27;t normal to me, but I&#x27;ve been fully conditioned to expect this from QuickBooksOnline
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=showsover" target="_blank">showsover</a>   <span class="timeago" data-date="2021-06-11 13:52:43 &#43;0000 UTC">2021-06-11 13:52:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They do though. PDS2 requires all banks to have an accessible API.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samhw" target="_blank">samhw</a>   <span class="timeago" data-date="2021-06-11 14:21:47 &#43;0000 UTC">2021-06-11 14:21:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is different from banks actually _having_ an API. Many have stalled or successfully asked for exemptions, and even those who have gone ahead and, to some extent, complied, have still tried to make their APIs as difficult to use, feature-poor, and unreliable as possible. Source: worked at a bank which actually tried to do this well, and which also offered functionality which required us to integrate with other banks&#x27; APIs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tainnor" target="_blank">Tainnor</a>   <span class="timeago" data-date="2021-06-11 14:08:01 &#43;0000 UTC">2021-06-11 14:08:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; How is that even legal?<p>It&#x27;s worse than that. Several banks tried to enforce in their terms and conditions that sharing your bank login data would be a breach of contract or at least absolve the bank of any liability. This was deemed in violation of antitrust laws for some reason, so now banks have to actively allow this which is just brain-dead IMHO.<p>The only upside of this is that we now have PSD2 now anyway, so the damage that can be done by someone who has your login credentials is limited.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samhw" target="_blank">samhw</a>   <span class="timeago" data-date="2021-06-11 14:17:34 &#43;0000 UTC">2021-06-11 14:17:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This was deemed in violation of antitrust laws for some reason<p>My best guess at what that &quot;some reason&quot; may be is that it breaks shoddily built integrations like [Teller](<a href="https:&#x2F;&#x2F;teller.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;teller.io&#x2F;</a>), which, instead of using schemes like Open Banking where available, simply rely on credential sharing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdaniel" target="_blank">mdaniel</a>   <span class="timeago" data-date="2021-06-11 15:06:00 &#43;0000 UTC">2021-06-11 15:06:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For others wondering what PSD2 is: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Payment_Services_Directive" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Payment_Services_Directive</a> and there were also a lot of &quot;what is it and how does it affect you&quot; articles from name brand bank websites, too, but I figured start here
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gmokki" target="_blank">gmokki</a>   <span class="timeago" data-date="2021-06-12 06:34:48 &#43;0000 UTC">2021-06-12 06:34:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Finland it is illegal to give your bank login data to others, including scrapers.
+One couple both got sentenced when the other used the bank login data left on table to order something online. Fraud for the other and neglegence of leaving the login data easily accessible for the other.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=randomlurking" target="_blank">randomlurking</a>   <span class="timeago" data-date="2021-06-11 13:22:58 &#43;0000 UTC">2021-06-11 13:22:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, haven’t used it (knowingly) and regularly order from other sites if klarna is the only payment option.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Xylakant" target="_blank">Xylakant</a>   <span class="timeago" data-date="2021-06-11 13:03:19 &#43;0000 UTC">2021-06-11 13:03:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you certain you haven’t used it? Some shopping sites use them as payment processor for regular CC transactions without much visibility. You have to look at the T&amp;C to even notice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 13:27:11 &#43;0000 UTC">2021-06-11 13:27:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I usually don&#x27;t leave CC info on some random site, only to major and well known. If the site is unknown, it&#x27;s either PayPal, &quot;pay by invoice&quot; or no order at all.<p>Either PayPal or CC issuer provide at least some buyers&#x27; protection, while given your bank credentials to Klarna is normally against ToC of your bank.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-06-11 13:44:59 &#43;0000 UTC">2021-06-11 13:44:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I try not to use PayPal in the hope they will become irrelevant as a business (I know, not holding my breath), mainly because their customer service and fees are terrible.<p>CCs are not a great mechanism and I wished we had better bank services and safer integrations to process payments, but that&#x27;s what we have. I check my bank statement regularly and I know I can get money back if fraud happens. If I don&#x27;t trust a website I used a prepaid with the exact amount on.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zibzab" target="_blank">zibzab</a>   <span class="timeago" data-date="2021-06-11 14:04:30 &#43;0000 UTC">2021-06-11 14:04:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I usually don&#x27;t leave CC info on some random site, only to major and well known.<p>That&#x27;s the whole point of klarna (who also do CC processing so might have used them unknowingly): you don&#x27;t need to trust Johnny&#x27;s Little Online Store handling your CC, since the payment is handled by klarna.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 14:39:07 &#43;0000 UTC">2021-06-11 14:39:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The irony is, as a buyer, I trust unknown Johnny&#x27;s Little Online Store as much as Klarna. Maybe even more, since I can give a Little Johnny the benefit of the doubt.<p>But in practice it&#x27;s either invoice, PayPal or CC. Even if Klarna process that payment in the background, I can still object to my CC company and let them settle it, instead of having to deal with them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zibzab" target="_blank">zibzab</a>   <span class="timeago" data-date="2021-06-11 14:50:36 &#43;0000 UTC">2021-06-11 14:50:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you believe Johnnys has the resources to create a secure payment system and keep it secure?<p>Also,  Klarna is a major invoice and CC processor. You probably have already used them unknowingly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:35:13 &#43;0000 UTC">2021-06-11 13:35:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Deathmax" target="_blank">Deathmax</a>   <span class="timeago" data-date="2021-06-11 13:19:36 &#43;0000 UTC">2021-06-11 13:19:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This happened to Steam as well, where misconfigured caching leaked PII: <a href="https:&#x2F;&#x2F;store.steampowered.com&#x2F;oldnews&#x2F;19852" rel="nofollow">https:&#x2F;&#x2F;store.steampowered.com&#x2F;oldnews&#x2F;19852</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the-rc" target="_blank">the-rc</a>   <span class="timeago" data-date="2021-06-11 13:40:09 &#43;0000 UTC">2021-06-11 13:40:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It used to happen even with everything configured correctly, if your users connected over plain HTTP, from an ISP that forced their traffic to go through a transparent proxy with overaggressive caching. It&#x27;s not fun to hear about users logged in with somebody else&#x27;s account, but only in remote corners of the world instead of the more densely populated areas as you&#x27;d expect.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-06-11 13:36:24 &#43;0000 UTC">2021-06-11 13:36:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The same happened to the Italian government: <a href="https:&#x2F;&#x2F;moondo.info&#x2F;en&#x2F;Luciano-Vangone-suddenly-the-most-famous-citizen-of-Italy&#x2F;" rel="nofollow">https:&#x2F;&#x2F;moondo.info&#x2F;en&#x2F;Luciano-Vangone-suddenly-the-most-fam...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fuzzer37" target="_blank">fuzzer37</a>   <span class="timeago" data-date="2021-06-11 14:20:40 &#43;0000 UTC">2021-06-11 14:20:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This configuration change had been written by an authorized engineer in one team, consulting but misinterpreting vendor documentation. The change was then reviewed by three other authorized engineers in three separate teams, according to normal processes. None of them spotted the mistake in the configuration update.<p>Is anyone else shocked by this? Are code reviews worthless? An engineer made a change reviewed by 3 other people. It seems like _someone_ would notice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coldcode" target="_blank">coldcode</a>   <span class="timeago" data-date="2021-06-11 14:38:21 &#43;0000 UTC">2021-06-11 14:38:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reviewing someone&#x27;s code you had not seen before, involving a third party vendor you know nothing about, that only happens in production environment and only randomly fails and otherwise works—does not shock me at all. No process no matter how thorough can still fail. Code reviews in my prior experience solved nothing as people were expected to work full time and yet still review code continuously; unless you give engineers sufficient time to do both without overtime effort, one or the other will be affected, and usually its the reviews.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdaniel" target="_blank">mdaniel</a>   <span class="timeago" data-date="2021-06-11 15:18:14 &#43;0000 UTC">2021-06-11 15:18:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had always seen code review process as partially a knowledge sharing exercise, so fine, maybe none of the 3 other engineers had <i>previously</i> seen those vendor docs, but part of the process is to retrace the steps and see if (with the benefit of hindsight) the reviewer would reach the same conclusion<p>&gt; Code reviews in my prior experience solved nothing<p>I find that assertion suspicious, unless the culture was &quot;push the approval button without even reading because ship,ship,ship&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=peach" target="_blank">peach</a>   <span class="timeago" data-date="2021-06-11 15:35:11 &#43;0000 UTC">2021-06-11 15:35:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Once in a while a bunch of people will fail to notice something that might be cryptic if you don&#x27;t know the details.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xbar" target="_blank">xbar</a>   <span class="timeago" data-date="2021-06-11 15:01:57 &#43;0000 UTC">2021-06-11 15:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Impressive success at burying the lead.<p>Let me fix for it.<p>&quot;Detailed incident report: No One At Klarna Understands That Disabling CDN Cache Protections for Personal Information is Bad&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brasetvik" target="_blank">brasetvik</a>   <span class="timeago" data-date="2021-06-11 16:18:41 &#43;0000 UTC">2021-06-11 16:18:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Their initial post blamed the problem on “human error”, an anti-pattern in getting to the root cause of things.<p>This post attempts to blame their CDN vendor.<p>“All these reviewers couldn’t spot it.”
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=new_here" target="_blank">new_here</a>   <span class="timeago" data-date="2021-06-11 14:02:13 &#43;0000 UTC">2021-06-11 14:02:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The blog post doesn&#x27;t say much more than the headline. I&#x27;m curious about the specifics of what could of actually happened here.<p>In my limited experience working with CDNs wouldn&#x27;t you just cache the responses of unique URLs and have some sort of cookie check at the edge before serving it.<p>So my own app would request something like &#x2F;api&#x2F;account?id=123 with my own id in there.<p>How would you end up getting other people&#x27;s data in your app if your app only calls that unique URL?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=samhw" target="_blank">samhw</a>   <span class="timeago" data-date="2021-06-11 14:09:02 &#43;0000 UTC">2021-06-11 14:09:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s pretty easy to imagine an API having an endpoint like GET &#x2F;api&#x2F;account&#x2F;mine, which is implicitly parameterised by the user ID associated with that session. Or even a &#x27;list&#x27; rather than a &#x27;lookup&#x27; endpoint, like GET &#x2F;api&#x2F;messages, which fetched all private messages associated with the authenticated user – or whatever the equivalent private information would be, in Klarna&#x27;s &#x27;domain&#x27;.<p>Edit: If the other commenter is correct, then it&#x27;s less bad than I imagined. Or rather it would at least only be triggered, seemingly, if someone deliberately and maliciously requested something that didn&#x27;t &#x27;belong&#x27; to them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=new_here" target="_blank">new_here</a>   <span class="timeago" data-date="2021-06-11 15:14:01 &#43;0000 UTC">2021-06-11 15:14:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I see, so the it&#x27;s likely that a generic URL pattern (like your example) was accidentally included in their caching rules.<p>I guess I didn&#x27;t think of that originally because I thought if you wanted to cache some kind of response data like this, why on earth would you use a generic URL? But perhaps they probably didn&#x27;t intend to cache this endpoint.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q3k" target="_blank">q3k</a>   <span class="timeago" data-date="2021-06-11 14:08:15 &#43;0000 UTC">2021-06-11 14:08:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; How would you end up getting other people&#x27;s data in your app if your app only calls that unique URL?<p>From what I understand what happened with this outage, the CDN would still cache &#x2F;api&#x2F;account?id=123, and someone with account ID 234 could access it by altering the URL to retrieve the cached version, if account 123 has used the app recently.<p>That&#x27;s because a CDN has (usually) no concept of authorization&#x2F;authentication and can&#x27;t make decisions that &#x2F;api&#x2F;account?id=123 shouldn&#x27;t be served to someone other than the owner of account 123.<p>It would be less catastrophic (at least from a PR point of view) because people wouldn&#x27;t get immediately served others&#x27; accounts, but you&#x27;d be vulnerable to attack.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Ndymium" target="_blank">Ndymium</a>   <span class="timeago" data-date="2021-06-11 14:55:04 &#43;0000 UTC">2021-06-11 14:55:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In fact users did get other users&#x27; data just by using the app normally, so it likely didn&#x27;t happen the way you describe it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q3k" target="_blank">q3k</a>   <span class="timeago" data-date="2021-06-11 15:11:27 &#43;0000 UTC">2021-06-11 15:11:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, what probably happened is that an `&#x2F;accounts&#x2F;me` endpoint got cached.<p>But what GP seems to be asking about is: “Would having your app always encode a user ID into the endpoint have helped?”.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=new_here" target="_blank">new_here</a>   <span class="timeago" data-date="2021-06-11 15:16:51 &#43;0000 UTC">2021-06-11 15:16:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I&#x27;ve just realised they&#x27;ve probably accidentally included a generic URL in the cache rules that they actually didn&#x27;t intend to cache.<p>I originally thought they <i>were</i> trying to cache account data responses and so wondered why they wouldn&#x27;t just use unique query parameters in that case. Definitely risky business though.<p>Out of interest, it looks like Cloudflare offers some sort of token authentication to authenticate at the edge: <a href="https:&#x2F;&#x2F;blog.cloudflare.com&#x2F;token-authentication-for-cached-private-content-and-apis&#x2F;" rel="nofollow">https:&#x2F;&#x2F;blog.cloudflare.com&#x2F;token-authentication-for-cached-...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cuspycode" target="_blank">cuspycode</a>   <span class="timeago" data-date="2021-06-11 16:40:15 &#43;0000 UTC">2021-06-11 16:40:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What I&#x27;m wondering is: why would you ever want a CDN configuration to override no-cache instructions from the backend? I assume there&#x27;s a use case for this, but I can&#x27;t figure out what it is. Can anyone explain?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=willejs" target="_blank">willejs</a>   <span class="timeago" data-date="2021-06-11 12:58:14 &#43;0000 UTC">2021-06-11 12:58:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This sounds a bit like request collapsing on their CDN was enabled perhaps?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=terom" target="_blank">terom</a>   <span class="timeago" data-date="2021-06-11 13:55:35 &#43;0000 UTC">2021-06-11 13:55:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;developer.fastly.com&#x2F;learning&#x2F;concepts&#x2F;request-collapsing&#x2F;" rel="nofollow">https:&#x2F;&#x2F;developer.fastly.com&#x2F;learning&#x2F;concepts&#x2F;request-colla...</a> fastly&#x27;s VCL docs are interesting, particularly the bit about request queueing and `Cache-Control: private`. This sounds exactly like the kind of confusion that would lead to this kind of issue, while not being noticed in a low-traffic test environment with fewer simultaneous requests.<p>&gt; HINT: One of many reasons you should be using Cache-Control and not Expires for your caching configuration is the ability to use directives like private. The private directive tells Fastly that this response is good for only one user, the one that originally triggered the request. Anyone else that got tagged onto the queue must now be dequeued and their requests processed individually.<p>&gt; Responses not marked private, may be used to satisfy queued requests. Even a response with max-age=0 or the equivalent no-cache can be used to satisfy all the waiting clients, and the next request for the object will once again be a MISS. If your reason for giving a response a zero cache lifetime is that it contains content intended for a single user only, then ensure it is correctly marked private to avoid having this content sent to more than one user.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 12:58:33 &#43;0000 UTC">2021-06-11 12:58:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=EE84M3i" target="_blank">EE84M3i</a>   <span class="timeago" data-date="2021-06-11 13:24:36 &#43;0000 UTC">2021-06-11 13:24:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems to go out of their way to say which vendor they were using? Looks like now they&#x27;re on Cloudfront.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

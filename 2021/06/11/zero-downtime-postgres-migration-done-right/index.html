@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/zero-downtime-postgres-migration-done-right/">
+
+
+    <title>Zero downtime Postgres migration, done right - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Zero downtime Postgres migration, done right - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/zero-downtime-postgres-migration-done-right/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/zero-downtime-postgres-migration-done-right/">
+<meta name="twitter:title" content="Zero downtime Postgres migration, done right - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Zero downtime Postgres migration, done right - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T14:25:08JST",
+    "dateModified": "2021-06-11T14:25:08JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://engineering.theblueground.com/blog/zero-downtime-postgres-migration-done-right/">Zero downtime Postgres migration, done right</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chtitux" target="_blank">chtitux</a>   <span class="timeago" data-date="2021-06-11 17:33:09 &#43;0000 UTC">2021-06-11 17:33:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you can afford a one off 1 second of latency for your SQL queries, then using logical replication with pgbouncer seems way easier :<p>- setup logical replication between the old and the new server (limitations exist on what is replicated, read the docs)<p>- PAUSE the pgbouncer (virtual) database. Your app will hang, but not disconnect from pgbouncer<p>- Copy the sequences from the old to new server. Sequences are not replicated with logical replication<p>- RESUME the pgbouncer virtual database.<p>You&#x27;re done. If everything is automated, your app will see a temporary increase of the SQL latency. But they will keep their TCP connections, so virtually no outage.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-11 17:48:03 &#43;0000 UTC">2021-06-11 17:48:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This works wonderfully. If you have any long running queries, though, the PAUSE won&#x27;t pause until they have finished.<p>I love pgbouncer, it is such a great tool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fierro" target="_blank">fierro</a>   <span class="timeago" data-date="2021-06-12 03:20:20 &#43;0000 UTC">2021-06-12 03:20:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this is interesting.  So you have a weakest link kind of problem here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-06-13 17:36:34 &#43;0000 UTC">2021-06-13 17:36:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can temporarily reduce query timeout to a smaller setting as part of the automated failover. The long running transactions will fail but you can minimize the window where you can&#x27;t talk to postgres
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-12 13:10:08 &#43;0000 UTC">2021-06-12 13:10:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really, new connections will block as it&#x27;s pausing.  But you won&#x27;t be able to shut down Postgres until those long queries complete.  Perhaps I was not super clear, but what I&#x27;m trying to say is that PAUSE is not instantaneous.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fierro" target="_blank">fierro</a>   <span class="timeago" data-date="2021-06-13 01:11:10 &#43;0000 UTC">2021-06-13 01:11:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            yeah what I&#x27;m saying is that you can only pause as fast as your slowest currently initiated query.  So if you have a diverse set of query patterns, you could be waiting for a really small percentage of small queries to wrap up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-13 01:14:22 &#43;0000 UTC">2021-06-13 01:14:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand now. Yes, this is true and should be taken into consideration during upgrades.<p>Most of our queries are fast, and the longer ones hit a read-only secondary instance. Cleanup jobs, though, can take hours to complete.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=twunde" target="_blank">twunde</a>   <span class="timeago" data-date="2021-06-11 21:58:31 &#43;0000 UTC">2021-06-11 21:58:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be fair about this page, this was used to migrate versions of postgres __prior__ to the introduction of logical replication. Logical replication makes this significantly easier (ie you no longer need the triggers)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stingraycharles" target="_blank">stingraycharles</a>   <span class="timeago" data-date="2021-06-11 21:45:14 &#43;0000 UTC">2021-06-11 21:45:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Exactly this. The OP’s approach reminded me so much of the days of Slony, and I wondered why a simpler approach with logical replication would not just suffice.<p>Rather than pgbouncer, I did this in the actual application code once (write to both databases at the same time, once everything is in sync and you’re confident the new server works well, fail over to the new one only), but it depends upon how much control you can exercise over the application code.<p>Any approach that is based on triggers makes me shiver, however.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=booleanbetrayal" target="_blank">booleanbetrayal</a>   <span class="timeago" data-date="2021-06-11 18:01:59 &#43;0000 UTC">2021-06-11 18:01:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is precisely the migration I&#x27;m planning on doing in the next few weeks with pglogical under the hood for replication. Seems like the atomic switch is much easier than any sort of problem that could stem from conflict or data duplication errors while in a bi-directional replication strategy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=asenchi" target="_blank">asenchi</a>   <span class="timeago" data-date="2021-06-11 19:48:42 &#43;0000 UTC">2021-06-11 19:48:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, you can also prepare the new database by using a snapshot of the primary&#x27;s volume, and use pg-rewind to get them in sync. Altogether the tooling can make migrations super easy without minimal downtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vira28" target="_blank">vira28</a>   <span class="timeago" data-date="2021-06-12 01:50:55 &#43;0000 UTC">2021-06-12 01:50:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does PAUSE works in session mode? I have always had challenges with PAUSE in session mode.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=foobarbazetc" target="_blank">foobarbazetc</a>   <span class="timeago" data-date="2021-06-11 20:55:30 &#43;0000 UTC">2021-06-11 20:55:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s how you do it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nhumrich" target="_blank">nhumrich</a>   <span class="timeago" data-date="2021-06-11 22:03:09 &#43;0000 UTC">2021-06-11 22:03:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use pgbouncer and had no idea it supported logical replication. I cant find anything about it in the docs. Do you have something you can link me to to read more?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidos" target="_blank">aidos</a>   <span class="timeago" data-date="2021-06-11 22:12:18 &#43;0000 UTC">2021-06-11 22:12:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m assuming they mean to use Postgres logical replication.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nhumrich" target="_blank">nhumrich</a>   <span class="timeago" data-date="2021-06-11 22:27:47 &#43;0000 UTC">2021-06-11 22:27:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which is only possible if you are using a version of postgres which is new enough, and isn&#x27;t restricted, such as some versions of RDS. Which, explains the whole original post.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=luhn" target="_blank">luhn</a>   <span class="timeago" data-date="2021-06-11 16:31:46 &#43;0000 UTC">2021-06-11 16:31:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Braintree (IIRC) had a really clever migration strategy, although I can&#x27;t seem to find the blog post now.  They paused all traffic at the load balancer, cut over to the new DB, and then resumed traffic.  No requests failed, just a slight bump in latency while the LBs were paused.<p>This app apparently had robust enough retry mechanisms that they were able just eat the errors and not have customer issues—Color me impressed!  I&#x27;m not sure how many teams can make that claim; that&#x27;s a hard thing to nail down.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scrollaway" target="_blank">scrollaway</a>   <span class="timeago" data-date="2021-06-11 16:38:08 &#43;0000 UTC">2021-06-11 16:38:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I remember reading something like that about Adyen. That might be why you&#x27;re unable to find it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rattray" target="_blank">rattray</a>   <span class="timeago" data-date="2021-06-11 20:13:37 &#43;0000 UTC">2021-06-11 20:13:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if that was it (Adyen and Braintree are competitors).<p>Here&#x27;s the post: <a href="https:&#x2F;&#x2F;www.adyen.com&#x2F;blog&#x2F;updating-a-50-terabyte-postgresql-database" rel="nofollow">https:&#x2F;&#x2F;www.adyen.com&#x2F;blog&#x2F;updating-a-50-terabyte-postgresql...</a><p>Discussed here: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26535357" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26535357</a><p>They architected their application to be able to tolerate 15-30min of postgres downtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nezirus" target="_blank">nezirus</a>   <span class="timeago" data-date="2021-06-11 17:02:55 &#43;0000 UTC">2021-06-11 17:02:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            pgbouncer has PAUSE comnand, which can be used for seamless restarts&#x2F;failovers or similar
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simonw" target="_blank">simonw</a>   <span class="timeago" data-date="2021-06-11 19:21:57 &#43;0000 UTC">2021-06-11 19:21:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that&#x27;s covered in this talk (I&#x27;ve not watched the video though): <a href="https:&#x2F;&#x2F;www.braintreepayments.com&#x2F;blog&#x2F;ruby-conf-australia-high-availability-at-braintree&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.braintreepayments.com&#x2F;blog&#x2F;ruby-conf-australia-h...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pgr0ss" target="_blank">pgr0ss</a>   <span class="timeago" data-date="2021-06-11 19:38:24 &#43;0000 UTC">2021-06-11 19:38:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was also covered in: <a href="https:&#x2F;&#x2F;www.braintreepayments.com&#x2F;blog&#x2F;switching-datacenters&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.braintreepayments.com&#x2F;blog&#x2F;switching-datacenters...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=luhn" target="_blank">luhn</a>   <span class="timeago" data-date="2021-06-11 21:50:03 &#43;0000 UTC">2021-06-11 21:50:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Aha, that&#x27;s the post I was looking for!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xyst" target="_blank">xyst</a>   <span class="timeago" data-date="2021-06-11 18:30:42 &#43;0000 UTC">2021-06-11 18:30:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            probably had a good circuit breaker design. would love to read the article though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dkhenry" target="_blank">dkhenry</a>   <span class="timeago" data-date="2021-06-11 22:42:00 &#43;0000 UTC">2021-06-11 22:42:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is one of the areas where Postgres is so far behind MySQL is embarrassing. Zero downtime migrations in MySQL have been a common method for over 10 years. This solution is far from ideal due to the use of Triggers which can greatly increase the load on the database and slow down transactions. If you don&#x27;t have a lot of load on your DB thats fine, but if you are pushing your DB this will bring it down.<p>In MySQL they started with triggers with PT-OSC, but now there is GH-OST which does it with Replication. You can do something like this with Postgres by using Logical replication, but its still requires hand holding, and to my knowledge there is no way to &quot;throttle&quot; the migration like you can with GH-OST. Where I work now we are building all this out so we can have first class online migrations, but the chasm is still pretty big.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwdbaaway" target="_blank">throwdbaaway</a>   <span class="timeago" data-date="2021-06-12 01:18:15 &#43;0000 UTC">2021-06-12 01:18:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article is about migrating from RDS Postgres 9.5 to RDS Postgres 12, which is only feasible with Bucardo. Major version upgrade is less of a pain point these days with logical replication, and even Google Cloud SQL started to support logical replication since about a week ago, after a painfully long wait.<p>Meanwhile, you are talking about schema migration? In that case, gh-ost indeed is the best tool available. With Postgres, most types of schema migration can be done instantly with just a metadata change, or otherwise be done concurrently without locking the table. So a tool like gh-ost is not as vital, but still valuable for edge cases such as:<p>- altering the column type: requires table rewrite<p>- adding an index concurrently onto a busy server: a throttle would be nice
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=montroser" target="_blank">montroser</a>   <span class="timeago" data-date="2021-06-11 23:17:11 &#43;0000 UTC">2021-06-11 23:17:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, we did MySQL dual primary-primary circular replication on a cluster with ten read replicas, thousands of qps per box, all the way back in 2005.<p>We failed over back and forth from one primary to the other on a schedule every few weeks, just to practice and affirm we could.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ransom1538" target="_blank">ransom1538</a>   <span class="timeago" data-date="2021-06-12 00:24:53 &#43;0000 UTC">2021-06-12 00:24:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mysql admin here. If i need to create an in sync copy of a mysql db machine i take a snapshot then let replication catch up. Done. I can do whatever I want to this new machine (test alters, drop columns, etc) and let it catch up.  If i like the box i just attach a few replicas - promote it to master, done.<p>The Triggers trick is awesome (go percona!) -- but with cloud vms it takes a few seconds to fire up a complete insync replica.  I find this safer than triggers running all over a prod database [esp. if you have thousands of vms!]. IMHO.<p>When I read about Postgres it&#x27;s like being transported to 2005.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=merb" target="_blank">merb</a>   <span class="timeago" data-date="2021-06-11 22:52:46 &#43;0000 UTC">2021-06-11 22:52:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but its still requires hand holding, and to my knowledge there is no way to &quot;throttle&quot; the migration like you can with GH-OST<p>eh? you only do a basebackup and than you can begin the logical replication. at some point you than you do a failover?<p>chtitux basically described the process which is extremly simple.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dkhenry" target="_blank">dkhenry</a>   <span class="timeago" data-date="2021-06-11 23:02:35 &#43;0000 UTC">2021-06-11 23:02:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Up until the table is so large that the copy takes longer then your WAL retention so you can&#x27;t ever catch up. Like all things in Postgres, it works great up to a point, and then you are stuck. You also have to Logically replicate the entire schema because postgres won&#x27;t logically replicate from table to table
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=merb" target="_blank">merb</a>   <span class="timeago" data-date="2021-06-11 23:11:22 &#43;0000 UTC">2021-06-11 23:11:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            if that is the case you should have enough manpower to make use of basebackups+wal-e&#x2F;wal-g and than once your up, flipping it over to logical.<p>of course it is not as easy as having vitess, but vitess was not built in a day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tbrock" target="_blank">tbrock</a>   <span class="timeago" data-date="2021-06-11 18:59:14 &#43;0000 UTC">2021-06-11 18:59:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its insane that it has to be this complex and require third party software to accomplish…<p>Most modern rdbms&#x2F;nosql database vendors allow a rolling upgrade where you roll in new servers and roll out the old ones seamlessly.<p>Also the fact that AWS rds doesnt do this with zero downtime by default through automating it this way is also crazy. Why pay for hosted when the upgrade story is incomplete? Take downtime to upgrade a DB in 2021? Everyone must be joking.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Pxtl" target="_blank">Pxtl</a>   <span class="timeago" data-date="2021-06-11 19:40:17 &#43;0000 UTC">2021-06-11 19:40:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, Postgres is F&#x2F;OSS, so I expect the solution to problems to be &quot;lots of small tools&quot;... but I see the same kind of herculean battle-plans for MS SQL Server work, and I get shocked.  That is a paid product, what on Earth are we paying for?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=marcosdumay" target="_blank">marcosdumay</a>   <span class="timeago" data-date="2021-06-11 20:05:25 &#43;0000 UTC">2021-06-11 20:05:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; what on Earth are we paying for?<p>The same is the same for any relational DBMS: lock-in.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=worewood" target="_blank">worewood</a>   <span class="timeago" data-date="2021-06-11 21:04:03 &#43;0000 UTC">2021-06-11 21:04:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re paying for an &quot;if something goes wrong and it&#x27;s the software&#x27;s fault you can sue us&quot; license
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=senko" target="_blank">senko</a>   <span class="timeago" data-date="2021-06-11 21:50:13 &#43;0000 UTC">2021-06-11 21:50:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re not. Approximately 25% of SQL Server EULA text deals with ways in which the warranty is limited. The best the license gives you is your money back if you prove that it was the software&#x27;s fault.<p>Of course, you can always sue. A $2T company. Good luck with that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=doctor_eval" target="_blank">doctor_eval</a>   <span class="timeago" data-date="2021-06-11 22:05:23 &#43;0000 UTC">2021-06-11 22:05:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Went to post the same thing but HN had a little downtime burp.<p>Would only add that the main reason people buy these licenses, apart from familiarity, is so they can shift the blame if something goes wrong. Its all about ass covering.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=salmo" target="_blank">salmo</a>   <span class="timeago" data-date="2021-06-11 22:14:20 &#43;0000 UTC">2021-06-11 22:14:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, this and<p>1) the illusion of &quot;support&quot;
+2) OSS-fearing companies&#x27; love of indemnification
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fridif" target="_blank">fridif</a>   <span class="timeago" data-date="2021-06-12 02:22:42 &#43;0000 UTC">2021-06-12 02:22:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it likely wasnt downtime and rather a &quot;you are posting too many messages and we will pretend that the whole site is down rather than telling you&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=afarrell" target="_blank">afarrell</a>   <span class="timeago" data-date="2021-06-12 00:25:31 &#43;0000 UTC">2021-06-12 00:25:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You’re presumably paying for a relationship with someone who has expertise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=defaultname" target="_blank">defaultname</a>   <span class="timeago" data-date="2021-06-11 19:54:30 &#43;0000 UTC">2021-06-11 19:54:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a complex task, fraught on <i>any</i> platform. Most systems base such clustering on a shared filesystem, which is obviously orthogonal to the shared nothing designs most try to pursue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=0xbadcafebee" target="_blank">0xbadcafebee</a>   <span class="timeago" data-date="2021-06-11 21:18:48 &#43;0000 UTC">2021-06-11 21:18:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Most modern rdbms&#x2F;nosql database vendors<p>&quot;Modern&quot; = &quot;not a traditional RDBMS&quot;. Expecting your 1983 Toyota Corolla to <i>fly</i>, regardless of the fact that it&#x27;s now 2021, is unrealistic. But personal helicopters have been around for a while.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ivan888" target="_blank">ivan888</a>   <span class="timeago" data-date="2021-06-11 17:43:50 &#43;0000 UTC">2021-06-11 17:43:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t read this article, but I really hate the tag line &quot;done right&quot;. It expresses such a poor sense of humility, which is one of, or perhaps the most, important traits in the world of software
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=doctor_eval" target="_blank">doctor_eval</a>   <span class="timeago" data-date="2021-06-11 22:10:52 &#43;0000 UTC">2021-06-11 22:10:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I got the same feeling but couldn’t quite put my finger on it.<p>“Here’s how we did this. Feedback welcome” would seem more appropriate.<p>Perhaps it doesn’t fit the hyper-aggressive mould of the would be titan of industry.<p>That said their engineering blog seems to be down so ¯\_(ツ)_&#x2F;¯
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cullinet" target="_blank">Cullinet</a>   <span class="timeago" data-date="2021-06-12 02:03:46 &#43;0000 UTC">2021-06-12 02:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            adding &quot;(for us)&quot; would have taken the edge out of their title, I am thinking..
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeffbee" target="_blank">jeffbee</a>   <span class="timeago" data-date="2021-06-11 19:06:48 &#43;0000 UTC">2021-06-11 19:06:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bucardo has no performance impact, it just adds a trigger to every mutation. Negligible!<p>I really think articles of this kind are not useless, but need to explicitly narrow their audience to set expectation at the start. This particular topic is PG replication for users who aren&#x27;t very sensitive to write latency.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlmorton" target="_blank">jlmorton</a>   <span class="timeago" data-date="2021-06-11 16:59:51 &#43;0000 UTC">2021-06-11 16:59:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are in AWS, or have connectivity available, AWS Database Migration Service makes this relatively trivial.<p>DMS for Postgres is based on Postgres Logical Replication, which is built-in to Postgres, and the same thing Bucardo is using behind the scenes.  But AWS DMS is very nearly point-and-click to do this sort of migration.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chousuke" target="_blank">chousuke</a>   <span class="timeago" data-date="2021-06-11 17:32:03 &#43;0000 UTC">2021-06-11 17:32:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The key here is Postgres 9.5. AWS DMS does not support it because they require logical replication support.<p>A few years back I migrated a PostgreSQL 9.2 database to AWS and wasn&#x27;t able to use RDS because logical replication was not available.<p>I did try to use Bucardo but ultimately didn&#x27;t trust myself to configure it such that it wouldn&#x27;t lose data (first attempt left nearly all BLOBs unreplicated because the data isn&#x27;t actually in the tables you set triggers on)<p>Physical replication to a self-built instance was easy, I was 100% confident it wouldn&#x27;t be missing data, and the downtime from cutover was about 15 minutes (It involved restarting piles of slow Java applications)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=booleanbetrayal" target="_blank">booleanbetrayal</a>   <span class="timeago" data-date="2021-06-11 17:55:22 &#43;0000 UTC">2021-06-11 17:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think DMS generally lags RDS releases. Last I checked, there still wasn&#x27;t a way to replicate from Postgres RDS 12 -&gt; 13 with DMS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=booleanbetrayal" target="_blank">booleanbetrayal</a>   <span class="timeago" data-date="2021-06-11 17:24:59 &#43;0000 UTC">2021-06-11 17:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Has anyone here leveraged pglogical for this before? Looking at a similar migration but it has native extension support in AWS RDS. Would love to hear any success &#x2F; horror stories!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 17:02:25 &#43;0000 UTC">2021-06-11 17:02:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder how much easier software engineering would be if there were a period where things are simply not available.<p>What problems are currently very difficult would be made trivial if 6 hours of downtime every Sunday were acceptable? 10PM-4AM EST
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maccard" target="_blank">maccard</a>   <span class="timeago" data-date="2021-06-11 17:11:14 &#43;0000 UTC">2021-06-11 17:11:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your team is now working 10pm to 4am est every Sunday, and anyone who uses your services in any time zone around the world is without your service. 10pm est is lunch time in Australia. 4am est is working hours in many parts of western Europe.<p>You don&#x27;t have to be huge to have customers all around the world.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yifanl" target="_blank">yifanl</a>   <span class="timeago" data-date="2021-06-11 17:16:44 &#43;0000 UTC">2021-06-11 17:16:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the idea is that this world is one where the customer accepts that there may be an outage every Sunday because feature work can be done far more cheaply.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 17:17:39 &#43;0000 UTC">2021-06-11 17:17:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You’re correct, but if there happened to be an outage during that time now you’d have to have your team working then anyway.<p>The existence of a planned downtime doesn’t necessarily mean deployments, or work, have to happen during that time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yupper32" target="_blank">yupper32</a>   <span class="timeago" data-date="2021-06-11 17:23:10 &#43;0000 UTC">2021-06-11 17:23:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but if there happened to be an outage during that time now you’d have to have your team working then anyway.<p>So you&#x27;re having them work late 52 times a year AND when there&#x27;s an outage vs only when there&#x27;s an outage. They&#x27;re working late WAY more in your plan.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 18:49:44 &#43;0000 UTC">2021-06-11 18:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The existence of planned downtime doesn’t mean they have to work during said time. I’m not following your reasoning
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kabdib" target="_blank">kabdib</a>   <span class="timeago" data-date="2021-06-11 19:36:47 &#43;0000 UTC">2021-06-11 19:36:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Er, you bring the service down so you can do work on it. <i>Somebody</i> is doing that work.<p>I guarantee that you&#x27;ll have trouble hiring qualified people for a role that includes core hours of &quot;2AM-5AM Sunday mornings&quot; (or whatever other oddball time you&#x27;ve decided). Updating systems is precisely when you may need to have all-hands-on-deck responses. Been there, multiple times.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sigstoat" target="_blank">sigstoat</a>   <span class="timeago" data-date="2021-06-11 19:49:07 &#43;0000 UTC">2021-06-11 19:49:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            they might not have to work during every planned downtime, but they&#x27;re going to have to work during some of them, or what was the point of the downtime?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 20:30:17 &#43;0000 UTC">2021-06-11 20:30:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The point is to create a predictable period in which downtime, if any, would occur during
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xmprt" target="_blank">xmprt</a>   <span class="timeago" data-date="2021-06-11 20:56:59 &#43;0000 UTC">2021-06-11 20:56:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This predictability only matters for frequent, repeat customers. But those are the exact customers that you could just email saying &quot;the website is going to be down on Sunday for 1 hour for planned maintenance&quot; a few times a year when it&#x27;s actually required.<p>If you run a business (eg. HFT where you run certain cleanup scripts after trading hours) where regular planned downtime is fine then go for it but most of the time, you don&#x27;t need a downtime schedule every single week because you&#x27;re not doing planned maintenance work every single week.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ohyeshedid" target="_blank">ohyeshedid</a>   <span class="timeago" data-date="2021-06-12 01:07:15 &#43;0000 UTC">2021-06-12 01:07:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You will be doing that every week when the system is designed to only be worked on during those planned windows, because that&#x27;s what happens in these types of situations.<p>These windows are also when people discover how fragile their infrastructure is; when it doesn&#x27;t come back up and now everyone is panicking and well past the planned downtime window.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 21:04:14 &#43;0000 UTC">2021-06-11 21:04:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think people are getting too caught up in my particular example. It could be a month, biweekly, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yupper32" target="_blank">yupper32</a>   <span class="timeago" data-date="2021-06-11 17:07:18 &#43;0000 UTC">2021-06-11 17:07:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find it very hard to come up with a use case where a weekly 6 hours of downtime at night EST would be acceptable.<p>US government websites already often do this, and I find that completely unacceptable since these services need to be available to anyone, regardless of work and life schedules.<p>Any website that&#x27;s international would also suffer greatly for an EST centralized scheduled downtime.<p>Maybe a very localized website that doesn&#x27;t have much impact on real life?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 17:10:11 &#43;0000 UTC">2021-06-11 17:10:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why wouldn’t it be acceptable? People aren’t available all the time either, nor are stores. In fact software is unique in its availability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yupper32" target="_blank">yupper32</a>   <span class="timeago" data-date="2021-06-11 17:13:00 &#43;0000 UTC">2021-06-11 17:13:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Frankly, because it can be. Weekly scheduled downtime is arbitrary, manufactured, and lazy.<p>Of course, having to schedule the occasional downtime for a database migration is fine. There&#x27;s probably a few times a year that you&#x27;d need to do it if you don&#x27;t have the bandwidth to do fancy zero-downtime solutions. It&#x27;s the weekly arbitrary downtime that I&#x27;m firmly against.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-06-13 18:01:43 &#43;0000 UTC">2021-06-13 18:01:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s expensive to run things like that. Multiple &quot;9&quot;s are significantly more expensive to engineer than, say, 95% uptime.<p>In general, the correct amount of allowable downtime is when losses due to downtime are greater than the cost of increasing availability (which depends on the system). Should we raise taxes to increase government website availability? Not sure there&#x27;s a clear cut case and it would definitely depend on each specific website and what utility it provides
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 17:15:26 &#43;0000 UTC">2021-06-11 17:15:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why is it lazy? When things are up people have to work. Do you believe people should be working all of the time?<p>I think regular downtime is only natural. If you had to choose between 95% availability or 100% availability other than the before mentioned downtime which would you choose?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yupper32" target="_blank">yupper32</a>   <span class="timeago" data-date="2021-06-11 17:21:39 &#43;0000 UTC">2021-06-11 17:21:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry I&#x27;m a bit confused by your argument.<p>&gt; When things are up people have to work.<p>That&#x27;s not true. Monitoring software and on-call rotations are well established things, and wouldn&#x27;t even go away in your world. Believe it or not, people who run websites already sleep at night.<p>&gt; Do you believe people should be working all of the time?<p>I&#x27;m not sure where you got that. Besides, you&#x27;re already having people in the office in the middle of the night every Sunday already. Or are you saying that the downtime is when your team gets to sleep?<p>&gt; If you had to choose between 95% availability or 100% availability other than the before mentioned downtime which would you choose?<p>Again, not sure what you&#x27;re getting at. There&#x27;s only a few reasons why you&#x27;d need to schedule a downtime. Database migrations are a good one. All of the reasons should only happen a few times a year, likely. Way better than 52 times a year.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-06-11 18:55:22 &#43;0000 UTC">2021-06-11 18:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m not making a particular argument. I’m just wondering if having regular downtime is better or worse in terms of reducing engineering complexity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Spooky23" target="_blank">Spooky23</a>   <span class="timeago" data-date="2021-06-12 01:52:15 &#43;0000 UTC">2021-06-12 01:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps. Oftentimes it’s driven by legacy batch processes on mainframes.<p>There’s a wide variety of reasons why it may make sense to carry on in that way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-06-13 17:43:25 &#43;0000 UTC">2021-06-13 17:43:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s still somewhat (fairly?) common for internal facing apps where you can just tell your users &quot;It&#x27;s going to be down in this window, plan accordingly&quot;. For a publicly available app, you&#x27;ll lose your customers to a competitor with a more advanced maintenance strategy (or even one that happened to pick a NoSQL database where rolling upgrades are trivial)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kabdib" target="_blank">kabdib</a>   <span class="timeago" data-date="2021-06-11 19:28:19 &#43;0000 UTC">2021-06-11 19:28:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What part of the world?<p>One service I worked on (with customers around the globe) had about 10 minutes of scheduled downtime a week. Peak user load was, interestingly enough, during our core hours, when there are a lot more hands on deck to handle any issues. So that&#x27;s the time we chose.<p>Naturally people still complained bitterly about that ten minutes.<p>Getting to zero didn&#x27;t seem worth the significant engineering effort required. &quot;You&#x27;re not Amazon, and you&#x27;re not 911&quot; [emergency number in the US]
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=doctor_eval" target="_blank">doctor_eval</a>   <span class="timeago" data-date="2021-06-11 22:27:58 &#43;0000 UTC">2021-06-11 22:27:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Setting aside the other comments, I think it depends on your definition of “easier”.<p>Yes - it is easier in terms of up-front investment to have a scheduled (daily, weekly) downtime. But that often means the downtime is not automated - it’s someone doing the work, often out of hours when they’re not fresh, things can do wrong, etc. And it also means that the duration of the work is limited to the scheduled downtime. Some large upgrades just won’t fit in the allotted time, and you need to schedule an outage.<p>On the other hand, creating a system designed for zero downtime (ie, in-place upgrades, removal of big batch jobs etc) is a lot more of an investment up front, and makes upgrade planning more complex, but ultimately it saves time and effort because you can do all the changes during working hours, and “upgrades” become just how you deploy code - part of the core skill set of your team - and you do them 10 times a day.<p>The main difference that I’ve seen is that the scheduled downtime approach tends to create a much more conservative upgrade cycle, much bigger upgrades, and more risk of an upgrade failing - which means that a pile of features don’t get released. Also, certain customers will push back and demand a ton of documentation and detailed release notes and advanced warning of the upgrades etc - this creates loads of unproductive work for a small company. A continuous deployment model tends to reduce these problems because you’re not externalising your upgrade schedule and you don’t have a single big upgrade that can go bang, so maybe one feature doesn’t get released but everything else does.<p>Having taken both approaches (and even moved a company from scheduled to continuous) I would never go back to a scheduled downtime approach.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=i_have_an_idea" target="_blank">i_have_an_idea</a>   <span class="timeago" data-date="2021-06-11 17:11:56 &#43;0000 UTC">2021-06-11 17:11:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interestingly, this is unacceptable in the US and probably most of Western Europe. However, I know of more than one bank in Eastern Europe where online banking simply doesn&#x27;t work after midnight, until about 6am.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tinus_hn" target="_blank">tinus_hn</a>   <span class="timeago" data-date="2021-06-12 06:27:53 &#43;0000 UTC">2021-06-12 06:27:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My Dutch bank often sends me mails about their internet banking being available for a few hours during the night for maintenance.<p>Availability is great but realistically, who’s going to use their bank in the middle of the night? It probably isn’t worth the effort and the risks to avoid the downtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tikkabhuna" target="_blank">tikkabhuna</a>   <span class="timeago" data-date="2021-06-11 23:36:22 &#43;0000 UTC">2021-06-11 23:36:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is very common in the equity trading space. Applications must be up during the trading day (non-fri 8-5) but after that they can be upgraded and restarted easily. Typically there’s strict change management processes that prevent Continuous Delivery and slows the rollout of changes.<p>Often I wish I worked in an industry where I could release during the day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=legohead" target="_blank">legohead</a>   <span class="timeago" data-date="2021-06-11 17:45:34 &#43;0000 UTC">2021-06-11 17:45:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Easier sure, but Zero downtime migration is a fun engineering problem (albeit stressful).  Just need an employer who is willing to pay for it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mmanulis" target="_blank">mmanulis</a>   <span class="timeago" data-date="2021-06-11 17:08:25 &#43;0000 UTC">2021-06-11 17:08:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can this be done using existing PostgreSQL functionality around replicas? I think there&#x27;s a plugin for PostgreSQL that supports master-master replication as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Nextgrid" target="_blank">Nextgrid</a>   <span class="timeago" data-date="2021-06-11 15:59:31 &#43;0000 UTC">2021-06-11 15:59:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Internet Archive link in case the original is overloaded: <a href="https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20210611143214&#x2F;https:&#x2F;&#x2F;engineering.theblueground.com&#x2F;blog&#x2F;zero-downtime-postgres-migration-done-right&#x2F;" rel="nofollow">https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20210611143214&#x2F;https:&#x2F;&#x2F;engineeri...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=omot" target="_blank">omot</a>   <span class="timeago" data-date="2021-06-12 07:01:53 &#43;0000 UTC">2021-06-12 07:01:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always tell my non technical friends: “Migrations are like surgeries, and we’re letting new grads lead them.”
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silviogutierrez" target="_blank">silviogutierrez</a>   <span class="timeago" data-date="2021-06-11 16:32:15 &#43;0000 UTC">2021-06-11 16:32:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very interesting article. But I have to ask: would taking down the system for a couple of hours be <i>that</i> bad?<p>I looked at the company, and while they seem rather large, they&#x27;re not Netflix or AWS.<p>I imagine they need to be up for people to be able to check in, etc. But they could just block out the planned maintenance as check in times far in advance. I&#x27;m sure there&#x27;s a million other edge cases but those can be thought out and weighed against the engineering effort.<p>Don&#x27;t get me wrong, this is very cool.<p>But I wonder what the engineering cost was. I&#x27;d think easily in the hundreds of thousands of dollars.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maccard" target="_blank">maccard</a>   <span class="timeago" data-date="2021-06-11 17:25:07 &#43;0000 UTC">2021-06-11 17:25:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s always worth questioning both sides. Why is downtime acceptable? People on this site routinely complain about windows needing a restart for system updates while boasting about their Linux servers uptime.<p>People talk about how kubernetes is overkill for many people, but it gives you rolling deployments for your applications out of the box.<p>There&#x27;s also the &quot;slippery slope&quot; argument. A 0 downtime migration means 0 downtime. A 5 minute migration creeps up to a 30 minutes migration occasionally, and then regression to the mean happens, causing standard migrations to be 30 minutes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=munk-a" target="_blank">munk-a</a>   <span class="timeago" data-date="2021-06-11 18:09:52 &#43;0000 UTC">2021-06-11 18:09:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why is downtime acceptable?<p>At least where I&#x27;m working downtime is acceptable because our customer base is composed of professionals in north america that work 9-5 thus taking the DB offline for five minutes at midnight PST has essentially no cost to our client base.  To contrast that, spending three months developing a rollout plan costs our company dearly in competitive advantage.<p>I agree that it&#x27;s always worth examining from both sides but I also think that 0 downtime migration is both a shiny interesting problem and a point of pride for developers that can cause a company to vastly over invest in a complex technical solution to a problem they never had.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Daishiman" target="_blank">Daishiman</a>   <span class="timeago" data-date="2021-06-11 17:47:36 &#43;0000 UTC">2021-06-11 17:47:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A lot of 0-downtime migrations end up turning into a months-long ordeal and can still fail.<p>Allowing maintenance windows means you can do things in a much simple manner. Need to take a snapshot of a DB without running into issues with a production system adding data? Sure, go ahead, you just saved two months.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-06-11 18:52:37 &#43;0000 UTC">2021-06-11 18:52:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s the old can&#x2F;should argument.<p>The principle of something like zero downtime or switching a vendor out to save 20% may not stack up against the reality in opportunity costs, employee burnout, and customer turnover.<p>My company is reorganizing and so everyone is trying to settle old philosophical debates during The Churn. But everyone is overextended and a number of us have started pushing back. Just the meetings to discuss changing vendors might push the break-even point out 6 months, before you even get into implementation costs. The more time we spend working on infrastructure instead of customer-facing features and bugs, the more likely those customers are to wander off.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xmprt" target="_blank">xmprt</a>   <span class="timeago" data-date="2021-06-11 21:01:47 &#43;0000 UTC">2021-06-11 21:01:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the slippery slope argument is almost always a fallacy. In practice you can say &quot;we accept 99.99% availability&quot; (which is about 1 hour every year) and budget for that. Your service might go down for unplanned reasons such as an outage but it could also go down for planned maintenance and as long as you&#x27;re within that budget it seems ok.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 00:02:04 &#43;0000 UTC">2021-06-12 00:02:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-11 16:34:49 &#43;0000 UTC">2021-06-11 16:34:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I work for a small company and it would be devastating if our database was down for a few hours.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silviogutierrez" target="_blank">silviogutierrez</a>   <span class="timeago" data-date="2021-06-11 16:48:53 &#43;0000 UTC">2021-06-11 16:48:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unplanned? Probably. But maybe it&#x27;s not as a dire as you think? Azure Active Directory (auth as a service) went down for a <i>while</i>, globally, and life went on. Same with GCP and occasionally AWS[1]<p>I&#x27;m not saying there&#x27;s no downside, I&#x27;m asking <i>against</i> the downside of engineering cost. And that itself carries risk of failure when you go live. It&#x27;s not guaranteed.<p>[1] AWS is <i>so</i> ubiquitous though, that half the internet would be affected so it makes it less individually noticeable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dividedbyzero" target="_blank">dividedbyzero</a>   <span class="timeago" data-date="2021-06-11 19:43:06 &#43;0000 UTC">2021-06-11 19:43:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So don&#x27;t host on AWS, wait out their next big outage and then take down your app for that big migration, so you can hide among all the other dead apps. Half joking, of course.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=silviogutierrez" target="_blank">silviogutierrez</a>   <span class="timeago" data-date="2021-06-11 19:50:07 &#43;0000 UTC">2021-06-11 19:50:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s brilliant. Have the PR ready to go and merge&#x2F;deploy only when that happens. Just host on us-east1 and it&#x27;ll happen eventually.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=willcipriano" target="_blank">willcipriano</a>   <span class="timeago" data-date="2021-06-11 16:50:31 &#43;0000 UTC">2021-06-11 16:50:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my view that&#x27;s just saying at some point in the future the company will be devastated. Nothing has 100% uptime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hobs" target="_blank">hobs</a>   <span class="timeago" data-date="2021-06-11 16:50:24 &#43;0000 UTC">2021-06-11 16:50:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OTOH I worked for several small companies that had &quot;business hours&quot; software - if you had to take downtime on the weekend or after hours you&#x27;d be looking at impacting &lt;1% of users.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jbverschoor" target="_blank">jbverschoor</a>   <span class="timeago" data-date="2021-06-11 16:49:25 &#43;0000 UTC">2021-06-11 16:49:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I doubt that..  aws is down sometimes too. Card payments are sometimes down, even 112(911) is sometimes down.<p>I hope you have everything redundant, including the CEO
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xcambar" target="_blank">xcambar</a>   <span class="timeago" data-date="2021-06-11 18:11:56 &#43;0000 UTC">2021-06-11 18:11:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I hope you have everything redundant, including the CEO<p>Made me laugh, I&#x27;ll sure reuse it!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-11 16:58:00 &#43;0000 UTC">2021-06-11 16:58:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The database has a hot standby and two warm standby instances, redundant hardware, network infrastructure, all of that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chefkoch" target="_blank">chefkoch</a>   <span class="timeago" data-date="2021-06-11 16:54:02 &#43;0000 UTC">2021-06-11 16:54:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then hopefully everything is HA in your company.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-11 17:00:00 &#43;0000 UTC">2021-06-11 17:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It absolutely is, BGP with geographically diverse paths, databases, app servers, etc, are all redundant.  It&#x27;s hosted in-house, so there is a cold standby database in AWS which would only be used if, say, an aircraft crashed into our server rooms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ikiris" target="_blank">ikiris</a>   <span class="timeago" data-date="2021-06-11 17:17:13 &#43;0000 UTC">2021-06-11 17:17:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It always amazes me when someone says they can&#x27;t ever be down, and then says they only serve from one physical location actively.<p>One of these things is not like the other.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-11 17:44:27 &#43;0000 UTC">2021-06-11 17:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have everything in place to run from AWS if needed but do not operate from there because of cost.<p>This goes both ways -- there have been many AWS outages which have not affected us.  I hear what you&#x27;re saying, but we&#x27;ve had only one instance of extended (hours) downtime in the last 20 years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xcambar" target="_blank">xcambar</a>   <span class="timeago" data-date="2021-06-11 18:15:22 &#43;0000 UTC">2021-06-11 18:15:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The more experienced I become, the more such down to earth solutions seem OMG SO MUCH MORE reasonable than all the bells and whistles of &quot;modern&quot; engineering practices.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ohyeshedid" target="_blank">ohyeshedid</a>   <span class="timeago" data-date="2021-06-12 01:16:34 &#43;0000 UTC">2021-06-12 01:16:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Out of curiosity, what do you use in AWS to keep a running live backup of the data you&#x27;d need to migrate in the worst case scenario?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fullstop" target="_blank">fullstop</a>   <span class="timeago" data-date="2021-06-12 02:25:47 &#43;0000 UTC">2021-06-12 02:25:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For postgres we send WAL files to a server in AWS which processes them. To bootstrap the database initially we sent zfs snapshots, and those WAL files are applied on an ongoing basis. If our data center were to die a horrendous fiery death, we could lose, at most, about 3 minutes of data although monitoring shows that it&#x27;s closer to 30s under normal operating conditions.<p>For the app servers, saltstack is used and we synchronize that repository with what is needed to reproduce a production environment in AWS.<p>Obviously we&#x27;d have to provision servers, etc, but it&#x27;s all possible in a worst-case scenario.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jnpatel" target="_blank">jnpatel</a>   <span class="timeago" data-date="2021-06-11 17:11:35 &#43;0000 UTC">2021-06-11 17:11:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you share what domain your company is in? Just curious what has such HA requirements
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sharadov" target="_blank">sharadov</a>   <span class="timeago" data-date="2021-06-11 17:12:44 &#43;0000 UTC">2021-06-11 17:12:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            pg_upgrade with --hard-link option will upgrade the db in mins, I&#x27;ve done a 2TB db in less than a minute.
+Yes, there is no rollback, but if you do enough testing prior it can be really smooth. Am in the middle of doing this across an environment where we have tens of hosts from a few GB to couple TB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-11 19:48:28 &#43;0000 UTC">2021-06-11 19:48:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could take a filesystem-level snapshot for rollback.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeffbee" target="_blank">jeffbee</a>   <span class="timeago" data-date="2021-06-11 19:04:21 &#43;0000 UTC">2021-06-11 19:04:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem happens when you estimate it will only take a few hours and at the end of the first hour it&#x27;s 1% done, or it nears completion and crashes, in a loop. Now what?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 19:15:43 &#43;0000 UTC">2021-06-11 19:15:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andrewmcwatters" target="_blank">andrewmcwatters</a>   <span class="timeago" data-date="2021-06-11 19:55:30 &#43;0000 UTC">2021-06-11 19:55:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is the equivalent for MySQL?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=redis_mlc" target="_blank">redis_mlc</a>   <span class="timeago" data-date="2021-06-12 03:25:07 &#43;0000 UTC">2021-06-12 03:25:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            MySQL has had a myriad of easy-to-use solutions for over a decade that offer point-in-time cloning:<p>- Percona xtrabackup<p>- Linux LVM snapshots<p>- master-slave replication<p>- then built-in replication for point-in-time catchup.<p>I do some work with pg, but it seems clunky compared to MySQL for typical HA and failover scenarios, but it can be done. All the MySQL methods I mentioned above can and have been scripted. With MySQL GTIDs, it&#x27;s usually trivial.<p>MySQL 8 and Percona Cluster are easy-to-use multi-master topologies. (I only use them with less than 100 GB of data in case of state transfers.)<p>Source: MySQL DBA.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ckboii89" target="_blank">ckboii89</a>   <span class="timeago" data-date="2021-06-11 16:55:29 &#43;0000 UTC">2021-06-11 16:55:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            does anyone know if this works when the target database is a replica&#x2F;standby? The downside using pg_dump is that it acquires a lock on the table its dumping, and doing this on production may cause some slowness
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rhacker" target="_blank">rhacker</a>   <span class="timeago" data-date="2021-06-11 16:35:07 &#43;0000 UTC">2021-06-11 16:35:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;the zero downtime&quot; + this site is definitely down is making me laugh.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zild3d" target="_blank">zild3d</a>   <span class="timeago" data-date="2021-06-11 18:57:34 &#43;0000 UTC">2021-06-11 18:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            next post &quot;zero downtime static site&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=holoduke" target="_blank">holoduke</a>   <span class="timeago" data-date="2021-06-11 16:07:06 &#43;0000 UTC">2021-06-11 16:07:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looking for something similar for a mariadb setup. Anyone knows some resources?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nick__m" target="_blank">nick__m</a>   <span class="timeago" data-date="2021-06-11 16:29:29 &#43;0000 UTC">2021-06-11 16:29:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can do multi master replication with conflicts detection with symmetricDS. The migration would be similar to the procedure described in the article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=data_ders" target="_blank">data_ders</a>   <span class="timeago" data-date="2021-06-11 15:49:03 &#43;0000 UTC">2021-06-11 15:49:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            way cool!<p>fyi the hyperlink &quot;found here&quot; to setup_new_database.template is broken.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coolspot" target="_blank">coolspot</a>   <span class="timeago" data-date="2021-06-11 18:28:50 &#43;0000 UTC">2021-06-11 18:28:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just don’t get all the “just shutdown the db for an hour, you’re not Netflix” comments.<p>If you can do things properly, as an engineer, you absolutely should, even if your company serves “just” hundreds of thousands instead of hundreds of millions users.<p>It is not like they wrote their own database for that, they just used an open source tool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mswtk" target="_blank">mswtk</a>   <span class="timeago" data-date="2021-06-11 18:43:50 &#43;0000 UTC">2021-06-11 18:43:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My understanding of doing things &quot;properly&quot; as an engineer, is picking the solution with the right tradeoffs for my use case. If the cost to the business of having some amount of scheduled downtime occasionally is significantly less than the engineering cost of maintaining several 9s worth of availability over major migrations, then I consider the former to be &quot;done right&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=perrygeo" target="_blank">perrygeo</a>   <span class="timeago" data-date="2021-06-11 19:17:45 &#43;0000 UTC">2021-06-11 19:17:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you do things properly as an engineer, you&#x27;ve already negotiated and committed to service-level agreements with specific downtime objectives, right? Right?<p>If you&#x27;ve got say 5 minutes of downtime budget per month, do you really think it&#x27;s a good investment to spend a million dollars of engineering effort and opportunity costs to get database downtime to zero seconds? Or you could use off-the-shelf techniques for orders of magnitude less investment and suffer a few minutes of downtime at worst, well within your SLO. It&#x27;s an economic decision, not a technical one.<p>If zero downtime at any cost is non-negotiable, well you&#x27;d better hire, plan and budget accordingly. And hope those few extra minutes per year are worth the cost.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coolspot" target="_blank">coolspot</a>   <span class="timeago" data-date="2021-06-11 19:35:59 &#43;0000 UTC">2021-06-11 19:35:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree that it is an economic decision. In my understanding it didn’t cost them millions of dollars to do it zero-downtime. Maybe a $10k-$50k in  development&#x2F;admin&#x2F;test hours to make it so.<p>Also engineers get better (and happier) when they do challenging tasks!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=koreth1" target="_blank">koreth1</a>   <span class="timeago" data-date="2021-06-11 23:41:31 &#43;0000 UTC">2021-06-11 23:41:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Also engineers get better (and happier) when they do challenging tasks!<p>Better maybe, but happier, I&#x27;m not so sure.<p>At my last job I was the main developer in charge of hitting our zero-downtime target for code deploys and system upgrades, and it was a pain in the ass to always have to implement multi-stage migration processes with bidirectional compatibility between adjacent stages for things that would have been very little work if we&#x27;d been able to schedule an hour of downtime.<p>The cost was worth it from a business point of view, but it wasn&#x27;t much fun to actually do the work.<p>Though I guess I agree with the &quot;happier&quot; part too if you&#x27;re just talking about doing the initial infrastructure and software-architecture work that allows those annoying multi-stage migrations to run seamlessly. I did enjoy writing the migration framework code and figuring out what all the stages would need to be.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cullinet" target="_blank">Cullinet</a>   <span class="timeago" data-date="2021-06-12 02:10:08 &#43;0000 UTC">2021-06-12 02:10:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Also engineers get better (and happier) when they do challenging tasks!<p>I would rather encourage them to engineer to the limit of ability but deliver to Ed: within the limit of burning out my engineering team, plus some comfortable margin gained from the encouragement given, which should be rewarded.<p>I&#x27;ve talked myself into engineering insufficient time for unforseen downtime tasks and it took me a while to realise that I was wearing my management hat as a founder and not the engineering hat I should have been wearing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jbverschoor" target="_blank">jbverschoor</a>   <span class="timeago" data-date="2021-06-11 16:54:34 &#43;0000 UTC">2021-06-11 16:54:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Blueground is a real estate tech company offering flexible and move-in ready furnished apartments across three continents and 12 of the world’s top cities. We search high and low for the best properties in the best cities, then our in-house design team transforms these spaces into turnkey spaces for 30 days or longer.<p>Seriously, how big can that db be, and how bad would a 1hr reduced availability &#x2F; downtime be?<p>Seems like a lot of wasted engineering effort. “You are not google”
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cryptoz" target="_blank">cryptoz</a>   <span class="timeago" data-date="2021-06-11 16:59:17 &#43;0000 UTC">2021-06-11 16:59:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You cut out the part in About where they hint at it being important here even. &quot;But we go a step further, merging incredible on-the-ground support with app-based services for a seamless experience for all our guests&quot;<p>It sounds like across multiple timezones, with a tech stack that backs the business in a specific way, that downtime could be a problem and that it would reduce their offering, &quot;seamless&quot; and reliability for moving.<p>If twitter goes down and you can&#x27;t tweet, only really Twitter loses money and you can try again later. But if you&#x27;re moving into an apartment you don&#x27;t want to be standing outside trying to get the keys but the system is down. Edit: And you also don&#x27;t want the service to tell you that you can&#x27;t move in from 11am-1pm because of &#x27;maintenance&#x27;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=majormajor" target="_blank">majormajor</a>   <span class="timeago" data-date="2021-06-11 17:25:17 &#43;0000 UTC">2021-06-11 17:25:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can often get away with some downtime, but that&#x27;s not the same as not spending any engineering effort.<p>What kills you is when you take an hour scheduled downtime, communicate this out, get everyone on board... and then are down for a day. If you don&#x27;t have a good, well-rehearsed, plan, you might be unexpectedly screwed even then. As a rule of thumb... something usually doesn&#x27;t quite go how you expect it to!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ohyeshedid" target="_blank">ohyeshedid</a>   <span class="timeago" data-date="2021-06-12 01:23:59 &#43;0000 UTC">2021-06-12 01:23:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To your point:<p>You can have the best plan in the world, well rehearsed and battle tested; something in that last patch bugged out and took the system with it. Now you&#x27;re getting cursed out because the email, ivr, etc all said 1 hour downtime and it&#x27;s been 4.<p>Weekly scheduled downtime has value, but it&#x27;s not a good idea for most.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hallucinaut" target="_blank">Hallucinaut</a>   <span class="timeago" data-date="2021-06-11 22:50:11 &#43;0000 UTC">2021-06-11 22:50:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was trying to get on Zoopla (and, I think, Rightmove) two nights ago for over an hour after midnight and the site continued to tell me it was down for maintenance, and to wait again until the non-night owls were up in the morning. Pretty sure their market cap is ten, if not eleven, figures.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=svaha1728" target="_blank">svaha1728</a>   <span class="timeago" data-date="2021-06-11 17:24:39 &#43;0000 UTC">2021-06-11 17:24:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree that it&#x27;s a lot of wasted engineering effort for companies that can have planned downtimes.<p>My guess the conversation was &#x27;To be agile, we need to be 100% CICD&#x27;. Next thing you know everything needs to get pushed straight to prod continuously with no downtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

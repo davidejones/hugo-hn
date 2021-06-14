@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/responsive-images/">
+
+
+    <title>Responsive images - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Responsive images - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/responsive-images/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/responsive-images/">
+<meta name="twitter:title" content="Responsive images - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Responsive images - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T11:51:43JST",
+    "dateModified": "2021-06-11T11:51:43JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">Responsive images</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phiresky" target="_blank">phiresky</a>   <span class="timeago" data-date="2021-06-12 13:43:28 &#43;0000 UTC">2021-06-12 13:43:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I never understood why the `sizes` attribute has to be so complicated. Why do I have to decide on which image to choose based on the display size instead of it automatically choosing the best image based on the size the image is displayed as?<p>It makes it impossible to choose the &quot;correct&quot; image without using JS if the amount of space the image will take up of the viewport is determined in some relative manner (i.e. basically always).<p>For example, If I have a container with width: 10em, and then in there an image with width: 50%. I want to just e.g. specify 3 alternative images with widths 200px, 400px, 800px. The browser <i>knows</i> the exact pixel size the image will actually be, so why can&#x27;t it just choose the best one? Why do I have to specify which one to use based on the <i>viewport width</i> instead of the <i>actual image width</i>? It&#x27;s impossible to calculate that unless your image is a known fixed ratio of the viewport or by asking the layout engine for the computed width (with JS).<p>There&#x27;s an answer about this being impossible by one of the spec authors here: <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;38684928&#x2F;correct-sizes-for-img-srcset-in-a-container-element" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;38684928&#x2F;correct-sizes-f...</a> But it doesn&#x27;t explain at all why it was done this way, I don&#x27;t even know when I would ever prefer to specify the chosen image in the way the spec currently requires.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=superfad" target="_blank">superfad</a>   <span class="timeago" data-date="2021-06-12 15:13:40 &#43;0000 UTC">2021-06-12 15:13:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The browser doesn’t know the size at which the image will be rendered on the page until it has downloaded and parsed all the relevant CSS and JavaScript files. Shortly after the browser downloads the HTML, it requests CSS and JavaScript. But before the CSS and JavaScript is done loading, the browser starts downloading images. The only thing that the browser does know is the size of the viewport. If we give sizes based on screen width then the browser will know which image to use. The width doesn’t have to be expressed as a viewport width unit though. It can be any length including absolute and relative length. You can even use CSS calc() to do things like auto-calculate margins dynamically.<p>For your example I believe it would be done like so:<p>&lt;img src=&quot;cat-200.jpg&quot; alt=&quot;cat&quot; srcset=&quot;cat-200.jpg 200w, cat-400.jpg 400w, cat-800.jpg 800w&quot; sizes=&quot;5em&quot;&gt;<p>This page explains responsive images further: <a href="https:&#x2F;&#x2F;cloudfour.com&#x2F;thinks&#x2F;responsive-images-101-part-5-sizes&#x2F;" rel="nofollow">https:&#x2F;&#x2F;cloudfour.com&#x2F;thinks&#x2F;responsive-images-101-part-5-si...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=extra88" target="_blank">extra88</a>   <span class="timeago" data-date="2021-06-12 14:50:51 &#43;0000 UTC">2021-06-12 14:50:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If I have a container with width: 10em, and then in there an image with width: 50%. I want to just e.g. specify 3 alternative images with widths 200px, 400px, 800px.<p>Basically, you want container queries, something long desired. It’s actively in the works but it’s first going to be for elements. Once that is working, it can inform how to implement it for responsive images.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrismorgan" target="_blank">chrismorgan</a>   <span class="timeago" data-date="2021-06-12 15:41:44 &#43;0000 UTC">2021-06-12 15:41:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Container queries are a red herring here; they don’t change anything at all. The question being asked here is “why doesn’t it just use the image’s size?” and the real answer to that is that you don’t want to wait for the CSS to all be loaded before fetching any images at all—that’d be a pessimisation, not an optimisation. Hence the sizes attribute cares about viewport sizes, and always will do. Container queries will almost certainly never get involved in this, because, along with the rest of CSS, they’re evaluated after image loading begins.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=extra88" target="_blank">extra88</a>   <span class="timeago" data-date="2021-06-12 16:09:10 &#43;0000 UTC">2021-06-12 16:09:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You misunderstand me; one will not use container queries to load images responsively, responsive image standards will be changed in ways that are informed by how container queries are implemented.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrismorgan" target="_blank">chrismorgan</a>   <span class="timeago" data-date="2021-06-13 11:51:51 &#43;0000 UTC">2021-06-13 11:51:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did misunderstand you at least partially, but my point stands: container queries are part of CSS and <i>layout</i>, and I think it’s very unlikely that they will yield any new approach for responsive image source specifications, because making it work would require shifting waaaaay too much stuff into presentational HTML. What the sizes attribute covers is bad enough in this regard, but it’s at least straightforward to implement in an isolated fashion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=splitbrain" target="_blank">splitbrain</a>   <span class="timeago" data-date="2021-06-12 12:52:20 &#43;0000 UTC">2021-06-12 12:52:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing that&#x27;s annoying about responsive images is that the displays with highest density are built into the devices with the potentially shittiest bandwidth.<p>So on a image heavy site, I might deliver 3x sized images (which may several megabytes) to an top generation iPhone in the middle of nowhere (like rural Germany) on a Edge connection...<p>I wish there was a CSS media query that would also consider the current network connection.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=darekkay" target="_blank">darekkay</a>   <span class="timeago" data-date="2021-06-12 16:41:25 &#43;0000 UTC">2021-06-12 16:41:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a prefers-reduced-data media query draft [1] which addresses the issue. It doesn&#x27;t actually check the bandwidth, though (although I believe there are options to put a mobile phone into &quot;reduced data&quot; mode below a certain bandwidth).<p>[1] <a href="https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;CSS&#x2F;@media&#x2F;prefers-reduced-data" rel="nofollow">https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;CSS&#x2F;@media&#x2F;pref...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Santosh83" target="_blank">Santosh83</a>   <span class="timeago" data-date="2021-06-12 13:00:31 &#43;0000 UTC">2021-06-12 13:00:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &lt;img&gt; srcset with resolution descriptor is supposed to consider network speed when making a decision to download from a set of resolutions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Y-bar" target="_blank">Y-bar</a>   <span class="timeago" data-date="2021-06-12 13:00:54 &#43;0000 UTC">2021-06-12 13:00:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This!<p>But wasn&#x27;t progressive JPEG and AVIF pretty much designed to alleviate this problem though? Webp does not seem to support progressive loading however.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Nextgrid" target="_blank">Nextgrid</a>   <span class="timeago" data-date="2021-06-12 13:18:04 &#43;0000 UTC">2021-06-12 13:18:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Progressive formats still require the device and network to allocate the bandwidth appropriately, so you&#x27;d want <i>required</i> traffic reaching the device first, and then images. The problem is that in most cases everything is just thrown more or less at once towards the device and then latency and packet loss goes through the roof and <i>nothing</i> loads.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tjchear" target="_blank">tjchear</a>   <span class="timeago" data-date="2021-06-12 12:58:47 &#43;0000 UTC">2021-06-12 12:58:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or better yet, give client control over the reported media sizes, so they can ask for a lower quality but faster loading website if they want to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=darekkay" target="_blank">darekkay</a>   <span class="timeago" data-date="2021-06-12 07:19:56 &#43;0000 UTC">2021-06-12 07:19:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On my blog, I usually create and include 6 files for the same image:<p>- 1x vs. 2x dpi for high-density monitors<p>- png&#x2F;jpg + webp + avif<p>I don&#x27;t create additional screen-optimized image versions, as the work would require 6 additional files per screen resolution.<p>It&#x27;s already quite some work, but I think it is worth it. Especially AVIF is often significantly smaller than other formats. I recently wrote a short guide on this topic [1].<p>[1] <a href="https:&#x2F;&#x2F;darekkay.com&#x2F;blog&#x2F;avif-images&#x2F;" rel="nofollow">https:&#x2F;&#x2F;darekkay.com&#x2F;blog&#x2F;avif-images&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leipert" target="_blank">leipert</a>   <span class="timeago" data-date="2021-06-12 07:39:21 &#43;0000 UTC">2021-06-12 07:39:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ran into the same problem with my a recent website. I think I am still going to create at least one smaller version for mobile.<p>Additionally to your technique I defined a really small image as a background image in order to get a “progressive loading for avif” kind of effect on slower connections.<p><a href="https:&#x2F;&#x2F;gutshaeuser-ostpreussen.de&#x2F;" rel="nofollow">https:&#x2F;&#x2F;gutshaeuser-ostpreussen.de&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rikroots" target="_blank">rikroots</a>   <span class="timeago" data-date="2021-06-12 10:50:24 &#43;0000 UTC">2021-06-12 10:50:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing I learned about responsive images - &lt;img&gt; elements with a srcset attribute - while developing my JS canvas library is that if you&#x27;re relying on those &lt;img&gt; elements to as the source for your ctx.drawImage() calls then the whole thing blows up in unexpected ways when the user changes their browser&#x27;s size.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rikroots" target="_blank">rikroots</a>   <span class="timeago" data-date="2021-06-12 18:00:35 &#43;0000 UTC">2021-06-12 18:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In case anyone&#x27;s interested, this is how I solved the problem so my library can work with responsive images: <a href="https:&#x2F;&#x2F;scrawl-v8.rikweb.org.uk&#x2F;learn&#x2F;second-lesson" rel="nofollow">https:&#x2F;&#x2F;scrawl-v8.rikweb.org.uk&#x2F;learn&#x2F;second-lesson</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chiefalchemist" target="_blank">chiefalchemist</a>   <span class="timeago" data-date="2021-06-12 12:08:01 &#43;0000 UTC">2021-06-12 12:08:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So, with these attributes in place, the browser will:<p>- Look at its device width.<p>- Work out which media condition in the sizes list is the first one to be true.<p>- Look at the slot size given to that media query.<p>- Load the image referenced in the srcset list that has the same size as the slot or, if there isn&#x27;t one, the first image that is bigger than the chosen slot size.<p>&gt; ---<p>Where many people&#x27;s understanding falls short is the essential importance of the sizes value. In short, get that wrong and the browser is more likely to pick a suboptimal image from the srcset. Put another way, focusing on the scrset - which many seem to do - doesn&#x27;t help if the sizes value misleads the browser about the nature of the image needed.<p>I found this artcle some time ago and it changed my understanding for the better. It&#x27;s not new, but it doesn&#x27;t need to be.<p><a href="https:&#x2F;&#x2F;ericportis.com&#x2F;posts&#x2F;2014&#x2F;srcset-sizes&#x2F;" rel="nofollow">https:&#x2F;&#x2F;ericportis.com&#x2F;posts&#x2F;2014&#x2F;srcset-sizes&#x2F;</a><p>p.s. I do a lot of WordPress work. It&#x27;s fine with srcset but usually pretty bad with sizes equal. Even Gutenberg isn&#x27;t much better. That&#x27;s right, 35% of the internet is doing this poorly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Santosh83" target="_blank">Santosh83</a>   <span class="timeago" data-date="2021-06-12 12:20:24 &#43;0000 UTC">2021-06-12 12:20:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sizes is needed when you specify the intrinsic width of the image with the <i>w</i> descriptor I believe. Alternatively you can specify resolution factor (1x, 2x, etc) in which case the sizes attribute is not needed and the choice of which image to download is placed on the browser in a more autonomous manner than specifying sizes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chiefalchemist" target="_blank">chiefalchemist</a>   <span class="timeago" data-date="2021-06-12 15:57:39 &#43;0000 UTC">2021-06-12 15:57:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You might be correct. Regardless, the choice is always on the browser, as it should be. It&#x27;s the only one who knows the screen res, how wide and tall, the markup, etc. With all that it picks.<p>Again, that article I shared does a great job of explaining. I&#x27;ll re-read to find out about 1x, 2x, etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=superfad" target="_blank">superfad</a>   <span class="timeago" data-date="2021-06-12 17:15:41 &#43;0000 UTC">2021-06-12 17:15:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only time the sizes attribute is not needed when using srcset is when the rendered size of the image is fixed.<p>One example would be a logo that is less than 320px wide (so it fits even on mobile). In that case you can add x descriptors to give a higher quality logo on retina screens. e.g.<p>&lt;img src=&quot;logo.jpg&quot; alt=&quot;Logo&quot; srcset=&quot;logo.jpg, logo-2X.jpg 2x&quot;&gt;<p>Alternatively use an svg :)<p>But if the image depends on the viewport width then &#x27;srcset&#x27; (without x descriptors but with w descriptors) and in combination with &#x27;sizes&#x27; is the way to go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tofukid" target="_blank">tofukid</a>   <span class="timeago" data-date="2021-06-12 07:11:13 &#43;0000 UTC">2021-06-12 07:11:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In addition to the lesser known srcset and sizes &lt;img&gt; attributes, there&#x27;s also the loading=&quot;lazy&quot; attribute, which adds native lazy loading of images. <a href="https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;HTML&#x2F;Element&#x2F;img#attr-loading" rel="nofollow">https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;HTML&#x2F;Element&#x2F;im...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yboris" target="_blank">yboris</a>   <span class="timeago" data-date="2021-06-12 14:29:44 &#43;0000 UTC">2021-06-12 14:29:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JPEG XL may solve all these problems instantly:<p>It is a progressive image format which has an amazing feature: you can terminate the bitstream at any point during the download and have a good looking image. So servers could keep the high resolution of an image but send over just the first (for example) 20% when client is on mobile, and send 50% of the file for laptop, and all 100% when users are on a 4K television.<p><a href="https:&#x2F;&#x2F;cloudinary.com&#x2F;blog&#x2F;time_for_next_gen_codecs_to_dethrone_jpeg" rel="nofollow">https:&#x2F;&#x2F;cloudinary.com&#x2F;blog&#x2F;time_for_next_gen_codecs_to_deth...</a><p><a href="https:&#x2F;&#x2F;cloudinary.com&#x2F;blog&#x2F;improve_the_web_experience_with_progressive_image_decoding" rel="nofollow">https:&#x2F;&#x2F;cloudinary.com&#x2F;blog&#x2F;improve_the_web_experience_with_...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lpasselin" target="_blank">lpasselin</a>   <span class="timeago" data-date="2021-06-12 14:50:21 &#43;0000 UTC">2021-06-12 14:50:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For those wondering, JPEG XL is not currently supported by browsers <a href="https:&#x2F;&#x2F;caniuse.com&#x2F;jpegxl" rel="nofollow">https:&#x2F;&#x2F;caniuse.com&#x2F;jpegxl</a><p>Progressive JPEG is already supported but JPEG XL seems much better.<p>First time I hear about JPEG XL. I have experimented with progressive JPEG a couple of years ago but switched to webp since the various public Google page scores give a better score for images in webp.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yboris" target="_blank">yboris</a>   <span class="timeago" data-date="2021-06-13 00:27:20 &#43;0000 UTC">2021-06-13 00:27:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JPEG XL is already in the latest Chrome behind a developer flag:<p>chrome:&#x2F;&#x2F;flags<p>Search for `jxl` (pronounced &quot;jixel&quot;) and enable it. Then visit <a href="https:&#x2F;&#x2F;jpegxl.info&#x2F;" rel="nofollow">https:&#x2F;&#x2F;jpegxl.info&#x2F;</a> as well as the gallery: <a href="https:&#x2F;&#x2F;jpegxl.info&#x2F;jxl-art.html" rel="nofollow">https:&#x2F;&#x2F;jpegxl.info&#x2F;jxl-art.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=frabjoused" target="_blank">frabjoused</a>   <span class="timeago" data-date="2021-06-12 06:04:40 &#43;0000 UTC">2021-06-12 06:04:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Had to recently build a helper function in our templating engine to handle image tags - it&#x27;s amazing how much markup you have to generate to get an image just right factoring pixel density, source sets, lazy loading and explicit width &#x2F; height.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=topicseed" target="_blank">topicseed</a>   <span class="timeago" data-date="2021-06-12 06:14:26 &#43;0000 UTC">2021-06-12 06:14:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funny thing if you have WordPress. When you upload images, you may have compressed your image when saving the file from Photoshop, but WordPress automatically crops that image to various sizes based on your theme and plugins. Some of these cropped files can often be larger than the original full size file.<p>So make sure you use a CDN or plugin that optimizes all image files.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chiefalchemist" target="_blank">chiefalchemist</a>   <span class="timeago" data-date="2021-06-12 12:14:16 &#43;0000 UTC">2021-06-12 12:14:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s I believe that&#x27;s incorrect. WP won&#x27;t &quot;crop up&quot;, unless you&#x27;re using some special plugin.<p>In fact, for example, if you have 3 images sizes registered, say 100px wide, 500px wide, and 1000px wide, and you upload an image 800px wide, native WP will not produce the 1000px wide image. It can&#x27;t. It will only resize &#x2F; crop down. It won&#x27;t take an image an stretch it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquareWheel" target="_blank">SquareWheel</a>   <span class="timeago" data-date="2021-06-12 15:04:06 &#43;0000 UTC">2021-06-12 15:04:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe what they&#x27;re saying is that the thumbnails Wordpress generates may be larger in file size because they&#x27;re not rigorously optimized like your original image may be.<p>There&#x27;s browser plugins that will loop through your entire media library and ensure they&#x27;re optimized.  TinyPNG and Smush are well-known ones.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=topicseed" target="_blank">topicseed</a>   <span class="timeago" data-date="2021-06-12 19:08:47 &#43;0000 UTC">2021-06-12 19:08:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that&#x27;s exactly what I meant. I optimise my uploaded images highly and when WP created the various sizes, the smaller pixel sizes often end up heavier in kb than the original.<p>So I have to optimise them all, now it is done automatically.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chiefalchemist" target="_blank">chiefalchemist</a>   <span class="timeago" data-date="2021-06-12 15:54:00 &#43;0000 UTC">2021-06-12 15:54:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d like to see that. That would mean either WP is adding meta to the image file (which I&#x27;m pretty sure it doesn&#x27;t do), or WP is making a lower quality jpg in higher which - without a special AI-y algorithm - isn&#x27;t going to yield true higher res.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=onli" target="_blank">onli</a>   <span class="timeago" data-date="2021-06-12 16:14:51 &#43;0000 UTC">2021-06-12 16:14:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have definitely seen that happen with the PHP blog engine that runs my blog, either with the GD image functions or with the imagemagick integration. Probably something like: Take an optimized image, like an indexed png, load it as raw image data, scale it down, save it in the same format but not optimized. The Wordpress code looks similar.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=superfad" target="_blank">superfad</a>   <span class="timeago" data-date="2021-06-12 16:49:13 &#43;0000 UTC">2021-06-12 16:49:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve had this happen when uploading a highly optimized image (manually optimized with Squoosh) 2560px wide, then WP generating a 1920px wide version and the KB was larger. I believe I was using the free version of Smush at the time and had to change. Now using reSmush.it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 12:41:42 &#43;0000 UTC">2021-06-12 12:41:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokoon" target="_blank">jokoon</a>   <span class="timeago" data-date="2021-06-12 13:08:03 &#43;0000 UTC">2021-06-12 13:08:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for posting this. Making responsive webpage with CSS alone is not trivial.<p>Already discovered recently about loading=&quot;lazy&quot; when loading a lot of image in a page...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=genghizkhan" target="_blank">genghizkhan</a>   <span class="timeago" data-date="2021-06-12 08:11:01 &#43;0000 UTC">2021-06-12 08:11:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ghost (<a href="https:&#x2F;&#x2F;ghost.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;ghost.org&#x2F;</a>) does this automatically. They used to do it for featured images till v3, v4 takes this up a notch and automatically creates different sized images for every image in your blog post. It&#x27;s extremely nifty and convenient.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-12 12:32:54 &#43;0000 UTC">2021-06-12 12:32:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A fair amount of old php shopping cart software has done this for ages. Not for responsive design, but because they need thumbnails for category&#x2F;search pages, normal images for a product page, and zoomed in photos for user detail clicks, etc.  Typically, there&#x27;s an imagemajick script or similar that&#x27;s used on &quot;product photo&quot; upload.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nicbou" target="_blank">nicbou</a>   <span class="timeago" data-date="2021-06-12 06:49:29 &#43;0000 UTC">2021-06-12 06:49:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using them for a while, with the help of this exact guide. They significantly improve speed, especially on mobile.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Santosh83" target="_blank">Santosh83</a>   <span class="timeago" data-date="2021-06-12 09:05:12 &#43;0000 UTC">2021-06-12 09:05:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On large monitors, browsers are still picking the image tagged as 1x, and not the 2x or 3x versions, because the DPI of the monitor is 1x, but since the screen dimensions are large, the 1x image becomes pixelated or just too small.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 09:08:29 &#43;0000 UTC">2021-06-12 09:08:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can&#x27;t really take a blog post seriously that claims to introduce responsive design, yet still uses pixel defined sizes like it&#x27;s 2005. 1200px is nothing on a 4k monitor.<p>In my opinion your best bet is to forget about all this px-fuckery and drop the `&lt;img&gt;` all together. Use a `&lt;div&gt;` with a `background-image`, and use media queries to control how the `background-image` is cropped, zoomed, or whatevered.<p>In general, `&lt;img&gt;` is a huge pain in the ass. It seems to defy all known layout rules and models, and I pretty much never want it to take up the x*y pixels that the image source is. I want it to take 100% of the width, or contain and crop it in 100% of the height, but all of this is notoriously annoying with an `&lt;img&gt;` tag. Seriously, use a `div` with a `background-image`. The semantics of having an image in an `&lt;img&gt;` tag don&#x27;t matter, no one cares about it and your users won&#x27;t notice it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chiefalchemist" target="_blank">chiefalchemist</a>   <span class="timeago" data-date="2021-06-12 12:19:13 &#43;0000 UTC">2021-06-12 12:19:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually afaik, there are accessibility issues with that solution. Instead, stick with img and use object-fit instead.<p><a href="https:&#x2F;&#x2F;css-tricks.com&#x2F;almanac&#x2F;properties&#x2F;o&#x2F;object-fit&#x2F;" rel="nofollow">https:&#x2F;&#x2F;css-tricks.com&#x2F;almanac&#x2F;properties&#x2F;o&#x2F;object-fit&#x2F;</a><p>I&#x27;d also suggest reading this. Having to write ultra-complicated media queries (width + resolution, etc.) feels friction-y. Instead, use sizes and scrset and the browser will take care of the rest.<p><a href="https:&#x2F;&#x2F;ericportis.com&#x2F;posts&#x2F;2014&#x2F;srcset-sizes&#x2F;" rel="nofollow">https:&#x2F;&#x2F;ericportis.com&#x2F;posts&#x2F;2014&#x2F;srcset-sizes&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 17:06:35 &#43;0000 UTC">2021-06-12 17:06:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What accessibility issues? that a _blind_ person might not _see_ that it&#x27;s an image? Who really cares? And don&#x27;t just go &quot;oh bruce you&#x27;re a bad guy you don&#x27;t care about aria for blind people&quot; but actually think about it. Images on the web are of 0 value to blind people. If it&#x27;s really important to your article, add a subscript to the image. (which a screenreader will gladly read)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=leephillips" target="_blank">leephillips</a>   <span class="timeago" data-date="2021-06-12 12:29:58 &#43;0000 UTC">2021-06-12 12:29:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pixel in CSS is a CSS pixel, which your browser will translate to about 1&#x2F;96 inches. So 1200px is the same physical length on an old 72dpi screen, a 4k monitor, or the quark-scale resolution displays of the future.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 17:03:58 &#43;0000 UTC">2021-06-12 17:03:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t buy it. Old websites that have handcrafted tables, px-perfect to fit fullscreen on a vga monitor look really, really narrow and small on my screen.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=leephillips" target="_blank">leephillips</a>   <span class="timeago" data-date="2021-06-12 17:12:05 &#43;0000 UTC">2021-06-12 17:12:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Someone in this thread quoted the CSS spec. You don’t have to “buy it”. A CSS pixel is a unit of length, like cm. It’s not a pixel. Of course that’s confusing. It’s supposed to be. It’s CSS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 22:06:38 &#43;0000 UTC">2021-06-12 22:06:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I get that but then perhaps my browser doesn&#x27;t implement the spec correctly. Because I know what I see. Tiny pages with tiny text that would have looked fine on my 4:3 crt emac years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leephillips" target="_blank">leephillips</a>   <span class="timeago" data-date="2021-06-12 22:13:39 &#43;0000 UTC">2021-06-12 22:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are more things that come in to play, such as the resolution that X11 thinks your display has. Just zoom the page in. What’s important is the relative sizes of things on the page, not how big the page looks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisan" target="_blank">chrisan</a>   <span class="timeago" data-date="2021-06-12 10:52:18 &#43;0000 UTC">2021-06-12 10:52:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            General curiosity of mine for 4K users.  Do you actually want all of the web delivered to you in 4K?<p>I get movies&#x2F;games, but day to day browsing seems like just extra slowness?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=have_faith" target="_blank">have_faith</a>   <span class="timeago" data-date="2021-06-12 10:04:51 &#43;0000 UTC">2021-06-12 10:04:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CSS object-fit and object-position do the same thing for img tags.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 17:04:43 &#43;0000 UTC">2021-06-12 17:04:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve tried those but I just can&#x27;t get it to work the way I want for some reason, while never having an issue with background-image.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghusbands" target="_blank">ghusbands</a>   <span class="timeago" data-date="2021-06-12 14:29:27 &#43;0000 UTC">2021-06-12 14:29:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CSS px are not screen pixels. From the spec:<p>&quot;The reference pixel is the visual angle of one pixel on a device with a pixel density of 96dpi and a distance from the reader of an arm’s length. For a nominal arm’s length of 28 inches, the visual angle is therefore about 0.0213 degrees. For reading at arm’s length, 1px thus corresponds to about 0.26 mm (1&#x2F;96 inch).&quot; [1]<p>[1] <a href="https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;css-values-3&#x2F;#absolute-lengths" rel="nofollow">https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;css-values-3&#x2F;#absolute-lengths</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 17:02:41 &#43;0000 UTC">2021-06-12 17:02:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t buy it. Old websites that have handcrafted tables, px-perfect to fit fullscreen on a vga monitor look really, really narrow and small on my screen.<p>I&#x27;ll just use cm, thanks
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Santosh83" target="_blank">Santosh83</a>   <span class="timeago" data-date="2021-06-12 09:28:14 &#43;0000 UTC">2021-06-12 09:28:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Googlebot will care about it, especially for a site that is primarily images (as opposed to images being merely decorative)?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=innocenat" target="_blank">innocenat</a>   <span class="timeago" data-date="2021-06-12 10:30:27 &#43;0000 UTC">2021-06-12 10:30:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doesn&#x27;t CSS pixel scale based on your monitor scale setting? 1200px on a 4k monitor with 2x scaling ought to be roughly the same size as 1200px on FHD monitor with 1x scaling. Unless you are talking about source image, then it&#x27;s intrinsics size.<p>And as other have said, use object-fit.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 17:05:08 &#43;0000 UTC">2021-06-12 17:05:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+             I don&#x27;t buy it. Old websites that have handcrafted tables, px-perfect to fit fullscreen on a vga monitor look really, really narrow and small on my screen.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=innocenat" target="_blank">innocenat</a>   <span class="timeago" data-date="2021-06-14 06:04:15 &#43;0000 UTC">2021-06-14 06:04:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Of course? If it&#x27;s for 768px and your post-scaled resolution is 1920px then of course it&#x27;s narrow and small.<p>The point is it should be the same on 2K monitor with 1x scaling AND 4k monitor with 2x scaling.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=foxpurple" target="_blank">foxpurple</a>   <span class="timeago" data-date="2021-06-12 13:42:52 &#43;0000 UTC">2021-06-12 13:42:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s exactly what it does.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rhdunn" target="_blank">rhdunn</a>   <span class="timeago" data-date="2021-06-12 09:35:20 &#43;0000 UTC">2021-06-12 09:35:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are using CSS, you will still have CSS media queries to say &quot;load an image of this size when on a device with this maximum&#x2F;minimum size&quot; so you can send smaller sized images to devices with smaller screens.<p>Using the HTML markup allows the browser to load the images sooner instead of having to wait for the CSS to be downloaded, parsed, and evaluated.<p>And there is nothing preventing you from selecting a larger image on a 2K&#x2F;4K display if you have it, or using CSS to provide additional cropping, zooming, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

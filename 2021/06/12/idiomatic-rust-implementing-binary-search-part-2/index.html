@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/idiomatic-rust-implementing-binary-search-part-2/">
+
+
+    <title>Idiomatic Rust? Implementing binary search (part 2) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Idiomatic Rust? Implementing binary search (part 2) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/idiomatic-rust-implementing-binary-search-part-2/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/idiomatic-rust-implementing-binary-search-part-2/">
+<meta name="twitter:title" content="Idiomatic Rust? Implementing binary search (part 2) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Idiomatic Rust? Implementing binary search (part 2) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T23:09:18JST",
+    "dateModified": "2021-06-12T23:09:18JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://shane-o.dev/blog/binary-search-rust-part-2">Idiomatic Rust? Implementing binary search (part 2)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-06-13 00:48:48 &#43;0000 UTC">2021-06-13 00:48:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>    let middle = (high + low) &#x2F; 2;
+</code></pre>
+oh no!<p>This (famous) mistake risks overflow in the intermediate calculation. `low + (high - low) &#x2F; 2` is a common trick to avoid it.<p>Rust can only do so much!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-06-13 00:55:40 &#43;0000 UTC">2021-06-13 00:55:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m calling the bluff here.<p>32 bit:<p>middle, high and low can be 32 bit unsigned integers. The array we are bisecting has entries that are at minimum four bytes; we are not going be binary searching an array of 8 bit bytes.<p>But, suppose we are binary searching bytes. We can limit the integers to 31 bit range, so our array is restricted to 2GB. Adding 31 bit integers in 32 bit width does not overflow.
+Binary searching through a 2GB array of bytes is an unlikely application of the binary search. There are only 256 unique values, surely some better structure can be found. The 2GB limit seems generous. On some 32 bit OSes, that was about you could get in user space.<p>Suppose we are not searching through bytes, but through an array of pointers, or 32 bit integers or 32 bit floats or something useful that is plausibly subject to binary searching. The array can only have one billion entries in it, assuming our OS would let us use the entire 4GB address space. That is to say, the indices are at most 28 bit integers. high + low absolutely does not overflow 32 bits.<p>64 bit:<p>We make high and low 64 bits wide. We positively do not have an array in which <i>high</i> uses anywhere near all 64 bits, and therefore high + low does not overflow.<p>16 bit:<p>Similar analysis to 32. If the array is of bytes, 16 bit indices let us have a 32768 element array without high + low overflow. That&#x27;s half the memory. If the elements are two bytes or larger, the overflow problem is nonexistent.<p>16 bit with 8 bit registers:<p>Here is where we have a problem. mid, high and low are 8 bit values from 0 to 255. We have arrays that large. We&#x27;d like to do the bisecting arithmetic entirely in 8 bit. Hello, low + (high - low) &#x2F; 2.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-06-13 01:38:12 &#43;0000 UTC">2021-06-13 01:38:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You have to think smaller! Here&#x27;s a binary search that trips over intermediate overflow. You can run it and everything!<p><a href="https:&#x2F;&#x2F;play.rust-lang.org&#x2F;?version=stable&amp;mode=debug&amp;edition=2018&amp;gist=e8b017021bf34361533e56654084d0e3" rel="nofollow">https:&#x2F;&#x2F;play.rust-lang.org&#x2F;?version=stable&amp;mode=debug&amp;editio...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rstuart4133" target="_blank">rstuart4133</a>   <span class="timeago" data-date="2021-06-14 01:22:03 &#43;0000 UTC">2021-06-14 01:22:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I get your point, but you have cardinality(usize) elements in your array.  So you need to use an indexing type and operations that let you exploit that full cardinality.<p>usize does have the required range, but then you combine it with std::ops::Add().  In this case std::ops::Add()&#x27;s overflow check just gets in the way, preventing you from fearlessly exploiting all 64 bits in the usize.  Had you used usize.wrapping_add(), it would not only have not hit the overflow panic, it would have been faster.<p>Maybe that&#x27;s your point?  The final version of his code is indeed buggy, because middle should have been calculated like this:<p><pre><code>    let middle = high.wrapping_add(low) &#x2F; 2;</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-06-13 03:13:33 &#43;0000 UTC">2021-06-13 03:13:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why would anyone do a silly thing like work with integers smaller than the register size of the machine?<p>Yet, even C gets this sort-of right, in an obsolescent way.  When integer types narrower than int are manipulated in expressions, they promote to either int or unsigned int (whichever can represent the original type&#x27;s value range).<p>So for instance, this doesn&#x27;t overflow, unless sizeof(char) == sizeof(int).<p><pre><code>   char mid, high, low;
+
+   ...
+
+   mid = high + low &#x2F; 2;
+</code></pre>
+Reason being that this is actually doing something like:<p><pre><code>   mid = (char) (((int) high + (int) low) &#x2F; 2);
+</code></pre>
+(When sizeof(char) == 1, we are almost certainly on some DSP chip, where char is wider than 8 bits possibly as much as 32. Portable code using unsigned for array indexing would not assume that it goes beyond 255.)<p>It would be useful in a C like language if the declaration of a custom integer type could separately specify promotion semantics (possibly that it has none).<p>I would make it the default behavior that all integer values promote to the widest available type in their signedness. (E.g. the thing that corresponds to intmax_t or uintmax_t in C).<p>If someone wanted to optimize around that (due to the widest type not being the fastest, say), they could declare a custom type that promotes to something narrower, or doesn&#x27;t promote.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-06-13 05:09:59 &#43;0000 UTC">2021-06-13 05:09:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You misunderstood! In my code, all arithmetic is performed with 64-bit unsigned integers.<p>The &quot;trick&quot; is a type whose size is zero bytes. If T is size zero, Vec&lt;T&gt; does not allocate any memory: it just keeps a count. You can make a Vec&lt;()&gt; with usize::max() for free, if you can finesse the compiler.<p>The binary search itself does not access any memory: it&#x27;s just pure arithmetic, and it overflows.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-06-13 15:34:12 &#43;0000 UTC">2021-06-13 15:34:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you use this object in an application, such that it&#x27;s useful to do a binary_search on it and part of the application?<p>Would that be just to prototype something before going to other data structures, or in production too?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=leetrout" target="_blank">leetrout</a>   <span class="timeago" data-date="2021-06-13 01:29:42 &#43;0000 UTC">2021-06-13 01:29:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have more information on this being a famous mistake? I don’t understand.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sgeisenh" target="_blank">sgeisenh</a>   <span class="timeago" data-date="2021-06-13 01:33:20 &#43;0000 UTC">2021-06-13 01:33:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This post covers it in good detail:<p><a href="https:&#x2F;&#x2F;ai.googleblog.com&#x2F;2006&#x2F;06&#x2F;extra-extra-read-all-about-it-nearly.html?m=1" rel="nofollow">https:&#x2F;&#x2F;ai.googleblog.com&#x2F;2006&#x2F;06&#x2F;extra-extra-read-all-about...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leetrout" target="_blank">leetrout</a>   <span class="timeago" data-date="2021-06-13 12:28:27 &#43;0000 UTC">2021-06-13 12:28:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 01:19:05 &#43;0000 UTC">2021-06-13 01:19:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Charon77" target="_blank">Charon77</a>   <span class="timeago" data-date="2021-06-13 02:00:15 &#43;0000 UTC">2021-06-13 02:00:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems at the last part we&#x27;re using the ordering trait so that future improvements can allow any arrays that&#x27;s orderable.<p>However the function signature still looks for [i32].
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

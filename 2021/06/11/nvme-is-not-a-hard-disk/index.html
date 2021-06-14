@@ -1,0 +1,3545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/nvme-is-not-a-hard-disk/">
+
+
+    <title>NVMe is not a hard disk - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="NVMe is not a hard disk - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/nvme-is-not-a-hard-disk/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/nvme-is-not-a-hard-disk/">
+<meta name="twitter:title" content="NVMe is not a hard disk - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "NVMe is not a hard disk - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T14:45:11JST",
+    "dateModified": "2021-06-11T14:45:11JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.koehntopp.info/2021/05/25/nvme-is-not-a-hard-disk.html">NVMe is not a hard disk</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 16:50:52 &#43;0000 UTC">2021-06-11 16:50:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&quot;most database-like applications do their redundancy themselves, at the application level, so that...storage replication in distributed storage...is not only useless, but actively undesirable&quot;</i><p>I do believe that&#x27;s been the author&#x27;s experience.  However, I think he may be unaware that&#x27;s not everyone&#x27;s...or even most people&#x27;s, experience.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=walrus01" target="_blank">walrus01</a>   <span class="timeago" data-date="2021-06-11 17:04:18 &#43;0000 UTC">2021-06-11 17:04:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My biggest take away from this is &quot;I certainly hope this person isn&#x27;t responsible for actually designing the bare metal storage infrastructure meant to underly something important&quot;. They seem to be operating from the premise that data replication at the &#x27;cloud&#x27; level can solve all their problems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ahupp" target="_blank">ahupp</a>   <span class="timeago" data-date="2021-06-11 17:47:37 &#43;0000 UTC">2021-06-11 17:47:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure what to say, but this is how it works on all the large systems I&#x27;m familiar with.<p>Image you have two servers, each with two 1TB disks (4TB physical storage).  And you have two distinct services with 1TB datasets, and want some storage redundancy.<p>One option is to put each pair of discs in a RAID-1 configuration, and so each RAID instance holds one dataset.  This protects against a disk failure, but not against server or network failures.<p>Your other option is to put one copy of the dataset on each server.  Now you are protected from the failure of any single disk, server, or the network to that server.<p>In both cases you have 2TB of logical storage available.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wafflespotato" target="_blank">wafflespotato</a>   <span class="timeago" data-date="2021-06-11 20:32:49 &#43;0000 UTC">2021-06-11 20:32:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            you&#x27;re putting yourself at risk of split-brain though (or downtime due to fail-over (or the lack of it)).<p>In either case what you&#x27;re describing isn&#x27;t really the &#x27;cloud&#x27; alternative.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dan_quixote" target="_blank">dan_quixote</a>   <span class="timeago" data-date="2021-06-11 21:05:44 &#43;0000 UTC">2021-06-11 21:05:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that&#x27;s a complication&#x2F;cost of HA that a significant portion of industry has long accepted.  Everywhere I&#x27;ve been in the last 5 years has had this assumption baked in across all distributed systems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nightfly" target="_blank">nightfly</a>   <span class="timeago" data-date="2021-06-11 21:49:27 &#43;0000 UTC">2021-06-11 21:49:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where possible, my organization tries and have services deployed in sets of three (and try and require a quorum) to reduce&#x2F;eliminate split-brain situations. And we&#x27;re very small scale.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 21:08:50 &#43;0000 UTC">2021-06-11 21:08:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=411111111111111" target="_blank">411111111111111</a>   <span class="timeago" data-date="2021-06-11 17:23:04 &#43;0000 UTC">2021-06-11 17:23:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;re giving him too little credit there.<p>The parents point is really spot on though: most websites aren&#x27;t at scale where every stateful api has redundant implementations.
+But the author&#x27;s point does have merit: inevitably, something goes wrong with all systems - and when it does, your system goes down if you trust your HA config to work. 
+If you actually did go for redundant implementations, your users likely aren&#x27;t even gonna notice anything went wrong.<p>It&#x27;s however kinda unsustainable to maintain unless you have a massive development budget
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alisonkisk" target="_blank">alisonkisk</a>   <span class="timeago" data-date="2021-06-11 17:55:57 &#43;0000 UTC">2021-06-11 17:55:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But why is his layer the only correct layer for redundancy?<p>He&#x27;s also doing wasted work his redundancy has bugs that a consumer has to worry about working around.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=411111111111111" target="_blank">411111111111111</a>   <span class="timeago" data-date="2021-06-11 18:31:49 &#43;0000 UTC">2021-06-11 18:31:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re currently quite off-topic if i&#x27;m honest.<p>I think the author was specifically talking about RAID-1 redundancy and is advocating that you can leave your systems with RAID-0 (so no redundant drives in each server), as you&#x27;re gonna need multiple nodes in your cluster anyway... so if any of your systems disks break, you can just let it go down and replace the disk while the node is offline.<p>but despite being offtopic: redundant implementations are -from my experience - not used in a failover way. they&#x27;re active at all times and load is spread if you can do that, so you&#x27;d likely find the inconsistencies in the integration test layer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rbanffy" target="_blank">rbanffy</a>   <span class="timeago" data-date="2021-06-11 20:15:50 &#43;0000 UTC">2021-06-11 20:15:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; not used in a failover way.<p>Aurora works like that. Read replicas are on standby and become writable when the writable node dies or is replaced. They can be used, of course, but so can other standby streaming replicas.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smueller1234" target="_blank">smueller1234</a>   <span class="timeago" data-date="2021-06-11 20:18:13 &#43;0000 UTC">2021-06-11 20:18:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not the original author but I used to work with him and now do in storage infrastructure at Google. As others pointed out, what the author, Kris, writes kind of implies&#x2F;requires a certain scale of infrastructure to make sense. Let me try to provide at least a little bit of context:<p>The larger your infrastructure, the smaller the relative efficiency win that&#x27;s worth pursuing (duh, I know, engineering time costs the same, but the absolute savings numbers from relative wins go up). That&#x27;s why an approach along the lines of &quot;redundancy at all levels&quot; (raid + x-machine replication + x-geo replication etc) starts becoming increasingly worth streamlining.<p>Another, separate consideration is types of failures you have to consider: an availability incident (temporary unavailability) vs. durability (permanent data loss). And then it&#x27;s worth considering that in the limit to long durations, an availability incident will become the same as a durability incident. This is contextual: To pick an obvious&#x2F;illustrative example, if your Snapchat messages are offline for 24h, you might as well have lost the data instead.<p>Now, machines fail, of course. Doing physical maintenance (swapping disks) is going to take significant, human time scales. It&#x27;s not generally tolerable for your data to be offline for that long. So local RAID barely helps at all. Instead, you&#x27;re going to want to make sure your data stays available despite a certain rate of machine failure.<p>You can now make similar considerations for different, larger domains. Network, power, building, city&#x2F;location, etc. They have vastly different failure probabilities and also different failure modes (network devices failing is likely an availability concern, a mudslide into your DC is a bit less likely to recover). Depending on your needs, you might accept some of these but not others.<p>The most trivial way to deal with this is to simply make sure you have a replica of each chunk of data in multiple of each of these kinds of failure zones. A replica each on multiple machines (pick the amount of redundancy you need based on a statistical model from component failure rates), a replica each on machines under different network devices, on different power, in different geographies, etc.<p>That&#x27;s expensive. The next most efficient thing would be to use the same concept as RAID (erasure codes) and apply that across a wider scope. So you basically get RAID, but you use your clever model of failure zones for placement.<p>This gets a bit complicated in practice. Most folks stick to replicas. (Eg. last I looked, for example HDFS&#x2F;Hadoop only supported replication, but it did use knowledge of network topology for placing data.)<p>The reason why you don&#x27;t want to do this in your application is because it&#x27;s really kinda complicated. You&#x27;re far more likely to have many applications than many storage technologies (or databases).<p>Now, at some point of infrastructure size or complexity or team size it may make sense to separate your storage (the stuff I&#x27;m talking about) from your databases as well. But as Kris argues, many common databases can be made to handle some of these failure zones.<p>In any case, that&#x27;s the extremely long version of an answer to your question why you&#x27;d handle redundancy in this particular layer. The short answer is: Below this layer is too small a scope or with too little meta information. But doing it higher in the stack fails to exploit a prime opportunity to abstract away some really significant complexity. I think we all know how useful good encapsulation can be! You avoid doing this in multiple places simply because it&#x27;s expensive.<p>(Everything above is common knowledge among storage folks, nothing is Google specific or otherwise it has been covered in published articles. Alas, the way we would defend against bugs in storage is not public. Sorry.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sterlind" target="_blank">sterlind</a>   <span class="timeago" data-date="2021-06-12 01:21:57 &#43;0000 UTC">2021-06-12 01:21:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Erasure codes are indeed a great illustration of the scale concept. If your designing to tolerate 2 simultaneous failures with 3 drives you need RAID-1 with N=3, 3x the cost of a single copy. If you have 15 drives you can do 12-of-15 erasure coding which is only 1.25x the cost of a single copy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 18:22:07 &#43;0000 UTC">2021-06-11 18:22:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:42:15 &#43;0000 UTC">2021-06-11 19:42:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are not running a database at home, you have the database in a replication setup.<p>That provides capacity, but also redundancy. Better redundancy than at the disk level - fewer resources are shared.<p><a href="https:&#x2F;&#x2F;blog.koehntopp.info&#x2F;2021&#x2F;03&#x2F;24&#x2F;a-lot-of-mysql.html" rel="nofollow">https:&#x2F;&#x2F;blog.koehntopp.info&#x2F;2021&#x2F;03&#x2F;24&#x2F;a-lot-of-mysql.html</a>
+Here is how we run our datatbases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 20:56:06 &#43;0000 UTC">2021-06-11 20:56:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&quot;If you are not running a database at home, you have the database in a replication setup.&quot;</i><p>That&#x27;s one of the perceptions I&#x27;m saying isn&#x27;t always true. Especially in big, non-tech companies that have a mish-mash of crazy legacy stuff.  Traditional H&#x2F;A disks and backups still dominate some spaces.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AstralStorm" target="_blank">AstralStorm</a>   <span class="timeago" data-date="2021-06-12 15:51:18 &#43;0000 UTC">2021-06-12 15:51:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Backups that are easily restored trump replication for so many cases and much more cheaply. High availability is overrated when you have spare preconfigured commodity hardware you can spin up in minutes, which is often perfectly acceptable human time scale.
+You really don&#x27;t need the other insurance running all the time - that only makes it more fragile.<p>Only really huge services would care about downtime of this degree, or horizontal scaling.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-14 07:28:25 &#43;0000 UTC">2021-06-14 07:28:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Backups that are easily restored trump replication for so many cases and much more cheaply<p>At 400 MB&#x2F;s, you restore a terabyte in 45 minutes, and then you need to replay the changes that happened since the backup (in MySQL: replay the binlog), which will take aproximately another 15 minutes.<p>&quot;One hour of MTTR or provisioning time per Terabyte of data at 400 MB&#x2F;s sustained linear I&#x2F;O speed&quot; is a useful rule of thumb.<p>Having a replica that you can promote reduces that to seconds. Having a time delayed replica where you just roll forward the binlog reduces that to minutes.<p>You can work with modern databases without using replication, but that in most cases just shows you suck at operations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Spooky23" target="_blank">Spooky23</a>   <span class="timeago" data-date="2021-06-11 20:32:06 &#43;0000 UTC">2021-06-11 20:32:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed. It depends on what you do.<p>When I ran large-scale Exchange and database systems, we would always get into big fights with the storage people, who believed that SAN disk with performance tiering, replication, etc was the way to solve all problems.<p>The problem at the time was that the fancy storage cost $40+ Gb&#x2F;mo and performed like hot garbage because the data didn’t tier well. For email, the “correct” answer in 2010 was local disk or dumb sas arrays with exchange dag.<p>For databases, the answer was “it depends”. Often it made sense to use the SAN and replication at that layer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lurkerasdfh8" target="_blank">lurkerasdfh8</a>   <span class="timeago" data-date="2021-06-11 17:32:18 &#43;0000 UTC">2021-06-11 17:32:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even if the author assumptions are true and valid, this is like saying mirroring RAID is a safe backup option :)<p>it is not. if you have 10 DB hosts with the same brand of nvme, and they fail under a workload, what good is it that you have 10 hot-hot failover hosts? you just bought yourself a few days, or hours if you are specially unlucky and using consumer grade.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 17:35:05 &#43;0000 UTC">2021-06-11 17:35:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep. Mirroring happily mirrors mistakes very well, and very quickly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alisonkisk" target="_blank">alisonkisk</a>   <span class="timeago" data-date="2021-06-11 17:46:07 &#43;0000 UTC">2021-06-11 17:46:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Replication also replicates mistakes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:08:38 &#43;0000 UTC">2021-06-11 19:08:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Correct.<p>For that you have time delayed replicas and of course backups. But time delayed replicas are usually much faster to restore than a backup.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 19:18:14 &#43;0000 UTC">2021-06-11 19:18:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 19:11:55 &#43;0000 UTC">2021-06-11 19:11:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notaplumber" target="_blank">notaplumber</a>   <span class="timeago" data-date="2021-06-11 16:19:06 &#43;0000 UTC">2021-06-11 16:19:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Because flash does not overwrite anything, ever.<p>This is repeated multiple times in the article, and I refuse to believe it is true. If NVME&#x2F;SSDs never overwrote anything, they would quickly run out of available blocks, especially on OSs that don&#x27;t support TRIM.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cduzz" target="_blank">cduzz</a>   <span class="timeago" data-date="2021-06-11 16:23:55 &#43;0000 UTC">2021-06-11 16:23:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s nuance to this; the deletes &#x2F; overwrites are accomplished by bulk wiping entire blocks.<p>Rather than change the paint color in a hallway you have to tear down the house and build a new house in the vacant lot next door that&#x27;s a duplicate of the original, but with the new hallway paint.<p>To optimize, you keep a bucket of houses to destroy, and a bucket of vacant lots, and whenever a neighborhood has lots of &quot;to be flattened houses&quot; the remaining active houses are copied to a vacant lot and the whole neighborhood is flattened.<p>So, things get deleted, but not in the way people are used to if they imagine a piece of paper and a pencil and eraser.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slaymaker1907" target="_blank">slaymaker1907</a>   <span class="timeago" data-date="2021-06-11 17:22:37 &#43;0000 UTC">2021-06-11 17:22:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just to add to the explanation, SSDs are able to do this because they have a layer of indirection akin to virtual memory. This means that what your OS thinks is byte 800000 of the SSD may change it&#x27;s actual physical location on the SSD over time even in the absence of writes or reads to said location.<p>This is a very important property of SSDs and is a large reason why log structured storage is so popular in recent times. The SSD is very fast at appends, but changing data is much slower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-06-11 18:10:03 &#43;0000 UTC">2021-06-11 18:10:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The SSD is very fast at appends, but changing data is much slower.<p>No, it&#x27;s worse than that. The fact that it&#x27;s an overly subtle distinction is the problem.<p>SSDs are fast while write traffic is light. From an operational standpoint, the drive is <i>lying to you</i> about its performance. Unless you are routinely stress testing your system to failure, you may have a very inaccurate picture of how your system performs under load, meaning you have done your capacity planning incorrectly, and you will be caught out with a production issue.<p>Ultimately it&#x27;s the same sentiment as people who don&#x27;t like the worst-case VACUUM behavior of Postgres - best-effort algorithms in your system of record make some people very cranky. They&#x27;d rather have higher latency with a smaller error range, because at least they can see the problem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hawski" target="_blank">hawski</a>   <span class="timeago" data-date="2021-06-11 17:28:35 &#43;0000 UTC">2021-06-11 17:28:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are there write-once SSDs? They would have a tremendous capacity. Probably good for long term backups or archiving. Also possibly with a log structured filesystem only.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 17:48:19 &#43;0000 UTC">2021-06-11 17:48:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Making them write-once doesn&#x27;t increase the capacity; that&#x27;s mostly limited by how many analog levels you can distinguish on the stored charge, and how many cells you can fit.  The management overhead and spare capacity to make SSDs rewritable is –to my knowledge– in the single digit percentages.<p>(Also you need the translation layer even for write-once since flash generally doesn&#x27;t come 100% defect free.  Not sure if manufacturers could try to get it there, but that&#x27;d probably drive the cost up massively.  And the translation layer is there for rewritable flash anyway...  the cost&#x2F;benefit tradeoff is in favor of just living with a few bugged cells.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=entangledqubit" target="_blank">entangledqubit</a>   <span class="timeago" data-date="2021-06-11 18:02:17 &#43;0000 UTC">2021-06-11 18:02:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suspect that hawki was assuming that a WORM SSD would be based on a different non-flash storage medium.  I don&#x27;t know any write once media that has similar read&#x2F;write access times to an SSD.<p>FWIW, there are WORM microsd cards available but it looks like they still use flash under the hood.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hawski" target="_blank">hawski</a>   <span class="timeago" data-date="2021-06-11 18:40:06 &#43;0000 UTC">2021-06-11 18:40:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know enough specifics, so I didn&#x27;t assume anything :) In fact I was not aware of non-flash SSDs.<p>Because of the Internet age there probably is not much place for write once media anyway, even it would be somewhat cheaper. But maybe for specialized applications or if it would be much much cheaper per GB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wongarsu" target="_blank">wongarsu</a>   <span class="timeago" data-date="2021-06-11 19:09:40 &#43;0000 UTC">2021-06-11 19:09:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only write once media I&#x27;m aware of that is in significant use are WORM tapes. They don&#x27;t offer significant advantages over regular tapes, but for compliance reasons it can be useful to just make it impossible to modify the backups.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Pet_Ant" target="_blank">Pet_Ant</a>   <span class="timeago" data-date="2021-06-12 13:59:15 &#43;0000 UTC">2021-06-12 13:59:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about EPROMs? I mean could those be scaled down with 7nm lithography to be energy efficient incorruptible fast storage?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AstralStorm" target="_blank">AstralStorm</a>   <span class="timeago" data-date="2021-06-12 16:00:09 &#43;0000 UTC">2021-06-12 16:00:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean the UV erasable kind? Essentially phase change memory? Very hard to miniaturize?<p>Because the older Flash aren&#x27;t as stable when miniaturized as you&#x27;d expect. Current flash is a direct descendant of these, they only are more stable because the cells are much chunkier and thus with lower leakage.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Pet_Ant" target="_blank">Pet_Ant</a>   <span class="timeago" data-date="2021-06-14 13:16:09 &#43;0000 UTC">2021-06-14 13:16:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was thinking of the anti-fuse based PROMs not EPROMs sorry. I figure if you miniatures those they&#x27;d be faster and denser and use-based fully reliable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jonny_eh" target="_blank">jonny_eh</a>   <span class="timeago" data-date="2021-06-11 18:17:36 &#43;0000 UTC">2021-06-11 18:17:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Making them write-once doesn&#x27;t increase the capacity<p>It could theoretically make them cheaper. But I guess that there wouldn&#x27;t be enough demand, so you&#x27;d be better off having some kind of OS enforced limitation on it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=weinzierl" target="_blank">weinzierl</a>   <span class="timeago" data-date="2021-06-11 18:03:01 &#43;0000 UTC">2021-06-11 18:03:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find this a super interesting question. I always assumed that long term stability of electronic non-volatile memory is worse than that of magnetic memory. When I think about it, I can&#x27;t think of any compelling reason why that should be the case. Trapped electrons vs magnetic regions; I have no intuition which one of them is likely to be more stable.<p>There is a question on stackoverflow about this topic with many answers but no definitive conclusion. There seem to be some papers touching the subject but at a glance I couldn&#x27;t find anything useful in them.<p>[1] <a href="https:&#x2F;&#x2F;superuser.com&#x2F;questions&#x2F;4307&#x2F;what-lasts-longer-data-stored-on-non-volatile-flash-ram-optical-media-or-magn" rel="nofollow">https:&#x2F;&#x2F;superuser.com&#x2F;questions&#x2F;4307&#x2F;what-lasts-longer-data-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=olejorgenb" target="_blank">olejorgenb</a>   <span class="timeago" data-date="2021-06-11 22:47:42 &#43;0000 UTC">2021-06-11 22:47:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            According to <a href="https:&#x2F;&#x2F;www.ni.com&#x2F;en-no&#x2F;support&#x2F;documentation&#x2F;supplemental&#x2F;12&#x2F;understanding-life-expectancy-of-flash-storage.html" rel="nofollow">https:&#x2F;&#x2F;www.ni.com&#x2F;en-no&#x2F;support&#x2F;documentation&#x2F;supplemental&#x2F;...</a>  (Seems kinda reputable at least)<p>&quot;The level of charge in each cell must be kept within certain thresholds to maintain data integrity.  Unfortunately, charge leaks from flash cells over time, and if too much charge is lost then the data stored will also be lost.<p>During normal operation, the flash drive firmware routinely refreshes the cells to restore lost charge.  However, when the flash is not powered the state of charge will naturally degrade with time.  The rate of charge loss, and sensitivity of the flash to that loss, is impacted by the flash structure, amount of flash wear (number of P&#x2F;E cycles performed on the cell), and the storage temperature.  Flash Cell Endurance specifications usually assume a minimum data retention duration of 12 months at the end of drive life.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wtallis" target="_blank">wtallis</a>   <span class="timeago" data-date="2021-06-12 03:38:48 &#43;0000 UTC">2021-06-12 03:38:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; During normal operation, the flash drive firmware routinely refreshes the cells to restore lost charge. However, when the flash is not powered the state of charge will naturally degrade with time.<p>You have to be careful how you interpret this bit. &quot;Normal operation&quot; here assumes not just that the SSD is powered, but that it is actively used to perform IO. Writes to the SSD will eventually cause data to be refreshed as a consequence of wear leveling; if you write 1TB per month to a 1TB drive then every (in-use) cell will be refreshed approximately monthly, and data degradation won&#x27;t be a problem.<p>If you have an extremely low-write workload, the natural turnover due to wear leveling won&#x27;t keep the data particularly fresh and you&#x27;ll be dependent on the SSD re-writing data when it notices (correctable) read errors, which means data that is never accessed could degrade without being caught. But in this scenario, you&#x27;re writing so little to the drive that the flash stays more or less new, and should have quite long data retention even without refreshing stored data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-06-11 18:11:50 &#43;0000 UTC">2021-06-11 18:11:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; When I think about it, I can&#x27;t think of any compelling reason why that should be the case. Trapped electrons vs magnetic regions; I have no intuition which one of them is likely to be more stable.<p>My layman intuition (which could be totally wrong) is that trapped electrons have a natural tendency to escape due to pure thermal jitter. Whereas magnetic materials tend to stick together, so there&#x27;s at least that. Don&#x27;t how much of this matches the actual electron physics&#x2F;technology though...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sharikone" target="_blank">sharikone</a>   <span class="timeago" data-date="2021-06-11 18:49:01 &#43;0000 UTC">2021-06-11 18:49:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm I don&#x27;t think this is conclusive. Thermal jitter makes magnetic boundaries change too, and of course you have to add to it that it is more susceptible to magnetic interference.<p>I don&#x27;t have intuition either, but I don&#x27;t think this explanation is sufficient
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madacol" target="_blank">madacol</a>   <span class="timeago" data-date="2021-06-11 18:35:15 &#43;0000 UTC">2021-06-11 18:35:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Trapped electrons vs magnetic regions;<p>From the physics point of view, aren&#x27;t both cases the same thing?.<p>Isn&#x27;t magnetic regions a state of the electric field? so if I move electrons in and out, the electric field should be changing as well
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mananaysiempre" target="_blank">mananaysiempre</a>   <span class="timeago" data-date="2021-06-11 19:12:20 &#43;0000 UTC">2021-06-11 19:12:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. A region of a piece of material is magnetized in a certain direction when its (ionized) atoms are mostly oriented in that direction, the presence of a constant magnetic field is (roughly speaking) only a consequence of that.<p>So flash memory is about the electrons, while magnetic memory is about the ions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pas" target="_blank">pas</a>   <span class="timeago" data-date="2021-06-11 22:00:26 &#43;0000 UTC">2021-06-11 22:00:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Aren&#x27;t permanent magnetics a direct result of oriented spins? (So due to quantum effects?)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dmitrygr" target="_blank">dmitrygr</a>   <span class="timeago" data-date="2021-06-11 18:55:14 &#43;0000 UTC">2021-06-11 18:55:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Modern multi-bit-per-cell flash has quite terrible data retention. It is especially low if it is stored in a warm place. You&#x27;d be lucky to see ten years without an occasional re-read + error-correct + re-write operation going on
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phonon" target="_blank">phonon</a>   <span class="timeago" data-date="2021-06-11 19:03:58 &#43;0000 UTC">2021-06-11 19:03:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Like <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ROM_cartridge" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ROM_cartridge</a> ?<p>I think Nintendo uses <a href="https:&#x2F;&#x2F;www.mxic.com.tw&#x2F;en-us&#x2F;products&#x2F;ROM&#x2F;Pages&#x2F;default.aspx" rel="nofollow">https:&#x2F;&#x2F;www.mxic.com.tw&#x2F;en-us&#x2F;products&#x2F;ROM&#x2F;Pages&#x2F;default.asp...</a><p><a href="https:&#x2F;&#x2F;www.mxic.com.tw&#x2F;CachePages&#x2F;en-us-Product-ROM-default.aspx#128Mb" rel="nofollow">https:&#x2F;&#x2F;www.mxic.com.tw&#x2F;CachePages&#x2F;en-us-Product-ROM-default...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-06-12 16:21:59 &#43;0000 UTC">2021-06-12 16:21:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any SSD you go through the trouble of building a max capacity disk image for, then dd&#x27;ing onto the disk before removing?<p>I mean... This is general purpose HW here. Write once SSD is a workflow more than an economically tenable use-case in terms of making massive size write once then burn the write circuit devices.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wtallis" target="_blank">wtallis</a>   <span class="timeago" data-date="2021-06-11 17:43:43 &#43;0000 UTC">2021-06-11 17:43:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think anyone would make literally write-once drives with flash memory; that&#x27;s more optical disk territory. But zoned SSDs and host-managed SMR hard drives make explicit the distinction between writes and larger-scale erase operations, while still allowing random-access reads.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=juloo" target="_blank">juloo</a>   <span class="timeago" data-date="2021-06-11 21:57:53 &#43;0000 UTC">2021-06-11 21:57:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That would be magnetic tapes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alisonkisk" target="_blank">alisonkisk</a>   <span class="timeago" data-date="2021-06-11 17:41:52 &#43;0000 UTC">2021-06-11 17:41:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Append-only garbage-collected storage was used in data center even when hard disks were (and are) popular because it&#x27;s more reliable and scalable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zdw" target="_blank">zdw</a>   <span class="timeago" data-date="2021-06-11 16:40:54 &#43;0000 UTC">2021-06-11 16:40:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            inspired by that last sentence, the analogy could be rewritten as:<p><pre><code>  - lines on page
+  - pages of paper
+  - whole notebooks
+</code></pre>
+and might be easier for people to grok than the earlier houses&#x2F;paint analogy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jazzyjackson" target="_blank">jazzyjackson</a>   <span class="timeago" data-date="2021-06-11 16:42:57 &#43;0000 UTC">2021-06-11 16:42:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t know, I like the drama of copying a neighborhood and tearing down the old one xD
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jnwatson" target="_blank">jnwatson</a>   <span class="timeago" data-date="2021-06-11 16:46:15 &#43;0000 UTC">2021-06-11 16:46:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of <a href="https:&#x2F;&#x2F;xkcd.com&#x2F;1737&#x2F;" rel="nofollow">https:&#x2F;&#x2F;xkcd.com&#x2F;1737&#x2F;</a>.<p>&quot;When a datacenter catches fire, we just rope it off and rebuild one town over.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jdironman" target="_blank">jdironman</a>   <span class="timeago" data-date="2021-06-11 17:28:38 &#43;0000 UTC">2021-06-11 17:28:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Speaking of xkcd, 2021 is return of &quot;All your bases&quot; 
+See alt-text on image.<p><a href="https:&#x2F;&#x2F;xkcd.com&#x2F;286&#x2F;" rel="nofollow">https:&#x2F;&#x2F;xkcd.com&#x2F;286&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wand3r" target="_blank">wand3r</a>   <span class="timeago" data-date="2021-06-11 18:53:12 &#43;0000 UTC">2021-06-11 18:53:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the explanation is sound maybe (I am not that familiar) but the analogy gets a bit lost when you talk about buckets of houses and buckets of vacant lots.<p>Maybe there is a better analogy or paradigm to view this through.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cduzz" target="_blank">cduzz</a>   <span class="timeago" data-date="2021-06-14 12:40:59 &#43;0000 UTC">2021-06-14 12:40:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I should have been a little more clear -- 
+the urban planner managing the house building &#x2F; copying and neighborhood destruction (the realtime controller)
+The rules are:
+1) You can build a house kinda quickly
+2) You can&#x27;t modify a house once it is built
+3) you can only build a house on a vacant lot
+4) you can change the &quot;mailing address&quot; (relative to the physical location) of the house
+5) you can only knock down whole blocks of houses at once (not one at a time)
+6) each time you flatten a block more crap accumulates in that block until after a while you can&#x27;t build there anymore.
+7) the flatten &#x2F; rebuild step may be quite slow (because you have <i>lots</i> of houses to build)
+8) You can lie and say you built a house before it is finished, if you don&#x27;t have too many houses to build. (if you&#x27;ve got an SSD with a capacitor &#x2F; battery or tiny cache and reserved area for that cache)
+9) you&#x27;ve lied to the user and you actually have 5-100% more build-able area than you&#x27;ve advertised.
+10) you have a finite area so eventually the dead space accumulates to the point where you can no longer safely build.<p>So -- you keep track of vacant lots and &quot;dead&quot; houses (abandoned but not flattened); whenever you&#x27;ve got spare time you will copy blocks with some ratio of &quot;live&quot; to abandoned houses to new lots so the new block only has live houses.<p>These pending &#x2F; anticipatory compaction&#x2F;garbage collection operations are what I refer to as &quot;buckets&quot; -- having to compact 300 (neighborhoods) blocks to achieve 300 writes is going to result in glacial performance because of this huge write amplification (behind the scenes the drive is duplicating 100s of mb &#x2F; gb of data to write a small amount of user modifications)<p>As you might imagine, there are lots of strategies to how to approach this problem, some of which give you an SSD with extremely unpredictable (when full) performance, others will give a much more consistent but &quot;slower&quot; performance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=daniellarusso" target="_blank">daniellarusso</a>   <span class="timeago" data-date="2021-06-11 17:48:29 &#43;0000 UTC">2021-06-11 17:48:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Spoiler alert - This is the plot to ‘The Prestige’.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:16:21 &#43;0000 UTC">2021-06-11 19:16:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Flash has a flash translation layer (FTL). It translates linear block addresses (LBA) into physical addresses (&quot;PHY&quot;).<p>Flash can write blocks at a granularity similar to a memory page (cells, around 4-16 KB). It can erase only sets of blocks, at a much larger granularity (around 512-ish cell sized blocks).<p>The FTL will try to find free pages to write your data to. In the background, it will also try to move data around to generate unused erase blocks and then erase them.<p>In flash, seeks are essentially free. That means that it does no longer matter if blocks are adjacent. Also, because of the FTL, adjacent FTL are not necessarily adjacent on the physical layer. And even if you do not rewrite a block, it may be that the garbage collection moves data around at the PHY layer in order to generate completely empty erase blocks.<p>The net effect is that positioning as seen from the OS no longer matters at all from the OS layer, and that the OS layer has zero control over adjacency and erase at the PHY layer. Rewriting, defragging, or other OS level operations cannot control what happens physically at the flash layer.<p>TRIM is a &quot;blatant layering violation&quot; in the Linus sense: It tells the disk &quot;hardware&quot; what the OS thinks it no longer needs. TRIM&#x27;ed blocks can be given up and will not be kept when the garbage collector tries to free up an erase page.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-11 20:07:14 &#43;0000 UTC">2021-06-11 20:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In flash, seeks are essentially free. That means that it does no longer matter if blocks are adjacent.<p>&gt; The net effect is that positioning as seen from the OS no longer 
+matters at all from the OS layer, and that the OS layer has zero control over adjacency and erase at the PHY layer. Rewriting, defragging, or other OS level operations cannot control what happens physically at the flash layer.<p>I don&#x27;t agree with this. The &quot;OS visible position&quot; is relevant, because it influences what can realistically be written together (multiple larger IOs targeting consecutive LBAs in close time proximity). And writing data in larger chunks is very important for good performance, particularly in sustained write workloads. And sequential IO (in contrast to small random IOs) <i>does</i> influence how the FTL will lay out the data to some degree.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dannyw" target="_blank">dannyw</a>   <span class="timeago" data-date="2021-06-12 06:27:57 &#43;0000 UTC">2021-06-12 06:27:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Disagree, because my understanding your OS visible positions have zero relevance to what will actually be translated to PHYs.<p>If you feed your NVMe a stream of 1GB writes spread out at completely randomised OS visible places (LBAs), the FTL may very well write it sequentially and you get the solid sustained write performance.<p>Conversely, you may try to write 1GB of sequential LBAs, and your FTL may very well spread it out all across the physical blocks simply because that&#x27;s what’s available.<p>What I&#x27;m saying is that sequential reads and writ workloads are good, but whether the OS considers them sequential or not in terms of LBAs is irrelevant. The controller ignores LBAs and abstracts everything away.<p>My understanding could be wrong, so please correct me if I am.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-12 06:48:58 &#43;0000 UTC">2021-06-12 06:48:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That may sometimes be true the first times you write the random data (but in my experience it&#x27;s often not true even then, and only if you carefully TRIMed the whole filesystem and it was mostly empty). But on later random writes it&#x27;s rarely true, unless your randomness pattern of exactly the same as in the first run. To make room the FTL will (often in the background) need to read the non-written parts of erase blocks sized data assigned in the previous runs, just to be able to write out the new random writes. At some point new writes need to wait for this. Slowing things down.<p>Whereas with larger&#x2F;sequential writes, there&#x27;s commonly no need for read-modify-write cycles. The entire previous erase block sized chunks can just be marked as reusable with new content - the old data isn&#x27;t relevant anymore.<p>This is pretty easy to see by just running benchmarks with sustained sequential and random write IO. But on some devices it&#x27;ll take a bit - initially the writes are all in a faster area (e.g. using SLC flash instead of denser&#x2F;cheaper mlc&#x2F;tlc&#x2F;qlc).<p>Of course, if all the random writes are &gt;= erase block size, with a consistent alignment to multiples of the write size, then you&#x27;re not going to see this - it&#x27;s essentially sequential enough.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notaplumber" target="_blank">notaplumber</a>   <span class="timeago" data-date="2021-06-11 19:40:53 &#43;0000 UTC">2021-06-11 19:40:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for this part, I feel like this was a crucial piece of information I was missing. Also explains my observations about TRIM not being as important as people claim it is, the firmware on modern flash storage seems more than capable of handling this without OS intervention.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:46:34 &#43;0000 UTC">2021-06-11 19:46:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The GC in the device cleans up.<p>TRIM is useful, it gives the GC important information.<p>TRIM is not that important as long as the device is not full (less than 80%, generally speaking, but it is very easy to produce pathological cases that are way off in either direction). Once the device fills up above that it is crucial.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 17:04:30 &#43;0000 UTC">2021-06-11 17:04:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s true and untrue depending on how you look at it.  Flash memory only supports changing&#x2F;&quot;writing&quot; bits in one direction, generally from 1 to 0.  Erase, as a separate operation, clears entire sectors back to 1, but is more costly than a write.  (Erase block size depends on the technology but we&#x27;re talking MB on modern flash AFAIK, stuff from 2010 already had 128kB.)<p>So, the drives do indeed never &quot;overwrite&quot; data - they mark the block as unused (either when the OS uses TRIM, or when it writes new data [for which it picks an empty block elsewhere]), and put it in a queue to be erased whenever there&#x27;s time (and energy and heat budget) to do so.<p>Understanding this is also quite important because it can have performance implications, particularly on consumer&#x2F;low-end devices.  Those don&#x27;t have a whole lot of spare space to work with, so if the entire device is &quot;in use&quot;, write performance can take a serious hit when it becomes limited by erase speed.<p>[Add.: reference for block sizes: <a href="https:&#x2F;&#x2F;www.micron.com&#x2F;support&#x2F;~&#x2F;media&#x2F;74C3F8B1250D4935898DB7FE79EB56E7.ashx" rel="nofollow">https:&#x2F;&#x2F;www.micron.com&#x2F;support&#x2F;~&#x2F;media&#x2F;74C3F8B1250D4935898DB...</a> - note the PDF creation date on that is 2002(!) and it compares 16kB against 128kB size.]
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=matheusmoreira" target="_blank">matheusmoreira</a>   <span class="timeago" data-date="2021-06-11 18:48:50 &#43;0000 UTC">2021-06-11 18:48:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Understanding this is also quite important because it can have performance implications<p>Security implications too. The storage device cannot be trusted to securely delete data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=effie" target="_blank">effie</a>   <span class="timeago" data-date="2021-06-11 21:46:56 &#43;0000 UTC">2021-06-11 21:46:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you write whole drive capacity of random data, you should be fine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robocat" target="_blank">robocat</a>   <span class="timeago" data-date="2021-06-11 22:48:53 &#43;0000 UTC">2021-06-11 22:48:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. Say a particular model of SSD has over-provisioning of 10%, then even after writing the &quot;whole&quot; capacity of the drive, you can still be left with up to 10% of data recoverable from the Flash chips.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=effie" target="_blank">effie</a>   <span class="timeago" data-date="2021-06-12 10:35:18 &#43;0000 UTC">2021-06-12 10:35:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, so one better write 2x or 10x drive capacity of random data to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-14 07:33:03 &#43;0000 UTC">2021-06-14 07:33:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You should be running flash with self-encryption (and make sure you have a drive that implements that correctly).<p>To zap a drive you ask it to securely drop the self-encryption key. The data will still be there, but without the key it is indistinguishable from random noise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dannyw" target="_blank">dannyw</a>   <span class="timeago" data-date="2021-06-12 06:32:00 &#43;0000 UTC">2021-06-12 06:32:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For some family photos? Probably. For sensitive material or crypto keys? Absolutely not, due to overprovisoning as mentioned (which can be way higher than 10% for enterprise drives), but also due to controllers potentially lying to you especially when drives have things like pSLC caches, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-11 18:23:05 &#43;0000 UTC">2021-06-11 18:23:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            By any reasonable definition they do overwrite data. It&#x27;s just that they can&#x27;t overwrite less than a block of data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tzs" target="_blank">tzs</a>   <span class="timeago" data-date="2021-06-11 18:56:39 &#43;0000 UTC">2021-06-11 18:56:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If a logical overwrite only involved bits going from 1 to 0, are and drives smart enough to recognize this and do it as an actual overwrite instead of a copy and erase?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 19:21:16 &#43;0000 UTC">2021-06-11 19:21:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On embedded devices, yes, this is actually used in file systems like JFFS2.  But in these cases the flash chip is just dumb storage and the translation layer is implemented on the main CPU in software.  So there&#x27;s no &quot;drive&quot; really.<p>On NVMe&#x2F;PC type applications with a controller driving the flash chips… I have absolutely no idea.  I&#x27;m curious too, if anyone knows :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-06-12 07:39:37 &#43;0000 UTC">2021-06-12 07:39:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I do know. Apparently you downvoted my sibling response to you as too simplistic, but I was clearly responding to someone where the embedded bare drive situation is irrelevant.<p>When it comes to what non bare flash drives do, you can start here: <a href="http:&#x2F;&#x2F;www.vldb.org&#x2F;pvldb&#x2F;vol13&#x2F;p519-kakaraparthy.pdf" rel="nofollow">http:&#x2F;&#x2F;www.vldb.org&#x2F;pvldb&#x2F;vol13&#x2F;p519-kakaraparthy.pdf</a><p>This paper is imperfect and the following citations are worth skimming. There&#x27;s a cohort of similar papers chasing the same basic question in recent years that aren&#x27;t densely cited amongst each other.<p>Go here next: <a href="https:&#x2F;&#x2F;citeseerx.ist.psu.edu&#x2F;viewdoc&#x2F;download?doi=10.1.1.461.932&amp;rep=rep1&amp;type=pdf" rel="nofollow">https:&#x2F;&#x2F;citeseerx.ist.psu.edu&#x2F;viewdoc&#x2F;download?doi=10.1.1.46...</a> but note that&#x27;s just a jumping off point to the more recent papers.<p>It&#x27;s hard to gain a full understanding of this layer because it&#x27;s the basis of intense competition, hence held closely by controller manufacturers.<p>I&#x27;m far from world expert on this, but have read a lot about it and can answer with what I know to the best of my ability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-12 09:39:15 &#43;0000 UTC">2021-06-12 09:39:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Apparently you downvoted my sibling response to you as too simplistic,<p>I didn&#x27;t downvote your sibling response, but I did ignore it since it provided neither any sources nor any context for why I should trust your knowledge.  Apparently others were less kind on your short statement.<p>With the additional information in this post, I&#x27;m much more willing to accept it into my head — thanks for answering this!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-06-12 19:55:58 &#43;0000 UTC">2021-06-12 19:55:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah sorry that was unnecessarily grouchy of me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-06-11 19:04:19 &#43;0000 UTC">2021-06-11 19:04:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Generally no, because the unit of write is a page.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-06-11 16:25:01 &#43;0000 UTC">2021-06-11 16:25:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps they mean it must erase an entire block before writing any data, unlike a disk that can write a single sector at a time?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-06-11 16:40:08 &#43;0000 UTC">2021-06-11 16:40:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The issue is that DDR4 is like that too. Not only the 64 byte cache line, but DDR4 requires a transfer to the sense amplifiers (aka a RAS, row access strobe) before you can read or write.<p>The RAS command eradicated the entire row, like 1024 bytes or so. This is because the DDR4 cells only have enough charge for one reliable read, after that the capacitors don&#x27;t have enough electrons to know if a 0 or 1 was stored.<p>A row close command returns the data from the sense amps back to the capacitors. Refresh commands renew the 0 or 1 as the capacitor can only hold the data for a few milliseconds.<p>------<p>The CAS latency statistic assumes that the row was already open. It&#x27;s a measure of the sense amplifiers and not of the actual data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 17:32:06 &#43;0000 UTC">2021-06-11 17:32:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s vaguely similar, but there&#x27;s a huge difference in that flash needs to be erased before you can write it again, and that operation is much slower and only possible on much larger sizes.  DDR4 doesn&#x27;t care, you can always write, just the read is destructive and needs to be followed by a write.<p>I think this makes the comparison unhelpful since the characteristics are still very different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-11 20:36:57 &#43;0000 UTC">2021-06-11 20:36:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference is that on DDR you have infinite write endurance and you can do the whole thing in parallel.<p>If flash was the same way, and it could rewrite an entire erase block with no consequences, then you could ignore erase blocks.  But it&#x27;s nowhere near that level, so the performance impact is very large.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-06-11 21:03:53 &#43;0000 UTC">2021-06-11 21:03:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a good point.<p>There are only 10,000 erase cycles per Flash cell. So a lot of algorithms are about minimizing those erases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zymhan" target="_blank">zymhan</a>   <span class="timeago" data-date="2021-06-11 16:54:46 &#43;0000 UTC">2021-06-11 16:54:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does DDR have to do with NVMe?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nine_k" target="_blank">nine_k</a>   <span class="timeago" data-date="2021-06-11 17:02:04 &#43;0000 UTC">2021-06-11 17:02:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can&#x27;t write a byte, or a word, either.<p>The &quot;fact&quot; that you can do it in your program without disturbing bytes around it is a convenient fiction that the hardware fabricates for you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-06-11 17:06:59 &#43;0000 UTC">2021-06-11 17:06:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DDR4 is effectively a block device and not &#x27;random access&#x27;.<p>Pretty much only cache is RAM proper these days (aka: all locations have equal access time... that is, you can access it randomly with little performance loss).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mirker" target="_blank">mirker</a>   <span class="timeago" data-date="2021-06-11 17:21:17 &#43;0000 UTC">2021-06-11 17:21:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m confused. What’s the difference between a cache line and a row in RAM? They’re both multiples of bytes. You have data sharing per chunk in either case.<p>The distinction seems to be how big the chunk is not uniformity of access time (is a symmetrical read disk not a block device?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-06-11 17:29:17 &#43;0000 UTC">2021-06-11 17:29:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hard disk chunks are 512 bytes classically, and smaller than the DDR4 row of 1024 bytes !!<p>So yes. DDR4 has surprising similarities to a 512byte sector hard drive (modern hard drives have 4k blocks)<p>&gt;&gt; What’s the difference between a cache line and a row in RAM?<p>Well DDR4 doesn&#x27;t have a cache line. It has a burst length of 8, so the smallest data transfer is 64 bytes. This happens to coincide with L1 cache lines.<p>The row is 1024 bytes long. Its pretty much the L1 cache on the other side, so to speak. When your CPU talks to DDR4, it needs to load a row (RAS all 1024 bytes) before it can CAS read a 64 byte burst length 8 chunk.<p>-----------<p>DDR4, hard drives, and Flash are all block devices.<p>The main issue for Flash technologies, is that the erase size is even larger than the read&#x2F;write block size. That&#x27;s why we TRIM for NVMe devices.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mirker" target="_blank">mirker</a>   <span class="timeago" data-date="2021-06-12 12:58:57 &#43;0000 UTC">2021-06-12 12:58:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, I see what you mean at the interface level.<p>In terms of performance analogy though, hard drives do not get random access to blocks, but RAM does. The practical block size of hard drives is sequential reads of 100kiB+ due to seeks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway09223" target="_blank">throwaway09223</a>   <span class="timeago" data-date="2021-06-11 18:33:14 &#43;0000 UTC">2021-06-11 18:33:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The author clearly explains how this works in the sentence immediately following. &quot;Instead it has internally a thing called flash translation layer (FTL)&quot; ...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notaplumber" target="_blank">notaplumber</a>   <span class="timeago" data-date="2021-06-11 19:48:56 &#43;0000 UTC">2021-06-11 19:48:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I unfortunately skimmed over this, isotopp&#x27;s explanation helped clear things up in my head.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway09223" target="_blank">throwaway09223</a>   <span class="timeago" data-date="2021-06-11 20:15:53 &#43;0000 UTC">2021-06-11 20:15:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just saw his post, it&#x27;s a great explanation.<p>It might also help to keep in mind that both regular disk drives and solid state drives remap bad sectors. Both types of disks maintain an unaddressable storage area which is used to transparently cover for faulty sectors.<p>In a hard drive, faulty sectors are mapped during production and stored in the p-list, and are remapped to sectors in this extra hidden area. Sectors that fail at runtime are recorded in the g-list and are likewise remapped.<p>Writes may <i>usually</i> go to the same place in a hard drive, but it&#x27;s not guaranteed there either.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dannyw" target="_blank">dannyw</a>   <span class="timeago" data-date="2021-06-12 06:52:43 &#43;0000 UTC">2021-06-12 06:52:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is not true anymore for many recent SMR HDDs. They have a translation layer, just like flash storage.<p>This is because for SMR HDDs, each block can either be SMR (higher density, EXTREMELY SLOW WRITES like &lt;10mb&#x2F;s possible, erases will remove multiple blocks just like flash memory), or normal (standard density, normal write speeds).<p>The controller abstracts this away and does writes as normal, but while the drive is idle, the controller in the background, converts these standard blocks into SMR blocks.<p>This is also why SMR HDDs support TRIM.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway09223" target="_blank">throwaway09223</a>   <span class="timeago" data-date="2021-06-12 07:27:00 &#43;0000 UTC">2021-06-12 07:27:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the info that makes a lot of sense. It looks like this tech has emerged in the time since I last did much work with disk drives.<p>Seems it&#x27;s increasingly a bad idea to presume the implementation of internals.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dzugaru" target="_blank">Dzugaru</a>   <span class="timeago" data-date="2021-06-11 16:25:50 &#43;0000 UTC">2021-06-11 16:25:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Of course it does [0]. It&#x27;s just it assigns writes as evenly as possible (to have as even wear as possible), so log-like internal &quot;file system&quot; is a way to go.<p><a href="https:&#x2F;&#x2F;pages.cs.wisc.edu&#x2F;~remzi&#x2F;OSTEP&#x2F;file-ssd.pdf" rel="nofollow">https:&#x2F;&#x2F;pages.cs.wisc.edu&#x2F;~remzi&#x2F;OSTEP&#x2F;file-ssd.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bob1029" target="_blank">bob1029</a>   <span class="timeago" data-date="2021-06-11 18:28:30 &#43;0000 UTC">2021-06-11 18:28:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My take on NVMe has evolved a lot after getting a chance to really play around with the capabilities of consumer-level devices.<p>The biggest thing I have realized (as have others), is that traditional IO wait strategies don&#x27;t make sense for NVMe. Even &quot;newer&quot; strategies like async&#x2F;await do not give you want you truly want for one of these devices (still too slow). The best performance I have been able to extract from these is when I am doing really stupid busy-wait strategies.<p>Also, single-writer principle and serializing+batching writes <i>before</i> you send them to disk is critical. With any storage medium where a block write costs you device lifetime, you want to put as much effective data per block as possible, and you also want to avoid editing existing blocks. Append-only log structures are what NVMe&#x2F;flash devices live for.<p>With all of this in mind, the motivations for building gigantic database clusters should start going away. One NVMe device per application instance is starting to sound a lot more compelling to me. Build clusters with app logic (not database logic).<p>In testing of these ideas I have been able to push 2 million small writes (~64k) per second to a single Samsung 960 pro for a single business entity. I don&#x27;t know of any SQL clusters that can achieve these same figures.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:22:18 &#43;0000 UTC">2021-06-11 19:22:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In NVME you can get around 800.000 IOPS from a single device, but the latency gives you around 20.000 IOPS sequentially. You need to talk with deep queues or with multiple concurrent threads to the device in order to eat the entire IOPS buffet.<p>Traditional OLTP workloads do not tend to have the concurrency to actually saturate the NVME. You would need to be 40-way parallel, but most OLTP workloads give you 4-way.<p>Multiple instances per device are almost a must.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-11 19:41:08 &#43;0000 UTC">2021-06-11 19:41:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With a lot of NVMe devices, up to medium priced server gear, the bottleneck in OLTP workloads isn&#x27;t normal write latency, but slow write cache flushes. On devices with write caches one either needs to fdatasync() the journal on commit (which typically issues a whole device cache flush) or use O_DIRECT | O_DSYNC (ending up as a FUA write which just tags the individual write as needing to be durable) for journal writes.   Often that drastically increases latency <i>and</i> slows down concurrent non-durable IO, reducing the benefit of deeply queued IO substantially.<p>On top-line gear this isn&#x27;t an issue, they don&#x27;t signal a write cache (by virtue of either having a non-volatile cache or enough of a power reserve to flush the cache). Which then prevents the OS from actually doing more expensive for fdatasync()&#x2F;O_DSYNC. One also can manually ignore the need for caching by changing &#x2F;sys&#x2F;block&#x2F;nvme*&#x2F;queue&#x2F;write_cache to say write through, but that obviously looses guarantees - but can be useful to test on lower end devices.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-11 19:44:38 &#43;0000 UTC">2021-06-11 19:44:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One consequence of that is that:<p>&gt; Multiple instances per device are almost a must.<p>Isn&#x27;t actually unproblematic in OLTP, because it increases the number of journal writes that need to be flushed. With a single instance group commit can amortize the write cache flush costs much more efficiently than with many concurrent instances all separately doing much smaller group commits.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bob1029" target="_blank">bob1029</a>   <span class="timeago" data-date="2021-06-11 19:32:31 &#43;0000 UTC">2021-06-11 19:32:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You need to talk with deep queues or with multiple concurrent threads to the device in order to eat the entire IOPS buffet.<p>Completely agree. There is another angle you can play if you are willing to get your hands dirty at the lowest levels.<p>If you build a custom database engine that fundamentally stores everything as key-value, and then builds relational abstractions on top, you can leverage a lot more benefit on a per-transaction basis. For instance, if you are storing a KVP per column in a table and the table has 10 columns, you may wind up generating 10-20 KVP items per logical row insert&#x2F;update&#x2F;delete. And if you are careful, you can make sure this extra data structure expressiveness does not cause write amplification (single writer serializes <i>and batches</i> all transactions).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaytaylor" target="_blank">jaytaylor</a>   <span class="timeago" data-date="2021-06-11 19:56:18 &#43;0000 UTC">2021-06-11 19:56:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  &gt; If you build a custom database 
+  &gt; engine that fundamentally stores
+  &gt; everything as key-value, and then
+  &gt; builds relational abstractions on
+  &gt; top
+</code></pre>
+Sounds like this could be FoundationDB, among other contenders like TiDB.<p><a href="https:&#x2F;&#x2F;foundationdb.org" rel="nofollow">https:&#x2F;&#x2F;foundationdb.org</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thu2111" target="_blank">thu2111</a>   <span class="timeago" data-date="2021-06-12 09:34:50 &#43;0000 UTC">2021-06-12 09:34:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            More like myRocks. FoundationDB doesn&#x27;t use LSM and definitely wants to do lots of overwriting in place. TiDB uses Rocksdb and would be closer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:44:40 &#43;0000 UTC">2021-06-11 19:44:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You may want to play with a TiDB setup from Pingcap.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=90minuteAPI" target="_blank">90minuteAPI</a>   <span class="timeago" data-date="2021-06-11 21:32:47 &#43;0000 UTC">2021-06-11 21:32:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess it still makes sense for higher abstraction levels though, right? Like a filesystem or other shared access to a storage resource. So these asynchronous APIs aren’t writing as directly to storage, they’re placing something in the queue and notifying when that batch is committed.<p>&gt; Append-only log structures are what NVMe&#x2F;flash devices live for.<p>I would think this is also good for filesystems like ZFS, APFS, and BTRFS, yes? I had an inkling but never really looked into it. Aren’t these filesystems somewhat similar to append-only logs of changes, which serialize operations as a single writer?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dcminter" target="_blank">dcminter</a>   <span class="timeago" data-date="2021-06-11 15:27:36 &#43;0000 UTC">2021-06-11 15:27:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Most people need their data a lot less than they think they do&quot; - great way to put it and a thought provoking article.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zwieback" target="_blank">zwieback</a>   <span class="timeago" data-date="2021-06-11 16:09:57 &#43;0000 UTC">2021-06-11 16:09:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, interesting thought. On my ride in to work I was actually thinking how our situation is exactly opposite: in our environment (R&amp;D test and measurement and production automation) data is everything and never in the cloud so we don&#x27;t get to benefit from all the cool stuff the kids are doing these days. Historical data can go in the cloud (as long as we&#x27;re reasonably sure it&#x27;s secure) but operational data from our test and production tooling (e.g. assembly lines and end-of-line audit tools) has to be right there with super short latency.<p>So we&#x27;re still very interested in things like hard disks, NVMe, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NikolaNovak" target="_blank">NikolaNovak</a>   <span class="timeago" data-date="2021-06-11 16:49:53 &#43;0000 UTC">2021-06-11 16:49:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s often true at business level (most departments in a large company don&#x27;t need redundancy and uptime they think they do),<p>and rarely if ever true at personal&#x2F;family level (most people don&#x27;t think their phone&#x2F;tablet&#x2F;laptop could lose their data; most people don&#x27;t think of their data past photos they took this week - &quot;Oh it&#x27;s OK to lose... wait, my tax documents are gone? Photos of my baby from two years ago are gone? My poems are gone? My [.. etc] is gone???&quot;?).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=birdyrooster" target="_blank">birdyrooster</a>   <span class="timeago" data-date="2021-06-11 16:10:10 &#43;0000 UTC">2021-06-11 16:10:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know for a fact I don’t need 40T of movies and tv, but that changes nothing
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dannyw" target="_blank">dannyw</a>   <span class="timeago" data-date="2021-06-12 06:55:54 &#43;0000 UTC">2021-06-12 06:55:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pfft. 440tb of data hoarding on my NAS. ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=behringer" target="_blank">behringer</a>   <span class="timeago" data-date="2021-06-11 16:08:05 &#43;0000 UTC">2021-06-11 16:08:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can&#x27;t imagine wasting NVME storage on backup data. That&#x27;s what I have my 8tb spinning hdds for.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 17:47:37 &#43;0000 UTC">2021-06-11 17:47:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Koshkin" target="_blank">Koshkin</a>   <span class="timeago" data-date="2021-06-11 16:17:39 &#43;0000 UTC">2021-06-11 16:17:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t tape more cost-effective and reliable? (Also, your backups do not need to be spinning all the time, if that&#x27;s what they are doing.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=walrus01" target="_blank">walrus01</a>   <span class="timeago" data-date="2021-06-11 17:03:08 &#43;0000 UTC">2021-06-11 17:03:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem with really high capacity tape these days is there&#x27;s almost literally 1 vendor for drives and tapes, which is even worse than the 3 companies worldwide that manufacture hard drives. If you want relatively not so fast storage for a lot of terabytes, I bet I could clone a backblaze storage pod with some modifications and achieve a better $&#x2F;TB ratio than an enterprise priced tape solution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-06-11 17:47:38 &#43;0000 UTC">2021-06-11 17:47:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are at least 2 manufacturers for tapes (Fujifilm and Sony), but their tapes are also sold under many other brands (e.g. IBM, Quantum, HP).<p>The price per TB is currently about $7 or less (per real TB of LTO-8, not per marketing compressed TB), so there is no chance to approach the cost and reliability of tapes using HDDs.<p>The problem with tapes is that currently the tape drives are very expensive, because their market is small, so you need to store a lot of data before the difference in price between HDDs and tapes exceeds the initial expense for the tape drive.<p>Nevertheless, if you want to store data for many years, investing in a tape drive may be worthwhile just for the peace of mind, because when storing HDDs for years you can never be sure how will they work when operated again.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Sebb767" target="_blank">Sebb767</a>   <span class="timeago" data-date="2021-06-12 02:55:28 &#43;0000 UTC">2021-06-12 02:55:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Nevertheless, if you want to store data for many years, investing in a tape drive may be worthwhile just for the peace of mind, because when storing HDDs for years you can never be sure how will they work when operated again.<p>You&#x27;d actually need two tape drives to be reasonably secure, because getting a SATA adapter is much easier if your current setup is broken and you need to access the data either many years later (when technology moved on) or right now.<p>Having your data on a few hard drives combined with some check-summing and somewhat regular checking is probably easier. Or a combination of both - two different storage systems with two different failure modes are a lot safer. But when you&#x27;re going that way the break even moves even farther away.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jabroni_salad" target="_blank">jabroni_salad</a>   <span class="timeago" data-date="2021-06-11 16:31:41 &#43;0000 UTC">2021-06-11 16:31:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tape is great for long term storage of archival records, but nobody wants to restore a live virtual machine from 7 years ago.<p>Depending on the business system you might want your server to be backed up multiple times a day to just weekly, and if you are doing multiple times a day you do want it to be decently fast or to have some extra capacity so as not to slow down normal operations while the backup runs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=behringer" target="_blank">behringer</a>   <span class="timeago" data-date="2021-06-11 23:30:41 &#43;0000 UTC">2021-06-11 23:30:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe but I imagine automatic daily backups from 5 different machines would be a headache to do with tape.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whatshisface" target="_blank">whatshisface</a>   <span class="timeago" data-date="2021-06-11 16:26:20 &#43;0000 UTC">2021-06-11 16:26:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right now disks are cheaper than tapes, even if you don&#x27;t count the very expensive tape readers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 17:14:35 &#43;0000 UTC">2021-06-11 17:14:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is incorrect.  I recently acquired an LTO-6 tape library; the tapes are &lt;20€ for 2.5TB true capacity (marketing = &quot;6TB compressed&quot;.)  That&#x27;s &lt;8€&#x2F;TB. Disk drives start at 20€&#x2F;TB for the cheapest garbage.<p>Sources:<p><a href="https:&#x2F;&#x2F;geizhals.eu&#x2F;?cat=zip&amp;xf=1204_LTO-6" rel="nofollow">https:&#x2F;&#x2F;geizhals.eu&#x2F;?cat=zip&amp;xf=1204_LTO-6</a> (tapes)<p><a href="https:&#x2F;&#x2F;geizhals.eu&#x2F;?cat=hde7s&amp;sort=r" rel="nofollow">https:&#x2F;&#x2F;geizhals.eu&#x2F;?cat=hde7s&amp;sort=r</a> (disks)<p>(For completeness, the tape library ran me 500€ on eBay used, but they normally run about twice that.  It&#x27;s a 16-slot library, which coincidentally matches the breakeven - filled for 40TB it&#x27;s 820€, the same in disks would&#x27;ve been 800€, though I would never buy the cheapest crappy disks.)<p>FWIW, a major reason for going for tapes for me was that at some point my backup HDDs always ended up used for &quot;real&quot;. The tape library frees me from trying to discipline myself to properly separate backup HDDs ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-06-11 18:08:36 &#43;0000 UTC">2021-06-11 18:08:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For newer tape formats the prices are similar or even a little lower.<p>For example, at Amazon in Europe an LTO-7 cartridge is EUR 48 for 6 real TB (EUR 8 per real TB), while an LTO-8 cartridge is EUR 84 for 12 real TB (EUR 7 per real TB).<p>At Amazon USA I see now $48 for LTO-7 and $96 for LTO-8, i.e. $8 per TB if you buy 1 tape. For larger quantities, there are discounts.<p>Older formats like LTO-6 have the advantage that you may find much cheaper tape drives, but you must handle more cartridges for a given data size.<p>Currently the cheapest HDDs are the external USB drives with 5400 rpm, which are much slower, about 3 times slower than the tapes, but even those are many times more expensive than the tapes (e.g. $27 ... $30 per TB).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-11 20:46:32 &#43;0000 UTC">2021-06-11 20:46:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t disagree much overall but in my experience cheap or sale drives can beat 15 per TB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-12 04:41:12 &#43;0000 UTC">2021-06-12 04:41:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since someone... disagreed? I&#x27;ll cite that I recently got a low end 14TB drive for less than $15 per TB, including sales tax.  If I pretend it had a 20% VAT and convert that to euros it was actually well under 14€&#x2F;TB.<p>That was a better than usual deal but $15&#x2F;TB is the norm for low end drives with a bit of patience in the US, at least until Chia&#x27;s influence hit extremely recently.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rattray" target="_blank">rattray</a>   <span class="timeago" data-date="2021-06-11 16:37:35 &#43;0000 UTC">2021-06-11 16:37:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, reminds me of a tech blog I read in the last year or so (can&#x27;t remember where) that talked about using 6 replicas for each DB shard (across 3 AZ&#x27;s IIRC)… they just used EC2&#x27;s on-disk NVMe storage (which is &quot;ephemeral&quot;) because it&#x27;s faster and hey, if the machine dies, you have replicas!<p>This post&#x27;s point that even with that setup, it&#x27;s still nice to have volume-based storage for quicker image replacements is interesting, I&#x27;m not experienced enough with cloud setups to know if that makes sense (eg how long does it take to upgrade an EC2 instance that has data on disk? upgrade your OS? upgrade your pg version? does ephemeral storage vs volume storage affect these? I imagine not…)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=santoshalper" target="_blank">santoshalper</a>   <span class="timeago" data-date="2021-06-11 15:47:51 &#43;0000 UTC">2021-06-11 15:47:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Especially in a world where so much data now &quot;lives&quot; in the cloud. Between my dropbox, github, google photos, etc. Very little of my data only lives on a hard drive. The stuff that does lives on a Synology NAS and is mirrored to S3 Glacier weekly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sreeramb93" target="_blank">sreeramb93</a>   <span class="timeago" data-date="2021-06-11 15:52:09 &#43;0000 UTC">2021-06-11 15:52:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NAS mirrored to S3 Glacier. How much does it cost?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xyzzy_plugh" target="_blank">xyzzy_plugh</a>   <span class="timeago" data-date="2021-06-11 15:58:30 &#43;0000 UTC">2021-06-11 15:58:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my experience this is very cheap. I take it the parent is not retrieving from Glacier often&#x2F;ever, which is where the significant costs go. It&#x27;s a decent balance for disaster recovery.<p>I sync my photos to S3 (a mix of raw and jpeg, sidecar rawtherapee files) across a few devices so Glacier is prohibitively expensive in this regard, but I still pay &lt;$100 a year for more stuff than I could ever store locally.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 16:13:00 &#43;0000 UTC">2021-06-11 16:13:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did the math, and for me Glacier is great for backups where homeowners insurance is likely to be involved in the restoral. It was ferociously expensive for anything less drastic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DougWebb" target="_blank">DougWebb</a>   <span class="timeago" data-date="2021-06-11 16:54:09 &#43;0000 UTC">2021-06-11 16:54:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m trying to figure out the costs. To back up my NAS at full capacity, I need 10TB of storage. Using S3 Glacier Deep Archive, that seems to cost $10&#x2F;month per full backup image I keep. That&#x27;s not bad.<p>What&#x27;s confusing is that the calculator has &quot;Restore Requests&quot; as the # of requests, &quot;Data Retrievals&quot; as TB&#x2F;month, but there&#x27;s also a &quot;Data Transfer&quot; section for the S3 calculator. If I add 1 restore request for 10TB of data (eg: restoring my full backup to the NAS), that adds about $26 for that month. Totally reasonable.<p>However, if &quot;Data Transfer&quot; is relevant, and I can&#x27;t tell if it is or isn&#x27;t, uploading my backup data is free but retrieving 10TB would cost $922! Is that right?<p>This is what has always deterred me from using AWS. It&#x27;s so unclear what services and fees will apply to any given use case, and it seems like there&#x27;s no way to know until Amazon decides that you&#x27;ve incurred them. At $10&#x2F;month for storage and $26 if I need to restore, I can just set this up and I don&#x27;t need to plan for disaster recovery expenses. But if it&#x27;s going to cost me $922 to get my data back, I&#x27;ve got to figure out how to make sure my insurance is going to cover that. This isn&#x27;t a no-brainer anymore. Also, what assurance do I have that the cost isn&#x27;t going to be higher when I need the data, or that there won&#x27;t be other fees tacked on that I&#x27;ve missed?<p>[1] <a href="https:&#x2F;&#x2F;calculator.aws&#x2F;#&#x2F;createCalculator&#x2F;S3" rel="nofollow">https:&#x2F;&#x2F;calculator.aws&#x2F;#&#x2F;createCalculator&#x2F;S3</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seized" target="_blank">seized</a>   <span class="timeago" data-date="2021-06-11 17:09:34 &#43;0000 UTC">2021-06-11 17:09:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glacier pricing can be hard to grok...<p>With Glacier as it is usually used you dont read data directly from the Glacier storage, it has to be restored to S3 where you then access it. That is the restore charges and the delays, so you can pay a low rate for the bulk option that takes up to 24 hours to restore your data to S3. But the real cost is the bandwidth from S3 back to your NAS&#x2F;datacenter&#x2F;etc, which brings it up to about $90USD&#x2F;TB.<p>Other fees would include request pricing, some low amount per 1000 requests. So costs can go up a bit if you store 1 million small files to Glacier vs 1000 large files. There is also a tipping point (IIRC about 170KB) where it is cheaper to store small files on S3 than Glacier.<p>Depending on your data and patterns it can be better to use Glacier as a second backup which is what I do. All my data is backed up to a Google Workspace as that is &quot;unlimited&quot; for now. The most important subset (a few TB) also goes to Glacier. Glacier is pay as you go, there isnt some &quot;unlimited&quot; or &quot;5TB for life&quot; type deal that can change. If Google Workspace ever becomes not &quot;unlimited&quot; or something happens to it, I have the most important data in Glacier and its data that I have no qualms paying &gt;$1k to get back.<p>But for me restoring from Glacier means that my NAS is dead (ZFS RAIDZ2 on good hardware) and Google Workspace has failed me at the same time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DougWebb" target="_blank">DougWebb</a>   <span class="timeago" data-date="2021-06-11 20:27:37 &#43;0000 UTC">2021-06-11 20:27:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool, thank you for the details. None of their marketing or FAQs for Glacier mention that getting the data back means going to S3 first and then paying S3&#x27;s outgoing bandwidth costs. As deceptive as I expected.<p>I&#x27;ll check out Google Workspace; that sounds like the right level of kludge for me, since this is the first time I&#x27;ve ever bothered to try to setup off-site backups. I only started using RAID a couple of years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=seized" target="_blank">seized</a>   <span class="timeago" data-date="2021-06-12 02:28:49 &#43;0000 UTC">2021-06-12 02:28:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It makes more sense sense when you think of Glacier as a tier of S3, like Infrequent Access&#x2F;etc which it is now. There used to be a Glacier standalone service but you had to upload a blob and track the UID to file name mapping yourself. That skipped S3 but was far more complex.<p>Workspace make more sense for large amounts of data where you can take advantage of the &quot;unlimited&quot;.<p>Backblaze B3 might be what you are looking for as an in between option.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 22:08:05 &#43;0000 UTC">2021-06-11 22:08:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you sure about the &quot;restored to s3&quot; bit? Their SDK seems to fetch directly from Glacier.<p>Note that the official name is &quot;S3 Glacier&quot;, so from AWS&#x27;s public perspective, it <i>is</i> S3.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-11 20:49:39 &#43;0000 UTC">2021-06-11 20:49:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; However, if &quot;Data Transfer&quot; is relevant, and I can&#x27;t tell if it is or isn&#x27;t, uploading my backup data is free but retrieving 10TB would cost $922! Is that right?<p>That&#x27;s right.  AWS charges offensive prices for bandwidth.<p>There are alternate methods to get data out for about half the price, or you can try your luck on using lightsail and if they don&#x27;t decide it&#x27;s a ToS violation you could get the transfer costs to around $50.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 19:02:39 &#43;0000 UTC">2021-06-11 19:02:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The $922 sounds about right. That jibes with my estimates.<p>There&#x27;s another (unofficial!) calculator at <a href="http:&#x2F;&#x2F;liangzan.net&#x2F;aws-glacier-calculator&#x2F;" rel="nofollow">http:&#x2F;&#x2F;liangzan.net&#x2F;aws-glacier-calculator&#x2F;</a> you can toy with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DougWebb" target="_blank">DougWebb</a>   <span class="timeago" data-date="2021-06-11 20:27:54 &#43;0000 UTC">2021-06-11 20:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, I&#x27;ll check it out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=laurentb" target="_blank">laurentb</a>   <span class="timeago" data-date="2021-06-11 16:17:16 &#43;0000 UTC">2021-06-11 16:17:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            how would that process look like in practice should you need to get to call the insurance guys?
+as in, would you claim on the cost to retrieve the data or ?
+(this question is general, regardless of the actual country)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 22:08:38 &#43;0000 UTC">2021-06-11 22:08:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I honestly don&#x27;t know. I&#x27;ve never had to use it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unethical_ban" target="_blank">unethical_ban</a>   <span class="timeago" data-date="2021-06-11 16:15:22 &#43;0000 UTC">2021-06-11 16:15:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t have automated mirroring set up, but I have insight.<p>I use a Windows free tool called FastGlacier. I set up an IAM user on my AWS account for my backups, and use those creds to login. Then it&#x27;s drag and drop! You can even use FastGlacier to encrypt&#x2F;decrypt on the fly as you upload and download.<p>Glacier is cheap because the retrieval times are very slow - something like 1-12 hours depending on the tier.<p>I have about 100GB of critical data. Personal documents, photos and some music I don&#x27;t want to have to search for if the house burns down. It&#x27;s something like a dollar a month. Less than a cup of coffee.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thrtythreeforty" target="_blank">thrtythreeforty</a>   <span class="timeago" data-date="2021-06-11 18:48:59 &#43;0000 UTC">2021-06-11 18:48:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Deep Archive is super cost effective, $1&#x2F;TB&#x2F;mo. For the house-burns-down scenario, I don&#x27;t mind the 24hr retrieval time
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seized" target="_blank">seized</a>   <span class="timeago" data-date="2021-06-11 17:01:11 &#43;0000 UTC">2021-06-11 17:01:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glacier is about $1USD&#x2F;TB&#x2F;month just for storing data. If you need to retrieve it ends up being about $90USD&#x2F;TB, most of that is bandwidth charges.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-06-11 18:22:46 &#43;0000 UTC">2021-06-11 18:22:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That means that if you store the data for much more than a half of year, Glacier becomes more expensive than storing on tapes.<p>Of course, tapes require a tape drive and its cost would require a lot of data to compensate the cost, but at a such high cost of retrieval it would not take much data to equal the cost of a tape drive.<p>Glacier is OK for a couple of TB, but for tens or hundreds it would not be suitable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-11 21:10:16 &#43;0000 UTC">2021-06-11 21:10:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Of course, tapes require a tape drive and its cost would require a lot of data to compensate the cost, but at a such high cost of retrieval it would not take much data to equal the cost of a tape drive.<p>But the less you expect to use it, the less this matters.<p>So I&#x27;d put the break-even point a bit higher.  Tape is good for 100TB or more but for tens it&#x27;s hard to justify a tape drive.<p>Also it&#x27;s important to remember to get those tapes offsite every week!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=santoshalper" target="_blank">santoshalper</a>   <span class="timeago" data-date="2021-06-11 16:04:44 &#43;0000 UTC">2021-06-11 16:04:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Few bucks a month. More if I needed to retrieve something.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wazoox" target="_blank">wazoox</a>   <span class="timeago" data-date="2021-06-11 15:58:36 &#43;0000 UTC">2021-06-11 15:58:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But Dropbox, Github, Google photos etc rely on massive piles of hard drives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=santoshalper" target="_blank">santoshalper</a>   <span class="timeago" data-date="2021-06-11 16:05:20 &#43;0000 UTC">2021-06-11 16:05:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, but the comment was about personal storage. Fault tolerance at the edge is less important in a cloud world.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=innot" target="_blank">innot</a>   <span class="timeago" data-date="2021-06-11 15:49:51 &#43;0000 UTC">2021-06-11 15:49:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; RAID or storage replication in distributed storage &lt;..&gt; is not only useless, but actively undesirable<p>I guess I&#x27;m different from most people, good news!
+When building my new &quot;home server&quot; half a year ago I made a raid-1 (based on ZFS) with 4 NVMEs. I rarely appear at that city, so I brought the fifth one and put it into an empty slot. Well, one of the 4 nvmes lasted for 3 months and stopped responding. One &quot;zpool replace&quot; and I&#x27;m back to normal, without any downtime, disassembly, even reboots. I think that&#x27;s quite useful. When I&#x27;m there the next time I&#x27;ll replace the dead one, of course.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toast0" target="_blank">toast0</a>   <span class="timeago" data-date="2021-06-11 16:10:01 &#43;0000 UTC">2021-06-11 16:10:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This article is speaking of large scale multinode distributed systems. Hundreds of rack sized systems. In those systems, you often don&#x27;t need explicit disk redundancy, because you have data redundancy across nodes with independent disks.<p>This is a good insight, but you need to be sure the disks are independent.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=merb" target="_blank">merb</a>   <span class="timeago" data-date="2021-06-11 16:16:37 &#43;0000 UTC">2021-06-11 16:16:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            well most often hba&#x27;s and raid controllers are another thing which increases latency and makes maintenances costs go up quite a bit (more stuff to update) and also it&#x27;s another part that can break.<p>that&#x27;s why it&#x27;s not recommended when running ceph.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Aea" target="_blank">Aea</a>   <span class="timeago" data-date="2021-06-11 16:32:04 &#43;0000 UTC">2021-06-11 16:32:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m pretty sure discrete HBAs &#x2F; Hardware RAID Controllers have effectively gone the way of the dodo. Software RAID (or ZFS) is the common, faster, cheaper, more reliable way of doing things.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-11 16:47:27 &#43;0000 UTC">2021-06-11 16:47:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don’t lop HBAs and RAID controllers together. The former is just PCIe to SATA or SCSI or whatever (otherwise it is not just an HBA, but indeed a RAID controller). Such a thing is still useful and perhaps necessary for software RAID if there are insufficient ports on the motherboard.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toast0" target="_blank">toast0</a>   <span class="timeago" data-date="2021-06-11 17:18:19 &#43;0000 UTC">2021-06-11 17:18:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hardware RAID doesn&#x27;t seem to be going away quickly. Since they&#x27;re almost all made by the same company, and they can usually be flashed to be dumb HBAs, it&#x27;s not too bad, but it was pretty painful when using managed hosting and the menu options with lots of disks all have the raid controllers that are a pain to setup; and I&#x27;m not going to reflash their hardware (although I did end up doing some SSD firmware updates myself because firmware bugs were causing issues and their firmware upgrade scripts weren&#x27;t working well and were tremendously slow)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=seized" target="_blank">seized</a>   <span class="timeago" data-date="2021-06-11 16:52:39 &#43;0000 UTC">2021-06-11 16:52:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ZFS needs HBAs. Those get your disks connected but otherwise get out of the way of ZFS.<p>But yes, hardware RAID controllers and ZFS don&#x27;t go together.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=karmakaze" target="_blank">karmakaze</a>   <span class="timeago" data-date="2021-06-11 16:52:04 &#43;0000 UTC">2021-06-11 16:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hardware caching raid controllers do have the advantage if power is lost, the cache can still be written out without the CPU&#x2F;software to do it. This let&#x27;s you safely run without write-thru cache fsync. This was a common spec for provisioned bare-metal MySQL servers I&#x27;d worked with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Godel_unicode" target="_blank">Godel_unicode</a>   <span class="timeago" data-date="2021-06-11 17:22:57 &#43;0000 UTC">2021-06-11 17:22:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The entire comment thread of this article is on-prem, low scale admins and high-scale cloud admins talking past each other.<p>You can build in redundancy at the component level, at the physical computer level, at the rack level, at the datacenter level, at the region level. Having all of them is almost certainly redundant and unnecessary at best.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-11 17:21:27 &#43;0000 UTC">2021-06-11 17:21:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sometimes. Other times they may make things worse by lying to the filesystem (and thereby also the application) about writes being completed, which may confound higher-level consistency models.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wtallis" target="_blank">wtallis</a>   <span class="timeago" data-date="2021-06-11 18:01:15 &#43;0000 UTC">2021-06-11 18:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It does seem to me that it&#x27;s much easier to reason about the overall system&#x27;s resiliency when the capacitor-protected caches are in the drives themselves (standard for server SSDs) and nothing between that and the OS lies about data consistency. And for solid state storage, you probably don&#x27;t need those extra layers of caching to get good performance.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=karmakaze" target="_blank">karmakaze</a>   <span class="timeago" data-date="2021-06-13 02:09:08 &#43;0000 UTC">2021-06-13 02:09:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since my experience was from a number of years back, I tried searching for more recent reports: &quot;mysql ssd fsync performance&quot;. The top recent one I found was for Digital Ocean[0] in 2020. It says &quot;average of about 20ms which matches your 50&#x2F;sec&quot; and mentions battery back-up controllers which wasn&#x27;t even in my search terms.<p>[0] <a href="https:&#x2F;&#x2F;www.digitalocean.com&#x2F;community&#x2F;questions&#x2F;poor-fsync-performance-on-do-block-storage" rel="nofollow">https:&#x2F;&#x2F;www.digitalocean.com&#x2F;community&#x2F;questions&#x2F;poor-fsync-...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Nextgrid" target="_blank">Nextgrid</a>   <span class="timeago" data-date="2021-06-11 23:47:48 &#43;0000 UTC">2021-06-11 23:47:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would be worried about my data behind held hostage by a black box proprietary RAID controller from a hostile manufacturer (unless you&#x27;re paying them millions to build &amp; design you a custom product, at which point you <i>may</i> have access to internal specs &amp; a contact within their engineering team to help you).<p>I&#x27;d rather have ZFS or something equivalent in software. Software can be inspected, is (hopefully) battle-tested for years by many different companies with different workloads &amp; requirements, and worst-case scenario, because it&#x27;s software, you can freeze the situation in time by taking byte-level snapshots of the underlying drives as well as a copy of the software for later examination&#x2F;reverse-engineering, something you can&#x27;t do with a hardware black box where you&#x27;re bound to the physical hardware and often have a single shot at a recovery attempt (as it may change the state of the black box).<p>Have you heard of the SSD failures about a decade ago where the SSD controller&#x27;s firmware had a bug that bricked the drive past a certain lifetime? The data is technically still there, and would be recoverable if you could bypass the controller or fix its firmware, but unless you had a <i>very good</i> relationship with the manufacturer of the SSD to gain access to the internal tools and&#x2F;or source code to allow you to tinker with the controller you were SOL.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=karmakaze" target="_blank">karmakaze</a>   <span class="timeago" data-date="2021-06-13 02:03:28 &#43;0000 UTC">2021-06-13 02:03:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was RAID-1, so there&#x27;s no data manipulation going on, a simple mirror copy with double the read bandwidth.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=twotwotwo" target="_blank">twotwotwo</a>   <span class="timeago" data-date="2021-06-11 16:18:42 &#43;0000 UTC">2021-06-11 16:18:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; &gt; RAID or storage replication in distributed storage &lt;..&gt; is not only useless, but actively undesirable<p>&gt; I guess I&#x27;m different from most people, good news!<p>The earlier part of the sentence helps explain the difference: &quot;That is, because most database-like applications do their redundancy themselves, at the application level...&quot;<p>Running one box I&#x27;d want RAID on it for sure. Work already runs a DB cluster because the app needs to stay up when an entire box goes away. Once you have 3+ hot copies of the data and a failover setup, RAID within each box on top of that can be extravagant. (If you <i>do</i> want greater reliability, it might be through more replicas, etc. instead of RAID.)<p>There is a bit of universalization in how the blog post phrases it. As applied to databases, though, I get where they&#x27;re coming from.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-11 16:13:13 &#43;0000 UTC">2021-06-11 16:13:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You omitted the context from the rest of the sentence:<p>&gt; most database-like applications do their redundancy themselves, at the application level …<p>If that’s not the case for your storage (doesn’t sound like it), then the author’s point doesn’t apply to your case anyway. In which case, yes, RAID may be useful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zxexz" target="_blank">zxexz</a>   <span class="timeago" data-date="2021-06-11 16:04:45 &#43;0000 UTC">2021-06-11 16:04:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What setup do you use to put 4  NVME in one box? I know it’s possible, I’ve just heard off so many different setups. I know there are some PCIE cards that allow for 4 NVME drives. But you have to match that with a motherboard&#x2F;CPU combo with enough ones to not lose bandwidth.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:27:04 &#43;0000 UTC">2021-06-11 19:27:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For distributed storage, we use this:
+<a href="https:&#x2F;&#x2F;www.slideshare.net&#x2F;Storage-Forum&#x2F;operation-unthinkable-software-defined-storage-bookingcom-peter-buschman#14" rel="nofollow">https:&#x2F;&#x2F;www.slideshare.net&#x2F;Storage-Forum&#x2F;operation-unthinkab...</a><p>We then install SDS software, Cloudian for S3, Quobyte for File, and we used to use Datera for iSCSI. Lightbits maybe in the future, I don&#x27;t know.<p>These boxen get purchased with 4 NVME devices, but can grow to 24 NVME devices. Currently 11 TB Microns, going for 16 or more in the future.<p>For local storage, multiple NVME hardly ever make sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pdpi" target="_blank">pdpi</a>   <span class="timeago" data-date="2021-06-11 16:06:59 &#43;0000 UTC">2021-06-11 16:06:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been looking into building some small&#x2F;cheap storage, and this is one of the enclosures I&#x27;ve been looking at.<p><a href="https:&#x2F;&#x2F;www.owcdigital.com&#x2F;products&#x2F;express-4m2" rel="nofollow">https:&#x2F;&#x2F;www.owcdigital.com&#x2F;products&#x2F;express-4m2</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=birdyrooster" target="_blank">birdyrooster</a>   <span class="timeago" data-date="2021-06-11 16:05:50 &#43;0000 UTC">2021-06-11 16:05:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s exactly what they are doing. Anyone else is using proprietary controllers and ports for a server chassis
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SkyMarshal" target="_blank">SkyMarshal</a>   <span class="timeago" data-date="2021-06-11 16:05:07 &#43;0000 UTC">2021-06-11 16:05:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve recently converted all my home workstation and NAS hard drives over to OpenZFS, and it’s amazing.  Anyone who says RAID is useless or undesirable just hasn’t used ZFS yet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-11 16:49:55 &#43;0000 UTC">2021-06-11 16:49:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article’s author only said RAID was useless in a specific scenario, not generally, and the post you’re replying to omitted this crucial context.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=goodpoint" target="_blank">goodpoint</a>   <span class="timeago" data-date="2021-06-11 17:18:10 &#43;0000 UTC">2021-06-11 17:18:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compare your solution with having 4 SBCs, with 1 NVME each, at different locations. The network client would handle replication and checksumming.<p>The total cost might be similar but you have increased reliability over SBC&#x2F;controller&#x2F;uplink failure.<p>Of course there are tradeoffs on performance and ease of management...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Godel_unicode" target="_blank">Godel_unicode</a>   <span class="timeago" data-date="2021-06-11 17:30:13 &#43;0000 UTC">2021-06-11 17:30:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You think that building 4 systems in 4 locations is likely to have a similar cost to one system at one location? For small systems, the fixed costs are a significant portion of the overall system cost.<p>This is doubly true for physical or self-hosted systems.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:24:31 &#43;0000 UTC">2021-06-11 19:24:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My environment is not a home environment.<p>It looks like this:
+<a href="https:&#x2F;&#x2F;blog.koehntopp.info&#x2F;2021&#x2F;03&#x2F;24&#x2F;a-lot-of-mysql.html" rel="nofollow">https:&#x2F;&#x2F;blog.koehntopp.info&#x2F;2021&#x2F;03&#x2F;24&#x2F;a-lot-of-mysql.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=linsomniac" target="_blank">linsomniac</a>   <span class="timeago" data-date="2021-06-11 16:52:40 &#43;0000 UTC">2021-06-11 16:52:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We are currently converting our SSD-based Ganeti clusters from LVM on RAID to ZFS, to prepare for our NVMe future, without RAID cards (1).  Was hoping to get the second box in our dev ganeti cluster reinstalled this morning to do further testing, but the first box has been working great!<p>1: LSI has a NVMe RAID controller for U.2 chassis, preparing for a non-RAID future, just in case.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=birdyrooster" target="_blank">birdyrooster</a>   <span class="timeago" data-date="2021-06-11 16:04:56 &#43;0000 UTC">2021-06-11 16:04:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does zpool not automatically promote the hot spare like mdadm?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seized" target="_blank">seized</a>   <span class="timeago" data-date="2021-06-11 16:54:40 &#43;0000 UTC">2021-06-11 16:54:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It can, if you set a disk as the hot spare for that pool.<p>But a disk can only be a hot spare in one pool, so to have a &quot;global&quot; hot spare it has to be done manually. That may be what that poster was doing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sjagoe" target="_blank">sjagoe</a>   <span class="timeago" data-date="2021-06-11 19:41:45 &#43;0000 UTC">2021-06-11 19:41:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, if I understand it correctly, there are a few other caveats with hot spares: It will only activate when another drive completely fails, so you can&#x27;t decide to replace a drive when it&#x27;s close to failure (probably not an issue in this case, though, with the unresponsive drive). Second, with the hot spare activated, the pool is still degraded, and the original drive still needs to be replaced; then the hot spare is removed from the vdev, and goes back to being a hot spare.<p>It&#x27;s these reasons that I&#x27;ve decided to just keep a couple of cold spares ready that I can swap in to my system as needed, although I do have access to the NAS at any time. If I was remote like GP, I might decide to use a hot spare.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeffinhat" target="_blank">jeffinhat</a>   <span class="timeago" data-date="2021-06-11 21:01:14 &#43;0000 UTC">2021-06-11 21:01:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been messing with NVMe over TCP at home lately and it&#x27;s pretty awesome. You can scoop up the last-gen of 10GBe&#x2F;40GBe networking on eBay for cheap and build your own fast disaggregated storage on upstream Linux. The kernel based implementation saves you some context switching over other network file systems, and you can (probably) pay to play for on-NIC implementations (especially as they&#x27;re getting smarter).<p>It seems like these solutions don&#x27;t have a strong authentication&#x2F;encryption-in-transit story. Are vendors building this into proprietary products or is this only being used on trusted networks? I think it&#x27;d be solid technology to leverage for container storage.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stingraycharles" target="_blank">stingraycharles</a>   <span class="timeago" data-date="2021-06-11 21:13:45 &#43;0000 UTC">2021-06-11 21:13:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just use iSCSI at home but using Mellanox’ RoCE which is pretty well performing.<p>One thing I’m noticing is that most of these storage protocols do, in fact, assume converged Ethernet; that is, zero packet loss and proper flow control.<p>Is this also the case with NVMe over TCP?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-14 07:40:42 &#43;0000 UTC">2021-06-14 07:40:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The point of TCP is to provide protection against packet loss and reordering, and to provide flow control.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeffinhat" target="_blank">jeffinhat</a>   <span class="timeago" data-date="2021-06-12 02:57:38 &#43;0000 UTC">2021-06-12 02:57:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t experimented with it yet, but I expect that over TCP things degrade more gracefully. It seems earlier iterations of storage over networking didn&#x27;t want to pay the overhead of TCP and lost out on the general purpose benefits that it brings. IIRC some RoCE iterations aren&#x27;t routable for example. In theory, you could expose your NVMe over TCP device over the internet.<p>It seems to me applications taking advantage of NVMe are focused on building out deep queues of operations which may smooth out issues introduced by the network. But only way to know is to benchmark.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=effie" target="_blank">effie</a>   <span class="timeago" data-date="2021-06-11 21:52:45 &#43;0000 UTC">2021-06-11 21:52:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; build your own fast disaggregated storage on upstream Linux<p>Why is this better than just connecting the drive via PCIe bus directly to the CPU?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeffinhat" target="_blank">jeffinhat</a>   <span class="timeago" data-date="2021-06-12 02:51:34 &#43;0000 UTC">2021-06-12 02:51:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It certainly isn&#x27;t faster or more reliable for a single node, but this is just homelab stuff. Nothing in mine is particularly necessary. I think it&#x27;s interesting because it&#x27;s now accessible and receiving support from multiple vendors.<p>At some scale, it&#x27;s nice to separate the two. You don&#x27;t care much about where the disks live vs. where your compute is running. You can evict work from a node, have it reschedule, and not have to worry about replicating the data to another machine with excess capacity. Though I&#x27;m no authority on this topic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-06-12 02:26:10 &#43;0000 UTC">2021-06-12 02:26:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want a whole drive, sure. But if you want to virtualize storage (e.g. split up one drive) you need a network protocol.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=effie" target="_blank">effie</a>   <span class="timeago" data-date="2021-06-12 10:34:21 &#43;0000 UTC">2021-06-12 10:34:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t need a network protocol to use one drive for 100 VMs, PV drivers in Xen or VirtIO in KVM work well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rbanffy" target="_blank">rbanffy</a>   <span class="timeago" data-date="2021-06-11 19:46:26 &#43;0000 UTC">2021-06-11 19:46:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing I don’t get in the Mach.2 design is why not use the approach IBM used in mainframe hard drives of having multiple heads over the same platter. The Mach.2 is two drives sharing parts, that  will behave like a 2-drive RAID array. Having multiple heads on the same platter would allow it to read like a RAID-1 while writing like a RAID-0.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kmeisthax" target="_blank">kmeisthax</a>   <span class="timeago" data-date="2021-06-11 23:48:52 &#43;0000 UTC">2021-06-11 23:48:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I was quite surprised to see &quot;the drive presents itself as two disks&quot;... I can only imagine building the drive this was was seen as the lowest risk in terms of both firmware NREs and additional hardware required.<p>That being said, dual head stacks (as opposed to just dual actuators on a single head stack) would almost certainly not fit within the footprint that ordinary drives do, which would mean not being able to use standard disk enclosures for them... which would be a non-starter. Alternatively you shrink the platters, which means less capacity - and given that hard disk drives have been stuck at a certain areal density limit for a while I imagine nobody&#x27;s particularly keen on losing lots of capacity for a small IOPS benefit.<p>IDK - maybe if HAMR goes mainstream in hard drives then we can make that tradeoff without the drive seeming like an inferior product.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rbanffy" target="_blank">rbanffy</a>   <span class="timeago" data-date="2021-06-12 00:37:46 &#43;0000 UTC">2021-06-12 00:37:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; would almost certainly not fit within the footprint that ordinary drives do<p>Yes. You&#x27;d probably need to use 2.5&quot; platters for a 3.5&quot; enclosure. Also not sure if the mechanics would be precise enough to allow one head to read what the other wrote. When IBM did this, densities were MUCH lower.<p>As for capacity vs IOPS, 10K and 15K RPM drives rarely have the same densities as the slower large capacity units. I don&#x27;t think I ever saw a 10+TB drive faster than 7200 RPM.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kardos" target="_blank">kardos</a>   <span class="timeago" data-date="2021-06-11 16:34:35 &#43;0000 UTC">2021-06-11 16:34:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not following the leaf-and-spine figure. 40x10G is 400G, but 4x40G is 160G, so how is this completely oversubscription free?<p>Edit: followed the link, it is 2.5:1 oversubscribed
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=walrus01" target="_blank">walrus01</a>   <span class="timeago" data-date="2021-06-11 17:07:16 &#43;0000 UTC">2021-06-11 17:07:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it&#x27;s worth noting that 40GbE is an absolute dead end in terms of technology, in the ISP world. Look at how many 40GbE members there are on many major IXes and other things. It&#x27;s super cheap to buy an older Arista switch on ebay with N x 10GbE ports and a few 40GbE uplinks, because they&#x27;re all getting pulled from service and sold off cheap. The upgrade path for 10GbE is 100GbE.<p>major router and switch manufacturers aren&#x27;t even making new line cards with multiple 40GbE ports on them anymore, they&#x27;re tech from 6-7 years ago. You can buy either something with dense 10GbE SFP+ ports, or something with QSFP&#x2F;QSFP28 or similar 100GbE ports.<p>If you want something for a test&#x2F;development lab, or are on a <i>very</i> tight budget, sure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bluedino" target="_blank">bluedino</a>   <span class="timeago" data-date="2021-06-11 17:24:16 &#43;0000 UTC">2021-06-11 17:24:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Meanwhile some budget homelabbers are jumping on the 2.5Gb bandwagon
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:31:12 &#43;0000 UTC">2021-06-11 19:31:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The image is from 2012 and describes a topology, but not a technology.<p>Today you&#x27;d rather use Arista 7060, 7050cx orJuniper 5200 as ToR. You&#x27;d not build 1:1, but plan for it in terms of ports and cable space, then add capacity as needed.<p>Almost nobody in an Enterprise environment actually needs 1:1, unlike hosters or hyperscalers renting nodes to others. Even then you&#x27;d probably being able to get away with a certain amount of oversubscription.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ramoz" target="_blank">ramoz</a>   <span class="timeago" data-date="2021-06-11 23:18:28 &#43;0000 UTC">2021-06-11 23:18:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Random perspective: I think the author is unintentionally speaking of a future not quite here yet &amp; specifically with AI integrated into applications &amp; their infrastructure. Essentially the need for low data gravity with how AI works today in viable business domains.<p>For large processing of data in general requests (maybe like a traditional SQL query) AI might typically require the retrieval data to map to vector formats. But it&#x27;s not applicable to add those to RDBs (you&#x27;re not doing any sql upfront, retrieval will be too slow), nor compute those ad-hoc (business app use cases, not general CV or NLP models, nor analytics).<p>AI&#x2F;ML inputs&#x2F;vectors need to exist somewhere where it is fast access vs abstracted software over that access; so using embedded dbs (leveldb, rocks, badger, lmdb, etc). Anecdotally,    I get top performance over 8-24 physical ssd attachments (TBs of data), nvme raid-0 single mount on individual nodes, where we need to gather anywhere from 1 - potentially 10s of thousands of vectors every request. It&#x27;s never more performant to distribute that and nothing is really gained with persistence. Today&#x27;s platforms are somewhat geared for fast recovery (though writing TB&#x27;s of data isnt simple, you can model automation &amp; scale horizontally). Still, app platform infrastructure isn&#x27;t really geared for AI application architectures like this. E.g., Kubernetes is too abstracted, but I imagine Google&#x2F;GCP will, intentionally for AI workloads, enable CSI drivers and more robustness around Local SSDs on GKE.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KaiserPro" target="_blank">KaiserPro</a>   <span class="timeago" data-date="2021-06-11 16:37:11 &#43;0000 UTC">2021-06-11 16:37:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NVME over X seems like fun. After a decade of shying away from fibre channel, we&#x27;ve finally got to the point where we&#x27;ve forgotten how awful iscsi was to look after. (and how expensive FC used to be, and how disappointing SAS switches were.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:32:29 &#43;0000 UTC">2021-06-11 19:32:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;I don&#x27;t know what features the network of the future will have, but it will be called Ethernet.&quot;<p>Ethernet is absorbing all the features of other networking technology, and adding them to it&#x27;s own perfection.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jabl" target="_blank">jabl</a>   <span class="timeago" data-date="2021-06-11 17:15:49 &#43;0000 UTC">2021-06-11 17:15:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t worry. By the time the worst bugs are ironed out, and we have management tools worth crap, there will be a new shiny.<p>That being said, nvme seems nice with no major footguns, so I guess NVME over X is in principle at least a good idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=myrandomcomment" target="_blank">myrandomcomment</a>   <span class="timeago" data-date="2021-06-11 20:35:00 &#43;0000 UTC">2021-06-11 20:35:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Arista was pushing leaf-spine in 2008....
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DeliriumTrigger" target="_blank">DeliriumTrigger</a>   <span class="timeago" data-date="2021-06-11 16:57:25 &#43;0000 UTC">2021-06-11 16:57:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This blog post is the perfect example for &quot;I think I have a deep understanding but I really don&#x27;t.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=walrus01" target="_blank">walrus01</a>   <span class="timeago" data-date="2021-06-11 17:00:25 &#43;0000 UTC">2021-06-11 17:00:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; &quot;Customers of the data track have stateless applications, because they have outsourced all their state management to the various products and services of the data track.&quot;<p>I have no idea what this is even supposed to mean. It&#x27;s like somebody combined some buzzwords thought up by a fresh business school marketing graduate working in the &#x27;cloud&#x27; industry with an attempt at actual x86-64 hardware systems engineering.<p>The whole premise of the first half of the article seems to be &#x27;you don&#x27;t need to design a lot of redundancy and fault tolerance&#x27;, the second part then goes into a weird explanation of NVME targets on CentOS. I hope this person isn&#x27;t actually responsible for building storage systems at the bare metal level supporting some production business application.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cowmoo728" target="_blank">cowmoo728</a>   <span class="timeago" data-date="2021-06-11 17:14:20 &#43;0000 UTC">2021-06-11 17:14:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the article is saying that a web server (customers) should be stateless, because everything important should be in a database (data track) on another host. And that database probably has application level handling for duplicating writes to another disk or another host.<p>The conclusion seems to be that it&#x27;s not important for hardware level data redundancy because existing database software already handles duplication in application code. I don&#x27;t understand how that conclusion was reached. Hardware level redundancy like raid1 seems useful because it simplifies handling a common failure case when a single HDD or NVME fails on a database server. Hardware redundancy is just the first stage in a series of steps to handle drive failure. I do agree that a typical stateless server doesn&#x27;t need raid1, but afaik it&#x27;s not standard practice for a stateless web application to bother with raid1 anyway.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isotopp" target="_blank">isotopp</a>   <span class="timeago" data-date="2021-06-11 19:34:49 &#43;0000 UTC">2021-06-11 19:34:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I think the article is saying that a web server (customers) should be stateless, because everything important should be in a database (data track) on another host. And that database probably has application level handling for duplicating writes to another disk or another host.<p>Correct.<p>&gt; Hardware level redundancy like raid1 seems useful because it simplifies handling a common failure case when a single HDD or NVME fails on a database server<p>Nobody needs that if your database does replicate. Cassandra replicates data. MySQL in a replication setup replicates data. And so on. Individual nodes in such a setup are as expendable as individual disks in a RAID. More so, because you get not only protection against a disk failure, but depending on deployment strategy also against loss of a node, a Rack or a Rack Row. Or even loss of DC or AZ.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-06-11 17:13:39 &#43;0000 UTC">2021-06-11 17:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s basic 12-factor aka cloud native thinking: &quot;Any data that needs to persist must be stored in a stateful backing service, typically a database.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=villgax" target="_blank">villgax</a>   <span class="timeago" data-date="2021-06-11 16:16:05 &#43;0000 UTC">2021-06-11 16:16:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wish it was as swappable as RAM sticks, quite the pain to get in with a screwdriver after removing the GPU during OS installs on 2 drives without bootloader crap
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=snuxoll" target="_blank">snuxoll</a>   <span class="timeago" data-date="2021-06-11 16:33:48 &#43;0000 UTC">2021-06-11 16:33:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NVMe is just a protocol for accessing flash memory over PCIe express, do not confuse it with the M.2 form factor (which also supports SATA and USB!). My Optane P900 I use as a ZFS log device is NVMe and plugs into a standard PCIe slot on my PowerEdge R520, and servers frequently use U.2 form factor drives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=walrus01" target="_blank">walrus01</a>   <span class="timeago" data-date="2021-06-11 17:10:37 &#43;0000 UTC">2021-06-11 17:10:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think where people commonly confuse it is because <i>most often</i> when they see a M.2 device, it is the variant of the slot that exposes PCI-E pins to the NVME SSD, such as for a $100 M.2 2280 SSD from Samsung, Intel, WD, etc. As you mention there&#x27;s lots of other things which can be electrically connected to a motherboard&#x27;s I&#x2F;O buses in a M.2 slot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=villgax" target="_blank">villgax</a>   <span class="timeago" data-date="2021-06-12 10:06:22 &#43;0000 UTC">2021-06-12 10:06:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah agreed, but I&#x27;m clearly not referring to the protocol.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-11 17:03:31 &#43;0000 UTC">2021-06-11 17:03:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not necessarily flash - the p900 you list isn&#x27;t flash for one. Nor is it necessarily over PCIe...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Godel_unicode" target="_blank">Godel_unicode</a>   <span class="timeago" data-date="2021-06-11 17:42:01 &#43;0000 UTC">2021-06-11 17:42:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Icy dock makes an entire range of hot-swap docks for m.2 NVMe drives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=villgax" target="_blank">villgax</a>   <span class="timeago" data-date="2021-06-12 10:06:31 &#43;0000 UTC">2021-06-12 10:06:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-11 17:05:17 &#43;0000 UTC">2021-06-11 17:05:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            E.g. U.2 drives can utilize NVMe but in a form factor easier to swap (including hot plugging support).<p>Edit: typo
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Syzygies" target="_blank">Syzygies</a>   <span class="timeago" data-date="2021-06-11 19:05:48 &#43;0000 UTC">2021-06-11 19:05:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&quot;Flash shredders exist, too, but in order to be compliant the actual chips in their cases need to be broken. So what they produce is usually much finer grained, a “sand” of plastics and silicon.&quot;</i><p>For metal, chip credit cards I can&#x27;t shred, I put them on a brick in the back yard, and torch them with a weed burner. There&#x27;s a psychological bonus here, if for example Amex made me change cards through no choice of my own because they were hacked.<p>This wouldn&#x27;t be &quot;compliant&quot; for a flash drive, but it would be effective.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

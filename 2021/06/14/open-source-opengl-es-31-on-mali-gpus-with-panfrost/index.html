@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/open-source-opengl-es-31-on-mali-gpus-with-panfrost/">
+
+
+    <title>Open Source OpenGL ES 3.1 on Mali GPUs with Panfrost - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Open Source OpenGL ES 3.1 on Mali GPUs with Panfrost - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/open-source-opengl-es-31-on-mali-gpus-with-panfrost/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/open-source-opengl-es-31-on-mali-gpus-with-panfrost/">
+<meta name="twitter:title" content="Open Source OpenGL ES 3.1 on Mali GPUs with Panfrost - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Open Source OpenGL ES 3.1 on Mali GPUs with Panfrost - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T04:19:45JST",
+    "dateModified": "2021-06-14T04:19:45JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.collabora.com/news-and-blog/blog/2021/06/11/open-source-opengl-es-3.1-on-mali-gpus-with-panfrost/">Open Source OpenGL ES 3.1 on Mali GPUs with Panfrost</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flakiness" target="_blank">flakiness</a>   <span class="timeago" data-date="2021-06-14 07:14:08 &#43;0000 UTC">2021-06-14 07:14:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The opaque, undocumented nature of mobile GPU is outstanding (not in a good sense).<p>Intel CPUs are well document both by their documentation or by third party docs (like Patterson-Hennessy.) Although NVIDIA is less document than these CPUs, there are some well-written whitepapers including one for academic conferences. And these are the basis for the textbook coverage.<p>Compared to that, ARM or Qualcomm GPUs are totally a blackbox. I&#x27;d love to learn the specifics of mobile GPUs but there is no clue. I wonder how Collabora folks have figure out the instruction set architecture and other details.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KeepingItToasty" target="_blank">KeepingItToasty</a>   <span class="timeago" data-date="2021-06-14 14:36:29 &#43;0000 UTC">2021-06-14 14:36:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &#x27;Arm Is Now Backing Panfrost Gallium3D As Open-Source Mali Graphics Driver&#x27;: <a href="https:&#x2F;&#x2F;www.phoronix.com&#x2F;scan.php?page=news_item&amp;px=Arm-Panfrost-Going-Official" rel="nofollow">https:&#x2F;&#x2F;www.phoronix.com&#x2F;scan.php?page=news_item&amp;px=Arm-Panf...</a><p>I think Arm is providing Collabora with some of the documentation they need to write the graphics driver.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flakiness" target="_blank">flakiness</a>   <span class="timeago" data-date="2021-06-14 17:41:04 &#43;0000 UTC">2021-06-14 17:41:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wasn&#x27;t aware of this, but cool move on ARM side! Thanks for the tip!<p>Looking at the code [1], some of files are indeed copyrighted to ARM. So they are actually providing some data. Also, the linked story mentions that qcom is also providing some support to thee opensource driver. Pardon my ignorance here.<p>[1] <a href="https:&#x2F;&#x2F;gitlab.freedesktop.org&#x2F;mesa&#x2F;mesa&#x2F;-&#x2F;tree&#x2F;main&#x2F;src&#x2F;panfrost&#x2F;perf" rel="nofollow">https:&#x2F;&#x2F;gitlab.freedesktop.org&#x2F;mesa&#x2F;mesa&#x2F;-&#x2F;tree&#x2F;main&#x2F;src&#x2F;pan...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CameronNemo" target="_blank">CameronNemo</a>   <span class="timeago" data-date="2021-06-14 17:19:05 &#43;0000 UTC">2021-06-14 17:19:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While this is true now, Collabora devs did a lot of reverse engineering with little documentation to get a functional driver, then ARM started to pay attention. For a long time, ARM neglected efforts to develop open source drivers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nix23" target="_blank">nix23</a>   <span class="timeago" data-date="2021-06-14 09:35:55 &#43;0000 UTC">2021-06-14 09:35:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really wished that Intel and AMD took a leading role in ARM, things would be so much more open in the mobile space.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CameronNemo" target="_blank">CameronNemo</a>   <span class="timeago" data-date="2021-06-14 17:19:57 &#43;0000 UTC">2021-06-14 17:19:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Intel and AMD, which have entirely closed source coprocessors on their chips.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 13:47:51 &#43;0000 UTC">2021-06-14 13:47:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As if they don&#x27;t have their own commercial agenda, like having used PowerVR SGX545 on their CPUs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qwertox" target="_blank">qwertox</a>   <span class="timeago" data-date="2021-06-14 11:06:58 &#43;0000 UTC">2021-06-14 11:06:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting point of view, this sounds plausible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=someperson" target="_blank">someperson</a>   <span class="timeago" data-date="2021-06-14 08:40:35 &#43;0000 UTC">2021-06-14 08:40:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I found this interesting YouTube talk from a few months ago titled &quot;Open drivers for Arm GPUs&quot; from the author of this article: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ZYCGVzkSIpg&amp;list=PLZjq3una5SrBQ4J1erd88Cs3cA0GvUY4W&amp;index=2" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ZYCGVzkSIpg&amp;list=PLZjq3una5S...</a><p>The key thing about open-source drivers is they retain compatibility with newer Linux kernels, and receive bug fixes and improvements long after the original vendor has lost interest. This reduces e-waste and allows system integrators (like Google with Chromebooks) to easily maintain their hardware far longer than Broadcom, Qualcomm and ARM itself ever would.<p>It&#x27;s great that shipping open-source drivers over the proprietary one is fast becoming the norm not the outlier. And this change is not because of hippie free software ideals, but because of cold-hearted business reasons.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IntelMiner" target="_blank">IntelMiner</a>   <span class="timeago" data-date="2021-06-14 14:25:14 &#43;0000 UTC">2021-06-14 14:25:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was surprised to find a while back that Google&#x27;s now ancient &quot;Nexus 7&quot; tablet is allegedly able to run a mainline Linux kernel!<p>Unfortunately the one I built and &quot;flashed&quot; to it never booted and I lack the soldering skills to build the modified headphone connector&#x2F;serial TTL cable thing it needs, so it sits in my drawer unused<p>I really wish we could get to a better upstream ecosystem with ARM devices but it just never seems to happen
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-06-14 14:30:34 &#43;0000 UTC">2021-06-14 14:30:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is the headphone&#x2F;serial cable the same as those used on Pine64 products ? You may be able to buy one for fairly low cost.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-06-14 14:28:55 &#43;0000 UTC">2021-06-14 14:28:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is Broadcom bad at this ? I thought the VC4 (RPi) DRM code was officially supported by them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ncmncm" target="_blank">ncmncm</a>   <span class="timeago" data-date="2021-06-14 06:24:17 &#43;0000 UTC">2021-06-14 06:24:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is such great work! All praise to Alyssa R. (and to whoever else she credits).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Aissen" target="_blank">Aissen</a>   <span class="timeago" data-date="2021-06-14 07:03:18 &#43;0000 UTC">2021-06-14 07:03:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I might add: kudos to Collabora, and its customers who were crazy enough to fund this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ece" target="_blank">ece</a>   <span class="timeago" data-date="2021-06-14 17:17:19 &#43;0000 UTC">2021-06-14 17:17:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This really makes Samsung Exynos chips with Mali GPUs appealing for Linux use, and hopefully when Exynos with RDNA2 comes out, support will be great there as well. I&#x27;m not really seeing Mali GPUs and unlocked bootloader phone options in the US (other than the PinePhone), but I&#x27;ll have to look more another time. Thanks Collabora!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-06-14 14:32:55 &#43;0000 UTC">2021-06-14 14:32:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be nice if the Panfrost DRM code could be dual licenced like the Lima stuff.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pabs3" target="_blank">pabs3</a>   <span class="timeago" data-date="2021-06-14 05:43:31 &#43;0000 UTC">2021-06-14 05:43:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It feels like we now have open drivers (at some stage of the development process) for all the relevant GPUs that are sold today, are there any still missing? Even the Apple M1 GPU has reverse engineering work being done on it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slezyr" target="_blank">slezyr</a>   <span class="timeago" data-date="2021-06-14 06:03:43 &#43;0000 UTC">2021-06-14 06:03:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, but not a single open-source driver can make a render with Blender 3D.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mappu" target="_blank">mappu</a>   <span class="timeago" data-date="2021-06-14 07:06:25 &#43;0000 UTC">2021-06-14 07:06:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The default renderer Eevee is a GPU-only renderer that works fine on my RX 570 with the FOSS amdgpu driver.<p>You can also run Cycles&#x27; CUDA backend with ROCm on amdgpu (somewhat..).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slezyr" target="_blank">slezyr</a>   <span class="timeago" data-date="2021-06-14 15:50:51 &#43;0000 UTC">2021-06-14 15:50:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The default renderer Eevee is a GPU-only renderer that works fine on my RX 570 with the FOSS amdgpu driver.<p>However, you need Cycles, and not Eevee. They have very significant difference in quality.<p><a href="https:&#x2F;&#x2F;all3dp.com&#x2F;2&#x2F;blender-render-from-eevee-simply-explained&#x2F;" rel="nofollow">https:&#x2F;&#x2F;all3dp.com&#x2F;2&#x2F;blender-render-from-eevee-simply-explai...</a><p>&gt; You can also run Cycles&#x27; CUDA backend with ROCm on amdgpu (somewhat..).<p>No. No. No, you can&#x27;t.<p>They support only some GPUs !!!AND CPUs!!!. No support for RX 5xxx-6xxx XT. They are very picky about the hardware they support.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;ROCm&#x2F;ROCm.github.io&#x2F;blob&#x2F;master&#x2F;hardware.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ROCm&#x2F;ROCm.github.io&#x2F;blob&#x2F;master&#x2F;hardware....</a><p><a href="https:&#x2F;&#x2F;github.com&#x2F;ROCm&#x2F;ROCm.github.io&#x2F;blob&#x2F;master&#x2F;hardware.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ROCm&#x2F;ROCm.github.io&#x2F;blob&#x2F;master&#x2F;hardware....</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robert_foss" target="_blank">robert_foss</a>   <span class="timeago" data-date="2021-06-14 06:18:05 &#43;0000 UTC">2021-06-14 06:18:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume that&#x27;s because Blender uses OpenCL?<p>I think a lot of progress is being made on that front.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Kelteseth" target="_blank">Kelteseth</a>   <span class="timeago" data-date="2021-06-14 06:20:39 &#43;0000 UTC">2021-06-14 06:20:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, they just removed in entirely...<p><a href="https:&#x2F;&#x2F;code.blender.org&#x2F;2021&#x2F;04&#x2F;cycles-x&#x2F;" rel="nofollow">https:&#x2F;&#x2F;code.blender.org&#x2F;2021&#x2F;04&#x2F;cycles-x&#x2F;</a><p>&gt; Deprecation<p>As part of the new architecture, we are removing some functionality. Most notably:<p>OpenCL rendering kernels. The combination of the limited Cycles split kernel implementation, driver bugs, and stalled OpenCL standard has made maintenance too difficult. We can only make the kinds of bigger changes we are working on now by starting from a clean slate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 06:48:05 &#43;0000 UTC">2021-06-14 06:48:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Vulkan Compute shaders (or GLSL compute shaders, if supported by the OpenGL version) should be quite a bit more robust than OpenCL kernels.  The main issue w&#x2F; shaders compared to OpenCL kernels is some missing features in the former, that will have to be optionally supported via standard extensions.<p>The programming model is also quite different, so code will have to be rewritten.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gspr" target="_blank">gspr</a>   <span class="timeago" data-date="2021-06-14 10:29:41 &#43;0000 UTC">2021-06-14 10:29:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll piggyback on your comment for a question: I only very recently started getting into the basic of GPGPU coding. I hate vendor lock in, so I started out with OpenCL. I had a good time, but I do understand that more and more of non-CUDA world (however small that may be) is moving away from OpenCL. What are they moving to? Where should one direct one&#x27;s &quot;compute learning energy&quot; (if one already excludes CUDA or other proprietary solutions)?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsloth" target="_blank">fsloth</a>   <span class="timeago" data-date="2021-06-14 12:29:36 &#43;0000 UTC">2021-06-14 12:29:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not OP, but: Unfortunately you need to pick a platform and target that. Which API you use depends on the platform. DirectX, OpenGL, Vulkan and Metal all have compute capability.<p>So, I think you need to abstract your code at the services level, and provide an implementations for each platform you need to support (the number may be 1 or more than 1).<p>I think you need to direct your &quot;compute learning&quot; energy at the algorithm level. Numerics and all that. The GPU API:s are just the obtuse implementation detail, but not the meat of the thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-06-14 13:05:38 &#43;0000 UTC">2021-06-14 13:05:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In addition to picking a platform, you also essentially need to pick a generation. Vulkan 1.0 for example is missing subgroups and has lots of other limitations. Vulkan 1.2 on a modern GPU with an updated driver is pretty darned powerful, with an explicit memory model, control over subgroup size, a form of pointers, and a range of scalar datatype sizes (f16 is especially useful for machine learning, commonly having 2x the throughput as f32). It is possible to have multiple versions and select at runtime, but it&#x27;s an additional complexity that needs to be considered, and can constrain your architecture to accommodate the compatibility modes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 14:37:15 &#43;0000 UTC">2021-06-14 14:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So, I think you need to abstract your code at the services level, and provide an implementations for each platform you need to support (the number may be 1 or more than 1).<p>There are some cross-platform capabilities via SPIRV-Cross.  The LLVM folks are working on MLIR that might provide even better features wrt. a common abstraction layer going forward.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gspr" target="_blank">gspr</a>   <span class="timeago" data-date="2021-06-14 13:39:37 &#43;0000 UTC">2021-06-14 13:39:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! That&#x27;s a bit of a sad state of things :-(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=0-_-0" target="_blank">0-_-0</a>   <span class="timeago" data-date="2021-06-14 10:20:32 &#43;0000 UTC">2021-06-14 10:20:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you know what the missing features are? I&#x27;m very interested, I&#x27;m rewriting code from ocl to vulkan.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 10:29:09 &#43;0000 UTC">2021-06-14 10:29:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27396634" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27396634</a> for a basic intro, but IIRC the main differences involved are (1) support for general pointers in OpenCL, whereas data indirection in compute shaders involves varying levels of messiness, and (2) OpenCL introduces support for some mathematical functions, that is not in Vulkan Compute. (However, note that OpenCL 3.0 has also made many features optional, so the basic featureset may be more comparable as a result.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Doxin" target="_blank">Doxin</a>   <span class="timeago" data-date="2021-06-14 06:30:49 &#43;0000 UTC">2021-06-14 06:30:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that they are not removing GPU rendering. Just the OpenCL kernels. They&#x27;ll still have NVIDIA and AMD kernels. As long as the open source drivers keep working towards supporting the required features those will eventually work on them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slezyr" target="_blank">slezyr</a>   <span class="timeago" data-date="2021-06-14 06:36:17 &#43;0000 UTC">2021-06-14 06:36:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; They&#x27;ll still have ... and AMD kernels.<p>Do they? Blender uses OpenCL implementation for AMD GPUs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Doxin" target="_blank">Doxin</a>   <span class="timeago" data-date="2021-06-14 06:37:35 &#43;0000 UTC">2021-06-14 06:37:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh did I misremember that? It has been a hot minute since I last owned an AMD card. Apologies for the misinformation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 14:34:15 &#43;0000 UTC">2021-06-14 14:34:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

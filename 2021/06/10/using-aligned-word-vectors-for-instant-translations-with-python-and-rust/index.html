@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/10/using-aligned-word-vectors-for-instant-translations-with-python-and-rust/">
+
+
+    <title>Using aligned word vectors for instant translations with Python and Rust - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Using aligned word vectors for instant translations with Python and Rust - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/using-aligned-word-vectors-for-instant-translations-with-python-and-rust/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/using-aligned-word-vectors-for-instant-translations-with-python-and-rust/">
+<meta name="twitter:title" content="Using aligned word vectors for instant translations with Python and Rust - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Using aligned word vectors for instant translations with Python and Rust - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-10T20:22:10JST",
+    "dateModified": "2021-06-10T20:22:10JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://instantdomainsearch.com/engineering/how-to-use-fasttext-for-instant-translations">Using aligned word vectors for instant translations with Python and Rust</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=beau" target="_blank">beau</a>   <span class="timeago" data-date="2021-06-10 20:38:45 &#43;0000 UTC">2021-06-10 20:38:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;ve released the underlying Rust implementation here: <a href="https:&#x2F;&#x2F;github.com&#x2F;InstantDomain&#x2F;instant-distance" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;InstantDomain&#x2F;instant-distance</a> with Python bindings at <a href="https:&#x2F;&#x2F;pypi.org&#x2F;project&#x2F;instant-distance" rel="nofollow">https:&#x2F;&#x2F;pypi.org&#x2F;project&#x2F;instant-distance</a> — feedback welcome!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=habibur" target="_blank">habibur</a>   <span class="timeago" data-date="2021-06-10 23:26:22 &#43;0000 UTC">2021-06-10 23:26:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For Linux, in the Makefile change the copy command to<p>cp target&#x2F;release&#x2F;libinstant_distance.so instant-distance-py&#x2F;test&#x2F;instant_distance.so<p>and it works. Built and running. The main tree was MacOS only.<p>Here&#x27;s resource consumption in a sample run.<p>Time: 4.49s, Memory: 1552 mb.<p>Single word. Three langs including en.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=planckscnst" target="_blank">planckscnst</a>   <span class="timeago" data-date="2021-06-11 00:51:19 &#43;0000 UTC">2021-06-11 00:51:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How did you figure this out? I&#x27;ve done lots of Linux software build troubleshooting as a result of using Gentoo, BuildRoot, and pacaur, but this doesn&#x27;t ring any bells for a common issue
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fnord123" target="_blank">fnord123</a>   <span class="timeago" data-date="2021-06-11 06:59:22 &#43;0000 UTC">2021-06-11 06:59:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They probably tried it, it couldn&#x27;t find a dynlib which is a Macos shared object file, opened the three line makefile, and then fixed it to copy a .so
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arbol" target="_blank">arbol</a>   <span class="timeago" data-date="2021-06-10 23:18:49 &#43;0000 UTC">2021-06-10 23:18:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did you try spacy&#x27;s most similar method? It&#x27;s written in cython so is presumably quite fast as well. Thanks for the rust implementation though, I will most likely use this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Fiahil" target="_blank">Fiahil</a>   <span class="timeago" data-date="2021-06-10 22:05:00 &#43;0000 UTC">2021-06-10 22:05:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve not much to say on the actual lib, it seems great! However, don’t feel compelled to put all your rust code into a single lib.rs. You can split your work into several files and use ‘pub use’ and ‘mod’ in lib.rs to re-export your functions &amp; types into a public API of your choosing.<p>cargo check and format time might also slightly improve!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ibraheemdev" target="_blank">ibraheemdev</a>   <span class="timeago" data-date="2021-06-11 03:45:27 &#43;0000 UTC">2021-06-11 03:45:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funny, I often say the opposite. Don&#x27;t feel compelled to split up your lib.rs. It&#x27;s really refreshing to see a nice, compact library in one or two files. Much easier to follow, especially over &quot;type per file&quot;. Of course, there are limits, but for a small lib like this, I personally would keep it in a single, or maybe two files.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dochtman" target="_blank">dochtman</a>   <span class="timeago" data-date="2021-06-11 04:50:48 &#43;0000 UTC">2021-06-11 04:50:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a fair bit of experience writing Rust code and the current status is totally deliberate. I find module file sizes of about 400-800 lines of code optimal in terms of my ability to find things vs the unnecessary complexity of having to skip around files when changing something that touches an API boundary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maeln" target="_blank">maeln</a>   <span class="timeago" data-date="2021-06-11 07:10:17 &#43;0000 UTC">2021-06-11 07:10:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This webpage use a significant amount of CPU <i>constantly</i> for no apparent reason (as far as I can see it is mostly a static webpage). What the hell ? Is it mining crypto in the background ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beau" target="_blank">beau</a>   <span class="timeago" data-date="2021-06-11 14:42:04 &#43;0000 UTC">2021-06-11 14:42:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, this page had a useEffect&#x2F;setState render loop. We are running react@experimental with concurrent mode, and missed the error. Rolling out a fix now. Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maybevain" target="_blank">maybevain</a>   <span class="timeago" data-date="2021-06-11 08:18:51 &#43;0000 UTC">2021-06-11 08:18:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At a quick glance it seems like some React component is constantly re-rending.<p>Quick glance in this case: took a couple second snapshot on the Performance tab and saw a lot of React related calls.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chakkepolja" target="_blank">chakkepolja</a>   <span class="timeago" data-date="2021-06-11 07:24:45 &#43;0000 UTC">2021-06-11 07:24:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compiling rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=denysvitali" target="_blank">denysvitali</a>   <span class="timeago" data-date="2021-06-10 21:52:52 &#43;0000 UTC">2021-06-10 21:52:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For example, here are the results of translating the English word &quot;hello&quot;:<p>&gt; Language: fr, Translation: bonjours<p>&gt; Language: fr, Translation: bonsoir<p>&gt; Language: fr, Translation: salutations<p>&gt; Language: it, Translation: buongiorno<p>&gt; Language: it, Translation: buonanotte<p>&gt; Language: fr, Translation: rebonjour<p>&gt; Language: it, Translation: auguri<p>&gt; Language: fr, Translation: bonjour,<p>&gt; Language: it, Translation: buonasera<p>&gt; Language: it, Translation: chiamatemi<p>Is it just me or these machine translations are worse than ... Google Translate?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beau" target="_blank">beau</a>   <span class="timeago" data-date="2021-06-10 23:00:07 &#43;0000 UTC">2021-06-10 23:00:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These results are less accurate than Google Translate. But they are far faster to get, and far less expensive to generate: <a href="https:&#x2F;&#x2F;cloud.google.com&#x2F;translate&#x2F;pricing" rel="nofollow">https:&#x2F;&#x2F;cloud.google.com&#x2F;translate&#x2F;pricing</a> — our goal is here is speed. We want to search through many possibilities as quickly as possible.<p>The word vectors have been aligned in multiple languages. Using an approximate nearest neighbor search we are able to find the nearest vector to the input in multiple languages very quickly.<p>To keep the example simple, we did not try to filter the data through hand-built language dictionaries. In fact, we simply drop words in other languages that also appear in the English .vec file. Words like &quot;ciao&quot; appear frequently enough in otherwise English sentences that the example code drops it from Italian, and so is not shown in the results:<p>% curl -s &quot;<a href="https:&#x2F;&#x2F;dl.fbaipublicfiles.com&#x2F;fasttext&#x2F;vectors-aligned&#x2F;wiki.en.align.vec" rel="nofollow">https:&#x2F;&#x2F;dl.fbaipublicfiles.com&#x2F;fasttext&#x2F;vectors-aligned&#x2F;wiki...</a>&quot; | grep -n ciao
+50393:ciao 0.0120 ...<p>One improvement would be to filter out any words that do not appear in a hand-curated dictionary instead of filtering out words that already appear in English. We decided not to show how to do this because we&#x27;d already introduced a few concepts, like aligned word vectors, approximate nearest neighbour searches, and wanted to keep the example as simple as possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-06-10 21:54:34 &#43;0000 UTC">2021-06-10 21:54:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google Translate is state of the art, so I’m not sure why that would be surprising. That said, is there something wrong with the translations offered?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shakow" target="_blank">shakow</a>   <span class="timeago" data-date="2021-06-10 23:09:51 &#43;0000 UTC">2021-06-10 23:09:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Google Translate is state of the art<p>For French&#x2F;English&#x2F;German, DeepL is much better IME.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-06-10 22:02:25 &#43;0000 UTC">2021-06-10 22:02:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; That said, is there something wrong with the translations offered?<p>I think in French hello = &quot;bonjour&quot; and hi = &quot;salut&quot;... not sure where &quot;bonjours&quot; and &quot;salutations&quot; came from.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=T-A" target="_blank">T-A</a>   <span class="timeago" data-date="2021-06-10 22:15:28 &#43;0000 UTC">2021-06-10 22:15:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Italian &quot;auguri&quot; means &quot;best wishes&quot;; &quot;chiamatemi&quot; means &quot;call me&quot;. Neither is a plausible translation of &quot;hello&quot;. The obvious one, &quot;ciao&quot;, is missing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=e17" target="_blank">e17</a>   <span class="timeago" data-date="2021-06-11 09:17:43 &#43;0000 UTC">2021-06-11 09:17:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought Hello was invented with the telephone. Prior to that, English greetings were good morning&#x2F;evening. What do Italians and French say when they pick up the phone? Allora?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shakow" target="_blank">shakow</a>   <span class="timeago" data-date="2021-06-10 23:11:18 &#43;0000 UTC">2021-06-10 23:11:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Bonjours&quot; doesn&#x27;t exist, and &quot;salutations&quot; is a tad quirky, but OK in informal settings, especially when addressing many people at once.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tasogare" target="_blank">tasogare</a>   <span class="timeago" data-date="2021-06-11 00:13:05 &#43;0000 UTC">2021-06-11 00:13:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, <i>bonjours</i> exists (it&#x27;s simply the plural form of bonjour used as a noun) but the contexts it is used are very very infrequent so it&#x27;s weird to find it in that list.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=a1369209993" target="_blank">a1369209993</a>   <span class="timeago" data-date="2021-06-11 01:11:32 &#43;0000 UTC">2021-06-11 01:11:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compare &quot;I said my hellos and goodbyes.&quot; in English. It&#x27;s definitely a word, just so uncommon as to be largely irrelevant in most practical contexts.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-06-11 10:17:27 &#43;0000 UTC">2021-06-11 10:17:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s very clearly semantically related though? I don&#x27;t understand the complaint here.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=numpad0" target="_blank">numpad0</a>   <span class="timeago" data-date="2021-06-11 05:51:10 &#43;0000 UTC">2021-06-11 05:51:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems to be a very <i>domain specific</i> solution, they are trying to present versions of words in customer requested domain names if already taken.<p>Like you type in “stargazer. com”, system sees it’s already registered, and returns a “sorry sir it’s taken” page, with similar words listed as “but maybe try these words: astronomer, observatory, telescope, shooting star...”.<p>So it’s not serious translation, more of an inexpensive quick dictionary search. I guess it’s okay for its intended purposes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ampdepolymerase" target="_blank">ampdepolymerase</a>   <span class="timeago" data-date="2021-06-10 22:23:01 &#43;0000 UTC">2021-06-10 22:23:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be better to run the vectors through an attention layer if you want sentence to sentence translation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-11 04:14:27 &#43;0000 UTC">2021-06-11 04:14:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was disappointed this can&#x27;t translate from Python to Rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dukeofdoom" target="_blank">dukeofdoom</a>   <span class="timeago" data-date="2021-06-11 01:28:11 &#43;0000 UTC">2021-06-11 01:28:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can something like this be done to compare&#x2F;translate subsequences COVID genetic code to SARS and other virus genetic codes. Would be interesting how much overlap there is. And would further the research into where it came from.<p>Full genome of COVID-19 is available:<p><a href="https:&#x2F;&#x2F;www.snapgene.com&#x2F;resources&#x2F;coronavirus-resources&#x2F;?resource=SARS-CoV-2_(COVID-19)_Genome" rel="nofollow">https:&#x2F;&#x2F;www.snapgene.com&#x2F;resources&#x2F;coronavirus-resources&#x2F;?re...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nestorD" target="_blank">nestorD</a>   <span class="timeago" data-date="2021-06-11 05:43:18 &#43;0000 UTC">2021-06-11 05:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bioinformaticists have been able to do that with traditional algorithms for years (dynamic programming gets you a long way to compute an edit distance for example).<p>It is probably the first thing that was done once the COVID-19 genome was made public. A quick googling gave me that summary of the results: <a href="https:&#x2F;&#x2F;www.news-medical.net&#x2F;health&#x2F;How-Does-the-SARS-Virus-Genome-Compare-to-Other-Viruses.aspx" rel="nofollow">https:&#x2F;&#x2F;www.news-medical.net&#x2F;health&#x2F;How-Does-the-SARS-Virus-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dukeofdoom" target="_blank">dukeofdoom</a>   <span class="timeago" data-date="2021-06-11 12:13:08 &#43;0000 UTC">2021-06-11 12:13:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great article, thank you
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattkrause" target="_blank">mattkrause</a>   <span class="timeago" data-date="2021-06-11 14:08:52 &#43;0000 UTC">2021-06-11 14:08:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It sounds like you&#x27;re thinking of &quot;sequence alignment&quot;, which is a pretty standard bioinformatics tool.<p>BLAST (=Basic Local Alignment Search Tool) is one common version, and the NIH&#x27;S NCBI has a variety of nice online tools here: <a href="https:&#x2F;&#x2F;blast.ncbi.nlm.nih.gov&#x2F;Blast.cgi" rel="nofollow">https:&#x2F;&#x2F;blast.ncbi.nlm.nih.gov&#x2F;Blast.cgi</a><p>Note that it does take a little bit of background knowledge to interpret:some motifs are just really common, others are shared.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PaulHoule" target="_blank">PaulHoule</a>   <span class="timeago" data-date="2021-06-10 20:38:26 &#43;0000 UTC">2021-06-10 20:38:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice example.<p>The short text and that fact that your application would tolerate or celebrate catchy neologisms plays to fasttext&#x27;s strengths.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beau" target="_blank">beau</a>   <span class="timeago" data-date="2021-06-10 20:59:42 &#43;0000 UTC">2021-06-10 20:59:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-10 21:43:45 &#43;0000 UTC">2021-06-10 21:43:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shakow" target="_blank">shakow</a>   <span class="timeago" data-date="2021-06-10 23:12:12 &#43;0000 UTC">2021-06-10 23:12:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; fast translates to vite in French<p>Only as an adverb, it should be &quot;rapide&quot; otherwise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-10 20:39:29 &#43;0000 UTC">2021-06-10 20:39:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aitk" target="_blank">aitk</a>   <span class="timeago" data-date="2021-06-10 22:18:32 &#43;0000 UTC">2021-06-10 22:18:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At first glance at the title, I thought it was translating Python code to Rust code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adsharma" target="_blank">adsharma</a>   <span class="timeago" data-date="2021-06-10 23:42:10 &#43;0000 UTC">2021-06-10 23:42:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It may not be a bad candidate for writing the rust part in python and then running it through py2many to generate the rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

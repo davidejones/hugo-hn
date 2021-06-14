@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/linearmouse-a-minimal-app-to-get-rid-of-scrolling-acceleration-on-macos/">
+
+
+    <title>LinearMouse – A minimal app to get rid of scrolling acceleration on macOS - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="LinearMouse – A minimal app to get rid of scrolling acceleration on macOS - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/linearmouse-a-minimal-app-to-get-rid-of-scrolling-acceleration-on-macos/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/linearmouse-a-minimal-app-to-get-rid-of-scrolling-acceleration-on-macos/">
+<meta name="twitter:title" content="LinearMouse – A minimal app to get rid of scrolling acceleration on macOS - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "LinearMouse – A minimal app to get rid of scrolling acceleration on macOS - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T15:16:27JST",
+    "dateModified": "2021-06-12T15:16:27JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://linearmouse.lujjjh.com/">LinearMouse – A minimal app to get rid of scrolling acceleration on macOS</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=albertzeyer" target="_blank">albertzeyer</a>   <span class="timeago" data-date="2021-06-12 23:11:00 &#43;0000 UTC">2021-06-12 23:11:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funny: I implemented the opposite: A minimal app to increase the scroll acceleration, and also enable scroll acceleration on Linux and Windows.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;albertz&#x2F;mouse-scroll-wheel-acceleration-userspace" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;albertz&#x2F;mouse-scroll-wheel-acceleration-u...</a><p>I really missed scroll acceleration when switching over from Mac to Linux. Scrolling long web pages or big source code files was so annoying. And just increasing the scroll speed is also not useful, as I still want to have the possibility to only scroll a little bit (pixel by pixel) when I want to. So I really want the dynamic acceleration.<p>This simple tool just implements that in user space, by injecting further scroll events.<p>Later I tested it also on Mac, where it would just increase the acceleration. And after getting used to it, I really like the increased acceleration.<p>There is also a long discussion for libinput on adding mouse wheel acceleration: <a href="https:&#x2F;&#x2F;gitlab.freedesktop.org&#x2F;libinput&#x2F;libinput&#x2F;-&#x2F;issues&#x2F;7" rel="nofollow">https:&#x2F;&#x2F;gitlab.freedesktop.org&#x2F;libinput&#x2F;libinput&#x2F;-&#x2F;issues&#x2F;7</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rbreaves" target="_blank">rbreaves</a>   <span class="timeago" data-date="2021-06-13 01:13:02 &#43;0000 UTC">2021-06-13 01:13:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am actually not often bothered by the scroll of a wheel or touchpad on any OS, but I do often need to crank things up on all of them, especially on Windows. I need sensitivity.<p>I am also the author of <a href="https:&#x2F;&#x2F;kinto.sh" rel="nofollow">https:&#x2F;&#x2F;kinto.sh</a> so if you want some good mac style keybinds it&#x27;ll have you covered.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atoav" target="_blank">atoav</a>   <span class="timeago" data-date="2021-06-13 12:29:06 &#43;0000 UTC">2021-06-13 12:29:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a scroll wheel with a fly wheel so I just push it hard and break it once I am there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ribs" target="_blank">ribs</a>   <span class="timeago" data-date="2021-06-12 18:43:37 &#43;0000 UTC">2021-06-12 18:43:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve always considered Apple’s scrolling acceleration to be among its most important features. For, like, 30 years. Since the Mac debuted. But I suppose I shouldn’t be surprised that someone out there wants to disable it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gruez" target="_blank">gruez</a>   <span class="timeago" data-date="2021-06-13 00:49:50 &#43;0000 UTC">2021-06-13 00:49:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Last time I used a mac with a scroll wheel mouse, I found the scroll acceleration to be rage inducing. If I was slowly turning the wheel (eg. reading through an article), it would scroll one or two lines on the screen, or maybe nothing at all. If I scrolled faster the speed would ramp up and cause me to scroll past half the page. All the muscle memory I had from linear scroll wheels (ie. windows&#x2F;linux) was basically useless. Maybe macs weren&#x27;t supposed to be used with clicky scroll wheels, or that mac users can somehow get used to it, but I doubt anyone coming from windows&#x2F;linux could get used to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=monkpit" target="_blank">monkpit</a>   <span class="timeago" data-date="2021-06-13 01:11:18 &#43;0000 UTC">2021-06-13 01:11:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It feels natural if you’re using Mac hardware, like a Magic Mouse or the trackpad.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gruez" target="_blank">gruez</a>   <span class="timeago" data-date="2021-06-13 02:05:04 &#43;0000 UTC">2021-06-13 02:05:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            maybe my muscle memory is different for touchpads, but the difference between scrollwheel on mac vs windows is significantly more jarring than touchpad on mac vs windows.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jkcxn" target="_blank">jkcxn</a>   <span class="timeago" data-date="2021-06-13 01:43:26 &#43;0000 UTC">2021-06-13 01:43:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Were you using firefox by any chance? I get this on firefox after switching from chrome and its so annoying. no idea how to turn it off. every other scrollview in osx works fine but mozilla must have made changes to it
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=akiselev" target="_blank">akiselev</a>   <span class="timeago" data-date="2021-06-13 02:25:58 &#43;0000 UTC">2021-06-13 02:25:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe the settings you&#x27;re looking for are documented here [1] (go to url `about:config`)<p>[1] <a href="https:&#x2F;&#x2F;wiki.mozilla.org&#x2F;Firefox&#x2F;Projects&#x2F;AcceleratedScrolling#Design:_Acceleration_Model_for_Scrolling" rel="nofollow">https:&#x2F;&#x2F;wiki.mozilla.org&#x2F;Firefox&#x2F;Projects&#x2F;AcceleratedScrolli...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gruez" target="_blank">gruez</a>   <span class="timeago" data-date="2021-06-13 02:05:51 &#43;0000 UTC">2021-06-13 02:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s been a while since I last used a mouse on a mac, but it definitely wasn&#x27;t limited to a single app.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lilyball" target="_blank">lilyball</a>   <span class="timeago" data-date="2021-06-13 01:13:15 &#43;0000 UTC">2021-06-13 01:13:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could your mouse have had built-in scroll acceleration?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gruez" target="_blank">gruez</a>   <span class="timeago" data-date="2021-06-13 02:01:11 &#43;0000 UTC">2021-06-13 02:01:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a logitech mouse, and works expected on windows. Also, I&#x27;ve never encountered a mouse with scroll acceleration, all of them scroll the same amount of lines per &quot;click&quot;, regardless of how fast you turn the wheel.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vladvasiliu" target="_blank">vladvasiliu</a>   <span class="timeago" data-date="2021-06-13 07:54:00 &#43;0000 UTC">2021-06-13 07:54:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some Logitech models (possibly not all) have a &quot;high resolution&quot; scroll wheel which reports events differently. Out of the box it&#x27;s off, but it can be enabled on windows with the provided software. Not sure if windows by itself can enable it. I&#x27;m also not sure what the situation is on the mac.<p>A quick search didn&#x27;t yield any interesting info on this, it&#x27;s mostly articles about its support on linux (spoiler: it&#x27;s been deactivated).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-06-13 04:48:47 &#43;0000 UTC">2021-06-13 04:48:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s great for touch-based scrolling, it&#x27;s terrible for a clicky wheel
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fartcannon" target="_blank">fartcannon</a>   <span class="timeago" data-date="2021-06-12 19:26:30 &#43;0000 UTC">2021-06-12 19:26:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like it for some things and not for others.<p>I like choice.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deagle50" target="_blank">deagle50</a>   <span class="timeago" data-date="2021-06-12 16:30:08 &#43;0000 UTC">2021-06-12 16:30:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is great. Scroll Reverser + scroll acceleration fix in one app. If you can also figure out cursor acceleration, you&#x27;ll have a hit. The only app that correctly disables cursor acceleration is SteelSeries ExactMouse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akhuchdy" target="_blank">akhuchdy</a>   <span class="timeago" data-date="2021-06-12 18:25:17 &#43;0000 UTC">2021-06-12 18:25:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1, I&#x27;ve also been using the paid Mac app Smooze (smooze.co) to get smooth mousewheel scrolling animation like I get on Linux and Windows out-of-the-box when web browsing and so forth because I haven&#x27;t found a free app that can do this.<p>And while we&#x27;re talking about the effort needed to get sane mouse behavior for serious CAD&#x2F;3D editing&#x2F;art&#x2F;gaming, it is way too hard to reliably disable cursor acceleration on Linux. There are at least three different X11 mouse drivers on Ubuntu: the really old one, the evdev one, and the newest libinput one. (I don&#x27;t even know what you have to do for Wayland... never got there....) So if you web search &quot;disable mouse accel linux&quot; you likely get the wrong directions (at least I did) because you might be using the libinput driver and the instructions you found are for evdev. One unreliable method I tried involves setting a matrix. This at first works and then you eventually discover some apps like Blender develop cursor jump bugs....<p>So the reliable method is....<p>If using libinput mouse driver you do something like this:<p>$ xinput --set-prop &#x27;Cooler Master Technology Inc. MM710 Gaming Mouse&#x27; &#x27;libinput Accel Profile Enabled&#x27; 0, 1<p>If using evdev mouse driver you do something like this:<p>$ xinput --set-prop &#x27;pointer:Cooler Master Technology Inc. MM710 Gaming Mouse&#x27; &#x27;Device Accel Profile&#x27; -1<p>To figure out your mouse name string like the MM710 example I used above you do this:<p>$ xinput --list<p>The number of tweaks I&#x27;ve needed to research and implement for both Mac and Linux are one reason I&#x27;m now currently using Windows + WSL for getting stuff done. I want to solve computer science problems more interesting than configuring my mouse and my window manager vsync tearing &#x2F; compositor issues....
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 18:46:41 &#43;0000 UTC">2021-06-12 18:46:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thankfully, KDE and Gnome have both added easy settings menus that allow you to toggle this. Not sure how recently it was added, but it sure is a nice addition now that Linux is starting to break into the gaming space, where disabling mouse acceleration is one of the first things you&#x27;ll probably end up doing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jtth" target="_blank">jtth</a>   <span class="timeago" data-date="2021-06-12 17:05:05 &#43;0000 UTC">2021-06-12 17:05:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SteerMouse does this just fine, and has for years and years. I can&#x27;t use a Mac without it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=deagle50" target="_blank">deagle50</a>   <span class="timeago" data-date="2021-06-12 17:32:37 &#43;0000 UTC">2021-06-12 17:32:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I tried SteerMouse in the past and it didn&#x27;t feel right. ExactMouse feels like Windows.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lujjjh" target="_blank">lujjjh</a>   <span class="timeago" data-date="2021-06-13 11:32:41 &#43;0000 UTC">2021-06-13 11:32:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for your suggestion. I&#x27;ve released a new version which could disable cursor acceleration as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Twixes" target="_blank">Twixes</a>   <span class="timeago" data-date="2021-06-12 17:02:23 &#43;0000 UTC">2021-06-12 17:02:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1, ExactMouse is a must for me as a macOS non-Magic mouse user. Would love for this tool to replace SteelSeries&#x27;s app too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rosstex" target="_blank">rosstex</a>   <span class="timeago" data-date="2021-06-12 16:46:34 &#43;0000 UTC">2021-06-12 16:46:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Explain this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deagle50" target="_blank">deagle50</a>   <span class="timeago" data-date="2021-06-12 16:50:29 &#43;0000 UTC">2021-06-12 16:50:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which part?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rosstex" target="_blank">rosstex</a>   <span class="timeago" data-date="2021-06-12 17:37:05 &#43;0000 UTC">2021-06-12 17:37:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh sorry, I misread this! Nevermind.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=burlesona" target="_blank">burlesona</a>   <span class="timeago" data-date="2021-06-12 17:59:39 &#43;0000 UTC">2021-06-12 17:59:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting. I like scrolling acceleration  and miss it when using other platforms. I agree it should be a system setting, though. Silly that we need apps for this and for having the mouse and trackpad scrolling to be different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jzelinskie" target="_blank">jzelinskie</a>   <span class="timeago" data-date="2021-06-12 17:08:55 &#43;0000 UTC">2021-06-12 17:08:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using Mos[0] for this. Don&#x27;t be scared away by the language in the README, it supports an English UI.<p>[0]: <a href="https:&#x2F;&#x2F;github.com&#x2F;Caldis&#x2F;Mos" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Caldis&#x2F;Mos</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eyelidlessness" target="_blank">eyelidlessness</a>   <span class="timeago" data-date="2021-06-12 17:41:13 &#43;0000 UTC">2021-06-12 17:41:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The website[0] has English copy. Unfortunately on mobile the screenshots are cropped in a way I still can’t tell what it does<p>0: <a href="https:&#x2F;&#x2F;mos.caldis.me&#x2F;" rel="nofollow">https:&#x2F;&#x2F;mos.caldis.me&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Shank" target="_blank">Shank</a>   <span class="timeago" data-date="2021-06-12 17:43:28 &#43;0000 UTC">2021-06-12 17:43:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you know how this compares to the aforementioned SteelSeries ExactMouse Tool?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toomanyducks" target="_blank">toomanyducks</a>   <span class="timeago" data-date="2021-06-12 18:51:47 &#43;0000 UTC">2021-06-12 18:51:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So it takes a dedicated app to adjust mouse acceleration curves? Is this an accurate reflection of the platform as a whole?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-12 19:03:02 &#43;0000 UTC">2021-06-12 19:03:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is in general to be used as designed rather than configured, yes. I don’t think I change any configuration options at all in macOS for example - not even the wallpaper.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jare" target="_blank">Jare</a>   <span class="timeago" data-date="2021-06-12 16:59:39 &#43;0000 UTC">2021-06-12 16:59:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have to try this. I already have a reverser (how on earth is this not the default, and not even an OS option to begin with?!?) but scrolling with the wheel on a usb mouse jumps randomly. Crossing fingers this may help there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jagger27" target="_blank">jagger27</a>   <span class="timeago" data-date="2021-06-12 17:45:51 &#43;0000 UTC">2021-06-12 17:45:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You have always been able to reverse the scroll direction in the Mouse&#x2F;Trackpad options. It’s a checkbox that says “Scroll direction: Natural”.<p>As for your jumping issue that sounds like a hardware problem. It might just be that your mouse wheel is dirty.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jare" target="_blank">Jare</a>   <span class="timeago" data-date="2021-06-12 20:36:50 &#43;0000 UTC">2021-06-12 20:36:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can reverse on both or neither, but not for just one. That&#x27;s why there&#x27;s 3rd party software like this one.<p>Scroll jumping should be a hardware issue but I&#x27;ve swapped mice and same issue; both also work fine on windows. It could be the USB hub, I&#x27;ve still to try something with that, but it sounds... unlikely.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vladvasiliu" target="_blank">vladvasiliu</a>   <span class="timeago" data-date="2021-06-13 08:02:21 &#43;0000 UTC">2021-06-13 08:02:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You have always been able to reverse the scroll direction in the Mouse&#x2F;Trackpad options. It’s a checkbox that says “Scroll direction: Natural”.<p>Yes, but, for some reason, changing this to the old direction breaks the volume &#x2F; backlight in the menu drop-down panel.<p>Which is clearly a bug because:<p>Scrolling up &#x2F; down always changes the volume the same way: down is lower.<p>But if &quot;natural&quot; is unchecked (so scrolling down moves content up) then scrolling left moves the volume control to the right. If &quot;natural&quot; is checked, then scrolling left moves the control to the left.<p>This behaviour has been broken at least since they introduced the horizontal volume panel, not sure which version that was. Not sure how it worked before, because it had never occurred to me to scroll sideways on a vertical control.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawayboise" target="_blank">throwawayboise</a>   <span class="timeago" data-date="2021-06-12 18:43:35 &#43;0000 UTC">2021-06-12 18:43:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s struck me as peculiar but with a trackpad or a mouse the &quot;drag down to move screen content up&quot; feels natural, but on a touch-screen, phone, or tablet it&#x27;s the opposite. So on a Mac I always have to change the default trackpad preference.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pimlottc" target="_blank">pimlottc</a>   <span class="timeago" data-date="2021-06-13 01:51:35 &#43;0000 UTC">2021-06-13 01:51:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it makes sense for touchscreen scrolling to work the way it does, but for mouse, I don’t think either way is really more natural, it’s just what you’re used to. I used the “old” way in Windows and Linux for years, but it was pretty easy to “relearn” when I switched to Mac.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jare" target="_blank">Jare</a>   <span class="timeago" data-date="2021-06-13 07:05:44 &#43;0000 UTC">2021-06-13 07:05:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me, relearning the scroll direction on the touchpad was trivial, however on the wheel it just never worked at all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=joshstrange" target="_blank">joshstrange</a>   <span class="timeago" data-date="2021-06-12 18:29:33 &#43;0000 UTC">2021-06-12 18:29:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For smoother scrolling with a non-Apple mouse&#x2F;trackpad you might want to look at Smooze [0], it&#x27;s what I use for my logitech mouse. That said, it&#x27;s paid and it looks like Moz [1] claims to fix smooth scrolling so maybe check that out too.<p>[0] <a href="https:&#x2F;&#x2F;smooze.co&#x2F;" rel="nofollow">https:&#x2F;&#x2F;smooze.co&#x2F;</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;Caldis&#x2F;Mos" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Caldis&#x2F;Mos</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=baxuz" target="_blank">baxuz</a>   <span class="timeago" data-date="2021-06-13 09:40:30 &#43;0000 UTC">2021-06-13 09:40:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using SteerMouse to disable scrolling acceleration, which is absolutely atrocious on a Logitech mouse with hyperscroll.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=satya71" target="_blank">satya71</a>   <span class="timeago" data-date="2021-06-13 03:22:01 &#43;0000 UTC">2021-06-13 03:22:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I want an app to disable mouse acceleration altogether (not just scrolling) in macOS. The  mouse acceleration on macOS is just bonkers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-06-12 17:51:33 &#43;0000 UTC">2021-06-12 17:51:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since the discussion is about making MacOS more usable, do you have something to recommend to switch between windows and not applications using command+tab, and to have a dock that shows all the windows easily, grouped per application. Because the default MacOS windows manager is really crappy when you have more than one window of the same application.<p>I would also enjoy a maximize button that does maximize the window and not create a virtual space with the application in full-screen.<p>I think people at Apple should probably use windows 10 for a few days on a dual screen setup, because MacOS is not very good compared to it. Thankfully it looks like a lot of people produce tools to make it better.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Angostura" target="_blank">Angostura</a>   <span class="timeago" data-date="2021-06-12 18:15:56 &#43;0000 UTC">2021-06-12 18:15:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; ince the discussion is about making MacOS more usable, do you have something to recommend to switch between windows and not applications<p>Command + ` does that.<p>&gt; and to have a dock that shows all the windows easily, grouped per application.<p>Does Exposé not work for you? F3 by default, I think?<p>&gt; I would also enjoy a maximize button that does maximize the window and not create a virtual space with the application in full-screen.<p>You might want to try opt-clicking the window maximise button. This maximise window size, in context of the content. May not always be full screen, but as big as the content needs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-06-12 18:27:29 &#43;0000 UTC">2021-06-12 18:27:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t command + ` switching between windows of the same application?<p>Exposé is not the same no.<p>The option click algorithm that decide how big the window should be hasn&#x27;t impressed me to say the least.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fatboy" target="_blank">fatboy</a>   <span class="timeago" data-date="2021-06-12 18:48:38 &#43;0000 UTC">2021-06-12 18:48:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree the window maximising is frustrating in macOS. I use what used to be Spectacle and is now Rectangle to bind a &quot;real&quot; fullscreeen commmand to a key combo.<p>The way the default behaviour creates a new space makes me think that no one in Cupertino uses a second monitor because that behaviour simply does not work if you do.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=monkpit" target="_blank">monkpit</a>   <span class="timeago" data-date="2021-06-13 01:14:49 &#43;0000 UTC">2021-06-13 01:14:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just downloaded Spectacle a few days ago. Should I be using Rectangle?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fatboy" target="_blank">fatboy</a>   <span class="timeago" data-date="2021-06-13 09:23:48 &#43;0000 UTC">2021-06-13 09:23:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe that&#x27;s the case yes, although I only learned of it the other day and haven&#x27;t got round to switching yet.<p>Spectacle is now unsupported and Rectangle is a community fork.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brumm" target="_blank">brumm</a>   <span class="timeago" data-date="2021-06-12 18:08:02 &#43;0000 UTC">2021-06-12 18:08:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;manytricks.com&#x2F;witch&#x2F;" rel="nofollow">https:&#x2F;&#x2F;manytricks.com&#x2F;witch&#x2F;</a> may be exactly what you&#x27;re looking for
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-06-12 18:25:21 &#43;0000 UTC">2021-06-12 18:25:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks. I will try this one too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joombaga" target="_blank">joombaga</a>   <span class="timeago" data-date="2021-06-12 18:03:19 &#43;0000 UTC">2021-06-12 18:03:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Contexts is a good cmd+tab replacement&#x2F;supplement. You can try it for free.<p><a href="https:&#x2F;&#x2F;contexts.co&#x2F;" rel="nofollow">https:&#x2F;&#x2F;contexts.co&#x2F;</a><p>Hold option while clicking maximize and the window will do what you want.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-06-12 18:23:21 &#43;0000 UTC">2021-06-12 18:23:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Contexts looks like an improvement. It&#x27;s still missing the window previews though.<p>I had mixed results with the option key pressed while clicking maximize, some apps such as safari gets slightly bigger by a random amount that is probably a failed tentative to guess the optimal size.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TooKool4This" target="_blank">TooKool4This</a>   <span class="timeago" data-date="2021-06-12 18:27:53 &#43;0000 UTC">2021-06-12 18:27:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I would also enjoy a maximize button that does maximize the window and not create a virtual space with the application in full-screen.<p>This was the biggest thing that annoyed me when switching from Windows. I’ve been using SizeUp for 5 years now without any problem and it’s great, especially when using a 4K screen (quarter screen window tiles).<p><a href="https:&#x2F;&#x2F;www.irradiatedsoftware.com&#x2F;sizeup&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.irradiatedsoftware.com&#x2F;sizeup&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmole" target="_blank">jmole</a>   <span class="timeago" data-date="2021-06-12 17:56:56 &#43;0000 UTC">2021-06-12 17:56:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Command ` (or Command ~) switches between app windows.<p>You can also use exposé, recently renamed to mission control to view all app windows.<p>It looks like the default key binding for application windows is Control-↑ and for all windows is Control-↓<p>edit: you can also bind these to mouse buttons in system preferences.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-06-12 18:24:46 &#43;0000 UTC">2021-06-12 18:24:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks. I should try to rebind the shortcuts to make mission control a bit more convenient to use. I have it in a hot corner, but this is useless on dual screen. Maybe a button on the mouse will be better.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggrelet" target="_blank">ggrelet</a>   <span class="timeago" data-date="2021-06-13 08:04:13 &#43;0000 UTC">2021-06-13 08:04:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’d recommend alt-tab-macos [0]. It’s FOSS!<p>[0] <a href="https:&#x2F;&#x2F;alt-tab-macos.netlify.app&#x2F;" rel="nofollow">https:&#x2F;&#x2F;alt-tab-macos.netlify.app&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 18:19:04 &#43;0000 UTC">2021-06-12 18:19:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is one of the reasons I ended up using Linux, it&#x27;s nice to see that current Mac users don&#x27;t have to suffer with the asinine mouse controls anymore.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akhuchdy" target="_blank">akhuchdy</a>   <span class="timeago" data-date="2021-06-12 18:43:47 &#43;0000 UTC">2021-06-12 18:43:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is one of the reasons I ended up using Linux<p>This is one of the reasons I ended up ditching Linux for Windows+WSL.<p>Disabling mouse cursor acceleration under X11, for example, depends on which of at least three different X.org mouse drivers you are using (really old, evdev, or libinput). And web searches often turn up an unreliable or incorrect method. (Search this article&#x27;s comments for &quot;xinput&quot; to find more info I just typed up for another reply.)<p>And if you use a Logitech unifying receiver you need to research that the program you need is &#x27;solaar&#x27; to pair&#x2F;unpair your mouse under Linux.<p>And if your bluetooth mouse or keyboard goes to sleep too fast under Linux (5 seconds in my case) you might need to add this to your grub boot params (worked for me):<p>$ sudo vi &#x2F;etc&#x2F;default&#x2F;grub<p># Add btusb.enable_autosuspend=n to GRUB_CMDLINE_LINUX_DEFAULT<p>GRUB_CMDLINE_LINUX_DEFAULT=&quot;btusb.enable_autosuspend=n&quot;<p>Then:<p>$ sudo update-grub<p>The point is, researching all this hardware config stuff is time I could have been using to research more interesting computer science problems. I sure can get my printer working much faster under Windows than Linux....
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 19:01:55 &#43;0000 UTC">2021-06-12 19:01:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gnome and KDE offer options to fix this out of the box, and while that&#x27;s not a tacit approval of installing full-fat DEs on every system, I think the average user won&#x27;t have to worry about this unless they&#x27;re using a bare-bones WM on a stripped down compositor, at which point I&#x27;d argue their already well-versed enough in Linux-fu to know how to fix it.<p>That said though, I get it. I think the pervasive myth of &quot;the year of the Linux desktop&quot; riles people up into believing that Linux has finally &quot;Windows-ified&quot; itself, which it hasn&#x27;t.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oneplane" target="_blank">oneplane</a>   <span class="timeago" data-date="2021-06-12 18:38:41 &#43;0000 UTC">2021-06-12 18:38:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t get all the mouse hate. It works fine for me yet I&#x27;m not calling other&#x27;s mouse preferences asinine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 18:45:03 &#43;0000 UTC">2021-06-12 18:45:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wouldn&#x27;t be mad if it was a matter of preference, but Apple doesn&#x27;t give you the choice to disable acceleration. Across every device I&#x27;ve ever used (even Android phones), I&#x27;ve always been able to disable mouse acceleration. For most people who aren&#x27;t using a trackpad, it feels imprecise and terrible, and it absolutely doesn&#x27;t make sense in the age of the modern optical mouse.<p>I&#x27;m just tired of Apple refusing to add settings for the most basic options. I want to use MacOS, but Apple keeps removing features that I use religiously and refusing to extend their desktop in ways that compete with the rest of the market. Is it too much to ask them to spend some of their 2 trillion dollar valuation on adding a mouse menu?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=oneplane" target="_blank">oneplane</a>   <span class="timeago" data-date="2021-06-12 19:55:09 &#43;0000 UTC">2021-06-12 19:55:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use a mouse too. I&#x27;ve also started using trackpads more, but for the last 20 years it&#x27;s been mice in various incarnations (currently a razor deathadder elite), no problems so far. Had a steelseries before that, and a roccat before that, Logitech before that.<p>I suppose the difference is the religious use of a specific configuration. I usually use the same mouse (buy them 2 or 3 at a time) on Linux (Gnome 3 mostly) and Windows. No problems there either. All on mostly default settings, perhaps a little faster tracking speed but that&#x27;s about it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-12 20:30:22 &#43;0000 UTC">2021-06-12 20:30:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For most people who aren&#x27;t using a trackpad, it feels imprecise and terrible<p>Are you sure it&#x27;s for most people? Or just you and some people you know?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=machello13" target="_blank">machello13</a>   <span class="timeago" data-date="2021-06-12 23:10:05 &#43;0000 UTC">2021-06-12 23:10:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For most people who aren&#x27;t using a trackpad, it feels imprecise and terrible<p>Um, are you sure that isn’t because you’re not used to it? I find it feels that way when I’ve switched from Windows or Linux but you get used to it pretty quick.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sitzkrieg" target="_blank">sitzkrieg</a>   <span class="timeago" data-date="2021-06-12 17:04:19 &#43;0000 UTC">2021-06-12 17:04:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            isnt it kind of ridiculous that these apps have to exist because usable input isnt high on apple&#x27;s list? like paying fir window snapping is one thing, but non wacky input.. ugh
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=delgaudm" target="_blank">delgaudm</a>   <span class="timeago" data-date="2021-06-12 17:39:12 &#43;0000 UTC">2021-06-12 17:39:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+             Rectangle [0] is FOSS and may satisfy your window arranging needs.<p>[0] <a href="https:&#x2F;&#x2F;rectangleapp.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;rectangleapp.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 18:20:27 &#43;0000 UTC">2021-06-12 18:20:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the larger concern is that the world&#x27;s most valuable company can&#x27;t find the time to fix their window manager.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-12 19:06:25 &#43;0000 UTC">2021-06-12 19:06:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s not ‘broken’ just because it’s not quite designed as you’d like.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 21:33:11 &#43;0000 UTC">2021-06-12 21:33:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, would &quot;functionally inferior&quot; be a more suitable name for it? I&#x27;ve come to expect robust and fully-featured WMs from years of using Windows and Linux, it&#x27;s a bit funny to me that Apple has just given up in this respect.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-12 21:36:46 &#43;0000 UTC">2021-06-12 21:36:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lack of cruft and fuss <i>is</i> a feature though. And how&#x27;s it not &#x27;robust&#x27;?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 21:49:53 &#43;0000 UTC">2021-06-12 21:49:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lack of cruft is a feature on Linux boxes, where people care about running a lean machine. My Mac is a slow, hulking trash box that runs Telegram and slurps bandwidth through a swizzle-straw. I frankly don&#x27;t care about how little cruft my WM has when my system idles at 4 gigs of memory usage.<p>Apple needs a few things to make their WM competitive out of the box: 4&#x2F;6 corner tiling would probably be a good place to start: split-screen is useless. Hopefully they would have an auto-tile functionality like Yabai, Pop Shell or i3-gaps, since I&#x27;ve come to expect that on my high-res devices too. They should also copy Microsoft&#x27;s FancyZones, which let you quickly draft window presets to keep your screen divided the way you like it. Any of these would be welcome additions, because currently it feels like my Retina display is being put to waste with only two or three apps all fighting for attention.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-12 22:23:10 &#43;0000 UTC">2021-06-12 22:23:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They clearly don&#x27;t need this stuff and they clearly are competitive already, given their market share with developers. I&#x27;d hate to see Apple cram in all these wacky features you&#x27;re describing - I much prefer a simpler system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rustyemu" target="_blank">rustyemu</a>   <span class="timeago" data-date="2021-06-12 19:01:52 &#43;0000 UTC">2021-06-12 19:01:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not really broken, it&#x27;s just not meant for power users
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-06-12 21:39:53 &#43;0000 UTC">2021-06-12 21:39:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Broken might be a bit heavy-handed, but it&#x27;s not like I&#x27;m chiding some tiny mom-and-pop store for writing bad software. This is Apple, a company that has been developing their current operating system for nearly a decade. In that time, the closest their window manager got to a glow-up was the introduction of split-screen tiling. Pretty pathetic if you ask me, which is why I have to install Yabai on every godforsaken Mac I own. I&#x27;m not following them into the ARM transition if they don&#x27;t fix the basics of their OS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xodice" target="_blank">xodice</a>   <span class="timeago" data-date="2021-06-13 11:56:30 &#43;0000 UTC">2021-06-13 11:56:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            HID (be it my mouse or trackpad, on either my Mac mini or MacBook) input works excellent on my Mac&#x27;s.  Nothing wrong here.<p>Not working how <i>you</i> prefer it doesn&#x27;t make something unusable or broken...<p>BTW your supposed Mac mini has serious hardware problems, get that thing RMA&#x27;d ASAP!  And man, why did you not RMA your MacBook Pro you bought a few years ago?? It was also just as broke!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ephimetheus" target="_blank">ephimetheus</a>   <span class="timeago" data-date="2021-06-12 20:47:39 &#43;0000 UTC">2021-06-12 20:47:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean you find it ridiculous that you need extra software to make macOS input bad?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 17:28:20 &#43;0000 UTC">2021-06-12 17:28:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

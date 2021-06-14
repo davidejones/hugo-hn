@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/the-mounting-cost-of-stale-ad-blocking-rules-2018/">
+
+
+    <title>The mounting cost of stale ad blocking rules (2018) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="The mounting cost of stale ad blocking rules (2018) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/the-mounting-cost-of-stale-ad-blocking-rules-2018/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/the-mounting-cost-of-stale-ad-blocking-rules-2018/">
+<meta name="twitter:title" content="The mounting cost of stale ad blocking rules (2018) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "The mounting cost of stale ad blocking rules (2018) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T18:13:46JST",
+    "dateModified": "2021-06-13T18:13:46JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://brave.com/the-mounting-cost-of-stale-ad-blocking-rules/">The mounting cost of stale ad blocking rules (2018)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pmoriarty" target="_blank">pmoriarty</a>   <span class="timeago" data-date="2021-06-13 21:35:37 &#43;0000 UTC">2021-06-13 21:35:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&quot;... we applied EasyList to both the Alexa 5k, a curated list of the 5,000 most popular sites on the web, and a random sampling of 5,000 sites from the Alexa 1,000,000 (ensuring no duplicate sites). Our measurement was in several steps:</i><p><i>1. Use Selenium and the DevTools Protocol to record every URL requested when rendering and executing a website.</i><p><i>2. Add additional automation to randomly select three distinct same-domain URLs from anchor tags on a page.</i><p><i>3. Used the above automation to visit the homepage of each site, and a maximum of three child pages, and recorded all URLs requested for images, script files, and other web resources.</i><p><i>4. Determine which of those URLs would be blocked by the version of EasyList fetched on that day, using Brave&#x27;s optimized ad-block implementation.</i><p>...<p><i>We found that the vast majority of EasyList rules are not used when browsing popular websites; 3,268 of 39,198 (~8%) of network and exception rules were used during our crawls (these measurements exclude element rules).&quot;</i><p>That doesn&#x27;t mean that EasyList is not useful for browsing the rest of the internet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seoaeu" target="_blank">seoaeu</a>   <span class="timeago" data-date="2021-06-13 22:00:33 &#43;0000 UTC">2021-06-13 22:00:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, there are likely statistical methods you could use to estimate the number of stale rules, but &quot;try the top 5000 and ~0.5% of the rest&quot; isn&#x27;t that
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LetsNotBeCunts" target="_blank">LetsNotBeCunts</a>   <span class="timeago" data-date="2021-06-14 02:06:29 &#43;0000 UTC">2021-06-14 02:06:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Exactamundo bundo! It a solved problem to toss the bottom 10% of unused. Que es la problama?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IgorPartola" target="_blank">IgorPartola</a>   <span class="timeago" data-date="2021-06-14 03:09:12 &#43;0000 UTC">2021-06-14 03:09:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also 8% of the rules could block like 99% of web traffic. But also notice the part where they went to 1m random sites too. That would be a sample from the rest of the Internet.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gorhill" target="_blank">gorhill</a>   <span class="timeago" data-date="2021-06-13 22:26:28 &#43;0000 UTC">2021-06-13 22:26:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Much work has been done since this article came out to remove stale filters, see:<p><a href="https:&#x2F;&#x2F;twitter.com&#x2F;fanboynz&#x2F;status&#x2F;1344796683612299265" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;fanboynz&#x2F;status&#x2F;1344796683612299265</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=snyderp" target="_blank">snyderp</a>   <span class="timeago" data-date="2021-06-14 15:57:17 &#43;0000 UTC">2021-06-14 15:57:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For anyone interested in this blog post here, the full conference paper version is here: <a href="https:&#x2F;&#x2F;www.peteresnyder.com&#x2F;static&#x2F;papers&#x2F;easylist-sigmetrics-2020.pdf" rel="nofollow">https:&#x2F;&#x2F;www.peteresnyder.com&#x2F;static&#x2F;papers&#x2F;easylist-sigmetri...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ufo" target="_blank">ufo</a>   <span class="timeago" data-date="2021-06-14 01:19:42 &#43;0000 UTC">2021-06-14 01:19:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does anyone know how EasyList normally deals with old rules? Is there a process to identify and remove stale rules?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yummypaint" target="_blank">yummypaint</a>   <span class="timeago" data-date="2021-06-13 19:47:19 &#43;0000 UTC">2021-06-13 19:47:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can someone explain the steplike shapes in the curve in the &quot;time to filter a request&quot; plot? I was under the impression that ad blockers used hash tables or a similar structure which is agnostic of the address being checked with O(1). Are these some kind of cache misses?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edoceo" target="_blank">edoceo</a>   <span class="timeago" data-date="2021-06-13 19:52:58 &#43;0000 UTC">2021-06-13 19:52:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not a simple address check (lookup) it&#x27;s a pattern-match - like loops around a bunch of regex. Those 1000+ stale patterns slow it down.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jhgb" target="_blank">jhgb</a>   <span class="timeago" data-date="2021-06-13 23:24:49 &#43;0000 UTC">2021-06-13 23:24:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Surely a loop over regexes is not the smartest solution that one could use for this? We do have algorithms for looking up multiple patterns at once and such, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-06-14 02:02:15 &#43;0000 UTC">2021-06-14 02:02:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the fastest data structure for this is to replace the whole thing by one big finite state transducer <a href="https:&#x2F;&#x2F;blog.burntsushi.net&#x2F;transducers&#x2F;" rel="nofollow">https:&#x2F;&#x2F;blog.burntsushi.net&#x2F;transducers&#x2F;</a> - such data structure can be built from the EasyList regexes, and perform all checks in a single lookup.<p>The idea here would be to compile the regex of each rule to an automata (each automata matches a set of strings) and them build a fst out of them (that would map strings to matched rules)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edoceo" target="_blank">edoceo</a>   <span class="timeago" data-date="2021-06-14 00:29:19 &#43;0000 UTC">2021-06-14 00:29:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, you can see one approach in the uBlock source code.<p>Matching against static, glob and regex patterns. And there is some grouping and filtering so, it&#x27;s not like every URL gets all 64k patterns matched. And it&#x27;s possible to pre-compile and group the Regex to get a little faster (lots of framework routers do this)<p>From my opinion the &quot;web&quot; is so contaminated it&#x27;s a shorter accept-list than a constantly changing reject-list
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=o8r3oFTZPE" target="_blank">o8r3oFTZPE</a>   <span class="timeago" data-date="2021-06-14 03:43:35 &#43;0000 UTC">2021-06-14 03:43:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally use an &quot;allow list&quot; as opposed to a &quot;block list&quot;.  
+Not sure which is &quot;easier&quot; but definitely know which one is faster, more efficient and has zero misses or false positives.<p>Arguably its more useful to know what a given website actualy requires than to know every possible advertising scheme.  Allow lists teach about where to find desired content.  Block lists do not teach anything useful in that regard.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdoms" target="_blank">mdoms</a>   <span class="timeago" data-date="2021-06-13 20:07:05 &#43;0000 UTC">2021-06-13 20:07:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The steps are an artifact of the X-axis, which is logarithmic. The first step occurs from 1 resource to 2 resources, on so on.<p>A hash table can&#x27;t be used for this kind of check because it uses patterns, so resources need to be compared on a pattern. Although I&#x27;m sure there are special cases, like hash tables of domain names, which cover a large portion rules.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

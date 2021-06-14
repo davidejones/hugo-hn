@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/translating-quake-3-into-rust-2020/">
+
+
+    <title>Translating Quake 3 into Rust (2020) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Translating Quake 3 into Rust (2020) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/translating-quake-3-into-rust-2020/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/translating-quake-3-into-rust-2020/">
+<meta name="twitter:title" content="Translating Quake 3 into Rust (2020) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Translating Quake 3 into Rust (2020) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T17:07:16JST",
+    "dateModified": "2021-06-12T17:07:16JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://immunant.com/blog/2020/01/quake3/">Translating Quake 3 into Rust (2020)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=habibur" target="_blank">habibur</a>   <span class="timeago" data-date="2021-06-12 19:20:17 &#43;0000 UTC">2021-06-12 19:20:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Need some benchmark numbers after that.<p>Rust compiled binary FPS vs C code FPS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pornel" target="_blank">pornel</a>   <span class="timeago" data-date="2021-06-12 23:55:09 &#43;0000 UTC">2021-06-12 23:55:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It should be the same as the C code compiled with clang. Apart from edge cases, it&#x27;s a straightforward 1:1 translation. It all ends up in the LLVM optimizer either way.<p>c2rust doesn&#x27;t change semantics of the C code, so there&#x27;s no added safety, no extra abstraction, no checks. The converted code can be the first step in refactoring towards safe Rust, but that&#x27;s a manual job.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gostsamo" target="_blank">gostsamo</a>   <span class="timeago" data-date="2021-06-12 17:48:01 &#43;0000 UTC">2021-06-12 17:48:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            previous discussion:<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21979555" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21979555</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsiefken" target="_blank">fsiefken</a>   <span class="timeago" data-date="2021-06-12 18:56:13 &#43;0000 UTC">2021-06-12 18:56:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So, is quake3 more performant with the rust version? not that it really matters in modern hardware, but I&#x27;m curious if Quake3 rust would run faster on my 486.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Synaesthesia" target="_blank">Synaesthesia</a>   <span class="timeago" data-date="2021-06-12 19:09:15 &#43;0000 UTC">2021-06-12 19:09:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quake 1 wouldn&#x27;t even run on a 486, and Q3 needed a GPU, one of the first games to have that requirement.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-06-13 00:39:04 &#43;0000 UTC">2021-06-13 00:39:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quake 1 relied on fast floating point maths. So it would run on a 486DX (the variants with floating point) but very slowly. Intel&#x27;s Pentium at similar or even slower core speeds has much faster FP maths, resulting in Quake on a mid-range Pentium PC running rings around Quake on the top-spec 486, whereas most other games from that era would be faster on the 486.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsiefken" target="_blank">fsiefken</a>   <span class="timeago" data-date="2021-06-12 21:59:10 &#43;0000 UTC">2021-06-12 21:59:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quake1 ran on my 486 for sure, I think I also tried Q3. I think I was running either slackware or mandriva. All games required a GPU, so you probably mean DirectX or OpenGL acceleration.<p>Yes, so given the existence of OpenGL acceleration on chip would this rust version be significantly more performant than the c++ version?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Synaesthesia" target="_blank">Synaesthesia</a>   <span class="timeago" data-date="2021-06-13 19:07:14 &#43;0000 UTC">2021-06-13 19:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah it ran, at low res and low FPS, I remember I had one too. It was barely playable. You <i>really</i> wanted a Pentium
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 19:20:05 &#43;0000 UTC">2021-06-12 19:20:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whatever_dude" target="_blank">whatever_dude</a>   <span class="timeago" data-date="2021-06-13 02:06:26 &#43;0000 UTC">2021-06-13 02:06:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With c2rust it wouldn&#x27;t. It would likely be slower in some cases due to added checks for, say, buffer overruns.<p>But that&#x27;s not the point. C2rust code is not &quot;idiomatic&quot;. You get weird, unsafe Rust code full of potential side effects. The idea is to provide a means for you to start rewriting things in ways that make sense in Rust.<p>Would the final code be faster? Harder to tell. Maybe, maybe not. It depends on how well it&#x27;s implemented, what kind of clever constructs are applied, what the game&#x27;s bottlenecks are, etc.<p>And yet, I don&#x27;t think that matters much either. Games shouldn&#x27;t be bound by CPU as much nowadays unless they&#x27;re doing massive simulations that are likely not language constrained. So it would be the wrong comparison to make IMO.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-06-12 18:23:36 &#43;0000 UTC">2021-06-12 18:23:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Pointers to Arrays<p>&gt;In a few places, the original source code contains expressions that point one past the last element of an array. Here is a simplified example of the C code:<p><pre><code>    int array[1024];
+    int *p;
+
+
+
+    if (p &gt;= &amp;array[1024]) {
+   
+    }
+</code></pre>
+&gt;The C standard (see e.g. C11, Section 6.5.6) allows pointers to an element one past the end of the array.<p>Wait? Why?<p>I get that char strings in C are null terminated and that might seem like an off by 1 issue if you aren’t paying attention, you still size your string one larger than your string.<p>What is this all about?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwdisswordfish8" target="_blank">pwdisswordfish8</a>   <span class="timeago" data-date="2021-06-12 18:29:08 &#43;0000 UTC">2021-06-12 18:29:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>    #define COUNT(array) (sizeof(array) &#x2F; sizeof((array)[0]))
+
+    int array[1024];
+
+    for (int *p = array; p &lt; array + COUNT(array); ++p) {
+        &#x2F;&#x2F; ...
+    }
+</code></pre>
+For the loop to be well-behaved, such pointer formation must be well-defined.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kimixa" target="_blank">kimixa</a>   <span class="timeago" data-date="2021-06-12 18:28:15 &#43;0000 UTC">2021-06-12 18:28:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s so you can do exactly what&#x27;s being done here - see if you have reached the end of the array by comparing the current position pointer.<p>Lots of iterator designs have a special &quot;end&quot; iterator you can compare against but not deference or access - this is just the same for C arrays.<p>The C standard here allows pointers to elements one past the array, but it&#x27;s still busted if you try to dereference it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-06-12 18:50:42 &#43;0000 UTC">2021-06-12 18:50:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Makes sense. I got what they were doing but in my head combined the C statement of addressing and accessing&#x2F;dereferencing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pix64" target="_blank">pix64</a>   <span class="timeago" data-date="2021-06-12 18:28:56 &#43;0000 UTC">2021-06-12 18:28:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can point to the element one pass, but you cannot dereference the pointer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-06-12 18:42:05 &#43;0000 UTC">2021-06-12 18:42:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, I get it now.<p>And it’s interesting to me that Rust doesn’t allow that considering it’s not accessing memory (yet, and that’s the whole point I’m sure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-12 18:56:40 &#43;0000 UTC">2021-06-12 18:56:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pointers in Rust behave the same way. The problem is that the &quot;array index&quot; operator in Rust returns a <i>reference</i> to the indexed element, not a pointer, and references must be safely dereferenceable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=defaultname" target="_blank">defaultname</a>   <span class="timeago" data-date="2021-06-12 19:13:01 &#43;0000 UTC">2021-06-12 19:13:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C arrays are nothing more than convenient pointer math. array[1024] = &amp;array + sizeof(element) * index (in that case 1024). And while there is some weird post-facto &quot;one past the end&quot; bit in the standard (added long after Quake 3 was made), in any modern compiler you can happily get pointers for illegal indexes. If you have a literally sized array and a literal offset it could warn (e.g. Warray-bounds), but for the vast majority of cases it won&#x27;t flag at all. Nor would this cause any runtime issues. Because it&#x27;s just math.<p>And the truth is that without runtime memory protection you can dereference those illegal positions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=steveklabnik" target="_blank">steveklabnik</a>   <span class="timeago" data-date="2021-06-12 19:10:39 &#43;0000 UTC">2021-06-12 19:10:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is <i>very</i> confusing to me that you&#x27;ve been downvoted in this thread. Anyone who did so want to explain why?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bertr4nd" target="_blank">bertr4nd</a>   <span class="timeago" data-date="2021-06-12 20:04:41 &#43;0000 UTC">2021-06-12 20:04:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn’t downvote (I can’t, and I wouldn’t have anyways) but I’ve often see the “Wait? Why?” (Or “wait, what?”) construct carries a connotation of “Why are you doing this insane bad thing?” which people sometimes react negatively to.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=steveklabnik" target="_blank">steveklabnik</a>   <span class="timeago" data-date="2021-06-12 20:28:15 &#43;0000 UTC">2021-06-12 20:28:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, that would make sense. I wouldn’t have thought of it that way. Thanks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-06-12 21:12:47 &#43;0000 UTC">2021-06-12 21:12:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yea, maybe it’s that, but every other post I’ve made is also offended someone deeply or so it would seem :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fallingfrog" target="_blank">fallingfrog</a>   <span class="timeago" data-date="2021-06-12 20:01:50 &#43;0000 UTC">2021-06-12 20:01:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I second that.  Why punish someone for asking a pretty understandable question?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oscargrouch" target="_blank">oscargrouch</a>   <span class="timeago" data-date="2021-06-12 19:01:21 &#43;0000 UTC">2021-06-12 19:01:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reading at the transpiled code, theres something that make me a little worried if this becomes a trend.
+The lost information in the process. I guess if there&#x27;s an AI in the middle, capturing the logical context and later helping into the translation process.<p>In that way the power of the source code to teach us will still be there.<p>I understand if some tool that is in C and need a boost in security might use this, but giving the output code is intractable, they would still have to code in C, so this kind of defeat the some of the goals of writing code in a more secure environment.<p>Its important to understand that security is just one of the axis of a whole that have much more things to consider.<p>Having said that, maybe there will be a good use for source code in C that needs a safety boost right away in critical places, or use something like this to spot dark corners and fix the code back in C.<p>Also, great hacking points to whoever did this, as this is fun just because is hacking at its best.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-06-12 19:35:45 &#43;0000 UTC">2021-06-12 19:35:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You don&#x27;t get much of a safety boost right away with the auto-translation, because a lot (all?) of it will start out wrapped in unsafe blocks. The idea is to use it as a jumping-off point from which you can gradually migrate more and more code into safety
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-06-13 01:07:03 &#43;0000 UTC">2021-06-13 01:07:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It produces functions which are pub unsafe extern &quot;C&quot; -- which among other effects currently results in effectively wrapping the code in an unsafe block yes.<p>It seems as though the very long term plan is to divide more thoroughly the unsafe function declaration (purpose: To flag to people calling it that they need to be careful) from the unsafe block (purpose: To flag to the compiler that you checked this is OK and so it&#x27;s fine that the compiler can&#x27;t tell if it&#x27;s OK). Today I believe the linter will optionally complain that you didn&#x27;t clarify, and perhaps in the Rust 2021 edition the compiler will default to rejecting this, then perhaps Rust 2024 will just outlaw it.<p>I expect c2rust will eventually either just shove everything inside unsafe {} blocks as well as inside unsafe functions, or it will mark code as Rust 2018 edition and let you change that when you&#x27;ve written as idiomatic Rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=oscargrouch" target="_blank">oscargrouch</a>   <span class="timeago" data-date="2021-06-12 19:51:36 &#43;0000 UTC">2021-06-12 19:51:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That makes sense. But i wonder if two teams creating a port, one straight from the C code and the other with the translation output..<p>Which one would end first and with the best version..<p>(Not sure if doing this from the transpiled code is the best option, giving you will miss a lot of otherwise informative context in the original source)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 18:00:18 &#43;0000 UTC">2021-06-12 18:00:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

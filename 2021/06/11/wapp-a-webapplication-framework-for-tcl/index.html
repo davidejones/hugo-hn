@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/wapp-a-webapplication-framework-for-tcl/">
+
+
+    <title>Wapp – A Web-Application Framework for Tcl - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Wapp – A Web-Application Framework for Tcl - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/wapp-a-webapplication-framework-for-tcl/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/wapp-a-webapplication-framework-for-tcl/">
+<meta name="twitter:title" content="Wapp – A Web-Application Framework for Tcl - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Wapp – A Web-Application Framework for Tcl - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T12:38:57JST",
+    "dateModified": "2021-06-11T12:38:57JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://wapp.tcl.tk/home/doc/trunk/README.md">Wapp – A Web-Application Framework for Tcl</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gilbetron" target="_blank">gilbetron</a>   <span class="timeago" data-date="2021-06-11 16:13:12 &#43;0000 UTC">2021-06-11 16:13:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve heavily used TCL twice in my career, and while I find it an interesting experiment in a language, and actually enjoy a lot of it, I would never recommend it to anyone, nor would I ever pick it for a project. The core idea of &quot;everything is a string&quot; just has a lot of failure modes, and you find yourself making common errors even after years of developing with it.<p>But it&#x27;s a really neat exploration of a &quot;what if&quot; in programming languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcfields" target="_blank">jcfields</a>   <span class="timeago" data-date="2021-06-11 20:43:52 &#43;0000 UTC">2021-06-11 20:43:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t used Tcl for anything in ages, but I have a book on it that I thumb through sometimes because it&#x27;s so bizarre and fun to read about.<p>For example, you can delete or rename procedures on the fly, including built-in procedures. So you can rename a built-in like puts to something else, create your own puts procedure, and then call the old one (under its new name) in your new procedure (in case you wanted to override it to do some pre- or post-processing each time). You can even redefine procedures within themselves.<p>You can use variables in variable names (PHP does this as well).<p>The comment character # is a valid name for a variable or a procedure.<p>&quot;Everything is a string&quot; extends to even lists and code blocks.<p>Even though we&#x27;ve moved away from the hyperflexibility of languages like Tcl and Perl, they certainly served their purpose, and a lot of their better ideas were refined in their more orderly successors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=an1sotropy" target="_blank">an1sotropy</a>   <span class="timeago" data-date="2021-06-11 19:22:06 &#43;0000 UTC">2021-06-11 19:22:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the 1990s, when Tcl was taking off, there was really nothing else that made it as convenient to glue together different C libraries and slap a (Tk-based) GUI on it.  It was a welcome revelation, compared to XWindows programming.<p>In the 1990s.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gilbetron" target="_blank">gilbetron</a>   <span class="timeago" data-date="2021-06-12 00:26:20 &#43;0000 UTC">2021-06-12 00:26:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, my first encounters was the early 90s, where I wrote a gene sequencing support system with TCL&#x2F;TK - it was pretty fun and worked pretty well, but there wasn&#x27;t a lot available in the space. Python was still being dreamed up, bash wasn&#x27;t up for it, and otherwise you had Fortran&#x2F;C&#x2F;C++&#x2F;Pascal&#x2F;Lisp.<p>Fast forward 20 years and I found myself using it again, but it felt silly compared to the now-mature Python, Lua, PHP, and Ruby.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 19:43:18 &#43;0000 UTC">2021-06-11 19:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To me, it seems fine in the space of an embedded scripting language where you let end users script within your otherwise &quot;not tcl&quot; application.<p>These days, maybe lua is a better choice, but I can see lua being more intimidating for smart, but less software-experienced people. &quot;Everything is a string&quot; might be more intuitive for them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AndresNavarro" target="_blank">AndresNavarro</a>   <span class="timeago" data-date="2021-06-11 21:10:12 &#43;0000 UTC">2021-06-11 21:10:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was just thinking about this today.  I am currently forcing myself to work on TCL for a small project (I&#x27;ve only used it casually before).  Coming from lisp I can appreciate some aspects of it, but it can be frustrating at times.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=doublerabbit" target="_blank">doublerabbit</a>   <span class="timeago" data-date="2021-06-12 00:04:53 &#43;0000 UTC">2021-06-12 00:04:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TCL is one of the few languages allowing you to dabble in to and one of the few that caught hook with me. It&#x27;s friendliness then leads you down a path of voodoo and creativity.<p><pre><code>  proc displayHackerNews {} {
+  set hn &quot;Hacker News&quot; ;#Fill the variable (hn) with the string &quot;Hacker News&quot;
+  puts $hn ;#output the variable ($hn) to terminal
+  } ;#end procedure
+
+  displayHackerNews ;#execute the procedure
+   displays: Hacker News
+</code></pre>
+If statements are easy<p><pre><code>  set hn &quot;&quot;
+  if { $hn eq &quot;Hacker News&quot; } { puts $hn } else { 
+     set hn &quot;Not Hacker News&quot; 
+     puts $hn 
+  } ;#end if
+</code></pre>
+Infinite Loops are fun<p><pre><code>  set hn &quot;Hacker News&quot; ;#Set a variable
+  while { $hn eq &quot;Hacker News&quot; } {
+    puts &quot;$hn&quot; ;# print &quot;Hacker News&quot; to terminal in an infinite loop
+  } ;#end loop
+</code></pre>
+Multi-threading is a breeze.<p><pre><code>  package require Thread
+  set MyThreadID [thread::create { 
+  puts &quot;Hello from my new thread&quot;
+   thread::wait
+  } ;#end code-to-run
+   ] ;#end thread
+</code></pre>
+And finally, a if-switch-threaded-loop<p><pre><code>  set hn &quot;Hacker News&quot;
+  if { $hn eq &quot;Hacker News&quot; } {set switch &quot;hn&quot; } else { set switch &quot;&quot; }
+
+  switch $switch {
+  hn { 
+  set MyThreadID [thread::create { 
+  proc displayHackerNews {} {set hn &quot;Hacker News&quot; ; puts $hn} ;#end procedure
+
+  #set aCounter to zero, if aCounter is &lt; 7 execute displayHackerNews procedure
+  for {set aCounter 0} {$aCounter &lt; 7} {incr aCounter} { displayHackerNews } 
+   thread::wait
+  } ;#end threaded-code
+  ] ;#end thread
+  } ;#end switch-case
+
+  default {puts &quot;It&#x27;s still not hacker news&quot;}
+  } ;#end switch
+</code></pre>
+The simplicity of the language plus it&#x27;s power enhances it further then python could ever reach. It also powers the Mar&#x27;s Rover a long with 99% of all industrial technology. I wouldn&#x27;t be too surprised to find the nuclear launch button is coded in TCL. (that part might not all be true) but<p>It&#x27;s a nice language but to diss it that much, don&#x27;t. It&#x27;s a fun language to use and creates modern enhancements. I would HIGHLY recommend it to anyone who&#x27;s confused about programming. Running remotely hosted X applications via novnc natively on most OS is tasty.<p>If one language that should be dropped is GOlang. Rust wins. It came from Google. Seriously, github links in source? Yes, looks smart and modern but is incredibly stupid. NO programming language should ever pull  URL links for dependence. You wouldn&#x27;t execute a random bash file on the internet to install a script would you? It&#x27;s no difference.<p>I create a repo, heres link to repo, people install repo. I maliciously change the code to backdoor your box, you don&#x27;t notice. Well done, You&#x27;ve compiled remote backdoor new version, none the wiser.<p>Who really reads the dependency code that that person has wrote?<p>My home page completely coded in PureTCL. No Databases,  No JavaScript, no SSL and no bitching. <a href="http:&#x2F;&#x2F;fantasy.tf&#x2F;" rel="nofollow">http:&#x2F;&#x2F;fantasy.tf&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=talkinghead" target="_blank">talkinghead</a>   <span class="timeago" data-date="2021-06-11 13:24:58 &#43;0000 UTC">2021-06-11 13:24:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i feel like a good business idea would be showing new product names &#x2F; logos to a group of 50 people from various demographics and ages to see if the name clashes with something else.<p>bc this one quite quite funny
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mouldysammich" target="_blank">mouldysammich</a>   <span class="timeago" data-date="2021-06-11 13:38:03 &#43;0000 UTC">2021-06-11 13:38:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This project predates the song i assume you&#x27;re referring to by 2 or 3 years
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CraigJPerry" target="_blank">CraigJPerry</a>   <span class="timeago" data-date="2021-06-11 13:47:23 &#43;0000 UTC">2021-06-11 13:47:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It made me think of the old wireless application protocol stuff - WAP. I did create a site in WML around 2002 but all i remember is a &lt;card&gt; structure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andylynch" target="_blank">andylynch</a>   <span class="timeago" data-date="2021-06-11 13:49:44 &#43;0000 UTC">2021-06-11 13:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I worked with some guys who released one of the first mobile online games over WAP (it was a spin on wumpus hunt)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dqv" target="_blank">dqv</a>   <span class="timeago" data-date="2021-06-11 14:26:50 &#43;0000 UTC">2021-06-11 14:26:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s some... apps on this server
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=badesalz" target="_blank">badesalz</a>   <span class="timeago" data-date="2021-06-11 14:36:08 &#43;0000 UTC">2021-06-11 14:36:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            certified geek seven days a week
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dqv" target="_blank">dqv</a>   <span class="timeago" data-date="2021-06-11 14:39:57 &#43;0000 UTC">2021-06-11 14:39:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In all seriousness, I don&#x27;t think there is much overlap in people who know about Wapp and those who know about WAP.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tekromancr" target="_blank">tekromancr</a>   <span class="timeago" data-date="2021-06-11 18:43:08 &#43;0000 UTC">2021-06-11 18:43:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think it would be hard to imagine people would be aware of an VERY RECENT INCREDIBLY POPULAR song.<p>Just because you like web shit doesn&#x27;t mean you are completely disconnected from the greater culture.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SQLite" target="_blank">SQLite</a>   <span class="timeago" data-date="2021-06-11 19:13:48 &#43;0000 UTC">2021-06-11 19:13:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am the developer of Wapp.  I gather (from other comments) that the name &quot;Wapp&quot; collides with a recent pop song by someone named &quot;Cardi B&quot; - please correct me if I have misunderstood.  For the record:<p><pre><code>  *  I do not follow or participate in pop culture.
+  *  I do not listen to pop music, ever.
+  *  I do not know who Cardi B is.
+</code></pre>
+Any similarity in the name of the Wapp software framework and music by the individual or group known as &quot;Cardi B&quot; is purely coincidental.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lhorie" target="_blank">lhorie</a>   <span class="timeago" data-date="2021-06-11 20:13:58 &#43;0000 UTC">2021-06-11 20:13:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, Cardi B is a female singer who is popular these days (as in, she&#x27;s on the radio). WAP the song name is an abbreviation that refers to female genitalia.<p>That people associate &quot;Wapp&quot; with a sexually suggestive pop song name instead of &quot;app&quot; or &quot;web app&quot; might say more about them than anything inherent from the project name...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cortesoft" target="_blank">cortesoft</a>   <span class="timeago" data-date="2021-06-11 15:23:08 &#43;0000 UTC">2021-06-11 15:23:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, all these people commenting know both. I have a feeling a majority of people who know about Wapp know WAP, just because of the latter’s overall popularity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scrozier" target="_blank">scrozier</a>   <span class="timeago" data-date="2021-06-11 14:45:15 &#43;0000 UTC">2021-06-11 14:45:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suspect you&#x27;re wrong. :-)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ht85" target="_blank">ht85</a>   <span class="timeago" data-date="2021-06-11 15:21:47 &#43;0000 UTC">2021-06-11 15:21:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t cook, I don&#x27;t clean<p>but let me tell you how I got this app running
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tekromancr" target="_blank">tekromancr</a>   <span class="timeago" data-date="2021-06-11 18:45:07 &#43;0000 UTC">2021-06-11 18:45:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tcl on the web; That&#x27;s a Wapp
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fredley" target="_blank">fredley</a>   <span class="timeago" data-date="2021-06-11 14:13:55 &#43;0000 UTC">2021-06-11 14:13:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, imagine the name of your product sounding like the Western Australia Party!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PedroBatista" target="_blank">PedroBatista</a>   <span class="timeago" data-date="2021-06-11 16:01:14 &#43;0000 UTC">2021-06-11 16:01:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure pretty much every word clashes with something and is &quot;quite funny&quot; at some point in time, and that&#x27;s not even considering other idioms.<p>Better just call it whatever you find OK at the time ( minus the legal stuff ).<p>Btw, having a framework called Wet Ass PussPuss -&gt; (,)++ for short it&#x27;s pretty cool.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 18:57:36 &#43;0000 UTC">2021-06-11 18:57:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I went to a PTA meeting once and they were playing &quot;OPP&quot; while everyone&#x27;s kindergarten age children danced to it. My wife and I were pretty sure we were the only ones that knew the lyrics.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=canadianfella" target="_blank">canadianfella</a>   <span class="timeago" data-date="2021-06-11 14:24:46 &#43;0000 UTC">2021-06-11 14:24:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            “WOP” and “Wapp” are as different from each other as as “can’t” and “cunt”.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sbuttgereit" target="_blank">sbuttgereit</a>   <span class="timeago" data-date="2021-06-11 21:51:35 &#43;0000 UTC">2021-06-11 21:51:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And of course anytime anyone mentions TCL and the web, we must take a moment to remember AOLserver:<p><a href="http:&#x2F;&#x2F;aolserver.github.io&#x2F;" rel="nofollow">http:&#x2F;&#x2F;aolserver.github.io&#x2F;</a><p>Maybe a slightly better link... <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;AOLserver" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;AOLserver</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bogwog" target="_blank">bogwog</a>   <span class="timeago" data-date="2021-06-11 16:38:43 &#43;0000 UTC">2021-06-11 16:38:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cardi B&#x27;s favorite framework
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cheschire" target="_blank">cheschire</a>   <span class="timeago" data-date="2021-06-11 20:31:33 &#43;0000 UTC">2021-06-11 20:31:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean her song about wireless access points?<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=-PlLRUoSukk" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=-PlLRUoSukk</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=catwind7" target="_blank">catwind7</a>   <span class="timeago" data-date="2021-06-11 22:12:22 &#43;0000 UTC">2021-06-11 22:12:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            mixed feelings about this not being the top comment
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kemyd" target="_blank">kemyd</a>   <span class="timeago" data-date="2021-06-11 21:23:52 &#43;0000 UTC">2021-06-11 21:23:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TCL was the first programming language I learned because it was used to write scripts for IRC bots. Funny times :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-06-11 15:52:54 &#43;0000 UTC">2021-06-11 15:52:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like many of these commands should be methods on an OO object or at least subcommands of &quot;wapp&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlg23" target="_blank">jlg23</a>   <span class="timeago" data-date="2021-06-11 17:35:00 &#43;0000 UTC">2021-06-11 17:35:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What could be the benefit of dragging OO into this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andrewshadura" target="_blank">andrewshadura</a>   <span class="timeago" data-date="2021-06-11 17:46:08 &#43;0000 UTC">2021-06-11 17:46:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be more Tclish, more similar what other Tcl packages (third-party and core ones) do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:04:02 &#43;0000 UTC">2021-06-11 13:04:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cutler" target="_blank">cutler</a>   <span class="timeago" data-date="2021-06-11 14:33:46 &#43;0000 UTC">2021-06-11 14:33:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For TCL? But why?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fmakunbound" target="_blank">fmakunbound</a>   <span class="timeago" data-date="2021-06-11 15:28:58 &#43;0000 UTC">2021-06-11 15:28:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why not?<p>Also, sometimes it seems “hacker” in Hacker News has been lost and replaced with corporate group think consensus, here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anoncake" target="_blank">anoncake</a>   <span class="timeago" data-date="2021-06-11 17:44:36 &#43;0000 UTC">2021-06-11 17:44:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Growth Hacker News&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bdcravens" target="_blank">bdcravens</a>   <span class="timeago" data-date="2021-06-11 18:52:04 &#43;0000 UTC">2021-06-11 18:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s thankfully moved on from those days, but for a while it was &quot;San Francisco and some tech News&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rkeene2" target="_blank">rkeene2</a>   <span class="timeago" data-date="2021-06-11 15:12:59 &#43;0000 UTC">2021-06-11 15:12:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was written by the author of SQLite, which is basically a Tcl extension that escaped into the wild.<p>There&#x27;s a talk by DRH at the Tcl 2019 Conference regarding Wapp [0].<p>[0] <a href="https:&#x2F;&#x2F;youtu.be&#x2F;Aq4NI5NTUpU" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;Aq4NI5NTUpU</a> time code 1:49:34
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=blacksqr" target="_blank">blacksqr</a>   <span class="timeago" data-date="2021-06-11 15:23:41 &#43;0000 UTC">2021-06-11 15:23:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, why on earth would someone use a tool designed to work directly with text to manage a text-based document definition protocol, when so many more complicated options are available?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mhd" target="_blank">mhd</a>   <span class="timeago" data-date="2021-06-11 14:44:47 &#43;0000 UTC">2021-06-11 14:44:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tcl had a very short time in the fickle web dev spotlight, mostly due to Aolserver and Philip Greenspun. Something between CGI with Perl and whatever Java had to offer in the deep end of the 90s.<p>At that time, a few lucky folks made way too much money using weird languages for the fledgling commercial internet.<p><a href="http:&#x2F;&#x2F;aolserver.github.io" rel="nofollow">http:&#x2F;&#x2F;aolserver.github.io</a><p><a href="https:&#x2F;&#x2F;philip.greenspun.com&#x2F;tcl&#x2F;" rel="nofollow">https:&#x2F;&#x2F;philip.greenspun.com&#x2F;tcl&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=doublerabbit" target="_blank">doublerabbit</a>   <span class="timeago" data-date="2021-06-11 15:59:36 &#43;0000 UTC">2021-06-11 15:59:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just throwing this out there, NaviServer is the replacement to aolserver. It&#x27;s in active development and pretty awesome to what it can do. OpenACS is a prime example<p><a href="https:&#x2F;&#x2F;openacs.org" rel="nofollow">https:&#x2F;&#x2F;openacs.org</a><p><a href="https:&#x2F;&#x2F;wiki.tcl-lang.org&#x2F;page&#x2F;NaviServer" rel="nofollow">https:&#x2F;&#x2F;wiki.tcl-lang.org&#x2F;page&#x2F;NaviServer</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=orthoxerox" target="_blank">orthoxerox</a>   <span class="timeago" data-date="2021-06-11 15:06:10 &#43;0000 UTC">2021-06-11 15:06:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because it&#x27;s a likeable language. It has a small, neat syntax, equally clever semantics, so people do stuff in tcl for fun.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shp0ngle" target="_blank">shp0ngle</a>   <span class="timeago" data-date="2021-06-11 15:11:59 &#43;0000 UTC">2021-06-11 15:11:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used to fix some bugs in Tcl&#x2F;Tk program a long time ago and it was the opposite of &quot;fun&quot;.<p>But frankly it was about 10 years ago (and the program in question was ancient even back then) and I don&#x27;t really remember much, and if it was a fault of Tcl, Tk, or the actual program.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andrewshadura" target="_blank">andrewshadura</a>   <span class="timeago" data-date="2021-06-11 15:26:02 &#43;0000 UTC">2021-06-11 15:26:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tcl has this interesting property. It&#x27;s closer to Lisp in spirit and shell in syntax, but it also looks superficially like C, being actually nothing like it. People who try to program in it as if it were C usually fail and start hating it, whereas people who understand its essence start liking it.<p>Unfortunately, people often encounter Tcl in situations where there&#x27;s nobody to explain it to them, so they learn it the wrong way.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=therealcamino" target="_blank">therealcamino</a>   <span class="timeago" data-date="2021-06-12 00:01:50 &#43;0000 UTC">2021-06-12 00:01:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To paraphrase the moderator of comp.compilers from many years ago, everything is easier if you always keep in mind that TCL is a string substitution language.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-06-11 14:38:59 &#43;0000 UTC">2021-06-11 14:38:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has one of the only truly cross platform UI toolkits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reflectiv" target="_blank">reflectiv</a>   <span class="timeago" data-date="2021-06-11 14:45:27 &#43;0000 UTC">2021-06-11 14:45:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ok but like....thats for desktop application development...<p>...this is the web, a completely different and totally unrelated beast.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tpoindex" target="_blank">tpoindex</a>   <span class="timeago" data-date="2021-06-11 15:05:40 &#43;0000 UTC">2021-06-11 15:05:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did write a Tcl web system back in the 2000&#x27;s that was close to the Tk programming model, although not quite a one-to-one.  Here is an example of side by side programs for Tk and Aejaks:  <a href="https:&#x2F;&#x2F;wiki.tcl-lang.org&#x2F;page&#x2F;%C3%86jaks+compares+to+Tcl%2FTk" rel="nofollow">https:&#x2F;&#x2F;wiki.tcl-lang.org&#x2F;page&#x2F;%C3%86jaks+compares+to+Tcl%2F...</a><p>Some other screen shots: <a href="http:&#x2F;&#x2F;aejaks.sourceforge.net&#x2F;Screen_Shots&#x2F;index.html" rel="nofollow">http:&#x2F;&#x2F;aejaks.sourceforge.net&#x2F;Screen_Shots&#x2F;index.html</a><p>This was made with the Java based Echo toolkit, and the Jtcl interpreter (Tcl implemented in Java.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-06-11 14:48:46 &#43;0000 UTC">2021-06-11 14:48:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tk works on mobile as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=reflectiv" target="_blank">reflectiv</a>   <span class="timeago" data-date="2021-06-11 15:05:54 &#43;0000 UTC">2021-06-11 15:05:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            mobile is much more akin to desktop development because the API&#x27;s&#x2F;etc are specific to each device type (android&#x2F;iphone).<p>The web is a different beast from that too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edwinyzh" target="_blank">edwinyzh</a>   <span class="timeago" data-date="2021-06-11 15:10:32 &#43;0000 UTC">2021-06-11 15:10:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC, the author of SQLite uses TCL.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bachmeier" target="_blank">bachmeier</a>   <span class="timeago" data-date="2021-06-11 16:03:29 &#43;0000 UTC">2021-06-11 16:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He used to be a member of the core TCL development team.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:01:51 &#43;0000 UTC">2021-06-11 13:01:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:49:48 &#43;0000 UTC">2021-06-11 13:49:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

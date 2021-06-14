@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/linuxkernel-printk-indexing/">
+
+
+    <title>Linux-Kernel: Printk() Indexing - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Linux-Kernel: Printk() Indexing - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/linuxkernel-printk-indexing/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/linuxkernel-printk-indexing/">
+<meta name="twitter:title" content="Linux-Kernel: Printk() Indexing - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Linux-Kernel: Printk() Indexing - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T09:43:43JST",
+    "dateModified": "2021-06-11T09:43:43JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://lwn.net/Articles/857148/">Linux-Kernel: Printk() Indexing</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-06-11 15:28:05 &#43;0000 UTC">2021-06-11 15:28:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean this semi-seriously but doesn&#x27;t the hypothetical example &quot;CPU on fire&quot; vs &quot;CPU in flames&quot; violate <i>We Do Not Break User Space</i>? As someone who got a useful (IMHO) one-line patch with less change dinged for WDNBUS, I would say yes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dcminter" target="_blank">dcminter</a>   <span class="timeago" data-date="2021-06-11 15:40:34 &#43;0000 UTC">2021-06-11 15:40:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            According to the article &quot;those messages have never really been considered to be a part of the kernel&#x27;s ABI&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjw1007" target="_blank">mjw1007</a>   <span class="timeago" data-date="2021-06-11 16:28:49 &#43;0000 UTC">2021-06-11 16:28:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, but the <i>We Do Not Break User Space</i> rule has often been explained (somewhat emphatically on occasion) as depending on whether anyone&#x27;s code actually gets broken, not on whether the thing they were relying on was intended to be, or advertised as, a stable interface.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fctorial" target="_blank">fctorial</a>   <span class="timeago" data-date="2021-06-11 17:20:31 &#43;0000 UTC">2021-06-11 17:20:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think WDNBUS is only respected for the syscall api.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjw1007" target="_blank">mjw1007</a>   <span class="timeago" data-date="2021-06-11 18:17:25 &#43;0000 UTC">2021-06-11 18:17:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s a relatively mild rant where the breaking change in question was in &#x2F;proc&#x2F;cpuinfo:<p>«Really. Shut up.<p>The whole &quot;no regressions&quot; thing is very much about the fact that we don&#x27;t waste users time.»<p><a href="https:&#x2F;&#x2F;linux.kernel.narkive.com&#x2F;7hMPh8zX&#x2F;patch-revert-9fc2105aeaaf56b0cf75296a84702d0f9e64437b-to-fix-pyaudio-and-probably-more#post12" rel="nofollow">https:&#x2F;&#x2F;linux.kernel.narkive.com&#x2F;7hMPh8zX&#x2F;patch-revert-9fc21...</a><p>Of course in an ideal world the extent of the intended promise would be clearly written down in some obvious place. But we don&#x27;t live in an ideal world.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dcminter" target="_blank">dcminter</a>   <span class="timeago" data-date="2021-06-11 22:09:53 &#43;0000 UTC">2021-06-11 22:09:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I found this statement from Linus in that thread;<p>&quot;It&#x27;s not that the kernel ABI (with all the system calls, all the &#x2F;proc files, all the ioctl&#x27;s, etc) is set in stone and &quot;sacred&quot;. Absolutely anything can be changed, wildly.<p>But if it turns out that applications (or hardware) that people use end up breaking noticeably, then <i>that</i> is a regression.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dcminter" target="_blank">dcminter</a>   <span class="timeago" data-date="2021-06-11 17:40:45 &#43;0000 UTC">2021-06-11 17:40:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about &#x2F;proc ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-06-11 18:11:54 &#43;0000 UTC">2021-06-11 18:11:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &#x2F;proc has surely killed some user apps. If you were expected to see a fixed number of lines, a fixed number of columns or the fields to mean the same thing, you&#x27;re in for suffering. At least I know of meminfo changes, stuff in &#x2F;proc&#x2F;net...<p>But to be honest, so have ifconfig, hostname, df...<p>At least in procfs they add things (columns, lines) so apart from meminfo I don&#x27;t know of changing the meaning of fields.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tinus_hn" target="_blank">tinus_hn</a>   <span class="timeago" data-date="2021-06-11 20:35:17 &#43;0000 UTC">2021-06-11 20:35:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Linus has been pretty strict in not unnecessarily breaking userspace even if something is not strictly ‘part of the ABI’. It’s a judgement call though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scrps" target="_blank">scrps</a>   <span class="timeago" data-date="2021-06-11 16:21:36 &#43;0000 UTC">2021-06-11 16:21:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;The 2011 Kernel Summit featured a combative session around a proposal to add a 128-bit binary tag to every kernel message. That idea, like all others before and after, failed to get anywhere near the mainline. The kernel community has, quite simply, never felt the need to impose any structure on the logging information it puts out via printk(); the additional effort that would be required does not seem to be worth the cost.<p>It seems like that was the more elegant solution vs enabling debugfs, running through the list of error messages to ensure nothing changed. How many distros even ship with debugfs enabled by default?<p>Edit: formatting
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elurg" target="_blank">elurg</a>   <span class="timeago" data-date="2021-06-11 17:49:19 &#43;0000 UTC">2021-06-11 17:49:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; How many distros even ship with debugfs enabled by default?<p>Almost all of them, try `mount | grep ^debugs` or at least `&#x2F;proc&#x2F;filesystems |grep debugfs`. It&#x27;s root-only though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nexuist" target="_blank">nexuist</a>   <span class="timeago" data-date="2021-06-11 17:32:08 &#43;0000 UTC">2021-06-11 17:32:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the problem then becomes what message gets what tag and you have to bikeshed over if smaller or larger numbers mean bad&#x2F;urgent messages. It&#x27;s like the same problem of port allocation that IANA was created to solve. Do we really expect every kernel module to adhere to e.g. registering a unique tag with some authority for their messages? What if two separate modules print the same tag? And so and so on, and all this time of arguing over what is the &quot;Linuxy&quot; way to match numbers with format strings would be better used reviewing commits that could actually improve the kernel.<p>I think the better morale of the story is to not rely on third party log output to troubleshoot problems. If you want to be notified when the CPU catches fire then you should have a daemon watching CPU temp waiting to trigger the event, not relying on some black box to log the correct line at the right time and some other black box to match the line against some ancient regex that nobody understands anymore. At the very least your temperature monitoring daemon should `printk` a message you decided upon instead of someone else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-11 19:35:00 &#43;0000 UTC">2021-06-11 19:35:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If anyone wants to steal a done-tested-and-working userspace variant (for C, and with limitations C++) of this:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;FRRouting&#x2F;frr&#x2F;pull&#x2F;6766" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;FRRouting&#x2F;frr&#x2F;pull&#x2F;6766</a><p>It&#x27;s pretty much the same thing, all occurences of &quot;zlog_debug&quot; and the like create an entry in a separate ELF section.  The section can be accessed both at runtime by the program itself as well as offline by reading the appropriate ELF headers (there&#x27;s an extraction tool in the codebase that does that, it even works cross-OS cross-CPU cross-endian).<p>disclaimer: it&#x27;s my code ;)<p>disclaimer[2]: this will <i>not</i> work without major overhaul on OSX or Windows.  It relies on the binary format being ELF.<p>disclaimer[3]: the PR linked above is only the &quot;core&quot; of it, you may have to fish out other pieces elsewhere.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=freehrtradical" target="_blank">freehrtradical</a>   <span class="timeago" data-date="2021-06-11 15:26:07 &#43;0000 UTC">2021-06-11 15:26:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article mentions debugfs which I&#x27;ve never heard about and is pretty cool: <a href="https:&#x2F;&#x2F;www.kernel.org&#x2F;doc&#x2F;html&#x2F;latest&#x2F;filesystems&#x2F;debugfs.html" rel="nofollow">https:&#x2F;&#x2F;www.kernel.org&#x2F;doc&#x2F;html&#x2F;latest&#x2F;filesystems&#x2F;debugfs.h...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-11 16:50:54 &#43;0000 UTC">2021-06-11 16:50:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Debugfs is just a dumping ground for various debug functions. For instance ftrace subsystem is there. Of course, it&#x27;s 700 root by default, because you can find a lot there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

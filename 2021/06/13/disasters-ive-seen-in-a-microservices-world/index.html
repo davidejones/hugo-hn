@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/disasters-ive-seen-in-a-microservices-world/">
+
+
+    <title>Disasters I&#39;ve seen in a microservices world - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Disasters I&#39;ve seen in a microservices world - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/disasters-ive-seen-in-a-microservices-world/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/disasters-ive-seen-in-a-microservices-world/">
+<meta name="twitter:title" content="Disasters I&#39;ve seen in a microservices world - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Disasters I\u0027ve seen in a microservices world - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T13:51:46JST",
+    "dateModified": "2021-06-13T13:51:46JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://world.hey.com/joaoqalves/disasters-i-ve-seen-in-a-microservices-world-a9137a51">Disasters I&#39;ve seen in a microservices world</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaaarrgh" target="_blank">throwawaaarrgh</a>   <span class="timeago" data-date="2021-06-14 02:09:24 &#43;0000 UTC">2021-06-14 02:09:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the modern world of computing, the one thing I have seen literally everywhere I&#x27;ve been is people implementing systems that they absolutely do not understand.<p>Most microservices I&#x27;ve seen implemented are not actually microservices. Most teams (unless they are developing &quot;simple&quot; web or mobile applications) have no idea who is consuming their services, or how, or if what they&#x27;ve made is working correctly. They frequently don&#x27;t have an understanding of the different models of releasing software, much less of a complete system architecture, failure modes, consistency models, reliability estimates, performance limits, etc. Mostly what I see time and again is a team of people who just write some code that seems to work for them, and then go home, without ever considering how or if it&#x27;s working in the real world.<p>I don&#x27;t know anything about modern computer science education. But it appears that new developers have absolutely no idea how anything but algorithms work. It&#x27;s like we taught them how hammers and saws and wrenches work, and then told them to go build a skyscraper. There are only two ways I know of for anyone today to correctly build a modern large-scale computer system: 1) Read every single book and blog post, watch every conference talk, and listen to every podcast that exists about building modern large-scale computing systems, and 2) Spend 5+ years making every mistake in the book as you try to build them yourself.<p>It feels like the industry mostly just re-learns the same mistakes over and over like we&#x27;re in Groundhog&#x27;s Day (we&#x27;re the extras, not Bill Murray). But it&#x27;s equally possible that I just lack perspective and am expecting too much. Maybe the auto industry at the turn of the 20th century also spent decades re-learning the same lessons over and over, as the novelty of mass-producing complex systems continued to elude us. Hell, the new auto companies <i>still</i> don&#x27;t get it right.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axaxs" target="_blank">axaxs</a>   <span class="timeago" data-date="2021-06-14 02:46:25 &#43;0000 UTC">2021-06-14 02:46:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It feels like the industry mostly just re-learns the same mistakes over and over like we&#x27;re in Groundhog&#x27;s Day<p>This is true, but also in life.  I&#x27;m so sad I can&#x27;t just pass my knowledge to my daughter to give her a 30 year head start.  I remember telling her &#x27;dont touch that stove it&#x27;s hot&#x27;, she nods, and soon after is crying she burnt her hand.  I wanted to be mad but it made me realize the one universal truth: advice and information is great, but humans just seem to learn most from mistakes.  Made me realize how much time and energy and knowledge is lost, as every human learns a lot of the same things over and over.  I&#x27;m sure there was a caveman telling his kid not to touch the fire thousands of years ago, too.  And here we are.  So don&#x27;t be too cynical and depressed about this cycle, it&#x27;s pretty natural.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=np-" target="_blank">np-</a>   <span class="timeago" data-date="2021-06-14 17:48:49 &#43;0000 UTC">2021-06-14 17:48:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People shouldn&#x27;t always just blindly accept what is told to them as truth either - they need to have the ability to determine if something is true or not on their own, and experiencing&#x2F;verifying things yourself is a powerful way to do that. So overall it&#x27;s a balancing act. There&#x27;s also a lot of information that&#x27;s lost when you merely just tell someone something. There&#x27;s just no way to know exactly how bad it feels to touch a stove unless you have been through the experience yourself, there&#x27;s no way for a human to convey that level of feeling to another human verbally, and as such it&#x27;s inevitable that humanity&#x27;s curse is that we have to relive things over and over again.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adjkant" target="_blank">adjkant</a>   <span class="timeago" data-date="2021-06-14 03:01:07 &#43;0000 UTC">2021-06-14 03:01:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just want to give a giant explicit +1 to this sentiment and understanding of how humans learn, and then add a bit from there to connect it back to the problem highlighted in the first comment.<p>IMO, there&#x27;s a few ways to try and take a pragmatic approach to the problem above:<p>1. Make simple ways to do complex things. A library, a language, a framework, they all go after the same thing when designed well: batteries included complex functionality that the end user can&#x27;t shoot themselves in the foot with. It seems like in this domain (microservices), we are still early and need better support for small companies to spin this up. I&#x27;ve found my current company runs microservices pretty well, but I know it took a TON of infrastructure, support, and education to get it to that point. Few companies can afford to have that.<p>The danger with this approach is that people who understand the internals become rare, and surface level only knowledge can lead to issues when you get to edge cases. I&#x27;ll still take it, but wanted to call it out. The linux kernel is a great example of what that looks like down the line.<p>2. Make as many places as possible for developers in training to fail and make those 5 years of mistakes with low stakes consequences. In some ways, the way the industry hires already does this, but I&#x27;m sure there are better ways we can come up with versus the current sandboxes. If your frustration boils over, this is a place to channel it positively.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hyperman1" target="_blank">hyperman1</a>   <span class="timeago" data-date="2021-06-14 17:21:54 &#43;0000 UTC">2021-06-14 17:21:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is another way: Junior dev does support and micro bug fixing.  After a year of hell, you&#x27;ll have a medior dev that knows the value of logging, troubleshooting, testing, and above all simplicity.  a.k.a. someone who can be trusted to write code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axaxs" target="_blank">axaxs</a>   <span class="timeago" data-date="2021-06-14 03:10:42 &#43;0000 UTC">2021-06-14 03:10:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks.  I really like idea number 2.  In training, have people fail nearly purposefully.<p>I think some of the problem is that there&#x27;s no real standardized training for developers.  Many have 4 weeks of &#x27;bootcamp&#x27; and are cut into the wild.<p>And I can&#x27;t be too negative about it, I didn&#x27;t even have that.  I would just say I learned from 20 years of reading and mistakes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaaarrgh" target="_blank">throwawaaarrgh</a>   <span class="timeago" data-date="2021-06-14 03:31:14 &#43;0000 UTC">2021-06-14 03:31:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  I would just say I learned from 20 years of reading and mistakes.<p>One thing that&#x27;s crazy to me is that when people make mistakes, in most cases it&#x27;s forgotten or swept under the rug. Whereas if they do a full post-mortem and share it with the entire engineering organization, they&#x27;re teaching everyone a valuable lesson (possibly multiple lessons) for free. If that lesson prevents the same situation from happening again even one time, they&#x27;ll have &quot;paid off&quot; the first mistake, and it cost them nothing. Free money!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=axaxs" target="_blank">axaxs</a>   <span class="timeago" data-date="2021-06-14 04:55:37 &#43;0000 UTC">2021-06-14 04:55:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, but it goes back to my initial argument.  Even if everyone documented every failure and had perfect documentation, the result wouldn&#x27;t be a whole lot different.  People just don&#x27;t care or pay much attention until it affects them personally.<p>That&#x27;s not to say it&#x27;s a waste.  Once a person gets bitten, they look for resources and learn from that.  But until then, we&#x27;re basically all stupid apes making the same mistakes in perpetuity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ZephyrBlu" target="_blank">ZephyrBlu</a>   <span class="timeago" data-date="2021-06-14 05:45:42 &#43;0000 UTC">2021-06-14 05:45:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;re slightly wrong here. I&#x27;d say most, or possibly almost all humans don&#x27;t learn from other people&#x27;s mistakes. But _some_ people do learn _some_ things from other people&#x27;s mistakes instead of their own.<p>I don&#x27;t think this is some sort of innate human thing, I think it&#x27;s purely down to ego. You think you know more or you&#x27;re better than the person who made the mistake, and therefore you don&#x27;t listen to them because you would never do that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=strken" target="_blank">strken</a>   <span class="timeago" data-date="2021-06-14 07:55:48 &#43;0000 UTC">2021-06-14 07:55:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s easier to learn from other people making mistakes when it happens directly in front of you than when they tell you about it afterwards. I&#x27;m never going to use heroin, or try to move a broken leg without splinting it first, for example.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pfarrell" target="_blank">pfarrell</a>   <span class="timeago" data-date="2021-06-14 02:34:11 &#43;0000 UTC">2021-06-14 02:34:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  “There aren’t any new problems; only new engineers.”
+  - Quote I read online a long time ago
+</code></pre>
+Agree with all your points, but there is a third way:  apprenticeship with older engineers. I advise new engineers to find their balance between not accepting the status quo but also realizing software is way more complicated than they think. 
+For example: successfully versioning an API over time while supporting live deployments is (I think) not something you’re going to learn in school.<p>As a further aside... I’ve heard older attorneys complain about newly minted lawyers.  They work to pass school and then the bar.  But when they start lawyering, new grads don’t know the first thing about how to actually file something at the courthouse. I’m saying, I don’t think it’s constrained to our industry.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sangnoir" target="_blank">sangnoir</a>   <span class="timeago" data-date="2021-06-14 03:02:04 &#43;0000 UTC">2021-06-14 03:02:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Agree with all your points, but there is a third way: apprenticeship with older engineers.<p>That&#x27;s unlikely to work: our industry has an ageism problem, combined with the low prospects of promotions&#x2F;raises which results in engineers having to frequently job-hop to get ahead. This results in most organizations having <i>very</i> limited institutional memory. Other compounding problems are a discussion for another day (title inflation: e.g. &quot;Senior engineer&quot; with 2 years <i>total</i> experience)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Spooky23" target="_blank">Spooky23</a>   <span class="timeago" data-date="2021-06-14 02:57:57 &#43;0000 UTC">2021-06-14 02:57:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think computing is following industry. I’d argue that most companies are younger and dumber than they were when I entered the professional world about 20 years ago.<p>A few months ago, i engaged to help fix a troubled system. The thing was built around kubernetes and the architecture was basically aligned with how a bunch of contractors were hired. Nobody really understood how it worked and it performed poorly. So poorly in fact that I reimplemented a core component in a shell script, mostly to quickly understand how it worked, and to my surprise, the thing ran faster on my laptop at moderate load than the actual system!<p>Sounds like a bad IT project, but to be honest whole companies run this way, saving pennies while setting dollars on fire.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mbreese" target="_blank">mbreese</a>   <span class="timeago" data-date="2021-06-14 06:19:33 &#43;0000 UTC">2021-06-14 06:19:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; most companies are younger and dumber than they were when I entered the professional world about 20 years ago </i><p>Channeling a post from earlier today — I’m not sure if companies are younger and dumber today, but I’m sure that you are older and wiser now than you were then. And I’m sure you are better at seeing the idiocy in companies. Bad projects have always been around. But it isn’t until you have more experience that you can fully appreciate a bad project — particularly when you’re in the middle of it!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akiselev" target="_blank">akiselev</a>   <span class="timeago" data-date="2021-06-14 02:42:56 &#43;0000 UTC">2021-06-14 02:42:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; Maybe the auto industry at the turn of the 20th century also spent decades re-learning the same lessons over and over, as the novelty of mass-producing complex systems continued to elude us. Hell, the new auto companies still don&#x27;t get it right.</i><p>I think you have a misconception about what manufacturing is like. Waterfall development is just as unrealistic in manufacturing as it is in software, the scales are just different. People create CAD models of the machines in a factory all the time but those are architectural diagrams - when it comes time to build, the people on the ground (the equivalent of the software engineers) have to figure out all of the details, often using no more than trial and error guided by a little intuition. Experienced individuals know more about the pitfalls and gotchas but they&#x27;re still creating something <i>new</i> even if they&#x27;re going off some grand design. Becoming a competitive manufacturer in something simple like ball point pen balls is a years long process of mastering the &quot;craft,&quot; gathering real world data, and incrementally improving. Factors like a single critical employee&#x27;s physical disability can decide the layouts of entire factories so there are no cookie cutter factories for them to build.<p>The real world is a lot messier than software. Just like we spend most of our time chasing bugs and implementing features, they spend most of their time building or troubleshooting interfaces between machines and processes, optimizing, and so on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=collyw" target="_blank">collyw</a>   <span class="timeago" data-date="2021-06-14 10:49:54 &#43;0000 UTC">2021-06-14 10:49:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Waterfall development is just as unrealistic in manufacturing as it is in software<p>Is it? Aren&#x27;t a lot of the largest systems build using waterfall, or they certainly were in the past. When i was taught waterfall at university you were allowed to reiterate steps, yet these is a constant straw man that you only gte to move down the waterfall.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gonzo41" target="_blank">gonzo41</a>   <span class="timeago" data-date="2021-06-14 13:15:59 &#43;0000 UTC">2021-06-14 13:15:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well maybe the way to compare software waterfall to manufacturing waterfall is that the CI&#x2F;CD pipeline that&#x27;s in use is the waterfall. But even car companies have a development stage that&#x27;s messy where they have to retool production lines. But they manage it the same way we do, by making things as standard as possible. Like how most SUV&#x27;s have the same chassis and only really differ in internal fitout and body panels.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wildrhythms" target="_blank">wildrhythms</a>   <span class="timeago" data-date="2021-06-14 02:42:47 &#43;0000 UTC">2021-06-14 02:42:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I attended a community college and learned Java, C#, PHP, HTML, CSS, Javascript... the classes were more or less an introduction to full stack web development. I remember when I transferred to a four-year school for my Bachelor&#x27;s the other students in the CS program (we were all Juniors) struggled to put together a year-end project requiring a GUI- like a text input and some buttons, simple HTML&#x2F;CSS, or Swing (popular at the time). They didn&#x27;t even know where to start with GUI development. Is this kind of thing still not being taught?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Izkata" target="_blank">Izkata</a>   <span class="timeago" data-date="2021-06-14 03:41:31 &#43;0000 UTC">2021-06-14 03:41:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My college, none of that was in the Computer Science (CS) curriculum - it was all part Information Technology and Management (ITM).<p>CS was focused mostly on the broad underlying structure of computing, things like how software interacts with hardware (this was gutted a year or two before me), algorithms, programming paradigms (functional&#x2F;etc), the theory behind databases (3rd normal form sound familiar?), and so on. The idea was to give you a really good foundation such that you could self-learn much much easier after college, but also unfortunately that you had to do some of that selfglearning right away because it didn&#x27;t prep you for getting things done.<p>I only took one or two ITM courses out of curiosity, so I&#x27;m less confident in describing it in broad strokes, but the impression I got is that it was for teaching specific skills while not &quot;wasting&quot; time on better understanding how they work. Very get-things-done oriented. The web development one, for example, used a lot of jquery, but never touched on what was going on under the hood. I can see it working as preparation for being able to do a job, but it left you kind of stuck if you hit a roadblock and didn&#x27;t know where to look for answers.<p>If I had to stereotype them, a CS student would spend time writing an algorithm for something instead of finding an existing library, while an ITM student would look for a library and if they can&#x27;t find one say they can&#x27;t do it.  But the ITM student wouldn&#x27;t get lost implementing and end-to-end project as long as they could use tech they already know, whereas the CS student has never done such a thing before.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swrj" target="_blank">swrj</a>   <span class="timeago" data-date="2021-06-14 02:47:08 &#43;0000 UTC">2021-06-14 02:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can only speak for my own experience (large, top 25 state school in the US) - this sort of thing is still not taught. There was maybe one or two optional courses that taught software engineering related material, the rest of it was just a lot of computer science theory. Definitely struggled the first couple of months at my first job out of college due to this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barbarbar" target="_blank">barbarbar</a>   <span class="timeago" data-date="2021-06-14 05:08:45 &#43;0000 UTC">2021-06-14 05:08:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Welcome to agile development. We fix it in the next sprint. Except we don&#x27;t - since we need the new button.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pm90" target="_blank">pm90</a>   <span class="timeago" data-date="2021-06-14 03:01:33 &#43;0000 UTC">2021-06-14 03:01:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Computer Science curriculum in most universities is focused on theory. Mine had a large component of working with and understanding digital electronics, Operating Systems, Networking, Discrete Math. Most of the ‘popular’ electives were AI related. Very few courses on actually building maintainable and functional systems. Most of what I learned I had to learn from experience and from others I worked with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deckard1" target="_blank">deckard1</a>   <span class="timeago" data-date="2021-06-13 17:57:03 &#43;0000 UTC">2021-06-13 17:57:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was going to comment on this very thing in the other thread about software glue[1]. In that article there is a youtube video on Multics vs Unix[2] which really outlines why microservices were always doomed.<p>Someone should coin a new law for how programmers have to rediscover Brooks&#x27;s law every 5-10 years. The issue with microservices, as it has always been, is that you need an <i>enormous</i> company to brute force the communication pathways and maintenance overhead for it to all work. And by work, I don&#x27;t mean function efficiently (as the Multics vs Unix video shows). I mean <i>just function</i>. Just work at all. The Multics team had all the devs and the Unix team was two guys doing laps around the Multics team. Because they had the mathematics on their side.<p>Remember the bad old days of memory thrashing? That&#x27;s what happens to teams that do not have enough bandwidth to properly maintain the dozens of services they are responsible for. Your organization gets frozen.<p>This is what we all get for taking advice from the Googles and Facebooks of the world. Google has like a billion lines of code in a monorepo. They do not do things remotely like 99% of the businesses out there. They are sitting on huge piles of money that lets them be incredibly inefficient <i>for decades</i>.<p>[1] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27482832" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27482832</a><p>[2] <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=3Ea3pkTCYx4" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=3Ea3pkTCYx4</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h43k3r" target="_blank">h43k3r</a>   <span class="timeago" data-date="2021-06-14 04:58:07 &#43;0000 UTC">2021-06-14 04:58:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Googler here. You are absolutely right. I would never ever do something the Google way outside of Google.<p>Google has a dedicated organisation for maintaining all the infrastructure required for and around microservices. We are talking about 500-1000 engineers just improving and maintaining the infrastructure.<p>I don&#x27;t have to worry about things like distributed tracing, monitoring, authentication, logs, logs search, logs parsing for exceptions, anamoly detection on logs, deployment, release management etc. They are already there and is glued pretty well that 90 percent of engineers don&#x27;t even have to spend more than a day to understand all that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=collyw" target="_blank">collyw</a>   <span class="timeago" data-date="2021-06-14 11:03:13 &#43;0000 UTC">2021-06-14 11:03:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To me a microservices application is a monolithic application, with unreliable network calls between the components. That can&#x27;t possibly make things simpler to understand or maintain.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jillesvangurp" target="_blank">jillesvangurp</a>   <span class="timeago" data-date="2021-06-13 15:52:06 &#43;0000 UTC">2021-06-13 15:52:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People do microservices for the wrong reasons. There are only a few somewhat valid reasons:<p>1) something has different run time needs than something else. Think CPU, memory, network. Breaking stuff up allows you to make different choices here. Although I have dodged this by simply deploying the same monolith and configure it to do different things.<p>2) Something needs to be developed by a different team and for whatever reasons you don&#x27;t want those teams to be too dependent. It&#x27;s a bad reason but it&#x27;s valid in a lot of companies where certain teams just need to be engineered around or where there is a fundamental lack of trust between different parts of the org chart. Conway&#x27;s law is a thing. It&#x27;s the most common reason to do micro services.<p>3) You have two things depending on each other (cyclical dependency) and you want to reuse that thing. Extracting it to a third thing is a common way out. It&#x27;s true for almost any component technology. If you have two components, you&#x27;ll find a reason to create a third. And a fourth. And so on. However, consider using something less dramatic. E.g. code libraries are a valid choice. Or having an extra module in your source tree.<p>Everything else is just needlessly&#x2F;prematurely increasing overhead, deployment friction, etc. You get more things to monitor, deploy, manage the roadmap off, worry about, specialize in, etc. Big bloated organizations do micro services because they are big and bloated. Many smart startups keep this nonsense to a minimum. Of course some startups start out being over funded and bloat too early. VC money is great and sometimes requires over engineering like this (i.e. impress the suits). I&#x27;ve heard more than a few CTOs boast their multi cloud strategy and micro service architecture. In my mind that translates to we funnel a lot of VC money to Amazon and pay people full time to do just that. Ridiculous monthly bills and no users or traction is a common pattern in that world.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-13 16:39:04 &#43;0000 UTC">2021-06-13 16:39:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, i don&#x27;t think our needs fall into any of those three.  But our reasons may just be, as you say, the wrong reasons.<p>We split up our services when the majority of changes made to a service can be made independently of everyone else.  So then each of our services is a different codebase, and they each have a completely different rate of change from each other.  You very rarely would ever make changes across all services as once, only when changing what&#x27;s being communicated between some set of services.  Some services are large, some are small, and many of them fall into the category of -- developed for a while then stabilized and now basically rarely every touched just works.<p>So then the advantage is that you always have a small mental working set.  You&#x27;re focusing on a service at a time, have less to worry about breaking everything else with your changes.  And then when you deploy, even if everything goes horribly wrong, it&#x27;s just your one service that is down, and everything else is up and running, and you&#x27;ll just have to process your queued messages once you came back online.<p>And then of course each service is smaller, so less code, less tests, faster to compile, faster to run through the  pipeline, faster to release.  And you&#x27;re only ever doing rolling deploys on a small sub-section of your infrastructure, never the whole thing at once.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AlexCoventry" target="_blank">AlexCoventry</a>   <span class="timeago" data-date="2021-06-13 18:33:12 &#43;0000 UTC">2021-06-13 18:33:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Modular interfaces are great, but why require communication over those interfaces to go via network traffic? Can&#x27;t you just use a library&#x2F;package?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-14 01:48:03 &#43;0000 UTC">2021-06-14 01:48:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some reasons may be:<p>1. Multiple languages&#x2F;tech stacks. Have something like protobufs and now any language can &quot;import&quot; your library instead of it just being things that can handle cffi.<p>2. State management. For example, redis couldn&#x27;t be an in-process library. There are in-process kv stores but that&#x27;s not the idea of redis.<p>3. Transparent monitoring for all languages. I can passively detect all retries, latencies, request counts, etc since there is a protocol.<p>4. Centralized fixes. Similarly to dynamic linking I can now update a single component and &quot;fix the world&quot; rather than redeploying every binary.<p>5. Canaries: I can deploy version N+1 to a mirror of production traffic and make sure it doesn&#x27;t explode. Then I can route 1%, 10%, 50%, 100% of traffic and check those metrics as well.<p>6. If something goes horribly wrong I can rewrite the entire service for performance or maintenance or whatever within a tightly bounded amount of time. Discord has many blog posts about doing this for some of their services.<p>Great talk: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=-UKEPd2ipEk" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=-UKEPd2ipEk</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-06-14 01:58:56 &#43;0000 UTC">2021-06-14 01:58:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Multiple languages&#x2F;tech stacks.<p>This is what I&#x27;m excited about--enabling a team to use the most powerful tools that address their own problems, rather than whichever Blub is approachable enough for the entire staff.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaaarrgh" target="_blank">throwawaaarrgh</a>   <span class="timeago" data-date="2021-06-14 02:43:03 &#43;0000 UTC">2021-06-14 02:43:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But this is a problem at large scale. Each language and stack carries a variety of overhead. The more of them you have, the higher the overhead is.<p>Say you run a factory, and everyone needs a hammer. When there&#x27;s only two teams, two kinds of hammer is fine. But fast forward to 10 teams. Can you always get all of those hammers when you need them? What if team #3 needs extra support? You need to find a new engineer who knows hammer #3, or take an engineer off of team #6 and train them on how to use hammer #3. And if all the hammers need a slight modification specific to that company, you need to make 10 different  modifications. And how will all the teams benefit from shared hammer tips-n-tricks if they all use different hammers? There&#x27;s a lot more overhead than you think at first.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adjkant" target="_blank">adjkant</a>   <span class="timeago" data-date="2021-06-14 03:06:36 &#43;0000 UTC">2021-06-14 03:06:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a problem if you assume that your infrastructure needs won&#x27;t scale. For many of the positives listed upthread, it can be a worthwhile trade to heavily invest in infrastructure. It just needs to be a conscious choice, and it also does more or less eliminate any small or even medium sized companies from making microservives work best. Unless you can afford to have an infra team bigger than multiple of your product feature teams, you&#x27;re not at the point of needing microservices probably.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-06-14 04:46:46 &#43;0000 UTC">2021-06-14 04:46:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t care what brand of chainsaw I may use, but we’re going to have trouble hiring and retaining chainsaw experts if our staff is only allowed steak knives (which is what other teams are familiar with).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-13 22:53:27 &#43;0000 UTC">2021-06-13 22:53:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because there is state?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-06-14 01:47:09 &#43;0000 UTC">2021-06-14 01:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the question was meant to be along the lines of: Why have that unit as a separate service then, instead of just locally as, e.g., a shared library, running in the same process?<p>Unless you have the specific need of that piece of code not being in the same process&#x2F;container&#x2F;computer&#x2F;network.<p>Unless your linking time is prohibitively high (but even very large software takes minutes, not hours), the benefit to compile time should be the same. But maybe &quot;redeploying&quot; is more disruptive (I don&#x27;t know, I haven&#x27;t done web development for something approaching 10 years now), and depending on the language, problems in one part can crash the whole process. (But depending on the actual process model used, shouldn&#x27;t it just restart? Unless the language is not sufficiently memory safe, e.g. it&#x27;s C, and you get way worse problems with memory smashers.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-14 03:49:25 &#43;0000 UTC">2021-06-14 03:49:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Service A calls to Service B and interacts with state, then Service B has a background process to do some post-processing on its state, then Service C calls to service B and interacts with state, then you interact with Service B&#x27;s web interface to interact with state.  How is the shared library managing and persisting the state between all these interactions?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-06-14 04:20:22 &#43;0000 UTC">2021-06-14 04:20:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The suggestion was to not split up the application into (many) services in the first place. Modularity and modular interfaces can exist without that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-14 06:25:16 &#43;0000 UTC">2021-06-14 06:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Generally when I think about a shared library, i think about a interface that manipulates state in memory to return some result.  I think i&#x27;d be quite surprised if it had some built-in persistence, if it launched its own background processes, and had a web interface included.  I would expect libraries to almost intentionally not cross these types of boundaries.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-06-14 07:32:57 &#43;0000 UTC">2021-06-14 07:32:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sigh. We can continue playing that game, or acknowledge that the question was between microservices vs. more monolithic approaches, obviously in situations where both is equally viable. If your boundaries between services (or whatever) are only what you just mentioned, then either it is a small application, or the services are not very “micro”.<p>Again, my, and likely OPs point, was that distinct, modular development (and for example the mentioned low compile times) is not contingent on separate services and IPC or even RPC, which come with a whole other can of worms.<p>(BTW your scope of shared library is also pretty narrow. For persistence for example, SQLite <i>is</i> essentially a persistence layer that is a shared library. And some libraries do certainly spawn threads for their work. But that’s not really the point.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-14 07:59:10 &#43;0000 UTC">2021-06-14 07:59:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So my question is how do you do modular development that spreads across multiple portions of the stack?  Because just saying &quot;put in a library&quot; doesn&#x27;t seem a sensible answer.<p>SQLite is a great library, but that&#x27;s more of a business-agnostic tool.  How do you encapsulate a dedicated portion of business logic, let&#x27;s say, managing image datasets for building machine learning models.  e.g. I want some apis for basic CRUD on datasets, i want to automatically create new versions of existing datasets as images get published, i want to generate stats in the background for these datasets, i want a ui to review and manage datasets for model building, and then i want all this packaged in a single library?<p>Also, to clarify, I&#x27;m not playing a game here.  I don&#x27;t care about theoreticals, I want to hear about how people have actually solved their problems, so I can then evaluate and use those approaches. So I&#x27;m trying to get at something a little bit more specific and less handwavy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tabular-Iceberg" target="_blank">Tabular-Iceberg</a>   <span class="timeago" data-date="2021-06-14 11:56:14 &#43;0000 UTC">2021-06-14 11:56:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You write all the same code as you would your microservice, you just don&#x27;t bother exposing the public methods over a network protocol, you just import them where you want to use them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-14 16:21:00 &#43;0000 UTC">2021-06-14 16:21:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t expose the public method of my HTML file over a network protocol?  Again, are we talking about the same thing?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-14 01:51:22 &#43;0000 UTC">2021-06-14 01:51:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Think of a situation where you have, for example, a database like Redis. If you need to run two systems that need to access that data there will need to be some process that maintains that data and allows other people to access it.<p>You would have a hard time to make a resource efficient distributed in-process key-value store.<p>You could have an in-process library but this would cause your two programs to have either:<p>1. Store different data<p>2. All writes would need to be distributed to all processes (looping back to needing a network connection).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-06-14 01:56:27 &#43;0000 UTC">2021-06-14 01:56:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that makes sense for the data store, but don&#x27;t microservices split up much more? Of course this could quickly devolve into a conversation about &quot;at what point is it microservices&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-14 02:07:32 &#43;0000 UTC">2021-06-14 02:07:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Of course this could quickly devolve into a conversation about &quot;at what point is it microservices&quot;.<p>Yep, exactly. I&#x27;ve built more than one microservice in my time that loads up a few GB of data into RAM and efficiently queries it for a lot of services. At that point the line between DB and service gets blurry.<p>But, essentially, the TCP connection between your services isn&#x27;t necessarily a big issue. If there is some logic&#x2F;operation&#x2F;access that is complex it makes sense to chuck a language-independent interface in front of it for most use cases. There are some where performance trumps maintenance but where it doesn&#x27;t I think this abstraction is helpful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spaetzleesser" target="_blank">spaetzleesser</a>   <span class="timeago" data-date="2021-06-13 19:53:47 &#43;0000 UTC">2021-06-13 19:53:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what I am always. People can&#x27;t manage libraries so they think services will solve this problem. It seems to me that a lot of microservices are creating technical debt that will come due when the requirements change in a way that requires a big overhaul of the system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rualca" target="_blank">rualca</a>   <span class="timeago" data-date="2021-06-14 00:24:37 &#43;0000 UTC">2021-06-14 00:24:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt;So then the advantage is that you always have a small mental working set.<p>You don&#x27;t need microservices architectures for that. Even a clean architecture on a monolith ensures that you can compartmentalize the problem domain.<p>At most, just refactor out that responsibility into a library&#x2F;component&#x2F;module.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-14 04:02:23 &#43;0000 UTC">2021-06-14 04:02:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a little bit hard to cleanly separate each grouping of database+cache+background tasks+apis+web ui.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-13 17:01:31 &#43;0000 UTC">2021-06-13 17:01:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are plenty more reasons than the three you&#x27;ve mentioned...<p>However, the one thing that&#x27;s <i>not</i> a reason to use microservices and which the article brought up a lot, is to increase resilience. Microservices do not increase resilience: at best they can avoid reducing it.<p>One of the most compelling reasons for me to use microservices is to limit the potential damage of bad decisions.<p>In a monolithic application, one developer can have a bad day and write some code that eg. leaks a database object into an area of the program which should deal with business logic only. Or perhaps they try out some new technology that turns out to have problems.<p>If that manages to get through code review, and is then copied elsewhere by other developers who are just following the example, you can quickly end up in a situation where fixing the problem requires everyone to stop feature work so that a significant rewrite or at least refactoring can take place.<p>In most cases, the business cannot afford to stop all feature work in this way, and so the problem will persist forever, becoming a permanent drop in productivity. It will also make your developers miserable.<p>In a microservices architecture, a single mistake can only grow to the size of a single service. In the worst case you have to stop feature work on that one service for a period of time, but work on other areas of the product can continue uninterrupted.<p>Of course, you could still make a mistake whilst defining the boundaries between services. Luckily those decisions are much less frequent and involve many more people, so there&#x27;s less chance of a freak bad decision. And even if you do get it wrong, you&#x27;re only looking at two or three affected services rather than your whole product.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macspoofing" target="_blank">macspoofing</a>   <span class="timeago" data-date="2021-06-13 17:15:10 &#43;0000 UTC">2021-06-13 17:15:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;you can quickly end up in a situation where fixing the problem requires everyone to stop feature work so that a significant rewrite or at least refactoring can take place.<p>But that&#x27;s normal and expected on any non-trivial codebase that has been evolving over some amount of time. We call that &#x27;maintenance&#x27;. You&#x27;ll never have 100% of your development resources pushing new features out. And if you do, well... we call that &#x27;incurring technical debt&#x27;. You should be investing in this kind of maintenance continuously, because as your product evolves, new problem areas will emerge.<p>&gt;In most cases, the business cannot afford to stop all feature work in this way, and so the problem will persist forever, becoming a permanent drop in productivity.<p>Yes.. That&#x27;s called &#x27;technical debt&#x27;. If your business does not invest in maintenance today, then it&#x27;ll will cost them in the future. This isn&#x27;t limited to software. If you&#x27;re maintaining physical infrastructure, same deal. You&#x27;re always fixing things. Microservices are not a solution to this.<p>&gt;In a microservices architecture, a single mistake can only grow to the size of a single service.<p>Not necessarily. Microservices tend to be tightly coupled to other microservices. I&#x27;ve worked on a system that suffered from sporadic &#x27;failure storms&#x27; where a failure in one service propagated across the entire system. It took days for us to track down the root cause. Microservices aren&#x27;t a panacea. In fact, everything is easier with monolithic systems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-13 22:15:00 &#43;0000 UTC">2021-06-13 22:15:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But that&#x27;s normal and expected on any non-trivial codebase that has been evolving over some amount of time.<p>Having to stop all feature work is not normal. A healthy business should be able to have a certain proportion of its engineers working on tech debt at all times, it shouldn&#x27;t have to stop all feature work to address tech debt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macspoofing" target="_blank">macspoofing</a>   <span class="timeago" data-date="2021-06-14 00:13:43 &#43;0000 UTC">2021-06-14 00:13:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Who says you have to stop all feature work?<p>Like you said, part of your dev resources will (should) be dedicated to maintaining your system.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-14 01:15:09 &#43;0000 UTC">2021-06-14 01:15:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because in a monolith, the problem can easily extend into all parts of the system, making it very difficult to continue feature work whilst fixing the problem.<p>In a microservice, in the absolute worst case (let&#x27;s say a foundational technology suddenly becomes unsuitable) you have to rebuild just that service.<p>Work on other services can continue uninterrupted in the meantime.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-06-14 01:53:53 &#43;0000 UTC">2021-06-14 01:53:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless the problem lies in an interface shared across many or all services, or the assumed data model, or other higher level considerations. There are certainly monoliths that are successfully being developed on by many people at the same time (OS kernels for example), and I can see a few arguments why developing and debugging with microservices can be harder. For once, it&#x27;s much easier to deal with most of your state in one address space instead of multiple.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macspoofing" target="_blank">macspoofing</a>   <span class="timeago" data-date="2021-06-14 11:24:40 &#43;0000 UTC">2021-06-14 11:24:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;Because in a monolith, the problem can easily extend into all parts of the system, making it very difficult to continue feature work whilst fixing the problem.<p>You&#x27;re creating a strawman. That&#x27;s now how software is written. Monolithic software is modularized as well, but the boundaries are behind interfaces and modules, instead of http services. That makes them easier to work with.<p>&gt;In a microservice, in the absolute worst case (let&#x27;s say a foundational technology suddenly becomes unsuitable) you have to rebuild just that service.<p>No. Not necessarily.<p>&gt;Work on other services can continue uninterrupted in the meantime.<p>Again, it&#x27;s a weird hill you&#x27;re dying on. You can refactor, or rewrite an module without pausing feature development. It happens all.the.time.<p>I don&#x27;t know what your professional experience is but clearly it is not indicative of the wider reality.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=candiddevmike" target="_blank">candiddevmike</a>   <span class="timeago" data-date="2021-06-13 17:17:51 &#43;0000 UTC">2021-06-13 17:17:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A single mistake can only impact one service?  If a microservice depends on said broken microservice, you could experience a cascade of failures, or possibly data corruption, because microservice development is typically predicated on trusting the other components following their API spec.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-14 01:19:05 &#43;0000 UTC">2021-06-14 01:19:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See my other reply: I&#x27;m not talking about bugs, I&#x27;m talking about tech debt and design mistakes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yxhuvud" target="_blank">yxhuvud</a>   <span class="timeago" data-date="2021-06-13 19:14:35 &#43;0000 UTC">2021-06-13 19:14:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well there are different cases of resilience. Creating a separate service for some part that have the potential for network traffic spikes can be fine and can make the system more resilient against that.<p>But you are right in that it makes the code resilience worse, as it makes logic discovery and overview harder.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rualca" target="_blank">rualca</a>   <span class="timeago" data-date="2021-06-14 00:30:34 &#43;0000 UTC">2021-06-14 00:30:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In most cases, the business cannot afford to stop all feature work in this way, and so the problem will persist forever, becoming a permanent drop in productivity. It will also make your developers miserable.<p>This scenario is only possible if the project has no automated testing or invests any effort in QA or no one pays any attention whatsoever to whatever is running in prod.<p>Meanwhile, one of the basic features of CICD is automated rollbacks.<p>If this sort of problem happens on a project, the problem was not caused by a developer having a bad day. The problem is caused by an entire team enduring a culture that allows problems to fester without anyone doing anything about it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Diggsey" target="_blank">Diggsey</a>   <span class="timeago" data-date="2021-06-14 01:17:27 &#43;0000 UTC">2021-06-14 01:17:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not talking about bugs, I&#x27;m talking about tech debt and design problems. Tests can&#x27;t catch those things, and you can&#x27;t rollback six months of work...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DasIch" target="_blank">DasIch</a>   <span class="timeago" data-date="2021-06-13 16:47:54 &#43;0000 UTC">2021-06-13 16:47:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big organizations do microservices because it reduces the number of people who you need to coordinate changes with to a reasonably small number per service. This is critical for the ability to effectively maintain services and make progress at a reasonable pace.<p>Important to note here is that a single microservice can actually be quite large with anywhere from 3-12 people working on just one or a few services. A single service could be larger than a startups monolith.<p>I would argue that this is really the only reasonable use of microservices. If you can fully understand your monolith, you shouldn’t change to microservices. If you fully understand or even know about all microservices in your organization, chances are that you’re doing it wrong.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakshaving_jgt" target="_blank">yakshaving_jgt</a>   <span class="timeago" data-date="2021-06-13 17:00:42 &#43;0000 UTC">2021-06-13 17:00:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As far as I can tell, there&#x27;s no reason why any of the constraints you have described could not be solved with libraries, and a function call is always going to be less complex than a network request.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raffraffraff" target="_blank">raffraffraff</a>   <span class="timeago" data-date="2021-06-13 21:42:02 &#43;0000 UTC">2021-06-13 21:42:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you ensure that everybody uses the correct version of the library? If a library change comes with a database schema change, how do you coordinate? With microservices, the owner of the service is responsible for the database schema change and service upgrade. Nobody else needs to be involved. (Genuine question, I&#x27;m an infrastructure guy, not a software engineer)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yakshaving_jgt" target="_blank">yakshaving_jgt</a>   <span class="timeago" data-date="2021-06-13 22:08:59 &#43;0000 UTC">2021-06-13 22:08:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where I work, we use Haskell&#x27;s type system to keep all of these boundaries in sync. All of the &quot;services&quot; we have extracted are indeed libraries. These libraries use type classes to interface with the core of our application which manages data persistence. This also means that each &quot;service&quot; can be written mostly in isolation and use a different data store (like an in-memory DB or something), depending on our needs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DasIch" target="_blank">DasIch</a>   <span class="timeago" data-date="2021-06-13 17:14:48 &#43;0000 UTC">2021-06-13 17:14:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are many reasons for why a library might not be sufficient. The most common one is that what you’re doing is stateful and requires some sort of data store.<p>That has a huge impact because now you need to set up the data store and potentially perform migrations, which means you may need to change how you do deployments. It may introduce a bottleneck such as number of connections to that store, so you now have limitations to think about when scaling.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tabular-Iceberg" target="_blank">Tabular-Iceberg</a>   <span class="timeago" data-date="2021-06-13 21:50:44 &#43;0000 UTC">2021-06-13 21:50:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why can&#x27;t a library be stateful or have a data store?<p>If you&#x27;re using libpng to edit an image on your disk you are working with both state and a data store. Yet plenty of applications do this every day without feeling a need to call it over a network.<p>And if you have to set up and migrate a client&#x2F;server DBMS for the library, wouldn&#x27;t you also have to do the exact same steps as if it was running as its own process somewhere the network?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pm90" target="_blank">pm90</a>   <span class="timeago" data-date="2021-06-14 03:27:09 &#43;0000 UTC">2021-06-14 03:27:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; And if you have to set up and migrate a client&#x2F;server DBMS for the library, wouldn&#x27;t you also have to do the exact same steps as if it was running as its own process somewhere the network?<p>You would not. The HTTP (say) API objects are versioned separately from the DB (or any internal implementation detail) of the service. This is abstraction: your API interfaces don’t change despite any internal changes.<p>To illuminate this a bit more suppose you do share such a library anyways. Having 2 independent services let’s you upgrade each of them independently. You aren’t forced to update all of them at once.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tabular-Iceberg" target="_blank">Tabular-Iceberg</a>   <span class="timeago" data-date="2021-06-14 11:30:52 &#43;0000 UTC">2021-06-14 11:30:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You would not. The HTTP (say) API objects are versioned separately from the DB (or any internal implementation detail) of the service. This is abstraction: your API interfaces don’t change despite any internal changes.<p>This is exactly the same as how libraries are supposed to be written. A stable public API so the user doesn&#x27;t have to bother with internal implementation details.<p>&gt; Having 2 independent services let’s you upgrade each of them independently. You aren’t forced to update all of them at once.<p>You aren&#x27;t forced to do that with libraries either. You don&#x27;t have to statically link them at compile time, you can load them whenever you please.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DasIch" target="_blank">DasIch</a>   <span class="timeago" data-date="2021-06-14 07:32:23 &#43;0000 UTC">2021-06-14 07:32:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A library can be stateful or have a data store but that means the user of that library has to be aware of changes beyond the API and hat to operate this data store.<p>&gt; And if you have to set up and migrate a client&#x2F;server DBMS for the library, wouldn&#x27;t you also have to do the exact same steps as if it was running as its own process somewhere the network?<p>No only the team doing it has to. Users of a service only have to worry about the API that it exposes, which should ideally never change in backwards incompatible ways and if it does, you make sure everyone calling the API understands it and migrates and you break backwards compatibility only after everyone has migrated.<p>As a user the implementation details of other services I don’t work on, don’t concern me.<p>Note that a service equivalent to libpng should probably not exist and be a library instead. A more reasonable service would be a wishlist service that keeps track of every customers wishlist and sends notifications to customers when products on their wishlist get discounted or are back in stock.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tabular-Iceberg" target="_blank">Tabular-Iceberg</a>   <span class="timeago" data-date="2021-06-14 11:39:00 &#43;0000 UTC">2021-06-14 11:39:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A library can be stateful or have a data store but that means the user of that library has to be aware of changes beyond the API and hat to operate this data store.<p>No, it does not mean that at all. Where are you getting this idea from?<p>&gt; Users of a service only have to worry about the API that it exposes<p>Users of a library only have to worry about the API that it exposes too. What kind of libraries have you been using?<p>&gt; Note that a service equivalent to libpng should probably not exist and be a library instead. A more reasonable service would be a wishlist service that keeps track of every customers wishlist and sends notifications to customers when products on their wishlist get discounted or are back in stock.<p>What&#x27;s the difference between the two? The only difference that I can see is that the libpng and libwishlist wouldn&#x27;t waste a network round-trip and lots of serialization and deserialization compared to a png service or whishlist service.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DasIch" target="_blank">DasIch</a>   <span class="timeago" data-date="2021-06-14 11:57:54 &#43;0000 UTC">2021-06-14 11:57:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let&#x27;s say you want to add redis for caching purposes. If a service does that, users of that service don&#x27;t have to be aware of it. If a library does that, users of the library do have to be aware of that.<p>Same problem applies, if your library suddenly wants to access another service (like S3 or some other AWS service).<p>You can of course maintain a stable API in a library and you should but that restricts the changes you can do to that library. A service I could rewrite in another language without users noticing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tabular-Iceberg" target="_blank">Tabular-Iceberg</a>   <span class="timeago" data-date="2021-06-14 12:52:35 &#43;0000 UTC">2021-06-14 12:52:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why do you need to make the dependence on Redis a part of the public API? You don&#x27;t do that with the service API, so why do you have to do it with the library API?<p>If you&#x27;re going to rewrite it in another language, what difference does it make if it was a library to begin with? There&#x27;s no point in making all the upfront work in both the service and all the clients making them talk on the network on the off chance you need to do a rewrite in another language, when you need to rewrite the API layer too. The only thing that would over after the rewrite is the client code. Doing it risks having wasted time doing a network API level on both client and server for nothing, not doing it just risks having to do it when you need it. Doing a rewrite &quot;without users noticing&quot; has no real benefit here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DasIch" target="_blank">DasIch</a>   <span class="timeago" data-date="2021-06-14 15:29:09 &#43;0000 UTC">2021-06-14 15:29:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why do you need to make the dependence on Redis a part of the public API? You don&#x27;t do that with the service API, so why do you have to do it with the library API?<p>Where does the redis instance come from? How does the library get access to it?<p>These are problems the library author cannot solve and end up being problems for the user. Much like monitoring of that redis instance will also become a problem for the user.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spaetzleesser" target="_blank">spaetzleesser</a>   <span class="timeago" data-date="2021-06-13 19:54:57 &#43;0000 UTC">2021-06-13 19:54:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Important to note here is that a single microservice can actually be quite large with anywhere from 3-12 people working on just one or a few services. A single service could be larger than a startups monolith.&quot;.<p>This seems quite reasonable In some companies it seems it&#x27;s more like 1 developer managing 3-12 services :-(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rualca" target="_blank">rualca</a>   <span class="timeago" data-date="2021-06-14 00:20:58 &#43;0000 UTC">2021-06-14 00:20:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; 1) something has different run time needs than something else.<p>This is supposedly the #1 technical reason to move to microservices: horizontal scaling + distributed system (in the rare cases the app needs low latency across the world)<p>The other one is being able to reuse services, whether provided by third parties or that you can download from docker hub&#x2F;GitHub and run yourself.<p>&gt; 2) Something needs to be developed by a different team and for whatever reasons you don&#x27;t want those teams to be too dependent.<p>This is supposedly the single core reason to adopt microservices architecture. This is what says on the tin.  If you want to have multiple teams work independently on separate components, they need to be loosely coupled deployed independently.<p>This is not brain surgery.<p>&gt; Everything else is just needlessly&#x2F;prematurely increasing overhead, deployment friction, etc.<p>What else is there? The rationale for microservices was from the start organizational, with a lesser scope on operations&#x2F;technical aspects.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaredcwhite" target="_blank">jaredcwhite</a>   <span class="timeago" data-date="2021-06-13 17:12:01 &#43;0000 UTC">2021-06-13 17:12:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem with the hype around microservices was that it&#x27;s the web app deployment equivalent of writing device drivers in C. Sure, some people can do it. Some people <i>have</i> to do it. Yet most people shouldn&#x27;t even make the attempt.<p>I&#x27;ve been on teams where we can&#x27;t even reliably deploy code over time to <i>one</i> service. The idea of our team maintaining multiple services is madness. That&#x27;s not a knock on any individual&#x27;s technical merits. Deploying code to the cloud is just hard, period—and that&#x27;s even when talking about a traditional monolith!<p>I&#x27;m glad the pendulum is swinging back. The microservices pattern is useful for the areas in which it&#x27;s useful…it just so happens that problem space is <i>way</i> smaller than the hype cycle cared to admit a few years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dwaite" target="_blank">dwaite</a>   <span class="timeago" data-date="2021-06-13 22:08:41 &#43;0000 UTC">2021-06-13 22:08:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I&#x27;ve been on teams where we can&#x27;t even reliably deploy code over time to one service. The idea of our team maintaining multiple services is madness. That&#x27;s not a knock on any individual&#x27;s technical merits. Deploying code to the cloud is just hard, period—and that&#x27;s even when talking about a traditional monolith!<p>If devops has a good philosophy here it is - if something is hard, you should do it more often. When something is intermittent pain it can be avoided or considered a one-off; if you are say deploying your web app once a week or more people will start to figure out how to automate the manual processes and optimize the slow ones, rewrite troublesome components and come up with strategies for things like incremental database migrations.<p>More generally - everything is a trade-off, and you shouldn&#x27;t blindly accept more complexity when you don&#x27;t need the benefits that it is supposed to provide. But sometimes you need to embrace the complexity of doing things the right way when you are hitting up against limitations of doing it the wrong way (in this example - slow, painful, error-prone deployments)<p>Microservices are useful when the monolith becomes too complex for local reasoning and management, so you instead compartmentalize things into components with contracts and reason about those, while you are responsible for managing just your own component. You&#x27;re taking on complexity (and latency, and additional resource utilization) because your system started to hit up against the limits of everyone working within the same project.<p>If you haven&#x27;t hit the point where your database is falling over in production because of concurrent loads, or where development is hindered by the infrastructure&#x2F;dependency or time requirements of doing a local test, or various other problems - you likely don&#x27;t need to invest in doing microservices.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ownagefool" target="_blank">ownagefool</a>   <span class="timeago" data-date="2021-06-14 08:36:58 &#43;0000 UTC">2021-06-14 08:36:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d argue it&#x27;s just the word micro.<p>People draw the boundries out in very odd places when they&#x27;re following microservices like a religion, but here&#x27;s an example where it might not suck.<p>Pull out the auth service.<p>Should a startup with a single app do this?  Probably not.<p>But as soon as your big enough that someones yelling at you to power multiple services and you have compliance requirements that requires you solve protective monitoring, you probably have a project for a small team of experts, a reason to run this indepedently, and a stable enough API that you can do it well.<p>Alternatively you could pay Okta &amp; co in blood. :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pm90" target="_blank">pm90</a>   <span class="timeago" data-date="2021-06-14 03:32:05 &#43;0000 UTC">2021-06-14 03:32:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The author doesn’t say the pendulum is swinging back. They’re providing many (valid) failure modes which were not evident at the start of the “revolution”. We’re just building tools that make it easier to build and operate micro services and being deliberate about when services should be split.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevmo314" target="_blank">kevmo314</a>   <span class="timeago" data-date="2021-06-13 15:20:38 &#43;0000 UTC">2021-06-13 15:20:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Some teams were suffering from servicitis. Even worse than that, it generated a lot of friction while developing. One could not just look into a project in their IDE, but it required to have multiple projects open simultaneously to make sense of all that mess.<p>This is real: I&#x27;ve worked in projects where purely transformational code was offloaded into a &quot;service&quot;. Refactoring it into a library reduced lines of code, computational cost, and code complexity dramatically.<p>But wouldn&#x27;t it be cool if there were a framework where the developer didn&#x27;t have to demarcate where services started and ended? In principle, any pure asynchronous function could be abstracted out to a service. It would be neat if the compiler did that for me and deployment of the application was more like &quot;deploy the cluster&quot; instead of deploying each individual service.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aprdm" target="_blank">aprdm</a>   <span class="timeago" data-date="2021-06-13 15:46:21 &#43;0000 UTC">2021-06-13 15:46:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lol, that sounds like Java in 2011... put an annotation on a function and it&#x27;s a service :) SOAP and all that.<p>Maybe they had something right! It did cause problems when users put something on a tight loop that was actually a remote call but not easy to see.<p>Anyho... what&#x27;s old is new!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kitd" target="_blank">kitd</a>   <span class="timeago" data-date="2021-06-13 16:06:42 &#43;0000 UTC">2021-06-13 16:06:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The one I was thinking of was SCA. Define the interface and implement the backend, either as a service or library,  and the SCA layer in between would handle how to call it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rsynnott" target="_blank">rsynnott</a>   <span class="timeago" data-date="2021-06-13 17:15:30 &#43;0000 UTC">2021-06-13 17:15:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also Java in 1996; remember RMI?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ourmandave" target="_blank">ourmandave</a>   <span class="timeago" data-date="2021-06-13 17:57:33 &#43;0000 UTC">2021-06-13 17:57:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used RMI but put a queue in front of it.<p>One at a time, please <i>wait</i> your turn...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brown" target="_blank">brown</a>   <span class="timeago" data-date="2021-06-13 15:27:59 &#43;0000 UTC">2021-06-13 15:27:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Next up, leftpad.io, leftpad as a service.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevmo314" target="_blank">kevmo314</a>   <span class="timeago" data-date="2021-06-13 15:39:10 &#43;0000 UTC">2021-06-13 15:39:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Haha someone actually made this: <a href="http:&#x2F;&#x2F;left-pad.io&#x2F;" rel="nofollow">http:&#x2F;&#x2F;left-pad.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coding123" target="_blank">coding123</a>   <span class="timeago" data-date="2021-06-13 19:00:00 &#43;0000 UTC">2021-06-13 19:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is comedy gold:<p>&gt; `left-pad.io` is 100% REST-compliant as defined by some guy on Hacker News with
+maximal opinions and minimal evidence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MichaelMoser123" target="_blank">MichaelMoser123</a>   <span class="timeago" data-date="2021-06-14 02:02:34 &#43;0000 UTC">2021-06-14 02:02:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            servicitis sounds like the absence of an experienced system architect, or the absence of any kind of system architecture as such.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ai_ja_nai" target="_blank">ai_ja_nai</a>   <span class="timeago" data-date="2021-06-13 21:35:58 &#43;0000 UTC">2021-06-13 21:35:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Erlang?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-13 15:25:30 &#43;0000 UTC">2021-06-13 15:25:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But wouldn&#x27;t it be cool if there were a framework where the developer didn&#x27;t have to demarcate where services started and ended?<p>Erlang&#x2F;Elixir, for JVM Akka, for .NET Akka.NET.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jerf" target="_blank">jerf</a>   <span class="timeago" data-date="2021-06-13 18:29:56 &#43;0000 UTC">2021-06-13 18:29:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, it&#x27;s a bit of a myth that those techs just magically scale everything. They don&#x27;t make that problem go away at all. You still need to find homes for the services to run on. It does make it a single function call to potentially start up a new service on a remote node, but if you need to be careful about resource use you&#x27;re hardly any better off than you are with anything else. In a way that can end up being <i>too</i> easy to just add work to systems rather willy-nilly, the ceremony in kubernetes or any other more explicit system can be a <i>good</i> thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-13 18:34:31 &#43;0000 UTC">2021-06-13 18:34:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The question wasn&#x27;t &quot;how to magically scale everything&quot;.<p>The question was why not eliminate the difference between in-process async call and a service, and that&#x27;s basically what Erlang and actors do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wrnr" target="_blank">wrnr</a>   <span class="timeago" data-date="2021-06-13 18:00:35 &#43;0000 UTC">2021-06-13 18:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is what lots of actor frameworks are trying, first specify a DAG of tranformations and then instantiate that graph on a physical network of computers such that the async boundaries can be scaled independently. It&#x27;s cumbersome, like writing the same program squared just to get scaling for &quot;free&quot;.<p>Personally I think the Persistency-as-a-library and Consistency-as-a-library architecture is a saner alternative.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cratermoon" target="_blank">cratermoon</a>   <span class="timeago" data-date="2021-06-13 16:13:37 &#43;0000 UTC">2021-06-13 16:13:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Timeouts, retries, and resilience<p>At a previous employer I was responsible for a critical service that was starting to show strain as traffic ramped up. It used Hystrix as the circuit breaker for calls to backend services, including the DB, and at peak times the thread pool would fill and start rejecting additional requests. I was tasked with fixing that.<p>There&#x27;s a very simple formula for tuning the number of threads:<p>&gt; requests per second at peak when healthy × 99th percentile latency in seconds + some breathing room<p>The catch is that getting good RPS and latency numbers is in a distributed system deployed across three geographically separated datacenters is the opposite of simple.  In particular, the legacy of the system meant that we had one write instance of the DB, in one datacenter, meaning that latency was different depending on which DC was the source of the call, so there was no one setting that worked for all instances.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sackerhews" target="_blank">sackerhews</a>   <span class="timeago" data-date="2021-06-13 22:03:30 &#43;0000 UTC">2021-06-13 22:03:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was once working with an engineer so hell bent on splitting everything up into microservices that at one point logging became incompatible with his solution.<p>He then argued that our banking solution didn&#x27;t need logging, because it was so well tested that failure rates would be extremely low.<p>I&#x27;m not making this up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=e67f70028a46fba" target="_blank">e67f70028a46fba</a>   <span class="timeago" data-date="2021-06-13 17:49:25 &#43;0000 UTC">2021-06-13 17:49:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Putting a network connection between your application abstractions was always a dicey proposition. (See EJB 1.0)<p>Making it the entire basis for application abstraction is lunacy, the sort of extremely clever idiocy that can only occur in the tech world.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=discreteevent" target="_blank">discreteevent</a>   <span class="timeago" data-date="2021-06-13 18:49:56 &#43;0000 UTC">2021-06-13 18:49:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The funny thing is that Martin Fowler had a First Law of Distributed Objects: Don&#x27;t distribute your objects. But then he switched and helped popularize microservices (he&#x27;s rowing back a bit nowadays).<p>I can only assume it&#x27;s because he saw his clients doing it and for a consultant the client is always right. (And I think the client was doing it to indulge their hard to get developers who wanted complexity and the freedom to use their programming language of the week)<p>It feels like a cowboy industry when this is the &#x27;leadership&#x27; we have.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=e67f70028a46fba" target="_blank">e67f70028a46fba</a>   <span class="timeago" data-date="2021-06-13 20:34:56 &#43;0000 UTC">2021-06-13 20:34:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep.<p>Look at the REST&#x2F;JSON API debacle that has unfolded over the last two decades. It is <i>trivially obvious</i> that REST is both difficult to implement and largely pointless outside of a hypermedia system, but the thought leaders never said a thing about it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=edgyquant" target="_blank">edgyquant</a>   <span class="timeago" data-date="2021-06-14 05:26:55 &#43;0000 UTC">2021-06-14 05:26:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is REST difficult to implement?  And as for pointless, what is a better way to present an API in your opinion?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tootie" target="_blank">tootie</a>   <span class="timeago" data-date="2021-06-14 01:27:09 &#43;0000 UTC">2021-06-14 01:27:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are some valid cases for microservices. Specifically when you have divergent scaling needs for different types of services. But almost everything else about them can be solved with good code modularity. I think microservices grew out crummy package managers that either didn&#x27;t work very well (npm, everything python has tried) or ones that were powerful but no one knew how to use properly (maven, nuget).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-14 01:40:52 &#43;0000 UTC">2021-06-14 01:40:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do your applications persist data? If you&#x27;re running a compute resource today there&#x27;s very likely a TCP connection between your application and your data somewhere.<p>Also, in things like kube, it&#x27;s possible to schedule jobs next to each other so your TCP connection is essentially going over localhost.<p>There are many tricks you can do to have this even out perform a single process application.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aprdm" target="_blank">aprdm</a>   <span class="timeago" data-date="2021-06-13 15:53:34 &#43;0000 UTC">2021-06-13 15:53:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really good write up! I think the suite spot in a &lt; 50 eng organization is either a monolithic or a microservice per domain (instead of per functionality)<p>Once you have thousands of engineers, then you either need extreme discipline and a huge team maintaining the &quot;devops&quot; pipeline that everything goes through, or, it&#x27;s basically everyone for themselves and a &quot;devops&quot; team trying to help others setting standards, best practices and whatnot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=trixie_" target="_blank">trixie_</a>   <span class="timeago" data-date="2021-06-14 00:34:22 &#43;0000 UTC">2021-06-14 00:34:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another one for <a href="http:&#x2F;&#x2F;microservices.fail&#x2F;" rel="nofollow">http:&#x2F;&#x2F;microservices.fail&#x2F;</a><p>There are so many developers who think microservices are the answer to every ill in the world it is infuriating. It’s like one of those ‘nosql is webscale we should use it’ conversions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tjpnz" target="_blank">tjpnz</a>   <span class="timeago" data-date="2021-06-14 02:50:29 &#43;0000 UTC">2021-06-14 02:50:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The E2E testing one is driving me nuts. I&#x27;ve told people time and time again that we&#x27;ll never be able to have hundreds (or even a dozen) of them working reliably. Yet people still try and to date we&#x27;ve lost even more hours in trying to make them reliable. The idea is seductive but in my experience an exercise in futility. At the same time I&#x27;ve proposed alternatives such as semantic monitoring but people typically recoil in horror when they learn what it means.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaaarrgh" target="_blank">throwawaaarrgh</a>   <span class="timeago" data-date="2021-06-14 03:05:11 &#43;0000 UTC">2021-06-14 03:05:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It depends on what your goals are. At Cisco, we absolutely needed to do E2E testing because we were shipping people physical devices that they relied on to work as intended. We built automation test frameworks and reusable&#x2F;configurable tests. We built labs full of equipment and time-sharing systems to keep equipment constantly in use. Quality engineers wrote tens of thousands of (mostly) no-code tests, that would each do tens of thousands of permutations of tests. We wrote new test tools and bought high-performance test gear. In the end, we were able to do via automated testing what it would have taken thousands more people to do individually.<p>Your organization and product goals may be totally different and not need that level of testing. But if it is needed, you can do it. It&#x27;s up to your business to decide how much to invest in it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=helge9210" target="_blank">helge9210</a>   <span class="timeago" data-date="2021-06-13 16:31:03 &#43;0000 UTC">2021-06-13 16:31:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I&#x27;ve seen many engineers ignoring these because it&#x27;s &quot;an edge case&quot;, to realize later they have a massive data integrity problem.<p>Massive optimism detected at the part of &quot;to realize later&quot;.<p>Also, if you have &quot;edge case&quot; with high (close to 1 but lower than 1) probability of successful outcome, with more and more tries probability of all outcomes being successful moves to zero (multiplication of lower than 1 values) and probability of at least single failed outcome goes to 1 (addition of lower than 1 values). You still have to handle low probability edge cases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mavelikara" target="_blank">mavelikara</a>   <span class="timeago" data-date="2021-06-13 21:49:01 &#43;0000 UTC">2021-06-13 21:49:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A response someone wrote to this article: <a href="https:&#x2F;&#x2F;medium.com&#x2F;productboard-engineering&#x2F;countering-microservice-disasters-5a8f957803cb" rel="nofollow">https:&#x2F;&#x2F;medium.com&#x2F;productboard-engineering&#x2F;countering-micro...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seibelj" target="_blank">seibelj</a>   <span class="timeago" data-date="2021-06-14 01:55:02 &#43;0000 UTC">2021-06-14 01:55:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Three languages</i><p>&gt; <i>”At the heart of our Engineering Strategy is a rather simple document. A manifesto if you’d like. We call it Core Engineering Principles.”</i><p>&gt; <i>Lists 7 fairly complex rules</i><p>&gt; <i>”There are about 30 more touching stacks, architecture, and org structure.”</i><p>I’m dying. This could only be written with a straight face by a microservices enthusiast.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zizee" target="_blank">zizee</a>   <span class="timeago" data-date="2021-06-14 03:48:20 &#43;0000 UTC">2021-06-14 03:48:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read the full post linked to by the grand-parent, and I think you are mischaracterizing things.<p>Settling on 3 programming languages is a good compromise between &quot;one language to rule them all&quot;, and &quot;anything goes&quot;. Being limited a single language&#x27;s talent pool can be quite limiting, as is only having one language to problems in. Having no limits on language choice also has obvious drawbacks.<p>The &quot;7 fairly complex rules&quot; are not _that_ complex considering they are rules for trying to tame a domain that is inherently complex. If you try and scale any software engineering team much beyond 30 engineers you will need to have similar rules regardless of whether you have a majestic monolith, microservices, or some mix of the two.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ferdowsi" target="_blank">ferdowsi</a>   <span class="timeago" data-date="2021-06-13 20:05:11 &#43;0000 UTC">2021-06-13 20:05:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s interesting to hear about stability concerns. Overall I think my organization moving to microservices improved our resiliency story. It allowed us to freeze sensitive legacy services and gradually build other surrounding services that incrementally replaced those legacy services with better-performing Go services. Rolling out new services is not onerous due to our Kubernetes platform (which was nowhere near as difficult to build on as some might suggest).<p>Strong service boundaries helped us, they didn&#x27;t hold us back.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 02:41:16 &#43;0000 UTC">2021-06-14 02:41:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FpUser" target="_blank">FpUser</a>   <span class="timeago" data-date="2021-06-13 15:54:44 &#43;0000 UTC">2021-06-13 15:54:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In places where micro&#x2F;services were *really* needed people&#x2F;orgs were implementing those even decades back. I personally was doing it in the 90s. For myself the criteria for making something as a service was simple: it will really cost the organization not to have it as a service.<p>Now as with many things that nothingburger got suddenly overhyped and ended up being shoved into every hole disregarding of any technical rationale.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-13 15:38:10 &#43;0000 UTC">2021-06-13 15:38:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; One could not just look into a project in their IDE, but it required to have multiple projects open simultaneously to make sense of all that mess<p>Why not both? You can set things up so your go-to-def can understand your API calls and head to the right place. This is very easy to do with a monorepo + protobuf setup.<p>&gt; How much does it cost to spin 200 services in a cloud provider? Can you do it? Can you also spin up the infrastructure needed to run them?<p>Assuming 256mb RAM&#x2F;service you&#x27;re still well within 1 machine territory. Once you get above 1 machine territory you can set things up so that you can:<p>1. Build really good integration testing tooling so that devs don&#x27;t really need to interface with all services. In a test spin up everything you need + deps, run an API call, tear everything down. This can be cached if your build system does that. You can run into issues if you have situations where 1 API call hits <i>every</i> service but if you&#x27;ve done that you&#x27;ve already messed up. In those cases the best you can do is mock a step in the chain there, run a few test hits the entire chain before release, but then have devs run against the mock in their integration tests.<p>2. Hybrid environments. You run a dev cluster that has all of your basic infrastructure that doesn&#x27;t change much and provide a way for developers to launch new tasks that don&#x27;t get routed to unless the driver has a feature flag flipped. Essentially you have a &quot;dev&quot; cluster that is continuously delivered from your master repo, each developer has the ability to launch new tasks in this cluster, and they can say &quot;all traffic from alice for FoobarService should go to `{namespace=bob,service=Foobar}`.<p>&gt; As you can imagine, end-to-end tests have similar problems to development environments. Before, it was relatively easy to create a new development environment using virtual machines or containers. It was also fairly simple to create a test suite using Selenium to go through business flows and assert they were working before deploying a new version.<p>Why is it not simple anymore? I&#x27;ve implemented this at more than one company.<p>&gt; Aside from being an obvious single-point-of-failure, defeating some of the service-oriented architecture&#x27;s principles, there&#x27;s more. Do you create a user per service? Do you have fine-grained permissions so service A can only read or write from specific tables? What if someone removes an index unintentionally? How do we know how many services are using different tables? What about scaling?<p>Come up with a convention for your company and stick to it. If you can automate it that&#x27;s better. If you build some way for your task you are running to know &quot;who&quot; it is they can inject that information into other libraries. For example you can inject the following environment variables into a container:<p><pre><code>    FOOBAR_DB_ABCD=pg
+    FOOBAR_DB_ABCD_PASSWORD=...
+    FOOBAR_DB_ABCD_HOST=...
+    FOOBAR_DB_ABCD_PORT=...
+</code></pre>
+You can then have some library you write expose a `OpenDatabase(&quot;abcd&quot;)` that connects in and injects everything. A security operator can then provision accounts and everything transparently. If you generate those env vars from some automated config management tool you don&#x27;t even have to see the passwords.<p>&gt; Instead of having a monolith getting all of the traffic, now you have a home-made Spring Boot service getting all of it! What could go wrong? Engineers quickly realize this is a mistake, but as there are many customizations, sometimes they cannot substitute this piece for stateless, scale-friendly ones.<p>I don&#x27;t think this is a single point of failure. This is a single point of failure for a specific <i>subset</i> of your infrastructure and at that it should be a very simple (mostly-pass-through) component. If your mobile gateway dies, your backend one shouldn&#x27;t. If all of your API gateways die then your integrations to third parties that are required for legal compliance should stay up, etc.<p>&gt; I&#x27;ve seen teams using circuit breakers and then increase the timeouts of an HTTP call to a service downstream.<p>You should always decrease timeouts for operations if you&#x27;re attempting to retry calls. You can also use a load balancer that already knows the liveness state of all of your instances.<p>Aside from this bit I mostly agree with this section about timeouts, retries, etcs is actually correct. If you are tackling a single problem that&#x27;s simple don&#x27;t break it into a distributed system. If you are saying &quot;I want to have X but we should implement a Y&quot; where Y is a completely different thing that doesn&#x27;t need to talk to X directly, then why not implement it in a separate binary? There&#x27;s no reason they can&#x27;t share code to make the burden of operation low.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jameshart" target="_blank">jameshart</a>   <span class="timeago" data-date="2021-06-13 19:33:56 &#43;0000 UTC">2021-06-13 19:33:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess you just won’t get traction on HN writing ‘Disasters I’ve seen in a monolithic world’.<p>If you have never gone through a significant dependency upgrade on a large monolithic codebase, you might not appreciate the value of microservice architecture. I’ve been at companies where the number one technical achievement for a tech organization for an entire calendar year was ‘successfully moved the app from .net 2 to .net 4’. Have you ever gone through the process of integrating an acquired company’s monolith into an acquiring company’s monolith? It’s futile. With a microservice architecture though I’ve seen acquisitions integrate significant systems (things like billing and auth) in a matter of weeks where monolith projects dragged on for years.<p>Sure, there’s no silver bullets. But there are a <i>lot</i> of problems with monoliths which microservices eliminate. Not without trade offs, naturally.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dspillett" target="_blank">dspillett</a>   <span class="timeago" data-date="2021-06-13 20:24:26 &#43;0000 UTC">2021-06-13 20:24:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; I guess you just won’t get traction on HN writing ‘Disasters I’ve seen in a monolithic world’.</i><p>Though I think mostly that is because the discussion there has been well trodden already. Microservice Architectures are relatively new, less completely explored, and less familiar to many.<p>There are new and interesting mistakes to make (the biggest two being to use this model where it is not at all appropriate, or cargo-culting and not <i>really</i> understanding what its advantages are so not actually taking advantage of them) where most of the &quot;interesting&quot; problems to be had in the monolithic world have been well documented for quite some time (which is why new models pop up, to try remove the potential for these problems in some, many, or even most, cases (anyone who says method X is better in <i>all</i> cases should be treated with deep suspicion)).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeffshek" target="_blank">jeffshek</a>   <span class="timeago" data-date="2021-06-13 20:48:14 &#43;0000 UTC">2021-06-13 20:48:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In those organizations, I highly doubt microservices or monolithic decisions would have made a difference.<p>Disorganized management won&#x27;t magically get fixed if the root problems of ASAP, priority, techinal debt, etc features aren&#x27;t fixed.<p>The fact that the organization was trying to combine two large monolithic codebase into one is an obvious smell that technical decisions are made by someone non-technical.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jameshart" target="_blank">jameshart</a>   <span class="timeago" data-date="2021-06-13 21:07:19 &#43;0000 UTC">2021-06-13 21:07:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well yes, acquisitions are frequently decided by nontechnical people. That’s where the money comes from.<p>For better or worse, nontechnical people sometimes make decisions. One of the jobs of a software architecture is to be robust in accommodating the consequences of them. Monolithic architectures frequently <i>aren’t</i>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-06-14 00:33:44 &#43;0000 UTC">2021-06-14 00:33:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Microservices was a terrible buzzword and definitely made me re-evaluate the kool-aids I had previously drank from Martin Fowler.<p>We already had services and service oriented architecture. Finding the correct size and establishing boundaries between services is a huge part of a correct architecture.<p>Building a monolith was a first step, then companies were branching out different parts in other services, when and if needed (eg. when doing acquisitions, as you mentioned).<p>Microservices just pushed companies to write services that were too small (I still remembers thought leaders praising 20 lines microservices) and declare dinosaurs everyone doing monoliths.<p>Your ‘successfully moved the app from .net 2 to .net 4’ becomes `updated all versions of the logger in all microservices`.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jameshart" target="_blank">jameshart</a>   <span class="timeago" data-date="2021-06-14 01:32:42 &#43;0000 UTC">2021-06-14 01:32:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Key difference for me between microservice architecture and service oriented architecture is the move away from a shared database. Switching to small, single purpose datastores is the much bigger shift in thinking than small, single purpose components.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=frays" target="_blank">frays</a>   <span class="timeago" data-date="2021-06-14 02:22:17 &#43;0000 UTC">2021-06-14 02:22:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great read, thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-13 15:21:34 &#43;0000 UTC">2021-06-13 15:21:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Disaster #1 is too small services, and Disaster #4 is huge, shared databases (between many services).<p>Which reaffirms my overall opinion that most people writing services have no idea what&#x27;s a service and what it encapsulates (it encapsulates its own state, for example, it&#x27;s basically distributed OOP).<p>BTW, remember when &quot;your service should be 100 lines of code top&quot; was considered a best practice?<p>Why is it so hard for most to resist this hype nonsense wave when its oncoming and it&#x27;s so hard to resist the anti-hype wave that inevitably follows it? Because hype and anti-hype are simply the oscillation of a sea of empty minds in look for a solution to a problem they don&#x27;t understand.<p>I&#x27;ve been writing service oriented apps for decades. In my &quot;world&quot; nothing has changed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unlimit" target="_blank">unlimit</a>   <span class="timeago" data-date="2021-06-13 15:35:44 &#43;0000 UTC">2021-06-13 15:35:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why is it so hard for most to resist this hype nonsense wave when its oncoming and it&#x27;s so hard to resist the anti-hype wave that inevitably follows it?<p>Because then how will one do career development? We are building now for a client and the client wants it, I can feel it in my bones that what we are building is far more complex and will be difficult to maintain. I am no expert in microservices but this hunch is just coming from common sense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-13 15:44:43 &#43;0000 UTC">2021-06-13 15:44:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In your situation it seems like a non-technical person in charge of technical decisions. Those decisions are by definition poor quality.<p>But the really bad moment is when the developers themselves make those bad choices entirely on their own.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=unlimit" target="_blank">unlimit</a>   <span class="timeago" data-date="2021-06-13 18:16:20 &#43;0000 UTC">2021-06-13 18:16:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In your situation it seems like a non-technical person in charge of technical decisions. Those decisions are by definition poor quality.<p>The client is to blame. The client let go of all the people who knew the technical side of the product and has hired an architect to re-architect everything. And the client is in a hurry.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yxhuvud" target="_blank">yxhuvud</a>   <span class="timeago" data-date="2021-06-13 19:24:32 &#43;0000 UTC">2021-06-13 19:24:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think one major contributing reason is that the amount of programmers is still rising so fast, with each new generation  being larger than the previous. Then every generation see the tail end of the previous generation and will then rebel against it to solve the issues. That they will have moderated after a couple oscillations doesn&#x27;t matter as there is so few of them in most work places.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeffbee" target="_blank">jeffbee</a>   <span class="timeago" data-date="2021-06-13 18:23:39 &#43;0000 UTC">2021-06-13 18:23:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, I don&#x27;t remember when 100-line services were the &quot;best practice&quot; because I don&#x27;t elevate every stupid idea that some inexperienced kid blogs about to &quot;best practice&quot;. I know 1000s of people in the industry and exactly none who would agree that is a best practice. Successful large-scale systems are built around much larger services, like &quot;deliver this e-mail message&quot; or &quot;store this blob of data&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-13 20:22:44 &#43;0000 UTC">2021-06-13 20:22:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You legit called 1000s of people in the industry to ask them what they think about the 100 lines meme. Great, appreciate your effort there. &#x2F;s
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spaetzleesser" target="_blank">spaetzleesser</a>   <span class="timeago" data-date="2021-06-13 16:04:04 &#43;0000 UTC">2021-06-13 16:04:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I recently got talked into developing a new project with Kubernetes and microservices. It&#x27;s an interesting journey but the complexity this adds is just enormous. Debugging is hard, refactoring is hard once it touches service boundaries, coordinating releases between services is hard and so on. I highly doubt that we will ever scale to a size where the complexity pays off.<p>I feel this kind architecture of  especially appeals to people who like to write only new code instead of understanding  existing code. They don&#x27;t like to read old code to see where new functionality may fit in so they spin up new services.<p>We are complaining about maintenance of old COBOL code but God be with the poor people who in 20 years will have to maintain the monstrosities we are creating today.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mech422" target="_blank">mech422</a>   <span class="timeago" data-date="2021-06-13 19:04:05 &#43;0000 UTC">2021-06-13 19:04:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt;We are complaining about maintenance of old COBOL code but God be with the poor people who in 20 years will have to maintain the monstrosities we are creating today.<p>I&#x27;m hoping for some major tax changes right before my retirement so I can dust off my COBOL and get phat lewt!<p>I wonder how many people that have actually written COBOL will be left by 2030?  No one mentions it here, but I&#x27;m sure there must be programmers deep in the bowels of banks and insurance companies that are learning COBOL even now?<p>Oh - And RPG... wonder if there&#x27;s any of that left ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yurishimo" target="_blank">yurishimo</a>   <span class="timeago" data-date="2021-06-13 22:43:41 &#43;0000 UTC">2021-06-13 22:43:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are definitely new devs learning COBOL. I&#x27;m not sure where I saw it, but I could have sworn I saw an article or blog post about these mission critical companies paying insane wages and signing bonuses to devs who would sign-on to learn &amp; maintain their infrastructure. And since these jobs would likely be on prem for security reasons, they don&#x27;t have to pay insane Silicon Valley wages either.<p>Imagine living in Cincinnati making $250k maintaining COBOL? Some people are totally fine with that paradigm and will keep the system running as long as it needs to.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mech422" target="_blank">mech422</a>   <span class="timeago" data-date="2021-06-13 22:54:08 &#43;0000 UTC">2021-06-13 22:54:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was down until the on-prem thing..<p>Still, I wouldn&#x27;t be surprised about insane wages for COBOL.  You make money at the bleeding edge of tech, or way back on the tail end - scarcity breeds profit :-)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spaetzleesser" target="_blank">spaetzleesser</a>   <span class="timeago" data-date="2021-06-14 00:45:09 &#43;0000 UTC">2021-06-14 00:45:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i think most of the highly paid COBOL devs are a myth. I looked into this a while ago and after talking to some people I got the impression that these jobs don&#x27;t pay well at all. This may be the reason why nobody wants to do it. I bet otherwise they would have no problem finding plenty of people who are OK with making 250k in Cincinnati.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ryanthedev" target="_blank">ryanthedev</a>   <span class="timeago" data-date="2021-06-14 02:06:08 &#43;0000 UTC">2021-06-14 02:06:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I work in a 300+ project monolith.  If you think microserivces are an issue.  I can’t help you.<p>I have worked in both. Until you realize that both worlds have their pros and cons, just stop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

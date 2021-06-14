@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/plan2scene-converting-floorplans-to-3d-scenes/">
+
+
+    <title>Plan2Scene: Converting Floorplans to 3D Scenes - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Plan2Scene: Converting Floorplans to 3D Scenes - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/plan2scene-converting-floorplans-to-3d-scenes/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/plan2scene-converting-floorplans-to-3d-scenes/">
+<meta name="twitter:title" content="Plan2Scene: Converting Floorplans to 3D Scenes - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Plan2Scene: Converting Floorplans to 3D Scenes - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T06:56:09JST",
+    "dateModified": "2021-06-11T06:56:09JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://3dlg-hcvc.github.io/plan2scene/">Plan2Scene: Converting Floorplans to 3D Scenes</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 17:02:24 &#43;0000 UTC">2021-06-11 17:02:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m the first author of this, happy to answer any questions. It&#x27;s great to see this on HN.<p>PS. I&#x27;ll be graduating this July with my masters.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=beatthatflight" target="_blank">beatthatflight</a>   <span class="timeago" data-date="2021-06-11 23:01:45 &#43;0000 UTC">2021-06-11 23:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Congrats!<p>As far as I can tell it&#x27;s not directly related to yours - but are you aware of any software that uses say, Android OS and a camera or pre-existing photos of the inside of a house&#x2F;office&#x2F;building to create a 3d map?  Matterport seems like it might but their Android app is not going so well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:19:47 &#43;0000 UTC">2021-06-12 22:19:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ben Claremont has done a lot of reviews of 3D virtual tour software, see <a href="https:&#x2F;&#x2F;youtu.be&#x2F;uKkQQ0aHRSc" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;uKkQQ0aHRSc</a><p>Ben’s reviews are the best I’ve seen, but he is far from the only reviewer in this space.<p>Unfortunately, most of the software in this space does not actually generate a floor plan, even if they do create a 3D model of the space (like Matterport). There is one program he highlighted which is bundled with a service from the company that you can use to process your pictures and generate a floor plan among other things, but some of that work is still done by human beings.<p>I’m still looking for a good consumer grade program that can do photogrammetry of a space and turn that into a floor plan. I’ve seen attempts to do this with phones and cameras, and the LIDAR scanner that Apple has recently introduced has improved the situation, but IMO it is still not there yet.<p>But please correct me if I’m wrong. I would love to be wrong.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-12 03:07:23 &#43;0000 UTC">2021-06-12 03:07:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did a bit of googling and this came up: <a href="https:&#x2F;&#x2F;canvas.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;canvas.io&#x2F;</a>. But, it&#x27;s not for Android.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:24:30 &#43;0000 UTC">2021-06-12 22:24:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ahh, yes — they used to support the Structure.io scanner that you could strap to an iPad or iPhone.
+ I bought one of those. I could never get it to work.<p>Edit: the Canvas.io software really wants the latest iPhone or iPad devices with LIDAR scanners built-in. It will supposedly run on lesser hardware, but with greater error in the constructed 3D map. Fine for a sample to get an idea of whether or not it might work for you, but not really enough to actually use for anything useful.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:43:24 &#43;0000 UTC">2021-06-12 22:43:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that the Canvas.io software really wants the latest iPhone or iPad devices with LIDAR scanners built-in. It will supposedly run on lesser hardware, but with greater error in the constructed 3D map.<p>Fine for a sample to get an idea of whether or not it might work for you, but not really enough to actually use for anything useful.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-13 02:27:37 &#43;0000 UTC">2021-06-13 02:27:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was reminded about a program called MagicPlan.  See <a href="https:&#x2F;&#x2F;youtu.be&#x2F;gEUk7YzfTcc" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;gEUk7YzfTcc</a> for a video demo of using it to scan an apartment, using an iPhone 12 Pro with the LIDAR sensor.<p>But IMO, this still isn’t good enough.  It’s a huge improvement over the corner mode, which is what you have to use if you aren’t using a device with a LIDAR sensor, but it’s still not enough.<p>I’m still looking.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tarsiel" target="_blank">tarsiel</a>   <span class="timeago" data-date="2021-06-11 19:00:52 &#43;0000 UTC">2021-06-11 19:00:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Congratulations! Always great to see SFU students in the wild :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 19:20:50 &#43;0000 UTC">2021-06-11 19:20:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrfusion" target="_blank">mrfusion</a>   <span class="timeago" data-date="2021-06-11 12:30:18 &#43;0000 UTC">2021-06-11 12:30:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You know it would also be useful to work in reverse. I get frusterated when house listings don’t include a floor plan. How cool if a program could go through the photos and guess a floor plan. Obviously a hard problem.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CrazyPyroLinux" target="_blank">CrazyPyroLinux</a>   <span class="timeago" data-date="2021-06-11 13:00:46 &#43;0000 UTC">2021-06-11 13:00:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A hard problem, but back in 2008, Microsoft Photosynth could stitch together a user’s collection of images into a 3-D model.  I remember seeing a detailed model of the exterior of the Notre Dame cathedral.<p>For people who have physical access to a property, I wonder if you could use a variant of SLAM like the robot vacs - maybe hack one of those laser tape measures to plug into your phone as you walk around the house.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rpvnwnkl" target="_blank">rpvnwnkl</a>   <span class="timeago" data-date="2021-06-11 17:31:33 &#43;0000 UTC">2021-06-11 17:31:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Photosynth was a great app, really disappointed when it was discontinued. Does anyone have the backstory on that? It seemed to have a leg up on Google’s street view&#x2F;cardboard app at the time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=semi-extrinsic" target="_blank">semi-extrinsic</a>   <span class="timeago" data-date="2021-06-11 22:08:11 &#43;0000 UTC">2021-06-11 22:08:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bringing a laser tape measure and a pen to a physical viewing, and just doing this manually, gets you 98% of the way.<p>It&#x27;s not automatic of course, but you can do it pretty discretely and cover a whole house with measurements in ~ 10 minutes. I did it every single time when we were looking at houses.<p>Also always brought a powerful flashlight and a small spirit level.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TaylorAlexander" target="_blank">TaylorAlexander</a>   <span class="timeago" data-date="2021-06-11 17:29:11 &#43;0000 UTC">2021-06-11 17:29:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well if you take video or many photos of a house you can create a 3D model using photogrammetry. I was recently served an ad showing that I think Redfin includes 3D photogrammetry captures of some homes. So it’s perhaps already being done in the wild.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jpgleeson" target="_blank">jpgleeson</a>   <span class="timeago" data-date="2021-06-11 21:40:50 &#43;0000 UTC">2021-06-11 21:40:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are a number of companies operating in the space. Matterport is one some people in my work have been exploring for documenting projects in various stages of construction. There are definitely still a bunch of rough edges, but the results so far even just using a phone to capture the spaces have been acceptable to good.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TaylorAlexander" target="_blank">TaylorAlexander</a>   <span class="timeago" data-date="2021-06-12 07:59:43 &#43;0000 UTC">2021-06-12 07:59:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice! Glad to hear it’s not just for research nerds these days. I’ve done a fair bit of experimentation with photogrammetry and it does work well for the built environment.<p>I have an application however where I want to be able to capture an outdoor forest scene with a video camera and convert that to a video game&#x2F;simulation scene which renders efficiently. It turns out that is a more challenging problem that actually no one has solved as far as I know.<p>There’s lots of neat research tho and it will be possible some day. This bit of research is pretty cool:
+<a href="https:&#x2F;&#x2F;youtu.be&#x2F;JuH79E8rdKc" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;JuH79E8rdKc</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-12 09:09:53 &#43;0000 UTC">2021-06-12 09:09:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is actually a very interesting video. Reflection effects look very realistic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TaylorAlexander" target="_blank">TaylorAlexander</a>   <span class="timeago" data-date="2021-06-12 18:53:56 &#43;0000 UTC">2021-06-12 18:53:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yah it’s cool stuff! Currently NERF takes a very long time to calculate and render but folks are working on improving that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-12 20:17:08 &#43;0000 UTC">2021-06-12 20:17:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you think its possible to decouple lighting effects from the generated 3D scene? Currently it seem to simply copy the actual lighting condition in the environment. In a way, it&#x27;s a limitation. It&#x27;s much better if it can provide the RGB color + other material information (SVBRDF decomposition). If that&#x27;s possible, then these meshes can be used in other environments.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 19:17:49 &#43;0000 UTC">2021-06-11 19:17:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Estimating the global camera pose using non-overlapping photos is a challenging problem. This is doable if the photos densely cover the house (e.g. video frames).<p>However, if the global camera poses are available, we can detect surfaces in photos and project them reasonably well into 3D. In the past, I have used this work to achieve something similar: <a href="https:&#x2F;&#x2F;github.com&#x2F;NVlabs&#x2F;planercnn" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;NVlabs&#x2F;planercnn</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=linsomniac" target="_blank">linsomniac</a>   <span class="timeago" data-date="2021-06-11 14:49:44 &#43;0000 UTC">2021-06-11 14:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In addition to Matterport, mentioned in another comment, there&#x27;s FloPlan, which has the agent walk around the house taking a video of the baseboards, and constructs a floorplan from that.  Not entirely accurate, but good enough for a rough idea of the layout of the space.<p>I believe it can also use the LiDAR sensor in newer phones, but I haven&#x27;t tested that.<p>An easier sell than Matterport, which (IIRC) is a $5K camera.  FloPlan just charges a per-plan price (again, IIRC).<p><a href="https:&#x2F;&#x2F;floplan.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;floplan.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:30:51 &#43;0000 UTC">2021-06-12 22:30:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Floplan is based on the technology from Cubi Casa at <a href="https:&#x2F;&#x2F;www.cubi.casa&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.cubi.casa&#x2F;</a> but FloPlan is only available for MLS property listings.<p>If you want the generic service, you have to go to Cubi Casa.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=diggernet" target="_blank">diggernet</a>   <span class="timeago" data-date="2021-06-11 15:42:07 &#43;0000 UTC">2021-06-11 15:42:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Matterport will also work with a phone, so the fancy camera is optional.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=c22" target="_blank">c22</a>   <span class="timeago" data-date="2021-06-11 16:39:18 &#43;0000 UTC">2021-06-11 16:39:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know if this is available where you live, but where I live the county assessor maintains a web application that contains information about each parcel and the buildings theron, including simple floorplans.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:32:21 &#43;0000 UTC">2021-06-12 22:32:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Austin, Texas, you can get a “platte map” which will show the boundaries of the property and a simple outline of where the known structures fit in that map, but that doesn’t help with indoor floor plans.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shezi" target="_blank">shezi</a>   <span class="timeago" data-date="2021-06-11 18:45:27 &#43;0000 UTC">2021-06-11 18:45:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could try RealityCapture, <a href="https:&#x2F;&#x2F;www.capturingreality.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.capturingreality.com&#x2F;</a>, which is a professional 3d capturing software. It has been free to try since Epic bought it. Unfortunately, you&#x27;ll need a lot of photos to get reliable 3d models. But playing with it will probably give you an understanding of how hard that problem really is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bradknowles" target="_blank">bradknowles</a>   <span class="timeago" data-date="2021-06-12 22:39:06 &#43;0000 UTC">2021-06-12 22:39:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So far as I can tell, the RealityCapture software only runs on Windows. You would have to feed it pictures or data from somewhere else (like your phone), but the software itself doesn’t run on the phone.<p>It also seems to focus on creating 3D models of things and not spaces.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Mountain_Skies" target="_blank">Mountain_Skies</a>   <span class="timeago" data-date="2021-06-11 14:09:57 &#43;0000 UTC">2021-06-11 14:09:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A friend invented a device to do that. It was a small backpack you (or whoever is making the listing) would wear and walk into each room of the building. After gathering the data, software would turn it into a floorplan. It probably took less time per room than getting good listing photos. Not sure why she never went to market with it but I&#x27;m going to guess something similar could be done now with just a modern smartphone and the right software.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andechs" target="_blank">andechs</a>   <span class="timeago" data-date="2021-06-11 14:24:56 &#43;0000 UTC">2021-06-11 14:24:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Matterport does this and uses it for real estate listings all the time.<p><a href="https:&#x2F;&#x2F;matterport.com&#x2F;gallery&#x2F;bclm-tollhouse" rel="nofollow">https:&#x2F;&#x2F;matterport.com&#x2F;gallery&#x2F;bclm-tollhouse</a><p>The &quot;dollhouse&quot; view is really handy for being able to get a sense of the space.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eps" target="_blank">eps</a>   <span class="timeago" data-date="2021-06-11 14:30:18 &#43;0000 UTC">2021-06-11 14:30:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a plenty of solutions like this already.<p>The earliest I am aware of was a specialized mini &quot;cart&quot; studded with video cameras that one would roll around the place and will get a textured 3D model that can then be walked around, Doom-style. It was made by a Vancouver startup was back in mid &#x27;00s.<p>There is also a specialized handheld &quot;scanner&quot; gadget that was marketed towards police use for capturing crime scene details. You&#x27;d just wave it around and see the resulting 3D phtogrammetry capture in real-time. Missed a bit - go back a wave a bit more. This was in the early &#x27;10s.<p>I&#x27;d imagine that this has been ported to smartphones already, because they now have sufficient sensor, storage and processing capacity for that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rhacker" target="_blank">rhacker</a>   <span class="timeago" data-date="2021-06-11 15:32:20 &#43;0000 UTC">2021-06-11 15:32:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There is a plenty of solutions like this already.<p>I definitely feel like no one has won the market yet. Having something available or somewhat good isn&#x27;t market dominance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=froh42" target="_blank">froh42</a>   <span class="timeago" data-date="2021-06-11 16:06:51 &#43;0000 UTC">2021-06-11 16:06:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder how it would compare to the floor plan my vacuum robot creates every time it is working. Or whether my Neato&#x27;s floor plans are anywhere near realistic.<p>Or what Neato does with all these floor plans on their servers ...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-11 17:10:23 &#43;0000 UTC">2021-06-11 17:10:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The floor plans for every house should already exist in some database. Planners&#x2F;builders at some point must had acquired them from the architect.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Mountain_Skies" target="_blank">Mountain_Skies</a>   <span class="timeago" data-date="2021-06-11 17:42:44 &#43;0000 UTC">2021-06-11 17:42:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be nice if there was standardization for such things. No doubt most counties will have on file somewhere blueprints and drawings that were submitted for building permits but most likely haven&#x27;t been digitalized. I&#x27;d hope that newer homes could have their blueprints submitted digitally by the architects but I suspect most places are still using paper centric processes.<p>About twenty years ago I worked for a big box store&#x27;s corporate headquarters. One of my tasks was to add new stores to MapBlast so they would show up on the &quot;Find a store&quot; section of our website. Problem was that often stores were built in new sections of rapidly growing sprawl so the streets weren&#x27;t in MapBlast yet. I&#x27;d have to make educated guesses as where to put the store on the map. Sometimes I could call the store and get some help that way but for our international stores, that was difficult because of the language barrier. We knew that there was some department somewhere in the company that had detailed drawings of each store, including precise location coordinates but the company was so large, we had no clue where to even begin to find that department.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 20:38:53 &#43;0000 UTC">2021-06-11 20:38:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are some prior work that can digitize (vectorize) floorplans: <a href="https:&#x2F;&#x2F;github.com&#x2F;art-programmer&#x2F;FloorplanTransformation" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;art-programmer&#x2F;FloorplanTransformation</a>.<p>This can detect rooms as polygons, doors&#x2F;windows as line segments and bounding boxes around objects (e.g. cabinets, sinks etc. indicated on floorplans).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-12 00:41:01 &#43;0000 UTC">2021-06-12 00:41:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting startup idea to digitize the blueprints&#x2F;floor plans by working with counties. I&#x27;d imagine if you offer them some money they won&#x27;t refuse.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=neppo" target="_blank">neppo</a>   <span class="timeago" data-date="2021-06-14 07:59:40 &#43;0000 UTC">2021-06-14 07:59:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This would be an excellent addition to services like homebyme <a href="https:&#x2F;&#x2F;home.by.me&#x2F;en&#x2F;" rel="nofollow">https:&#x2F;&#x2F;home.by.me&#x2F;en&#x2F;</a><p>They have a feature where you can put a floor plan and then retrace it yourself manually with walls, doors, windows etc.<p>It&#x27;s quite a pain to do, having this automated would be a boon.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-14 16:12:20 &#43;0000 UTC">2021-06-14 16:12:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh yes. This could be a nice interface to provide other inputs we (plan2scene) want as well. Like photo to room assignments. Then, plan2scene can create 3d houses with appropriate materials. Thank you for sharing this link.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jillesvangurp" target="_blank">jillesvangurp</a>   <span class="timeago" data-date="2021-06-11 10:09:08 &#43;0000 UTC">2021-06-11 10:09:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very interesting. We actually are looking at viable approaches to get usable indoor maps for large buildings currently. We are building map based productivity software for workers in factories and offices. Maps are important for our use case but not the core thing we do. We actually partner with other companies for maps and positioning typically.<p>Indoor mapping is a hard problem because typical map providers tend to ignore private spaces, which is where maps are most needed. E.g. Apple, Google, Here, etc have great maps for a very limited set of public buildings but they don&#x27;t really have solutions for indoors.<p>We know of a few companies specializing in this but it typically involves a lot of manual work and tends to have a high cost, require a lot of hand holding, and some very niche mapping skills. Also, a lot of indoor maps are intended for e.g. architects, contain a lot of clutter, or are generally not well suited for use on e.g. mobile screens.<p>It&#x27;s an interesting problem to start tackling because we are getting kind of a critical mass of technology that will be able to start delivering pretty accurate positioning to commodity phones. There are all sorts of things happening in the industry related to that. It&#x27;s a bit similar to when GPS became common on phones and it became a mass market in a few short years. Before that you had all sorts of niche stuff. After that you had ridiculous amounts of user generated content, open street maps, foursquare, etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hongwei" target="_blank">Hongwei</a>   <span class="timeago" data-date="2021-06-11 14:47:09 &#43;0000 UTC">2021-06-11 14:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi!  If you&#x27;re looking for a developer friendly indoor mapping suite (both for editing and viewing&#x2F;navigating), check us out - www.mappedin.com<p>Totally agree that it&#x27;s an overlooked problem and we&#x27;ve been quietly working to solve it for years. Early on we realized the key was to build &quot;everyman&quot; mapping tools that facility managers can use themselves to keep data up to date.<p>We&#x27;re increasingly focused on our developer-facing tools and I&#x27;d love any feedback if you end up taking a look!  (<a href="https:&#x2F;&#x2F;www.mappedin.com&#x2F;mapping&#x2F;sdks&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.mappedin.com&#x2F;mapping&#x2F;sdks&#x2F;</a>)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amitport" target="_blank">amitport</a>   <span class="timeago" data-date="2021-06-11 15:04:02 &#43;0000 UTC">2021-06-11 15:04:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            BTW the demo link in the sample app does not work:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;MappedIn&#x2F;platform-api&#x2F;blob&#x2F;master&#x2F;examples&#x2F;Demo" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;MappedIn&#x2F;platform-api&#x2F;blob&#x2F;master&#x2F;example...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hongwei" target="_blank">Hongwei</a>   <span class="timeago" data-date="2021-06-11 17:43:43 &#43;0000 UTC">2021-06-11 17:43:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!  fixed
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jillesvangurp" target="_blank">jillesvangurp</a>   <span class="timeago" data-date="2021-06-11 22:28:26 &#43;0000 UTC">2021-06-11 22:28:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We are in contact with mappedin but thanks for the tip!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhenr18" target="_blank">mhenr18</a>   <span class="timeago" data-date="2021-06-11 11:08:51 &#43;0000 UTC">2021-06-11 11:08:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey, producing indoor maps of private spaces is an area I&#x27;ve been working in for the past few years and I know exactly what you&#x27;re dealing with.<p>I&#x27;d be happy to talk more about this if you&#x27;re interested - email is in my bio.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iamphilrae" target="_blank">iamphilrae</a>   <span class="timeago" data-date="2021-06-11 11:34:15 &#43;0000 UTC">2021-06-11 11:34:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like your company and the company I work for operate in similar areas. We focus on the indoor routing and positioning aspects, but are quite constrained by the effort of converting a floor plan or PDF of a CAD into a map. May be worth us connecting on LinkedIn to see if our companies could mutually benefit each other. My profile is my username here, without the “i am”.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-11 17:04:47 &#43;0000 UTC">2021-06-11 17:04:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rent3D++ dataset is not available for download, there is only a Google form they want you to fill out and no automatic email is sent upon submission. It&#x27;s great that the source code is available, but it kind of defeats the purpose if the data it relies is behind a wall or at someone&#x27;s whim before you can access it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 18:11:54 &#43;0000 UTC">2021-06-11 18:11:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi, 
+This is because the Rent3D dataset we extend has a &quot;non-commercial use only&quot; term.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-11 23:28:55 &#43;0000 UTC">2021-06-11 23:28:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do we get access to it? I filled out the form and haven&#x27;t heard anything back.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-12 03:14:23 &#43;0000 UTC">2021-06-12 03:14:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did got a delivery failure on one of the emails I sent out. Can you submit again just to be sure?<p>Here is the form: <a href="https:&#x2F;&#x2F;docs.google.com&#x2F;forms&#x2F;d&#x2F;e&#x2F;1FAIpQLSfl4muDFf0qktqtWhj6f5GMF3ifybMZj5-2ox9R9GrfKUtcDg&#x2F;viewform" rel="nofollow">https:&#x2F;&#x2F;docs.google.com&#x2F;forms&#x2F;d&#x2F;e&#x2F;1FAIpQLSfl4muDFf0qktqtWhj6...</a><p>Sorry for the trouble.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 14:36:52 &#43;0000 UTC">2021-06-11 14:36:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yasith" target="_blank">yasith</a>   <span class="timeago" data-date="2021-06-11 19:59:33 &#43;0000 UTC">2021-06-11 19:59:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is neat, do you have any future ideas of making this into a product?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 20:18:40 &#43;0000 UTC">2021-06-11 20:18:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is definitely a thought I have considered. It could potentially ease lot of hassle related to 3D scanning of houses by real-estate companies. Very often, those scans require expensive equipment, professional expertise to use those equipment and considerable time and effort to capture the entire residence. Even then,you will find many holes in those scans and floating debris. With our work, one only needs a sketch of the floorplan and photos taken from that house. Plan2Scene will use data to infer appearance of unseen surfaces.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 20:31:15 &#43;0000 UTC">2021-06-11 20:31:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For instance, look at this sample 3d scanned house: <a href="https:&#x2F;&#x2F;matterport.com&#x2F;en-gb&#x2F;media&#x2F;2486" rel="nofollow">https:&#x2F;&#x2F;matterport.com&#x2F;en-gb&#x2F;media&#x2F;2486</a>. Make sure to switch to the doll-house view from the toolbar. There are many holes in the scan.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 07:29:34 &#43;0000 UTC">2021-06-12 07:29:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sachith500" target="_blank">sachith500</a>   <span class="timeago" data-date="2021-06-12 07:30:06 &#43;0000 UTC">2021-06-12 07:30:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            hi yasith, fancy running into you here :p
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bhagyas" target="_blank">bhagyas</a>   <span class="timeago" data-date="2021-06-11 20:01:15 &#43;0000 UTC">2021-06-11 20:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This seems to be really well done.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madhawav" target="_blank">madhawav</a>   <span class="timeago" data-date="2021-06-11 20:27:14 &#43;0000 UTC">2021-06-11 20:27:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

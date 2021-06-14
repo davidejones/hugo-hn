@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/finding-a-cpu-design-bug-in-the-xbox-360-2018/">
+
+
+    <title>Finding a CPU Design Bug in the Xbox 360 (2018) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Finding a CPU Design Bug in the Xbox 360 (2018) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/finding-a-cpu-design-bug-in-the-xbox-360-2018/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/finding-a-cpu-design-bug-in-the-xbox-360-2018/">
+<meta name="twitter:title" content="Finding a CPU Design Bug in the Xbox 360 (2018) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Finding a CPU Design Bug in the Xbox 360 (2018) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T01:16:24JST",
+    "dateModified": "2021-06-12T01:16:24JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://randomascii.wordpress.com/2018/01/07/finding-a-cpu-design-bug-in-the-xbox-360/">Finding a CPU Design Bug in the Xbox 360 (2018)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vvanders" target="_blank">vvanders</a>   <span class="timeago" data-date="2021-06-12 02:32:57 &#43;0000 UTC">2021-06-12 02:32:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bruce Dawson taught a 100 level class at the college I attended, it&#x27;s been a while but I think the class title was something around image processing. The first or second assignment was to copy one image region into another, little did we know that we implemented bit blit.<p>After turning in the assignment the next class he grabbed one random assignment from the class and added some quick benchmark instrumentation and if I remember right then asked the class how fast we think it could run. The next 30 minutes was a total geek out on cache lines, prefetching, alignment and all the other dark arts of performance optimizations. I don&#x27;t remember how fast he got it to go over the naive for loop but it was many orders of magnitude. There&#x27;s a few classes that really stick with you and that was definitely one of them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vmception" target="_blank">vmception</a>   <span class="timeago" data-date="2021-06-12 04:43:07 &#43;0000 UTC">2021-06-12 04:43:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only thing that stands out to me in college are the 100 level classes at the beginning and the 400 level classes in the middle that werent in my major<p>Maybe its the imposter syndrome coupled with actually being unqualified and incompetent which makes those classes stand out<p>But we can just pretend its only imposter syndrome
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skavi" target="_blank">skavi</a>   <span class="timeago" data-date="2021-06-12 03:12:04 &#43;0000 UTC">2021-06-12 03:12:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anyone know of any profs like this at UIUC?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=james_white" target="_blank">james_white</a>   <span class="timeago" data-date="2021-06-12 08:16:49 &#43;0000 UTC">2021-06-12 08:16:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Angrave was very memorable for me for CS241 Systems Programming (2016?). To this day my threading understanding is unparalleled to that of my colleagues due to him and that class.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cinntaile" target="_blank">cinntaile</a>   <span class="timeago" data-date="2021-06-12 10:22:37 &#43;0000 UTC">2021-06-12 10:22:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like it still exists <a href="https:&#x2F;&#x2F;cs241.cs.illinois.edu&#x2F;" rel="nofollow">https:&#x2F;&#x2F;cs241.cs.illinois.edu&#x2F;</a>
+and I can imagine this was a difficult course, you have challenging assignments on a weekly basis judging from the descriptions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bytematic" target="_blank">bytematic</a>   <span class="timeago" data-date="2021-06-12 04:36:35 &#43;0000 UTC">2021-06-12 04:36:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Barton Miller is like this at UW-Madison
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-06-12 03:32:39 &#43;0000 UTC">2021-06-12 03:32:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It sounds like a mispredicted xcdbt would actually need to invalidate or otherwise make coherent the cache lines that it mistakenly made incoherent, which also affects the instructions that read the incorrect data, so effectively a full pipeline flush. Even if they got that right, I suspect it would still result in some interesting performance anomalies whenever a mispredicted xcdbt was speculatively executed and then &quot;cancelled&quot;.<p>It&#x27;s notable that in 2005, it was already near the end for the P4&#x2F;Netburst with its insanely 31-stage pipeline, and CPU designs were moving towards increasing IPC rather than clock frequency.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brucedawson" target="_blank">brucedawson</a>   <span class="timeago" data-date="2021-06-12 15:48:35 &#43;0000 UTC">2021-06-12 15:48:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The question of how to properly implement an instruction like xdcbt is interesting. Undoing the damage would be both tricky and expensive. Only doing the L2-skipping when the instruction is executed (as opposed to speculatively executed) would probably be way too late. It seems that such an instruction is probably not practical to implement correctly.<p>I never asked any of the IBM CPU designers this question (it was too late to make changes so it wasn&#x27;t relevant) and now I regret that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=boulos" target="_blank">boulos</a>   <span class="timeago" data-date="2021-06-12 16:14:43 &#43;0000 UTC">2021-06-12 16:14:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Re-reading the post, it sounds like the conclusion was just “don’t use it” &#x2F; label it as dangerous. Why didn’t they end up marking the instruction as “can’t speculate this”?<p>(I can imagine wanting to keep it for straight line unrolled copies that don’t have prediction, but it still seems dicey given that you’d have to write any code with knowledge of the speculative fetches).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brucedawson" target="_blank">brucedawson</a>   <span class="timeago" data-date="2021-06-12 19:36:14 &#43;0000 UTC">2021-06-12 19:36:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Making the instruction not speculatable would indeed be a hardware change, which there was not time for. So that was not an option.<p>And, let&#x27;s say they did that. All other loads&#x2F;prefetches are done in the early stages of the pipeline, when execution is speculative. I think they would need new logic at a later stage of the pipeline just for this instruction, in order to initiate a &quot;late prefetch&quot;. That is potentially a lot of extra transistors and wires. And, at that point you have a prefetch instruction that doesn&#x27;t start prefetching until potentially dozens (or more) cycles later. At that point using xdcbt instead of dcbt may just make your code run slower.<p>What about, then, an xdcbt which is seen in a context where it is known early on that it will definitely be executed - a context where it is not speculative. Well, there really is no such context. Practically speaking there are so many branches that when an instruction is decoded there is almost always a conditional branch in front of it in the pipeline. And, architecturally speaking, any earlier instruction could trigger an exception which would stop execution flow from reaching the xdcbt. Pipelines are really really deep.<p>TL;DR - On heavily pipelined CPUs (even in-order ones) you don&#x27;t know for sure that an instruction is &quot;real&quot; until it is time to commit its results, and that is way too late for a &quot;prefetch&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saagarjha" target="_blank">saagarjha</a>   <span class="timeago" data-date="2021-06-12 16:51:25 &#43;0000 UTC">2021-06-12 16:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This sounds like something you’d need to fix in hardware.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SethTro" target="_blank">SethTro</a>   <span class="timeago" data-date="2021-06-12 04:10:39 &#43;0000 UTC">2021-06-12 04:10:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discussion from 2018: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16094925" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16094925</a><p>Side note, I&#x27;m happy to call Bruce a friend in the real world where he&#x27;s an equally talented juggler and runner.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=djmips" target="_blank">djmips</a>   <span class="timeago" data-date="2021-06-12 15:52:12 &#43;0000 UTC">2021-06-12 15:52:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wouldn&#x27;t say equally otherwise he would probably be renowned as a juggler or runner.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=seanmclo" target="_blank">seanmclo</a>   <span class="timeago" data-date="2021-06-12 05:12:20 &#43;0000 UTC">2021-06-12 05:12:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been working on verifying memory coherency units of modern out-of-order CPUs for a few years now. Nowadays, this would be a <i>huge</i> miss if it were to escape to silicon. You&#x27;d have a dead on arrival product.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toast0" target="_blank">toast0</a>   <span class="timeago" data-date="2021-06-12 05:28:26 &#43;0000 UTC">2021-06-12 05:28:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the specific application of the CPU here makes it more palettable. It was a nice idea, but it doesn&#x27;t work out, so scan for it and don&#x27;t publish games that have that opcode; if possible, issue a microcode update that makes it either a noop or an illegal operation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=marcan_42" target="_blank">marcan_42</a>   <span class="timeago" data-date="2021-06-12 07:57:10 &#43;0000 UTC">2021-06-12 07:57:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Game console CPUs get away with all sorts of brokenness. The Wii U CPU also has broken coherency, and needs workaround flush instructions in the core mutex primitives. You can&#x27;t run standard PowerPC Linux on it multicore for this reason.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=djmips" target="_blank">djmips</a>   <span class="timeago" data-date="2021-06-12 15:56:28 &#43;0000 UTC">2021-06-12 15:56:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree that console silicon can be rushed and bugs slip through. But then again, we may not even be aware of all the bugs in Intel or AMD products where they have been fixed post silicon via mechanisms such as microcode patches.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=l33t2328" target="_blank">l33t2328</a>   <span class="timeago" data-date="2021-06-12 16:29:46 &#43;0000 UTC">2021-06-12 16:29:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does ‘escape to silicon’ mean?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brucedawson" target="_blank">brucedawson</a>   <span class="timeago" data-date="2021-06-12 19:39:54 &#43;0000 UTC">2021-06-12 19:39:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If Intel ships a CPU with a bug in it then that is an expensive mistake. If they produce a bunch of CPUs with a bug (escape to silicon) that can also be an expensive mistake.<p>That said:
+1) I deal with CPU bugs pretty regularly on Chrome. Some old CPUs behave unreliably with certain sequences of instructions and we get bursts of crashes on these CPUs with some Chrome versions.
+2) Intel regularly &quot;fixes&quot; CPU bugs with microcode updates.
+3) The Spectre family of vulnerabilities are arguably CPU bugs.
+4) The Pentium fdiv bug was definitely a CPU bug.<p>So, CPU bugs escape to silicon all the time. Way more than I would have guessed just a few years ago. Our industry is built on a pile of wobbly sand.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattst88" target="_blank">mattst88</a>   <span class="timeago" data-date="2021-06-12 21:50:12 &#43;0000 UTC">2021-06-12 21:50:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; And that was the problem – the branch predictor would sometimes cause xdcbt instructions to be speculatively executed and that was just as bad as really executing them. One of my coworkers (thanks Tracy!) suggested a clever test to verify this – replace every xdcbt in the game with a breakpoint. This achieved two things:
+&gt; 
+&gt;    1. The breakpoints were not hit, thus proving that the game was not executing xdcbt instructions.
+&gt;    2. The crashes went away.<p>I love the simplicity and the genius behind this idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-06-12 02:44:34 &#43;0000 UTC">2021-06-12 02:44:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the PREFETCH_EX flag was never passed, why did the branch predictor speculatively execute xdcbt? That branch would never be taken, so it ought not to be predicted.<p>Was it a static branch prediction hint? I know PowerPC has that. If so, could it have fixed by just flipping the hint bit?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-06-12 02:46:07 &#43;0000 UTC">2021-06-12 02:46:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the article:<p><i>Instead simple branch predictors typically squish together a bunch of address bits, maybe some branch history bits as well, and index into an array of two-bit entries. Thus, the branch predict result is affected by other, unrelated branches, leading to sometimes spurious predictions.</i>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-06-12 02:47:30 &#43;0000 UTC">2021-06-12 02:47:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ahh thanks, shame on me for not reading to the end.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saagarjha" target="_blank">saagarjha</a>   <span class="timeago" data-date="2021-06-12 16:53:47 &#43;0000 UTC">2021-06-12 16:53:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Should’ve let the full thing execute before speculating on the results ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=barbazoo" target="_blank">barbazoo</a>   <span class="timeago" data-date="2021-06-12 02:07:58 &#43;0000 UTC">2021-06-12 02:07:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would it be possible to tell the CPU not to apply branch prediction in this one case?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-12 07:01:45 &#43;0000 UTC">2021-06-12 07:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a &quot;branch hint&quot; in PowerPC, I wonder if that&#x27;s acted on by the Xenon CPU in question.<p>edit: it&#x27;s discussed in the comments as well but they don&#x27;t know either. The author responds: &quot;I can’t remember how PowerPC branch hints work but if the branch hint overrode the branch predictor then it could have avoided the bug.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kmeisthax" target="_blank">kmeisthax</a>   <span class="timeago" data-date="2021-06-12 02:27:18 &#43;0000 UTC">2021-06-12 02:27:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, because the branch predictor is just &quot;on&quot; or &quot;off&quot;. You&#x27;d be wondering if you can make it not speculatively execute specific instructions. I&#x27;m going to infer from the article that there wasn&#x27;t a way to do that and it was far too late to spin a new CPU revision to prohibit speculatively executed xdcbt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anarazel" target="_blank">anarazel</a>   <span class="timeago" data-date="2021-06-12 06:28:12 &#43;0000 UTC">2021-06-12 06:28:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume one could have put a serializing instruction inside the &quot;dangerous&quot; path, which should then lead to the speculative execution path being rolled back before reaching the dangerous instruction. Obviously it&#x27;d also be expensive...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tardyp" target="_blank">tardyp</a>   <span class="timeago" data-date="2021-06-12 07:24:45 &#43;0000 UTC">2021-06-12 07:24:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder why they didn&#x27;t just make two separate routines without any branch except for loop. 
+Then you would just make another safety offset to assume for the last loop iteration prediction.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brucedawson" target="_blank">brucedawson</a>   <span class="timeago" data-date="2021-06-12 19:43:18 &#43;0000 UTC">2021-06-12 19:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That would _probably_ be safe, but you have to be sure that the xdcbt instructions in the &quot;special&quot; function are far enough into the function that speculative execution can never reach there. Pipelines are way deeper than most people realize so this might require a lot of instructions before the first xdcbt.<p>And then, for maximum performance you want prefetch instructions to be as early as possible. So, you immediately have a contradiction.<p>And, assuming that you resolve this there is still the risk that a mispredicted indirect branch could end up triggering an xdcbt. So, you end up with no guarantees anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saagarjha" target="_blank">saagarjha</a>   <span class="timeago" data-date="2021-06-12 16:55:01 &#43;0000 UTC">2021-06-12 16:55:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps an indirect branch elsewhere may be spuriously predicted to go to the instruction?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=netr0ute" target="_blank">netr0ute</a>   <span class="timeago" data-date="2021-06-12 02:22:54 &#43;0000 UTC">2021-06-12 02:22:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You probably could have done the equivalent if it were IA-64, but I suspect you can&#x27;t do this with plain old branch-prediction mechanisms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

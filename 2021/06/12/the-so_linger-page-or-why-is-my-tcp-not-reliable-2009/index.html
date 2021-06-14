@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/the-so_linger-page-or-why-is-my-tcp-not-reliable-2009/">
+
+
+    <title>The SO_LINGER page, or: why is my TCP not reliable (2009) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="The SO_LINGER page, or: why is my TCP not reliable (2009) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/the-so_linger-page-or-why-is-my-tcp-not-reliable-2009/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/the-so_linger-page-or-why-is-my-tcp-not-reliable-2009/">
+<meta name="twitter:title" content="The SO_LINGER page, or: why is my TCP not reliable (2009) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "The SO_LINGER page, or: why is my TCP not reliable (2009) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T12:49:15JST",
+    "dateModified": "2021-06-12T12:49:15JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.netherlabs.nl/articles/2009/01/18/the-ultimate-so_linger-page-or-why-is-my-tcp-not-reliable">The SO_LINGER page, or: why is my TCP not reliable (2009)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Animats" target="_blank">Animats</a>   <span class="timeago" data-date="2021-06-12 17:32:35 &#43;0000 UTC">2021-06-12 17:32:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is what we used to call a &quot;Berkeleyism&quot;. It&#x27;s an error in the UC Berkeley implementation of TCP in the kernel, which, being free, became standard. (Yes, there was TCP&#x2F;IP before Berkeley UNIX, at least four implementations.)<p>The trouble is that UNIX does not take &quot;close()&quot; very seriously. This is because &quot;close()&quot; is implicit on exit, and having &quot;exit()&quot; stall waiting for I&#x2F;O is undesirable. So, close is non-blocking. When you close a file after writing, close happens immediately, even if writing is not yet done. &quot;Calling close() DOES NOT guarantee that contents are on the disk as the OS may have deferred the writes.&quot;<p>So sockets got the same unchecked semantics as files.<p>Now, logically, you&#x27;d call &quot;fsync()&quot; to get a socket fully flushed. But, another Berkeleyism is that sockets were originally distinct from the file system, because networking was bolted on as an afterthought and not well integrated.  Hence &quot;send&quot; and &quot;recv&quot; instead of &quot;read&quot; and &quot;write&quot;. Being able to use read and write on sockets came later. So, sockets have &quot;shutdown&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway09223" target="_blank">throwaway09223</a>   <span class="timeago" data-date="2021-06-12 18:36:55 &#43;0000 UTC">2021-06-12 18:36:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The semantics around close() are as they are not because of issues around exit, but because of shared descriptors.<p>Calls that duplicate descriptors such as fork() or dup() will result in multiple descriptors which refer to the same network socket. These sockets need to be able to be closed individually via close() without actually shutting down the socket or modifying the socket state.<p>If close() terminated a connection ala shutdown() then it would be impossible for a process with a network socket to fork a temporary subprocess.<p>A different call is necessary to indicate that you wish to terminate the underlying network socket state.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-12 21:14:36 &#43;0000 UTC">2021-06-12 21:14:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually when people criticize UNIX i&#x2F;o behavior for not being proper what they want is for it to do that thing NT does where processes freeze indefinitely at the first sign of trouble, and you have to pull out the task manager and kill the thing. Nice thing about UNIX is pretty much the only time things get that bad is when you implement sigchld wrong, and the times when we want that behavior, like with linger, we can specify the number of milliseconds it should hang. In fact, NT is so zealous about the process freezing thing that even when it comes to the signals it&#x27;s required to be able to deliver by the ANSI C standard it will spawn a thread in your program just to do it. Being able to drop connections yolo style without the kernel having strong opinions is pretty important if, for example, your app is getting attacked by a slowloris and you need to shed resources while responding to requests from the main process. That&#x27;s why proper operating systems are rarely production worthy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway09223" target="_blank">throwaway09223</a>   <span class="timeago" data-date="2021-06-13 15:27:38 &#43;0000 UTC">2021-06-13 15:27:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, as succinctly captured by the &quot;worse is better&quot; philosophy: <a href="https:&#x2F;&#x2F;www.jwz.org&#x2F;doc&#x2F;worse-is-better.html" rel="nofollow">https:&#x2F;&#x2F;www.jwz.org&#x2F;doc&#x2F;worse-is-better.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=grzm" target="_blank">grzm</a>   <span class="timeago" data-date="2021-06-13 15:31:06 &#43;0000 UTC">2021-06-13 15:31:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or, from Richard Gabriel, the less-HN-hostile source:<p>- <a href="https:&#x2F;&#x2F;www.dreamsongs.com&#x2F;RiseOfWorseIsBetter.html" rel="nofollow">https:&#x2F;&#x2F;www.dreamsongs.com&#x2F;RiseOfWorseIsBetter.html</a><p>- <a href="https:&#x2F;&#x2F;www.dreamsongs.com&#x2F;WorseIsBetter.html" rel="nofollow">https:&#x2F;&#x2F;www.dreamsongs.com&#x2F;WorseIsBetter.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-14 03:35:55 &#43;0000 UTC">2021-06-14 03:35:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Those better engineers picked the wrong hill to die on with EINTR since it was never worse. It harmoniously reflects the way hardware works and hasn&#x27;t threatened UNIX&#x27;s long-term survival. His ideas could be more appropriately applied today to Node and Rust which made a devil&#x27;s bargain adopting a quadratic packaging model.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-06-12 21:00:57 &#43;0000 UTC">2021-06-12 21:00:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>When the socket is closed as part of exit(2), it always lingers in the background</i><p>In other words, <i>not</i> closing the socket before exiting might actually be the easiest way to not have the connection aborted with pending data?<p>Note that Windows has slightly different, and perhaps the more expected, semantics for closing a socket with pending data:<p><a href="https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;winsock&#x2F;nf-winsock-closesocket" rel="nofollow">https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;winsock&#x2F;n...</a><p><i>However, any data queued for transmission will be sent, if possible, before the underlying socket is closed. This is also called a graceful disconnect or close. In this case, the Windows Sockets provider cannot release the socket and other resources for an arbitrary period, thus affecting applications that expect to use all available sockets. This is the default behavior for a socket.</i>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=muststopmyths" target="_blank">muststopmyths</a>   <span class="timeago" data-date="2021-06-12 21:58:58 &#43;0000 UTC">2021-06-12 21:58:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually, your quoted text applies to when SO_LINGER option is used and the semantics are exactly the same for both platforms for this option.<p>Matching the semantics of Unix for most things was a goal of Winsock. In those days the NT TCP stack was new (compared to Berkeley TCP) and so there was a lot of effort spent to get it to match behavior so that applications did not get unexpected glitches.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

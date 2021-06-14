@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/implementing-private-fields-for-javascript/">
+
+
+    <title>Implementing Private Fields for JavaScript - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Implementing Private Fields for JavaScript - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/implementing-private-fields-for-javascript/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/implementing-private-fields-for-javascript/">
+<meta name="twitter:title" content="Implementing Private Fields for JavaScript - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Implementing Private Fields for JavaScript - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T11:37:30JST",
+    "dateModified": "2021-06-12T11:37:30JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://hacks.mozilla.org/2021/06/implementing-private-fields-for-javascript/">Implementing Private Fields for JavaScript</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=miohtama" target="_blank">miohtama</a>   <span class="timeago" data-date="2021-06-13 07:45:18 &#43;0000 UTC">2021-06-13 07:45:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are private fields worth all of the problems, as mentioned in article, in a language like JavaScript? Looks like it is cramming in little needed feature with some runtime cost. Also the mental model of private fields does not seem to map to JavaScript constructs very well.<p>Are there any obvious advantages as vast better JIT performance, etc<p>Edit: Sounds very confusing and overengineered<p>&gt; Having a private field named x must not prevent there from being a public field named x, so accessing a private field can&#x27;t just be a normal lookup.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=austincheney" target="_blank">austincheney</a>   <span class="timeago" data-date="2021-06-13 10:21:38 &#43;0000 UTC">2021-06-13 10:21:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Private class properties have been highly requested for nearly a decade since classes were first mentioned as a part of ES6, since almost after ES5 was formally published.<p>This is wanted to make the language more friendly to CS graduates and Java developers who are otherwise not comfortable using the language without the OOP they cannot live without outside this language. As an example, when I have had discussions about this in the past most proponents had no idea how scope works in the language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kkirsche" target="_blank">kkirsche</a>   <span class="timeago" data-date="2021-06-13 11:06:46 &#43;0000 UTC">2021-06-13 11:06:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I appreciate the context here, though I strongly dislike the reason. One of the values, in my opinion, of learning and working with multiple languages is being exposed to new paradigms and concepts rather than relying on a single approach to solving problems. At its core, javascript is a procedural language, with many functional concepts, and the more we try to hide the prototype-based underpinnings, I think it hurts this growth opportunity.<p>With that said, JS is a mess in a lot of ways, so maybe this is worthwhile. Hard to know though until it’s too late to revert.<p>Just my opinion though, I’m curious what others think about this and where I may be missing the mark.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zanethomas" target="_blank">zanethomas</a>   <span class="timeago" data-date="2021-06-13 14:03:09 &#43;0000 UTC">2021-06-13 14:03:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            1. Javascript never needed classes. Classes in javascript do not always behave as &quot;cs graduates and java developers&quot; expect, so bugs.<p>2. Java (and c++) are great examples of class-oriented languages. Javascript is object-oriented.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=austincheney" target="_blank">austincheney</a>   <span class="timeago" data-date="2021-06-13 18:37:15 &#43;0000 UTC">2021-06-13 18:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, if I wanted to write Java then I wouldn’t be writing JavaScript. Not ever. However, I do enjoy JavaScript and part of that enjoyment comes from not writing classes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Shacklz" target="_blank">Shacklz</a>   <span class="timeago" data-date="2021-06-13 13:27:10 &#43;0000 UTC">2021-06-13 13:27:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think private fields will come in very handy for libraries. Yes, people should not access fields marked as internal&#x2F;private, but they often do anyway (at least I&#x27;ve seen it often enough) just because it&#x27;s the easiest way to fix some issue, or to get more control than the library officially offers. And then they complain when upgrading the library version is a PITA...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=esprehn" target="_blank">esprehn</a>   <span class="timeago" data-date="2021-06-13 23:48:25 &#43;0000 UTC">2021-06-13 23:48:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m unconvinced it&#x27;s going to matter for libraries. Folks will just use a Babel transform that exposed the private fields somehow (ex. With getters or rewriting the names)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fallingknife" target="_blank">fallingknife</a>   <span class="timeago" data-date="2021-06-13 11:29:54 &#43;0000 UTC">2021-06-13 11:29:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I don&#x27;t get it.  Just start the name with a _ and don&#x27;t allow code that calls it from outside the class.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikolay" target="_blank">nikolay</a>   <span class="timeago" data-date="2021-06-14 16:25:53 &#43;0000 UTC">2021-06-14 16:25:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Insanely ugly syntax, which breaks the cleanness of JavaScript! I don&#x27;t buy their rationale - JavaScript is not the only language with private fields, but one of the few it decided to use meaningless prefixes!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SPBS" target="_blank">SPBS</a>   <span class="timeago" data-date="2021-06-13 07:31:05 &#43;0000 UTC">2021-06-13 07:31:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t understand why people are so hyped about OOP syntactic sugar when JavaScript could already do those ages ago. For example: the class keyword. JavaScript could already do classes via factory functions (return an object with associated methods), and factory functions are strictly more powerful than classes because you can declare freestanding variables inside.<p>And here&#x27;s the kicker: The freestanding variables that you do declare inside a factory function, those are naturally private fields. You can expose it to the outside world via method closures, but no one else can reach in and modify it directly. Classes can&#x27;t do that. Functions could. But the general sentiment is to embrace classes and throw factory functions to the wayside, and as a result you need extra effort like implementing private fields for classes when JavaScript functions can already do the same thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-13 07:48:27 &#43;0000 UTC">2021-06-13 07:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because syntactic sugar matters. var x = (function(){})() is just not readable, but it is error prone. The same goes for assigning to __proto__. IMO, the class keyword is a step forward. However, adding # to a variable looks like a step backward. How long before we have this.%x, to mark x &quot;protected&quot;? Or get x() {...} vs set #x()?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SPBS" target="_blank">SPBS</a>   <span class="timeago" data-date="2021-06-13 09:54:19 &#43;0000 UTC">2021-06-13 09:54:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Factory functions don&#x27;t mean using the (admittedly ugly) IIFE syntax or accessing __proto__ fields. This is an example of factory function<p><pre><code>    function NewObj(n) {
+        let myPublicInt = n;
+        let myPrivateInt = 0;
+
+        function privateIncrement() { myPrivateInt++; }
+
+        function incrementPrivateInt() { privateIncrement(); }
+
+        function printPrivateInt() { console.log(myPrivateInt); }
+
+        return {
+            myPublicInt,
+            incrementPrivateInt,
+            printPrivateInt,
+        };
+    }
+
+    let obj = NewObj(5);
+    console.log(obj.myPublicInt); &#x2F;&#x2F; 5, because myPublicInt is a public field
+    console.log(obj.myPrivateInt); &#x2F;&#x2F; undefined, because myPrivateInt is a private field
+    &#x2F;&#x2F; obj.privateIncrement(); &#x2F;&#x2F; exception, because privateIncrement is a private method
+    obj.printPrivateInt(); &#x2F;&#x2F; 0
+    obj.incrementPrivateInt();
+    obj.printPrivateInt(); &#x2F;&#x2F; 1</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tehbeard" target="_blank">tehbeard</a>   <span class="timeago" data-date="2021-06-13 10:25:13 &#43;0000 UTC">2021-06-13 10:25:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            so..... how do you know to optimize this as a factory function &#x2F; &quot;class&quot; in your JS runtime with reusable instructions that just use an instance&#x27;s scope in order to get good performance and memory usage.... When all that&#x27;s being spat out is a JS object, that the user could very well modify in the next instruction, 30 instructions time, or conditionally based on some other checks?<p>And it&#x27;s still a  pretty ugly way of defining a class like object without the syntactics.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hinoki" target="_blank">hinoki</a>   <span class="timeago" data-date="2021-06-13 11:18:40 &#43;0000 UTC">2021-06-13 11:18:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But an object constructed from a class still has all the optimisation problems you just mentioned. It’s just syntactic sugar. The optimiser generates invariants which, if invalidated, makes you fall back to a slow path.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tehbeard" target="_blank">tehbeard</a>   <span class="timeago" data-date="2021-06-13 12:07:09 &#43;0000 UTC">2021-06-13 12:07:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The syntactic sugar is something the optimiser is aware of and isn&#x27;t just a &quot;do this in a more pretty&#x2F;stylised way&quot; for the developer, it conveys an intent that this is a construct that can be optimized with a certain level of confidence that you can&#x27;t get from objects that &quot;look like a duck and quack like a duck&quot; if you squint a little.<p>And if anything happens that does &quot;deoptimize&quot; it, then if we know the &quot;base&quot; is definitely a class, the paths to handle the &quot;deoptimization&quot; can make better decisions and be able to avoid scrapping everything and falling back to the slow path.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=felixfbecker" target="_blank">felixfbecker</a>   <span class="timeago" data-date="2021-06-13 12:03:42 &#43;0000 UTC">2021-06-13 12:03:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JavaScript engines like V8 can already do exactly as you said through hidden classes based on source code position and have been doing so for a long time.
+I haven&#x27;t read any evidence that classes are actually better optimized, even if it&#x27;s often argued as the reason for why classes are better.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zanethomas" target="_blank">zanethomas</a>   <span class="timeago" data-date="2021-06-13 13:57:08 &#43;0000 UTC">2021-06-13 13:57:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;var x = (function(){})() is just not readable, but it is error prone.&quot;<p>How so? I have no trouble reading that, it&#x27;s certainly clearer than most of the c++ templates I&#x27;ve seen, and error prone? For example?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-13 15:05:44 &#43;0000 UTC">2021-06-13 15:05:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a bit apples and oranges. That declaration doesn&#x27;t have the power of a C++ template. A C++ class is much simpler.<p>One of the problems of the style is that you can&#x27;t easily split it up. Another one is that it allows you to redeclare&#x2F;reassign x. A third one is that it doesn&#x27;t tell the reader what it&#x27;s doing. You&#x27;d have to look carefully to find that out. And then there&#x27;s the &quot;extends&quot; functions, which everyone implements slightly differently. So, for me, the &quot;class&quot; keyword is a positive change that helps overcome JavaScript&#x27;s dynamic nature a bit.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zanethomas" target="_blank">zanethomas</a>   <span class="timeago" data-date="2021-06-13 16:00:53 &#43;0000 UTC">2021-06-13 16:00:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            const x = ...
+it&#x27;s usual to read code to understand it
+&quot;helps overcome JavaScript&#x27;s dynamic nature&quot;, you say that like it&#x27;s a good thing
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-13 16:50:21 &#43;0000 UTC">2021-06-13 16:50:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Weren&#x27;t class and const introduced in the same version?<p>&gt; like it&#x27;s a good thing<p>I think so. If you have full control over your own code, and you write in e.g. TypeScript, you don&#x27;t need it. Otherwise, it can prevent errors that take forever to debug.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zanethomas" target="_blank">zanethomas</a>   <span class="timeago" data-date="2021-06-13 17:45:18 &#43;0000 UTC">2021-06-13 17:45:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The utility of const does nothing to support adding classes to javascript.<p>TypeScript, also unnecessary and often just a pita.<p>I&#x27;ve written very much javascript and have never had a bug that took &quot;forever to debug&#x27;.<p>Programmers who like classes, and type-checking, and all the other syntactic sugar should, imo, just use languages that support such things and leave javascript alone.<p>I learned a lot about programming from the SICP when it first came out. I appreciate and use the good things Scheme inspired in javascript. And with very rare exceptions, such as const, let, and enhancements to builtin objects such as arrays, I still use vanilla js. I create new objects using factory functions and have zero use for classes.<p>However adding Map, Set, and similar objects to what is essentially the javascript library is fine with me as they do not impact the core syntax of js.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_the_inflator" target="_blank">_the_inflator</a>   <span class="timeago" data-date="2021-06-13 14:24:03 &#43;0000 UTC">2021-06-13 14:24:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my opinion, the code was very difficult to read and even harder to understand for !expert javascript devs and even for experts.<p>For example, I did, what every decent JS developer back then did: you build yet another library (&quot;helper library&quot;), that just abstract these creations away.<p>So what else is the Class syntax? A helper.<p>I felt I was one of the very, very rare JS devs, who read &quot;Secrets of a JS Ninja&quot; from John Resig, the jQuery legend, top to bottom multiple times. Afterwards I build very cool stuff, however folks did not understand it with their normale knowledge of JS. It blew me away, that you could do stuff like Function.toString() in combination with RegEx and New Function(). I was awesome, that I could do, what the C# and Java guys could do. I just took a lot more code to achieve. Fast forward 10 years.<p>I am extremely glad, that TypeScript came a long. It makes collaboration so much more meaningful.<p>I still love the JavaScript ECMA5 stuff, however the tradeoff was too big. It is like staying with C instead of Python, Java, or DSLs.<p>Even &quot;You might not need jQuery&quot; ended up being pointless in regards to readability. Why write 20 lines of code, when you can put it in one line? Paradoxically Resig&#x27;s jQuery had to do a lot of complex stuff to achieve the beauty of $(). So why not simply write Class?<p>Just my opinion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmitriid" target="_blank">dmitriid</a>   <span class="timeago" data-date="2021-06-13 08:57:28 &#43;0000 UTC">2021-06-13 08:57:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In mid-2000s Microsoft (of all orgs) was actually very opposed to the idea of bringing C++&#x2F;Java-like classes into Javascript because they have quite an impedance mismatch with prototype-based nature of JS.<p>I&#x27;d say, they were right.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iSnow" target="_blank">iSnow</a>   <span class="timeago" data-date="2021-06-13 12:34:16 &#43;0000 UTC">2021-06-13 12:34:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And then MS invented Typescript and it was all classes onward...<p>I don&#x27;t really get it either, and I am saying this as someone who codes in both JS and Java. While thinking in OOP concepts comes naturally for me, I found the prototype&#x2F;function based approach of JS a breeze of fresh air.<p>I guess the turning point was when JS migrated to the backend and more complex business logic was written in JS. As long as you are basically rendering view state or filtering data, traditional JS is much easier. But write the business logic of some enterprise app, and you want to use the OOP paradigms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Aardwolf" target="_blank">Aardwolf</a>   <span class="timeago" data-date="2021-06-13 14:14:37 &#43;0000 UTC">2021-06-13 14:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m wondering if this should be made part of the runtime at all, and not instead e.g. enforce this by JS compilers&#x2F;minifiers&#x2F;style checkers: this is something that&#x27;s relevant at development time, but not at runtime
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-14 14:43:56 &#43;0000 UTC">2021-06-14 14:43:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree. Given we already have this in Typescript it seems of little benefit to add it as a runtime feature.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TazeTSchnitzel" target="_blank">TazeTSchnitzel</a>   <span class="timeago" data-date="2021-06-13 07:29:07 &#43;0000 UTC">2021-06-13 07:29:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m surprised they&#x27;re adding private fields when symbols already exist? Is it just for improved convenience?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=v413" target="_blank">v413</a>   <span class="timeago" data-date="2021-06-13 07:40:03 &#43;0000 UTC">2021-06-13 07:40:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Object properties defined as Symbols (even through classes) are still accessible by e.g. 
+Object.getOwnPropertyDescriptors(myObject)<p>Before the private fields, it was possible to create private properties through a WeakMap object which is somewhat clumsy and not very performant.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmitriid" target="_blank">dmitriid</a>   <span class="timeago" data-date="2021-06-13 06:38:34 &#43;0000 UTC">2021-06-13 06:38:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m still miffed that private fields are not marked with `private`. Can&#x27;t remember the reasons though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fossilwater" target="_blank">fossilwater</a>   <span class="timeago" data-date="2021-06-13 07:09:52 &#43;0000 UTC">2021-06-13 07:09:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here’s what they said in the proposal<p><a href="https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;FAQ.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-13 08:01:13 &#43;0000 UTC">2021-06-13 08:01:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not convincing. When you add a new feature, you can change the parser. So internally, you could rewrite every usage of this.x to this.#x (or anything else) upon reading it.<p>Edit: wrt encapsulation, will the proposed solution work when a class marks the same field private as the one it extends?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=minitech" target="_blank">minitech</a>   <span class="timeago" data-date="2021-06-13 08:42:14 &#43;0000 UTC">2021-06-13 08:42:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Breaking this.x being equivalent to this[&#x27;x&#x27;], and making this.x quietly change its meaning depending on where the function containing it is located <i>and</i> on the presence or absence of a private field with a corresponding name, seems confusing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flefto" target="_blank">flefto</a>   <span class="timeago" data-date="2021-06-13 12:18:42 &#43;0000 UTC">2021-06-13 12:18:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t believe in private variables&#x2F;fields.<p>They shouldn’t be used or implemented.<p>A waste of time and effort.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zanethomas" target="_blank">zanethomas</a>   <span class="timeago" data-date="2021-06-13 13:55:27 &#43;0000 UTC">2021-06-13 13:55:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish they would just leave javascript alone and continue with java or c# or c++ or whatever it is they are trying to transfrom javascript into.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=caymanjim" target="_blank">caymanjim</a>   <span class="timeago" data-date="2021-06-13 06:59:08 &#43;0000 UTC">2021-06-13 06:59:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hopefully they come up with something better than a # prefix for identifying private fields. It seems like a small thing, but it looks clunky and arbitrary. Even _ would be better, but best of all would be adding a keyword or something instead of using a glyph.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_other" target="_blank">the_other</a>   <span class="timeago" data-date="2021-06-13 07:46:02 &#43;0000 UTC">2021-06-13 07:46:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For some time, there was a trend of adding _ to property and method names to indicate “I’m pretending to be private, don’t use me” (I think this happens in several languages, but I only know JS well).<p>I suspect there’s a risk that if the committee standardised on _ rather than #, it would actually break a load of older apps and content. There’s a good chance the _convention was abused in those earlier codebases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Madeindjs" target="_blank">Madeindjs</a>   <span class="timeago" data-date="2021-06-13 21:08:50 &#43;0000 UTC">2021-06-13 21:08:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; `_` would cause compatibility issues with existing JavaScript code, which has allowed `_` at the start of an identifier or (public) property name for a long time. -- <a href="https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;FAQ.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andy_ppp" target="_blank">andy_ppp</a>   <span class="timeago" data-date="2021-06-13 10:19:25 &#43;0000 UTC">2021-06-13 10:19:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why can’t they just introduce a new private keyword, i.e. private let myVar = 0;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ezekg" target="_blank">ezekg</a>   <span class="timeago" data-date="2021-06-14 03:33:44 &#43;0000 UTC">2021-06-14 03:33:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The proposal doesn’t even know.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=unwind" target="_blank">unwind</a>   <span class="timeago" data-date="2021-06-13 09:48:58 &#43;0000 UTC">2021-06-13 09:48:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As far as I know it&#x27;s the standard way in Python.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=v413" target="_blank">v413</a>   <span class="timeago" data-date="2021-06-13 07:42:40 &#43;0000 UTC">2021-06-13 07:42:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The # symbol denoting private fields has already been finalized and approved to be a legal part of the language. No going back.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elondaits" target="_blank">elondaits</a>   <span class="timeago" data-date="2021-06-13 11:44:52 &#43;0000 UTC">2021-06-13 11:44:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is all covered here:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;FAQ.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;tc39&#x2F;proposal-private-fields&#x2F;blob&#x2F;master&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ssdspoimdsjvv" target="_blank">ssdspoimdsjvv</a>   <span class="timeago" data-date="2021-06-13 09:56:12 &#43;0000 UTC">2021-06-13 09:56:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One more reason to just use Typescript.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andy_ppp" target="_blank">andy_ppp</a>   <span class="timeago" data-date="2021-06-13 10:21:21 &#43;0000 UTC">2021-06-13 10:21:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Variables are never truly private in the compiled JS though. You can fake it using clever closure techniques but there are still ways to access the vars as I understand it. This is fixing that at the JS level.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tylerhou" target="_blank">tylerhou</a>   <span class="timeago" data-date="2021-06-13 10:57:49 &#43;0000 UTC">2021-06-13 10:57:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t know of any way of accessing lexically bound variables that are captured by a closure if there is no explicit getter.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throw_m239339" target="_blank">throw_m239339</a>   <span class="timeago" data-date="2021-06-14 01:07:10 &#43;0000 UTC">2021-06-14 01:07:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Typescript is a mostly superset of javascript. Typescript does&#x2F;will also support # for private fields so it changes absolutely nothing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cutler" target="_blank">cutler</a>   <span class="timeago" data-date="2021-06-13 12:17:20 &#43;0000 UTC">2021-06-13 12:17:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Better would be priv.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikolay" target="_blank">nikolay</a>   <span class="timeago" data-date="2021-06-14 16:27:48 &#43;0000 UTC">2021-06-14 16:27:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly what I came up with, too, because it follows &quot;constant =&gt; const&quot; analogy. Why are constants not &quot;$name&quot; using the same perverted logic?!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nobody0" target="_blank">nobody0</a>   <span class="timeago" data-date="2021-06-13 07:48:54 &#43;0000 UTC">2021-06-13 07:48:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, _ is much better given its precenses in other languages. I would associate # with a number or a link.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikolay" target="_blank">nikolay</a>   <span class="timeago" data-date="2021-06-14 16:29:09 &#43;0000 UTC">2021-06-14 16:29:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The semantic meaning of &quot;#name&quot; is not private. In fact, the &quot;_&quot; is much more meaningful than &quot;#&quot;, which is always used as in the meaning of &quot;number&quot; or &quot;index&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

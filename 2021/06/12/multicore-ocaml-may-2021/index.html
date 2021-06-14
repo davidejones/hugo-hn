@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/multicore-ocaml-may-2021/">
+
+
+    <title>Multicore OCaml: May 2021 - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Multicore OCaml: May 2021 - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/multicore-ocaml-may-2021/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/multicore-ocaml-may-2021/">
+<meta name="twitter:title" content="Multicore OCaml: May 2021 - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Multicore OCaml: May 2021 - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T01:52:48JST",
+    "dateModified": "2021-06-12T01:52:48JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://discuss.ocaml.org/t/multicore-ocaml-may-2021/7990">Multicore OCaml: May 2021</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperhopper" target="_blank">hyperhopper</a>   <span class="timeago" data-date="2021-06-12 04:06:09 &#43;0000 UTC">2021-06-12 04:06:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love ML based languages, but it&#x27;s definitely hard to get excited about new features when even just installing ocaml on windows starts with reading a chart of what tradeoffs you&#x27;re going to have to make.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;ocaml&#x2F;ocaml&#x2F;blob&#x2F;trunk&#x2F;README.win32.adoc" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ocaml&#x2F;ocaml&#x2F;blob&#x2F;trunk&#x2F;README.win32.adoc</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=x0re4x" target="_blank">x0re4x</a>   <span class="timeago" data-date="2021-06-12 04:16:39 &#43;0000 UTC">2021-06-12 04:16:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Try F#. It&#x27;s not exactly ocaml, but close enough if you want to stay on windows.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rejectedandsad" target="_blank">rejectedandsad</a>   <span class="timeago" data-date="2021-06-12 05:14:14 &#43;0000 UTC">2021-06-12 05:14:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’d even argue F# might be better than OCaml thanks to the better library support, availability on Win&#x2F;Mac&#x2F;Linux and pre-existing multi core support.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hyperhopper" target="_blank">hyperhopper</a>   <span class="timeago" data-date="2021-06-12 07:09:30 &#43;0000 UTC">2021-06-12 07:09:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love F#! I have used it professionally for years!<p>Unfortunately, it has the same problem, but for Linux instead; dot net core is not the same as dot net.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Scarbutt" target="_blank">Scarbutt</a>   <span class="timeago" data-date="2021-06-12 04:17:45 &#43;0000 UTC">2021-06-12 04:17:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or Scala3
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vrotaru" target="_blank">vrotaru</a>   <span class="timeago" data-date="2021-06-12 04:20:59 &#43;0000 UTC">2021-06-12 04:20:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, installing OCaml from sources was always considered the hard way.<p>Now there is <a href="https:&#x2F;&#x2F;fdopen.github.io&#x2F;opam-repository-mingw&#x2F;installation&#x2F;" rel="nofollow">https:&#x2F;&#x2F;fdopen.github.io&#x2F;opam-repository-mingw&#x2F;installation&#x2F;</a><p>Basically you just need Cygwin and you are good. It worked for me when I last tried it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-06-12 04:32:46 &#43;0000 UTC">2021-06-12 04:32:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are binaries compiled with Cygwin Ocaml portable? As in, can they be distributed to other Windows systems that don&#x27;t have Cygwin installed?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vrotaru" target="_blank">vrotaru</a>   <span class="timeago" data-date="2021-06-12 04:38:36 &#43;0000 UTC">2021-06-12 04:38:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The documentation say yes.<p>With a caveat. If you depend on some cygwin libs for your ocaml program you need them on the other machine too.<p>Maybe you can copy them over as well. Or not. Not a win dev, sorry.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-06-12 22:08:49 &#43;0000 UTC">2021-06-12 22:08:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool, thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=solmag" target="_blank">solmag</a>   <span class="timeago" data-date="2021-06-12 04:27:01 &#43;0000 UTC">2021-06-12 04:27:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use WSL2 with Ocaml, works fine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-06-12 05:10:03 &#43;0000 UTC">2021-06-12 05:10:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is installing OCaml on a Linux VM with shared folders really installing &quot;on windows&quot;, that like saying that windows app are installed &quot;on a Mac&quot; when they need Parallels to run
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lou1306" target="_blank">lou1306</a>   <span class="timeago" data-date="2021-06-12 08:23:31 &#43;0000 UTC">2021-06-12 08:23:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            WSL is a Windows component, so I&#x27;d say &quot;yes&quot;? Parallels, instead, is 3rd party software.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hydroxonium" target="_blank">hydroxonium</a>   <span class="timeago" data-date="2021-06-12 04:40:30 &#43;0000 UTC">2021-06-12 04:40:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use WSL2 as much as possible. It&#x27;s great.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gip" target="_blank">gip</a>   <span class="timeago" data-date="2021-06-12 05:42:49 &#43;0000 UTC">2021-06-12 05:42:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tean years ago I moved to Silicon Valley from London to work at a hardware company. I realized pretty quikly that I wanted to do software not hardware. Algebraic datatypes, static typing, ..., were also more natural to me than OO and classes. So I &#x27;learned&#x27; OCaml in a week, applied to a software dev job at a startup and got hired (I got extremaly lucky obviously). My secret love was Haskell and I later joined companies using Haskell in production. I then transitioned to engineering management.<p>Long story short - my experience has been that OCaml (and Haskell) are often better phased out as the maturity of the team grows. I hope that one day I that will change - but as of today I would not advise a startup to bet on functional languages like OCaml. Happy to elaborate as to why if there is some interest.<p>I&#x27;m looking forward to hearing from people who disagree; and more importantly, have built successful products in OCaml.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SinParadise" target="_blank">SinParadise</a>   <span class="timeago" data-date="2021-06-12 13:33:42 &#43;0000 UTC">2021-06-12 13:33:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s quite the &quot;long story short&quot;. You went from a love of ML and Haskell to not recommending it in the second paragraph.<p>Please elaborate because that is quite the leap.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mands" target="_blank">mands</a>   <span class="timeago" data-date="2021-06-12 10:10:56 &#43;0000 UTC">2021-06-12 10:10:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed, have used both OCaml and Haskell in production and have founded startups using them. For startups we discovered you&#x27;re in a much stronger position using languages with big ecosystems and communities - we&#x27;re using Python and Django now, but would happily use Java or .NET in the future.<p>Still using OCaml for side projects tho!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=moonchild" target="_blank">moonchild</a>   <span class="timeago" data-date="2021-06-12 06:36:57 &#43;0000 UTC">2021-06-12 06:36:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Happy to elaborate<p>Please do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yawaramin" target="_blank">yawaramin</a>   <span class="timeago" data-date="2021-06-12 16:28:04 &#43;0000 UTC">2021-06-12 16:28:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What do you consider &#x27;successful&#x27;?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smasher164" target="_blank">smasher164</a>   <span class="timeago" data-date="2021-06-12 05:06:16 &#43;0000 UTC">2021-06-12 05:06:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would love to see a Concurrent ML variant that compiles down to Go as the target language. Get the advantages of a great type system, while standing on the shoulders of Go&#x27;s compiler and runtime.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rejectedandsad" target="_blank">rejectedandsad</a>   <span class="timeago" data-date="2021-06-12 05:12:30 &#43;0000 UTC">2021-06-12 05:12:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I 100% agree, and I’m surprised more folks haven’t built languages to compile to Go for this reason. The language spec and constructs seem straightforward enough, is there any reason I’m missing?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KMag" target="_blank">KMag</a>   <span class="timeago" data-date="2021-06-12 05:34:18 &#43;0000 UTC">2021-06-12 05:34:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are some design tradeoffs in garbage collector design, particularly for moving&#x2F;compacting collectors.  If programs in your language tend to create lots of objects and rarely mutate them, then you&#x27;d want to make tradeoffs that push complexity&#x2F;expense into the write barrier implementation.<p>IIRC, the .NET GC team were surprised at how poorly their GC performed in the first attempts to implement Haskell for .NET.<p>Another tradeoff for a classic 3-color tracing concurrent or incremental garbage collector is what the write barrier does when adding a reference to a maybe garbage (white) object from an already traced (black) object.  The color invariant is that traced objects may never have references to garbage.  In order to maintain the invariant, either the white object needs to be marked grey or the black object needs to be marked grey.  If further modifications of the black object this cycle are unlikely, then the correct thing to do is to push the GC cycle forward by marking the white object grey.  If further mutations of the black object are likely, the right thing to do is to defer potentially wasted work by marking the black object grey.  Some garbage collectors make this decision on a per-type basis.  For instance, IIRC LuaJIT&#x27;s GC will mark black Tables grey if adding a white reference, and for other types, the GC will mark the white object grey.  Languages that discourage mutation would tend to be tuned to mark white objects grey, and languages that tend to encourage mutation would tend to be tuned to mark black objects grey.<p>There&#x27;s also the fact that all abstractions are leaky.  If the semantic difference between your language and Go are small, then if you target Go, you can be relatively confident that the Go compiler has spent its finite complexity budget wisely for your language.  If your source language semantics are very different from Go, then the Go compiler may skip some optimizations that would really help your programs, and may spend a lot of time in analysis that&#x27;s unlikely to speed up your programs much.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KMag" target="_blank">KMag</a>   <span class="timeago" data-date="2021-06-12 11:39:50 &#43;0000 UTC">2021-06-12 11:39:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I should also point out that Bacon-Rajan-style concurrent reference counting with cycle detection[0] can in some cases dramatically out-perform tracing GCs as found in Oracle&#x27;s JVM, .NET, and most JavaScript engines.<p>The cost of tracing GC is proportional to the rate of object creation times the number of live objects.  The cost of reference counting is proportional to the rate of reference destruction (with batching optimizations to reduce the cost of a small number of objects having lots of references created and destroyed.)  If your programs create a lot of long-lived objects that rarely have their reference counts change, then cycle-detecting reference counting can be a big win.<p>[0] <a href="https:&#x2F;&#x2F;researcher.watson.ibm.com&#x2F;researcher&#x2F;files&#x2F;us-bacon&#x2F;Bacon01Concurrent.pdf" rel="nofollow">https:&#x2F;&#x2F;researcher.watson.ibm.com&#x2F;researcher&#x2F;files&#x2F;us-bacon&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smasher164" target="_blank">smasher164</a>   <span class="timeago" data-date="2021-06-12 05:54:50 &#43;0000 UTC">2021-06-12 05:54:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think this might be for social reasons instead of technical.<p>You&#x27;d need an overlap of<p>1. An appreciation of ML and its extensions.<p>2. A relatively deep understanding of Go&#x27;s semantics, performance hacks w&#x2F; GC, type system quirks, etc.<p>3. Belief that this would be useful.<p>4. Knowledge of compilers.<p>5. Time on your hands. This is a blocker for me :(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yawaramin" target="_blank">yawaramin</a>   <span class="timeago" data-date="2021-06-12 16:26:53 &#43;0000 UTC">2021-06-12 16:26:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One reason is that &#x27;crossover languages&#x27;–i.e. languages that are hosted on a platform they don&#x27;t control–invariably face many challenges, e.g. look at F# on .NET. They also face leaky abstraction, documentation, tooling etc. issues.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zem" target="_blank">zem</a>   <span class="timeago" data-date="2021-06-12 07:19:17 &#43;0000 UTC">2021-06-12 07:19:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            purescript can compile to go: <a href="https:&#x2F;&#x2F;github.com&#x2F;andyarvanitis&#x2F;purescript-native" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;andyarvanitis&#x2F;purescript-native</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tgbugs" target="_blank">tgbugs</a>   <span class="timeago" data-date="2021-06-12 04:56:47 &#43;0000 UTC">2021-06-12 04:56:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; hunt through the Stdlib for global state<p>Well I guess this is an indication of what it would take to get elisp to have real multi-processing. It will be interesting to follow this process to see how the workflow pans out, and should be of major interest as a case study. Making such invasive and extensive changes across a large codebase and countless 3rd party libraries is a daunting coordination problem for open source projects.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

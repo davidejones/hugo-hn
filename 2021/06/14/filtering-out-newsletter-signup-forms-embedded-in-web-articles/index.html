@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/filtering-out-newsletter-signup-forms-embedded-in-web-articles/">
+
+
+    <title>Filtering out newsletter signup forms embedded in web articles - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Filtering out newsletter signup forms embedded in web articles - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/filtering-out-newsletter-signup-forms-embedded-in-web-articles/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/filtering-out-newsletter-signup-forms-embedded-in-web-articles/">
+<meta name="twitter:title" content="Filtering out newsletter signup forms embedded in web articles - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Filtering out newsletter signup forms embedded in web articles - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T08:30:37JST",
+    "dateModified": "2021-06-14T08:30:37JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.fivefilters.org/2021/newsletter-signup-forms/">Filtering out newsletter signup forms embedded in web articles</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=greggturkington" target="_blank">greggturkington</a>   <span class="timeago" data-date="2021-06-14 15:33:08 &#43;0000 UTC">2021-06-14 15:33:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I keep a long list of these I can contribute. The authors need to take more advantage of fuzzy attribute matching. Really go after those patterns you see frequently from Mailchimp and other major newsletter vendors first!<p><pre><code>    [class*=&quot;mc_embed_signup&quot;]
+    [id*=&quot;mc_embed_signup&quot;]
+    [class*=&quot;FreeNewsletter&quot; i]
+    [class*=&quot;inline-newsletter&quot;]
+    [class*=&quot;newsletter-article&quot;]
+    [class*=&quot;newsletter-form&quot;]
+    [class*=&quot;newsletter-signup&quot;]
+    [class*=&quot;newsletter-tout&quot;]
+    [class*=&quot;newsletter-widget&quot;]
+    [class*=&quot;NewsletterCard&quot; i]
+    [class*=&quot;NewsletterSignup&quot; i]
+    [class*=&quot;newssignup&quot;]
+    [id*=&quot;SignupForm&quot; i]
+    [id*=&quot;signupWrapper&quot; i]
+</code></pre>
+CSS isn&#x27;t so simple anymore though, with CSS-in-JS we&#x27;re moving away from deterministic class name. We can still target other attributes with CSS though, which I don&#x27;t see used in these lists nearly enough, for example data attributes:<p><pre><code>    [data-title*=&quot;Mailchimp&quot;]</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-14 12:44:29 &#43;0000 UTC">2021-06-14 12:44:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Website owners are desperate to capture your attention, they have a few seconds to do so. What they don&#x27;t realize is that beong annoying is also what causes people to only stay for a few seconds on their site. For me it is a good sign of someone who cares more about advertisement than content so it makes me close the page 99% of the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=unknown_error" target="_blank">unknown_error</a>   <span class="timeago" data-date="2021-06-14 15:01:27 &#43;0000 UTC">2021-06-14 15:01:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Totally agreed... if only I could get management to listen too. If were it up to me as a dev, there would NEVER be popups&#x2F;overlays. We spend forever optimizing UX before and during site design, only to have some middle manager come in at the last minute and say &quot;We need a newsletter modal signup to drive conversions.&quot; They end up chasing signup numbers instead of overall user satisfaction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bartvk" target="_blank">bartvk</a>   <span class="timeago" data-date="2021-06-14 13:15:47 &#43;0000 UTC">2021-06-14 13:15:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally I use the &quot;No, Thanks&quot; extension.<p>It costs a bit of money. Daniel Kladnik, the developer, provides you with an invoice so you can deduct it as a business, or ask your boss to pay.<p><a href="https:&#x2F;&#x2F;www.no-thanks-extension.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.no-thanks-extension.com&#x2F;</a><p>Note that I haven&#x27;t compared it to Fanboy&#x27;s Annoyance List mentioned in the article. Ages ago, I just wanted a no-configure option.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=traceroute66" target="_blank">traceroute66</a>   <span class="timeago" data-date="2021-06-14 14:16:12 &#43;0000 UTC">2021-06-14 14:16:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m afraid I take issue with your &quot;ask your boss to pay&quot; statement.<p>As someone who has been involved with running small businesses, I can tell you that &quot;the boss&quot; very quickly gets annoyed with employees who nickle &amp; dime their employer and try to get &quot;the boss&quot; to pay things that the employee should be paying for.<p>Sure if a piece of software, hardware or a service is an essential part of your work (e.g. mobile phones for field engineers) then it should be paid for in an appropriate manner by &quot;the boss&quot; (or a suitable alternative provided, e.g. company phone).  No question, no argument.<p>But frankly, ad-blockers or other non-essentials ?  Forget about it. Being a &quot;good boss&quot; includes being able to draw a line in the sand somewhere. A &quot;bad boss&quot; is one who thinks &quot;the company&quot; can pay for everything &quot;just because&quot; is doing the themselves, their employees and their company a disservice.  Businesses are not charities and everyone should be doing their bit to keep overheads in control.<p>Not only that.  But in some jurisdictions the local tax authorities will make taxation differentiation between items that are of demonstrable business needs and those that are not.  This tax differentiation may not only impact the business itself, but your own personal tax situation too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Permit" target="_blank">Permit</a>   <span class="timeago" data-date="2021-06-14 14:58:27 &#43;0000 UTC">2021-06-14 14:58:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Being a &quot;good boss&quot; includes being able to draw a line in the sand somewhere. A &quot;bad boss&quot; is one who thinks &quot;the company&quot; can pay for everything &quot;just because&quot; is doing the themselves, their employees and their company a disservice.<p>I have never met an employee who would characterize a “good boss” this way. At the very least I would not expect these qualities to win you any favours with prospective employees.<p>No one looks at “free work lunches” as some negative reflection of their boss’ financial acumen. The closest complaint I could think of is that the employee would rather that money go directly into their pocket. Maybe there is a middle ground here where you could allocate $50&#x2F;year for these sort of expenditures in order to prevent them from getting out of hand?<p>I’m not sure, but I would consider reflecting on what really makes a “good boss” and whether or not your employees would agree with you on it. To me the distinction between a good boss and a bad one is always decided by the employees, never the boss.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=traceroute66" target="_blank">traceroute66</a>   <span class="timeago" data-date="2021-06-14 16:35:24 &#43;0000 UTC">2021-06-14 16:35:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Maybe there is a middle ground here where you could allocate $50&#x2F;year for these sort of expenditures in order to prevent them from getting out of hand?<p>Here I would agree and indeed I think certain people misunderstood my original comment.<p>What I was trying to say originally is a bad boss is one who has an open-wallet policy to &quot;but its just $10 a year&quot;, because that sort of policy will absolutely come back and bite them or their company in the backside one day once the numbers start adding up.  So yes, absolutely, set a hard dollar limit per employee and we&#x27;re in agreement.<p>Because yes, if you don&#x27;t, things will soon get out of hand (as I posted in more detail a little further down).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unknown_error" target="_blank">unknown_error</a>   <span class="timeago" data-date="2021-06-14 15:05:16 &#43;0000 UTC">2021-06-14 15:05:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, but if the employees have to worry about $10 a year because of nickle-and-diming from the boss, you&#x27;re either not paying them enough or your process for small reimbursements suck. Why don&#x27;t the employees have enough freedom to get the tools to do their job in an appropriate way instead of wasting your time and theirs discussing whether $10&#x2F;yr for adblocking is an essential part of their job? That argument alone would cost you more than $10, not to mention the productivity loss from intrusive advertising.<p>Yeesh, I&#x27;d hate to work for a boss like you...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=traceroute66" target="_blank">traceroute66</a>   <span class="timeago" data-date="2021-06-14 16:24:20 &#43;0000 UTC">2021-06-14 16:24:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            unknown_error<p>I&#x27;m sorry but the &quot;its only $10&#x2F;year, the boss can pay for it&quot; argument is complete BS.<p>That &quot;its only $10&#x2F;year&quot; multiplied by how many employees ? It soon adds up.<p>Then we move into the same BS &quot;only $10&#x2F;year&quot; argument that charities use when they are asking you to donate &quot;only $5&quot;  or that Disney+ uses when it says its &quot;only $10&#x2F;month&quot;.<p>The &quot;only $5&quot; to the charity and the &quot;only $10&#x2F;month&quot; to Disney+ is ON TOP OF all the other household expenses.  So really, you are foolish to buy into the &quot;its only&quot; school of nonsensical argument.<p>So we soon find ourselves in an exponential situation. One day we say &quot;yes, the boss will pay $10&#x2F;year for this&quot; .... roll forward a few weeks then its &quot;oh, just another $10&#x2F;year for that&quot; ... etc. etc. ... multiplied by X employees .... soon equals $$$$.<p>That&#x27;s why a good boss is one who is capable of standing their ground and putting that line in the sand.<p>Otherwise the overheads soon run away from you and you find yourself spending tens of thousands of dollars a year on &quot;but its just $10&quot; non-essential stuff.<p>Basic business good practice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=unknown_error" target="_blank">unknown_error</a>   <span class="timeago" data-date="2021-06-14 17:29:59 &#43;0000 UTC">2021-06-14 17:29:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not so much the particular dollar amount, but that it sounds like your process for evaluating whether a tool is &quot;essential&quot; is basically &quot;whatever the boss feels like in any given moment&quot; instead of having a transparent evaluation process that weighs, say, $10&#x2F;yr&#x2F;employee vs the potential for risk for malware&#x2F;ransomware or even simply lost productivity from intrusive ads. Is there ANYTHING an employee should be able to spend money on without your direct approval? Is there a process for evaluating what is an essential business expense, per position? How small a business is yours?<p>It&#x27;s the lack of agency and trust in your people, rather than the specific dollar amount, that bothers me. If it was a $10,000 or even $1,000 purchase (such as buying that ad blocker for the whole company), yes, of course it should merit more evaluation, but is there really a need to micromanage every single transaction instead of having an expense account of some sort and a procedure for small purchases and reimbursements?<p>Not arguing that all your employees should be able to arbitrarily spend company funds willy nilly, just that they deserve some say in how they do their jobs, and the tools they need for it, instead of being simply being told &quot;no, because if we scaled that $10 up to all the X employees it would be too expensive...&quot; Did all the X employees even ask for that..?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=criddell" target="_blank">criddell</a>   <span class="timeago" data-date="2021-06-14 16:35:30 &#43;0000 UTC">2021-06-14 16:35:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It can cost more to get approval on some small amount than the actual invoice is. Some places don&#x27;t require approval for amounts under $x.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shantnutiwari" target="_blank">shantnutiwari</a>   <span class="timeago" data-date="2021-06-14 15:09:05 &#43;0000 UTC">2021-06-14 15:09:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another vote for No thanks-- just works out of the box and blocks most(all?) irritating full screen &quot;popups&quot; that everyone seems to love so much
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rchaud" target="_blank">rchaud</a>   <span class="timeago" data-date="2021-06-14 15:01:00 &#43;0000 UTC">2021-06-14 15:01:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This by far is by biggest pet peeve of reading online: an article can&#x27;t even be shown in full. It has to be broken up into disembodied sections, with ads, newsletter signups, or a block of links appearing every few paragraphs.<p>Fortunately, the NYT appears to have scaled back on this. I&#x27;m finding that I can do &quot;Print to PDF&quot; on the majority of articles (excl. interactive stories) and the layout is very clean with no interruptions.<p>If that changes, I still have the option of going to FF&#x27;s &quot;reading view&quot; and Print to PDF from there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k1m" target="_blank">k1m</a>   <span class="timeago" data-date="2021-06-14 15:19:06 &#43;0000 UTC">2021-06-14 15:19:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This by far is by biggest pet peeve of reading online: an article can&#x27;t even be shown in full. It has to be broken up into disembodied sections, with ads, newsletter signups, or a block of links appearing every few paragraphs.<p>Absolutely. I&#x27;m actually a little worried that with the growing popularity of utility-first CSS and build tools that replace semantic information on HTML elements with randomly generated values, it&#x27;s going to be increasingly difficult to have filter lists remove these.<p>Currently the selectors in Fanboy&#x27;s Annoyance List target semantic attributes, e.g. &quot;newsletter-widget&quot;, but already there are a lot of sites that don&#x27;t contain any semantic info around the sections that aren&#x27;t a part of the content. The BBC website is one example, they have a list of related links between paragraphs of text on many articles, e.g. <a href="https:&#x2F;&#x2F;www.bbc.com&#x2F;news&#x2F;uk-57464097" rel="nofollow">https:&#x2F;&#x2F;www.bbc.com&#x2F;news&#x2F;uk-57464097</a>. This is the HTML markup:<p><pre><code>  &lt;div data-component=&quot;unordered-list-block&quot; class=&quot;ssrcss-uf6wea-RichTextComponentWrapper e1xue1i84&quot;&gt;
+    &lt;div class=&quot;ssrcss-18snukc-RichTextContainer e5tfeyi1&quot;&gt;
+      &lt;div class=&quot;ssrcss-1pzprxn-BulletListContainer e5tfeyi0&quot;&gt;
+        &lt;ul role=&quot;list&quot;&gt;
+          &lt;li&gt;[related link 1]&lt;&#x2F;li&gt;
+          &lt;li&gt;[related link 2]&lt;&#x2F;li&gt;
+          &lt;li&gt;[related link 3]&lt;&#x2F;li&gt;
+        &lt;&#x2F;ul&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;div&gt;
+  &lt;&#x2F;div&gt;
+</code></pre>
+These are just related links randomly inserted into the content, but no clear attribute values marking them as such, making automatic removal difficult.<p>&gt; If that changes, I still have the option of going to FF&#x27;s &quot;reading view&quot; and Print to PDF from there.<p>FF&#x27;s reading view does well on a lot of articles. It handles the BBC situation above quite well, but not others (see for example the screenshot in our article with the newsletter signup).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rchaud" target="_blank">rchaud</a>   <span class="timeago" data-date="2021-06-14 17:19:10 &#43;0000 UTC">2021-06-14 17:19:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not a web developer (more like a hobbyist), so I never used tools like Webpack to run &#x27;builds&#x27;. Someone recently explained this phenomenon to me when I asked about the nonsensical class names I was seeing on some websites.<p>I now understand that those machine-generated classes are  designed to prevent styling conflicts on modern websites where multiple developers&#x27; work may appear on a single page. But with adblockers currently set up to detect cruft via class names, I&#x27;m thinking that the clock is ticking on how long these lists remain accurate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shortformblog" target="_blank">shortformblog</a>   <span class="timeago" data-date="2021-06-14 17:31:02 &#43;0000 UTC">2021-06-14 17:31:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FWIW: The reason why they aren’t easy to automatically remove is because they are often put in manually by editors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tzahifadida" target="_blank">tzahifadida</a>   <span class="timeago" data-date="2021-06-14 10:44:57 &#43;0000 UTC">2021-06-14 10:44:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually I think that a lot of newsletters of professionals i am interested in are worthy and these are edge cases. I will be more worried not seeing these because they were filtered out by some plugin. I would say that if a site has a harassing newsletter then the whole site is probably not worth my time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Fnoord" target="_blank">Fnoord</a>   <span class="timeago" data-date="2021-06-14 10:49:48 &#43;0000 UTC">2021-06-14 10:49:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I want to sign-up to a newsletter from a company I will usually find it either manually, or I subscribe to their RSS feed. In almost every case I visit a website, I do not want to subscribe to a newsletter. Therefore, it distracts from my goal. To draw a parallel: in almost every case I start up an Android application, I do not want to rate the Android application. I don&#x27;t want to spend any time on either of such nonsense. In fact, from today on, I will rate applications on Android which ask me to rate them a bad rating just because I&#x27;m done with that spam. As for newsletters, if I want them, I will find them. Take for example Bruce Schneier&#x27;s blog. You can find the newsletter without getting spammed about it. That&#x27;s the correct way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-14 12:45:06 &#43;0000 UTC">2021-06-14 12:45:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I also think that hiding newsletter sign up forms is bad, because you lose the ability to detect that the site is just a blog spam. Real blogs offer RSS&#x2F;Atom. Only those freaks fighting for user engagement dumping zero content articles offer newsletters.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shortformblog" target="_blank">shortformblog</a>   <span class="timeago" data-date="2021-06-14 14:25:42 &#43;0000 UTC">2021-06-14 14:25:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi, I run a long-form newsletter. I send it out twice a week. I spend many bleary nights putting content together for it, and its pieces occasionally appear here on Hacker News. I do a lot of research for it—and pay lots of money for tools to access that research. I often do interviews. It often brings in contributors. Those contributors are paid.<p>It has an RSS feed as a service to readers. But it was built as a newsletter because I specifically wanted to experiment with that form and felt that I could do interesting things with it.<p>Since I started it six and a half years ago, a couple interesting things have happened in the sector: One, the interest in building a business model around blogs has shifted over to the newsletter space. And two, people who wouldn’t have paid to access a blog now are willing to pay to access a newsletter.<p>I like to keep my content open to a large amount of people, so I rely on newsletter sponsorships as a business model, but my advertising approach is very minimal compared to other publishers. I’m not particularly aggressive with my signup form—I run it at the top of my front page and put a pop-up option at the bottom of the article, and sometimes I implement an occasional interstitial when an article seems like it’s doing very well and I want to catch the user’s eye.<p>But I don’t do as much as I could. It probably could be larger if I did.<p>But this isn’t about me. This is about this comment. Which is to say: This is a really cruel thing to say about newsletters. I know a lot of creators who put hours of work into their newsletters each week on top of full-time gigs, grinding it out with the goal of hoping to do something with that newsletter.<p>It also ignores the business realities of the newsletter space. Trying to build a blog into a business is really tough these days (it was back then too, something I know because I was blogging back then). But newsletters have created a path of opportunity for those who want to build things independently.<p>And while I will never claim that the work they do is perfect, it’s certainly not blog spam.<p>So I request, hey, maybe research the space before you use such a broad brush. Thanks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 15:19:09 &#43;0000 UTC">2021-06-14 15:19:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mschuster91" target="_blank">mschuster91</a>   <span class="timeago" data-date="2021-06-14 12:48:51 &#43;0000 UTC">2021-06-14 12:48:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Real blogs offer RSS&#x2F;Atom. Only those freaks fighting for user engagement dumping zero content articles offer newsletters.<p>The thing is, ever since Google Reader got terminated, the user base of RSS&#x2F;Atom clients has been steadily dropping down. Firefox IIRC terminated &quot;dynamic bookmarks&quot; <i>years</i> ago, and even back when it existed it didn&#x27;t support notification.<p>Yes, us nerd crowd knows that RSS exists, but ever tried asking your boss or your teenage kid what &quot;Atom&quot; is?<p>Actual mail newsletters are the only way left other than even more obnoxious browser push nags to get your users notified that you have new content.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Breza" target="_blank">Breza</a>   <span class="timeago" data-date="2021-06-14 14:34:14 &#43;0000 UTC">2021-06-14 14:34:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I still miss Google Reader. I wonder if Google wishes it had kept it running now that their efforts to launch social networks failed and Twitter&#x2F;Facebook have taken over much of the space that RSS used to occupy. Google could have built such a huge dataset of individual-level reader preferences (not saying that&#x27;s the best use of RSS, just that there&#x27;s a business case).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-14 12:52:45 &#43;0000 UTC">2021-06-14 12:52:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your point is valid. Still, I find that most &quot;blogs&quot; offering newsletters these days are frivolous content dumping ground, and the reason for their existence is likely just building Internet persona or something.<p>EDIT: Lots of such noise (often appearing here on HN) comes from Substack.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=k1m" target="_blank">k1m</a>   <span class="timeago" data-date="2021-06-14 15:01:53 &#43;0000 UTC">2021-06-14 15:01:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the reason for their existence is likely just building Internet persona or something.<p>Another appeal of newsletters I think is distrust (rightly in my opinion) in corporate algorithms powering people&#x27;s feeds. I&#x27;d love to see more widespread adoption of RSS again, rather than a push to get everyone signed up to a bunch of different email newsletters. Perhaps once people feel overwhelmed with their inbox getting filled with email newsletters, RSS will make a resurgence.<p>I wrote the piece linked here, and it wasn&#x27;t intended to be an anti-newsletter post. Just against newsletters being pushed on readers in the middle of the article they&#x27;ve started reading, as opposed to a sidebar or at the end of the article. We have web apps that produce stripped-down articles to be read on e-readers or printed out. These newsletter signup requests often blend into the content as just another paragraph of text, which can be a little jarring when you&#x27;re engrossed in reading.<p>Quite a few of the writers I like are on Substack, and earn money through it. Substack also offers full-text RSS feeds (for publicly-accessible content, not sure what level of RSS support there is for paid content - perhaps that&#x27;s still email-only). And their Reader has RSS support too - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=25444507" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=25444507</a> - I hope that&#x27;s a sign that they&#x27;ll be doing more with RSS in the future.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kilroy123" target="_blank">kilroy123</a>   <span class="timeago" data-date="2021-06-14 17:09:13 &#43;0000 UTC">2021-06-14 17:09:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Am I the only one who doesn&#x27;t think these are that big of a deal? I&#x27;d gladly take this over a big ugly ad. Hell ANY ad at all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

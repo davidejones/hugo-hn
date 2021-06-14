@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/restic-cryptography-2017/">
+
+
+    <title>Restic Cryptography (2017) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Restic Cryptography (2017) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/restic-cryptography-2017/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/restic-cryptography-2017/">
+<meta name="twitter:title" content="Restic Cryptography (2017) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Restic Cryptography (2017) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T10:42:42JST",
+    "dateModified": "2021-06-11T10:42:42JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.filippo.io/restic-cryptography/">Restic Cryptography (2017)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-12 21:13:55 &#43;0000 UTC">2021-06-12 21:13:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know if this is the right place to discuss this, but I found it interesting: there&#x27;s something different about this submission: it doesn&#x27;t show up on the submitter&#x27;s profile exactly. HN has a &#x27;second chance&#x27; system[1], this is the first time I notice it in action. I once had a second-chance submission and got an email. What I didn&#x27;t notice at the time is that it&#x27;s not just resubmitted, it&#x27;s pushed and the date is fudged. If you look at the author&#x27;s submission history, they submitted this actually <i>prior</i> to the submission of the other backup system (Kopia) and both are listed as &quot;1 day ago&quot;, whereas this submission (same item ID and with the same number of points) is actually shown as &quot;1 hour ago&quot;. I thought the second chance thing would submit it again, this is kind of confusing though I guess it makes sense to keep any comments already submitted. Thought I&#x27;d remark upon it since this is the first time I see it (that is, I got that email a while back about my own submission, but didn&#x27;t notice this technicality).<p>Edit: or maybe the email I got was an invitation to repost rather than a second chance pool entry. I don&#x27;t know for sure. Both lists are available at <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;lists" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;lists</a><p>[1] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26998308" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26998308</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kragen" target="_blank">kragen</a>   <span class="timeago" data-date="2021-06-12 21:48:27 &#43;0000 UTC">2021-06-12 21:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hear Restic is great.  Alternatives I&#x27;ve heard of (providing open-source incremental encrypted backups) include Borg, SparkleShare, SyncThing, Kup, Areca, and rdedup.  I&#x27;d be really interested to hear how these compare; SyncThing and SparkleShare, for example, are not really intended for backups, but they make backups as a sort of side effect.  Are all of these still live projects?  Has anyone tried more than one of them?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=justin_oaks" target="_blank">justin_oaks</a>   <span class="timeago" data-date="2021-06-13 04:57:30 &#43;0000 UTC">2021-06-13 04:57:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Restic is pretty great. I use it for backups at work and my personal backups too. The fact that it&#x27;s encrypted makes it so I can use cloud storage without worrying about what happens if (when?) the cloud provider gets hacked. The reduplication allows me to have both incremental and full backups in one application. If you&#x27;re comfortable on the command line then I recommend Restic without reservation.<p>If you&#x27;re not comfortable on the command line then you may have to reach for another tool.<p>I&#x27;ve used SyncThing. It&#x27;s good for keeping folders on multiple devices in sync, but they are NOT backups. Backups allow you to recover from accidental or malicious deletions and modifications. SyncThing will happily move those deletions and modifications to your other systems, so both are in-sync and both are wrong.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kragen" target="_blank">kragen</a>   <span class="timeago" data-date="2021-06-13 16:04:05 &#43;0000 UTC">2021-06-13 16:04:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool, thanks!  I was thinking about data loss from, you know, a disk crash or phone theft, but you&#x27;re right that real backups allow you to recover from accidental and malicious deletions and modifications too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=captn3m0" target="_blank">captn3m0</a>   <span class="timeago" data-date="2021-06-13 09:24:26 &#43;0000 UTC">2021-06-13 09:24:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Alexander Neumann (Restic creator) was recently on the changelog podcast earlier this year talking about Restic: <a href="http:&#x2F;&#x2F;changelog.com&#x2F;podcast&#x2F;434" rel="nofollow">http:&#x2F;&#x2F;changelog.com&#x2F;podcast&#x2F;434</a>. He mentions his day-job is in infosec, and how that&#x27;s led to good choices for Restic security.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/10/raspberry-pi-wifi-to-ethernet-bridge/">
+
+
+    <title>Raspberry Pi WiFi to ethernet bridge - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Raspberry Pi WiFi to ethernet bridge - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/raspberry-pi-wifi-to-ethernet-bridge/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/raspberry-pi-wifi-to-ethernet-bridge/">
+<meta name="twitter:title" content="Raspberry Pi WiFi to ethernet bridge - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Raspberry Pi WiFi to ethernet bridge - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-10T19:51:36JST",
+    "dateModified": "2021-06-10T19:51:36JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://willhaley.com/blog/raspberry-pi-wifi-ethernet-bridge/">Raspberry Pi WiFi to ethernet bridge</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dasl" target="_blank">dasl</a>   <span class="timeago" data-date="2021-06-10 20:21:30 &#43;0000 UTC">2021-06-10 20:21:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A couple of months ago, another setup for a wifi to ethernet bridge was posted here: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26940521" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26940521</a><p>I like Will Haley&#x27;s setup better though, because it keeps everything in the same subnet.<p>The slowdown from the bridge is negligible, in my experience. After running 10 trials, I found that:<p>* median ping was 2.4% higher on the bridged pi<p>* median download speed was 3.6% slower on the bridged pi<p>* median upload speed was 0.1% slower on the bridged pi<p>More details about my setup and how I performed this speedtest: <a href="https:&#x2F;&#x2F;github.com&#x2F;dasl-&#x2F;pitools&#x2F;tree&#x2F;main&#x2F;wifi-ethernet-bridge#wifi-to-ethernet-bridge" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dasl-&#x2F;pitools&#x2F;tree&#x2F;main&#x2F;wifi-ethernet-bri...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-06-10 23:49:57 &#43;0000 UTC">2021-06-10 23:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; * median ping was 2.4% higher on the bridged pi<p>Pings are best compared in absolute terms as the latency of the Pi would be additive, not multiplicative.<p>I looked at your results and the Pi appears to add 0.6ms, which is indeed very negligible!<p>Thanks for sharing detailed results
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KingMachiavelli" target="_blank">KingMachiavelli</a>   <span class="timeago" data-date="2021-06-11 01:43:31 &#43;0000 UTC">2021-06-11 01:43:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even download &amp; upload should be posted as bride&#x2F;no-bridge speeds. Assuming they meant <i>internet</i> upload&#x2F;download then it makes a big difference if you are testing using a 50Mbps internet connection or 500Mbps.<p>I&#x27;d be very curious of the Wifi &amp; Ethernet can both operate at link saturation speeds so 1Gbit on the Ethernet. While the 4B has AC WiFi, just quick search shows it can only hit ~120Mbps with maybe 200Mbps maybe being achievable with some tweaks. At best it can do 480Mbps.<p>Considering the 4B costs ~$80, you would be better off buying a dedicated bridge. I think any Ubiquity AP can be used as a bridge for example. An old router would also work. I have a hard time thinking of a situation where you would want a 1-many bridge but don&#x27;t need decent bandwidth. i.e most situations where minimal throughput is OK means you probably only need 1 raspberry pi for the task anyway.<p>Still it&#x27;s a pretty decent project and good intro to networking.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=neilv" target="_blank">neilv</a>   <span class="timeago" data-date="2021-06-10 20:46:28 &#43;0000 UTC">2021-06-10 20:46:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can also do this with an old OpenWrt router, which also gets you a management interface and a gigabit Ethernet switch as part of the plastic box.<p>I used to have such a bridge (OpenWrt on Netgear WNDR3800 hardware) Velcro&#x27;d to the underside of a TV cart, so that an appliance on the cart that only had Ethernet and 2.4 GHz WiFi built-in could do a more reliable 5 GHz across the room.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aurelian15" target="_blank">aurelian15</a>   <span class="timeago" data-date="2021-06-10 21:51:56 &#43;0000 UTC">2021-06-10 21:51:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree that this is a much better option. Also, if you use two OpenWrt devices, you can enable WDS mode to build a true layer 2 bridge. That is, you won&#x27;t need Proxy ARP and DHCP relay. For example, DHCP and IPv6 will just work out of the box.<p>Edit: From what I can tell, support for WDS depends on the WiFi chipset. &quot;iw list&quot; must explicitly include &quot;WDS&quot; as a &quot;supported interface mode&quot;. At least the Broadcom chipset on the Raspberry Pi Zero does not support this, but, for example, the Atheros chipsets used in a variety of routers do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mobilio" target="_blank">mobilio</a>   <span class="timeago" data-date="2021-06-10 23:12:58 &#43;0000 UTC">2021-06-10 23:12:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m bridging for an IPTV box now TP-Link Archer C20i that cots me $10.<p>It also make 2nd AP connected wireless to first one for extending WiFi coverage. Not a perfect setup but works few months without issues.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cuu508" target="_blank">cuu508</a>   <span class="timeago" data-date="2021-06-11 04:53:16 &#43;0000 UTC">2021-06-11 04:53:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DD-WRT also supports this (wifi mode: &quot;client&quot;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-10 21:16:47 &#43;0000 UTC">2021-06-10 21:16:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And probably also a much better antenna.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CogitoCogito" target="_blank">CogitoCogito</a>   <span class="timeago" data-date="2021-06-10 21:01:37 &#43;0000 UTC">2021-06-10 21:01:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I might as well just dump this question in this thread:<p>Would this be easy to combine with openvpn? Basically what I&#x27;d like is to hook (say) my Apple TV into my pi by ethernet and then use the pi&#x27;s wifi to connect to my router. Finally I&#x27;d like to be able to connect the pi to a VPN and have the Apple TV transparently use that connection. Is this straight-forward to achieve?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pmccarren" target="_blank">pmccarren</a>   <span class="timeago" data-date="2021-06-10 21:06:14 &#43;0000 UTC">2021-06-10 21:06:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, rather straight-forward. Little bit of iptables forwarding and you&#x27;re all set:<p><pre><code>  echo 1 &gt; &#x2F;proc&#x2F;sys&#x2F;net&#x2F;ipv4&#x2F;ip_forward
+  iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT
+  iptables -A FORWARD -i wlan0 -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+  iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+</code></pre>
+I&#x27;d recommend wireguard[0] in preference to openvpn.<p>refs: [0]<a href="https:&#x2F;&#x2F;www.wireguard.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.wireguard.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=archontes" target="_blank">archontes</a>   <span class="timeago" data-date="2021-06-10 21:23:36 &#43;0000 UTC">2021-06-10 21:23:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            May I ask where I might start learning things like this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=giobox" target="_blank">giobox</a>   <span class="timeago" data-date="2021-06-10 23:00:24 &#43;0000 UTC">2021-06-10 23:00:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The tutorials provided by VPS providers like Digital Ocean are a pretty good way to learn how to setup a VPN or any other common webservice yourself. They have a pretty well maintained library:<p><a href="https:&#x2F;&#x2F;www.digitalocean.com&#x2F;community&#x2F;tutorials&#x2F;how-to-create-a-point-to-point-vpn-with-wireguard-on-ubuntu-16-04" rel="nofollow">https:&#x2F;&#x2F;www.digitalocean.com&#x2F;community&#x2F;tutorials&#x2F;how-to-crea...</a><p>etc. I&#x27;d also second a recommendation of wireguard over OpenVPN - it&#x27;s far simpler to configure too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hatware" target="_blank">hatware</a>   <span class="timeago" data-date="2021-06-10 22:21:05 &#43;0000 UTC">2021-06-10 22:21:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Stand up a few useful services around the home and harden them. Stuff like Plex&#x2F;Emby, Paperless-ng, *arr&#x27;s, etc. Self hosting is addicting and one of the best teachers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CogitoCogito" target="_blank">CogitoCogito</a>   <span class="timeago" data-date="2021-06-10 21:10:00 &#43;0000 UTC">2021-06-10 21:10:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great thanks for the info!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sohei" target="_blank">sohei</a>   <span class="timeago" data-date="2021-06-10 21:09:57 &#43;0000 UTC">2021-06-10 21:09:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, but a better approach would be to enable forwarding on the pi and using the pi as a gateway.<p>Performance is probably the only reason you&#x27;d favor bridging over routing. A segmented network is a safer network.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=deeblering4" target="_blank">deeblering4</a>   <span class="timeago" data-date="2021-06-10 21:09:10 &#43;0000 UTC">2021-06-10 21:09:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some routers support acting as a transparent vpn client as well, particularly those with open linux firmwares.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=godelski" target="_blank">godelski</a>   <span class="timeago" data-date="2021-06-10 21:42:08 &#43;0000 UTC">2021-06-10 21:42:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Has anyone tried this and successfully blocked ads from services like YouTube and Hulu? uBlock works on my computer but I&#x27;ve always had a hard time with pihole. It&#x27;ll work for like a day then go back to serving ads.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vorpalhex" target="_blank">vorpalhex</a>   <span class="timeago" data-date="2021-06-10 22:06:57 &#43;0000 UTC">2021-06-10 22:06:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Make sure nothing is changing your DNS. You may need to set your router to push the pihole as your DNS and tell any programs to use system DNS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=godelski" target="_blank">godelski</a>   <span class="timeago" data-date="2021-06-10 22:13:03 &#43;0000 UTC">2021-06-10 22:13:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve checked that my router continues to point to the pihole (no fallbacks, though I&#x27;ve tried with fallbacks and no difference). I also setup the pihole with cloudflare. I&#x27;m just always confused because it seems like some people have absolutely no problem and there&#x27;s others in my camp and the former just stop after &quot;just follow the directions.&quot; I even remember the LTT video mentioned this specific problem.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=livueta" target="_blank">livueta</a>   <span class="timeago" data-date="2021-06-11 00:09:05 &#43;0000 UTC">2021-06-11 00:09:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I went down a similar rabbit hole recently with unbound as a caching resolver, where it appeared to work on my real computers but didn&#x27;t on phones. I took a pcap and found that my Android 10+ devices were refusing to use the good-old port 53 DNS my unbound jail was serving because it wasn&#x27;t DoT. Once I set up unbound with real certs _and_ set it as each device&#x27;s &quot;Private DNS&quot;, it worked as expected.<p>Your issue might be different but I suggest taking a pcap to make sure your assumptions about what is answering a given DNS query are true.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-06-11 00:02:10 &#43;0000 UTC">2021-06-11 00:02:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh I didn&#x27;t realise anyone had that work. I just assumed it wasn&#x27;t possible (i.e. ads served from same domain as content) and uBO was able to do it by &#x27;content blocking&#x27; (i.e. DOM manipulation) rather than XHR blocking.<p>So, you&#x27;re not alone, me too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=puzzlingcaptcha" target="_blank">puzzlingcaptcha</a>   <span class="timeago" data-date="2021-06-10 21:18:35 &#43;0000 UTC">2021-06-10 21:18:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah yes, network configuration by way of executing a random bash script from a blog. With tasty morsels like:<p>&gt;# I have to admit, I do not understand ARP and IP forwarding enough to explain  exactly what is happening here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geerlingguy" target="_blank">geerlingguy</a>   <span class="timeago" data-date="2021-06-10 21:26:49 &#43;0000 UTC">2021-06-10 21:26:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean, the number of people on this site who could intelligently explain ARP and IP forwarding in detail is probably 10x higher than in the general population—and that percentage here is probably in the low single digits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tomjakubowski" target="_blank">tomjakubowski</a>   <span class="timeago" data-date="2021-06-11 00:11:45 &#43;0000 UTC">2021-06-11 00:11:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you mean the proportion is higher here, unless you mean that &gt;90% of people who could intelligently explain ARP and IP forwarding are HN posters.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-06-10 23:36:50 &#43;0000 UTC">2021-06-10 23:36:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I read it and found the overall approach a bit strange. I wondered why they weren&#x27;t just using a normal bridge interface, like <a href="https:&#x2F;&#x2F;unix.stackexchange.com&#x2F;questions&#x2F;363332&#x2F;how-do-i-configure-a-network-interface-bridge-from-wifi-to-ethernet-with-debian" rel="nofollow">https:&#x2F;&#x2F;unix.stackexchange.com&#x2F;questions&#x2F;363332&#x2F;how-do-i-con...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-06-11 00:09:43 &#43;0000 UTC">2021-06-11 00:09:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I don&#x27;t like the style of this &#x27;first, download this script; then, execute it&#x27;.. and it creates&#x2F;overwrites files.<p>Why not tell me to create the necessary files, with some article content around what we&#x27;re doing and why?<p>As an article this doesn&#x27;t seem to offer anything more than a suggestively named GitHub repository with a small readme.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geerlingguy" target="_blank">geerlingguy</a>   <span class="timeago" data-date="2021-06-10 21:53:39 &#43;0000 UTC">2021-06-10 21:53:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This can also be set up graphically using OpenWRT (which is a lighter-weight OS if you just want to do some networking and not use the Pi for anything else.<p>I should note that while the onboard WiFi is 802.11ac, I&#x27;ve never seen it get more than 60-70 Mbps in my own testing (in a variety of network environments), so if you want more speed, you might want to get an old n or ac router and flash it with OpenWRT instead.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mths" target="_blank">mths</a>   <span class="timeago" data-date="2021-06-10 23:30:07 &#43;0000 UTC">2021-06-10 23:30:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What operating frequency did you use? I got the RPi4 mentioned in the article and I run OpenWrt on it as my home router. I got it configured to AC mode, 40 MHz width, and I easily hit 100Mbps.<p>I live in an apartment though, I wouldn&#x27;t trust it to cover much of a house. Also it&#x27;s struggling with keeping 10+ devices connected. But speed is not bad! I prefer it over the retail routers I got hooked up as access points.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dasl" target="_blank">dasl</a>   <span class="timeago" data-date="2021-06-10 22:05:01 &#43;0000 UTC">2021-06-10 22:05:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, those speeds are roughly consistent with what I got in my speed tests here :)<p>You (and others in these comments) have suggested using OpenWRT as an alternative. I suppose one advantage of the approach outlined in the submitted article is that you can still use the pi for other tasks using the normal raspberry pi OS, instead of installing the OpenWRT OS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xiii1408" target="_blank">xiii1408</a>   <span class="timeago" data-date="2021-06-10 21:55:05 &#43;0000 UTC">2021-06-10 21:55:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, this.  I&#x27;ve used Ethernet bridge on old Netgear 802.11n routers, and it&#x27;s quite fast.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ThatPlayer" target="_blank">ThatPlayer</a>   <span class="timeago" data-date="2021-06-10 22:41:41 &#43;0000 UTC">2021-06-10 22:41:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve thought of doing something similar, but exposing it as a USB-Ethernet adapter instead. The Pi 4 (and Pi Zero W) support USB OTG. It looks simple enough with a single command with Linux USB gadget to create the network interface usb0.<p>Then you can do power and data over the single USB port.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=incanus77" target="_blank">incanus77</a>   <span class="timeago" data-date="2021-06-10 23:50:20 &#43;0000 UTC">2021-06-10 23:50:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21430574" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21430574</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=manuel_w" target="_blank">manuel_w</a>   <span class="timeago" data-date="2021-06-11 06:21:04 &#43;0000 UTC">2021-06-11 06:21:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used an Intel NUC running Debian Stretch as wireless access point for month. All I had to do was to assign all the interface (the internal ethernet one, an USB-ethernet adapter, and hostapd, the access point daemon) to the same network bridge `br0`. That&#x27;s all. Even hotplugging the usb-ethernet adapter worked fine.<p>For those curious, find the `&#x2F;etc&#x2F;network&#x2F;interfaces` and `&#x2F;etc&#x2F;hostapd.conf` here: (Grep for `br0` in both)<p><pre><code>  * https:&#x2F;&#x2F;gitlab.com&#x2F;manuel_wagesreither&#x2F;debian-image-creator&#x2F;-&#x2F;blob&#x2F;master&#x2F;src&#x2F;files&#x2F;interfaces
+  * https:&#x2F;&#x2F;gitlab.com&#x2F;manuel_wagesreither&#x2F;debian-image-creator&#x2F;-&#x2F;blob&#x2F;master&#x2F;src&#x2F;files&#x2F;hostapd.conf
+</code></pre>
+---<p>Can anyone elaborate on why the authors way of implementation is superior to that? He&#x2F;she&#x27;s using `parprouted` and `dhcp-helper`.<p>From the parprouted man page:<p>&gt; parprouted is a daemon for transparent IP (Layer 3) proxy ARP bridging. Unlike standard bridging, proxy ARP bridging allows to bridge Ethernet networks behind wireless nodes. Normal L2 bridging does not work between wireless nodes because wireless does not know about MAC addresses used in the wired Ethernet networks. Also this daemon is useful for making transparent firewalls.<p>When wireless nodes don&#x27;t know about mac addresses, why is my wireless interface on `ip a` showing a mac address then?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjg59" target="_blank">mjg59</a>   <span class="timeago" data-date="2021-06-11 06:52:40 &#43;0000 UTC">2021-06-11 06:52:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On wired ethernet, a packet contains the MAC address of the destination host. Switches across the network keep track of which port a given MAC address is associated with and forward it appropriately. Wifi doesn&#x27;t have the same concept - the only destination MAC address in a standard 802.11 packet is that of the destination Wifi station. So, if you have a device on Wifi with several wired devices behind it, and you want to send a packet to one of those wired devices, you can&#x27;t stick the wired device&#x27;s MAC address in there - it needs to be the address of the one with Wifi. So how does that Wifi node know which wired device to forward the packet to?<p>(This is avoided with WDS, but that requires the AP to cooperate)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=serendipitous" target="_blank">serendipitous</a>   <span class="timeago" data-date="2021-06-11 08:52:34 &#43;0000 UTC">2021-06-11 08:52:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The 802.11 header has 4 MAC addresses: Source Address (SA), Destination Address (DA), Transmitter Address (TA), Receiver Address (RA). The TA and RA are those of the Wifi station and SA and DA are the Ethernet addresses. This allows bridging Ethernet and Wifi interfaces and it is how many (most?) Linux-based Wifi routers work.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjg59" target="_blank">mjg59</a>   <span class="timeago" data-date="2021-06-11 17:17:39 &#43;0000 UTC">2021-06-11 17:17:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, if you&#x27;re using WDS, otherwise you only have three addresses used. Since you need the transmitting device to populate the DA, you can&#x27;t just turn on bridging on a client and have everything work - you need both ends of the link to be involved.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=serendipitous" target="_blank">serendipitous</a>   <span class="timeago" data-date="2021-06-12 08:32:02 &#43;0000 UTC">2021-06-12 08:32:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, for a wifi client (like in the article) you&#x27;re right. manuel_w was talking about bridging on the AP and for that you do just enable bridging and it works fine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lxgr" target="_blank">lxgr</a>   <span class="timeago" data-date="2021-06-10 22:01:42 &#43;0000 UTC">2021-06-10 22:01:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is this a &quot;true&quot; bridge (i.e. every Ethernet segment coming in on one end is transformed into an appropriate 802.11 frame and vice versa)? If not, is that possible using an RPi?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rkeene2" target="_blank">rkeene2</a>   <span class="timeago" data-date="2021-06-10 22:42:26 &#43;0000 UTC">2021-06-10 22:42:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not every IEEE 802.1 Ethernet frame can be converted to an IEEE 802.11 WiFi frame.  To do that you would need some type of tunnel to the Ethernet fabric.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-06-10 23:38:34 &#43;0000 UTC">2021-06-10 23:38:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No tunnel is needed. Just use a bridge interface.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rkeene2" target="_blank">rkeene2</a>   <span class="timeago" data-date="2021-06-10 23:59:13 &#43;0000 UTC">2021-06-10 23:59:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since not all IEEE 802.1 Ethernet frames can be converted to IEEE 802.11 frames using the Linux bridging infrastructure isn&#x27;t sufficient (even though it can do fancy things like bridge non-Ethernet and Ethernet interfaces; Like bridging PPP interfaces and IEEE 802.1 Interfaces).  You genuinely need a tunnel if you want support all Ethernet functionality.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-06-11 00:08:19 &#43;0000 UTC">2021-06-11 00:08:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m highly skeptical that bridging is insufficient for most use cases. After all, most Linux-based access points are using standard bridging.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rkeene2" target="_blank">rkeene2</a>   <span class="timeago" data-date="2021-06-11 00:36:29 &#43;0000 UTC">2021-06-11 00:36:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed that is true that for most cases WiFi can do the things users want.  My note was that not everything you can do with Ethernet frames can be converted to WiFi frames.<p>One such example is Ethernet multicast.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=musicale" target="_blank">musicale</a>   <span class="timeago" data-date="2021-06-11 05:41:51 &#43;0000 UTC">2021-06-11 05:41:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like making an ethernet bridge shouldn&#x27;t be hard; off the top of my head, if we wanted to bridge eth1 to wlan1 it would be something like:<p><pre><code>  brctl addbr br0
+  brctl addif br0 eth1
+  brctl addif br0 wlan1
+  ip link set br0 up
+</code></pre>
+or the equivalent with ovs-vsctl<p>I frequently use RPi as a programmable soft switch, plugging in four USB-ethernet dongles. On my Pi it splits the USB bandwidth, but it&#x27;s still very useful.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=colonelxc" target="_blank">colonelxc</a>   <span class="timeago" data-date="2021-06-11 06:08:44 &#43;0000 UTC">2021-06-11 06:08:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wondered too, and found this from the debian docs: <a href="https:&#x2F;&#x2F;wiki.debian.org&#x2F;BridgeNetworkConnectionsProxyArp" rel="nofollow">https:&#x2F;&#x2F;wiki.debian.org&#x2F;BridgeNetworkConnectionsProxyArp</a><p>TL;DR: Some routers don&#x27;t like it, so layer 3 might work better
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=belval" target="_blank">belval</a>   <span class="timeago" data-date="2021-06-10 23:13:27 &#43;0000 UTC">2021-06-10 23:13:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is fun! I wanted to do something similar but ended up buying two TP-Link AC routers with WDS for ~100$. Setup was simple and I get the full 400Mbps download speed from the paired router (the one that isn&#x27;t connected to WAN).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bredren" target="_blank">bredren</a>   <span class="timeago" data-date="2021-06-11 06:58:42 &#43;0000 UTC">2021-06-11 06:58:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used an old Airport Extreme I had sitting around to set up a bridge network recently. In doing so I realized those routers can become Time Machine devices simply by plugging a HD into the back USB port.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=api" target="_blank">api</a>   <span class="timeago" data-date="2021-06-10 21:27:37 &#43;0000 UTC">2021-06-10 21:27:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This should work with ZeroTier&#x27;s Ethernet bridging capability. You could have a WiFi network that bridged right into a virtual Ethernet network that spanned sites.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vxNsr" target="_blank">vxNsr</a>   <span class="timeago" data-date="2021-06-10 23:10:21 &#43;0000 UTC">2021-06-10 23:10:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m trying to understand why this is better than a usb WiFi dongle, and coming up empty. Anyone have an idea?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=foxrider" target="_blank">foxrider</a>   <span class="timeago" data-date="2021-06-10 23:19:51 &#43;0000 UTC">2021-06-10 23:19:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No driver, processing or configuration is required on the bridged machine. This is good for devices you can&#x27;t install a driver on (smart TVs, networked printers, any other appliance). No configuration also means you don&#x27;t have to risk your wifi password being stored&#x2F;shared with third parties.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vxNsr" target="_blank">vxNsr</a>   <span class="timeago" data-date="2021-06-11 15:14:27 &#43;0000 UTC">2021-06-11 15:14:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gotcha. These are actual great use cases. I wonder if there’s a market to make an actual dedicated consumer device.<p>I guess the main issue is that Ethernet ports are going the way of the dodo.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vel0city" target="_blank">vel0city</a>   <span class="timeago" data-date="2021-06-11 16:21:17 &#43;0000 UTC">2021-06-11 16:21:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ~~Lots of~~ Some* wireless access points support operating in either a client or bridged mode. Client mode usually implies (not always) it NAT&#x27;ing the WiFi connection similar to what a home router might do with your internet connection. Sometimes client mode is synonymous to bridging which is what this Pi is doing.<p>So yes, there&#x27;s been a market for this on lots of consumer devices for quite some time. Most people just don&#x27;t know it exists.<p>Edited my comment a bit as doing a bit more research its not <i>quite</i> as common as I believed but does exist on a number of consumer devices. I still stand by my point that most people don&#x27;t know about this feature of their hardware when present as most people don&#x27;t understand the difference between a router and an access point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vel0city" target="_blank">vel0city</a>   <span class="timeago" data-date="2021-06-11 01:09:07 &#43;0000 UTC">2021-06-11 01:09:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wireless bridges can be useful when you&#x27;re trying to connect several devices through a single wireless link. Think about potentially having a whole room of devices all with a perfectly placed antenna instead of half a dozen antennas placed in compromised locations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=locusm" target="_blank">locusm</a>   <span class="timeago" data-date="2021-06-11 00:20:08 &#43;0000 UTC">2021-06-11 00:20:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You have a printer thats no where near a wired port.
+Your USB stick isnt going to work in this case.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=treesknees" target="_blank">treesknees</a>   <span class="timeago" data-date="2021-06-11 16:03:45 &#43;0000 UTC">2021-06-11 16:03:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Similar case, I did this with a home security system when I moved in. It&#x27;s old but has a web interface for viewing some alarm data, and can technically reach out to the web for sending alarms. The panel is in a closet so the Pi worked perfectly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jz_" target="_blank">jz_</a>   <span class="timeago" data-date="2021-06-10 23:19:53 &#43;0000 UTC">2021-06-10 23:19:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            n=1<p>I use an intel nuc i3-7100U as a wifi to ethernet bridge for a Windows 10 machine (HP Elitedesk 8300 Core i5-3470).   The nuc also serves as a htpc running libreelec.<p>Why?  I tried 4 different USB WiFi dongles with different chipsets spanning ~11 years and each one would end up being the cause of intermittent blue screen of death.   The dump file backtrace repeatedly pointed to the usb-wifi stack.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sosodev" target="_blank">sosodev</a>   <span class="timeago" data-date="2021-06-11 00:27:20 &#43;0000 UTC">2021-06-11 00:27:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did this when I didn&#x27;t have a dongle but did have a Raspberry Pi on hand.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=geocrasher" target="_blank">geocrasher</a>   <span class="timeago" data-date="2021-06-11 02:34:13 &#43;0000 UTC">2021-06-11 02:34:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have an ASUS RT-N16 router from about 2013 that has been doing this duty since about 2015. It&#x27;s running the old Toastman build of TomatoUSB. It&#x27;s only WiFi G (not N) so throughput wasn&#x27;t so hot. But it really served me well until I decommissioned it last week.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sosodev" target="_blank">sosodev</a>   <span class="timeago" data-date="2021-06-11 00:26:45 &#43;0000 UTC">2021-06-11 00:26:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was using my Raspberry Pi 4 as a WiFi bridge for a &quot;temporary&quot; networking solution after I moved house. I ended up running it that way for over a year and it worked pretty flawlessly. Only problem was that it didn&#x27;t get anywhere near my full WiFi speed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ddtaylor" target="_blank">ddtaylor</a>   <span class="timeago" data-date="2021-06-10 20:32:33 &#43;0000 UTC">2021-06-10 20:32:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DD-WRT has support for Rpi now though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=0x0" target="_blank">0x0</a>   <span class="timeago" data-date="2021-06-10 21:23:01 &#43;0000 UTC">2021-06-10 21:23:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did something similar to bring a legacy cable-only printer online for wifi clients where there were no cabled uplink. Worked well. Tried to add airprint with cups as well but that was hit&amp;miss.<p>parprouted &amp; dhcp-helper are secret gems!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=postalponed" target="_blank">postalponed</a>   <span class="timeago" data-date="2021-06-11 04:44:09 &#43;0000 UTC">2021-06-11 04:44:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m curious if this would work on a network with a captive portal enabled. It would be quite useful for connecting smart devices by hooking up a router on the raspberry&#x27;s ethernet port.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sigjuice" target="_blank">sigjuice</a>   <span class="timeago" data-date="2021-06-10 21:55:02 &#43;0000 UTC">2021-06-10 21:55:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is the kernel&#x27;s proxy ARP support not enough to handle everything?  What is the reason to have parprouted?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gonesilent" target="_blank">gonesilent</a>   <span class="timeago" data-date="2021-06-11 03:06:55 &#43;0000 UTC">2021-06-11 03:06:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any way to do a Bluetooth proxy to use a remote Pi to relay Bluetooth to another network connected Pi?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=randomperson_24" target="_blank">randomperson_24</a>   <span class="timeago" data-date="2021-06-11 07:34:19 &#43;0000 UTC">2021-06-11 07:34:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is amazing! was looking for this exact solution :D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whereistimbo" target="_blank">whereistimbo</a>   <span class="timeago" data-date="2021-06-11 01:38:43 &#43;0000 UTC">2021-06-11 01:38:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Raspberry Pi 4 Model B still looks too bloated to me. I&#x27;m sure a more lightweight embedded option is possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

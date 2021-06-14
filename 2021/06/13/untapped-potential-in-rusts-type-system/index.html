@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/untapped-potential-in-rusts-type-system/">
+
+
+    <title>Untapped potential in Rust&#39;s type system - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Untapped potential in Rust&#39;s type system - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/untapped-potential-in-rusts-type-system/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/untapped-potential-in-rusts-type-system/">
+<meta name="twitter:title" content="Untapped potential in Rust&#39;s type system - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Untapped potential in Rust\u0027s type system - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T07:37:21JST",
+    "dateModified": "2021-06-13T07:37:21JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.jakobmeier.ch/blogging/Untapped-Rust.html">Untapped potential in Rust&#39;s type system</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=richardwhiuk" target="_blank">richardwhiuk</a>   <span class="timeago" data-date="2021-06-14 13:10:04 &#43;0000 UTC">2021-06-14 13:10:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note, you have to be quite careful with typeid - you can end up with types not matching because you have two different versions of a crate.<p>Normally this would be a compile time error, but using typeid can turn this into a runtime error.<p><a href="https:&#x2F;&#x2F;docs.rs&#x2F;assert-type-eq&#x2F;0.1.0&#x2F;assert_type_eq&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.rs&#x2F;assert-type-eq&#x2F;0.1.0&#x2F;assert_type_eq&#x2F;</a> allows you to assert that two types are the same, forcing a compile time error for this scenario.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simiones" target="_blank">simiones</a>   <span class="timeago" data-date="2021-06-14 17:30:23 &#43;0000 UTC">2021-06-14 17:30:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Off-topic mostly, but is this sort of &quot;single line&quot; function&#x2F;macro typical for Rust crates? This seems like something I would expect from a Node library, not a serious programming language community that cares about robust software.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SpaceNugget" target="_blank">SpaceNugget</a>   <span class="timeago" data-date="2021-06-14 17:50:31 &#43;0000 UTC">2021-06-14 17:50:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That isn&#x27;t a single line macro. Did you mean a single macro crate? Most crates in rust have more than a single macro&#x2F;function, but some do. Regardless, it&#x27;s not at all related to how &quot;robust&quot; or not the language ecosystem is.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=roblabla" target="_blank">roblabla</a>   <span class="timeago" data-date="2021-06-14 17:36:55 &#43;0000 UTC">2021-06-14 17:36:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Macros can be quite hard to understand, so having a simple crate wrapping it with extensive documentation and tests can be quite beneficial. And yes, this also applies to node. The attack is entirely unnecessary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=demurgos" target="_blank">demurgos</a>   <span class="timeago" data-date="2021-06-14 16:29:02 &#43;0000 UTC">2021-06-14 16:29:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am currently working on a configuration manager (to get rid of Ansible for my needs).
+To support running code as different users, I spawn multiple processes. I want to be able to call functions across processes without limitations, and be forward-compatible with a system where the processes could actually be on different machines.<p>I basically had similar goals and implemented it with a similar design as the one described in the last part. I had the same interrogations about what should should be captured by a universal type id.
+In my own code, I decide to punt the discussion and require  the user code to pick a globally unique name. I planned initially on using Typetag [0], a library achieving the same result as `UniversalId` from the article.
+The reason why I couldn&#x27;t use `Typetag` in the end is the lack of support for generics. Generics are a tough problem to deal with when deriving an id because it is not clear how they should influence it.<p>In my case I have a common pattern where structs are defined as:<p><pre><code>    Message&lt;S: AsRef&lt;str&gt;&gt; {
+        message: S,
+    }
+</code></pre>
+This allows me define methods on both borrowed (`Message&lt;&amp;str&gt;`) and owned (`Message&lt;String&gt;`) versions without issues. When remaining inside the process, the borrowed version is passed around and when sent across the process boundaries I can deserialize it to an owned version. This pattern prevents me from using Typetag and I am still not sure how it should be solved.<p>A related problem is also how the registry is built on the receiving end. In my project the registry is built manually, similarly to the example in the article. There are also crates such as Inventory [1] and Linkme [2]. Which allow to mark types at their definition point and then collect them in order to register them.<p>[0]: <a href="https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;typetag" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;typetag</a><p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;inventory" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;inventory</a><p>[2]: <a href="https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;linkme" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dtolnay&#x2F;linkme</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lpghatguy" target="_blank">lpghatguy</a>   <span class="timeago" data-date="2021-06-14 16:55:46 &#43;0000 UTC">2021-06-14 16:55:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve written a lot of structs that have &quot;maybe borrowed&quot; contents. I usually reach for std::borrow::Cow for this. It&#x27;s not exactly the same: we need to branch at runtime instead of having multiple generated codepaths.<p><pre><code>    struct Message&lt;&#x27;a&gt; {
+        message: Cow&lt;&#x27;a, str&gt;,
+    }</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=demurgos" target="_blank">demurgos</a>   <span class="timeago" data-date="2021-06-14 17:59:06 &#43;0000 UTC">2021-06-14 17:59:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree that in this case I can move to branch at runtime (the runtime cost is irrelevant for my use case), I still feel that it illustrates how it complicates deriving a universal type id.<p>The more general issue is that removing generic requires the lib to pick the implementation and remove choice from the consumer. Sometimes it&#x27;s not that important, sometimes it matters more. Another example I have in my project is that I have a trait describing a `User` (with e.g. `get_name`) it may be implemented as a `LinuxUser` or `WindowsUser`, each providing extra fields. How do you generate a universal id for a struct generic over a `User`?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eptcyka" target="_blank">eptcyka</a>   <span class="timeago" data-date="2021-06-14 11:10:28 &#43;0000 UTC">2021-06-14 11:10:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An interesting, yet somewhat unrelated discussion could be had about cases where one might want the type ID to not change when the type changes structurally. There are many structures in many ABI interfaces that are structurally different between releases, yet still binary compatible. This particular characteristic has always been defined adhoc, and I do wonder what a more formal system might mean. This almost feels like the issue of identity in distributed systems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lasagnaphil" target="_blank">lasagnaphil</a>   <span class="timeago" data-date="2021-06-14 11:25:41 &#43;0000 UTC">2021-06-14 11:25:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Code generation probably works the best here, although it makes the build system more complex. You would have the typeid mappings as an actually existing file that you can commit into your git repo.<p>Or if your language supports metaprogramming (something like Nim, Zig, or Jai), you could write compile-time code that maps each of your annotated types into deterministically-determined ids. (An example of this in Nim: <a href="https:&#x2F;&#x2F;gist.github.com&#x2F;PhilipWitte&#x2F;dd6c670fca3baf573490" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;PhilipWitte&#x2F;dd6c670fca3baf573490</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 13:31:27 &#43;0000 UTC">2021-06-14 13:31:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There are many structures in many ABI interfaces that are structurally different between releases, yet still binary compatible.<p>These should be defined in the API as simple newtype wrappers over some basic binary-level type (generally either unsigned binary word or u8 array) with conversions to and from safer higher-level types defined in Rust code, leaving it to the compiler to optimize these to no-ops whenever possible.  This ensures that &quot;binary compatible&quot; types also keep the same structural identity, and conversely, that binary incompatible types are automatically detected as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=weltensturm" target="_blank">weltensturm</a>   <span class="timeago" data-date="2021-06-14 14:56:53 &#43;0000 UTC">2021-06-14 14:56:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heh, this sounds just like the global event system I made for my D window manager: <a href="https:&#x2F;&#x2F;github.com&#x2F;weltensturm&#x2F;flatman&#x2F;blob&#x2F;master&#x2F;common&#x2F;event.d#L221" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;weltensturm&#x2F;flatman&#x2F;blob&#x2F;master&#x2F;common&#x2F;ev...</a>
+(which has some extra jingles with method annotations and event filters for convenience)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dshpala" target="_blank">dshpala</a>   <span class="timeago" data-date="2021-06-14 11:31:02 &#43;0000 UTC">2021-06-14 11:31:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve always wondered if it&#x27;s possible to use Rust&#x27; ownership chains to attribute memory usage? I.e. calculate total bytes retained by an object?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hywan" target="_blank">Hywan</a>   <span class="timeago" data-date="2021-06-14 14:08:43 &#43;0000 UTC">2021-06-14 14:08:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At my work, we have developped `loupe`, a Rust crate that does precisely that, <a href="https:&#x2F;&#x2F;github.com&#x2F;wasmerio&#x2F;loupe&#x2F;" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;wasmerio&#x2F;loupe&#x2F;</a>. I&#x27;m the main author of it.<p>`loupe` provides the `MemoryUsage` trait; It allows to know the size of a value in bytes, recursively. So it traverses most of the types, and its fields or variants as deep as possible. Hopefully, it tracks already visited values so that it doesn&#x27;t enter an infinite loupe loop.<p>We are using it inside Wasmer, a WebAssembly runtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simias" target="_blank">simias</a>   <span class="timeago" data-date="2021-06-14 11:38:44 &#43;0000 UTC">2021-06-14 11:38:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think ownership really lets you do anything more than what &quot;sizeof&quot; tells you in C. In particular:<p>- Some types have dynamic memory allocation (Vec, HashMaps etc...), so those would have to be computed at runtime and can change at any moment.<p>- Some types have shared ownership (Rc&#x2F;Arc), so it&#x27;s unclear how you would measure memory usage then.<p>- Some types, especially in foreign interfaces, will effectively just hold a pointer to some black box data, you&#x27;d need a special API to figure out how much memory it hides. For instance what&#x27;s the memory usage of a database handle or a JPEG compression library context?<p>- When you care about memory usage things like fragmentation are usually very important, and the amount of memory used by a given object can be misleading. If you have a string that takes up 12 bytes but it&#x27;s the only object left in the middle of a 4KiB page, then just counting &quot;12 bytes&quot; for this object is misleading because you have a huge fragmentation overhead.<p>The only advantage of the borrow checker is that safe Rust forces you to make ownership relationships explicit but not all Rust code is safe and there are many escape hatches that muddy the water (like Rc&#x2F;Arc mentioned above, but also threads and a few other things).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=squiggleblaz" target="_blank">squiggleblaz</a>   <span class="timeago" data-date="2021-06-14 12:25:19 &#43;0000 UTC">2021-06-14 12:25:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; - Some types have dynamic memory allocation (Vec, HashMaps etc...), so those would have to be computed at runtime and can change at any moment.<p>I thought that&#x27;s exactly the question that was being asked? Something like a htop for a rust program. This could be helpful in improving code efficiency.<p>&gt; - Some types have shared ownership (Rc&#x2F;Arc), so it&#x27;s unclear how you would measure memory usage then.<p>Same way we measure the memory usage of programs running on systems that support shared libraries and mmapped data. Seeking perfection here is the obstactal; the goal is to attribute memory usage to an object (and preferably, a function call) so that we can improve its characteristics.<p>&gt; - Some types, especially in foreign interfaces, will effectively just hold a pointer to some black box data, you&#x27;d need a special API to figure out how much memory it hides. For instance what&#x27;s the memory usage of a database handle or a JPEG compression library context?<p>It&#x27;s true that if you integrate with external systems, you don&#x27;t get the benefits of the system you chose to make your home. This doesn&#x27;t mean you should try to get as much benefit as possible.<p>&gt; - When you care about memory usage things like fragmentation are usually very important, and the amount of memory used by a given object can be misleading. If you have a string that takes up 12 bytes but it&#x27;s the only object left in the middle of a 4KiB page, then just counting &quot;12 bytes&quot; for this object is misleading because you have a huge fragmentation overhead.<p>This is interesting to me, and I don&#x27;t know much about it. It sounds like it&#x27;s not an actual limitation to the utility of the tool, but it should certainly guide how it is built and how its results are interpreted.<p>&gt; The only advantage of the borrow checker is that safe Rust forces you to make ownership relationships explicit but not all Rust code is safe and there are many escape hatches that muddy the water (like Rc&#x2F;Arc mentioned above, but also threads and a few other things).<p>In conclusion, I don&#x27;t think that renders the activity pointless. The fact that hazy information is hazy and requires careful interpretation doesn&#x27;t make it useless. People find test cases and static type checks useful even though they don&#x27;t answer the question &quot;is my code correct&quot;. And we&#x27;re all the time relying on half measures that answer parts of the questions here (I once developed a program and used the load averages from uptime to tell me if it was performant enough :&#x2F;). The pursuit of perfection is the enemy of improvement. It might be that there is some fatal flaw, but I don&#x27;t think you&#x27;ve mentioned any here.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-06-14 12:16:41 &#43;0000 UTC">2021-06-14 12:16:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think the ownership system gives you that directly. But I think you could make a trait with a #[derive] macro which could add up the owned memory of an object. And for complex objects, recursively calculate the owned memory for all of an object&#x27;s fields.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-06-14 15:06:30 &#43;0000 UTC">2021-06-14 15:06:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It didn&#x27;t use ownership, and I don&#x27;t think that&#x27;s the paradigm, but I did something like this in D by tagging allocating members with a user defined attribute which counted in bytes the allocated memory the summed it for the whole tree (structure).<p>Not worth the effort but it can be done in not much code
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fanf2" target="_blank">fanf2</a>   <span class="timeago" data-date="2021-06-14 13:25:41 &#43;0000 UTC">2021-06-14 13:25:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the plan is to support this kind of thing with per-collection allocators - <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;wg-allocators" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;wg-allocators</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ashtonkem" target="_blank">ashtonkem</a>   <span class="timeago" data-date="2021-06-14 11:34:17 &#43;0000 UTC">2021-06-14 11:34:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Shouldn&#x27;t that be possible with any memory management system? I believe Java has a tree behind the scenes in memory for management.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=squiggleblaz" target="_blank">squiggleblaz</a>   <span class="timeago" data-date="2021-06-14 12:30:35 &#43;0000 UTC">2021-06-14 12:30:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Java model ties one object to another. The rust model ties a consumed memory to a function. A debug log output that shows how much memory this function call required, in the same way it shows how much time it uses?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=willeh" target="_blank">willeh</a>   <span class="timeago" data-date="2021-06-14 11:27:58 &#43;0000 UTC">2021-06-14 11:27:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting article, but I think the key to writing idiomatic Rust is not to stretch what the type system can do but rather  be happy at what It can express and avoid unnecessary abstraction. The compile-time guarantees that we have to prove in Rust, also serve to give a hint for when not to abstract.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nine_k" target="_blank">nine_k</a>   <span class="timeago" data-date="2021-06-14 12:45:10 &#43;0000 UTC">2021-06-14 12:45:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think pushing the boundaries of what is idiomatic can sometimes be valuable. Look how much idiomatic C++ has changed since 1995. Or what is idiomatic in JavaScript now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fnord123" target="_blank">fnord123</a>   <span class="timeago" data-date="2021-06-14 15:32:28 &#43;0000 UTC">2021-06-14 15:32:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;sometimes&quot; is doing a lot of heavy lifting here.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=klyrs" target="_blank">klyrs</a>   <span class="timeago" data-date="2021-06-14 16:20:24 &#43;0000 UTC">2021-06-14 16:20:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This article is about curiosity, not best practices.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

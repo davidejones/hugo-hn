@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/main-is-usually-a-function-so-when-is-it-not-2015/">
+
+
+    <title>Main is usually a function, so when is it not? (2015) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Main is usually a function, so when is it not? (2015) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/main-is-usually-a-function-so-when-is-it-not-2015/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/main-is-usually-a-function-so-when-is-it-not-2015/">
+<meta name="twitter:title" content="Main is usually a function, so when is it not? (2015) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Main is usually a function, so when is it not? (2015) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T16:03:08JST",
+    "dateModified": "2021-06-14T16:03:08JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://jroweboy.github.io/c/asm/2015/01/26/when-is-main-not-a-function.html">Main is usually a function, so when is it not? (2015)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-06-14 17:59:04 &#43;0000 UTC">2021-06-14 17:59:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I interestingly did this just the other day.  I had a testing reason for main to consist of a single specific illegal instruction that I know the hex of anyway.  It was less work for the system&#x27;s Makefile to compile a .c rather than a .s file, and I knew everything I needed to make this trick work, but didn&#x27;t know how to for sure disable function prologues for this arch.<p>It&#x27;s the first time I had a legtimate excuse to whip out this technique since seeing it an obfuscated C contest entry for the PDP-11.  mullender.c I think?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jpegqs" target="_blank">jpegqs</a>   <span class="timeago" data-date="2021-06-14 16:26:16 &#43;0000 UTC">2021-06-14 16:26:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can be both, a string and a function:<p><pre><code>         char main
+         [&#x2F;*x86*&#x2F;]
+       __attribute__
+    ((section(&quot;.text&quot;))
+   )=&quot;WTYH)9Zj8_j7H)9]R&quot;
+  &quot;H)9^\350\0\0\0\0H)1^R&quot;
+   &quot;H))Z8&lt;2u\366j&lt;)9Xj9&quot;
+   &quot;)9j9VY)&lt;$[S_H\xbd^[&quot;
+    &quot;H$@\xcd\200-XP\xf&quot;
+    &quot;\5XP_j&lt;W\xeb\xe2]&quot;
+     &quot;Hello World!\n&quot;;
+      &#x2F;*Linux_Only!*&#x2F;</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FranchuFranchu" target="_blank">FranchuFranchu</a>   <span class="timeago" data-date="2021-06-14 16:39:17 &#43;0000 UTC">2021-06-14 16:39:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why does he add semicolons at the end of the assembly lines?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=actually_a_dog" target="_blank">actually_a_dog</a>   <span class="timeago" data-date="2021-06-14 17:07:31 &#43;0000 UTC">2021-06-14 17:07:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They&#x27;re not necessary, so I suspect some combination of reflex, consistency for consistency&#x27;s sake, or, possibly that they were added automatically by his editor&#x2F;IDE at some point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wtetzner" target="_blank">wtetzner</a>   <span class="timeago" data-date="2021-06-14 16:48:52 &#43;0000 UTC">2021-06-14 16:48:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure. I guess it shouldn&#x27;t hurt anything though, since semicolon is the comment character.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ltbarcly3" target="_blank">ltbarcly3</a>   <span class="timeago" data-date="2021-06-14 16:29:02 &#43;0000 UTC">2021-06-14 16:29:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, I guess technically they could expel him because he had someone do part of the assignment for him.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shadowgovt" target="_blank">shadowgovt</a>   <span class="timeago" data-date="2021-06-14 17:36:35 &#43;0000 UTC">2021-06-14 17:36:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there any particular utility to this trick, or is it just a neat side-effect of the linker and compiler being very permissive and treating something that most languages would call a compilation error as merely a warning?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-06-14 17:04:31 &#43;0000 UTC">2021-06-14 17:04:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Floats being more mysterious and intimidating than ints I prefer<p>const float main[] = {-8.10373123e+22, 6.16571324e-43, 1.58918456e-40, -7.11823707e-31, 5.81398733e-42, 1.26058568e-39, 6.72382769e-36, 2.17817833e-41, 2.16139414e-29, 1.10873646e+27, 1.76400414e+14, 1.74467096e+22, -221.039566};
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jalbertoni" target="_blank">jalbertoni</a>   <span class="timeago" data-date="2021-06-14 17:23:32 &#43;0000 UTC">2021-06-14 17:23:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Genuine question, can you be sure the conversion wouldn&#x27;t introduce a wrong bit here or there? Maybe in a different architecture or something?<p>I&#x27;m not that good with CPUs past 16 bits, this is really out of my comfort zone heh
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-14 17:34:14 &#43;0000 UTC">2021-06-14 17:34:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the format for single precision and double is defined by the standard. Beyond that may be implementation dependent.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_kst_" target="_blank">_kst_</a>   <span class="timeago" data-date="2021-06-14 17:53:34 &#43;0000 UTC">2021-06-14 17:53:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The format for floating-point is specified by the IEEE floating-point standard (or whatever it&#x27;s officially called these days). C permits but does not require IEEE format. Most implementations these days use it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=taneliv" target="_blank">taneliv</a>   <span class="timeago" data-date="2021-06-14 17:28:58 &#43;0000 UTC">2021-06-14 17:28:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Better yet, try to find the corresponding ints (or maybe more realistically shorts or chars) from usual #include headers, and use the #define or const mnemonics for all numbers.<p>Bonus points for finding them all in the same header file, or with like names, so as to give appearance of them actually meaning something in the context of the prank.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

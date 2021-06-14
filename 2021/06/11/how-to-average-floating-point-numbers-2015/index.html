@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/how-to-average-floating-point-numbers-2015/">
+
+
+    <title>How to average floating point numbers (2015) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="How to average floating point numbers (2015) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/how-to-average-floating-point-numbers-2015/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/how-to-average-floating-point-numbers-2015/">
+<meta name="twitter:title" content="How to average floating point numbers (2015) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "How to average floating point numbers (2015) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T07:29:13JST",
+    "dateModified": "2021-06-11T07:29:13JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.nu42.com/2015/03/how-you-average-numbers.html">How to average floating point numbers (2015)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rjmunro" target="_blank">rjmunro</a>   <span class="timeago" data-date="2021-06-11 16:40:36 &#43;0000 UTC">2021-06-11 16:40:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I still think the best way to deal with this stuff is to use interval arithmetic. Calculate the numbers with rounding set to round up, and separately to round down and compare the results. See PyInterval <a href="https:&#x2F;&#x2F;pyinterval.readthedocs.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;pyinterval.readthedocs.io&#x2F;</a> for an implementation.<p>&gt;&gt;&gt; from interval import interval<p>&gt;&gt;&gt; data = (interval(1_000_000_000.1), interval(1.1)) * 50_000<p>&gt;&gt;&gt; sum(data) &#x2F; len(data)<p>interval([500000000.5971994, 500000000.601347])<p>The result is definitely between the 2 values. If you try another method to do the calculation, (e.g. sorting first) you will know which one was better without the answer having to be obvious as it is in this case.<p>You might find one method is better at the lower bound, the other is better at the higher bound, which means you can narrow the value further than using either individually. It&#x27;s a really powerful system that I think should be much better known.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nestorD" target="_blank">nestorD</a>   <span class="timeago" data-date="2021-06-11 20:43:55 &#43;0000 UTC">2021-06-11 20:43:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You should be okay with a sum but interval arithmetic can blow up in a way that is <i>not</i> correlated with the numerical accuracy of the algorithm.
+Newton&#x27;s method, for example, is strongly convergent but produces diverging intervals.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uyt" target="_blank">uyt</a>   <span class="timeago" data-date="2021-06-11 22:57:26 &#43;0000 UTC">2021-06-11 22:57:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why does that happen? Is it because the errors are in opposite directions and will cancel each other out?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nestorD" target="_blank">nestorD</a>   <span class="timeago" data-date="2021-06-12 00:10:44 &#43;0000 UTC">2021-06-12 00:10:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That (and overall the unability to take correlation between error into account) and the fact that intervals propagated are upper bounds for some things like the division.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MaxBarraclough" target="_blank">MaxBarraclough</a>   <span class="timeago" data-date="2021-06-11 09:42:54 &#43;0000 UTC">2021-06-11 09:42:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can&#x27;t we just use Kahan summation [0] then divide by <i>n</i>?<p><i>edit</i> Someone on the reddit thread [1] had the same thought.<p>[0] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Kahan_summation_algorithm" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Kahan_summation_algorithm</a><p>[1] <a href="https:&#x2F;&#x2F;old.reddit.com&#x2F;r&#x2F;perl&#x2F;comments&#x2F;2zneat&#x2F;how_you_average_numbers_matters&#x2F;" rel="nofollow">https:&#x2F;&#x2F;old.reddit.com&#x2F;r&#x2F;perl&#x2F;comments&#x2F;2zneat&#x2F;how_you_averag...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SuchAnonMuchWow" target="_blank">SuchAnonMuchWow</a>   <span class="timeago" data-date="2021-06-11 10:28:37 &#43;0000 UTC">2021-06-11 10:28:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Kahan summation is better than naive summation, but not perfect. The stable_mean algorithm in the article is not perfect either. It just has more precision than the naive one, but it more or less has the same precision as twice-as-precise floats.<p>&gt;&gt;&gt; data = (1_000_000.1, 1.1, -1_000_000.1, -1.1) * 25_000<p>&gt;&gt;&gt; sum(data) &#x2F; len(data) == -2.3283153183228934e-16<p>&gt;&gt;&gt; sum(sorted(data)) &#x2F; len(data) == 2.7122441679239272e-11<p>&gt;&gt;&gt; stable_mean(data) == -2.571225228716577e-13<p>&gt;&gt;&gt; float(sum(numpy.array(data, dtype=numpy.float128)) &#x2F; len(data)) == 2.2648549702353195e-19<p>Note that in python there is a math.fsum function which return a perfectly rounded summation of floats. There are multiple different techniques for that, but they are more complex than Kahan summation.<p>&gt;&gt;&gt; math.fsum(data) &#x2F; len(data) == 0.0
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vitus" target="_blank">vitus</a>   <span class="timeago" data-date="2021-06-11 14:57:04 &#43;0000 UTC">2021-06-11 14:57:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Note that in python there is a math.fsum function which return a perfectly rounded summation of floats.<p>Quirks of the underlying data can yield surprising results.<p>I was playing around with the &quot;well-known&quot; floating point error result of 0.3 - 0.2 - 0.1 = some small number (instead of 0), and found:<p><pre><code>    &gt;&gt;&gt; sum((0.3, -0.2, -0.1) * 1_000_000) &#x2F; 3e6
+    -2.775557561562891e-23
+    &gt;&gt;&gt; math.fsum((0.3, -0.2, -0.1) * 1_000_000) &#x2F; 3e6
+    -9.25185853854297e-18
+    &gt;&gt;&gt; stable_mean((0.3, -0.2, -0.1) * 1_000_000)
+    -1.387894586067203e-17
+</code></pre>
+Namely, the &quot;naive&quot; mean yielded the smallest error (due to cancellation lining up just right such that it&#x27;s capped after two rounds), fsum yielded a nominally larger one, and stable_mean yielded the biggest error.<p>Of course, if you sort the values (such that we&#x27;re accumulating -0.2 + ... -0.2 + -0.1 + ... + -0.1 + 0.3 + ... + 0.3, then sum performs much worse, stable_mean is a little worse, and fsum performs exactly the same.<p><pre><code>    &gt;&gt;&gt; sum(sorted((0.3, -0.2, -0.1) * 1_000_000)) &#x2F; 3e6
+    -1.042215244884126e-12
+    &gt;&gt;&gt; math.fsum(sorted((0.3, -0.2, -0.1) * 1_000_000)) &#x2F; 3e6
+    -9.25185853854297e-18
+    &gt;&gt;&gt; stable_mean(sorted((0.3, -0.2, -0.1) * 1_000_000))
+    -3.0046468865706775e-16
+</code></pre>
+edit: Naturally, if you want accurate decimal calculations, you should consider using decimal.Decimal or fractions.Fraction (albeit at the cost of significant performance). Using numpy.float128 will help, but it&#x27;s still subject to rounding errors due to imprecise representation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-06-11 15:24:05 &#43;0000 UTC">2021-06-11 15:24:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some of these results are indeed very surprising. The &quot;correct&quot; result of (double(0.3) - double(0.2) - double(0.1)) is -1 * 2^-54 = -5.5511151231257827e-17, and dividing by three comes out to -1.8503717077085942e-17.<p>Hence, as far as those functions are concerned, the naive mean yielded the <i>worst</i> error in both tests, but stable_mean coincidentally happens to be the best in the first test. I&#x27;m slightly surprised that none of them got the correct result.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vitus" target="_blank">vitus</a>   <span class="timeago" data-date="2021-06-11 17:05:13 &#43;0000 UTC">2021-06-11 17:05:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you might be off by one for the &quot;correct&quot; result (i.e. 2^-55), which is what fsum arrives at.<p><pre><code>    &gt;&gt;&gt; 0.3 - 0.2 - 0.1
+    -2.7755575615628914e-17
+    &gt;&gt;&gt; (0.3 - 0.2 - 0.1) &#x2F; 3
+    -9.25185853854297e-18
+</code></pre>
+But either way, the fundamental problem in this case (as you noted) is actually due to loss of precision from numeric representation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-06-11 18:22:54 &#43;0000 UTC">2021-06-11 18:22:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heh, I reasoned about the exponent by hand and got -55 but then wasn&#x27;t sure whether it was correct so I searched for discussions of 0.3 - 0.2 - 0.1 and took the value they quoted (2^-54). That being an off-by-one error does resolve my question.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-06-11 11:03:09 &#43;0000 UTC">2021-06-11 11:03:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Specifically <a href="https:&#x2F;&#x2F;code.activestate.com&#x2F;recipes&#x2F;393090&#x2F;" rel="nofollow">https:&#x2F;&#x2F;code.activestate.com&#x2F;recipes&#x2F;393090&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Majromax" target="_blank">Majromax</a>   <span class="timeago" data-date="2021-06-11 12:17:10 &#43;0000 UTC">2021-06-11 12:17:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this case, it seems as if stable_mean is less accurate than the naive sum?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SuchAnonMuchWow" target="_blank">SuchAnonMuchWow</a>   <span class="timeago" data-date="2021-06-11 15:03:38 &#43;0000 UTC">2021-06-11 15:03:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The two behaves differently, so you can not strictly compare the two. Most of the time stable_mean will give more accurate results, but this is not always the case. For example you can create test cases where the naive approach will return an exact result but stable_mean will have some rounding error.<p>Kahan summation however is always more precise than naive summation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gpderetta" target="_blank">gpderetta</a>   <span class="timeago" data-date="2021-06-11 12:37:58 &#43;0000 UTC">2021-06-11 12:37:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interestingly enough I was given this problem (well, numerically stable online variance, but close enough) a while ago as a take-home job interview and I ended up researching this quite a bit.<p>It has been a while, but if I remember correctly pairwise sum was in practice as good or better as Kahan summation (and both more stable than Walford&#x27;s) but faster.<p>But by far the fastest and still very stable solution was to use the legacy 80 bit x87 fpu as accumulator. Which is not surprising as Kahan explicitly added 80 bit precision to x87 for intermediate computations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pixel_fcker" target="_blank">pixel_fcker</a>   <span class="timeago" data-date="2021-06-13 07:44:09 &#43;0000 UTC">2021-06-13 07:44:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How did you force using the x87 fpu?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gpderetta" target="_blank">gpderetta</a>   <span class="timeago" data-date="2021-06-13 15:59:33 &#43;0000 UTC">2021-06-13 15:59:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            with GCC long double is always an 80 bit precision type.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=m4r35n357" target="_blank">m4r35n357</a>   <span class="timeago" data-date="2021-06-11 09:51:33 &#43;0000 UTC">2021-06-11 09:51:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or can we sum more accurately by taking the stable_mean and multiplying by n?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eesmith" target="_blank">eesmith</a>   <span class="timeago" data-date="2021-06-11 09:33:02 &#43;0000 UTC">2021-06-11 09:33:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Switching to Python instead of Perl, use the &#x27;statistics&#x27; module, <a href="https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;statistics.html" rel="nofollow">https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;statistics.html</a> :<p><pre><code>  &gt;&gt;&gt; data = (1_000_000_000.1, 1.1) * 50_000
+  &gt;&gt;&gt; sum(data) &#x2F; len(data)
+  500000000.60091573
+  &gt;&gt;&gt; sum(sorted(data)) &#x2F; len(data)
+  500000000.6004578
+  &gt;&gt;&gt; sum(sorted(data, reverse=True)) &#x2F; len(data)
+  500000000.6012391
+  &gt;&gt;&gt; import statistics
+  &gt;&gt;&gt; statistics.mean(data)
+  500000000.6
+</code></pre>
+and<p><pre><code>  &gt;&gt;&gt; X = [10_000_000_000 + k for k in (4, 7, 13, 16)]
+  &gt;&gt;&gt; statistics.variance(X)
+  30</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pdkl95" target="_blank">pdkl95</a>   <span class="timeago" data-date="2021-06-11 10:13:01 &#43;0000 UTC">2021-06-11 10:13:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ruby seems to handle this out of the box:<p><pre><code>  &gt;&gt; RUBY_VERSION
+  ⇒  &quot;2.7.2&quot;
+  &gt;&gt; data = [1_000_000_000.1, 1.1] * 50_000 ; nil
+  ⇒  nil
+  &gt;&gt; data.sum
+  ⇒  50000000060000.0
+  &gt;&gt; data.sum &#x2F; data.length
+  ⇒  500000000.6
+  &gt;&gt; data.sort.sum &#x2F; data.length
+  ⇒  500000000.6
+  &gt;&gt; data.sort.reverse.sum &#x2F; data.length
+  ⇒  500000000.6
+</code></pre>
+I know that ruby will auto-promote an Integer into a Bignum. It seems like ruby will also auto-promote other types? I should research this...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aardvark179" target="_blank">aardvark179</a>   <span class="timeago" data-date="2021-06-11 14:11:20 &#43;0000 UTC">2021-06-11 14:11:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope. The sum method is implemented in C, and as soon as it sees a float value in the array it switches to Kahan-Babuska summation.<p>We don’t do that in TruffleRuby and so don’t produce quite such an accurate result.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmurray" target="_blank">dmurray</a>   <span class="timeago" data-date="2021-06-11 11:07:39 &#43;0000 UTC">2021-06-11 11:07:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FWIW, Ruby the language doesn&#x27;t have Bignum any more, though, just Integer which handles arbitrarily large numbers. Under the hood, there are some optimizations for small integers.<p><a href="https:&#x2F;&#x2F;bugs.ruby-lang.org&#x2F;issues&#x2F;12005" rel="nofollow">https:&#x2F;&#x2F;bugs.ruby-lang.org&#x2F;issues&#x2F;12005</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-11 12:09:01 &#43;0000 UTC">2021-06-11 12:09:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bignum is still there, working in almost exactly the same way, it&#x27;s not exposed to the user anymore.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ska" target="_blank">ska</a>   <span class="timeago" data-date="2021-06-11 18:52:38 &#43;0000 UTC">2021-06-11 18:52:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a nice thing about Common Lisp, not just integer promotion to bignums, but ratios too (works in complex, also).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=trinovantes" target="_blank">trinovantes</a>   <span class="timeago" data-date="2021-06-11 16:06:40 &#43;0000 UTC">2021-06-11 16:06:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess the question is does it still use floats internally or use something like BigNum and handle the precision issue (and thus more memory&#x2F;cpu)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_delirium" target="_blank">_delirium</a>   <span class="timeago" data-date="2021-06-11 17:04:40 &#43;0000 UTC">2021-06-11 17:04:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It looks like the second. For many of its operations, the statistics module first converts floats to integer ratios (integers are bignums in Python), does intermediate operations using integer arithmetic, and converts back to floats at the end.<p>Here&#x27;s the internal _sum function for example, which you can see maps _exact_ratio over the data before summing: <a href="https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;3.9&#x2F;Lib&#x2F;statistics.py#L123" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;3.9&#x2F;Lib&#x2F;statistics.py...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eesmith" target="_blank">eesmith</a>   <span class="timeago" data-date="2021-06-11 20:50:22 &#43;0000 UTC">2021-06-11 20:50:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s also fmean() which is for floats:<p><pre><code>  &gt;&gt;&gt; data = (1_000_000_000.1, 1.1) * 50_000
+  &gt;&gt;&gt; statistics.fmean(data)
+  500000000.6
+</code></pre>
+Implementation at <a href="https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;6df926f1c46eb6db7b5dcd0227c6b532c78525c9&#x2F;Modules&#x2F;mathmodule.c#L1314" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;6df926f1c46eb6db7b5dc...</a> .
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rhaps0dy" target="_blank">rhaps0dy</a>   <span class="timeago" data-date="2021-06-11 18:08:37 &#43;0000 UTC">2021-06-11 18:08:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            According to Radford Neal,
+it is possible to sum a sequence of n-bit floating point numbers exactly, i.e. rounding to the n-bit floating point value closest to the exact result.<p>The algorithm uses 2n bits for the sum. <a href="https:&#x2F;&#x2F;radfordneal.wordpress.com&#x2F;2015&#x2F;05&#x2F;21&#x2F;exact-computation-of-sums-and-means&#x2F;" rel="nofollow">https:&#x2F;&#x2F;radfordneal.wordpress.com&#x2F;2015&#x2F;05&#x2F;21&#x2F;exact-computati...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=asciimov" target="_blank">asciimov</a>   <span class="timeago" data-date="2021-06-11 18:29:29 &#43;0000 UTC">2021-06-11 18:29:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a special hatred of floating point numbers. I wish and advocate for a better standard.<p>My issue is that I&#x27;ve come across errors due to floating point in weird places. One example, searching a list of strings for another string. If the sort function decides those strings look like numbers it may coerce them into doubles (ints being too small to hold them). Then sort wont match correctly due to the least significant bits being rounded off.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Kranar" target="_blank">Kranar</a>   <span class="timeago" data-date="2021-06-11 18:44:27 &#43;0000 UTC">2021-06-11 18:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure what this could possibly have to do with floating point numbers, nor am I aware of any function that does what you&#x27;re describing. Is this some kind of JavaScript quirky behavior because nothing about floating point numbers has anything to do with coercing strings.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalCoder" target="_blank">TacticalCoder</a>   <span class="timeago" data-date="2021-06-11 18:51:19 &#43;0000 UTC">2021-06-11 18:51:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve definitely been bitten by similar (not identical) stuff. I&#x27;ve seen data serialized and sent over the wire by I-don&#x27;t-know-what where several parsers can&#x27;t correctly parse&#x2F;serialize and end up with the same thing written back. Be it 32 bit float&#x2F;64 bit float&#x2F;string parsed as 32 bit float&#x2F;string parsed as 64 bit float&#x2F;string parsed as big decimals: I don&#x27;t care, the fact is there are buggy serializers, buggy parsers, and even sometimes buggy parsers going into infinite loop (the JVM is famous for that: there was a bug where Double.parseDouble could be sent into an infinite loop by feeing it a carefully crafted string).<p>The fact is: such kind of SNAFU does happen.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spacechild1" target="_blank">spacechild1</a>   <span class="timeago" data-date="2021-06-12 09:14:51 &#43;0000 UTC">2021-06-12 09:14:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the lesson is rather: don&#x27;t use text based protocols for data serialization if you care about precision. Such things should never happen with a binary protocol.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=titzer" target="_blank">titzer</a>   <span class="timeago" data-date="2021-06-11 19:27:59 &#43;0000 UTC">2021-06-11 19:27:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve gone back and forth over the years. Having implemented some of the lowest-level floating point routines, taking care to handle all the corner cases, it definitely is a chore. But is there an alternative?<p>After all of this, I still think that IEEE 754 is pretty darn good. The fact that it is available and fast in pretty much all hardware is a major selling point.<p>That said, I absolutely hate -0 (minus zero). It&#x27;s a stupid design wart that I&#x27;ve never seen any good use case for. But it is observable and therefore cannot be ignored, leading to <i>even more</i> icky special cases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-11 22:30:54 &#43;0000 UTC">2021-06-11 22:30:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How about determining the quadrant of an angle? That&#x27;s how atan2() uses signed zero and it&#x27;s the greatest of all libm functions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=titzer" target="_blank">titzer</a>   <span class="timeago" data-date="2021-06-11 23:55:18 &#43;0000 UTC">2021-06-11 23:55:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            After staring at the MatLab[<a href="https:&#x2F;&#x2F;www.mathworks.com&#x2F;help&#x2F;matlab&#x2F;ref&#x2F;atan2.html#buct8h0-4" rel="nofollow">https:&#x2F;&#x2F;www.mathworks.com&#x2F;help&#x2F;matlab&#x2F;ref&#x2F;atan2.html#buct8h0...</a>] explanation, I have to admit I don&#x27;t really get that. Minus zero is a encoding artifact. Values of [x,y] with either `x == 0` or `y == 0` <i>don&#x27;t have</i>, in the mathematical sense, a quadrant. The fact that a convention preserves an encoding artifact doesn&#x27;t make it useful.<p>E.g. I&#x27;ve seen it argued that +0 and -0 represent limits of functions that approach zero from the negative side or the positive side. But that makes no sense, because no other floating point number represents a limit going from above or below the number, so why should 0? Also, all this walking on eggshells around a possible -0 (because that represents the limit of 0 coming from below 0) is just lost when someone writes 0. Admittedly, I&#x27;ve not seen the guts of most numerical code, but the only time I have ever seen a minus 0 written into code was to test the minus-zero handling of something.<p>&#x2F;shrug
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 03:47:09 &#43;0000 UTC">2021-06-12 03:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TinkersW" target="_blank">TinkersW</a>   <span class="timeago" data-date="2021-06-11 20:32:36 &#43;0000 UTC">2021-06-11 20:32:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+             That isn&#x27;t floating points fault, but whoever wrote the buggy parser..<p>Floating point is overall pretty good, sometimes I wish there was a version without some many ways to store NAN(for 16 bit floats it is so wasteful), and maybe versions of sqrt&#x2F;div&#x2F;rcp&#x2F;rsqrt that would clamp invalid inputs to 0, but other than that it is hard to see how you make any major improvements given the fixed # of bits.<p>Actually one other possible improvement would be a way to request the hardware to dither when rounding down to the fixed bit count, although I&#x27;m not sure how it could do anything besides pure white noise, but better than nothing..
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dolmen" target="_blank">dolmen</a>   <span class="timeago" data-date="2021-06-11 19:28:52 &#43;0000 UTC">2021-06-11 19:28:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t blame the floating point numbers.<p>Just use a programming language that doesn&#x27;t coerce strings into numbers.
+Or use a comparison function&#x2F;operator that explicitely compares arguments as strings and not as numbers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalCoder" target="_blank">TacticalCoder</a>   <span class="timeago" data-date="2021-06-11 18:44:50 &#43;0000 UTC">2021-06-11 18:44:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If the sort function decides those strings look like numbers it may coerce them into doubles (ints being too small to hold them).<p>You sometimes even see that with APIs inconsistently wrapping behind quotes or not (seemingly at random) some values. And then it gets trickier because you can have the parser correctly parse into, say, &quot;big decimals&quot; some of the values, while others may be automagically, imprecisely, parsed into floating-point numbers.<p>The problem is of course made worse by people overall overusing decimal numbers where integers would be totally fine.<p>One of the most beautiful floating-point bugs ever is this one (from about ten years ago as I recall it): language preference in browsers could be set as a decimal number between 0 and 1.  Java (and other languages) had a broken floating-point implementation where parsing a certain floating-point number would lead to an infinite loop.  So you could set one core of any webserver with that bug by simply requesting a page, with the language preference set to that floating-point number.  Rinse and repeat a few times and all cores were spinning at 100%, effectively DDoS&#x27;ing the webserver.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=an1sotropy" target="_blank">an1sotropy</a>   <span class="timeago" data-date="2021-06-11 19:30:54 &#43;0000 UTC">2021-06-11 19:30:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I have a special hatred of floating point numbers. I wish and advocate for a better standard.<p>Like what?  Packing the real number line in 32 (or 64) bits is an incredible trick.  The roughly scale-invariant distribution of represented values means you can do math without regard to choice of units, which would be impossible with any fixed point scheme.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gameswithgo" target="_blank">gameswithgo</a>   <span class="timeago" data-date="2021-06-11 19:35:56 &#43;0000 UTC">2021-06-11 19:35:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are &quot;better&quot; standards they are just way way way slower. Which sometimes is what you need.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 16:33:54 &#43;0000 UTC">2021-06-11 16:33:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_0ffh" target="_blank">_0ffh</a>   <span class="timeago" data-date="2021-06-11 13:56:05 &#43;0000 UTC">2021-06-11 13:56:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suppose if you&#x27;re not bothered with wasting lots of time, do the following for a precise sum: Select the two smallest numbers from the list, remove them and insert their sum. Repeat until only one number is left.<p>[Ed. smaller meaning closer to zero]
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dolmen" target="_blank">dolmen</a>   <span class="timeago" data-date="2021-06-11 15:14:03 &#43;0000 UTC">2021-06-11 15:14:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly what happens when you sort the number ascending and compute the sum starting from the smallest. Like in the article.<p>Except this doesn&#x27;t work if you must handle negative numbers. So what matters is not the smallest numbers but the number nearer from zero.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-06-11 15:32:19 &#43;0000 UTC">2021-06-11 15:32:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, that&#x27;s not the same.<p>Summing [4, 5, 6, 7] would yield the series (4, )9, 15, 22 with &quot;sort then add&quot;, but what the previous poster described would first sum 4+5 (leaving the list [9, 6, 7]), then 6+7 (leaving the list [9, 13]) and finally arriving at 22.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dolmen" target="_blank">dolmen</a>   <span class="timeago" data-date="2021-06-11 16:26:48 &#43;0000 UTC">2021-06-11 16:26:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OK.<p>That algorithm could be improved (for accuracy, not speed) by replacing sums of the smallest number with multiplications as I suppose that multiplication of more than 3 identical numbers or more is loosing less precision than multiple additions.<p>For example:<p>[4, 3, 7, 7, 8] could be calculated as:<p><pre><code>  (3+4) =&gt; [7, 7, 7, 8]
+  (7*3) =&gt; [21, 8]
+  (8+21) =&gt; 29</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-11 15:32:01 &#43;0000 UTC">2021-06-11 15:32:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            YAGNI.<p>If you do, in fact, need to worry about floating point error, then there is not some magical &quot;it will never happen if you have this much precision and use this neat algorithm&quot;. Heck, even fixed&#x2F;decimal&#x2F;rational numbers aren&#x27;t perfect solutions, they just make it easier to tell if you&#x27;re staying within your precision.<p>Without infinite storage, you can&#x27;t retain infinite precision, so the only real question is how much error you are willing to tolerate. And that depends very much on what you&#x27;re doing - I can tolerate a lot more error in rolls on a MMO than in my bank account balance...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=johnbcoughlin" target="_blank">johnbcoughlin</a>   <span class="timeago" data-date="2021-06-11 16:41:59 &#43;0000 UTC">2021-06-11 16:41:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the only real question is how much error you are willing to tolerate<p>So, you are, in fact, gonna need an algorithm for summation that controls that error, if you&#x27;re not willing to tolerate very much.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-11 16:57:34 &#43;0000 UTC">2021-06-11 16:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. Similarly, if you design something with total disregard to optimization, it will likely need optimization.<p>YAGNI is a prediction, not a rule. Just like premature optimization, alternatives to floating point - or using longer floating point types - have real costs, which must be balanced against the needed precision.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=commandlinefan" target="_blank">commandlinefan</a>   <span class="timeago" data-date="2021-06-11 16:49:00 &#43;0000 UTC">2021-06-11 16:49:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, his final example suggests otherwise, but I kind of suspect that there must be something else going on there (that I&#x27;m too lazy to try to track down).  Still, while fixing most floating point errors seem like rearranging the deck chairs on the titanic, if there&#x27;s one algorithm that&#x27;s 99.999% accurate and another that&#x27;s only 99.9% accurate, might as well use and be aware of the more accurate one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-11 17:11:58 &#43;0000 UTC">2021-06-11 17:11:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The error in the &#x27;Variance calculated using Statistics::Descriptive&#x27; is ~0.0002% of the mean (and of each value).<p>As the OP says: &quot;One saving grace of the real world is the fact that a given variable is unlikely to contain values with such an extreme range&quot;<p>My point is that 99.999% algorithm is going to have a cost over the 99.9% algorithm (more complex code, more resource usage), and depending on what you&#x27;re doing, you may have to consider that cost.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-11 23:07:05 &#43;0000 UTC">2021-06-11 23:07:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not in this case. Consider naive sum:<p><pre><code>    double fsum(const double *p, size_t n) {
+      size_t i;
+      double s;
+      for (s = i = 0; i &lt; n; ++i) s += p[i];
+      return s;
+    }
+</code></pre>
+Add one line of code and it not only becomes numerically stable but benchmarks faster too.<p><pre><code>    double fsum(const double *p, size_t n) {
+      size_t i;
+      double s;
+      if (n &gt; 8) return fsum(p, n &#x2F; 2) + fsum(p + n &#x2F; 2, n - n &#x2F; 2);
+      for (s = i = 0; i &lt; n; ++i) s += p[i];
+      return s;
+    }
+</code></pre>
+Losers always whine about how their laziness and ignorance is a calculated tradeoff.<p>What we need to consider is that sometimes there is no tradeoff.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-14 15:50:46 &#43;0000 UTC">2021-06-14 15:50:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That depends to an extreme degree on your environment, your language, your compiler... etc. What you need to consider is that tradeoffs have two sides.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alex_smart" target="_blank">alex_smart</a>   <span class="timeago" data-date="2021-06-12 00:06:29 &#43;0000 UTC">2021-06-12 00:06:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand why the second version might benchmark faster, but why is it more numerically stable?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-12 02:15:54 &#43;0000 UTC">2021-06-12 02:15:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because it reduces worst case roundoff errors from being linear to logarithmic. Why is that the case? Best intuitive explanation I can think of is that floating point behaves more like VHS than DVD. If you wanted to bootleg a thousand copies of Titanic, then would you have each copy be made from the previous copy? No. It&#x27;d look terrible. You would instead have a stack of VCRs where the copies could be made in a hierarchical way that minimizes the critical path of copies. The overall number of operations may be the same, but if we consider that errors get worse the more errorful something becomes then it should be simple to understand why divide and conquer improves numerical stability.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=worik" target="_blank">worik</a>   <span class="timeago" data-date="2021-06-11 22:30:53 &#43;0000 UTC">2021-06-11 22:30:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are looking for such accuracy (where 50_000_000.00006 is different from 50_000_000.06) then you need a specialised library and do very careful coding.<p>If you are averaging bazillions of numbers and they range from weeny to huge and you thing 50_000_000.000006 != 50_000_000.06 for your purposes then it is hard for me to see that you are doing anything sensible.<p>This is, except in very specialised cases that I cannot imagine, a non issue.<p>Just add them up and divide, (and check for overflow, that could ruin your day!)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alex_smart" target="_blank">alex_smart</a>   <span class="timeago" data-date="2021-06-12 01:17:51 &#43;0000 UTC">2021-06-12 01:17:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;Statistics::Descriptive&quot; example (near the end of the article) has to be a bug in the relevant library, right?<p>Even the naive floating implementation can&#x27;t possibly get it this wrong for just 4 numbers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ball_of_lint" target="_blank">ball_of_lint</a>   <span class="timeago" data-date="2021-06-11 18:40:03 &#43;0000 UTC">2021-06-11 18:40:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That last example looks more like an outright bug than a floating point error.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=worewood" target="_blank">worewood</a>   <span class="timeago" data-date="2021-06-11 21:40:37 &#43;0000 UTC">2021-06-11 21:40:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is useful for people working in critical applications. For the majority of people the 0.000001% difference doesn&#x27;t matter.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-11 21:55:16 &#43;0000 UTC">2021-06-11 21:55:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the wrong way to think about floating point. Double gives you ~15 digits of precision. If the answer is 500000000.600000 but your algorithm says 500000000.601239 then 25% of the bits you&#x27;ve got are kaput. It&#x27;s also a question of scalability. Increase the author&#x27;s example array size to 1 gigabyte and now 40% of your double is garbage data. Increase it to web scale, and you&#x27;re toast. What&#x27;s the solution? Divide and conquer. Not only will that let you farm out the summation across machines, but it also eliminates the linear growth in errors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amelius" target="_blank">amelius</a>   <span class="timeago" data-date="2021-06-11 09:56:45 &#43;0000 UTC">2021-06-11 09:56:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does numpy.mean() do this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eesmith" target="_blank">eesmith</a>   <span class="timeago" data-date="2021-06-11 10:10:34 &#43;0000 UTC">2021-06-11 10:10:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Simple testing shows it does not use the naive sum.<p><pre><code>  &gt;&gt;&gt; import numpy as np
+  &gt;&gt;&gt; arr = np.array( (1_000_000_000.1, 1.1) * 50_000)
+  &gt;&gt;&gt; arr.mean()
+  500000000.6000003</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jl2718" target="_blank">jl2718</a>   <span class="timeago" data-date="2021-06-11 16:57:01 &#43;0000 UTC">2021-06-11 16:57:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tl;dr: sort first<p>Better: recursive bucket accumulators using the exponent
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=metalliqaz" target="_blank">metalliqaz</a>   <span class="timeago" data-date="2021-06-11 14:10:37 &#43;0000 UTC">2021-06-11 14:10:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, Perl.  Now, that&#x27;s a name I&#x27;ve not heard in a long time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-11 11:26:07 &#43;0000 UTC">2021-06-11 11:26:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Give me an (real life) example where these errors matter. Any real data will be noisy anyway and relying on anything at the level of ppb (parts per billion) looks suspicious.<p>Clarification: I do not say that treating floats careful is not important, and I know doing stuff like subtracting large numbers can lead to inaccurate leading digits. This is clear and part and parcel of any numerical work. But this is not what the article is about. I am claiming instead the article is looking for a problem where there is none (or let&#x27;s say I fail to see) .
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vardump" target="_blank">vardump</a>   <span class="timeago" data-date="2021-06-11 11:42:10 &#43;0000 UTC">2021-06-11 11:42:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re developing floating point code, you&#x27;re in for a huge surprise, <i>eventually</i>. What happens for example when you subtract two close numbers with an error like this? There are a lot of mechanisms for small errors to become significant.<p>Many of us have had their attitudes readjusted by a bug where these &quot;insignificant&quot; errors became anything but.<p>We&#x27;re often wrong in ways we can&#x27;t imagine, so it is wise to remain humble and try to strive for correctness over our potentially misguided ideas how things work.<p>For example, you&#x27;d better still have multiple layers of security even though we&#x27;ve already made some other layer &quot;impenetrable&quot;. And still check for those &quot;impossible&quot; error cases before they create nearly undebuggable issues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-11 12:10:41 &#43;0000 UTC">2021-06-11 12:10:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, one has to careful about floating point, but honestly the article is not about that. Actually it is more about something where you do <i>not</i> have to be careful.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vardump" target="_blank">vardump</a>   <span class="timeago" data-date="2021-06-11 12:41:27 &#43;0000 UTC">2021-06-11 12:41:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article explicitly says while you <i>might</i> get away with it with some luck due to characteristics of the real world data, you <i>do</i> have to be careful.<p>From TFA:<p>&quot;Now, in the real world, you have programs that ingest untold amounts of data. They sum numbers, divide them, multiply them, do unspeakable things to them in the name of “big data”. Very few of the people who consider themselves C++ wizards, or F# philosophers, or C# ninjas actually know that one needs to pay attention to how you torture the data. Otherwise, by the time you add, divide, multiply, subtract, and raise to the nth power you might be reporting mush and not data.<p>One saving grace of the real world is the fact that a given variable is unlikely to contain values with such an extreme range. On the other hand, in the real world, one hardly ever works with just a single variable, and one can hardly every verify the results of individual summations independently.<p>Anyway, the point of this post was not to make a grand statement, but to illustrate with a simple example that when using floating point, the way numbers are added up, and divided, matters.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GuB-42" target="_blank">GuB-42</a>   <span class="timeago" data-date="2021-06-11 11:48:26 &#43;0000 UTC">2021-06-11 11:48:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I work with avionics and it does matter.<p>Yes, real data is noisy but testing needs do be precise and repeatable. For example, if we need to test that a value is &lt;=100, then it must pass at 100 and fail at 100.00000001. And yes, we use margins and fixed point numbers too but sometimes, we need to be precise with floating point numbers.<p>It also matters in some calculations, for example when doing GCD&#x2F;LCM with periods and frequencies. For that, we eventually switched to rational numbers because precision of source data was all over the place.<p>We all know that parts per billion rarely make sense but where do we draw the line? Sometimes, it really matters (ex: GPS clocks), sometimes, PI=3 is fine. So in doubt, use the highest precision possible, you can relax later if you can characterize your error.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sumtechguy" target="_blank">sumtechguy</a>   <span class="timeago" data-date="2021-06-11 15:46:15 &#43;0000 UTC">2021-06-11 15:46:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t work in avionics but a field that used a lot of GPS bits.  Depending on where your error is, it can be +&#x2F;- 100 feet or more or less depending on what point the cut off is.  Like you say you need to know what your target is.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whatshisface" target="_blank">whatshisface</a>   <span class="timeago" data-date="2021-06-11 14:40:15 &#43;0000 UTC">2021-06-11 14:40:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Of course, the fact that the threshold has to be so precise is because that&#x27;s the rules, not because of anything related to aviation. That&#x27;s a human-enforced quality. A threshold at 100 probably has about one significant figure, sometimes less.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-06-11 15:37:59 &#43;0000 UTC">2021-06-11 15:37:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, not necessarily. The <i>&quot;and repeatable&quot;</i> can be quite a constraint.<p>Imagine three redundant systems on a plane that want to compute the same from the same input array (and then check whether they all agree). You want to implement this, and figure that (since there&#x27;s a lot of data) it makes sense to parallelize the sum. Each thread sums some part and then in the end you accumulate the per-thread results. No race conditions, clean parallelization. And suddenly, warning lights go off, because the redundant systems computed different results. Why? Different thread team assignments may lead to different summation orders and different results, because floating point addition is not associative.<p>More generally, whenever you want fully reproducible results (like &quot;the bits hash to the same value&quot;), you need to take care of these kinds of &quot;irrelevant&quot; problems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 03:19:24 &#43;0000 UTC">2021-06-12 03:19:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GuB-42" target="_blank">GuB-42</a>   <span class="timeago" data-date="2021-06-11 15:27:10 &#43;0000 UTC">2021-06-11 15:27:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Aviation is all about rules, and sometimes a bit of flying.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mcguire" target="_blank">mcguire</a>   <span class="timeago" data-date="2021-06-11 18:07:59 &#43;0000 UTC">2021-06-11 18:07:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And most of the rules are written in blood.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=habibur" target="_blank">habibur</a>   <span class="timeago" data-date="2021-06-11 12:06:31 &#43;0000 UTC">2021-06-11 12:06:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then use more bits for floats and use naive average. This article is more like &quot;how to squeeze the last bits from a floating point operation.&quot;<p>And even if you use these techniques butterfly effect will kick in eventually.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CarVac" target="_blank">CarVac</a>   <span class="timeago" data-date="2021-06-11 11:51:32 &#43;0000 UTC">2021-06-11 11:51:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was accumulating deltas in a pde simulation on photographic images and when the calculation was tiled, different tiles had noticeable difference in brightness.<p>Real image data, roughly 1 megapixel per tile at that time, and 32-bit floats.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adrianN" target="_blank">adrianN</a>   <span class="timeago" data-date="2021-06-11 14:53:26 &#43;0000 UTC">2021-06-11 14:53:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A field where floating point errors accumulate quickly and can totally ruin your results is computational geometry. See this paper <a href="https:&#x2F;&#x2F;people.mpi-inf.mpg.de&#x2F;~mehlhorn&#x2F;ftp&#x2F;classroomExamplesNonrobustness.pdf" rel="nofollow">https:&#x2F;&#x2F;people.mpi-inf.mpg.de&#x2F;~mehlhorn&#x2F;ftp&#x2F;classroomExample...</a> for examples.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kstenerud" target="_blank">kstenerud</a>   <span class="timeago" data-date="2021-06-11 12:01:26 &#43;0000 UTC">2021-06-11 12:01:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;dolphin-emu.org&#x2F;blog&#x2F;2021&#x2F;06&#x2F;06&#x2F;dolphin-progress-report-april-and-may-2021&#x2F;#50-14239-jitarm64-fix-floating-multiply-fmul-rounding-errors-by-josjuice" rel="nofollow">https:&#x2F;&#x2F;dolphin-emu.org&#x2F;blog&#x2F;2021&#x2F;06&#x2F;06&#x2F;dolphin-progress-rep...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=snakeboy" target="_blank">snakeboy</a>   <span class="timeago" data-date="2021-06-11 11:50:56 &#43;0000 UTC">2021-06-11 11:50:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In general, floating point error can accumulate in iterative algorithms where you are feeding the result of one calculation into the next step.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-11 12:41:08 &#43;0000 UTC">2021-06-11 12:41:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. If you have a positive Ljapunov coefficient that will happen. But then what the article does won&#x27;t help you either
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=johnbcoughlin" target="_blank">johnbcoughlin</a>   <span class="timeago" data-date="2021-06-11 14:51:33 &#43;0000 UTC">2021-06-11 14:51:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you know about Lyapunov coefficients then you should also know about the concept of order of accuracy. If I&#x27;m developing a code that is supposed to be second order in time and space, then when I&#x27;m running my convergence study, I better be able to control the floating point error in my computation of the total energy, so that I can properly attribute the error I do observe to power series truncation, or what have you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thehappypm" target="_blank">thehappypm</a>   <span class="timeago" data-date="2021-06-11 16:26:36 &#43;0000 UTC">2021-06-11 16:26:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article is not saying that this is even all that useful or revelatory -- but it&#x27;s just something to keep in mind.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pcwalton" target="_blank">pcwalton</a>   <span class="timeago" data-date="2021-06-11 20:50:54 &#43;0000 UTC">2021-06-11 20:50:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure. Here&#x27;s an example of blatantly incorrect font rendering due to (what I assume is) floating point error in macOS: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;pcwalton&#x2F;status&#x2F;971825249464475648" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;pcwalton&#x2F;status&#x2F;971825249464475648</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SuchAnonMuchWow" target="_blank">SuchAnonMuchWow</a>   <span class="timeago" data-date="2021-06-11 11:41:40 &#43;0000 UTC">2021-06-11 11:41:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rounding errors might be small, but catastrophic cancellation can make errors much larger than parts per billion. Maybe for your application it doesn&#x27;t matter, but sometimes it does, and you need to be aware of these cases.<p>You wouldn&#x27;t want those kind of rounding errors in financial applications, in rocket science applications, etc ...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-11 12:41:51 &#43;0000 UTC">2021-06-11 12:41:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And how does the mentioned averages procedure help?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 18:54:08 &#43;0000 UTC">2021-06-11 18:54:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

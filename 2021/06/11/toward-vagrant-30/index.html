@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/toward-vagrant-30/">
+
+
+    <title>Toward Vagrant 3.0 - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Toward Vagrant 3.0 - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/toward-vagrant-30/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/toward-vagrant-30/">
+<meta name="twitter:title" content="Toward Vagrant 3.0 - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Toward Vagrant 3.0 - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T18:11:00JST",
+    "dateModified": "2021-06-11T18:11:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.hashicorp.com/blog/toward-vagrant-3-0">Toward Vagrant 3.0</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andrewmcwatters" target="_blank">andrewmcwatters</a>   <span class="timeago" data-date="2021-06-11 18:46:38 &#43;0000 UTC">2021-06-11 18:46:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m late to using Vagrant, hands-on. I used it years ago, but didn&#x27;t build my own Vagrantfiles. It seems to be a very nice programmatic wrapper around using, primarily, VirtualBox&#x27;s Unattended Guest Installation[1], though it can use other providers, too.<p>But I&#x27;ve noticed that it seems like you can skip straight to using docker containers for development environments as well. I&#x27;m wondering what other people&#x27;s experience here is with both or either software.<p>In my opinion, both still seem like relevant software. When I need an Ubuntu development environment on my Mac, I don&#x27;t turn to Docker. I think of Vagrant right now, because that&#x27;s what it was built for. Vagrant is a tool for managing virtual machines and development environments.[2]<p>[1]: <a href="https:&#x2F;&#x2F;www.virtualbox.org&#x2F;manual&#x2F;UserManual.html#basic-unattended" rel="nofollow">https:&#x2F;&#x2F;www.virtualbox.org&#x2F;manual&#x2F;UserManual.html#basic-unat...</a><p>[2]: <a href="https:&#x2F;&#x2F;www.vagrantup.com&#x2F;intro&#x2F;vs&#x2F;docker" rel="nofollow">https:&#x2F;&#x2F;www.vagrantup.com&#x2F;intro&#x2F;vs&#x2F;docker</a><p>Edit: Thank you for the excellent insights!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-06-11 18:52:15 &#43;0000 UTC">2021-06-11 18:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve used both extensively. At least in my case, my uses are slightly different:<p>* Docker is nice for consistent development and deployment environments, particularly when I&#x27;m on a macOS host and I&#x27;m doing userspace programming.<p>* Vagrant is nice for creating a completely <i>hermetic</i> development environment, both on macOS and Linux hosts. My particular use case has been kernelspace programming: it&#x27;s nice to not have to worry about accidentally taking my host down. Docker can&#x27;t provide that kind of isolation, since it&#x27;s still running on the host (or host VM) kernel at the end of the day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-06-11 19:04:45 &#43;0000 UTC">2021-06-11 19:04:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A VM can still use systemd as init rather than an entrypoint script, so if you&#x27;re developing systemd units, you need a VM. There is also the issue of running your application in a container in the first place. Docker in Docker is possible, but cumbersome. Redhat has certainly made it easier with Podman, but Docker still dominates developer mindshare. It&#x27;s also quite a bit easier to persist changes in a VM, so rather than rearchitecting the OS or toolchain secrets management, user-specific configuration in a VM can just be done by the user after first launch and it sticks around. Simpler to do that than providing instructions and capability to mount git credentials store and gpg trust dbs into a container, then worrying about making sure you have the same UID in the container and out of it, so you don&#x27;t mess up permissions.<p>Containers are largely just not a great medium for interactive work, i.e. development. They&#x27;re great for resident applications that use a single process run via a service account.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gscho" target="_blank">gscho</a>   <span class="timeago" data-date="2021-06-11 22:38:04 &#43;0000 UTC">2021-06-11 22:38:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any development of config management (ie: chef, ansible, etc) benefits from vagrant as well for the same reasons.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=carlosf" target="_blank">carlosf</a>   <span class="timeago" data-date="2021-06-11 19:41:38 &#43;0000 UTC">2021-06-11 19:41:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Docker is much faster than Vagrant and allows reproducible envs.<p>I&#x27;ve been using VS Code + its Remote-Containers extension + docker-compose (when needed) and it&#x27;s absolutely brilliant compared to other options.<p>I will use Vagrant when I want to avoid Docker in Docker, but I try to stay away from it as much as I can (for local app development).<p>That said Vagrant is really useful for testing infra, stuff like clusters etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=porker" target="_blank">porker</a>   <span class="timeago" data-date="2021-06-12 07:05:14 &#43;0000 UTC">2021-06-12 07:05:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Docker is much faster than Vagrant<p>On some host operating systems. On others it&#x27;s a similar speed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qxmat" target="_blank">qxmat</a>   <span class="timeago" data-date="2021-06-11 22:35:26 &#43;0000 UTC">2021-06-11 22:35:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you export your docker socket to the container you can avoid the poor performance of docker-in-docker
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=carlosf" target="_blank">carlosf</a>   <span class="timeago" data-date="2021-06-11 23:35:04 &#43;0000 UTC">2021-06-11 23:35:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DinD has many gotchas and I dislike it in general.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TheGuyWhoCodes" target="_blank">TheGuyWhoCodes</a>   <span class="timeago" data-date="2021-06-11 19:13:39 &#43;0000 UTC">2021-06-11 19:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used to run Vagrant for python development back in 2015
+it &quot;worked&quot; but was extremally slow and would break at least once a month. Not to mention Ubuntu suddenly removing the Vagrant user breaking more things. How much was VirtualBox or Vagrant fault, I&#x27;m not sure but it wasn&#x27;t a happy experience.
+It took like an hour minimum to even setup an environment and everyone dreaded the day when they need to recreate their machine.<p>Once WSL came into being we moved everything to docker containers and never looked back.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidos" target="_blank">aidos</a>   <span class="timeago" data-date="2021-06-11 19:18:22 &#43;0000 UTC">2021-06-11 19:18:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a counterpoint, vagrant has never broken on me, nor been slow. It’s mostly a configuration system for VM providers, so I don’t even see how that makes sense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andrewmcwatters" target="_blank">andrewmcwatters</a>   <span class="timeago" data-date="2021-06-11 19:20:48 &#43;0000 UTC">2021-06-11 19:20:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, this seems more like a provisioning issue, as Vagrant and VirtualBox aren&#x27;t going to do anything too different than what you would normally do setting up your own native development environment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=8bitbuddhist" target="_blank">8bitbuddhist</a>   <span class="timeago" data-date="2021-06-11 19:01:13 &#43;0000 UTC">2021-06-11 19:01:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The way I see it, Vagrant does for VMs what Docker does for containers: provides a way to build, deploy, manage, and teardown VMs consistently and without much manual effort. For example, I used Vagrant when learning to use Kubernetes, because I could quickly spin up a 3 node cluster on my laptop and destroy it if I messed up.<p>If you can use containers for local dev, great, but not everyone can or wants to migrate to containers. Vagrant still solves a very important use case.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mshekow" target="_blank">mshekow</a>   <span class="timeago" data-date="2021-06-12 06:22:43 &#43;0000 UTC">2021-06-12 06:22:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve found Vagrant very useful to test (or develop) GUI-based applications, especially on platforms which Docker cannot run as container, such as macOS. I&#x27;ve also collected further thoughts on when to choose which (and how they can be combined) here: <a href="https:&#x2F;&#x2F;www.augmentedmind.de&#x2F;2020&#x2F;08&#x2F;02&#x2F;vagrant-vs-docker&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.augmentedmind.de&#x2F;2020&#x2F;08&#x2F;02&#x2F;vagrant-vs-docker&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 18:50:58 &#43;0000 UTC">2021-06-11 18:50:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 19:36:28 &#43;0000 UTC">2021-06-11 19:36:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dharmab" target="_blank">dharmab</a>   <span class="timeago" data-date="2021-06-11 19:52:16 &#43;0000 UTC">2021-06-11 19:52:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used Vagrant extensively when I managed infrastructure at a company that was almost entirely private cloud based. I would create Linux VMs in Vagrant to test our infrastructure automation. The automation would then be deployed into VMware to create the platform used by the developers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hedwall" target="_blank">hedwall</a>   <span class="timeago" data-date="2021-06-11 19:51:42 &#43;0000 UTC">2021-06-11 19:51:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The VMWare plugin for Vagrant is now OSS and free as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mitchellh" target="_blank">mitchellh</a>   <span class="timeago" data-date="2021-06-11 19:07:17 &#43;0000 UTC">2021-06-11 19:07:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hello HN! I&#x27;m one of the founders of HashiCorp and original creators of Vagrant.<p>Vagrant isn&#x27;t &quot;HN hip&quot; these days ;) and I feel like folks tend to think if they don&#x27;t see it here it must be dead. Vagrant has been the opposite: downloads have still only gone up, and we&#x27;re seeing it used in more and more places on the regular. Most people are quiet about it because it does what it was built to do well and quite honestly, its moved more into the stereotypically &quot;boring&quot; organizations. For example, I recently ran into an engineer that works at a local city utility who was raving about how they just adopted Vagrant last year and it has been completely life-changing for their team. This is 2021, Vagrant came out 2012. Products have super long lifecycles and the market is massive.<p>Regardless, we&#x27;ve remained committed to Vagrant. We&#x27;ve always had a team dedicated to Vagrant, and the Vagrant team is awesome and has continued to push out new features and new releases for the past decade.<p>We&#x27;re super excited for Vagrant 3.0! There&#x27;s a lot we have planned for it and the transition to Go is going to bring a lot of those improvements.<p>I think one topic that is interesting for the HN crowd: why are we rewriting Vagrant in Go? Is that too expensive or time consuming? Does that cause too much user pain?<p>HashiCorp has built dozens of products now in Go and we&#x27;ve built a large foundation of libraries and utilities for Go-based projects. All our products share the same CLI library (that we wrote), the same plugin framework (that we wrote), the same distributed systems libraries (that we wrote), etc. Besides code, we&#x27;ve built a security team and release engineering team that has pipelines ready to go for Go-based projects. And more.<p>This means that we move fast with Go, and we can do it confidently, and we can do it without a lot of overhead. From the moment we decided to port Vagrant to Go, the Vagrant team had a working demo in just a few weeks, and an &quot;alpha&quot; release they&#x27;re ready to ship to users in a few months. We got this speed cause we just wrapped Vagrant around the same architecture and libraries that our other products are built on.<p>For our users, there are a bunch of improvements (mentioned in the blog post). We&#x27;re being very careful about backwards compatibility and have a multi-year plan to ensure that existing Vagrantfiles and plugins continue to work. We&#x27;re starting with continuing to embed a Ruby with our installers while the core is running Go. Over time, we&#x27;ll ask users to bring their own Ruby (and we&#x27;ll validate it) to use &quot;older&quot; Ruby-based plugins and Vagrantfiles.<p>Feel free to ask any questions, I&#x27;ll try to be present in this thread.<p>-----------------------------------------------------<p>Also, if you&#x27;re a Vagrant user, we also recently made our VMware plugin free and open source. Check it out: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;mitchellh&#x2F;status&#x2F;1402729560823664641" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;mitchellh&#x2F;status&#x2F;1402729560823664641</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dfabulich" target="_blank">dfabulich</a>   <span class="timeago" data-date="2021-06-11 19:49:50 &#43;0000 UTC">2021-06-11 19:49:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like Vagrant, but I don&#x27;t know how I&#x27;m going to keep using it when I switch to Apple Silicon (M1 Macs). Vagrant wraps around Oracle VirtualBox; VirtualBox doesn&#x27;t support M1 Macs, and Oracle has given no indication that they plan to start supporting Apple Silicon at all.<p>Is there any working version of Vagrant that &quot;just works&quot; on M1 out of the box without paying for a VM provider?<p>If not, would I have to pay for VMWare and then use Vagrant to wrap that? Would I use Vagrant to wrap Docker? (Why would I bother to use Vagrant if I&#x27;m using Docker?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mitchellh" target="_blank">mitchellh</a>   <span class="timeago" data-date="2021-06-11 20:24:23 &#43;0000 UTC">2021-06-11 20:24:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We just open sourced our VMware plugin so yes, we will support M1 there. Note that VMware Fusion for personal use is now free so you can get that whole setup completely free when its ready.<p>Beyond that, we&#x27;re looking into also writing a native Virtualization.framework implementation so you wouldn&#x27;t need any 3rd party virtualization software at all. For headless Linux VMs we&#x27;re confident this will work great.<p>We&#x27;re also looking at qemu as an option because qemu also offers emulation for x86. Being written in Go, we can bind to qemu natively much more easily.<p>The point being: there will be multiple options!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=justinclift" target="_blank">justinclift</a>   <span class="timeago" data-date="2021-06-12 04:27:05 &#43;0000 UTC">2021-06-12 04:27:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heh Heh Heh<p>Might be time for getting that Vagrant-Libvirt link happening after all? ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zdw" target="_blank">zdw</a>   <span class="timeago" data-date="2021-06-12 15:05:52 &#43;0000 UTC">2021-06-12 15:05:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This?<p><a href="https:&#x2F;&#x2F;github.com&#x2F;vagrant-libvirt&#x2F;vagrant-libvirt" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;vagrant-libvirt&#x2F;vagrant-libvirt</a><p>It&#x27;s been happening for a while now...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=justinclift" target="_blank">justinclift</a>   <span class="timeago" data-date="2021-06-13 08:40:01 &#43;0000 UTC">2021-06-13 08:40:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nah.  Mitchell had been looking at leveraging Libvirt for vagrant a few years before that. ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tmzt" target="_blank">tmzt</a>   <span class="timeago" data-date="2021-06-11 20:17:40 &#43;0000 UTC">2021-06-11 20:17:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Packer and other Hashicorp products support alternative VM drivers including bhyve and support for hyperkit.<p>The current ruby Vagrant supports plugins, but I&#x27;m not aware of bhyve or hyperkit support.<p>I would assume rewriting in Go means the same VM drivers as packer will be supported.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ksec" target="_blank">ksec</a>   <span class="timeago" data-date="2021-06-11 20:17:50 &#43;0000 UTC">2021-06-11 20:17:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;why are we rewriting Vagrant in Go?<p>From [1] 
+<i>I dont think Ruby would ever be able to compete in that space. Even Hashicorp, the company that was born out of vagrant left Ruby and Chose Go.
+I am thinking someday Crystal post 1.0 would be able to put up a fight in that space.</i><p>I still remember I wrote somewhere, that one day Vagrant will be rewritten from Ruby to Go and got some very negative <i>feedback</i> from someone. ( It was in the Parker era.... )<p>Vagrant, and the whole HashiCorp products are all infrastructure product it makes sense to be running on Go rather than Ruby.<p>Nothing to say or ask really. But Thank You and congratulation. At some point I thought you have abandoned Vagrant. Its nice to see Hashicorp continue to update and take care of their first product. And honestly all the HashiCorp product are <i>so</i> much better or simpler than their competitors ( <i>cough</i> K8s <i>cough</i> ). Really wish you and your company continue to move forward with great products and services.<p>[1] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23457496" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23457496</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bsaul" target="_blank">bsaul</a>   <span class="timeago" data-date="2021-06-11 23:36:01 &#43;0000 UTC">2021-06-11 23:36:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you give more info on hashicorp VS kubernetes ? I had the feeling they complemented each other.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andrewmcwatters" target="_blank">andrewmcwatters</a>   <span class="timeago" data-date="2021-06-11 19:11:02 &#43;0000 UTC">2021-06-11 19:11:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Conversely, that&#x27;s only when technology starts to become interesting to me. When it&#x27;s lived long enough to be useful, and hasn&#x27;t fallen out of favor for something else. Thank you for building such an excellent tool.<p>I want other people to prove those things for me. I want to spend as little time and effort possible acquiring scars and would rather learn from others.<p>Good technology lasts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dzonga" target="_blank">dzonga</a>   <span class="timeago" data-date="2021-06-12 00:21:36 &#43;0000 UTC">2021-06-12 00:21:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mitch, thanks for vagrant. I use it daily. I like long running processes. And nothing yet, gives me the simple configuration that I can get with Vagrant. And with Vagrant switching to Go, I can only bet performance will get better. 
+For some of us, docker is pure overhead.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aequitas" target="_blank">aequitas</a>   <span class="timeago" data-date="2021-06-11 19:43:43 &#43;0000 UTC">2021-06-11 19:43:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glad to hear there is still development on this project. I&#x27;ve been using Vagrant a lot in the past, with great pleasure, but since most of the projects I manage nowadays are containers, I sadly have less and less use for this tool.<p>For the few projects that don&#x27;t use containers however is still shines. One feature I&#x27;m missing though, which would make Vagrant a complete solution for me, is testing as a first class citizen. I&#x27;ve been using Test Kitchen[0] for this in this past which works well as a solution, but it would be really nice to have something like this built into and supported conceptually by Vagrant itself.<p>[0] <a href="https:&#x2F;&#x2F;docs.chef.io&#x2F;workstation&#x2F;kitchen&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.chef.io&#x2F;workstation&#x2F;kitchen&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atonse" target="_blank">atonse</a>   <span class="timeago" data-date="2021-06-11 19:15:01 &#43;0000 UTC">2021-06-11 19:15:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for all the tools. You guys have well-deserved success.<p>Are there plans to somehow harmonize the concepts here with packer (and whatever the new packer cloud will be?). Vagrant for the most part feels like a vm-only version of packer (even though Vagrant came first).<p>I can easily see a self-hosted cloud-based &quot;one-click dev machine&quot; paired with VS Code Remote, provisioned by packer (or vagrant), with the configs stored in git. We&#x27;d love to roll out something like that for our devs so sensitive data then never leaves our sandbox or even gets into the dev laptops.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mshekow" target="_blank">mshekow</a>   <span class="timeago" data-date="2021-06-12 06:32:16 &#43;0000 UTC">2021-06-12 06:32:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really like Vagrant. However, it is extremely(!) slow, and every command takes 3-30 seconds (including commands that should take 50 ms). You also know about this, and chose not to act on it :( [0]. Would the transition to Go remove this impediment?<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;vagrant&#x2F;issues&#x2F;11853" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;vagrant&#x2F;issues&#x2F;11853</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heurisko" target="_blank">heurisko</a>   <span class="timeago" data-date="2021-06-11 20:07:19 &#43;0000 UTC">2021-06-11 20:07:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for Vagrant. I&#x27;ve used it quite a bit. I think it&#x27;s underestimated how many large businesses there are that still manage their servers like &quot;pets&quot;, rather than &quot;cattle&quot;.<p>In my career, Vagrant has provided a good solution to move towards more automated deployment, where Docker would have been too big a paradigm shift, and&#x2F;or not really greatly justify its use.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aidos" target="_blank">aidos</a>   <span class="timeago" data-date="2021-06-11 19:21:05 &#43;0000 UTC">2021-06-11 19:21:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really any questions (other than my one in the comment thread about the best way forward for providers on Apple Silicon), but definitely a hat tip in your direction. I’ve had a good 8 years of plain sailing out of Vagrant and I appreciate the work you’ve done.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=justinclift" target="_blank">justinclift</a>   <span class="timeago" data-date="2021-06-12 04:26:06 &#43;0000 UTC">2021-06-12 04:26:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Client server architecture sounds like a good move forward.<p>It&#x27;d potentially open up having remote stuff be hosted in HashiCorp Cloud (HashiCloud?) directly. ;)<p>That could be pretty lucrative over time...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stormking" target="_blank">stormking</a>   <span class="timeago" data-date="2021-06-11 20:08:04 &#43;0000 UTC">2021-06-11 20:08:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love Vagrant, it was my secret weapon for years! However, I question the decision to release a complete new implementation under the 2.x version. The Go-based variant should be 3.0 from the start.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 19:18:49 &#43;0000 UTC">2021-06-11 19:18:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rad_gruchalski" target="_blank">rad_gruchalski</a>   <span class="timeago" data-date="2021-06-11 19:57:01 &#43;0000 UTC">2021-06-11 19:57:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi Mitchell, what would it take to build an official  firecracker plugin for Vagrant? Would there be any interest?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=la_fayette" target="_blank">la_fayette</a>   <span class="timeago" data-date="2021-06-11 19:05:35 &#43;0000 UTC">2021-06-11 19:05:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We use vagrant with ansible to build a local dev environment and almost the same production environment from the same ansible project.<p>We experimented with docker, but it is still extremly slow on windows and our production machine is provisioned with ansible, so vagrant is a natural fit...<p>Very happy most of the time, only some strange ssh errors happen from time to time...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=redsymbol" target="_blank">redsymbol</a>   <span class="timeago" data-date="2021-06-11 21:21:20 &#43;0000 UTC">2021-06-11 21:21:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly what we do. It is like having a locally run staging environment, and is really great. Can exactly test things like http server configuration, cron jobs, multiple nodes (vagrant vms) coordinating with each other, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vasergen" target="_blank">vasergen</a>   <span class="timeago" data-date="2021-06-11 18:44:40 &#43;0000 UTC">2021-06-11 18:44:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was surprised to see growing ecosystem and community. I though that docker would take mainstream in virtualization,  so main usecase for vagrant would be when you really need a virtual machine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-06-11 18:56:46 &#43;0000 UTC">2021-06-11 18:56:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Docker isn&#x27;t virtualization, and AFAIK has never really made any moves in that direction outside of small, local dev (eg running a local VM on a non-Linux host to get a local dockerd-on-Linux available).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tommek4077" target="_blank">tommek4077</a>   <span class="timeago" data-date="2021-06-11 18:52:09 &#43;0000 UTC">2021-06-11 18:52:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not everyone is building Javascript websites... ehm... I mean <i>Apps</i>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 19:04:36 &#43;0000 UTC">2021-06-11 19:04:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Docker has never been about such things, even if it&#x27;s a nice solution for developing them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidos" target="_blank">aidos</a>   <span class="timeago" data-date="2021-06-11 19:16:15 &#43;0000 UTC">2021-06-11 19:16:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Has anyone had any success with a vagrant provider on Apple Silicon now that virtual box is now out of action?<p>We’re using UTM, which does the job as a frontend to qemu, but it’s be nice to switch back to a vagrant based declarative file.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robbinb" target="_blank">robbinb</a>   <span class="timeago" data-date="2021-06-11 19:57:35 &#43;0000 UTC">2021-06-11 19:57:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            been using <a href="https:&#x2F;&#x2F;www.parallels.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.parallels.com&#x2F;</a> with <a href="https:&#x2F;&#x2F;kb.parallels.com&#x2F;en&#x2F;122843" rel="nofollow">https:&#x2F;&#x2F;kb.parallels.com&#x2F;en&#x2F;122843</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aidos" target="_blank">aidos</a>   <span class="timeago" data-date="2021-06-11 20:47:05 &#43;0000 UTC">2021-06-11 20:47:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And it’s working ok now? Do you know how the network support is?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=u678u" target="_blank">u678u</a>   <span class="timeago" data-date="2021-06-11 19:18:02 &#43;0000 UTC">2021-06-11 19:18:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            After struggling with KVM networking I just gave up and used cloud VMs. Should I give Vagrant a try instead?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/my-first-z80-assembly-language-program/">
+
+
+    <title>My first Z80 assembly language program - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="My first Z80 assembly language program - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/my-first-z80-assembly-language-program/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/my-first-z80-assembly-language-program/">
+<meta name="twitter:title" content="My first Z80 assembly language program - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "My first Z80 assembly language program - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T10:39:20JST",
+    "dateModified": "2021-06-12T10:39:20JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://nanochess.org/notebook.html">My first Z80 assembly language program</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zh3" target="_blank">zh3</a>   <span class="timeago" data-date="2021-06-13 21:01:19 &#43;0000 UTC">2021-06-13 21:01:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Back in &#x27;78 or so, my first computer was a hand-assembled Nascom I (2MHz Z80)[0] with 1kb of RAM. No assemblers, no disk drives, not even a cassette tape. Just a keyboard and a simple ROM that let you load hex values in memory. The low-res video display was memory-mapped, so after much study  of circuit diagrams,the Mostek Z80 manual and the ROM I got to understand memory addressing, where the screen was and how the hardware worked. So my first Z80 program was just 3 instructions entered as hex opcodes; all it did was splat an asterisk on the screen but what a buzz I got at the time :)<p><pre><code>      ld a,2a    # Load ASCII &#x27;*&#x27; in to acc
+      ld hl,d80  # Set HL to point to video-mapped RAM
+      ld (hl),a  # Put character on screen.
+</code></pre>
+Some years later I wrote one of the first multi-user games, picked up by British Telecom to run on their Prestel&#x2F;Micronet network. By that time I&#x27;ve graduated to 4MHz Z80s, with home-made 2MB RAM disks and 256Kb of main RAM accessed with a crude TTL MMU; we got up to 64 users per Z80, albeit accessing the system via 1200&#x2F;75 baud modems.<p>[0] It graced the cover of Issue #1 of Personal Computer World; I still have a copy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Renaud" target="_blank">Renaud</a>   <span class="timeago" data-date="2021-06-14 02:00:37 &#43;0000 UTC">2021-06-14 02:00:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We should have a site where these experiences are retained.<p>My teen years were in the 80s and I was mad about the Z80 in my cheap Laser 200 but was too isolated to have access to much information and equipment.<p>Yet, I reversed engineered the schematic of my little, made my own memory expansion (I couldn&#x27;t afford the official one) out of stacked SRAM chips, mapped the ROM, build my own crude tools to see what was going on in the hardware, coded assembler by hand and poked the memory to store the programs, one byte at a time...<p>It taught me about electronics, fundamentals of gate logic and how microprocessors worked, programming (and no I wasn&#x27;t ruined by BASIC), and those constant discoveries drove me to want to know more.<p>It was such a formative and fun experience for a curious teen to explore something in depth -with no help other than a few magazine and books- and uncovering the layers of what made a computer tick, however minimal that computer was.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=varyherb" target="_blank">varyherb</a>   <span class="timeago" data-date="2021-06-13 16:26:29 &#43;0000 UTC">2021-06-13 16:26:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I was 9 years old and I wanted to write amazing games...After four years of writing games in BASIC language, I felt like I was stopped by the slowness inherent to an interpreted language.<p>Wasn&#x27;t sure I was reading this correctly, so I navigated to the About Me page:<p>&gt; Born in 1978, I started programming at age 5 in BASIC, learnt assembly language by age 9
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kragen" target="_blank">kragen</a>   <span class="timeago" data-date="2021-06-13 20:00:50 &#43;0000 UTC">2021-06-13 20:00:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was in a similar situation, and I think the slowness inherent to an interpreted language was a big frustration to all of us kids programming in BASIC in the 01980s.<p>Unfortunately I didn&#x27;t have the guidance and direction Oscar Toledo G. had—my father did what he could, but he&#x27;s just not an educator, and he&#x27;s also not the same level of wizard as his father Oscar Toledo E.—so I didn&#x27;t learn assembly until I was about 13, and then I learned from a book.  (Also, I suspect Oscar Toledo G. has more innate aptitude than I do, but I think that in this case my lack of practice and feedback is what was holding me back.)  I didn&#x27;t write my first playable game until I was 29, which was <a href="http:&#x2F;&#x2F;canonical.org&#x2F;~kragen&#x2F;sw&#x2F;inexorable-misc&#x2F;tetris" rel="nofollow">http:&#x2F;&#x2F;canonical.org&#x2F;~kragen&#x2F;sw&#x2F;inexorable-misc&#x2F;tetris</a>.  (I wrote some games earlier, but they were just unplayably bad.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gzalo" target="_blank">gzalo</a>   <span class="timeago" data-date="2021-06-14 01:14:25 &#43;0000 UTC">2021-06-14 01:14:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This guy&#x27;s family is quite odd: 
+<a href="http:&#x2F;&#x2F;www.biyubi.com&#x2F;eng_principal.html" rel="nofollow">http:&#x2F;&#x2F;www.biyubi.com&#x2F;eng_principal.html</a><p>They designed their own hardware, operating systems and utilities back in the 70s, and they seem to really like optimizing software so they must run quite fast.<p>But they say they have been &quot;silenced&quot; by big corporations, and that the mexican government doesn&#x27;t like them and that&#x27;s why they haven&#x27;t been able to sell their computers.<p>I wish that they would release most of their hardware&#x2F;software with a free license. I imagine their stuff can be used for educational purposes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-13 15:11:36 &#43;0000 UTC">2021-06-13 15:11:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you download his MSX rom, from <a href="https:&#x2F;&#x2F;nanochess.org&#x2F;archive&#x2F;karate2.zip" rel="nofollow">https:&#x2F;&#x2F;nanochess.org&#x2F;archive&#x2F;karate2.zip</a> and then unzip, and extract the karate2_msx.rom file, you can play it online.<p><a href="https:&#x2F;&#x2F;webmsx.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;webmsx.org&#x2F;</a> is an online MSX emulator. Just click the &quot;load files&quot; link and give it the ROM file. Space bar and arrow keys for controls.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JKCalhoun" target="_blank">JKCalhoun</a>   <span class="timeago" data-date="2021-06-13 18:30:50 &#43;0000 UTC">2021-06-13 18:30:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I found it is simplest to drag the &#x27;karate2_msx.rom&#x27; to your browser and select &#x27;Cartidge 1&#x27; from the popup.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thom" target="_blank">thom</a>   <span class="timeago" data-date="2021-06-13 14:37:32 &#43;0000 UTC">2021-06-13 14:37:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Always like seeing Oscar&#x27;s site pop up here, so that I can tell people to check out the lovely annotated source code for Toledo Nanochess, his IOCCC-winning tiny chess engine:<p><a href="https:&#x2F;&#x2F;nanochess.org&#x2F;chess3.html#book" rel="nofollow">https:&#x2F;&#x2F;nanochess.org&#x2F;chess3.html#book</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=canada_dry" target="_blank">canada_dry</a>   <span class="timeago" data-date="2021-06-13 15:46:14 &#43;0000 UTC">2021-06-13 15:46:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a very similar stack of lined graph paper with my Z80 &#x27;trek&#x27; game that I developed when I was ~15yo.  I found this book [i] to be a fantastic resource - it taught me so much about microprocessor and computer architecture.<p>[i]  <a href="https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;programmingz8000zaks" rel="nofollow">https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;programmingz8000zaks</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elvis70" target="_blank">elvis70</a>   <span class="timeago" data-date="2021-06-13 15:53:13 &#43;0000 UTC">2021-06-13 15:53:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The author has made his book freely available : <a href="http:&#x2F;&#x2F;www.z80.info&#x2F;zaks.html" rel="nofollow">http:&#x2F;&#x2F;www.z80.info&#x2F;zaks.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mark-r" target="_blank">mark-r</a>   <span class="timeago" data-date="2021-06-13 16:38:58 &#43;0000 UTC">2021-06-13 16:38:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m really happy to see I wasn&#x27;t the only one who got their programming start on graph paper.  Lost all my old sources though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mgkimsal" target="_blank">mgkimsal</a>   <span class="timeago" data-date="2021-06-14 02:46:44 &#43;0000 UTC">2021-06-14 02:46:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Extremely impressive.  I had a ZX81 when I was around his age, and was dimly aware of &#x27;machine code&#x27;, but couldn&#x27;t quite get my head around doing anything substantial with it - BASIC was where I mostly stayed.  Moved to a 128, then later the PC world (a Sanyo 550 - <i>almost</i> PC compatible!), and mostly stuck with BASIC in those in the 80s.  I did get in to some assembly stuff  on the C128 side of things, as it came with a built-in assembler.<p>I understood assembly basics, but didn&#x27;t do much productive with it.  I could move some boxes around the screen via keys, and I did do a bit with the &#x27;80 col&#x27; monochrome mode trying to do some custom sprite stuff (learned a lot about XOR) - but that&#x27;s about as far as I got by my mid teens.<p>Reading stories like the OP make me feel inadequate...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoeAltmaier" target="_blank">JoeAltmaier</a>   <span class="timeago" data-date="2021-06-13 14:23:46 &#43;0000 UTC">2021-06-13 14:23:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My first 8080 game was &#x27;fly&#x27;, where an X would flit around the screen and turn 45 degrees left when you hit the space bar. You tried to keep it on the screen and not touching some obstacle (a wall that extended down the top about 1&#x2F;3 the way across?). 
+Pointless but fun to write!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Schiphol" target="_blank">Schiphol</a>   <span class="timeago" data-date="2021-06-13 16:51:51 &#43;0000 UTC">2021-06-13 16:51:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a question for people reading this article. Where did you get ahold of the relevant docs, back in the 80s? I remember being dimly aware that there was something called &#x27;machine code&#x27; which was like BASIC but much faster. But that was it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Doctor_Fegg" target="_blank">Doctor_Fegg</a>   <span class="timeago" data-date="2021-06-13 17:52:01 &#43;0000 UTC">2021-06-13 17:52:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Sinclair ZX81 manual had the full list of Z80 opcodes in it - Appendix A in <a href="http:&#x2F;&#x2F;zxnext.narod.ru&#x2F;manuals&#x2F;ZX81_Manual.pdf" rel="nofollow">http:&#x2F;&#x2F;zxnext.narod.ru&#x2F;manuals&#x2F;ZX81_Manual.pdf</a> . So with that you could start PEEKing and POKEing and experimenting.<p>I never really did any Z80 coding on the ZX81 itself, but that section of the manual came in really useful when I got an Amstrad CPC, which is what I learned Z80 on. To that I added The Ins &amp; Outs of the Amstrad (<a href="https:&#x2F;&#x2F;cpcrulez.fr&#x2F;book_english-the_ins_and_outs_of_the_amstrad.htm" rel="nofollow">https:&#x2F;&#x2F;cpcrulez.fr&#x2F;book_english-the_ins_and_outs_of_the_ams...</a>), which documented the firmware and other CPC-specific stuff.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pmontra" target="_blank">pmontra</a>   <span class="timeago" data-date="2021-06-13 17:20:55 &#43;0000 UTC">2021-06-13 17:20:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not the author but I bought a book about assembler for my Sinclair ZX81. I just discovered it&#x27;s got a Wikipedia page <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Programming_the_Z80" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Programming_the_Z80</a><p>Edit: wow, see this comment of elvis70<p>&gt; The author has made his book freely available : <a href="http:&#x2F;&#x2F;www.z80.info&#x2F;zaks.html" rel="nofollow">http:&#x2F;&#x2F;www.z80.info&#x2F;zaks.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Schiphol" target="_blank">Schiphol</a>   <span class="timeago" data-date="2021-06-13 18:06:04 &#43;0000 UTC">2021-06-13 18:06:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! I might just learn it, 35 years after the fact :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Renaud" target="_blank">Renaud</a>   <span class="timeago" data-date="2021-06-14 02:07:43 &#43;0000 UTC">2021-06-14 02:07:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depending on where you lived there were some electronic magazines available. I remember dreaming about articles in Elektor and other national magazines like that.<p>Libraries and book stores had a few books, especially if you lived in a university area.<p>Data sheets for the processor and co-processors and digital logic components were usually available in electronic stores (they also had some books).<p>But it&#x27;s hard to imagine this world now that we have the Internet. I miss the focus needed to hunt down information and understand how thing worked. A lot of it was trial and error, trying to validate your understanding with experimentation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bernds74" target="_blank">bernds74</a>   <span class="timeago" data-date="2021-06-13 23:21:16 &#43;0000 UTC">2021-06-13 23:21:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Germany we had specialized magazines, and I&#x27;m sure there were similar things in most countries. I bought a CPC664 in 1985, and there was a magazine called CPC International. It had articles about all sorts of things - programming languages or documentation for chips like the CRTC. There were also program listings you could type in; I believe I got an assembler that way. Another magazine had a BASIC compiler. Similar things existed later in the Amiga days.<p>There were also books. One of my favourites was an annotated disassembly of the CPC&#x27;s two major ROMs. 16KB basic operating system, and 16KB BASIC interpreter.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 06:15:04 &#43;0000 UTC">2021-06-14 06:15:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            INPUT magazine series, books with programming listing either at the local libraries or some bookstores, local computer club, in Portugal the &quot;A Capital&quot; newspaper informatics section on Friday&#x27;s issue or the Spooler magazine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jdswain" target="_blank">jdswain</a>   <span class="timeago" data-date="2021-06-13 23:16:12 &#43;0000 UTC">2021-06-13 23:16:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had an older student at my high school teach a machine language course, complete with a one page table of opcodes and their hex values so that we could type them in.<p>After that I purchased a copy of Programming the 6502 by Rodnay Zaks. Books took 3 months to arrive if they were a special order like that, sometimes longer. To this day it&#x27;s still one of my favourite books.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=awwaiid" target="_blank">awwaiid</a>   <span class="timeago" data-date="2021-06-13 19:48:34 &#43;0000 UTC">2021-06-13 19:48:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC my commodore 64&#x2F;128 manual came with BASIC and some assembly documentation. Different world when your turn on the machine and ... Get basically a REPL.<p>I did the same thing as the author, wrote BASIC until I needed a faster inner loop (doing some simulation like cellwar or something) and picked up asm to make it (just the inner loop) faster.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-13 18:03:25 &#43;0000 UTC">2021-06-13 18:03:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me, mostly from hobbyist magazines that led to BBS dial up numbers that had made copies of software and docs.  Though that was tricky, since long distance calls were expensive.  So you dealt mostly with whatever a local BBS had, which I assume varied in depth, breadth, quality, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacquesm" target="_blank">jacquesm</a>   <span class="timeago" data-date="2021-06-13 17:46:32 &#43;0000 UTC">2021-06-13 17:46:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leventhal&#x27;s CPU series was pretty good, also every manufacturer makes reference manuals for their instruction sets. I still have mine (pretty dog eared, just for sentimental value, unlikely to ever be used again).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elvis70" target="_blank">elvis70</a>   <span class="timeago" data-date="2021-06-13 17:25:27 &#43;0000 UTC">2021-06-13 17:25:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally, it was books!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jkh1" target="_blank">jkh1</a>   <span class="timeago" data-date="2021-06-13 14:58:51 &#43;0000 UTC">2021-06-13 14:58:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This brings back memories. My first Z80 assembly program was a jetpac game for the Sinclair ZX80 around 1984 because I couldn&#x27;t get a ZX Spectrum to play it. I don&#x27;t think any written copy still exists but there&#x27;s still a copy on a cassette tape.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KingOfCoders" target="_blank">KingOfCoders</a>   <span class="timeago" data-date="2021-06-13 16:19:38 &#43;0000 UTC">2021-06-13 16:19:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you do Z80, best book (one of the books I love most)<p>&quot;Z80 Assembly Language Subroutines&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elvis70" target="_blank">elvis70</a>   <span class="timeago" data-date="2021-06-13 16:21:08 &#43;0000 UTC">2021-06-13 16:21:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, <a href="https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;bitsavers_osborneboogeSubroutines1983_24203802&#x2F;page&#x2F;n3&#x2F;mode&#x2F;2up" rel="nofollow">https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;bitsavers_osborneboogeSubroutine...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_joel" target="_blank">_joel</a>   <span class="timeago" data-date="2021-06-13 14:20:46 &#43;0000 UTC">2021-06-13 14:20:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Kudos, I think this trumps me writing my name in a goto loop in qbasic that I did when I was 9. Still the sense of accomplishment dictated the next 30 years of my life so not bad I guess :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the_af" target="_blank">the_af</a>   <span class="timeago" data-date="2021-06-13 19:02:19 &#43;0000 UTC">2021-06-13 19:02:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            His whole website is pretty cool and filled with retro gaming goodness. Thanks for sharing!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KingOfCoders" target="_blank">KingOfCoders</a>   <span class="timeago" data-date="2021-06-13 14:52:44 &#43;0000 UTC">2021-06-13 14:52:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My first larger code was the towers of Hanoi on CPC, where I found the algorithm while experimenting with coins of different sizes, somewhere around 12. Still very proud that I found a solution algorithm.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

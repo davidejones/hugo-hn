@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/practical-reedsolomon-for-programmers/">
+
+
+    <title>Practical Reed-Solomon for Programmers - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Practical Reed-Solomon for Programmers - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/practical-reedsolomon-for-programmers/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/practical-reedsolomon-for-programmers/">
+<meta name="twitter:title" content="Practical Reed-Solomon for Programmers - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Practical Reed-Solomon for Programmers - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T09:51:42JST",
+    "dateModified": "2021-06-13T09:51:42JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://berthub.eu/articles/posts/reed-solomon-for-programmers/">Practical Reed-Solomon for Programmers</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h2odragon" target="_blank">h2odragon</a>   <span class="timeago" data-date="2021-06-14 15:41:17 &#43;0000 UTC">2021-06-14 15:41:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Amusing: the linked library page, <a href="https:&#x2F;&#x2F;www.ka9q.net&#x2F;code&#x2F;fec&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.ka9q.net&#x2F;code&#x2F;fec&#x2F;</a> says (from 2007) &quot;The new Intel Macs are not yet supported. Stay tuned.&quot;<p>Ignore an issue for long enough, and it stops being an issue :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coder543" target="_blank">coder543</a>   <span class="timeago" data-date="2021-06-14 15:20:36 &#43;0000 UTC">2021-06-14 15:20:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If anyone wants to read more about Reed Solomon, this is the article that helped me understand Reed Solomon earlier this year: <a href="https:&#x2F;&#x2F;innovation.vivint.com&#x2F;introduction-to-reed-solomon-bc264d0794f8" rel="nofollow">https:&#x2F;&#x2F;innovation.vivint.com&#x2F;introduction-to-reed-solomon-b...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ahubert" target="_blank">ahubert</a>   <span class="timeago" data-date="2021-06-14 15:36:47 &#43;0000 UTC">2021-06-14 15:36:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (author here) Nice! Added that to the page, very worthwhile. Thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sparc24" target="_blank">sparc24</a>   <span class="timeago" data-date="2021-06-14 17:11:57 &#43;0000 UTC">2021-06-14 17:11:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These 2 papers helped me better understand some more practical aspects of it.<p><a href="https:&#x2F;&#x2F;mirrors.edge.kernel.org&#x2F;pub&#x2F;linux&#x2F;kernel&#x2F;people&#x2F;hpa&#x2F;raid6.pdf" rel="nofollow">https:&#x2F;&#x2F;mirrors.edge.kernel.org&#x2F;pub&#x2F;linux&#x2F;kernel&#x2F;people&#x2F;hpa&#x2F;...</a>
+<a href="https:&#x2F;&#x2F;www.usenix.org&#x2F;legacy&#x2F;event&#x2F;fast08&#x2F;tech&#x2F;full_papers&#x2F;plank&#x2F;plank_html&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;www.usenix.org&#x2F;legacy&#x2F;event&#x2F;fast08&#x2F;tech&#x2F;full_papers&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=moreati" target="_blank">moreati</a>   <span class="timeago" data-date="2021-06-14 17:03:13 &#43;0000 UTC">2021-06-14 17:03:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A semi-related question&#x2F;puzzle. Is it possible to reverse engineer parameters of a Reed Solomoon function?<p>Given one or more known inputs&#x2F;outputs of a Reed Solomon function with known symbol size, message length, number of parity symbols. Is it possible to calculate the other parameters (polynomial coefficients, primitive element etc)?<p>I failed to find an answer a few years ago, when trying to interoperate with chirp.io (now gone). <a href="https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;663643&#x2F;discover-parameters-of-a-reed-solomon-code-from-its-output" rel="nofollow">https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;663643&#x2F;discover-par...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xorvoid" target="_blank">xorvoid</a>   <span class="timeago" data-date="2021-06-14 17:47:27 &#43;0000 UTC">2021-06-14 17:47:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doesn’t seem too hard actually, given enough example input. The parity is just a linear combination of the input so you can set up a linear system and solve for those things encoding matrix rows pretty easily. From there you may need to make some assumptions about what type of matrix was used (e.g. vandermonde is popular) and perhaps the field size being used (e.g. GF(2^8), and with those, it should be easy to determine the reducing polynomial. Some of these choices are small enough to be able to brute force (finite fields used for practical problems tend to be small, naturally). If you have a dataset, I might actually toy with it myself.. sounds fun.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=conductor" target="_blank">conductor</a>   <span class="timeago" data-date="2021-06-14 16:15:55 &#43;0000 UTC">2021-06-14 16:15:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the article and code.<p>Also check out <a href="https:&#x2F;&#x2F;github.com&#x2F;Parchive&#x2F;par2cmdline" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Parchive&#x2F;par2cmdline</a><p>I wish something like this was integrated into a modern and free archive format. RAR has it. RAR also got volume recovery: when creating split multi-volume archives you can also create recovery volumes - each recovery volume can replace <i>any</i> other <i>one</i> missing volume. It was a life-saver in floppy-disk times.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=crazygringo" target="_blank">crazygringo</a>   <span class="timeago" data-date="2021-06-14 16:50:30 &#43;0000 UTC">2021-06-14 16:50:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are there any uses cases for Reed-Solomon at the application level?<p>My impression was always that error checking was implemented at the hardware level, or else at the OS&#x2F;driver level.<p>But just curious if there are some applications I&#x27;m missing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-06-14 17:42:27 &#43;0000 UTC">2021-06-14 17:42:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you need to transmit data over an unreliable link where retransmission isn&#x27;t practical you will want some sort of FEC. If hardware isn&#x27;t available to do the job then it gets done in software.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=curtisf" target="_blank">curtisf</a>   <span class="timeago" data-date="2021-06-14 17:09:26 &#43;0000 UTC">2021-06-14 17:09:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You may want to be able to run highly resilient databases even on non-error-detecting hardware. (Most consumer disks, and even a lot of enterprise disks, don&#x27;t reliably detect&#x2F;report disk corruption)<p>You might also be building a distributed system, where blocks are spread across multiple disks. In that case, an &quot;error&quot; you&#x27;re trying to correct might be the loss of a disk or server in the distributed system; there is no one single disk or OS responsible for all the relevant blocks in that case.<p>But, both of these are assuming you&#x27;re building some kind of data-store, which is not a typical user application. Writing robust data-stores is hard for many reasons, error correcting is just one of them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the_benno" target="_blank">the_benno</a>   <span class="timeago" data-date="2021-06-14 17:15:12 &#43;0000 UTC">2021-06-14 17:15:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I worked on a research project in undergrad that used Reed-Solomon -- we showed a series of images to users, who would later pick those images out of a set of un-trained images in order to authenticate or access some privileged data, sans encryption.  the error-correcting allowed for some degree of misremembering or forgetfulness, as is normal in human image recognition tasks.<p>The professor later spun up a startup that has since been acquired by Dropbox, but I&#x27;m unaware what kind of product they&#x27;re currently working on.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mook" target="_blank">mook</a>   <span class="timeago" data-date="2021-06-14 17:19:55 &#43;0000 UTC">2021-06-14 17:19:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Parchive 2 was, I believe, an implementation of Reed-Solomon at the application level; mostly used (when it was introduced) to counter loss from missing chunks on binary newsgroups. I think RAR might have picked up a similar feature around that time too?<p>I believe parchive version 1 was simple XOR parity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=akalin" target="_blank">akalin</a>   <span class="timeago" data-date="2021-06-14 17:31:34 &#43;0000 UTC">2021-06-14 17:31:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, parchive v1 also used Reed-Solomon. The main difference between v1 and v2 was that v1 worked on the file level, but v2 divided the set of files into blocks.<p>Also, the parity matrix for v1 would be sometimes singular (non-invertible), which v2 tried to fix but it didn&#x27;t quite work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cycomanic" target="_blank">cycomanic</a>   <span class="timeago" data-date="2021-06-14 17:42:33 &#43;0000 UTC">2021-06-14 17:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            QR codes use Reed Solomon codes
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sparc24" target="_blank">sparc24</a>   <span class="timeago" data-date="2021-06-14 17:22:55 &#43;0000 UTC">2021-06-14 17:22:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            s3, dropbox - <a href="https:&#x2F;&#x2F;dropbox.tech&#x2F;infrastructure&#x2F;inside-the-magic-pocket" rel="nofollow">https:&#x2F;&#x2F;dropbox.tech&#x2F;infrastructure&#x2F;inside-the-magic-pocket</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xrd" target="_blank">xrd</a>   <span class="timeago" data-date="2021-06-14 15:52:06 &#43;0000 UTC">2021-06-14 15:52:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I loved this article and going down the rabbit hole with the associated links was excited to see a discussion from Russ Cox (golang) about how QR codes rely on RS (and another great article)<p><a href="https:&#x2F;&#x2F;research.swtch.com&#x2F;qart" rel="nofollow">https:&#x2F;&#x2F;research.swtch.com&#x2F;qart</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IAmLiterallyAB" target="_blank">IAmLiterallyAB</a>   <span class="timeago" data-date="2021-06-14 16:24:43 &#43;0000 UTC">2021-06-14 16:24:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is the difference between RS and Hamming codes?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rurban" target="_blank">rurban</a>   <span class="timeago" data-date="2021-06-14 16:46:50 &#43;0000 UTC">2021-06-14 16:46:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hamming Codes can only recover from 2 wrong bits per byte, with RS it&#x27;s configurable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrfusion" target="_blank">mrfusion</a>   <span class="timeago" data-date="2021-06-14 15:09:25 &#43;0000 UTC">2021-06-14 15:09:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is this what tcp&#x2F;ip uses?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jandrese" target="_blank">jandrese</a>   <span class="timeago" data-date="2021-06-14 17:47:31 &#43;0000 UTC">2021-06-14 17:47:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TCP doesn&#x27;t do forward error correction at all.  It uses a retransmission scheme instead.  TCP&#x27;s error correction is not only to insure a consistent datastream, but also to more equitably share limited bandwidth.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rl1987" target="_blank">rl1987</a>   <span class="timeago" data-date="2021-06-14 15:21:25 &#43;0000 UTC">2021-06-14 15:21:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. TCP, IP and UDP are all using Internet Checksum (RFC 1071). Ethernet uses CRC.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=znpy" target="_blank">znpy</a>   <span class="timeago" data-date="2021-06-14 15:29:18 &#43;0000 UTC">2021-06-14 15:29:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I went and skimmed the rfc you&#x27;re citing and it&#x27;s fro 1988, it&#x27;s old enough to have samples in C code where the &quot;register&quot; keyword is still used (afaik nowadays most compilers will ignore it) along with assembly code for motorola 68020, Cray CPUs and the IBM-370.<p>EDIT: for reference: <a href="https:&#x2F;&#x2F;datatracker.ietf.org&#x2F;doc&#x2F;html&#x2F;rfc1071.html" rel="nofollow">https:&#x2F;&#x2F;datatracker.ietf.org&#x2F;doc&#x2F;html&#x2F;rfc1071.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brandmeyer" target="_blank">brandmeyer</a>   <span class="timeago" data-date="2021-06-14 17:13:30 &#43;0000 UTC">2021-06-14 17:13:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All of these are techniques for verifying a message.  Galileo also uses a 24-bit CRC to verify its messages after performing forward error correction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stagger87" target="_blank">stagger87</a>   <span class="timeago" data-date="2021-06-14 15:24:11 &#43;0000 UTC">2021-06-14 15:24:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forward error correction is usually at the PHY layer, not the transport layer. So the more appropriate question is, does 10GbE&#x2F;100GbE&#x2F;WLAN&#x2F;etc use RS coding? (and yes some of them do.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TonyTrapp" target="_blank">TonyTrapp</a>   <span class="timeago" data-date="2021-06-14 16:13:16 &#43;0000 UTC">2021-06-14 16:13:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, but Reed-Solomon codes are used on on CDs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

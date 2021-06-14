@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/d3-70/">
+
+
+    <title>D3 7.0 - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="D3 7.0 - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/d3-70/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/d3-70/">
+<meta name="twitter:title" content="D3 7.0 - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "D3 7.0 - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T15:27:21JST",
+    "dateModified": "2021-06-12T15:27:21JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/d3/d3/releases/tag/v7.0.0">D3 7.0</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whimsicalism" target="_blank">whimsicalism</a>   <span class="timeago" data-date="2021-06-12 16:57:30 &#43;0000 UTC">2021-06-12 16:57:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The one critique I have of D3 is that it is becoming increasingly closely paired with Observable, such that when I&#x27;m searching for examples of how to make something in d3, I can only find Observable examples that require the Observable runtime in order to function properly.<p>I think the examples should have a JS native version in addition to the Observable implementation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DataCrayon" target="_blank">DataCrayon</a>   <span class="timeago" data-date="2021-06-12 17:59:21 &#43;0000 UTC">2021-06-12 17:59:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s part of the reason I started my book &quot;Visualisation with D3.js&quot;[1]... it&#x27;s early access and I&#x27;m trying to find more time to work on it, but it&#x27;s all JS native<p>[1] <a href="https:&#x2F;&#x2F;datacrayon.com&#x2F;shop&#x2F;product&#x2F;visualisation-with-d3&#x2F;" rel="nofollow">https:&#x2F;&#x2F;datacrayon.com&#x2F;shop&#x2F;product&#x2F;visualisation-with-d3&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_dwt" target="_blank">_dwt</a>   <span class="timeago" data-date="2021-06-12 17:16:14 &#43;0000 UTC">2021-06-12 17:16:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a real pain. I work with lots of &quot;data science&quot; types who are often trying to concurrently learn JavaScript and d3 - often with JS as their first or second programming language. It&#x27;s difficult enough for an experienced programmer coming back to d3 after a few versions to pick out what&#x27;s d3 vs. what&#x27;s Observable - and very difficult to help a relative newbie through the process of turning what&#x27;s shown in an Observable notebook into something that can run in an ordinary web page.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vmception" target="_blank">vmception</a>   <span class="timeago" data-date="2021-06-12 19:54:35 &#43;0000 UTC">2021-06-12 19:54:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even more difficult to deal with that <i>and</i> conforming it to Vue&#x2F;React SPAs
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kowlo" target="_blank">kowlo</a>   <span class="timeago" data-date="2021-06-12 17:56:07 &#43;0000 UTC">2021-06-12 17:56:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed - I don&#x27;t like the pairing with Observable. I don&#x27;t like Observable in general because the full experience can&#x27;t be self-hosted. However, both projects belong to Mike, and D3.js is free - so I can&#x27;t complain.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=norswap" target="_blank">norswap</a>   <span class="timeago" data-date="2021-06-12 22:12:05 &#43;0000 UTC">2021-06-12 22:12:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Didn&#x27;t they have an export function that allowed self-hosting something you developped on Observable? (Or is it the development part that you want to self-host for &quot;full experience&quot;?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobolus" target="_blank">jacobolus</a>   <span class="timeago" data-date="2021-06-12 22:20:24 &#43;0000 UTC">2021-06-12 22:20:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can self-host the runtime, and use code from notebook cells in whatever context you like. The closed part is the “notebook chrome” (editor, history view, social features, etc.).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 23:16:26 &#43;0000 UTC">2021-06-12 23:16:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dimal" target="_blank">dimal</a>   <span class="timeago" data-date="2021-06-12 18:00:00 &#43;0000 UTC">2021-06-12 18:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What’s the difference between the two? As someone who only dips into D3 every few years and just discovered Observable, I wasn’t aware that they were different. I thought Observable was just a way of sharing D3 visualizations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 18:34:09 &#43;0000 UTC">2021-06-12 18:34:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Observable is like Jupyter for Javascript. A general JS notebook environment, with the added twist that it uses reactive dataflow ideas to evaluate cells in a &quot;right&quot; and deterministic order (a common footgun in Jupyter where cells might be reevaluated manually, resulting in unexpected state).<p>D3 is a JS library for data visualisations.<p>Both are the brainchild of Mike Bostock. That&#x27;s the connection. :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tracyhenry" target="_blank">tracyhenry</a>   <span class="timeago" data-date="2021-06-12 18:35:59 &#43;0000 UTC">2021-06-12 18:35:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;observablehq.com&#x2F;@observablehq&#x2F;javascript-and-observable" rel="nofollow">https:&#x2F;&#x2F;observablehq.com&#x2F;@observablehq&#x2F;javascript-and-observ...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=th0ma5" target="_blank">th0ma5</a>   <span class="timeago" data-date="2021-06-12 21:41:00 &#43;0000 UTC">2021-06-12 21:41:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Someone should make an open source version of the Observable ecosystem or integrate it into Jupyter tooling better. The notebook format is not encrypted or anything.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=protoduction" target="_blank">protoduction</a>   <span class="timeago" data-date="2021-06-13 11:03:29 &#43;0000 UTC">2021-06-13 11:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I posted this on HN a little while back [1], it&#x27;s an open source alternative editor&#x2F;runtime for Observable as a plugin for Starboard.<p>[1]: <a href="https:&#x2F;&#x2F;starboard.gg&#x2F;nb&#x2F;nfwK2VA" rel="nofollow">https:&#x2F;&#x2F;starboard.gg&#x2F;nb&#x2F;nfwK2VA</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=th0ma5" target="_blank">th0ma5</a>   <span class="timeago" data-date="2021-06-13 18:20:21 &#43;0000 UTC">2021-06-13 18:20:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice!!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 17:00:42 &#43;0000 UTC">2021-06-12 17:00:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a bit like complaining that there are examples on codepen.<p>I&#x27;m super grateful that they provide such good documentation, which is second to none, in a nicely explorable environment.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whimsicalism" target="_blank">whimsicalism</a>   <span class="timeago" data-date="2021-06-12 17:10:48 &#43;0000 UTC">2021-06-12 17:10:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference is that examples in Codepen are easily reproducable in another environment.<p>d3, on the other hand, has converted most of their examples to Observable, which requires extensive research to convert back to JS (in the best case) and in the worst case requires reverse engineering the runtime.<p>I&#x27;m not the only one with this opinion, there are plenty of others who have struggled through similar issues and discussed it.<p>&quot;The process of converting an Observable notebook to standalone html and&#x2F;or js is clearly not as simple and copying and pasting. The use of Observable notebooks for all D3 examples has made the introduction to the library much more challenging for this reason.&quot; [0]<p>[0] <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;53155957&#x2F;convert-d3-observable-to-standalone-webpage-like-blocks-org" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;53155957&#x2F;convert-d3-obse...</a><p>[1]: <a href="https:&#x2F;&#x2F;talk.observablehq.com&#x2F;t&#x2F;i-want-to-learn-d3-i-don-t-want-to-learn-observable-is-that-ok&#x2F;1957" rel="nofollow">https:&#x2F;&#x2F;talk.observablehq.com&#x2F;t&#x2F;i-want-to-learn-d3-i-don-t-w...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 18:23:03 &#43;0000 UTC">2021-06-12 18:23:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I work with both D3 and Observable full time.<p>The claim that one has to &quot;reverse engineer the runtime&quot; is simply absurd.<p>The people that complain about D3 on observable always turn out to have taken neither the time to understand Observable nor D3 and are looking for a way to just copy paste something into their codebase, without understanding it, and without any willingness to really learn the tools they are using. Which would have never worked in the first place, because D3 is not a plotting library like vega or observables plot, it&#x27;s a library library, building material from which you can build your own bespoke visualisations.<p>Observable is in essence reevaluating the entire code with each &quot;requestAnimationFrame&quot;, no fancy diffing a la react or other magic, if it runs in observable, it will also run in your code as a static thing. Copy paste the cells out of observable, prepend them with a &quot;const&quot; and you&#x27;re done,
+not more work than removing and rewriting the boilerplate that&#x27;s in every codepen.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ronyeh" target="_blank">ronyeh</a>   <span class="timeago" data-date="2021-06-12 18:58:01 &#43;0000 UTC">2021-06-12 18:58:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; taken neither the time to understand Observable nor D3 and are looking for a way to just copy paste something into their codebase, without understanding it, and without any willingness to really learn the tools they are using.<p>That&#x27;s how many of us learn, by dipping our toes into a new SDK by copying and pasting into our bare HTML&#x2F;JS page and tweaking things to see what happens. Eventually we will get around to reading the full documentation.<p>I have made d3 examples and played around with the toolkit since back when it was in its infancy (called protovis or something). It has definitely become more and more difficult over the years for a beginner to jump into.<p>(Background: I have met Mike since I got my PhD from the hci&#x2F;graphics lab at Stanford, but we did not overlap.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=themulticaster" target="_blank">themulticaster</a>   <span class="timeago" data-date="2021-06-12 20:02:38 &#43;0000 UTC">2021-06-12 20:02:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is my experience as well - when deciding whether to use a certain library or framework, I don&#x27;t start reading the reference manual. Rather, I highly prefer looking at and tweaking existing examples, mostly to understand what the typical usage looks like and most importantly where the limitations lie.<p>I feel like the last point is often overlooked by documentation authors: When evaluating whether to use a library, I&#x27;m not just interested in what it <i>can</i> do, but also what it <i>can&#x27;t</i> do! That&#x27;s why I really enjoy the &quot;you should use X if you want to do Y&quot;&#x2F;&quot;you shouldn&#x27;t use X if you want to do Z&quot; sections present in some manuals.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sam_goody" target="_blank">sam_goody</a>   <span class="timeago" data-date="2021-06-13 09:12:50 &#43;0000 UTC">2021-06-13 09:12:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this.<p>I am a beginner, and have spent hours in frustration, because I couldn&#x27;t figure out the examples.<p>In every other project I would copy and paste some examples and start playing with it to understand.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 19:02:07 &#43;0000 UTC">2021-06-12 19:02:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You make my point.
+What better environment to learn and twiddle, than a reactive, constantly reevaluating interactive notebook?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ronyeh" target="_blank">ronyeh</a>   <span class="timeago" data-date="2021-06-12 23:07:23 &#43;0000 UTC">2021-06-12 23:07:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know why others down voted you so I upvoted this comment.<p>All I am saying is that the d3 team needs a &quot;getting started&quot; page aimed at allowing a dev to include one script tag (or a single npm install) and then copy and paste examples from the example gallery to get it quickly working on their own test website.<p>I recently tried getting back into d3 and I gave up (opted for another low threshold SVG toolkit). It&#x27;s fine if d3 is aimed at other people who want to use observable.... It&#x27;s just not targeted at me anymore.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-13 07:22:09 &#43;0000 UTC">2021-06-13 07:22:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that&#x27;s actually a result of how D3 has changed over time. It has become much more modular and flexible, but also less &quot;plug &amp; play&quot;. In a sense it&#x27;s a pro tool for custom data visulaisations, where everything is possible, but nothings easy.<p>I&#x27;d recommend Plot instead:
+<a href="https:&#x2F;&#x2F;observablehq.com&#x2F;@observablehq&#x2F;plot" rel="nofollow">https:&#x2F;&#x2F;observablehq.com&#x2F;@observablehq&#x2F;plot</a><p>It also works as a pure JS library, just like D3, but is based on a grammar of graphics idea, like ggplot.
+It&#x27;s not infinitely flexible, but flexible enough, and build to get quickly to a chart, with as few lines as possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=duped" target="_blank">duped</a>   <span class="timeago" data-date="2021-06-12 20:11:34 &#43;0000 UTC">2021-06-12 20:11:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess it depends on your goal. If your goal is to learn how to code a nice reactive environment like a notebook is great. If your goal is to learn how to take a library and use it in a piece of software to release to the world, the notebook is next to useless.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 21:27:45 &#43;0000 UTC">2021-06-12 21:27:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you think that the trivial differences between the two environments makes either of them useless to learn the other, franky I&#x27;ll doubt you&#x27;ll have the skill to learn D3 properly at all.<p>Taking a dom node and hooking it into the dom is not magic in D3. All that obervable does is hook in any dom node you return for you.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=protoduction" target="_blank">protoduction</a>   <span class="timeago" data-date="2021-06-13 11:21:08 &#43;0000 UTC">2021-06-13 11:21:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wasn&#x27;t sure whether I was going to comment, but this kind of comment is rather unhelpful and poor form. Some may prefer not to have a (mock) notebook runtime in their application for good reason that has nothing to do with their skill.<p>I see you are passionate about defending Observable, and that&#x27;s cool - it&#x27;s a great piece of tech, but please remember that everybody&#x27;s requirements are different and valid too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-13 13:12:11 &#43;0000 UTC">2021-06-13 13:12:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then don&#x27;t use the runtime and rewrite the code to plain js. All you have to do is declare cell contents as variables, and replace the first D3 select, that attaches to a reified dom node, with an #id selector. D3 is a series of tools, where the difficult parts are completely orthogonal to what observable provides.<p>It&#x27;s like complaining that you can&#x27;t learn how to drive in the evening, because there is a different sky color, than during the time you&#x27;ll take your morning commute. The sky color is not the relevant nor difficult part.<p>I have my own (different) complaints about observable, but I&#x27;m sick and tired of bottom of the barrel programmers complaining about free stuff not being pre-digested enough for them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hu3" target="_blank">hu3</a>   <span class="timeago" data-date="2021-06-12 19:24:17 &#43;0000 UTC">2021-06-12 19:24:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Whatever environment each user prefers.<p>Being softlocked into Observable is not a pro.<p>That&#x27;s like trying to force every vim user into Jetbrain IDEs (both are great, not trying to start a flamewar here).<p>Sure an IDE will have more features (like Observable vs simple HTML file), but it&#x27;s important to understand different people have different ways of doing things.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 21:28:32 &#43;0000 UTC">2021-06-12 21:28:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re talking about a javascript repl here, don&#x27;t blow it out of proportion. The things transfer trivially between the envionments. If having a javascript repl is such a show stopper for learning D3 for you, maybe learn javascript first.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=themulticaster" target="_blank">themulticaster</a>   <span class="timeago" data-date="2021-06-12 21:37:47 &#43;0000 UTC">2021-06-12 21:37:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But if the example transfers trivially, why is there no convenient &quot;download example project&quot; button that offers an archive containing all the necessary files I need to run the example?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-12 22:13:48 &#43;0000 UTC">2021-06-12 22:13:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is such a button.<p>Like I said, everyone I&#x27;ve seen complain so far, always turn out to not even want to learn basic stuff.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ronyeh" target="_blank">ronyeh</a>   <span class="timeago" data-date="2021-06-12 23:10:14 &#43;0000 UTC">2021-06-12 23:10:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ahh I must have missed this button. I will try to go look for it and report back when I have a d3 example working in my bare HTML page.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jwilber" target="_blank">jwilber</a>   <span class="timeago" data-date="2021-06-13 06:59:53 &#43;0000 UTC">2021-06-13 06:59:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This.<p>It’s literally just a matter of reordering variables, adding or removing a pair of parentheses, and removing the “return svg.node” call.<p>People love to complain about free open-source documentation. Especially for d3 it seems.<p>Shout out to Mike Bostock for all his awesome work.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaybutwhy" target="_blank">throwawaybutwhy</a>   <span class="timeago" data-date="2021-06-13 07:57:06 &#43;0000 UTC">2021-06-13 07:57:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Knowing what to re-order, remove&#x2F;add is non-trivial for a newbie.<p>Relevant discussion: [0].<p>Let&#x27;s look at the edit distance between [1] and [2]. Previous frustration at [3].<p>[0] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27415725" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27415725</a><p>[1] <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;66966625&#x2F;converting-observable-notebook-code-to-plain-javascript" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;66966625&#x2F;converting-obse...</a><p>[2] <a href="https:&#x2F;&#x2F;observablehq.com&#x2F;@d3&#x2F;contours" rel="nofollow">https:&#x2F;&#x2F;observablehq.com&#x2F;@d3&#x2F;contours</a><p>[3] <a href="https:&#x2F;&#x2F;talk.observablehq.com&#x2F;t&#x2F;i-want-to-learn-d3-i-don-t-want-to-learn-observable-is-that-ok&#x2F;1957&#x2F;2" rel="nofollow">https:&#x2F;&#x2F;talk.observablehq.com&#x2F;t&#x2F;i-want-to-learn-d3-i-don-t-w...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-13 10:36:47 &#43;0000 UTC">2021-06-13 10:36:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A newbie could simply use the export functionality in observable, which automatically generates iframe code, or vanilla-js code or react code for you.<p>Quoting other people that don&#x27;t want to spend 5 minutes on their problem, doesn&#x27;t make your not wanting to spend 5 minutes on your problem any more valid.<p>If you want a no code solution for data viz, use Excel, if finding the export button, or reordering variable declarations in an order, where things come before the things they are used by, is already too difficult, then you&#x27;re not gonna understand D3 anyways.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slumpt_" target="_blank">slumpt_</a>   <span class="timeago" data-date="2021-06-13 14:49:26 &#43;0000 UTC">2021-06-13 14:49:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your post comes off really condescending and shitty. I don’t think it’s necessarily true, either.<p>I think a lot of newbies might just find the Observable stuff a bit overwhelming. Maybe their background isn’t JavaScript. That <i>does not</i> mean they aren’t gonna understand.<p>What are you even suggesting. They aren’t capable? We must all look like ants to you, up there.<p>As a dev with over a decade of experience in the front-end and no issues picking up d3 on my own, I still sympathize with overwhelmed newbies. Mike is trying to shove Observable down everyone’s throats in hopes of getting a good valuation and selling it some day, and I don’t blame him wanting to cash in D3 for this purpose. But let us recognize it plainly, and recognize the adverse consequences that has on a subset of the userbase.<p>And it’s fine if he doesn’t want those people on for the ride. It may also just mean a long-term atrophy of the D3 community.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-13 17:02:30 &#43;0000 UTC">2021-06-13 17:02:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Mike is trying to shove Observable down everyone’s throats in hopes of getting a good valuation and selling it some day<p>That&#x27;s an allegation that completely contradicts mikes and observables behaviour to date. They are insanely obsessed with making the barrier of entry of observable as low as possible, give most of the code away as open source, and are more concerned about empowering minorities than having a working business.<p>But what has it earned them? A bunch of ungrateful brats that couldn&#x27;t code their way out of a hole if their lives depended on it.<p>Can you imagine people from any other profession being this whiney and entitled? &quot;Heres a free plan for a bridge! BuT It&#x27;S iN MeTrIC SySteM :(!&quot;, &quot;CiVIl EnGinEErINg is NoT MAtH!&quot;, &quot;I doN&#x27;T WanT tO Do A DeStrUCtiVe TeST, CaN&#x27;T We JuSt ShIP iT???&quot;<p>I come off as condescending? Good!
+I&#x27;m tired of catering to the absolute minimum. Observable is f** simple, if you don&#x27;t have the ability or drive or whatever to learn it, and appreciate the help it provides in learning D3, you won&#x27;t be able to learn D3. That&#x27;s not me being mean, that&#x27;s just realistic. D3 is super f*n hard, I have to look up stuff 24&#x2F;7, because it&#x27;s not build to be easy, it&#x27;s build to be the most generic thing you can imagine to make visualisations.<p>Let&#x27;s be real, the people don&#x27;t complain about observable because they&#x27;re overwhelmed newbies, but because they don&#x27;t want to do their job. It&#x27;s the people that copy paste stuff into their codebase without a glimmer of an attempt to understand it.
+Spend 10 minutes inside an interactive playground understanding the tool you&#x27;re gonna use? MoNKeY WAnNt CopY PAsTe NoW!<p>The living personification of legacy code, the kind of coworker some poor person that actually takes the whole software _engineering_ thing seriously has to clean up after.<p>Ironically it&#x27;s do-gooders like Mike and Melody that brought us into this mess in the first place, with their &quot;everybody can be empowered to program&quot; and &quot;always say &#x27;yes, and...&#x27;&quot; bull**.<p>You act as if D3 documentation in observable was some kind of burden, when in reality observable is a bunch of training wheels.<p>Importing the library is not the difficult part, neither is selecting the DOM node to attach to, the difficult part is the selections, scales, axis, tics, interaction helpers, drawing helpers, simulations, layouts and whatnot.<p>But sure take the training wheels off! Shaving those 2 pounds of your bike will surely make it go a bit faster. But since you were unwilling to learn how to ride it in the first place, it&#x27;s just gonna make you fall on your face more quickly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 21:16:38 &#43;0000 UTC">2021-06-13 21:16:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slumpt_" target="_blank">slumpt_</a>   <span class="timeago" data-date="2021-06-13 21:06:41 &#43;0000 UTC">2021-06-13 21:06:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oof. Man. Your attitude is what makes software less diverse and hospitable.<p>I know there are some folks who maybe come with sincere laziness, but the hard push with observable complicates an already complex thing. You don’t have to agree.<p>Keep being mad or whatever and shitting on newcomers to the field. I’ll stick to welcoming folks and trying to hear the merit in their complaints.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-06-13 21:33:22 &#43;0000 UTC">2021-06-13 21:33:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t turn this into a diversity argument. 
+We need more diversity in software from more diverse backgrounds. We just need less people in software in general.
+Especially less mediocre ones.<p>Guess who drives out female talent? Mediocre male white nerds who think they know it all and who don&#x27;t have the open mindedness to learn tools like observable.<p>ObservableHQ is one of the most impactfull diversity pushing companies I&#x27;ve seen, but you accuse them of some ulterior motives for having the audacity of writing and hosting amazing D3 docs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slumpt_" target="_blank">slumpt_</a>   <span class="timeago" data-date="2021-06-13 21:42:17 &#43;0000 UTC">2021-06-13 21:42:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Haha, alright bud. You enjoy your weekend.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jwilber" target="_blank">jwilber</a>   <span class="timeago" data-date="2021-06-13 20:16:48 &#43;0000 UTC">2021-06-13 20:16:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is trivial. I just told you what to remove, and tracebacks will inform you of the ordering.<p>I would advise the ‘newbie’ you speak of to learn how to read a basic error message and how to use the backspace key before tackling d3!<p>(For reference, just this week an intern on my team needed some d3 boilerplate for a fairly complicated plot. I wrote it for her in observable, with some guidelines on where to go next. She finished what was needed and cr’d directly to our codebase - at no point did either of us worry about the supposed difficult translation between observable and a js file.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macNchz" target="_blank">macNchz</a>   <span class="timeago" data-date="2021-06-12 17:40:13 &#43;0000 UTC">2021-06-12 17:40:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I encountered this problem recently as someone who was once reasonably familiar with d3 and came back to it after several years away.<p>I find myself wanting to start with a working example I can riff off of more in d3 than with many other tools I&#x27;ve used, so I totally understand the appeal of interactive examples in Observable but find it super frustrating and cumbersome when it comes to actually rolling what I&#x27;m working on into an existing application.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spankalee" target="_blank">spankalee</a>   <span class="timeago" data-date="2021-06-12 16:56:27 &#43;0000 UTC">2021-06-12 16:56:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Adopt type: module. #3501<p>Standard JS modules, very nice! D3 now works in all playgrounds and libraries even as dependencies without non-standard tooling!<p><a href="https:&#x2F;&#x2F;jsbin.com&#x2F;ducosajehi&#x2F;edit?html,output" rel="nofollow">https:&#x2F;&#x2F;jsbin.com&#x2F;ducosajehi&#x2F;edit?html,output</a><p>I do wish they didn&#x27;t even publish UMD, that&#x27;s a recipe for duplication if some libraries import the module and some import the UMD.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=azangru" target="_blank">azangru</a>   <span class="timeago" data-date="2021-06-12 18:50:55 &#43;0000 UTC">2021-06-12 18:50:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So, is d3 tree-shakeable yet? If I import { scaleLinear } from &#x27;d3&#x27; in a webpack-built project, will I get only the scaleLinear code? As far as I remember, in v6 this will import a lot of (or perhaps the rest of) d3 as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jwilber" target="_blank">jwilber</a>   <span class="timeago" data-date="2021-06-13 07:02:26 &#43;0000 UTC">2021-06-13 07:02:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can also just import it from d3-scale.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=azangru" target="_blank">azangru</a>   <span class="timeago" data-date="2021-06-13 13:52:26 &#43;0000 UTC">2021-06-13 13:52:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I know.<p>I am probably being unreasonable; but it&#x27;s kind of nice to be able to have a single third-party dependency out of which you can pick what you need at the moment, rather than a host of small third-party dependencies. Kind of like lodash, from which you can at least import individual functions (import merge from &#x27;lodash&#x2F;merge&#x27;) rather than installing all those functions as individual packages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jwilber" target="_blank">jwilber</a>   <span class="timeago" data-date="2021-06-13 20:29:11 &#43;0000 UTC">2021-06-13 20:29:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree with you and wish that were an option, but I do think most build tools will tree shake for you nowadays.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mirekrusin" target="_blank">mirekrusin</a>   <span class="timeago" data-date="2021-06-12 16:52:10 &#43;0000 UTC">2021-06-12 16:52:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Exciting to see ESM everywhere. It works so well with Observable. I&#x27;m trying to put live playgrounds at observable for my packages as part of docs [0] - just starting, nothing exciting to see there yet, but I think the concept of playground as part of docs is quite awesome.<p>[0] <a href="https:&#x2F;&#x2F;observablehq.com&#x2F;@mirek&#x2F;tsql-examples" rel="nofollow">https:&#x2F;&#x2F;observablehq.com&#x2F;@mirek&#x2F;tsql-examples</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DataCrayon" target="_blank">DataCrayon</a>   <span class="timeago" data-date="2021-06-12 17:53:47 &#43;0000 UTC">2021-06-12 17:53:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great! Nice to see very few breaking changes, the Dreamcast intro animation still works <a href="https:&#x2F;&#x2F;datacrayon.com&#x2F;posts&#x2F;visualisation&#x2F;visualisation-with-d3&#x2F;dreamcast-intro&#x2F;" rel="nofollow">https:&#x2F;&#x2F;datacrayon.com&#x2F;posts&#x2F;visualisation&#x2F;visualisation-wit...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=terpimost" target="_blank">terpimost</a>   <span class="timeago" data-date="2021-06-12 16:35:02 &#43;0000 UTC">2021-06-12 16:35:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you Mike!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nickreese" target="_blank">nickreese</a>   <span class="timeago" data-date="2021-06-12 16:39:44 &#43;0000 UTC">2021-06-12 16:39:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This x1000. D3 is such a great tool. Just the scales&#x2F;coloring&#x2F;map project libraries would be impressive standalone. D3 is incredible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Vaslo" target="_blank">Vaslo</a>   <span class="timeago" data-date="2021-06-12 18:44:35 &#43;0000 UTC">2021-06-12 18:44:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Used this in a data viz class and I’d say it’s overkill for most visualizations. Also very difficult to learn and frustrating to implement with all the “enter, exit” stuff.  Excel, Tableau, etc so much easier and most of what you need to do visualizations in the corporate setting.  Obviously it’s excellent for very specialized unusual visualizations but it’s rare those are really needed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mskullcap" target="_blank">mskullcap</a>   <span class="timeago" data-date="2021-06-12 19:05:51 &#43;0000 UTC">2021-06-12 19:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All the &quot;enter, exit&quot; stuff is what makes d3 beautiful.  From a core handful of ideas, Mike is able to express a vast world of visualizations.  I think it is the most amazing framework I have had the pleasure of using in my 30+yrs of software development.  Ya, you could grab bar chart library and just give it data and get a graph out, or, you could spend a little time with d3 and actually learn something so powerful you can make bar charts - or virtually any other kind of visualization you will ever need.  Well worth working past the frustration, imo.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drewda" target="_blank">drewda</a>   <span class="timeago" data-date="2021-06-12 19:27:51 &#43;0000 UTC">2021-06-12 19:27:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want the polish of d3 and some of its power without all the complexity, try Vega Lite and related tooling: <a href="https:&#x2F;&#x2F;vega.github.io&#x2F;vega-lite&#x2F;" rel="nofollow">https:&#x2F;&#x2F;vega.github.io&#x2F;vega-lite&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=HatchedLake721" target="_blank">HatchedLake721</a>   <span class="timeago" data-date="2021-06-12 20:12:43 &#43;0000 UTC">2021-06-12 20:12:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apples and oranges.<p>D3 is a low level visualisation library where you write code.<p>Excel&#x2F;Tableau are business tools.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=javierluraschi" target="_blank">javierluraschi</a>   <span class="timeago" data-date="2021-06-12 22:01:15 &#43;0000 UTC">2021-06-12 22:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why can&#x27;t we have both? -- I had a similar frustration and got to work on <a href="https:&#x2F;&#x2F;hal9.ai" rel="nofollow">https:&#x2F;&#x2F;hal9.ai</a>, you get prebuilt blocks to easily import&#x2F;transform&#x2F;visualize data, while also being able modify the D3&#x2F;Plot sources to your hearts contempt.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gaws" target="_blank">gaws</a>   <span class="timeago" data-date="2021-06-14 00:35:29 &#43;0000 UTC">2021-06-14 00:35:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Excel, Tableau, etc so much easier and most of what you need to do visualizations in the corporate setting.<p>D3 is the best way to make visualizations online. Yes, it requires learning the library and building things from scratch, but it&#x27;s light years better than the dog shit modules Tableau offers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=th0ma5" target="_blank">th0ma5</a>   <span class="timeago" data-date="2021-06-12 21:42:51 &#43;0000 UTC">2021-06-12 21:42:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You actually don&#x27;t have to use enter and exit and I agree it is cumbersome and unnecessary although I understand the desire for inband and out of band separation... <a href="https:&#x2F;&#x2F;medium.com&#x2F;d3js-tutorials&#x2F;d3-without-enter-91934575d30b" rel="nofollow">https:&#x2F;&#x2F;medium.com&#x2F;d3js-tutorials&#x2F;d3-without-enter-91934575d...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NelsonMinar" target="_blank">NelsonMinar</a>   <span class="timeago" data-date="2021-06-12 22:05:35 &#43;0000 UTC">2021-06-12 22:05:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re comparing Paint to Photoshop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 21:39:53 &#43;0000 UTC">2021-06-12 21:39:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kowlo" target="_blank">kowlo</a>   <span class="timeago" data-date="2021-06-12 16:57:02 &#43;0000 UTC">2021-06-12 16:57:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Feels like less than a year ago that we had D3 v6!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-06-12 18:44:55 &#43;0000 UTC">2021-06-12 18:44:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>D3 6.0</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=24288497" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=24288497</a> - Aug 2020 (86 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wongarsu" target="_blank">wongarsu</a>   <span class="timeago" data-date="2021-06-12 18:49:15 &#43;0000 UTC">2021-06-12 18:49:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            D3 v6 was released on 27th Aug 2020, so your feeling is right. We seem to get a major release about every year now, compared to every two years before v5.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

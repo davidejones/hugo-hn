@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/how-to-handle-secrets-on-the-command-line/">
+
+
+    <title>How to handle secrets on the command line - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="How to handle secrets on the command line - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/how-to-handle-secrets-on-the-command-line/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/how-to-handle-secrets-on-the-command-line/">
+<meta name="twitter:title" content="How to handle secrets on the command line - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "How to handle secrets on the command line - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T08:38:27JST",
+    "dateModified": "2021-06-13T08:38:27JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://smallstep.com/blog/command-line-secrets/">How to handle secrets on the command line</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=imiric" target="_blank">imiric</a>   <span class="timeago" data-date="2021-06-13 10:18:58 &#43;0000 UTC">2021-06-13 10:18:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sidenote: I really like the cookie consent form on this site. It&#x27;s unobtrusive, clear, opt-out by default and the highlighted and only button is &quot;Continue to site&quot;. And it even has a built-in GDPR request form! Bravo to <a href="https:&#x2F;&#x2F;www.clym.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.clym.io&#x2F;</a><p>Nice article, covers the basics well. Credential files seem like simplest way to go and are secure enough for most local uses. For anything more involved a secrets manager is probably required. I&#x27;ve been using Linux for a long time and hadn&#x27;t heard about `keyctl`, thanks for mentioning it. A more flexible solution might be <a href="https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;sops" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;sops</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JimDabell" target="_blank">JimDabell</a>   <span class="timeago" data-date="2021-06-13 15:17:55 &#43;0000 UTC">2021-06-13 15:17:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a maximised browser window on a 13&quot; screen it floats above and covers up the first few characters of each line of body copy, and it’s sticky, so it moves with me as I scroll. If I have to interact with it to read the article, it’s not unobtrusive.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=faeyanpiraat" target="_blank">faeyanpiraat</a>   <span class="timeago" data-date="2021-06-13 10:43:31 &#43;0000 UTC">2021-06-13 10:43:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It makes me feel weird that I have the option to “fill a form to not sell my personal data” though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=taberiand" target="_blank">taberiand</a>   <span class="timeago" data-date="2021-06-13 22:13:29 &#43;0000 UTC">2021-06-13 22:13:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It almost feels like satire.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tiziano88" target="_blank">tiziano88</a>   <span class="timeago" data-date="2021-06-13 14:39:02 &#43;0000 UTC">2021-06-13 14:39:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; opt-out by default<p>That&#x27;s the definition of opt-in
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mkl" target="_blank">mkl</a>   <span class="timeago" data-date="2021-06-13 13:16:31 &#43;0000 UTC">2021-06-13 13:16:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not what I experienced.  Is it just way worse for different locations (NZ here)?  It&#x27;s not opt-out by default; I had to turn off advertising and analytics cookies manually.  The cookie consent pop-up takes up a third of a big mobile screen.  As well as &quot;Continue to site&quot;, it has buttons for &quot;Policies&quot;, &quot;Preferences&quot;, &quot;Do not sell my personal information&quot;, and &quot;Powered by CLM&quot;.<p>Cookie pop-ups need to die.  Non-essential cookies aren&#x27;t to &quot;improve your experience&quot;, they&#x27;re usually for invasive tracking, and if a site only uses strictly necessary cookies, even the GDPR doesn&#x27;t require explicit consent.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=imiric" target="_blank">imiric</a>   <span class="timeago" data-date="2021-06-13 14:56:36 &#43;0000 UTC">2021-06-13 14:56:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s strange. Maybe it defaults to opt-out only in the EU?<p>While it&#x27;s not entirely unobtrusive, especially on mobile, it&#x27;s far better than similar forms on most other sites that usually take up the bottom half of the screen, or block the content entirely behind a modal dialog.<p>&gt; As well as &quot;Continue to site&quot;, it has buttons for &quot;Policies&quot;, ...<p>Those others aren&#x27;t buttons, but links, and small ones. The most prominent element is the single button that dismisses the dialog and is actually safe to click. If you&#x27;ve seen most other consent forms, rejecting cookies (if possible at all) is usually done via a small link next to a prominent &quot;Accept all&quot; button and other such dark patterns.<p>So this is a great UX improvement, though I agree with you that all these forms are obnoxious and we should get rid of them. Unfortunately it&#x27;s the best we currently have to mitigate this abuse legally (at least in the EU).<p>Also, I&#x27;d be fine with some non-essential cookies for e.g. analytics, as long as this is not shared with 3rd parties, so no Google Analytics and such, but few sites implement it that way.<p>Though TBH all this feels like privacy theater. There are more sophisticated ways than cookies for tracking users that aren&#x27;t being discussed nearly as much, yet are probably already widely used.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mkl" target="_blank">mkl</a>   <span class="timeago" data-date="2021-06-13 21:12:50 &#43;0000 UTC">2021-06-13 21:12:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you&#x27;ve seen most other consent forms, rejecting cookies (if possible at all) is usually done via a small link next to a prominent &quot;Accept all&quot; button and other such dark patterns.<p>That&#x27;s exactly how this one works for me.  The prominent &quot;Continue to site&quot; is &quot;Accept all&quot; in disguise, and to opt out you need to click on the little &quot;Preferences&quot; button&#x2F;link.  It&#x27;s the same dark pattern as usual, not a UX improvement.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=croes" target="_blank">croes</a>   <span class="timeago" data-date="2021-06-13 16:27:14 &#43;0000 UTC">2021-06-13 16:27:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cookie banners and pop-ups only exist to make the GDPR look bad.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhitza" target="_blank">mhitza</a>   <span class="timeago" data-date="2021-06-14 13:52:48 &#43;0000 UTC">2021-06-14 13:52:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cookie popups where a EU requirement before GDPR.<p>They just started showing up more often after, because at this point they also had to notify you&#x2F;have you opt in into sharing your data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kamil3141" target="_blank">kamil3141</a>   <span class="timeago" data-date="2021-06-13 14:14:44 &#43;0000 UTC">2021-06-13 14:14:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s not unobtrusive on mobile :(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=calvinmorrison" target="_blank">calvinmorrison</a>   <span class="timeago" data-date="2021-06-13 15:10:26 &#43;0000 UTC">2021-06-13 15:10:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; idontcareaboutcookies
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=croes" target="_blank">croes</a>   <span class="timeago" data-date="2021-06-13 16:25:12 &#43;0000 UTC">2021-06-13 16:25:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean, takemydata
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kenty" target="_blank">kenty</a>   <span class="timeago" data-date="2021-06-13 10:50:10 &#43;0000 UTC">2021-06-13 10:50:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            About the cookie: 
+  just install the extensions `CookieAutoDelete` and `I don&#x27;t care about cookies`. No more cookie warnings, no more privacy problems.
+About the article:
+  TL;DR: use a secrets file.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klntsky" target="_blank">klntsky</a>   <span class="timeago" data-date="2021-06-13 11:04:11 &#43;0000 UTC">2021-06-13 11:04:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is that different&#x2F;better than uBlock with annoyances filters turned on?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joosters" target="_blank">joosters</a>   <span class="timeago" data-date="2021-06-13 12:13:18 &#43;0000 UTC">2021-06-13 12:13:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Auto-deleting cookies means that you don’t need a filter list to block bad sites, <i>every</i> site will be wiped. There’s no chance that a missed site will sneak through.<p>The downside is that you will need to whitelist every site that you want to remember your login&#x2F;settings for when revisiting them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=imiric" target="_blank">imiric</a>   <span class="timeago" data-date="2021-06-13 12:54:46 &#43;0000 UTC">2021-06-13 12:54:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can achieve that by just using incognito mode. Though the extension would surely be more flexible.<p>Still, I haven&#x27;t used a browser extension in years, partly because of extensions like this that require access to all browsing data, even if they&#x27;re open source like in this case (though the author of &quot;I don&#x27;t care about cookies&quot; has a strange concept of distribution[1]). The inconvenience of wiping cookies and clicking through cookie consent forms is much more tolerable than allowing random extensions access to all my browsing data.<p>[1]: <a href="https:&#x2F;&#x2F;teddit.net&#x2F;r&#x2F;privacy&#x2F;comments&#x2F;bru6wd&#x2F;p&#x2F;eohtox3&#x2F;" rel="nofollow">https:&#x2F;&#x2F;teddit.net&#x2F;r&#x2F;privacy&#x2F;comments&#x2F;bru6wd&#x2F;p&#x2F;eohtox3&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=contravariant" target="_blank">contravariant</a>   <span class="timeago" data-date="2021-06-13 14:41:30 &#43;0000 UTC">2021-06-13 14:41:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well uBlock can&#x27;t block all cookie warnings, some of them are more than just cosmetic. And uBlock doesn&#x27;t remove the cookies if any get through.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atkailash" target="_blank">atkailash</a>   <span class="timeago" data-date="2021-06-13 19:33:21 &#43;0000 UTC">2021-06-13 19:33:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use sops for my dot files. There’s some oddities if you want to commit only an encrypted one to git and use a sops.yaml but not a big deal. Hadn’t thought of using it for local only use in this sort of thing, but is a good idea
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-06-13 09:22:37 &#43;0000 UTC">2021-06-13 09:22:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Some operating systems still make every process’s environment variables world readable. (But, in all the Linuxes I’ve seen, &#x2F;proc&#x2F;&lt;pid&gt;&#x2F;environ is not world-readable.)<p>A couple years ago this came up and someone made this claim, but no one could ever name an OS where this is the case. Maybe someone on HN knows one? :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NelsonMinar" target="_blank">NelsonMinar</a>   <span class="timeago" data-date="2021-06-13 18:12:21 &#43;0000 UTC">2021-06-13 18:12:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh oh I know this! Ultrix 2.2 in 1990 did this. Not via &#x2F;proc, which did not exist in that OS, but via the ps command. From the Ultrix Security Guide for Users:<p>&quot;Note that denying other users read permission [to your .profile] does not mean that they cannot find your PATH or any other of your environment variables. The -eaxww options to the ps command display in wide format the environment variables for all processes on the system&quot;<p>Ultrix 2.2 was a BSD 4.2 variant by DEC. I doubt it was unique in this behavior, my guess is all BSDs leaked info in this way, but I don&#x27;t have a reference handy. mkj&#x27;s example in this thread of AIX suggests Sys V did it too. Modern Linux only shows you your own processes&#x27; environment variables.<p>(Young people of Hacker News: beware what operating systems you learn because 31 years later their idiosyncracies will still be burned into your brain.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mkj" target="_blank">mkj</a>   <span class="timeago" data-date="2021-06-13 10:08:24 &#43;0000 UTC">2021-06-13 10:08:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AIX 5.2? That was EOL 2008, it seems hardly worth warning about these days.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;mobile-shell&#x2F;mosh&#x2F;issues&#x2F;156#issue-4077893" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mobile-shell&#x2F;mosh&#x2F;issues&#x2F;156#issue-407789...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=matja" target="_blank">matja</a>   <span class="timeago" data-date="2021-06-13 11:29:22 &#43;0000 UTC">2021-06-13 11:29:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The procfs hidepid option still defaults to 0 (visible), but systemd will set it to 2 (invisible).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-06-13 14:48:37 &#43;0000 UTC">2021-06-13 14:48:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On Linux, the permissions on &#x2F;proc&#x2F;$PID&#x2F;environ are the same permissions you&#x27;d need to read the memory of the process, so just being able to list that dirent doesn&#x27;t give you anything. Though I do think that command lines being visible to other users is a design flaw.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 09:55:40 &#43;0000 UTC">2021-06-13 09:55:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LadyCailin" target="_blank">LadyCailin</a>   <span class="timeago" data-date="2021-06-13 12:22:06 &#43;0000 UTC">2021-06-13 12:22:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the programming language I’m working on, MethodScript, I’ve created a subclass of string, secure_string. The normal print value is “secure string”. Unlike somewhat equivalent classes in other languages, this is a subclass of string, which means it can be passed around opaquely to things that only accept strings, but then the functions that actually need to be aware of secrets can check for the subclass and call the special decryption method. The string is encrypted in memory, but this is really just obscurity, because the decryption key is there too. But it does prevent most logging from ever leaking the secret, including things like memory dumps. I wish mainstream languages had a feature like this, since MethodScript is still fairly far in the “toy” category for now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=__zack" target="_blank">__zack</a>   <span class="timeago" data-date="2021-06-13 14:17:09 &#43;0000 UTC">2021-06-13 14:17:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the functions that actually need to be aware of secrets can check for the subclass<p>I feel like this is an antipattern in OOP. Shouldn’t the functions just be defined to take in parameters of type SecureString instead?<p>I think this violates the liskov substitution principle (<a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Liskov_substitution_principle" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Liskov_substitution_principl...</a>). For example, how is the “length” function or “startsWith” defined on SecureString? It seems like either data would be leaked via side channels, or the behavior doesn’t really conform to the String specification.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LadyCailin" target="_blank">LadyCailin</a>   <span class="timeago" data-date="2021-06-13 22:27:18 &#43;0000 UTC">2021-06-13 22:27:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that&#x27;s a decent point. To answer your question, it&#x27;s as if it&#x27;s the string &quot;*secure string*&quot; for the purposes of other string methods.<p>I think this is a good point, and perhaps worth considering, but in most of my thought exercises, it&#x27;s worth it, owing to the fact that when I use SecureString in other languages, I find myself having to decrypt the string more often than I would like. I guess one could argue that this is a deficiency of the libraries and such that are used, rather than a deficiency of the fact that SecureString doesn&#x27;t extend String. I&#x27;m having trouble recalling a specific example right now, but I know I&#x27;ve run into it before, because that&#x27;s what prompted me to implement this many years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjerem" target="_blank">pjerem</a>   <span class="timeago" data-date="2021-06-14 04:36:47 &#43;0000 UTC">2021-06-14 04:36:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yeah, that&#x27;s a decent point. To answer your question, it&#x27;s as if it&#x27;s the string &quot;<i>secure string</i>&quot; for the purposes of other string methods.<p>That’s a problem because you are enforcing all your functions accepting normal strings to either have to check if it’s NOT a SecretString or to return some nonsense. For exemple a function that returns the 2 firsts characters without caring about secret string could be passed one as argument and return « *s ».<p>The Liskov Substitution Principle states that a function accepting an Animal (a String) should never care about wether it’s a Cat (a Secret) and don’t fear Animal (String) methods to return meaningful values.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-06-13 13:31:38 &#43;0000 UTC">2021-06-13 13:31:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            .NET (and PowerShell) have something similar. Interestingly, Microsoft recommends not using them. <a href="https:&#x2F;&#x2F;github.com&#x2F;dotnet&#x2F;platform-compat&#x2F;blob&#x2F;master&#x2F;docs&#x2F;DE0001.md#recommendation" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dotnet&#x2F;platform-compat&#x2F;blob&#x2F;master&#x2F;docs&#x2F;D...</a><p>I assume by certs and Windows auth they&#x27;re implying the OS native stuff versus just passing those around in code, instead
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LadyCailin" target="_blank">LadyCailin</a>   <span class="timeago" data-date="2021-06-13 13:55:02 &#43;0000 UTC">2021-06-13 13:55:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The key difference though is that mine is a subclass of string. I am aware of these in other languages, but they can’t be used in place of strings.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-06-13 12:40:27 &#43;0000 UTC">2021-06-13 12:40:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Should be fairly straightforward to implement in say Python?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gurleen_s" target="_blank">gurleen_s</a>   <span class="timeago" data-date="2021-06-13 15:35:42 &#43;0000 UTC">2021-06-13 15:35:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If it quacks like a duck…
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hjfrf" target="_blank">Hjfrf</a>   <span class="timeago" data-date="2021-06-13 13:26:38 &#43;0000 UTC">2021-06-13 13:26:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds similar to Powershell&#x27;s SecureString, if you want to compare vs a non-&quot;toy&quot; equivalent.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LadyCailin" target="_blank">LadyCailin</a>   <span class="timeago" data-date="2021-06-13 14:02:58 &#43;0000 UTC">2021-06-13 14:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In isolation, yes, but my version is a subclass of string, which adds another layer of functionality on top of the base feature set.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=javajosh" target="_blank">javajosh</a>   <span class="timeago" data-date="2021-06-13 23:10:25 &#43;0000 UTC">2021-06-13 23:10:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I fear that this design violates the so-called &quot;substitution principle&quot;, which states you should be able to use instances of a subclass anywhere instances of the parent class are used. In this case, you have defined a default behavior, but I would argue it&#x27;s degenerate, because the value of your subclass are all the same.<p>In general, it&#x27;s better to design subclasses to be constrained versions of the parent. If you want to add functionality to a class you&#x27;re better off using another technique like composition, or even just a simple utility method.<p>Another way to state the issue here is that a user of an encrypted string will always need to know that it is an encrypted string because the <i>only</i> thing cyphertext is useful for is feeding the decryption algorithm.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sdwolfz" target="_blank">sdwolfz</a>   <span class="timeago" data-date="2021-06-13 09:55:11 &#43;0000 UTC">2021-06-13 09:55:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You have envchain to store secrets as ENV variables in your keyring and execute commands:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;sorah&#x2F;envchain" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;sorah&#x2F;envchain</a><p>Not really something you would use for production web apps, I think envconsul covers that usecase:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;envconsul" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;envconsul</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gumby" target="_blank">gumby</a>   <span class="timeago" data-date="2021-06-13 14:49:11 &#43;0000 UTC">2021-06-13 14:49:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ENV vars are global variables; they will be visible to all the child processes as well unless care is taken.  Is that really worth it?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=robbyt" target="_blank">robbyt</a>   <span class="timeago" data-date="2021-06-14 14:38:37 &#43;0000 UTC">2021-06-14 14:38:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your app needs a secret, and it forks, I would assume the child processes also need that secret.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vkomega" target="_blank">vkomega</a>   <span class="timeago" data-date="2021-06-13 17:19:01 &#43;0000 UTC">2021-06-13 17:19:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been asking myself lately:<p>Without considering resources or practicality, if we were to re-design computers and servers from security-first principles, what would features like management of secrets look like? Secure enclaves are wonderful but the secret still has to be propagated or used. A ground up computer design might greatly embellish on the idea of a secure enclave.<p>Linux seems a bit of a dinosaur in this regard.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qbasic_forever" target="_blank">qbasic_forever</a>   <span class="timeago" data-date="2021-06-13 22:21:46 &#43;0000 UTC">2021-06-13 22:21:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you really lay blame on the kernel though?  All of this stuff with secrets is happening in userspace and mostly at the shell.  If anything, systemd would probably be the place you&#x27;d want to build a secret storage system--perhaps build something API driven similar to Hashicorp&#x27;s vault.<p>edit: Apparently systemd now has an option to pass secrets&#x2F;credentials to a service through a more secure by default (i.e. only stored in memory) file option: <a href="https:&#x2F;&#x2F;www.freedesktop.org&#x2F;software&#x2F;systemd&#x2F;man&#x2F;systemd.exec.html#LoadCredential=ID:PATH" rel="nofollow">https:&#x2F;&#x2F;www.freedesktop.org&#x2F;software&#x2F;systemd&#x2F;man&#x2F;systemd.exe...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-13 18:39:51 &#43;0000 UTC">2021-06-13 18:39:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;Linux seems a bit of a dinosaur in this regard<p>To be fair, it has only whatever is on-hand to use. And the burden of running in a lot of different environments. Apple, having control of the hardware, and a very specific&#x2F;limited set of places to run, can do smarter things around enclaves, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NovemberWhiskey" target="_blank">NovemberWhiskey</a>   <span class="timeago" data-date="2021-06-13 18:20:15 &#43;0000 UTC">2021-06-13 18:20:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The usual problems apply: identity, authentication, authorization, roots of trust.<p>Imagine your enclave is a separate server on the network: how do you define which processes get access to which secrets under which circumstances? How do processes prove who they are to the enclave?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vkomega" target="_blank">vkomega</a>   <span class="timeago" data-date="2021-06-13 19:11:48 &#43;0000 UTC">2021-06-13 19:11:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe the idea of an OS with processes running on a single interconnected silicon is part of the issue, too. Just brainstorming based on your response.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aequitas" target="_blank">aequitas</a>   <span class="timeago" data-date="2021-06-13 09:25:09 &#43;0000 UTC">2021-06-13 09:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using a combination of the Keyring[0] CLI utility, Direnv and environment variables to load secrets for specific projects from the macOS keychain into the environment. The advantage of Keyring over macOS own security tool is that it is cross-platform and your setup scripts will work fine for Linux users as well.<p>[0] <a href="https:&#x2F;&#x2F;keyring.readthedocs.io&#x2F;en&#x2F;latest&#x2F;" rel="nofollow">https:&#x2F;&#x2F;keyring.readthedocs.io&#x2F;en&#x2F;latest&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=williamvds" target="_blank">williamvds</a>   <span class="timeago" data-date="2021-06-13 11:01:37 &#43;0000 UTC">2021-06-13 11:01:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Dealing with secrets on a Linux desktop is quite a mess right now. E.g. for my SSH and GPG keys I use some concoction of gnome-keyring and gpg-agent, and I must admit I don&#x27;t really understand how it works.
+Himitsu[0] is an interesting approach to a secrets manager. It apparently uses an &quot;agent&quot; to do authentication&#x2F;whatever and passes on the resource to the application that requested it, meaning applications don&#x27;t have to touch the secrets themselves.<p>[0] <a href="https:&#x2F;&#x2F;git.sr.ht&#x2F;~sircmpwn&#x2F;himitsu" rel="nofollow">https:&#x2F;&#x2F;git.sr.ht&#x2F;~sircmpwn&#x2F;himitsu</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaaarrgh" target="_blank">throwawaaarrgh</a>   <span class="timeago" data-date="2021-06-13 14:34:52 &#43;0000 UTC">2021-06-13 14:34:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While the author is correct that you can leak secrets that other users could see, in modern systems you can avoid accidental leaks via containers or host OS modifications.<p>If you&#x27;re using containers, only other users in your container will be able to see leaked secrets. Typically there&#x27;s only one user in a running container. If an application in the container gets hacked, the whole thing is vulnerable anyway, leaks or not. Or if the container was running in privileged mode, which compromises host security. If someone gets access to your Docker host, or root access on the Docker host (privilege escalation to root is pretty trivial on Linux) then they can see all information, leaked or not.<p>If you aren&#x27;t using containers, and just a regular Linux OS, a couple methods exist to harden process information between users (such as <i>cmdline</i> and <i>environ</i>) to contain most of the leaks.<p>What you do want to avoid is writing secrets to persistent storage, or filesystems that many different containers or users can access. You also want to prevent passing secrets to containers as environment variables, as your orchestration system might expose them to more users accidentally, and some logging systems might log them.<p>The best practice for passing secrets into a container is to have your container orchestration system pass credentials to the container, such as with an instance metadata service, or temporary volume-mounted secrets filesystems. The container would use that passed credential to then access a secrets manager.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hendry" target="_blank">hendry</a>   <span class="timeago" data-date="2021-06-14 08:52:02 &#43;0000 UTC">2021-06-14 08:52:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I defer to using AWS SSM to retrieve secrets <a href="https:&#x2F;&#x2F;github.com&#x2F;kaihendry&#x2F;dotfiles&#x2F;blob&#x2F;master&#x2F;bin&#x2F;ssm" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;kaihendry&#x2F;dotfiles&#x2F;blob&#x2F;master&#x2F;bin&#x2F;ssm</a><p>But yeah, reading secrets of env or ps or the clipboard is a real issue, so I focus on making sure that doesn&#x27;t leak.<p>I&#x27;ve made terrible mistakes leading &#x2F;proc accidentally in my Web app <a href="https:&#x2F;&#x2F;github.com&#x2F;securego&#x2F;gosec&#x2F;issues&#x2F;569" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;securego&#x2F;gosec&#x2F;issues&#x2F;569</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ahnick" target="_blank">ahnick</a>   <span class="timeago" data-date="2021-06-13 16:11:38 &#43;0000 UTC">2021-06-13 16:11:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difficulties mentioned in the article with passing secrets on the command line is one of the reasons why we wrote encpass.sh (<a href="https:&#x2F;&#x2F;github.com&#x2F;plyint&#x2F;encpass.sh" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;plyint&#x2F;encpass.sh</a>).  We had a similar need for a lightweight solution for managing secrets for simple shell scripts on our local workstations and in restricted environments.  Bonus, it can be easily customized with extension scripts to adapt functions for your own specific needs.  See our keybase extension for an example -&gt; <a href="https:&#x2F;&#x2F;github.com&#x2F;plyint&#x2F;encpass.sh&#x2F;blob&#x2F;master&#x2F;extensions&#x2F;keybase&#x2F;KEYBASE.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;plyint&#x2F;encpass.sh&#x2F;blob&#x2F;master&#x2F;extensions&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=failwhaleshark" target="_blank">failwhaleshark</a>   <span class="timeago" data-date="2021-06-13 11:35:27 &#43;0000 UTC">2021-06-13 11:35:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the concerns are just shell history and process info:<p>On macOS, you can use pbcopy and pbpaste from&#x2F;to the clipboard. On Linux, that&#x27;s:<p><pre><code>    alias pbcopy=&#x27;xclip -selection clipboard&#x27;
+    alias pbpaste=&#x27;xclip -selection clipboard -o&#x27;
+</code></pre>
+Or use secret files or something like Vault for automation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vbezhenar" target="_blank">vbezhenar</a>   <span class="timeago" data-date="2021-06-13 12:07:43 &#43;0000 UTC">2021-06-13 12:07:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            wl-copy&#x2F;wl-paste from wl-clipboard package for Linux&#x2F;Wayland.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user3939382" target="_blank">user3939382</a>   <span class="timeago" data-date="2021-06-13 15:06:15 &#43;0000 UTC">2021-06-13 15:06:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use a LastPass CLI client that I can pass in to other scripts or bash functions like my frequently used SSH invocations. Works great.<p>Edit: Here’s a link
+<a href="https:&#x2F;&#x2F;github.com&#x2F;lastpass&#x2F;lastpass-cli" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lastpass&#x2F;lastpass-cli</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=user3939382" target="_blank">user3939382</a>   <span class="timeago" data-date="2021-06-13 19:08:57 &#43;0000 UTC">2021-06-13 19:08:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can also use the macOS Keychain directly from the command line. This isn&#x27;t the guide I originally used but gives you an idea: <a href="https:&#x2F;&#x2F;www.netmeister.org&#x2F;blog&#x2F;keychain-passwords.html" rel="nofollow">https:&#x2F;&#x2F;www.netmeister.org&#x2F;blog&#x2F;keychain-passwords.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raizinho" target="_blank">raizinho</a>   <span class="timeago" data-date="2021-06-13 16:09:20 &#43;0000 UTC">2021-06-13 16:09:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you post a link to the client?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=okamiueru" target="_blank">okamiueru</a>   <span class="timeago" data-date="2021-06-13 11:27:34 &#43;0000 UTC">2021-06-13 11:27:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No mention of `pass`? Certainly solves all my needs, and works well for version controlling secrets across a team.<p>The only annoying thing about `pass` is the generic name, so searching for information on it, or dealing with issues is a pita. Luckily, there are few.<p>Edit: I was wrong about what this article covers. Which is how to pass secrets to processes without leaking to `ps` or audit log.<p>----<p>Pass is still worth a look, <a href="https:&#x2F;&#x2F;www.passwordstore.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.passwordstore.org&#x2F;</a><p>Keeping the password storage in a gitlab repo makes it very useful for managing those secrets internally. Keep the list of public gpg keys for each team member, and a README, some helping initialization script for setting it up, and that&#x27;s pretty much it.<p>Then, all cases presented where the command would either be used directly in the command line, or within another script, is just replaced with a call to<p><pre><code>  $(pass the&#x2F;secret&#x2F;we&#x2F;need)</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maweki" target="_blank">maweki</a>   <span class="timeago" data-date="2021-06-13 11:32:14 &#43;0000 UTC">2021-06-13 11:32:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does pass solve this problem? Surely entering &quot;command `pass accountdata`&quot; has the same problem that the secret shows up in ps as command&#x27;s argument.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=okamiueru" target="_blank">okamiueru</a>   <span class="timeago" data-date="2021-06-13 11:58:05 &#43;0000 UTC">2021-06-13 11:58:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I see. I should have read the article more closely before commenting. I made a bad assumption based on the comments I saw here. The article is more about avoiding leaking the password than actually dealing with managing passwords in command lines.<p>A few comments on the actual article, which was a lot more insightful than I had thought:<p>- Protecting yourself from an audit logs is not really worth the effort, as the audit log should be treated as confidential as the secrets themselves.<p>- Utilities can themselves hide arguments, and will not show on the ps output. For example, `mysqlsh` shows as `--password=********`, as does `mysql`. I&#x27;m not 100% if modifying argv data has any effect on &#x2F;proc, but then again, if you are protecting yourself from something that can access &#x2F;proc (i.e. root), then nothing will work in the end. Protecting yourself from a rogue process that can monitor `ps` is also already a lost battle.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hello71" target="_blank">Hello71</a>   <span class="timeago" data-date="2021-06-13 12:59:47 &#43;0000 UTC">2021-06-13 12:59:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if you are protecting yourself from something that can access &#x2F;proc (i.e. root)<p>on Linux and all other Unix-like systems I know of, all users are allowed to list running processes and their command lines.<p>&gt; Protecting yourself from a rogue process that can monitor `ps` is also already a lost battle.<p>ps is not a privileged command on most systems. POSIX says &quot;On some implementations, especially multi-level secure systems, ps may be severely restricted and produce information only about child processes owned by the user.&quot;; &quot;severely restricted&quot; implies that this is not a common behavior.<p>furthermore, the article explains clearly how to hide secret arguments from ps. that&#x27;s the main point of the article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raizinho" target="_blank">raizinho</a>   <span class="timeago" data-date="2021-06-13 16:10:41 &#43;0000 UTC">2021-06-13 16:10:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m currently using Doppler (<a href="https:&#x2F;&#x2F;www.doppler.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.doppler.com&#x2F;</a>) but I&#x27;m not sure if it sidesteps the issues outlined in the article.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tompic823" target="_blank">tompic823</a>   <span class="timeago" data-date="2021-06-13 19:55:10 &#43;0000 UTC">2021-06-13 19:55:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doppler solves this problem by storing your secrets in the cloud *hand wave*.<p>In actuality, the Doppler CLI (a Go binary) fetches your secrets from Doppler&#x27;s API and injects them as environment variables into your specified process. That looks something like `doppler run -- printenv`. This prevents your secrets from being written to the filesystem in plain text, and prevents the environment variables from being available more broadly. In the case of docker, you would bake the Doppler CLI into your image, thereby sidestepping the documented `docker inspect` pitfall.<p>Of course, the CLI still needs a way of authenticating to Doppler&#x27;s API. You authenticate and authorize the CLI by running `doppler login`. This initiates a login flow that you complete in your browser. Once completed, your newly generated auth token is sent back to the CLI. The CLI then saves the auth token to your system keyring for later use. The identifier needed to access that keyring entry is then stored in plain text in the CLI&#x27;s config file (~&#x2F;.doppler&#x2F;.doppler.yaml), which is only readable by the user.<p>We&#x27;re exploring other means of injecting your secrets into your application, as some users are wary of using environment variables. This is a challenging problem though as there are few means of injecting secrets that don&#x27;t require substantially changing your application&#x27;s logic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lvass" target="_blank">lvass</a>   <span class="timeago" data-date="2021-06-13 20:48:44 &#43;0000 UTC">2021-06-13 20:48:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does sanitizing ps outputs protect you from? Untrusted non-root users in the same machine?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dj_mc_merlin" target="_blank">dj_mc_merlin</a>   <span class="timeago" data-date="2021-06-13 20:56:31 &#43;0000 UTC">2021-06-13 20:56:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. If someone manages to gain a foothold on the machine running the process they would not instantly be able to elevate privileges. Of course the happier scenario includes no hackers on your machines, but why dig yourself a deeper hole?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=catlifeonmars" target="_blank">catlifeonmars</a>   <span class="timeago" data-date="2021-06-13 19:34:11 &#43;0000 UTC">2021-06-13 19:34:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ll add onto this: if at all possible, secrets should be short lived and rotated reasonably often.<p>Given enough time and enough secrets, it becomes asymptotically likely that a secret will become exposed. Ensuring that those secrets expire quickly is a good way to mitigate this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jeff_Brown" target="_blank">Jeff_Brown</a>   <span class="timeago" data-date="2021-06-13 16:49:42 &#43;0000 UTC">2021-06-13 16:49:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like an easy solution would be to use, say, Python instead of Bash. Nothing would then be inferrable from environmental variables or the output of `ps`.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nearmuse" target="_blank">nearmuse</a>   <span class="timeago" data-date="2021-06-13 15:23:54 &#43;0000 UTC">2021-06-13 15:23:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Local (unexported) environment variables are also easy to leak into ps output<p>...and then the variable containing the secret is expanded in a non-builtin simple command in the following snippet. It is taking a gun, pointing it at your leg, and pulling the trigger, very deliberately, if you know how POSIX shells work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jrootabega" target="_blank">jrootabega</a>   <span class="timeago" data-date="2021-06-13 12:33:55 &#43;0000 UTC">2021-06-13 12:33:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Named pipes are also an option, but share some of the pros and cons of stdin&#x2F;out and files
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jayrwren" target="_blank">jayrwren</a>   <span class="timeago" data-date="2021-06-13 16:05:59 &#43;0000 UTC">2021-06-13 16:05:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            sysctl -q proc.cmdline=0400
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-14 05:28:59 &#43;0000 UTC">2021-06-14 05:28:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which OS? Does not work on Linux.<p>There&#x27;s new hidepid mount option on Linux though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jspielberg" target="_blank">jspielberg</a>   <span class="timeago" data-date="2021-06-13 16:31:58 &#43;0000 UTC">2021-06-13 16:31:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tl;dr - If worried about leaking the path to a secret file, use &lt;() (e.g. &lt;( &lt; &quot;${secret_file_path}&quot;)) which makes an opaque ephemeral file i.e. &#x2F;dev&#x2F;fdX on the command line (1)<p>Sorry for the top level comment, but I am surprised this hasn&#x27;t been shared by someone else already. Process substitution(1) (e.g. &lt;(SECRET_STUFF_HERE)) totally solves the problem of leaking secrets to the process table.<p>From RTFA, the author is using &quot;$(&lt; $STEPPATH&#x2F;certs&#x2F;root_ca.crt)&quot; and is concerned about leaking &quot;$STEPPATH&#x2F;certs&#x2F;root_ca.crt&quot; to the process table. If the Author instead ran &lt;(&lt; $STEPPATH&#x2F;certs&#x2F;root_ca.crt) the process table would just have some junk ephemeral file path instead.<p>For example... lets say for an arbitrary example, I didn&#x27;t want folks knowing from the process table that I was getting the file details of &#x2F;etc&#x2F;passwd<p><pre><code>  ### LEAKY
+  ~ % wc &#x2F;etc&#x2F;passwd 
+     110     297    6946 &#x2F;etc&#x2F;passwd
+</code></pre>
+I could instead use process substitution:<p><pre><code>  % wc &lt;( &lt; &#x2F;etc&#x2F;passwd )
+     110     297    6946 &#x2F;dev&#x2F;fd&#x2F;11
+</code></pre>
+I have found this to be most useful not for files, but for temporary secret variables that I want to wrap in a file, but not have to deal with the cleanup and management of that file.<p>For a shell variable example, rather than writing &quot;B64 is not  encryption&quot; to a file, and then having to cleanup that file... use process substitution to create the temporary file which doesn&#x27;t leak to the process table.<p><pre><code>  ## Don&#x27;t do :
+  ~ % echo  &quot;B64 is not encryption&quot; | base64  
+  QjY0IGlzIG5vdCBlbmNyeXB0aW9uCg==
+
+  ## Do this instead; also &#x27;echo&#x27; is a bash builtin and won&#x27;t leak
+  ~ % base64 &lt;(echo &quot;B64 is not encryption&quot;) 
+  QjY0IGlzIG5vdCBlbmNyeXB0aW9uCg==
+</code></pre>
+Or if used in scripting:<p><pre><code>  secret=&quot;B64 is not  encryption&quot;
+  bar=&quot;$(base64 &lt;(echo &quot;${secret}&quot;))&quot;
+</code></pre>
+Some caveats: This only works for commands that accept files for arguments.  If a command requires a secret to be passed in as a plaintext argument, then maybe the right answer is to rethink using that command in the first place (maybe &lt;&lt;&lt;&quot;HERESTRINGS&quot; (2) helps in that case though I doubt it).<p>PROTIP: And for the love of all that&#x27;s holy... run shellcheck(3) before considering running your script for realz if you want to keep your butt out of the fire. Also, the google shell style guide (4) is full of practical&#x2F;good stuff.  Shellcheck and the google style guide are pretty magical.  I lost 10 lbs without dieting, became more attractive, and married my wife from following the guidance from those two resources.  You can too! (caveat lector, ymmv, not legal advice (ianal), wife is already taken... sorry)<p>---
+(1) <a href="https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;bash&#x2F;manual&#x2F;html_node&#x2F;Process-Substitution.html" rel="nofollow">https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;bash&#x2F;manual&#x2F;html_node&#x2F;Process-S...</a>
+(2) <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Here_document#Here_strings" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Here_document#Here_strings</a>
+(3) <a href="https:&#x2F;&#x2F;github.com&#x2F;koalaman&#x2F;shellcheck" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;koalaman&#x2F;shellcheck</a>
+(4) <a href="https:&#x2F;&#x2F;google.github.io&#x2F;styleguide&#x2F;shellguide.html" rel="nofollow">https:&#x2F;&#x2F;google.github.io&#x2F;styleguide&#x2F;shellguide.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-14 05:31:39 &#43;0000 UTC">2021-06-14 05:31:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is the first case (&quot;Don&#x27;t do :&quot;) in base64 example different from the second one? It seems to me to be exactly same thing. In both cases base64 reads from stdin and echo builtin is used. What am I missing?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hello71" target="_blank">Hello71</a>   <span class="timeago" data-date="2021-06-13 13:03:42 &#43;0000 UTC">2021-06-13 13:03:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it&#x27;s not the main point of the article, but curl -X is being misused here. as the manual explains, &quot;Normally you don&#x27;t need this option. All sorts of GET, HEAD, POST and PUT requests are rather invoked by using dedicated command line options.&quot; <a href="https:&#x2F;&#x2F;daniel.haxx.se&#x2F;blog&#x2F;2015&#x2F;09&#x2F;11&#x2F;unnecessary-use-of-curl-x&#x2F;" rel="nofollow">https:&#x2F;&#x2F;daniel.haxx.se&#x2F;blog&#x2F;2015&#x2F;09&#x2F;11&#x2F;unnecessary-use-of-cu...</a> reiterates the issue, along with a reminder that -X persists past redirects (hope your API doesn&#x27;t redirect to a completion page).<p>after searching for &quot;PUT&quot; in the manual, I found &quot;-T, --upload-file &lt;file&gt; [...] If this is used on an HTTP(S) server, the PUT command will be used. Use the file name  &quot;-&quot; (a single dash) to use stdin instead of a given file.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=HangoverMaster" target="_blank">HangoverMaster</a>   <span class="timeago" data-date="2021-06-13 10:07:48 &#43;0000 UTC">2021-06-13 10:07:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wrote a simple oh-my-zsh (but should be easy to port out) plugin to improve UX of the environment variables option [0]. It&#x27;s basically a very simple secrets manager, allowing one to store env variables (or whole chunks of scripts) in GPG-encrypted files and see if any secrets are sourced at the moment.<p>So the workflow usually looks like following:<p><pre><code>  $ secrets aws-credentials  # prompts a GPG passphrase
+  $ aws s3 sync ...
+</code></pre>
+[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;chuwy&#x2F;zsh-secrets" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;chuwy&#x2F;zsh-secrets</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stevekemp" target="_blank">stevekemp</a>   <span class="timeago" data-date="2021-06-13 10:12:18 &#43;0000 UTC">2021-06-13 10:12:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you use `pass` I wrote a little plugin to export the values as environmental variables in a simple and consistent fashion:<p><a href="https:&#x2F;&#x2F;blog.steve.fi&#x2F;password_store_plugin__env.html" rel="nofollow">https:&#x2F;&#x2F;blog.steve.fi&#x2F;password_store_plugin__env.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pablovidal85" target="_blank">pablovidal85</a>   <span class="timeago" data-date="2021-06-13 13:41:19 &#43;0000 UTC">2021-06-13 13:41:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice, I do this via a small script:<p><pre><code>  env $(pass env&#x2F;$1) ${@:2}</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

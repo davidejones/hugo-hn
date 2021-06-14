@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/evolution-of-code-deployment-tools-at-mixpanel/">
+
+
+    <title>Evolution of code deployment tools at Mixpanel - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Evolution of code deployment tools at Mixpanel - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/evolution-of-code-deployment-tools-at-mixpanel/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/evolution-of-code-deployment-tools-at-mixpanel/">
+<meta name="twitter:title" content="Evolution of code deployment tools at Mixpanel - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Evolution of code deployment tools at Mixpanel - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T14:26:02JST",
+    "dateModified": "2021-06-12T14:26:02JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://engineering.mixpanel.com/evolution-of-code-deployment-tools-at-mixpanel-210b99926cd4">Evolution of code deployment tools at Mixpanel</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Vendan" target="_blank">Vendan</a>   <span class="timeago" data-date="2021-06-12 16:18:41 &#43;0000 UTC">2021-06-12 16:18:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey, I&#x27;m one of the engineers on the DevInfra team at Mixpanel, and worked on the Argo implementation.  AMA, and we are hiring in general, and for the DevInfra team in specific (feel free to email me, just gotta solve the &quot;puzzle&quot; in my profile :D)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-12 16:48:33 &#43;0000 UTC">2021-06-12 16:48:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you considered using Bazel to build an artifact that describes your deployment configuration? This is something that I&#x27;ve been thinking about trying to implement for some time. Essentially I want to have a way to support defining service configurations like this:<p><pre><code>    service_binary(
+      name = &quot;foobar&quot;,
+      srcs = [&quot;foobar.jsonnet&quot;],
+      deps = [&quot;&#x2F;&#x2F;jsonnet&#x2F;service.jsonnet&quot;],
+      images = [&quot;&#x2F;&#x2F;a:image&quot;],
+    )
+</code></pre>
+Then make it possible to create a class of `*_test` rules that would start up a bunch of docker containers in the same network topology they would exist in prod, run your test in the same netns, then clean everything up. It could look something like this:<p><pre><code>    cc_integration_test(
+      name = &quot;...&quot;,
+      services = [&quot;&#x2F;&#x2F;a&quot;, &quot;&#x2F;&#x2F;b&quot;],
+      srcs = [&quot;main.cc&quot;]
+    )
+</code></pre>
+There&#x27;s some BazelCon talks about people doing similar stuff but not actually open sourcing their code.<p>P.S. if you use rules_docker please feel free to open a PR to add your company to our README: <a href="https:&#x2F;&#x2F;github.com&#x2F;bazelbuild&#x2F;rules_docker&#x2F;#adopters" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;bazelbuild&#x2F;rules_docker&#x2F;#adopters</a><p>&gt; service_binary
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Vendan" target="_blank">Vendan</a>   <span class="timeago" data-date="2021-06-12 16:59:39 &#43;0000 UTC">2021-06-12 16:59:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;ve looked at it, but we have services that aren&#x27;t using rules_docker to build their images, so for now at least, we&#x27;d rather have everything use as similar of a deployment process as possible.<p>(and we are using rules_docker, and love it!  Added a pr, gotta look into the CLA stuff (would like to do it from employer side, but that will have to wait until monday at least))
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sa46" target="_blank">sa46</a>   <span class="timeago" data-date="2021-06-13 02:12:40 &#43;0000 UTC">2021-06-13 02:12:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With something like service_binary, how do you wire up services? For example, If main.cc depended on Redis, how would you get the host and port of the Redis dependency from main.cc?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-13 04:48:58 &#43;0000 UTC">2021-06-13 04:48:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can do some amazing things based on convention. In kube it&#x27;s pretty common to use Services for service discovery. Essentially all a Service is is a smart DNS name that points to a collection of pods (netns). If you want to mirror that setup you can create a virtual bridge network setup the same docker-compose does which would let you have a container with a hostname of `database` and then `ping database` would resolve to the correct container. To match kube&#x27;s conventions you could do this: <a href="https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;services-networking&#x2F;service&#x2F;#dns" rel="nofollow">https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;services-networking&#x2F;serv...</a><p>Another thing you could do is generate environment variables similar to what kube does: <a href="https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;services-networking&#x2F;service&#x2F;#environment-variables" rel="nofollow">https:&#x2F;&#x2F;kubernetes.io&#x2F;docs&#x2F;concepts&#x2F;services-networking&#x2F;serv...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=postpawl" target="_blank">postpawl</a>   <span class="timeago" data-date="2021-06-12 16:57:00 &#43;0000 UTC">2021-06-12 16:57:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Off-topic, I know… but do you think it was a good idea to disable SSL cert verification by default in your python client recently?<p>You also did it in a way that ignores all insecure cert warnings for requests from other libraries too: <a href="https:&#x2F;&#x2F;github.com&#x2F;mixpanel&#x2F;mixpanel-python&#x2F;pull&#x2F;102" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mixpanel&#x2F;mixpanel-python&#x2F;pull&#x2F;102</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Vendan" target="_blank">Vendan</a>   <span class="timeago" data-date="2021-06-12 17:03:32 &#43;0000 UTC">2021-06-12 17:03:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not an area I&#x27;m involved with, but I&#x27;ll poke the people that are... sorry :(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cagenut" target="_blank">cagenut</a>   <span class="timeago" data-date="2021-06-12 16:32:11 &#43;0000 UTC">2021-06-12 16:32:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m seeing this &quot;we started out with 2 and now there&#x27;s dozens&quot; pattern with k8s everywhere, and just like in this example the cause is a one-two-punch combo of proliferation of service complexity and geographic replication demands (be they legal or performance).<p>kube was originally meant to abstract the datacenter, is there anyone who&#x27;s abstracting the globe&#x2F;internet yet?  I&#x27;d love a geo-kube abstraction where based on annotations or something I could provision deployments&#x2F;pods to arbitrary geographic locations.  I want a scale-to-zero node-pool in every region, and one kube master api for the world.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-12 16:42:04 &#43;0000 UTC">2021-06-12 16:42:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s active work on a standard called kubefed [0] that is being worked on.<p>&gt; I want a scale-to-zero node-pool in every region, and one kube master api for the world.<p>Personally, I&#x27;d generalize this to: &quot;I want to describe the reliability requirements and configuration for my software and have an automated system solve for where, how many, when, and how to route to it&quot;<p>I want to have something where I can say &quot;I need to have high availability, lowest latency, and X GB of RAM and Y cores&quot; and have a system automatically schedule me wherever compute is cheapest while also intelligently routing traffic to my servers based on client origins.<p>[0] - <a href="https:&#x2F;&#x2F;github.com&#x2F;kubernetes-sigs&#x2F;kubefed" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;kubernetes-sigs&#x2F;kubefed</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cagenut" target="_blank">cagenut</a>   <span class="timeago" data-date="2021-06-12 16:54:27 &#43;0000 UTC">2021-06-12 16:54:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            does it have to be mulitple federated clusters?  can etcd and kubelet not just handle 100ms? (or be adapted to).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gravypod" target="_blank">gravypod</a>   <span class="timeago" data-date="2021-06-12 17:15:25 &#43;0000 UTC">2021-06-12 17:15:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you have multiple federated clusters you can tolerate issues that affect an entire cluster of machines. Having 3x clusters each with 3x master nodes that do not depend on each other, and Volume drivers that are aware of having replication across regions, you can make some really reliable things.<p>For most use cases though what you&#x27;re talking about will work and you can do it today with just setting up a VPN to have a flat internal network topology.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p_l" target="_blank">p_l</a>   <span class="timeago" data-date="2021-06-12 16:58:25 &#43;0000 UTC">2021-06-12 16:58:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While laten ies can get pretty good these days, I&#x27;d rather not plan on having 100ms ceiling for multiple DCs without dedicated lines and considerably close geographic locations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cagenut" target="_blank">cagenut</a>   <span class="timeago" data-date="2021-06-14 00:53:48 &#43;0000 UTC">2021-06-14 00:53:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            us east-west coast is in the 60&#x27;s and us to western eu is in the 70s.  hell I&#x27;d be content to run the etcd cluster across a tighter range, us-east-1&#x2F;us-east-2&#x2F;ca-central-1 are all within 30ms of each other.  so I guess its really about kublet and whatever comes after that I&#x27;m not thinking of (networking).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

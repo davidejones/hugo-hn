@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/10/using-argo-to-train-predictive-models-at-flightaware/">
+
+
+    <title>Using Argo to Train Predictive Models at FlightAware - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Using Argo to Train Predictive Models at FlightAware - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/using-argo-to-train-predictive-models-at-flightaware/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/using-argo-to-train-predictive-models-at-flightaware/">
+<meta name="twitter:title" content="Using Argo to Train Predictive Models at FlightAware - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Using Argo to Train Predictive Models at FlightAware - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-10T19:16:16JST",
+    "dateModified": "2021-06-10T19:16:16JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://flightaware.engineering/using-argo-to-train-predictive-models/">Using Argo to Train Predictive Models at FlightAware</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vtuulos" target="_blank">vtuulos</a>   <span class="timeago" data-date="2021-06-11 03:40:47 &#43;0000 UTC">2021-06-11 03:40:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is very cool! If you are interested in using a similar setup for your ML workloads (Argo + K8S), I&#x27;d love to chat with you (ville@outerbounds.co).<p>We are working on integrating Argo &amp; K8S for Metaflow, an open-source ML framework originally developed at Netflix <a href="https:&#x2F;&#x2F;github.com&#x2F;Netflix&#x2F;metaflow&#x2F;pull&#x2F;434" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Netflix&#x2F;metaflow&#x2F;pull&#x2F;434</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=verst" target="_blank">verst</a>   <span class="timeago" data-date="2021-06-10 20:39:29 &#43;0000 UTC">2021-06-10 20:39:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Out of curiosity, was Kubeflow ever considered and was there a deliberate decision against Kubeflow?<p>Kubeflow Pipelines under the hood (and not very hidden) uses Argo Workflows.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KidComputer" target="_blank">KidComputer</a>   <span class="timeago" data-date="2021-06-11 01:10:02 &#43;0000 UTC">2021-06-11 01:10:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I found Kubeflow Pipelines to be worse than vanilla Argo. Not only is the documentation poor for the python DSL that gets compiled to the Argo workflow spec but some operations are downright impossible to express in the DSL. Vanilla Argo + RBAC works wonderfully especially with Argo Server since v3+.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=verst" target="_blank">verst</a>   <span class="timeago" data-date="2021-06-11 04:19:19 &#43;0000 UTC">2021-06-11 04:19:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree. For anything sophisticated you have to use the Kubernetes Python client combined with the KFP DSL. The compiled Argo Workflow spec can become such a mess that you quickly run into a size limitations -- especially if you choose to deploy a Python function directly (which then uses Kaniko to build the containers in cluster and run them via Argo Workflows). At that point I would rather use Argo directly. And KFP is generally quite behind in Argo Workflow versions.<p>And it&#x27;s not like KFP makes CI&#x2F;CD (MLOps) any easier than Argo Workflows itself.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=RocketSyntax" target="_blank">RocketSyntax</a>   <span class="timeago" data-date="2021-06-10 21:49:48 &#43;0000 UTC">2021-06-10 21:49:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or Apache Airflow. I&#x27;d expect this and KFP to have better integrations that cater to data science. You can use Elyra extension to design the workflows right from JupyterLab.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FridgeSeal" target="_blank">FridgeSeal</a>   <span class="timeago" data-date="2021-06-10 23:24:05 &#43;0000 UTC">2021-06-10 23:24:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not from said company, but did do a workflow tool comparison at my work and we also went with Argo.<p>Argo had better kubernetes + surrounding ecosystem integration out of the box, it was designed to run containers by default which suited us because we had mixed language workloads. Airflow was mostly Python specific, unless you then ran plugins and extensions, the config&#x2F;pipeline definition was written in Python which I didn’t want to do after witnessing my teammates write the worst Python I’ve seen in my career, and last time I evaluated it, it depended on a bunch of external, Python specific tools (celery etc) that I had previously found painful to run.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=verst" target="_blank">verst</a>   <span class="timeago" data-date="2021-06-11 04:21:30 &#43;0000 UTC">2021-06-11 04:21:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; my teammates write the worst Python I’ve seen in my career<p>Isn&#x27;t that fairly common which is why there are &quot;ML engineers&quot; that then productionize (clean up and optimize) the original code to be plugged into a production workflow &#x2F; pipeline system?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maximilianroos" target="_blank">maximilianroos</a>   <span class="timeago" data-date="2021-06-11 00:34:42 &#43;0000 UTC">2021-06-11 00:34:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Argo is extremely capable at its focus — coordinating workflows on Kubernetes.<p>I had used Airflow for a few years, and looked into Prefect; in retrospect I&#x27;m very happy we chose Argo.<p>Use Argo if:
+- Your tasks are containerized.
+- You&#x27;re using Kubernetes, and can benefit from what it can offer — individually sized containers, autoscaling, fault-tolerance.
+- You have loosely coupled tasks — which pass at most pass files to each other, rather than python objects.
+- You don&#x27;t have tens of thousands of tasks &#x2F; streaming &#x2F; etc.<p>Airflow can run on Kubernetes, but with Airflow we ended up having equally sized workers up 24&#x2F;7 — whether or not it was running an expensive job, a query on a remote system, or nothing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=iakh" target="_blank">iakh</a>   <span class="timeago" data-date="2021-06-11 03:33:55 &#43;0000 UTC">2021-06-11 03:33:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why create a new model for each airport? That doesn&#x27;t seem right. Delays are compounding and many are regional.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KingOfCoders" target="_blank">KingOfCoders</a>   <span class="timeago" data-date="2021-06-11 05:00:30 &#43;0000 UTC">2021-06-11 05:00:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would think they train for predicting the normal case from positions near the airport to touch down and from touch down to the parking positions at the airport.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phissenschaft" target="_blank">phissenschaft</a>   <span class="timeago" data-date="2021-06-10 21:36:59 &#43;0000 UTC">2021-06-10 21:36:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really like the flexibility provided by Argo. It&#x27;s the missing workflow concept from Kubernetes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KingOfCoders" target="_blank">KingOfCoders</a>   <span class="timeago" data-date="2021-06-11 04:58:56 &#43;0000 UTC">2021-06-11 04:58:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would like to know why they don&#x27;t use GPUs for training but vCPUs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whoisjuan" target="_blank">whoisjuan</a>   <span class="timeago" data-date="2021-06-11 05:07:29 &#43;0000 UTC">2021-06-11 05:07:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;datascience.stackexchange.com&#x2F;questions&#x2F;19220&#x2F;choosing-between-cpu-and-gpu-for-training-a-neural-network" rel="nofollow">https:&#x2F;&#x2F;datascience.stackexchange.com&#x2F;questions&#x2F;19220&#x2F;choosi...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

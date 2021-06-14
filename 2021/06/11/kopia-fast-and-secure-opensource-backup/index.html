@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/kopia-fast-and-secure-opensource-backup/">
+
+
+    <title>Kopia – Fast and Secure Open-Source Backup - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Kopia – Fast and Secure Open-Source Backup - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/kopia-fast-and-secure-opensource-backup/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/kopia-fast-and-secure-opensource-backup/">
+<meta name="twitter:title" content="Kopia – Fast and Secure Open-Source Backup - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Kopia – Fast and Secure Open-Source Backup - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T11:40:49JST",
+    "dateModified": "2021-06-11T11:40:49JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://kopia.io/">Kopia – Fast and Secure Open-Source Backup</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 17:10:04 &#43;0000 UTC">2021-06-11 17:10:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another one? Ten years ago I had trouble finding anything, then over time I learned of duplicity (2002?!¹), bup (2010), restic (2015), borg (2010)... all basically solving the same problem of encrypted incremental backups.<p>The landing page doesn&#x27;t mention why they made yet another solution. In the comments someone also mentions bvckup2. Is there an overview somewhere of all the different solutions? Any selling points here?<p>¹ That&#x27;s way older than I expected, but it&#x27;s also the first one I found and I stopped using it because it took many gigabytes on my then-250GB SSD for a local cache just to be able to do incremental backups. Maybe that&#x27;s why I had the feeling I couldn&#x27;t find anything good at the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mekster" target="_blank">mekster</a>   <span class="timeago" data-date="2021-06-12 04:13:44 &#43;0000 UTC">2021-06-12 04:13:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you think it&#x27;s just adding up similar tools, you&#x27;re pretty wrong.<p>I&#x27;ve only used kopia briefly and it had a bug where I couldn&#x27;t simply read files from its GUI, so I&#x27;d take it it&#x27;s still doing basic implementations but all the tools you mentioned have varying degree of reliability and performance as well.<p>You can easily Google around and see how restic takes huge memory and is slow to restore on larger repo, duplicity being unreliable and you&#x27;ll find less of those reports for borg which I believe is the only open source tool of the kind that is reliable and doesn&#x27;t stall on restoration.<p>I want to use multiple implementations for doing a backup towards multiple remote targets in case one implementation has a corruption bug but so far my research only shows it&#x27;s better to just use borg twice to different remote targets than use another implementation that could be unreliable.<p>duplicacy also takes lots of memory to the point of freezing up a machine with 2GB+ free ram while taking medium sized repo that is only in the range of 50GB with many small files. (Not to mention I don&#x27;t like its per machine license which can be costly if you handle many small servers.)<p>Backup tools are something that is so sensitive about its reliability. It must be working from the beginning as it&#x27;s too late when your backup data was corrupt but you only realize that when your original data is already inaccessible as not many people do backup data integrity check frequently.<p>Reading on its feature list doesn&#x27;t mean much but do yourself a favor and check for GitHub issues, check the forum for bug reports and maybe even Reddit and figure if they&#x27;re fighting primitive bugs or not.<p>You should rely on a solid tool than just one of the remote backup tool, like using rsnapshot locally first. It uses rsync and hard links, which is quite hard to break.<p>Here are a few reports on instability for a few tools.<p>1. <a href="https:&#x2F;&#x2F;forum.rclone.org&#x2F;t&#x2F;rclone-as-destination-for-borgbackup&#x2F;12717&#x2F;9" rel="nofollow">https:&#x2F;&#x2F;forum.rclone.org&#x2F;t&#x2F;rclone-as-destination-for-borgbac...</a><p>2. <a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;unRAID&#x2F;comments&#x2F;eg0zpe&#x2F;duplicati_seems_too_fragile_for_realworld_use&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;unRAID&#x2F;comments&#x2F;eg0zpe&#x2F;duplicati_se...</a><p>3. <a href="https:&#x2F;&#x2F;forum.duplicati.com&#x2F;t&#x2F;is-duplicati-2-ready-for-production&#x2F;4714&#x2F;6" rel="nofollow">https:&#x2F;&#x2F;forum.duplicati.com&#x2F;t&#x2F;is-duplicati-2-ready-for-produ...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MikusR" target="_blank">MikusR</a>   <span class="timeago" data-date="2021-06-11 17:14:47 &#43;0000 UTC">2021-06-11 17:14:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has a gui and works on Linux&#x2F;Windows&#x2F;MacOS. Also has both deduplication and compression.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 17:28:07 &#43;0000 UTC">2021-06-11 17:28:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!<p>Still a bit strange to me that they started a whole new project rather than contribute patches or fork something else.<p>The only one I&#x27;m fairly familiar with is restic. It also compiles for the major OSes and has deduplication. For compression, I think there are patches available, but alternatively they could just have contributed one. That leaves tying the command-line interface to a few buttons in a GUI.<p>Edit: Kopia turns out to be from 2016. I guess the author didn&#x27;t know of the others yet, or the others weren&#x27;t as mature. This makes a lot more sense, somehow the .io domain and my first hearing of it only now made me expect this was written recently.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MikusR" target="_blank">MikusR</a>   <span class="timeago" data-date="2021-06-11 17:47:22 &#43;0000 UTC">2021-06-11 17:47:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Restic issues for adding GUI and compression are 7 years old. If if there was interest&#x2F;&quot;easy to do&quot; for implementing them that would have been done.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 18:04:30 &#43;0000 UTC">2021-06-11 18:04:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What I meant is that the author of Kopia could have done that and made their life a lot easier compared to starting all the way from scratch. But I posted that before realizing that Kopia is barely a year younger than Restic.<p>But of course it could also just be what u&#x2F;poronski said in a sibling comment. His Noodly holiness knows I make a lot of software that already exists just because I enjoy the making and having it customized. In fact I think I also started... let me `stat` that directory... yup, in 2016 I started working on (and abandoned) my own implementation of encrypted backups. Also because online storage prices were through the roof (~40x the hardware cost price with servers and bandwidth included) and I thought I could do that cheaper.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=poronski" target="_blank">poronski</a>   <span class="timeago" data-date="2021-06-11 17:31:50 &#43;0000 UTC">2021-06-11 17:31:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To each their own.<p>For a lot of people it’s way more fun to make a new thing than to fork and patch someone else’s.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NilsIRL" target="_blank">NilsIRL</a>   <span class="timeago" data-date="2021-06-12 12:09:34 &#43;0000 UTC">2021-06-12 12:09:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there an overview somewhere of all the different solutions?<p><a href="https:&#x2F;&#x2F;github.com&#x2F;restic&#x2F;others" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;restic&#x2F;others</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=duckmysick" target="_blank">duckmysick</a>   <span class="timeago" data-date="2021-06-12 08:08:06 &#43;0000 UTC">2021-06-12 08:08:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which backup solution are you using now?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rglover" target="_blank">rglover</a>   <span class="timeago" data-date="2021-06-11 20:53:45 &#43;0000 UTC">2021-06-11 20:53:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Easy on the gas, bud.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-06-11 16:50:30 &#43;0000 UTC">2021-06-11 16:50:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been using Kopia for some time now after switching from Duplicity. Very happy with Kopia. You can just point Kopia at a GCS or S3 bucket and shove files there. Easy to restore files. You can list snapshots and files and do partial restores fairly easily. Old data gets expired on a timeline that you dictate.<p>Duplicity was a pain by comparison. I think Duplicity has a number of design flaws that become evident once you use it for a while.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=z77dj3kl" target="_blank">z77dj3kl</a>   <span class="timeago" data-date="2021-06-11 22:56:05 &#43;0000 UTC">2021-06-11 22:56:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only thing I need (and is sorely missing from Restic) is that the metadata be kept separate from the actual data. That way I can store the data in AWS S3 Deep Glacier at a cost of nothing per year, and still do incremental backups. Currently the architecture of Restic for instance requires all data to be quickly and cheaply accessible; which makes it impossible for this.<p>I have terabytes of data that I&#x27;d be happy to dump encrypted and compressed in Deep Glacier and happy to pay $500 to retrieve if I were to mess up my hard drives, but otherwise don&#x27;t want to pay for the costs of normal S3.<p>Does Kopia separate metadata from the actual encrypted&#x2F;compressed blobs?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jkowalski" target="_blank">jkowalski</a>   <span class="timeago" data-date="2021-06-11 23:22:09 &#43;0000 UTC">2021-06-11 23:22:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi, Kopia author here.<p>Yes, Kopia does segregate metadata from data. Directory listings, snapshot manifests and few other minor data pieces are stored in pack files starting with &quot;q&quot; while the bulk of data is stored in pack files starting with &quot;p&quot;. Indexes into both kinds of pack files are stored in filenames starting with &quot;n&quot;.<p>This has some interesting properties. For example we can easily cache all metadata files locally, which provides fast directory listing, manifest listing and very fast verification without having to download actual data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=z77dj3kl" target="_blank">z77dj3kl</a>   <span class="timeago" data-date="2021-06-12 18:06:58 &#43;0000 UTC">2021-06-12 18:06:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! I&#x27;ll have to investigate Kopia properly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-06-11 23:14:12 &#43;0000 UTC">2021-06-11 23:14:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would you mind sharing how much you pay for S3? I assume you’ve considered options like Backblaze B2 and Wasabi?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=z77dj3kl" target="_blank">z77dj3kl</a>   <span class="timeago" data-date="2021-06-12 14:02:38 &#43;0000 UTC">2021-06-12 14:02:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Suppose I have ~4 TB of data. If I dump it into Deep Glacier, it&#x27;ll be ~$50&#x2F;year (free ingress), if I ever need to retrieve the data, it&#x27;s like $370.<p>Normal S3 would be ~$1.1k&#x2F;yr, or around half of that for the infrequent access tier, both of which are way too expensive.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-06-12 16:47:22 &#43;0000 UTC">2021-06-12 16:47:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for sharing! This is why I asked... Wasabi prices 4TB of data, with 100% of it downloaded every month @ $287&#x2F;year according to their price calculator.<p>Backblaze B2&#x27;s calculator is a little more sophisticated, and putting in the numbers for an absolutely pathological usecase where you start with 4TB, download, delete and upload that same amount every month puts you at $720&#x2F;year. A much less pathological use case (I think) that assumes you upload, delete and download 1TB&#x2F;month puts out around $360&#x2F;year.<p>Hetzner storage boxes offer 10TB for ~$48&#x2F;month, which is $576 a year -- free ingress&#x2F;egress, no hidden fees for operations or whatever else, but you <i>do</i> have to set up a node with minio (or use FTP, etc).<p>Amortized over the happy time (time where you don&#x27;t need to rely on your backups) this does make sense, but I wonder what the percentages look like on that kind of metric. To be fair I haven&#x27;t had to restore from backup for years so this probably makes a lot of sense. I guess there&#x27;s no need to test your backups&#x2F;restore either if you&#x27;re using a tool like borg&#x2F;restic&#x2F;etc and have tested it with local hardware.<p>Also, what happens if you have to retrieve data <i>twice</i> from Glacier? You&#x27;ve got access to it for 24 hours so I assume you&#x27;re planning on just keeping the data on some non-glacier storage medium for a while after the initial post-disaster pull?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=z77dj3kl" target="_blank">z77dj3kl</a>   <span class="timeago" data-date="2021-06-12 18:06:30 &#43;0000 UTC">2021-06-12 18:06:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This wouldn&#x27;t be the primary backup, but Deep Glacier is just such a good deal that: I&#x27;d be happy to pay the $50 per year for a call option on my data, it&#x27;d make me sleep better at night!<p>Part of my calculus is that I have quite strong confidence in AWS in terms of business continuity and reliability&#x2F;availability. If I dump my files on AWS, I have high confidence in the files (and AWS) being around in 10 years and retrievable for roughly the same price (or at least no more).<p>Hetzner would have much lower durability. I&#x27;m a bit suss on Backblaze, though I do trust them to be more durable than my self-managed disks (and uncorrelated to my failures). I don&#x27;t know much about Wasabi; but it&#x27;s not a good sign for me that their landing page touts their latest funding round at the top: seems young and you never know if the price is subsidized with VC money (and won&#x27;t be in n years) or similar.<p>&gt; Also, what happens if you have to retrieve data twice from Glacier?<p>The killer is the egress. I&#x27;d just buy a new set of disks and download it straight there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mekster" target="_blank">mekster</a>   <span class="timeago" data-date="2021-06-13 12:57:58 &#43;0000 UTC">2021-06-13 12:57:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suppose you can&#x27;t check for backup data integrity inside Glacier.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DenseComet" target="_blank">DenseComet</a>   <span class="timeago" data-date="2021-06-12 03:08:58 &#43;0000 UTC">2021-06-12 03:08:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            S3 Glacier Deep Archive is $1&#x2F;TB&#x2F;month. Super cheap storage costs, but retrieval costs are insane.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-06-12 03:16:26 &#43;0000 UTC">2021-06-12 03:16:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My question was more about just how many TBs and ingress&#x2F;egress was making AWS S3 cost prohibitive -- Wasabi&#x27;s sticker price is $5.99&#x2F;month (so 6x glacier but ~0.2x regular S3), and I know that Hetzner will give you a storage box that is 1TB for 9.40EUR (but the kicker there is that 10TB of traffic is included which is amazing), and there are no API&#x2F;operation fees when you run your own Minio (or just use FTP&#x2F;all the other built-in access methods).<p>Network is one thing but what am I missing here? Maybe I just think $10&#x2F;month is reasonable for 1TB (because I don&#x27;t have enough TBs? or use remote storage enough?), and that&#x27;s different from most people who are interested in this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=przemub" target="_blank">przemub</a>   <span class="timeago" data-date="2021-06-11 15:25:09 &#43;0000 UTC">2021-06-11 15:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love the new tendency to use Polish (and other languages&#x27;) names for programs!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tade0" target="_blank">Tade0</a>   <span class="timeago" data-date="2021-06-11 16:59:28 &#43;0000 UTC">2021-06-11 16:59:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The other day I heard someone use the word &quot;żuk&quot; referring to a bug, and I think it fits amazingly well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coolspot" target="_blank">coolspot</a>   <span class="timeago" data-date="2021-06-11 18:03:10 &#43;0000 UTC">2021-06-11 18:03:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is it pronounced like Russian “Zhuk”?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tade0" target="_blank">Tade0</a>   <span class="timeago" data-date="2021-06-11 18:49:57 &#43;0000 UTC">2021-06-11 18:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, exactly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pivic" target="_blank">pivic</a>   <span class="timeago" data-date="2021-06-11 15:33:43 &#43;0000 UTC">2021-06-11 15:33:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed! I&#x27;m from Sweden, where &#x27;kopia&#x27; is Swedish for the English word &#x27;copy&#x27;. Same meaning in Polish?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DominikD" target="_blank">DominikD</a>   <span class="timeago" data-date="2021-06-11 15:38:27 &#43;0000 UTC">2021-06-11 15:38:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It means both &quot;copy&quot; and &quot;lance&quot; (as in: weapon used for jousting), hence the logo.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scns" target="_blank">scns</a>   <span class="timeago" data-date="2021-06-11 19:56:41 &#43;0000 UTC">2021-06-11 19:56:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;qarmin&#x2F;czkawka" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;qarmin&#x2F;czkawka</a><p>Means hiccup
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gingerlime" target="_blank">gingerlime</a>   <span class="timeago" data-date="2021-06-11 15:08:56 &#43;0000 UTC">2021-06-11 15:08:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder how it compares to restic or borg. Besides the gui anyway…
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Scaevolus" target="_blank">Scaevolus</a>   <span class="timeago" data-date="2021-06-11 15:38:39 &#43;0000 UTC">2021-06-11 15:38:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Restic doesn&#x27;t support compressing backups, and kopia does. Otherwise, the architectures appear to be very similar.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 17:05:21 &#43;0000 UTC">2021-06-11 17:05:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How much space do you typically save by compressing these days? Given that even smallish things like documents are already compressed archives, pictures&#x2F;audio&#x2F;movies of course already have heavy purpose-specific compression.<p>The main things I can still think of that are sparse on purpose are database files and disk images (not very mainstream, but also not uncommon). So like, a few gigabytes per terabyte (a few promille) unless you&#x27;re really heavy on either databases or virtual machines?<p>I can see why one would like to enable it, but deduplication (which breaks if you naively implement compression, iirc that&#x27;s why restic hasn&#x27;t yet implemented it) is much more worth it because it enables incremental backups and you don&#x27;t, for example, have to worry about making a copy of another system that has many of the same files (think game files or system files).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-06-11 17:25:46 &#43;0000 UTC">2021-06-11 17:25:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume compression works well for source code and other developer artifacts. Obviously you have to do dedupe, then compression, then encryption.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 18:25:49 &#43;0000 UTC">2021-06-11 18:25:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Source code compresses very well indeed, but my hunch is that it&#x27;s peanuts. Let&#x27;s see, I&#x27;ve got a projects directory with various projects from the past decade (all custom, there&#x27;s a separate dir for downloaded repositories). I&#x27;ve mostly written things in Python and PHP (the JS&#x2F;CSS&#x2F;HTML stuff is on a server mixed with things like owncloud or SMF or so; harder to isolate).<p>PHP: 591 KiB, 196 files, 13&#x27;813 LOC, 1&#x27;236 comment lines.<p>Python: 345 KiB, 136 files, 7&#x27;760 LOC, 930 comment lines.<p>If someone spends 5 minutes of developer time trying to compress that to save disk space, that&#x27;s already not worth it. Also in huge projects, the actual code is not going to be taking gigabytes of space. And if you mean in git history: that is, again, already compressed.<p>Other developer artifacts: I&#x27;ve got 26 GiB of project directories, this time including downloaded software and it will also include binaries (hashcat and jtr are in there, I wouldn&#x27;t be surprised if there&#x27;s also a medium-sized dictionary or two). Doing tar c . does not seem to add much overhead (26.5 GiB). Compressing that stream with pigz -1 (multithreaded gzip) brings it down to 17 GiB.<p>35% off is better than I thought! I wonder which files compress so well, hmm let me `find -type f | shuf | head -9001 | while read line; do echo &quot;$(($(wc -c &lt;&quot;$line&quot;)-$(&lt;&quot;$line&quot; pigz -1 | wc -c))) $line&quot;; done | sort -n`... The largest difference is a huge 121 MiB binary that compresses down to 36 MiB. I didn&#x27;t know these files were so sparse (not a C(++) dev), interesting!<p>While I&#x27;m looking into this, let&#x27;s also look at my &quot;documents&quot; directory. It&#x27;s 43 GiB and compresses down to 33 GiB. Not as good, but still worth it, more than I thought! (And this compression isn&#x27;t good, but probably not more than 10% worse before the compression gets impractically slow.) It might not quite get a total backup size down by a disk size (e.g. not 1T down to 500G), but it definitely allows to keep more history before having to worry about what you want to keep and what you want to toss.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-06-11 18:55:52 &#43;0000 UTC">2021-06-11 18:55:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For local backups, compression is less of an issue; for things that are compressible, transparent file system compression seems to get about 110% the size of what I would get by any non-CPU bound levels of compression using a tgz.  Since (as others in this thread have noted), compressible files tend to also be smaller files (the only exception I can think of would be if your log rotation doesn&#x27;t compress old logs), the fact that only a fraction of what I backup is 10% larger is kind of &quot;okay.&quot;  When you&#x27;re sending across the network though it can be a big deal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MikusR" target="_blank">MikusR</a>   <span class="timeago" data-date="2021-06-11 19:34:08 &#43;0000 UTC">2021-06-11 19:34:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On disk the backups are encrypted, that means no transparent compression.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isbvhodnvemrwvn" target="_blank">isbvhodnvemrwvn</a>   <span class="timeago" data-date="2021-06-11 20:33:59 &#43;0000 UTC">2021-06-11 20:33:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For people who haven&#x27;t dealt with this - a good encryption scheme produces output which you can&#x27;t tell apart from a purely random stream of bits - it has very high entropy, and is therefore not compressible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zmix" target="_blank">zmix</a>   <span class="timeago" data-date="2021-06-12 03:55:58 &#43;0000 UTC">2021-06-12 03:55:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for clarifying this. That must mean then: first encrypt, then compress?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-06-12 04:29:22 &#43;0000 UTC">2021-06-12 04:29:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compress than encrypt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isbvhodnvemrwvn" target="_blank">isbvhodnvemrwvn</a>   <span class="timeago" data-date="2021-06-12 10:18:15 &#43;0000 UTC">2021-06-12 10:18:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And this has some pitfalls as well, ciphertext in general has about the same length as the plaintext, so compression rate can be used to infer some information about the plaintext. It&#x27;s more of a problem with interactive protocols than with backups, but still worth keeping in mind.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ntolia" target="_blank">ntolia</a>   <span class="timeago" data-date="2021-06-11 18:44:49 &#43;0000 UTC">2021-06-11 18:44:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can see some of the performance differences here - <a href="https:&#x2F;&#x2F;blog.kasten.io&#x2F;benchmarking-kopia-architecture-scale-and-performance" rel="nofollow">https:&#x2F;&#x2F;blog.kasten.io&#x2F;benchmarking-kopia-architecture-scale...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeremyw" target="_blank">jeremyw</a>   <span class="timeago" data-date="2021-06-11 21:04:20 &#43;0000 UTC">2021-06-11 21:04:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note this compares an older restic version that doesn&#x27;t include the order of magnitude improvements in cloud communication.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benrockwood" target="_blank">benrockwood</a>   <span class="timeago" data-date="2021-06-11 15:31:39 &#43;0000 UTC">2021-06-11 15:31:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like a polished restic to me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isbvhodnvemrwvn" target="_blank">isbvhodnvemrwvn</a>   <span class="timeago" data-date="2021-06-11 16:34:22 &#43;0000 UTC">2021-06-11 16:34:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Polished*
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=StavrosK" target="_blank">StavrosK</a>   <span class="timeago" data-date="2021-06-11 18:05:07 &#43;0000 UTC">2021-06-11 18:05:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A hard joke to get, but I liked it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=poronski" target="_blank">poronski</a>   <span class="timeago" data-date="2021-06-11 17:29:13 &#43;0000 UTC">2021-06-11 17:29:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gotta say kopia does have a very strong restic vibe to it.<p>Not a bad thing, just means that restic managed to get lots of things right.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MikusR" target="_blank">MikusR</a>   <span class="timeago" data-date="2021-06-11 14:40:27 &#43;0000 UTC">2021-06-11 14:40:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has a gui and works on Linux&#x2F;Windows&#x2F;MacOS. Also has both deduplication and compression.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_def" target="_blank">_def</a>   <span class="timeago" data-date="2021-06-11 16:11:38 &#43;0000 UTC">2021-06-11 16:11:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Finally! I&#x27;ve been waiting patiently for a open source x-platform  solution that ticks those boxes. edit: ah, nevermind. I just tried it and I&#x27;m sure it&#x27;s great for online backups. But not so well suited for backups on a plain usb hdd.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nsriv" target="_blank">nsriv</a>   <span class="timeago" data-date="2021-06-11 20:15:38 &#43;0000 UTC">2021-06-11 20:15:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pretty sure it allows and works with local USB storage as well, covered in documentation here: <a href="https:&#x2F;&#x2F;kopia.io&#x2F;docs&#x2F;repositories&#x2F;#local-storage" rel="nofollow">https:&#x2F;&#x2F;kopia.io&#x2F;docs&#x2F;repositories&#x2F;#local-storage</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rkalla" target="_blank">rkalla</a>   <span class="timeago" data-date="2021-06-11 16:41:25 &#43;0000 UTC">2021-06-11 16:41:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any discussion about backup should always include a shout out to one of the most beautiful versions of this: bvckup2<p>About 10 years ago the founder just decided to start writing the most streamlined, beautiful pieces of software he could - obsession around NTFS nuances to improve performance and reduce overhead to an unbelievable degree.<p>10 years later, it&#x27;s still him (and maybe a few other folks) and the software is unbelievably polished.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jiejeing" target="_blank">Jiejeing</a>   <span class="timeago" data-date="2021-06-11 17:30:55 &#43;0000 UTC">2021-06-11 17:30:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe you about polish and performance, but that solution is neither open-source nor cross-platform (unless I failed to find it on the website).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-11 17:33:48 &#43;0000 UTC">2021-06-11 17:33:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nor free. The download button says a 2-week trial is included.<p>Which is okay, but licensing is enough of a hassle when restic etc. exist that I&#x27;m not going to bother with that for my systems. A design goal of restic (sorry I&#x27;m just familiar with that one, not affiliated with it) is also recoverability: if your repository gets horribly corrupted or you can&#x27;t run the software easily anymore then the author wanted to be able to recover things still. One of the early talks (at a local CCC) explains how to decrypt things manually in a few minutes -- obviously he knows what he&#x27;s doing and will be faster than me, but still. Having closed source software as an alternative to that... I dunno.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jiejeing" target="_blank">Jiejeing</a>   <span class="timeago" data-date="2021-06-11 17:40:52 &#43;0000 UTC">2021-06-11 17:40:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I’m not complaining and it’s entirely fair to sell your work, but I’m always wary of relying on a closed-source (+ licensed) tool for things as critical as backups. I may be partial though, having interacted with the Borg author in-person a few times at Congress, which convinced me I could trust it to not shred my data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=poronski" target="_blank">poronski</a>   <span class="timeago" data-date="2021-06-11 17:11:00 &#43;0000 UTC">2021-06-11 17:11:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Clickable - <a href="https:&#x2F;&#x2F;www.bvckup2.com" rel="nofollow">https:&#x2F;&#x2F;www.bvckup2.com</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dsego" target="_blank">dsego</a>   <span class="timeago" data-date="2021-06-11 21:39:48 &#43;0000 UTC">2021-06-11 21:39:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On Mac the most polished is Bombich&#x27;s Carbon Copy Cloner, it&#x27;s a thing of beauty. I might go back to Mac just for that piece of software alone.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vladgur" target="_blank">vladgur</a>   <span class="timeago" data-date="2021-06-11 23:28:06 &#43;0000 UTC">2021-06-11 23:28:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m curious if this or other tools can help me with the following use case:
+I have a Synology network attached storage.<p>What I want is a way for me to incrementally back up to Synology when I’m on my local network&#x2F;VPN, while Synology maintains an encrypted cloud backup of my stuff.
+Alternatively when I’m outside of my network travelling, my laptop is backing up directly to the cloud with a way to sync that up with Synology.<p>In other words, I want to have a synchronized local and offline backup that works seamlessly whether I’m on my network or outside of it.<p>Is that a reasonable expectation? 
+Does a tool like that exist?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ethanpil" target="_blank">ethanpil</a>   <span class="timeago" data-date="2021-06-12 00:53:50 &#43;0000 UTC">2021-06-12 00:53:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can setup Zerotier on your NAS and your computer (and Phone, etc) and things will always stay connected via an internal ip no matter where you are. I have been using this setup for several years. Best part is it works with any software running on the computer or Dockers, etc on the NAS.<p>I bought a second (cheap,slow) NAS and installed it off-site (away from home) and I keep a full off-site mirror of my NAS.<p>Use any tools you want, syncthing, rsync, smb, NFS... It&#x27;s all just internal IPs routed via ZeroTier.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=luckman212" target="_blank">luckman212</a>   <span class="timeago" data-date="2021-06-12 17:21:20 &#43;0000 UTC">2021-06-12 17:21:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ZeroTier is incredibly good. I have a Synology too and without ZT it would be a lot less useful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=forgotpwd16" target="_blank">forgotpwd16</a>   <span class="timeago" data-date="2021-06-11 18:52:01 &#43;0000 UTC">2021-06-11 18:52:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a trivia, kopia means copy in Polish which is founder&#x27;s mother tongue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kemonocode" target="_blank">kemonocode</a>   <span class="timeago" data-date="2021-06-11 18:27:21 &#43;0000 UTC">2021-06-11 18:27:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, I&#x27;d be willing to give it a try after I had to abandon Duplicati as it just seemed like a lost cause. Right now my backup setup consists on a UrBackup server my machines connect to, and a borg repository that is synced against the latest backup and then sent remotely to S3. It works, but could definitively use some streamlining...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=encryptluks2" target="_blank">encryptluks2</a>   <span class="timeago" data-date="2021-06-11 18:22:33 &#43;0000 UTC">2021-06-11 18:22:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can I get some recent performance benchmarks vs restic? I only recently switched to restic and for the most part it is great (definitely an improvement from CrashPlan IMO), but it seems like this might actually have a few improvements to make it worth considering switching from restic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ntolia" target="_blank">ntolia</a>   <span class="timeago" data-date="2021-06-11 18:44:16 &#43;0000 UTC">2021-06-11 18:44:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I ran some performance benchmarks not too long ago. <a href="https:&#x2F;&#x2F;blog.kasten.io&#x2F;benchmarking-kopia-architecture-scale-and-performance" rel="nofollow">https:&#x2F;&#x2F;blog.kasten.io&#x2F;benchmarking-kopia-architecture-scale...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brimstedt" target="_blank">brimstedt</a>   <span class="timeago" data-date="2021-06-11 19:18:17 &#43;0000 UTC">2021-06-11 19:18:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks.<p>It would have been interesting with restore times as well.<p>Quite important if it will take you an hour or a day to restore..<p>L
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 15:35:15 &#43;0000 UTC">2021-06-12 15:35:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shaicoleman" target="_blank">shaicoleman</a>   <span class="timeago" data-date="2021-06-12 01:49:51 &#43;0000 UTC">2021-06-12 01:49:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks really cool, and seems to tick all the boxes for me:<p>* Multi-platform<p>* Encrypted<p>* Compressed<p>* Deduplication<p>* Supports S3 Compatible + Backblaze B2<p>* Performant even with millions of small files<p>* Supports mounting<p>* Good usability<p>Wishlist:<p>* Automatic exclusion from .gitignore files<p>* Support nested includes&#x2F;excludes
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AaronFriel" target="_blank">AaronFriel</a>   <span class="timeago" data-date="2021-06-11 16:29:03 &#43;0000 UTC">2021-06-11 16:29:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does this compare to Duplicacy in terms of throughput?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 15:43:02 &#43;0000 UTC">2021-06-11 15:43:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks interesting. I always liked the borg concept, but never actually used it for backups because it lacks windows support and a nice gui.<p>Will give it a try.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-06-14 15:47:40 &#43;0000 UTC">2021-06-14 15:47:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It doesn&#x27;t have native Windows support but it works pretty well in Cygwin. I attempted to create a minimal Windows&#x2F;Cygwin setup for it to run in but admittedly it&#x27;s in a bit of decay at the current moment <a href="https:&#x2F;&#x2F;github.com&#x2F;nijave&#x2F;borg-windows-package" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;nijave&#x2F;borg-windows-package</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PopeRigby" target="_blank">PopeRigby</a>   <span class="timeago" data-date="2021-06-11 17:36:09 &#43;0000 UTC">2021-06-11 17:36:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Borg does have a GUI: <a href="https:&#x2F;&#x2F;vorta.borgbase.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;vorta.borgbase.com&#x2F;</a><p>Although it&#x27;s subjective if you find it nice or not.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 13:49:37 &#43;0000 UTC">2021-06-12 13:49:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 01:23:53 &#43;0000 UTC">2021-06-12 01:23:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xupybd" target="_blank">xupybd</a>   <span class="timeago" data-date="2021-06-12 00:46:14 &#43;0000 UTC">2021-06-12 00:46:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Has anyone had experience with Kopia and restic?<p>If so any opinions?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=37ef_ced3" target="_blank">37ef_ced3</a>   <span class="timeago" data-date="2021-06-12 01:16:13 &#43;0000 UTC">2021-06-12 01:16:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Use tarsnap instead: <a href="https:&#x2F;&#x2F;www.tarsnap.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.tarsnap.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=foolinaround" target="_blank">foolinaround</a>   <span class="timeago" data-date="2021-06-11 17:53:13 &#43;0000 UTC">2021-06-11 17:53:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            how would this type of software compare against Dropbox &#x2F; NextCloud?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jbnorth" target="_blank">jbnorth</a>   <span class="timeago" data-date="2021-06-11 18:19:08 &#43;0000 UTC">2021-06-11 18:19:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They&#x27;re fundamentally different in the problems they solve. Dropbox is a cloud file storage and syncing service. NextCloud is an open source alternative to something like Dropbox in that it offers file sharing and syncing but also much more on top of that. It&#x27;s really closer to something like the Google suite of personal cloud services with Google Drive, Photos, Contacts, and Calendar. Kopia is a backup solution for the files on your computer. You can use cloud file storage providers as the destination for these backups but it doesn&#x27;t handle the storage of the backups itself. You have to provide that storage to it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

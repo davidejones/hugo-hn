@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/electron-vs-qt-for-a-new-opensource-project-looking-for-advice/">
+
+
+    <title>Electron vs. Qt for a new open-source project? Looking for advice - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Electron vs. Qt for a new open-source project? Looking for advice - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/electron-vs-qt-for-a-new-opensource-project-looking-for-advice/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/electron-vs-qt-for-a-new-opensource-project-looking-for-advice/">
+<meta name="twitter:title" content="Electron vs. Qt for a new open-source project? Looking for advice - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Electron vs. Qt for a new open-source project? Looking for advice - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T15:41:18JST",
+    "dateModified": "2021-06-12T15:41:18JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.zynath.com/articles/bin-finder-2/">Electron vs. Qt for a new open-source project? Looking for advice</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DecoPerson" target="_blank">DecoPerson</a>   <span class="timeago" data-date="2021-06-12 17:16:19 &#43;0000 UTC">2021-06-12 17:16:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; 1. GUI vs. CLI - I want to support both. But should it be a CLI first application that&#x27;s then wrapped with GUI? Or perhaps it&#x27;s better to build it as a GUI first application, and add a CLI interface to it? Or just have a core library, and use it in independent CLI and GUI tools? I never wrote a cross-platform tool, so I am not sure what&#x27;s the best approach.<p>Don’t be GUI-first or CLI-first; be API-first. You can get started by writing a test target. As soon as you need more than “edit tests, recompile, run, examine debug prints”, you can start on both the GUI and the CLI together.<p>Focusing on keeping a solid API makes things much simpler. And if you ever regret choosing Electron over Qt or vice-versa, having all the juicy parts behind an API makes it much easier to switch.<p>For examples, look at Git, the TypeScript compiler, and Everything [0] (closed source unfortunately).<p>There was a quick-search app for macOS that used V8-to-Rust asynchronous procedure calls as the API. It would make a great example, but I can’t remember it’s name.<p>(Love the app idea btw! I look forward to trying it on my mess of files for my small business.)<p>[0] <a href="https:&#x2F;&#x2F;www.voidtools.com&#x2F;support&#x2F;everything&#x2F;sdk&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.voidtools.com&#x2F;support&#x2F;everything&#x2F;sdk&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=goostavos" target="_blank">goostavos</a>   <span class="timeago" data-date="2021-06-12 18:12:34 &#43;0000 UTC">2021-06-12 18:12:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;But should it be a CLI first application that&#x27;s then wrapped with GUI?<p>If you build it as a CLI, you can get the GUI for free via Gooey[0] (shameless plug)!<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;chriskiehl&#x2F;Gooey" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;chriskiehl&#x2F;Gooey</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Nicksil" target="_blank">Nicksil</a>   <span class="timeago" data-date="2021-06-12 18:35:51 &#43;0000 UTC">2021-06-12 18:35:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;If you build it as a CLI, you can get the GUI for free via Gooey<p>But then you&#x27;ve just added a dependency and, unless you vendor that thing, or don&#x27;t update it in the future, you&#x27;ve no way to ensure it doesn&#x27;t screw up your application at some point down the road.<p>Design the API, write the code, then have your front end(s) (cli, GUI, etc) call into it. Best of all worlds, no additional dependency.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aliasEli" target="_blank">aliasEli</a>   <span class="timeago" data-date="2021-06-13 05:02:50 &#43;0000 UTC">2021-06-13 05:02:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Don’t be GUI-first or CLI-first; be API-first.<p>This is very good advice for all systems. First try to describe the domain before implementing the user interface.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Nextgrid" target="_blank">Nextgrid</a>   <span class="timeago" data-date="2021-06-12 16:20:36 &#43;0000 UTC">2021-06-12 16:20:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Regardless of the GUI framework I would suggest separating the business logic from the GUI.<p>The business logic could run as a daemon in the background or a shared library and can be implemented in whatever language you&#x27;re most proficient in for writing system services and that matches the performance requirements of the task, and the GUI can be written in whatever language you&#x27;re most proficient with for GUIs (so you can <i>start</i> with Electron and switch down the line if needed).<p>I would&#x27;ve said Electron is a bad idea for this (for the reasons you mention in the post), but if the &quot;business logic&quot; is decoupled from it then Electron&#x27;s task is to merely display information at which point it becomes more viable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrtesthah" target="_blank">mrtesthah</a>   <span class="timeago" data-date="2021-06-12 16:37:30 &#43;0000 UTC">2021-06-12 16:37:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why bother shipping an entire separate browser? What would you actually gain vs bundling the daemon with a tiny launcher that just opened a new browser tab with “<a href="http:&#x2F;&#x2F;localhost:4855”" rel="nofollow">http:&#x2F;&#x2F;localhost:4855”</a> or whatnot?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=johannes1234321" target="_blank">johannes1234321</a>   <span class="timeago" data-date="2021-06-12 17:02:30 &#43;0000 UTC">2021-06-12 17:02:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This adds another layer of potential security flaws. Other applications might try to connect to that daemon via network and exploit it. In turn you have to do all the security things in it, treating your frontend as potentially malicious. In an electron app you have secure communication channels. (Still have to be careful on data by the user, but all you get in the backend from the frontend is from your code)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rapsey" target="_blank">rapsey</a>   <span class="timeago" data-date="2021-06-12 17:10:45 &#43;0000 UTC">2021-06-12 17:10:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also various local firewalls and anti virus software are going to block it by default.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nitrogen" target="_blank">nitrogen</a>   <span class="timeago" data-date="2021-06-12 17:03:56 &#43;0000 UTC">2021-06-12 17:03:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I ran a bootstrapped non-IoT home automation startup from 2009 to ~2014.  The hardware UI was presented as a web interface over the local network (backend was a mix of Ruby and C, some of which I have open sourced).<p>Some customers had problems because they had malware browser toolbars installed that rewrote&#x2F;altered the HTML.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=egeozcan" target="_blank">egeozcan</a>   <span class="timeago" data-date="2021-06-12 16:43:18 &#43;0000 UTC">2021-06-12 16:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For one, you have a better control on the GUI (native file pickers, app actions, your own icon etc.). Don&#x27;t get me wrong, I actually ship the tools I build also as little servers (example: <a href="https:&#x2F;&#x2F;github.com&#x2F;egeozcan&#x2F;json-tail" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;egeozcan&#x2F;json-tail</a>) but there are also disadvantages to this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stu2b50" target="_blank">stu2b50</a>   <span class="timeago" data-date="2021-06-12 16:41:39 &#43;0000 UTC">2021-06-12 16:41:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some things will be pretty annoying to implement because pages in browsers are sandboxed and limited in how they’re allowed to interact with the OS. You are also running that daemon so theoretically nothing is stopping you from doing those things by having the daemon do it.<p>But it’s pretty annoying that even things like a file path picker would need to be custom made and done via the daemon.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-06-12 16:39:50 &#43;0000 UTC">2021-06-12 16:39:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is going to look strange and suspicious to anyone who is not a tech worker.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fock" target="_blank">fock</a>   <span class="timeago" data-date="2021-06-12 16:41:06 &#43;0000 UTC">2021-06-12 16:41:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            why? The installer could clearly show a picture that this is how it works? People are not that stupid.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jitix" target="_blank">jitix</a>   <span class="timeago" data-date="2021-06-12 16:49:14 &#43;0000 UTC">2021-06-12 16:49:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s not about stupidity. Infact it’ll be the people who are proficient with computers but don’t work in tech that will find this fishy and lose trust over the software. Installation and management UX is a core part of any software.<p>It’s the same as us programmers driving cars or using kitchen gadgets. If something is out of the ordinary or the UX is difficult, we’ll think it’s fishy and lose a bit of confidence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jakelazaroff" target="_blank">jakelazaroff</a>   <span class="timeago" data-date="2021-06-12 16:54:22 &#43;0000 UTC">2021-06-12 16:54:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would much rather use a tool that works similarly to most other tools on my computer, rather one that works totally differently but it’s cool because the installer explains it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tacotacotaco" target="_blank">tacotacotaco</a>   <span class="timeago" data-date="2021-06-12 17:44:33 &#43;0000 UTC">2021-06-12 17:44:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Users spend most of their time on other sites. This means that users prefer your site to work the same way as all the other sites they already know.&quot;<p><a href="https:&#x2F;&#x2F;lawsofux.com&#x2F;jakobs-law&#x2F;" rel="nofollow">https:&#x2F;&#x2F;lawsofux.com&#x2F;jakobs-law&#x2F;</a><p>Jakob Nielson is a founding member of Nielson Norman Group that has studied UX for decades.<p><a href="https:&#x2F;&#x2F;www.nngroup.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.nngroup.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-06-12 20:01:24 &#43;0000 UTC">2021-06-12 20:01:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except this is a file system, so to users it shouldn’t be a site at all.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tacotacotaco" target="_blank">tacotacotaco</a>   <span class="timeago" data-date="2021-06-12 20:35:44 &#43;0000 UTC">2021-06-12 20:35:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This applies to all interactions. E.g.<p>&quot;Users spend most of their time _opening_ other _door handles_. This means that users prefer your _door handle_ to work the same way as all the other _door handles_ they already know.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dragonwriter" target="_blank">dragonwriter</a>   <span class="timeago" data-date="2021-06-12 17:54:07 &#43;0000 UTC">2021-06-12 17:54:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is somewhat sensitive to application posture [0] (sites are, for this purpose, effectively apps, even if they aren’t the kind of site that would be described that way usually.)<p>A site that is effectively a <i>sovereign app</i> has more freedom to defect from general interaction patterns, whereas one that is more of a <i>transient app</i> has less.<p>[0] <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Application_posture" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Application_posture</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 23:51:43 &#43;0000 UTC">2021-06-12 23:51:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ravenstine" target="_blank">ravenstine</a>   <span class="timeago" data-date="2021-06-12 16:44:06 &#43;0000 UTC">2021-06-12 16:44:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The best compromise would be to open a web view.  Though it&#x27;s a concept often neglected, most languages have a package that does this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrtesthah" target="_blank">mrtesthah</a>   <span class="timeago" data-date="2021-06-13 19:34:02 &#43;0000 UTC">2021-06-13 19:34:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right -- that was the other thing I was going to suggest. There&#x27;s nothing stopping you from using WKWebView on macOS or Edge WebView2 on Windows. Some might argue that there are browser differences -- to them, I ask: what&#x27;s difference between targeting a single browser and targeting a single GUI toolkit&#x2F;framework? They both limit the platform your code runs on. So you might as well choose the latter and give your users a native experience without ~300MB of useless bloat to save yourself what is probably not more than two lines of Javascript (you useless inconsiderate louts).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=krapp" target="_blank">krapp</a>   <span class="timeago" data-date="2021-06-12 16:47:01 &#43;0000 UTC">2021-06-12 16:47:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What if it were possible to host Electron apps on a remote server? That way, instead of shipping a browser, the user could use their preferred browser to somehow load the app from the remote server, and run it on their local machine?<p>The only major technical hurdle I can think of would be a way to locate and classify remote assets and resources, so one knows what belongs to what. We&#x27;d need to come up with an address system, something like a &quot;universal resource locator&quot; that could assign an app to a &quot;domain&quot; (think Java namespaces) that maps to one or more IP addresses. Instead of installing the app, you could just type the &quot;domain&quot; into the browser and access the application.<p>It could be a revolution in the way Electron apps are distributed. Someone write this down!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Zardoz84" target="_blank">Zardoz84</a>   <span class="timeago" data-date="2021-06-13 10:22:48 &#43;0000 UTC">2021-06-13 10:22:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s called a &quot;Web app&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrtesthah" target="_blank">mrtesthah</a>   <span class="timeago" data-date="2021-06-13 19:38:02 &#43;0000 UTC">2021-06-13 19:38:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Whoosh.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amelius" target="_blank">amelius</a>   <span class="timeago" data-date="2021-06-12 16:41:05 &#43;0000 UTC">2021-06-12 16:41:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  I would suggest separating the business logic from the GUI.<p>If only there existed a GUI library which did that for us ...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jjnoakes" target="_blank">jjnoakes</a>   <span class="timeago" data-date="2021-06-12 18:08:51 &#43;0000 UTC">2021-06-12 18:08:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which GUI libraries don&#x27;t let you separate the two? I usually don&#x27;t have a problem but maybe I&#x27;m missing something.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ahartmetz" target="_blank">ahartmetz</a>   <span class="timeago" data-date="2021-06-13 07:18:01 &#43;0000 UTC">2021-06-13 07:18:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Qt QML encourages it: business logic in C++, GUI in QML
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ivanmontillam" target="_blank">ivanmontillam</a>   <span class="timeago" data-date="2021-06-12 17:30:01 &#43;0000 UTC">2021-06-12 17:30:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I invite you to try Sciter[0], it allows you to write your frontend in HTML, CSS and JS, but the backend of the app can be anything native you want (C++, C#, Python perhaps). The events in the HTML DOM interface with methods in the native code, so your button actually runs the fastest, because the business logic of the app is native.<p>Some of the most performant products use it, like antivirus products. Yet, you see antivirus products have a nice GUI and that&#x27;s the reason. You can see it in the showcase.<p>I know Sciter is not mainstream, but you don&#x27;t have to deal with Qt&#x27;s API nor with making your business logic in Javascript with Electron and shipping the greatest overhead that an embedded browser implies.<p>To me, it&#x27;s the best of both worlds. Flexible do-as-you-see-fit GUI and native performance because of compiled languages.<p>[0]: <a href="https:&#x2F;&#x2F;sciter.com" rel="nofollow">https:&#x2F;&#x2F;sciter.com</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-14 14:49:28 &#43;0000 UTC">2021-06-14 14:49:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can write your backend logic in whatever language you wish with Qt or Electron too.<p>You also neglected to mention that Sciter is closed source which is a pretty big turn off.<p>&gt; antivirus products have a nice GUI<p>They do??<p>&gt; deal with Qt&#x27;s API.<p>Qt&#x27;s API is one of the best designed that I&#x27;ve ever used.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SavantIdiot" target="_blank">SavantIdiot</a>   <span class="timeago" data-date="2021-06-14 16:26:06 &#43;0000 UTC">2021-06-14 16:26:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, go look at licensing. Qt is quite complex, and LGPL might scare away your company since it intermingles with everything: if you&#x27;re not going full GPL, don&#x27;t mess with GPL. Electron is download and go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shaicoleman" target="_blank">shaicoleman</a>   <span class="timeago" data-date="2021-06-12 16:49:43 &#43;0000 UTC">2021-06-12 16:49:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If Electron is too heavy, there are lightweight alternatives such as Tauri [1] and Neutralinojs [2]<p>1. <a href="https:&#x2F;&#x2F;tauri.studio&#x2F;en&#x2F;" rel="nofollow">https:&#x2F;&#x2F;tauri.studio&#x2F;en&#x2F;</a><p>2. <a href="https:&#x2F;&#x2F;neutralino.js.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;neutralino.js.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-14 14:52:51 &#43;0000 UTC">2021-06-14 14:52:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunately both projects really try hard to hide what they actually do, so to save you time:<p>1. Like Electron but uses the platform web view API - Edge on Windows, Safari WebKit on Mac and GtkWebkit on Linux.<p>2. Same but I think it uses GtkWebkit on all platforms and possibly bundles it (if their claim of zero dependencies is not a lie). Not so sure about this one.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 17:27:54 &#43;0000 UTC">2021-06-12 17:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Will research them now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ari__" target="_blank">ari__</a>   <span class="timeago" data-date="2021-06-13 00:17:52 &#43;0000 UTC">2021-06-13 00:17:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hacker News is probably not the best place to ask this question, as it&#x27;s very much &quot;JS bad&quot; as a service. Take any advice received here with a grain of salt. With that out of the way - the only correct choice is the one you&#x27;re more productive in. If you find that QT fits your workflow better, go with that. If you&#x27;re more familiar with web technology and want to work within your comfort zone, use Electron (or Tauri or Neutralino or NWJS or...you get the point).<p>QT has much less overhead to it, but it&#x27;s not exceptionally difficult to create an optimized Electron app that people will enjoy using. Discord and (in my opinion) Visual Studio Code are good examples of well-optimized Electron apps.<p>All else held equal, I would personally choose Electron (or rather Tauri) if just by virtue of &quot;you are forced to separate the display tier from the business logic.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-06-13 17:42:19 &#43;0000 UTC">2021-06-13 17:42:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just because you don&#x27;t feel the weight of electron apps, it doesn&#x27;t mean it&#x27;s not there.<p>You just have a powerful computer.<p>I switched from Slack &#x2F; Discord to Ripcord and, even though the UI is not great, it&#x27;s much cheaper to run. It&#x27;s using 80mb of RAM with multiple slack organisations open and multiple discord servers.<p>Pritunl written in Electron is using more than 100mb or RAM, just to let me provide 2 factor auth and connect to my VPN.<p>I&#x27;ve been toying with the idea of writing a native app for Pritunl, but I don&#x27;t work for Pritunl and I have 32GB of RAM.
+I&#x27;d love to rewrite Visual Studio in Qt, but I don&#x27;t work for Microsoft.<p>The funniest thing is that the developer experience on Qt is years ahead frontend development in the browser and it&#x27;s been like this for more than 10 years. You have a mature widget system and you even have native looking widgets.<p>I can see the appeal of Electron; if all you know is web development, you don&#x27;t want to take the additional complexity of learning a new framework. Personally, I would definitely use Qt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ari__" target="_blank">ari__</a>   <span class="timeago" data-date="2021-06-14 01:01:53 &#43;0000 UTC">2021-06-14 01:01:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Just because you don&#x27;t feel the weight of electron apps, it doesn&#x27;t mean it&#x27;s not there. You just have a powerful computer.<p>I definitely don&#x27;t intend to imply that Electron apps aren&#x27;t inherently heavier - they are, hence the second paragraph of my initial comment.<p>&gt; I switched from Slack &#x2F; Discord to Ripcord and, even though the UI is not great, it&#x27;s much cheaper to run. It&#x27;s using 80mb of RAM with multiple slack organisations open and multiple discord servers.<p>I actually switched to Ripcord for Slack myself! I find it doesn&#x27;t provide a comparable experience to the first party Discord app, but it beats Slack all day every day. Slack is an excellent example of a poorly made and unoptimized Electron application, in my opinion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=allanrbo" target="_blank">allanrbo</a>   <span class="timeago" data-date="2021-06-12 17:16:50 &#43;0000 UTC">2021-06-12 17:16:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did you consider wxWidgets? I chose it over Qt and Electron for a recent project, because it gave me the most native looking UI across Mac&#x2F;Win&#x2F;Linux, and resulted in a small binary size and memory footprint. The project was an SSH file browser. Sounds like your project is also file browser related, so you may be able to get some inspiration or even reuse parts: <a href="https:&#x2F;&#x2F;github.com&#x2F;allanrbo&#x2F;filesremote" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;allanrbo&#x2F;filesremote</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 17:24:21 &#43;0000 UTC">2021-06-12 17:24:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am researching wxWidgets at the moment. I really like the small file size on the FilesRemote and how quickly it starts up. Those are a big plus for me. I am not too concerned about the native look and feel because of the type of app I am making, but the speed is a huge plus.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=korijn" target="_blank">korijn</a>   <span class="timeago" data-date="2021-06-13 00:10:28 &#43;0000 UTC">2021-06-13 00:10:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My 8GB dell xps laptop can&#x27;t even play music, chat, edit text and browse at the same time anymore. Because it&#x27;s all Electron&#x2F;Chrome (Spotify, Slack&#x2F;Teams, Chrome, Vscode). This was no problem in the windows XP days. What makes Electron so great that it is worth this amount of resources?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cuddlybacon" target="_blank">cuddlybacon</a>   <span class="timeago" data-date="2021-06-13 12:12:37 &#43;0000 UTC">2021-06-13 12:12:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t have professional experience in either desktop UIs or web UIs. When I tried making an app using the native macOS UI toolkit, I kept running into issues related to a lack of online discussion and books that were less complete than I expected. I think this is mostly just a symptom of there not being much native UI development happening in the west. It&#x27;s a self-fulfilling prophecy.<p>I don&#x27;t hear about this often, but I&#x27;ve heard that native apps are still common in China. I bet they don&#x27;t have this problem.<p>I bring this up because I notice a lot of the time on HN this gets attributed to web UI people being easier to hire and unwilling to learn native UI.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kabes" target="_blank">kabes</a>   <span class="timeago" data-date="2021-06-13 00:17:27 &#43;0000 UTC">2021-06-13 00:17:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; What makes Electron so great that it is worth this amount of resources<p>Apparently electron enabled all of those companies to make those apps you use.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-06-13 04:37:51 &#43;0000 UTC">2021-06-13 04:37:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With the amount of capital these companies have if they couldn&#x27;t manage without then something is deadly wrong (especially with the kind of people they hire - although that being said the most productive person I know has no formal qualifications). You could literally bring up an entire programming language and GUI framework from scratch with the resources some of these companies have.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spicybright" target="_blank">spicybright</a>   <span class="timeago" data-date="2021-06-13 05:14:42 &#43;0000 UTC">2021-06-13 05:14:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or you can shoot yourself in the foot and code fast n&#x27; loose for those sweet quarterly profits.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=diragon" target="_blank">diragon</a>   <span class="timeago" data-date="2021-06-13 10:17:43 &#43;0000 UTC">2021-06-13 10:17:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Enabled them to do create them cheaply, sure. Enabled in the first place? I don&#x27;t think our profession is that shitty.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-06-13 00:44:23 &#43;0000 UTC">2021-06-13 00:44:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People used to create music players, chat apps, and code editors without bundling a browser engine per app.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whereistimbo" target="_blank">whereistimbo</a>   <span class="timeago" data-date="2021-06-13 01:57:24 &#43;0000 UTC">2021-06-13 01:57:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you think ChromeOS and iPadOS as desktop, music player and chat app is still written in native apps. These apps available too in macOS if developer opted in. So this problem seems to be limited to Windows and Linux only.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=traviswt" target="_blank">traviswt</a>   <span class="timeago" data-date="2021-06-13 01:08:52 &#43;0000 UTC">2021-06-13 01:08:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So what’s stopping them from doing that now?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-13 08:17:47 &#43;0000 UTC">2021-06-13 08:17:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;aaS&quot;-ification of everything.  If your music is streamed from some service, you&#x27;re generally forced to use that service&#x27;s apps.  Otherwise you&#x27;d <i>StEaL tHeIr CoNtEnT</i>.<p>(formatting intended to convey sarcasm.)<p>Not really related:  your German word of the day is &quot;Raubmordkopieren&quot;.<p>The content industry, in Germany, decided to phrase copyright violations as &quot;Raubkopie&quot;, literally &quot;armed robbery copy&quot;.  (There are two verbs for robbery in German, &quot;stehlen&quot; for simple theft without force, and &quot;rauben&quot; for forceful theft.)<p>Since this is pretty obviously a far stretch (how is filesharing &quot;by force&quot;?), the P2P scene decided to go for the hyperbole: &quot;mord&quot;, as you might have guessed, is murder.  &quot;Raubmord&quot; is an established word in German (&quot;holdup murder&quot;.)  &quot;Raubmordkopie&quot; — you get the idea.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-06-13 09:00:01 &#43;0000 UTC">2021-06-13 09:00:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you use an unofficial Discord client, you risk getting your account banned.<p>Even banning aside, I wish there were better unofficial Discord clients. Ripcord is closed-source, lacks multi-message select, and doesn&#x27;t let you search, and gtkcord3&#x27;s repo is archived (and I didn&#x27;t try it).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=schwartzworld" target="_blank">schwartzworld</a>   <span class="timeago" data-date="2021-06-13 13:16:39 &#43;0000 UTC">2021-06-13 13:16:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They would have to build an app for every platform they support. If you want to target all three, it&#x27;s much easier to use something like electron that targets all three. You maintain feature parity and even bug parity across platforms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=korijn" target="_blank">korijn</a>   <span class="timeago" data-date="2021-06-14 06:11:33 &#43;0000 UTC">2021-06-14 06:11:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are plenty of alternatives such as Qt
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=schwartzworld" target="_blank">schwartzworld</a>   <span class="timeago" data-date="2021-06-14 10:17:44 &#43;0000 UTC">2021-06-14 10:17:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not defending the choice. Just explaining the upside.<p>I&#x27;m pretty sure you can access slack through a browser tab if you want, so anybody who really hates electron has an easy out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xkqd" target="_blank">xkqd</a>   <span class="timeago" data-date="2021-06-13 03:22:07 &#43;0000 UTC">2021-06-13 03:22:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably familiarity with and the relative ease of Electron?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=korijn" target="_blank">korijn</a>   <span class="timeago" data-date="2021-06-13 10:48:54 &#43;0000 UTC">2021-06-13 10:48:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This feels like the most probable explanation to me; companies hire tons of people skilled in web development, front and backend, and then suddenly desire a desktop app. Then they either don&#x27;t want to recruit people who specialize in desktop apps or they don&#x27;t want to retrain their web dev staff. And even if they were willing, they probably would still impose a ridiculous timeline and expect the app to be delivered. I can understand that an engineering team not familiar with desktop applications would choose Electron in such a scenario.<p>However, in none of these decisions was the user experience a factor at all. That bothers me.<p>&quot;Just buy a laptop with 16GB RAM and stop complaining, get with the times&quot;, I hear the downvoters thinking. This development directly drives people towards purchasing a more powerful replacement computer. Chip shortage, electronic waste, does anyone care?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 01:50:40 &#43;0000 UTC">2021-06-13 01:50:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 09:00:07 &#43;0000 UTC">2021-06-13 09:00:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=schaefer" target="_blank">schaefer</a>   <span class="timeago" data-date="2021-06-12 16:47:46 &#43;0000 UTC">2021-06-12 16:47:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there a reason that flutter2 is not considered?  With version 2 comes a push for first class desktop support.<p>Admittedly, I don&#x27;t currently know of any books that have been revised to cover version 2, but there is momentum on the desktop.  For example, it will be the default framework on Ubuntu moving forward [1].<p>[1]: <a href="https:&#x2F;&#x2F;ubuntu.com&#x2F;blog&#x2F;flutter-and-ubuntu-so-far" rel="nofollow">https:&#x2F;&#x2F;ubuntu.com&#x2F;blog&#x2F;flutter-and-ubuntu-so-far</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 17:42:44 &#43;0000 UTC">2021-06-12 17:42:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, I haven&#x27;t heard about the Ubuntu taking up Flutter. I wrote several commercial Flutter Mobile apps before, so this should be an easy transition for me. However, how mature is the desktop support in Flutter. I read that it&#x27;s still in very early beta on Windows. Linux support and MacOS appears to be solid. I think this is worth a look for sure. One of my goals was to learn something new, but learning something new about something I already know is great too! :) Thanks for the pointer!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=grlass" target="_blank">grlass</a>   <span class="timeago" data-date="2021-06-13 10:47:10 &#43;0000 UTC">2021-06-13 10:47:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The cwtch.im project (metadata resistant E2E chat app) started with Golang backend, and Qt as the front-end (targeting x-platform desktop and mobile apps).<p>However they had some issues with Qt, and have been transitioning to Flutter.<p>Their technical blog discusses their issues and experiences. <a href="https:&#x2F;&#x2F;openprivacy.ca&#x2F;discreet-log" rel="nofollow">https:&#x2F;&#x2F;openprivacy.ca&#x2F;discreet-log</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theorth" target="_blank">theorth</a>   <span class="timeago" data-date="2021-06-13 08:34:13 &#43;0000 UTC">2021-06-13 08:34:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            actually it is pretty stable for dart and c interrop code you just can&#x27;t have external view support like a browser yet
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=justinclift" target="_blank">justinclift</a>   <span class="timeago" data-date="2021-06-12 17:42:50 &#43;0000 UTC">2021-06-12 17:42:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Flutter is still single threaded isn&#x27;t it?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theorth" target="_blank">theorth</a>   <span class="timeago" data-date="2021-06-13 08:28:47 &#43;0000 UTC">2021-06-13 08:28:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            only the UI thread is, you can have concurrency and there is a nice library to execute rust code for high efficiency compute
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jakelazaroff" target="_blank">jakelazaroff</a>   <span class="timeago" data-date="2021-06-12 16:38:59 &#43;0000 UTC">2021-06-12 16:38:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Broadly speaking, I would not make this decision based on the technical merits of either option. Instead, choose based on your high level goals for this project.<p>Is the point to build and support this project for the medium to long term? Choose the one with which you’re more familiar, or for which there is more available help and resources.<p>As a sub-consideration, do you expect others to work on this project with you? Choose the one with which contributors are more likely to be familiar.<p>Is the point to learn a new UI framework? Choose the one in which you’re most interested.<p>Is the point to burnish your résumé? Choose the one that is more in demand by the opportunities you’re seeking.<p>That’s assuming that both technologies can meet your requirements (e.g. if you might want to use this on resource-constrained devices, choose Qt; if you want a web version, choose Electron). But all else being equal, you need to figure out your goals before you can make this decision.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=paulryanrogers" target="_blank">paulryanrogers</a>   <span class="timeago" data-date="2021-06-12 16:49:44 &#43;0000 UTC">2021-06-12 16:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My choice was Qt. In hindsight Electron probably would have been good enough. It also could have helped me launch sooner, iterate more easily, all at the cost of user memory.<p>Then again mine is only a source included product, not a community effort.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mwcampbell" target="_blank">mwcampbell</a>   <span class="timeago" data-date="2021-06-12 16:55:38 &#43;0000 UTC">2021-06-12 16:55:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suggest Electron for accessibility (e.g. with screen readers) if nothing else. In my experience, Chromium&#x27;s accessibility support is much more mature than Qt&#x27;s, at least on Windows. See also this thread: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27303503" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27303503</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=midjji" target="_blank">midjji</a>   <span class="timeago" data-date="2021-06-14 13:25:58 &#43;0000 UTC">2021-06-14 13:25:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Qt is far better and extremely much faster and generic, once you have spent the long time required actually learn Qt and c++ properly.  If you are new, then electron + some shitty html + js you&#x27;ll get something that mostly mostly works very quickly, at the cost of being slow as hell. Take from that what you will.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x7777" target="_blank">x7777</a>   <span class="timeago" data-date="2021-06-12 16:33:44 &#43;0000 UTC">2021-06-12 16:33:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want to prototype quickly and reuse a component libraries&#x2F;be able to attract contributors go with Electron. if you need to run your app on low-power devices consider QT but it will require a lot more investment from your end.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Fergusonb" target="_blank">Fergusonb</a>   <span class="timeago" data-date="2021-06-12 16:23:22 &#43;0000 UTC">2021-06-12 16:23:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe look at tauri?<p>You can write the cli in rust and the gui in html js css<p>Binary will probably end up around 6MB
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 17:37:20 &#43;0000 UTC">2021-06-12 17:37:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust has been on my ToDo list. I played with it, but haven&#x27;t written anything proper in it. This would be a really cool option, and I&#x27;ll get to learn something new! So, basically I can use any HTML&#x2F;JS framework I want for the UI?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kyleee" target="_blank">kyleee</a>   <span class="timeago" data-date="2021-06-12 16:42:18 &#43;0000 UTC">2021-06-12 16:42:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool project, what are some of the &quot;cons&quot; (if you or anyone else happen to know of any)? I&#x27;ve read through the website and github readme so I have a sense of the &quot;pros&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-06-13 00:46:35 &#43;0000 UTC">2021-06-13 00:46:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On Windows, Tauri won&#x27;t run on a computer unless it has WebView2, which doesn&#x27;t ship by default on Windows before 10, but may be automatically installed on Windows 10[1]. I&#x27;m not sure if all Windows 10 computers have it automatically installed though, in the Insider ring, stable ring, and&#x2F;or LTSB.<p>[1]: <a href="https:&#x2F;&#x2F;www.bleepingcomputer.com&#x2F;news&#x2F;microsoft&#x2F;microsoft-is-auto-installing-the-windows-10-webview2-runtime&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.bleepingcomputer.com&#x2F;news&#x2F;microsoft&#x2F;microsoft-is...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-06-12 16:50:10 &#43;0000 UTC">2021-06-12 16:50:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess, that you have to write (some?) Rust.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 18:41:49 &#43;0000 UTC">2021-06-12 18:41:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It appears that you don&#x27;t really have to write any Rust unless you need to do some heavy lifting. In this case Rust would be grate for file tree scanning, the rest can be done in JS. I am having trouble finding any really grate examples of what has been built in Tauri. I kind of want to play with a fully featured app to see how it performs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CarVac" target="_blank">CarVac</a>   <span class="timeago" data-date="2021-06-12 16:03:46 &#43;0000 UTC">2021-06-12 16:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Qt QML is really great for making GUIs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-12 16:23:40 &#43;0000 UTC">2021-06-12 16:23:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Advantage of using Electron is that you have easy to deploy web version as well as easy build &#x2F; install &#x2F; update process for Linux users (though less native).<p>Qt is amazing due to much smaller memory footprint, but cross platform builds, packaging and CI still gonna take a lot more effort to maintain.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lazypenguin" target="_blank">lazypenguin</a>   <span class="timeago" data-date="2021-06-12 16:27:03 &#43;0000 UTC">2021-06-12 16:27:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The original post describes a desktop application to manage local files. Having a web version is not a design consideration here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=x7777" target="_blank">x7777</a>   <span class="timeago" data-date="2021-06-12 16:31:52 &#43;0000 UTC">2021-06-12 16:31:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This does not dismiss the rest of his argument. Cross-platform is still an issue even if you don&#x27;t target the web.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=detaro" target="_blank">detaro</a>   <span class="timeago" data-date="2021-06-12 16:44:07 &#43;0000 UTC">2021-06-12 16:44:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Qt makes it also easy to build the app cross-platform, so no, it&#x27;s not really an argument.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-12 18:28:19 &#43;0000 UTC">2021-06-12 18:28:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your Qt app has single C++ line of code cross platform builds become much harder. Also regardless you still have to solve packaging and updates for Windows, macOS and Linux. Also it&#x27;s much harder to do QA and it&#x27;s take much more effort to maintain cross platform Qt app in general.<p>For Electron apps it&#x27;s all much easier because all native code is heavily tested by other commercial software and there is even on-the-fly updates possible.<p>PS: I shipped C++ apps built using Qt and cross-platform part is huge time sink.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-06-13 00:57:49 &#43;0000 UTC">2021-06-13 00:57:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If your Qt app has single C++ line of code cross platform builds become much harder.<p>What is a Qt app without a single C++ line of code? Is it written in PyQt? Or did you mean a single C++ dependency? I assume you meant that, based on your later comment saying &quot;if you take single external non-Qt library it&#x27;s will make builds, deploy and testing so much more harder&quot;.<p>&gt; For Electron apps it&#x27;s all much easier because all native code is heavily tested by other commercial software and there is even on-the-fly updates possible.<p>I&#x27;ve had the opposite experience; if you can build your own application code using CMake, and link it with prebuilt Qt on a set of platforms, bundling extra libraries vendored with your program and built from source each time is not significantly more difficult than making your own &quot;build from source&quot; work.<p>On the other hand, in my experience with Python&#x27;s native modules and observing others working on Electron Node native modules, if you&#x27;re depending on prebuilt native binaries (the alternative is building native extensions from source, requiring everyone building your app to have a JS&#x2F;Python toolchain plus a C++ toolchain that the JS&#x2F;Python can find), you are at the mercy of the maintainer of the native extensions to fix bugs for you and release prebuilt binaries. That&#x27;s unless you build and host your own native binaries with your own bugfixes and tweaks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-14 04:21:21 &#43;0000 UTC">2021-06-14 04:21:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; What is a Qt app without a single C++ line of code? Is it written in PyQt?<p>Yeah I meant PyQt since when you use Qt bindings you mostly bypass burden of C++. With single non-Qt dependency it&#x27;s just end up worse.<p>&gt; I&#x27;ve had the opposite experience; if you can build your own application code using CMake, and...<p>Be honest about it starting with CMake: even CMake alone is a mess especially if you have to target not just latest version. It&#x27;s has mixed code quality, non-existent dependency management (both Vcpkg and MXE are far from perfect) and require you to know tens different specifics if you want to build C++ project across Windows, Linux and macOS.<p>And if you want your open source project to be successful you need good CMake configuration so contributors across 3 different OS can easily setup development environment and builds.<p>I&#x27;m not gonna lie - I do far more experience working with C++ &#x2F; Qt rather than Electron as well as other web-tech based desktop apps. But it&#x27;s just crazy how many hours, nights, days and weeks I sinked into messing with CMake and debugging C++ project and some 3rd-party library build issues instead of actually writing the code for my projects.<p>PS: Might be I have somewhat rose-tinted glasses when I look at using non-Qt frameworks for desktop apps, but so far it&#x27;s feels far more plausable to bring some project to completion if it&#x27;s has nothing to do with C++.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Nicksil" target="_blank">Nicksil</a>   <span class="timeago" data-date="2021-06-12 19:10:18 &#43;0000 UTC">2021-06-12 19:10:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How often and to what extent did you build using Qt? Your arguments against using Qt don&#x27;t align with its actual capabilities. Qt has an extensive API so perhaps you weren&#x27;t aware Qt possesses such capabilities which would be understandable if your exposure to Qt was transient.<p>&gt;If your Qt app has single C++ line of code cross platform builds become much harder.<p>As I mentioned, Qt has an extensive cross-platform API; indeed that API is Qt&#x27;s value prop. If you&#x27;ve the need to write arch&#x2F;platform-specific UI code, then it&#x27;s very likely you&#x27;ll find the solution to that problem somewhere within Qt&#x27;s docs. If not, then you cannot expect to be able to write such code using Electron&#x2F;JavaScript.<p>&gt;Also regardless you still have to solve packaging and updates for Windows, macOS and Linux.<p>What&#x27;s to solve? Qt has had these capabilities. If you describe a specific issue, you may have an argument, otherwise this statement makes no claim.<p>&gt;Also it&#x27;s much harder to do QA and it&#x27;s take much more effort to maintain cross platform Qt app in general.<p>How so? This is such a broad and unspecific claim to the extent it isn&#x27;t possible to form a counter argument. State specifically the issues making it much harder to complete these tasks using Qt.<p>&gt;For Electron apps it&#x27;s all much easier because all native code is heavily tested by other commercial software<p>Qt&#x27;s testing suite is extensive. Qt is and has been deployed and &quot;heavily tested&quot; around the world for years. Qt is also deployed as an embedded technology.<p>&gt;PS: I shipped C++ apps built using Qt and cross-platform part is huge time sink.<p>I&#x27;m not sure you spent much time doing this because Qt makes shipping cross-platform software so simple it sometimes feels like I&#x27;m cheating (there are exceptions when dealing with very specific platform&#x2F;arch-specific items as I mentioned above; there is no solution in JavaScript.). There must be some specific issue(s) you came across, but without specifying what specifically made you perceive using Qt a huge time sink, the statement makes no claim.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-12 23:41:02 &#43;0000 UTC">2021-06-12 23:41:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t have enough time to make extensive reply at this moment, but still wish to clarify a point that I trying to make here. Also I do like Qt and Qt Creator is my favorite IDE. And I wish there were less of electon apps that eating GBs of my RAM for no reason, but I also understand that our world is not perfect.<p>So here is the problem: open source project usually mean that it&#x27;s gonna be project with just single maintainer for quite some time unless it&#x27;s get like really popular. So you gonna work on C++ codebase doing everything alone with limited resources.<p>Qt have a lot of features, but it&#x27;s still not comparable to what web stack has to offer. And if you take single external non-Qt library it&#x27;s will make builds, deploy and testing so much more harder. And testing or debugging desktop software alone is huge pain in ass when it&#x27;s cross platform. Running 3 different OS in VMs at least, etc.<p>Is Qt bad or lack something compared to Electron? No, not at all. But for 95% of open source projects C++ simply wont work. Messing with CMake, packaging and platform-specific mess most likely just gonna sink the project long before single developer manage to get it to stable, usable and user-friendly state.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 00:54:58 &#43;0000 UTC">2021-06-13 00:54:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=makomk" target="_blank">makomk</a>   <span class="timeago" data-date="2021-06-12 16:48:32 &#43;0000 UTC">2021-06-12 16:48:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, I suspect the main cross-platform portability issues you&#x27;re likely to run into with an app like that are differences in filesystem behaviour, and developing it as web app doesn&#x27;t really help there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 18:48:05 &#43;0000 UTC">2021-06-12 18:48:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Given that BinFinder only needs the ability to read&#x2F;write files and scan directories, it should be relatively cross platform out of the box. No real platform specific features, such as soft links, tags, etc necessary. On MacOS the app will likely need to ask for permission to access the disk, that&#x27;s the only cross platform file system issue I see at the moment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x7777" target="_blank">x7777</a>   <span class="timeago" data-date="2021-06-12 16:54:17 &#43;0000 UTC">2021-06-12 16:54:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a good point - still you&#x27;d be sacrificing product development speed for the low level fs access, so the author should really make sure they know how much of it they&#x27;ll need.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=paulryanrogers" target="_blank">paulryanrogers</a>   <span class="timeago" data-date="2021-06-12 16:51:20 &#43;0000 UTC">2021-06-12 16:51:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It depends on how dynamic the UI will be.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 18:51:29 &#43;0000 UTC">2021-06-12 18:51:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was hoping to design something where on the left side there would be a tree of all the Bins (folders) and user would be able to click check boxes next to the folders they care about and the UI would instantly update with a list of matching Bins on the right side of the UI. Data would be pulled from cache stored in SQLite DB.<p>Can you see any issues with this on either Electron or QT? At first glance it feels like both should ok.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-14 04:29:25 &#43;0000 UTC">2021-06-14 04:29:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Okay I hope you still readind replies so here is that: wanted to reply directly to topic starter since it&#x27;s most relevant. Some might be taken my posts here like I hate Qt or something, but I really like Qt.<p>I don&#x27;t see any issues with implementing your idea using Qt and it&#x27;s will absolutely certainly be using less CPU and RAM without any optimizations.<p>Yet IMHO there is good chance that if you stumble into some Qt &#x2F; CMake &#x2F; C++ issue then you gonna be wasting ten times more time on initial implementation. This is C++ for you. And this might kill your project before you even get to first stable version.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=paulryanrogers" target="_blank">paulryanrogers</a>   <span class="timeago" data-date="2021-06-13 01:55:57 &#43;0000 UTC">2021-06-13 01:55:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Should be possible with Qt widgets or Electron. Qt also has its own Electron-like web-based solution.<p>Qt widgets would likely be the fastest and lowest footprint. Though I&#x27;m not familiar enough to say exactly how you&#x27;d go about that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-12 18:24:04 &#43;0000 UTC">2021-06-12 18:24:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Desktop applications that manages local files can still use web UI. There is plenty of reasons why it&#x27;s can be nice to be able to access it through web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adamnemecek" target="_blank">adamnemecek</a>   <span class="timeago" data-date="2021-06-12 16:59:16 &#43;0000 UTC">2021-06-12 16:59:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been recently rolling my own Rust GUI framework using this rendering crate I’m invovled with <a href="https:&#x2F;&#x2F;github.com&#x2F;femtovg&#x2F;femtovg" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;femtovg&#x2F;femtovg</a> and I’m pretty happy with it.<p>I recently added a wgpu backend <a href="https:&#x2F;&#x2F;github.com&#x2F;adamnemecek&#x2F;femtovg" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;adamnemecek&#x2F;femtovg</a>.<p>Combine that with the Flutter layout (check out the Druid implementation), and you have a GUI framework.<p>Join the discord <a href="https:&#x2F;&#x2F;discord.gg&#x2F;V69VdVu" rel="nofollow">https:&#x2F;&#x2F;discord.gg&#x2F;V69VdVu</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SavantIdiot" target="_blank">SavantIdiot</a>   <span class="timeago" data-date="2021-06-12 17:02:49 &#43;0000 UTC">2021-06-12 17:02:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve built with Qt and Electron combined for over a dedcade.<p>Electron has entire libraries that are portable cross-OS. It is literally write once, deploy on Ubuntu, Mac, Win10. I&#x27;ve never had an issue, even using serial ports and USB interfaces. Qt is just a GUI, you will still need to write native hardware interface code. As a bonus, with Electron you also get ALL of the modern frameworks and templates. If you choose Qt you will always feel &quot;behind&quot;.<p>EDIT: Based on this thread I need to re-examine Qt. They now have cross-platform USB endpoint classes that are of interest. But I&#x27;m not giving up my frameworks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slobotron" target="_blank">slobotron</a>   <span class="timeago" data-date="2021-06-12 17:16:19 &#43;0000 UTC">2021-06-12 17:16:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Last time I used Qt, it had classes to abstract hardware.<p>Stuff like QSerialPort worked fine across platforms for my usage. YMMV
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=laurent123456" target="_blank">laurent123456</a>   <span class="timeago" data-date="2021-06-12 17:12:40 &#43;0000 UTC">2021-06-12 17:12:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Qt, isn&#x27;t it just a matter of finding a cross-platform C++ lib for whatever hardware support you need? Just like you&#x27;d look for an npm package for Electron?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-14 04:40:56 &#43;0000 UTC">2021-06-14 04:40:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C++ still don&#x27;t have ecosystem anywhere as easy-to-use compared to npm. There are two package managers with a lot of libraries (Vcpkg and MinGW &#x2F; MXE), but:<p>* Only very popular libraries actually available.<p>* Sometimes they break on package manager and no one notice for months since test coverage is often limited.<p>* Each extra library might cause tons of little issues and make your build system more and more complex.<p>* Libraries often don&#x27;t support all OS equally well.<p>* Most of mature C++ projects avoid those libraries and package managers.<p>So much often than with npm you will have to test each library on your own and what worse you might only learn that something fundamentally broken (on specific OS or architecture) inside it much much later. And with C++ it&#x27;s just harder to do refactoring to replace said library with something else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 18:07:06 &#43;0000 UTC">2021-06-12 18:07:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Nicksil" target="_blank">Nicksil</a>   <span class="timeago" data-date="2021-06-12 18:39:34 &#43;0000 UTC">2021-06-12 18:39:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;But I&#x27;m not giving up my frameworks.<p>Why would you dig your heels in if you&#x27;ve found a superior alternative fulfilling all your requirements?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SavantIdiot" target="_blank">SavantIdiot</a>   <span class="timeago" data-date="2021-06-12 20:05:51 &#43;0000 UTC">2021-06-12 20:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because I&#x27;m a rational human being. If something comes along that is better, I&#x27;ll jump ship. If Qt native meets my USB needs I&#x27;ll move to the next barrier: frameworks. If Qt solves that hurdle, why stay with Electron?<p>I was being funny but you took it seriously.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Nicksil" target="_blank">Nicksil</a>   <span class="timeago" data-date="2021-06-12 20:43:55 &#43;0000 UTC">2021-06-12 20:43:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understood your statement as saying you are not giving up Electron if you found Qt fulfills your requirements (USB). That&#x27;s was I was questioning: Why continue to use Electron if Qt does all the things you need to do.<p>Perhaps I misunderstood; text isn&#x27;t the best medium to convey tone.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SavantIdiot" target="_blank">SavantIdiot</a>   <span class="timeago" data-date="2021-06-12 23:34:03 &#43;0000 UTC">2021-06-12 23:34:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, sorry. Communication mishap indeed!! I was sort-of implying that now that I learned Qt offers USB support, one of my two reasons for not using Qt was dismantled, as if I was now worried that I made a mistake picking Electron and boy this sure sounds less and less funny as I type it out...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aliasEli" target="_blank">aliasEli</a>   <span class="timeago" data-date="2021-06-13 04:52:58 &#43;0000 UTC">2021-06-13 04:52:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I strongly suggest that you take a good look at git-annex[0].<p>git-annex manages (possible very large) files and helps you to copy&#x2F;move them between different storage location, e.g. usb sticks or hard drives (actually it supports far more than those). In your proposed scheme when you copy a file to a new location you must also copy the UID. This means that when you copy a file by traditional OS commands, your system will will not be able to recognize that the copies are actually identical. git-annex uses a smarter system because the unique identifier for a file is a hash of its contents. This means that it can detect if two files are identical or not[1].<p>In your description of a bin you have a name, description and tags as information about the bin. You only really need tags because they could be used to implement name and description. With git-annex you can add tags as metadata to each file [2].<p>git-annex is a great solution if you have many files stored in different locations.<p>[0] <a href="https:&#x2F;&#x2F;git-annex.branchable.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;git-annex.branchable.com&#x2F;</a>
+[1] If you think that you can produce SHA-256 collisions, you should be writing a scientific article about it and not spend so much time on HN.
+[2] <a href="https:&#x2F;&#x2F;git-annex.branchable.com&#x2F;git-annex-metadata&#x2F;" rel="nofollow">https:&#x2F;&#x2F;git-annex.branchable.com&#x2F;git-annex-metadata&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thinkyfish" target="_blank">thinkyfish</a>   <span class="timeago" data-date="2021-06-13 14:33:03 &#43;0000 UTC">2021-06-13 14:33:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your thinking about using Qt, check out U++(<a href="https:&#x2F;&#x2F;www.ultimatepp.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.ultimatepp.org&#x2F;</a>), its pretty powerful and I&#x27;ve never seen a better designed IDE for C++.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pi_el_59" target="_blank">pi_el_59</a>   <span class="timeago" data-date="2021-06-13 06:36:19 &#43;0000 UTC">2021-06-13 06:36:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want to learn some new tech.you could have a look at reasonML and the revery framework for your UI <a href="https:&#x2F;&#x2F;github.com&#x2F;revery-ui&#x2F;revery" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;revery-ui&#x2F;revery</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anaisbetts" target="_blank">anaisbetts</a>   <span class="timeago" data-date="2021-06-12 17:02:41 &#43;0000 UTC">2021-06-12 17:02:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just write it in the framework you&#x27;re most familiar and most likely to get something working in. You can always rewrite it later.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aryehof" target="_blank">aryehof</a>   <span class="timeago" data-date="2021-06-13 06:57:56 &#43;0000 UTC">2021-06-13 06:57:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your considering writing your application in something like C, C++, Rust or Go, then I would these days consider wrapping it in a Flutter &#x2F; Dart CLI that consumed it via FFI. Reach out if you want to discuss.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zmix" target="_blank">zmix</a>   <span class="timeago" data-date="2021-06-13 01:40:23 &#43;0000 UTC">2021-06-13 01:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally, if I see an app uses Electron, I look somewhere else... The only one I use is VSCode.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmytroi" target="_blank">dmytroi</a>   <span class="timeago" data-date="2021-06-12 17:03:27 &#43;0000 UTC">2021-06-12 17:03:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Web and Electron could be good if you&#x27;re willing to deal with Chromium Embedded Framework (CEF) directly, like Spotify desktop client does, it&#x27;s fairly snappy and feels good. That would mean that UI is web based, but everything else is native, and there is FFI of sorts in between. Though it probably only makes sense for a company of &gt;1000 people as at that scale issues like being able to hire specialists become more prominent (pool of web devs is simply larger than pool of Qt devs).<p>Qt is amazing, though only downside is near absence of ready-made 3rdparty widgets. Which limits the development speed quite a bit, while in other technologies you have an option to throw $$$ at the problem at get a widget of ok quality to solve your problem, there is very little of that available for Qt. So before venturing there I would recommend checking if built-in are covering everything you need, otherwise be prepared for a long road of making native-feeling widget that works with all platforms UI guidelines.<p>I would give .NET ecosystem a try, they cover both developer velocity (coding in Rider is amazing) and 3rdparty widgets (plenty available), albeit it&#x27;s not _that_ crossplatform just yet, .NET MAUI is only getting ready for .NET 6, so there be dragons :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=x0054" target="_blank">x0054</a>   <span class="timeago" data-date="2021-06-12 17:30:28 &#43;0000 UTC">2021-06-12 17:30:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was considering experimenting with .NET, but wasn&#x27;t sure how good GUI support is on MacOS and Linux. It&#x27;s worth a look as well. Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=musicale" target="_blank">musicale</a>   <span class="timeago" data-date="2021-06-13 03:23:31 &#43;0000 UTC">2021-06-13 03:23:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Electron and Qt are both terrible in different ways, but Electron is clunky and resource-heavy on all systems while Qt is primarily clunky on non-Linux systems.<p>Personally I&#x27;d go with almost anything that seems OK on Linux (e.g. GTK seems to be pretty mature and seems less susceptible to issues with the Qt company), and native on every other platform.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-06-13 02:48:30 &#43;0000 UTC">2021-06-13 02:48:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How come TCL&#x2F;TK or GT+ isn&#x27;t an option? They&#x27;re both far better.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spacechild1" target="_blank">spacechild1</a>   <span class="timeago" data-date="2021-06-13 22:32:44 &#43;0000 UTC">2021-06-13 22:32:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tk is very limited and full of bugs (especially the Cocoa implementation), you can&#x27;t even compare it to Qt. For a simple app it might be ok, though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=blueprint" target="_blank">blueprint</a>   <span class="timeago" data-date="2021-06-12 16:45:21 &#43;0000 UTC">2021-06-12 16:45:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;proton-native.js.org" rel="nofollow">https:&#x2F;&#x2F;proton-native.js.org</a> ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=legutierr" target="_blank">legutierr</a>   <span class="timeago" data-date="2021-06-12 17:10:17 &#43;0000 UTC">2021-06-12 17:10:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder, how does this compare to Microsoft&#x27;s React Native for desktop?<p><a href="https:&#x2F;&#x2F;microsoft.github.io&#x2F;react-native-windows&#x2F;" rel="nofollow">https:&#x2F;&#x2F;microsoft.github.io&#x2F;react-native-windows&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the__alchemist" target="_blank">the__alchemist</a>   <span class="timeago" data-date="2021-06-12 16:49:37 &#43;0000 UTC">2021-06-12 16:49:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Qt, absolutely. Great API and docs, and much more performant.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kabes" target="_blank">kabes</a>   <span class="timeago" data-date="2021-06-13 00:19:34 &#43;0000 UTC">2021-06-13 00:19:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Answer: The one you are most proficient in.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whydoineedthis" target="_blank">whydoineedthis</a>   <span class="timeago" data-date="2021-06-13 02:42:45 &#43;0000 UTC">2021-06-13 02:42:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The major app makers seem to think electron is the better choice, and I tend to agree.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tempest1981" target="_blank">Tempest1981</a>   <span class="timeago" data-date="2021-06-13 03:37:15 &#43;0000 UTC">2021-06-13 03:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t that because it&#x27;s easier to find web developers than Qt developers?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jazzfool" target="_blank">jazzfool</a>   <span class="timeago" data-date="2021-06-13 09:33:15 &#43;0000 UTC">2021-06-13 09:33:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            - Sent from my 32gb MacBook
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slightwinder" target="_blank">slightwinder</a>   <span class="timeago" data-date="2021-06-12 19:49:05 &#43;0000 UTC">2021-06-12 19:49:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I generate a lot of files for various projects. Some of my projects are professional software and hardware development projects, or marketing and design projects, for ongoing or one-off customers. Others are personal video, welding, making, building, etc projects. Lot&#x27;s of stuff to keep organized!<p>Funny, I have the same problem, and use a similar solution for a long time now.<p>&gt; What we need is a cross platform, cross UI (GUI and CLI interface), and cross file system solution. It has to work on thumb drives with ExFAT filesystem.<p>Why cross platform and cross filesystem? Why specifically ExFAT?
+Is this a personal Project or something Community-driven?<p>&gt; Bin Pointers - Pointers live in one part of the tree and point to a Bin in another part of the tree. Just like Aliases on MacOS, Shortcuts on Windows, or Soft Links on Linux, but cross platform and automatically self updating! If you move the target Bin, the Pointer will find where you moved it and update itself!<p>Many Buzzzwords. Also, are Windows-Shortcuts and Symbolic Links really the same? AFAIK Shortcuts are on desktop-level, while Symbolic Links are on Filesystem-Level. And Windows&amp;MacOS have links on Filesystem-Level too.<p>&gt; The base file organization unit in Bin Finder is a File Bin. A Bin is just a folder with a Bin Description File
+&gt; Because a File Bin is just a special type of folder, it can contain any number of files and sub-folders inside of it, including other Bins and Pointers to other Bins!
+&gt; If you need to tag or point to an individual file, it can be wrapped individually in a Bin. Since most human endeavors of any substance produce multiple files, this use case is relatively uncommon<p>Looks kind complicated... What&#x27;s the point of nested bins?<p>My own solution is similar, but simpler. I use a central folder $HOME&#x2F;HUB were I collect my sources (Local Drive, USB-Stick, NAS...). Each source has a subhierachy according to some personal reasons, with Content-Folders being on a fixed level. Each content-folder has #Tags in their name, and I use a simple script with rules to generate Hierachies of filesystem-links in my home-folder. I run the script occasionally when I change something, and thats it.<p>I also have a handful scripts and build a little GUI for managing code-projects, but overall it a very stable and straighforward solution. I mostly use a filemanager for 10+ years now, and overall it works very well. Though, I use it on Linux, were such things are common and easy. Having certain fixed paths for certain is also preferable, so my solution must be working on it&#x27;s own, without a gui.<p>&gt; When you click on a Pointer to the Project Bin you just moved, the system will first check where it has seen the bin last. If the system can&#x27;t find the Bin in that location, it will quickly rescan all of your Trees. If the Bin is found in another location, the system will update the pointer and open the Bin<p>This is pretty much the same as what Windows Shortcuts are doing.<p>This overall reads like you reimplement Windows Shortcuts, but for Multi-sourcesand with a focus on Project-Workspaces-Handling? How would this work on CLI? You can&#x27;t click them there?<p>&gt; I have most of the UI and workflows worked out in my head pretty well, but I find myself in a &quot;paralysis by analysis&quot; situation.<p>So you have not used it yet? Then why not start using it? Start as simple as possible an experience the basic concept in your daily life. I know from my own system that things evolved over many years and adapted to certain demands from my own life and work. Organizing is very personal an i won&#x27;t be always work as plannend.<p>&gt; GUI vs. CLI - I want to support both. But should it be a CLI first application that&#x27;s then wrapped with GUI?<p>What is the purpose of the GUI? How would you use it daily? What&#x27;s the purpose of CLI, How do you aim to use that? Waht ability do you even have? Are you a coder and could implement something fast? Or would you start by zero and would invest a juge a mount of time for this?<p>&gt; Language &#x2F; UI Library Selection - Here the choices appear to be Electron with JS vs. QT plus either Python, C++, or Go.<p>I use Python and Qt. It&#x27;s working well for this, as Python has a good focus on filesystem and cli-tooling, while PyQt allows fast growth into frontends. I would at least start with this for your first generation, till you have figured out what you really need. Start with cli, evolve into a lib, and build the GUI. Then you can still optimize with Go or Electron, depending on how it goes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=webmobdev" target="_blank">webmobdev</a>   <span class="timeago" data-date="2021-06-12 19:00:30 &#43;0000 UTC">2021-06-12 19:00:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  - GUI vs. CLI 
+</code></pre>
+Build command line tools first. Stick to the Unix philosophy of <i>&quot;Small is beautiful - do one thing and do it well&quot;</i> with each command program. Then build a GUI app for whatever platform you want to support.<p>Why CLI first? Command line tools can be used independently in scripts to automate various tasks (often repetitive tasks). This also further decouples programming logic so that you can work separately on the CLI code and the GUI code. (Here&#x27;s some good tips on how to create a GUI for a command line tool - <a href="https:&#x2F;&#x2F;softwareengineering.stackexchange.com&#x2F;a&#x2F;204316" rel="nofollow">https:&#x2F;&#x2F;softwareengineering.stackexchange.com&#x2F;a&#x2F;204316</a> ).<p>(Also keep in mind another Unix philosophy - <i>&quot;Reuse. Don&#x27;t reinvent &#x2F; rebuild&quot;</i>. The GNU Coreutils command line programs that is available for multiple platforms can be a real asset for your project - <a href="https:&#x2F;&#x2F;opensource.com&#x2F;article&#x2F;18&#x2F;4&#x2F;gnu-core-utilities" rel="nofollow">https:&#x2F;&#x2F;opensource.com&#x2F;article&#x2F;18&#x2F;4&#x2F;gnu-core-utilities</a> . SQLite is another software that can really make your project simpler).<p><pre><code>  - Language &#x2F; UI Library Selection
+</code></pre>
+For creating the command line tools, I&#x27;d recommend whatever language you are comfortable with, but I&#x27;d opt for something that can create a standalone executable.<p>For creating the GUI, consider the free and lesser known gem <i>Lazarus</i> <a href="https:&#x2F;&#x2F;www.lazarus-ide.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.lazarus-ide.org&#x2F;</a> - it can help you create <i>native GUI</i> for many platforms from one code-base (with some tweaks for each platform). A native GUI makes your application small, fast, and familiar to your users. The catch - you will have to learn Pascal to use it - if you are familiar with it, here&#x27;s a good tutorial <a href="http:&#x2F;&#x2F;www.delphibasics.co.uk&#x2F;Article.asp?Name=FirstPgm" rel="nofollow">http:&#x2F;&#x2F;www.delphibasics.co.uk&#x2F;Article.asp?Name=FirstPgm</a> to help you get started. (Note: Lazarus is an open source fork of Delphi - <a href="https:&#x2F;&#x2F;www.embarcadero.com&#x2F;products&#x2F;delphi" rel="nofollow">https:&#x2F;&#x2F;www.embarcadero.com&#x2F;products&#x2F;delphi</a> ).<p>Lazarus is better than QT because it uses the operating systems native GUI toolkit. You also don&#x27;t have to worry about licensing issues with Lazarus and can even create commercial closed source applications with it for free.<p>Lazarus is better than Electron because Electron bundles another layer over the OS (the chromium browser framework) to render the UI. That&#x27;s a lot of additional software just for a GUI, and will make your software big (50+ MB) and slower (chromium is a resource hog).<p>(But ... if time is a constraint or you don&#x27;t have the inclination to learn yet another programming language, then go with what you are most familiar. If it is C++ choose QT. If it is HTML + CSS + JS, choose Electron.)<p><pre><code>  - Use Cases
+</code></pre>
+I&#x27;d like it to be platform and filesystem agnostic - easily portable to another OS. Have fast indexing and search. Extensive tagging.  (Using a database, like SQLite, can really help with all this).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ziotom78" target="_blank">ziotom78</a>   <span class="timeago" data-date="2021-06-13 05:41:51 &#43;0000 UTC">2021-06-13 05:41:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree with this suggestion: Lazarus is
+ a great choice if you need to develop a GUI program.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

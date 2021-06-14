@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/making-invisible-glue-code-firstclass/">
+
+
+    <title>Making invisible glue code first-class - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Making invisible glue code first-class - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/making-invisible-glue-code-firstclass/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/making-invisible-glue-code-firstclass/">
+<meta name="twitter:title" content="Making invisible glue code first-class - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Making invisible glue code first-class - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T19:02:48JST",
+    "dateModified": "2021-06-12T19:02:48JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.metaobject.com/2021/06/glue-dark-matter-of-software.html?m=1">Making invisible glue code first-class</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codeismath" target="_blank">codeismath</a>   <span class="timeago" data-date="2021-06-12 23:42:41 &#43;0000 UTC">2021-06-12 23:42:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I recently watched a video [0] that contrasted all of the OO Design Patterns with Functional Programming equivalents.  After reading about how this author wants to make &quot;glue&quot; code &quot;first class&quot; and how the Unix pipe operator is an example of single-character-glue-code, my thoughts immediately went to the aforementioned video presentation.  Perhaps my &quot;glue code&quot; is simply gold-old &quot;function composition&quot;?<p>[0] Scott Wlaschin &quot;Functional programming design patterns&quot; <a href="https:&#x2F;&#x2F;vimeo.com&#x2F;113588389" rel="nofollow">https:&#x2F;&#x2F;vimeo.com&#x2F;113588389</a><p>[Edit] Spoiler alert:  each of the design patterns reviewed and contrasted in the video I mentioned seemed to &quot;disappear&quot; in FP since the equivalent is simply to use functions and&#x2F;or function composition.  Recently transitioning from C# to F# for my .NET Core projects, I felt the &quot;glue code&quot; the author mentions disappear in a similar manner with greatly-reduced code bloat.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bern4444" target="_blank">bern4444</a>   <span class="timeago" data-date="2021-06-14 06:51:30 &#43;0000 UTC">2021-06-14 06:51:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Scott is a great speaker and does an incredible job at talking about and explaining a ton of cool ideas in functional programming and makes his slides in F# easy to understand and apply those ideas.<p>Absolutely a great video and he has many others in addition to his site fsharpforfunandprofit.com
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shadytrees" target="_blank">shadytrees</a>   <span class="timeago" data-date="2021-06-13 02:47:44 &#43;0000 UTC">2021-06-13 02:47:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think function composition is powerful glue, indeed. Attach some side effect to the arrow, and all of a sudden you can implement a state machine, a reader environment, promises, or even continuations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mpweiher" target="_blank">mpweiher</a>   <span class="timeago" data-date="2021-06-13 06:43:13 &#43;0000 UTC">2021-06-13 06:43:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, function composition is one kind of glue, and it&#x27;s good that we have it.  But it&#x27;s only <i>one</i> kind of glue, and often not particularly useful (see the part of the post about <i>algorithm DSLs</i>).<p>As John Hughes put it in <i>Why Functional Programming Matters</i>, we need more kinds of glue.<p>See <a href="https:&#x2F;&#x2F;blog.metaobject.com&#x2F;2019&#x2F;02&#x2F;why-architecture-oriented-programming.html" rel="nofollow">https:&#x2F;&#x2F;blog.metaobject.com&#x2F;2019&#x2F;02&#x2F;why-architecture-oriente...</a><p>As to Design Patterns: the Smalltalk version of the Design Patterns book is a small booklet, most of the patterns just go away.  As to the video:  tried to watch, got to the &quot;it&#x27;s functions, functions functions and again functions&quot; slide.  For OO, it would be &quot;it&#x27;s objects, objects, objects and again, objects&quot;.  Sadly, most FP-centered critiques of OO are at this level, or even worse. :-&#x2F;<p>Overall, you&#x27;re going to have more patterns in FP because its model of computation is less powerful.  (See <i>Concepts, Techniques, and Models of Computer Programming</i>  <a href="https:&#x2F;&#x2F;www.info.ucl.ac.be&#x2F;~pvr&#x2F;book.html" rel="nofollow">https:&#x2F;&#x2F;www.info.ucl.ac.be&#x2F;~pvr&#x2F;book.html</a> for a definition of relative power ).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BoiledCabbage" target="_blank">BoiledCabbage</a>   <span class="timeago" data-date="2021-06-13 00:08:47 &#43;0000 UTC">2021-06-13 00:08:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He&#x27;s also got some other great videos on software design.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=crazygringo" target="_blank">crazygringo</a>   <span class="timeago" data-date="2021-06-12 20:33:57 &#43;0000 UTC">2021-06-12 20:33:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a really excellent topic to bring up -- the fact that glue code grows essentially quadratically.<p>Has it been a topic of exploration much in computer science? Any literature?<p>After all, sometimes it feels like <i>most</i> of the programming you wind up doing is glue code.<p>On the one hand, it feels like the kind of thing that there should be better tools for at least writing it <i>declaratively</i>, and let the computer turn it into code.<p>But on the other hand, it feels like a lot of that already <i>is</i> taken care of. E.g. CSS is essentially declarative glue code for what would otherwise be a huge number of painting and layout lines of code.<p>And most of the glue code I myself wind up writing winds up being written specifically to handle various constraints around memory, disk space, etc -- e.g. how to import a protobuf that changes every 30 seconds and convert it to 10,000 rows in a live database in a way that&#x27;s performant -- and so isn&#x27;t as amenable to something simple.<p>But I do still wonder if there&#x27;s more opportunity here for more declarative coding when it comes to &quot;glue&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bhrgunatha" target="_blank">bhrgunatha</a>   <span class="timeago" data-date="2021-06-13 02:46:34 &#43;0000 UTC">2021-06-13 02:46:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is a really excellent topic to bring up -- the fact that glue code grows essentially quadratically.<p>I think this was the motivation driving Microsoft&#x27;s Language Server Protocol.<p><a href="https:&#x2F;&#x2F;microsoft.github.io&#x2F;language-server-protocol&#x2F;" rel="nofollow">https:&#x2F;&#x2F;microsoft.github.io&#x2F;language-server-protocol&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=neilparikh" target="_blank">neilparikh</a>   <span class="timeago" data-date="2021-06-13 04:53:28 &#43;0000 UTC">2021-06-13 04:53:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LLVM (or, really, any IR&#x2F;bytecode format) solves a similar problem for programming languages and compilers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=squiggleblaz" target="_blank">squiggleblaz</a>   <span class="timeago" data-date="2021-06-12 21:39:39 &#43;0000 UTC">2021-06-12 21:39:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; After all, sometimes it feels like most of the programming you wind up doing is glue code.<p>This, except in spades.<p>&gt; But on the other hand, it feels like a lot of that already is taken care of. E.g. CSS is essentially declarative glue code for what would otherwise be a huge number of painting and layout lines of code.<p>Every gui environment seems to have something like that. Whether it&#x27;s as primitive as Win32 or as advanced as Android, you still program by putting widgets with properties in places. None of these really allow you to program the edges.<p>&gt; And most of the glue code I myself wind up writing winds up being written specifically to handle various constraints around memory, disk space, etc -- e.g. how to import a protobuf that changes every 30 seconds and convert it to 10,000 rows in a live database in a way that&#x27;s performant -- and so isn&#x27;t as amenable to something simple.<p>If the glue that I wrote served that purpose, I&#x27;d be happy. If you&#x27;re programming to meet a business requirement, it&#x27;s not really glue: and performing fast enough is a business requirement.<p>I can handle the Win32 glue, and work around it, because I know it&#x27;s there to make it easy to adapt code that was designed to work on computers with single digit megabytes of RAM.<p>If I write an Android program, the whole thing feels like writing glue, and the result is as chunky as an Android program always is. There&#x27;s like one line of code to implement a requirement surrounded by dozens of lines of code to fulfil the ever changing requirements of the API. The best way of actually focusing on the requirements is by writing even more lines of Rx glue to turn the whole thing inside out, but the Rx glue isn&#x27;t particularly concise either or well documented. The whole thing feels like I&#x27;m fighting against the people at Google, who give me an API that is neither efficient nor effective, nor some compromise of the two.<p>I do think these reactive style libraries and functional abstractions help to factor out some of the glue, if you don&#x27;t have to write it all yourself. And when I can write a page in an FRP style, I can squint and imagine, with a bit more work, the business rules could be expressed in a declarative&#x2F;markup language and even automatically drawn as a (state machine) diagram. In principle, with such a markup, you could write the glue for each platform and compile it to a native Swift iOS app or a Kotlin jvm Android app or JS app (using some library, perhaps Rx, as part of the target). (Naturally, you wouldn&#x27;t have something that was truly write once. Platform specific logic and processes should still be captured in the business logic, when they aren&#x27;t mere formalities. But it still gets the complexity way down.)<p>I think it&#x27;s in that direction we should go. Just like we can declaratively specify a REST API in Swagger and compile it to a target language and library, we should declarative specify the business logic of our program and compile it to a target language and library, instead of trying to specify our logic in terms of the APIs provided by some GUI service provider. The declarative language should be third party, so that it is genuinely adaptable to multiple platforms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=l0b0" target="_blank">l0b0</a>   <span class="timeago" data-date="2021-06-12 23:27:15 &#43;0000 UTC">2021-06-12 23:27:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Treating shell scripts as first class has taken me on a bit of a journey over the last decade:<p>- Learned from shunit2 that it&#x27;s possible to write solid shell scripts, and that writing test code in shell scripts is hard to learn but doable. Bonus: I&#x27;d rather write the test script in a more easily debuggable language, such as Python.<p>- Bash has many more surprises in store for you than any other mainstream language. How $IFS affects things, how looping over files is either completely trivial (`for file in *`) or damn near impossible (`while IFS= read -d &#x27;&#x27; -r -u 3; do …; done 3&lt; &lt;(find … -exec printf &#x27;%s\0&#x27;)`) based on the pattern you want to match, exit codes of arithmetic assignments, all the tricks to deal with not having exceptions, how `ls` is unsuitable for scripting despite being ubiquitous, locales, variable flags, and so on.<p>- `shellcheck` is fantastic, especially for including URLs to more information about each warning.<p>- Greg&#x27;s Wiki[0], despite being hard to find in search engines, is the best place by far for learning about Bash.<p>- Writing a shell script to do some fast, asynchronous processing is maybe 30-100 times faster than writing the same in Python, but getting the nitty-gritty details right is about 30-100 times harder as well.<p>[0] <a href="https:&#x2F;&#x2F;mywiki.wooledge.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;mywiki.wooledge.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=awolf" target="_blank">awolf</a>   <span class="timeago" data-date="2021-06-12 20:16:13 &#43;0000 UTC">2021-06-12 20:16:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One patten I&#x27;ve seen to address this is to define a &quot;plugin architecture&quot; where disparate components are integrated into the main system via fixed &quot;sockets&quot;. The sockets themselves are generic as is the glue code that attaches plugin and socket.<p>This does create a lot of boiler plate, but that boiler plate is predictable and uninteresting, and a good candidate for code generation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-12 22:12:56 &#43;0000 UTC">2021-06-12 22:12:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So it&#x27;s kind of like oop code with traits and interfaces?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-06-12 22:31:01 &#43;0000 UTC">2021-06-12 22:31:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isomorphisms.<p>They let us think about things very easily, and express ideas very cleanly.
+When I Think about a system, I treat isomorphic things as almost exactly the same.<p>But when actually writing code, I need to fully spell out the isomorphism. That is glue code.So the code becomes my clear ideas, with awkward glue in between.<p>My dream is a compiler that knows these isomorphisms, and automatically implements them with decent (perhaps guided by me) optimization.<p>This way, the idea in my head and the code in my editor start looking like eachother a whole lot more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danielheath" target="_blank">danielheath</a>   <span class="timeago" data-date="2021-06-12 22:35:38 &#43;0000 UTC">2021-06-12 22:35:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe the activefacts project is within a year or two of having this ability  (the hard research is done, but not the legwork to connect it to everything else).<p>Specifically, it should be able to automatically convert between any representation of any subset of the facts in a model.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 23:34:54 &#43;0000 UTC">2021-06-12 23:34:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fierro" target="_blank">fierro</a>   <span class="timeago" data-date="2021-06-13 07:09:36 &#43;0000 UTC">2021-06-13 07:09:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not understanding the importance of distinguishing glue code from non glue code.  It&#x27;s still work that needs to be done whether it&#x27;s &quot;first class&quot; or not.  That difference boils down to who writes it, not the fact that it is present in the code base (as measured by LOC, which the author measures and attributes the cause of high LOC to glue code)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fierro" target="_blank">fierro</a>   <span class="timeago" data-date="2021-06-13 07:07:18 &#43;0000 UTC">2021-06-13 07:07:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read this article but am having a hard time understanding the point in concrete terms.  What does it mean to make invisible glue code first class?  How would reduce the #LOC, which is something the author mentioned many times?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brabel" target="_blank">brabel</a>   <span class="timeago" data-date="2021-06-13 19:16:12 &#43;0000 UTC">2021-06-13 19:16:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glue code is almost always uninteresting, incidental, boilerplate. But as the author points out, it makes up for the large majority of a code base because it grows quadratically with the number of components that need to be glued together.<p>A powerful language to describe what needs to connect to what (similar to the Unix pipe) could perhaps make the glue code much more obvious and concise. Whether that&#x27;s achievable is the question the author is asking, and apparently trying to answer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=______-" target="_blank">______-</a>   <span class="timeago" data-date="2021-06-12 21:12:35 &#43;0000 UTC">2021-06-12 21:12:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s worth researching the demoscene[0] and how demos that looked <i>very complex</i> were made with as few lines of code as possible. Every byte was accounted for and nothing went to waste.<p>This is a common thing in games and Super Mario even re-used the cloud sprite for the bushes[1]<p>Now we have to deal with gargantuan Electron apps that hog your PC&#x27;s resources for housing what essentially is a lightweight webapp.<p>[0] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Demoscene" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Demoscene</a><p>[1] <a href="https:&#x2F;&#x2F;www.todayifoundout.com&#x2F;index.php&#x2F;2010&#x2F;01&#x2F;the-clouds-and-bushes-in-super-mario-bros-are-the-same&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.todayifoundout.com&#x2F;index.php&#x2F;2010&#x2F;01&#x2F;the-clouds-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tluyben2" target="_blank">tluyben2</a>   <span class="timeago" data-date="2021-06-14 05:37:26 &#43;0000 UTC">2021-06-14 05:37:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A lot of time and complexity went into inventing those simple things. If you ever made something &#x27;large&#x27; in a very constraint environment (like a mcu with 24kb for all including the drivers and the OS) which is what old home computers and consoles had in common with that and demo programming in another but similar way (getting every ounce from the system which has (artificial or real) limitations, you will have noticed that this is hardly comparable with what the author is saying. You are mixing glue and other code and try to sometimes mix them into one thing (stuff a hardware driver inside the business logic) etc. In the modern  demoscene potentially more (depending on the allowed size of the end result), but in the other cases the end result will have far less resemblance of something that called be considered and architecture. Or something you want to work with afterwards. The code fits in your head and you understand every byte; that does not scale to much more than indeed these examples. Not something the author is targeting or referencing besides line count. And we are indeed talking line count then k&#x2F;j or code golfing would fit with different degrees of readability of the end result, just like your examples and most embedded code (not talking rasberry pis; talking what runs in your dishwasher).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 22:50:23 &#43;0000 UTC">2021-06-12 22:50:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fouric" target="_blank">fouric</a>   <span class="timeago" data-date="2021-06-12 21:44:52 &#43;0000 UTC">2021-06-12 21:44:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I posted this to Lobste.rs when this story hit there and I&#x27;ll post it again here:<p>&gt; The pipe is one-character glue: “|”.<p>I think that this is mistaken. Pipe makes it easy to connect the output of one program to the input of another, but that is not the same as “gluing” them - you have to do text processing to actually extract the fields of data out of the output from one command and convert it into the right format for input to another.<p>This is why you see tr, cut, sed, awk, perl, grep, and more throughout any non-trivial shell script (and even in many trivial ones) - because very, very few programs actually speak “plain text” (that is, fully unstructured text), and instead speak an ad-hoc, poorly-documented, implementation-specific, brittle semi-structured-text language which is usually different than the other programs you want them to talk to. Those text-processing programs are the Unix glue code.<p>The explicit naming of “glue code” is brilliant and important - but the Unix model, if anything, increases the amount of glue code, not deceases it. (and not only because of the foolish design decision to make everything “plain” text - the “do one thing” philosophy means that you have to use more commands&#x2F;programs (which are equivalent to functions in a program) to implement a given set of features, which increases the amount of glue code you have to use - gives you a larger n, which is really undesirable if your glue code scales as n^2)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=squiggleblaz" target="_blank">squiggleblaz</a>   <span class="timeago" data-date="2021-06-12 22:04:17 &#43;0000 UTC">2021-06-12 22:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think that&#x27;s right. If you compare bash:<p><pre><code>    ls | sort
+</code></pre>
+with some pseudocode:<p><pre><code>    stdin_ls &lt;- empty_read_stream()
+    stdout_ls &lt;- init_write_stream()
+    stdin_sort &lt;- init_read_stream()
+    stdout_sort &lt;- init_write_stream()
+ 
+    plug_stream(stdout_ls, stdin_sort)
+    stream_sink(stdout_sort, function_that_processes_lines)
+
+    handle_ls &lt;- start_proc(&quot;ls&quot;, stdin_ls, stdout_ls)
+    handle_sort &lt;- start_proc(&quot;sort&quot;, stdin_sort, stdout_sort)
+
+    wait_for_both(handle_ls, handle_sort)
+</code></pre>
+it seems that &quot;|&quot; is definitely gluing things together.<p>It&#x27;s true that it doesn&#x27;t do everything you want. But it&#x27;s truly glue. It&#x27;s crazy to imply that there&#x27;s only one level of glue.<p>You identify other glue: if you want to sort by something that isn&#x27;t the whole line, you need to write a bunch of glue. But that doesn&#x27;t mean this isn&#x27;t glue.<p>&gt; the foolish design decision to make everything “plain” text<p>I don&#x27;t think you can call it foolish and be taken seriously. You can disagree about whether it was the right design decision, but it was neither the first nor the last system to transfer unstructured data and rely on external programs to interpret them. It seems to have paid off too - systems descended from this design are widespread. You might not like paying the tradeoff, but a lot of people find it productive.<p>Powershell has some improvements on top of the Unix model because it saw the benefits of the Unix model and the costs of it. In either case, the gui world has nothing like the productivity of either system.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nivertech" target="_blank">nivertech</a>   <span class="timeago" data-date="2021-06-13 12:51:23 &#43;0000 UTC">2021-06-13 12:51:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Powershell has some improvements on top of the Unix model because it saw the benefits of the Unix model and the costs of it.</i><p>yes, the pattern is to have some internal normalized generic-enough data structure on which pipes will operate.
+Then all you need is the ability to convert non-normalized  input sources into it, and the same with the output formats.<p>BTW: the UNIX pipes forks the processes, but Windows&#x27; CMD.com was executing the stages in the pipeline sequentially, not sure about PowerShell.<p>&gt; <i>the gui world has nothing like the productivity of either system.</i><p>I think Tcl&#x2F;Tk is kind of GUI glue. It&#x27;s very easy to build a GUI front-end for an existing CLI commands &#x2F; scripts.<p>EDIT: also COM&#x2F;OLE, ActiveX, JavaBeans were promising code re-use for GUIs
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsmith45" target="_blank">jsmith45</a>   <span class="timeago" data-date="2021-06-14 15:22:58 &#43;0000 UTC">2021-06-14 15:22:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            cmd.exe most certainly does execute the pipeline in parallel, much as unixes do. The old MS-DOS command.com would not (since only single process at a time execution was even supported). I have no idea if the Windows 9X&#x2F;ME version of command.com worked the same way as dos or not, and I don&#x27;t feel like firing up a VM to find out.<p>Now cmd.exe has maintained a lot of stupidity, and even many obvious bugs from the old command.com executable, in order to ensure that positively ancient script still run as expected. (This includes horribleness like the cmd.exe code not being able to read ahead in the .bat file, in order to support old self-modifying .bat file tricks!).<p>But sequential-only pipelines are not part of the stupidity that was kept in place.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mpweiher" target="_blank">mpweiher</a>   <span class="timeago" data-date="2021-06-13 06:49:24 &#43;0000 UTC">2021-06-13 06:49:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You are mistaken.<p>Connecting them <i>is</i> gluing them.<p>What you are describing is massaging the data so that the computation yields the result that you want.<p>I am not saying that Unix pipe got everything right, it did not.  And the &quot;everything is text&quot; idea is a compromise that is both brilliant and awkward.  It is brilliant because it means that the end-user packaging and compositional packaging of functionality is actually the same, which is generally hard to impossible to achieve, and something people generally get wrong.  That is, they create end-user packaging for their components and then wonder why it doesn&#x27;t compose.  Or create compositional packaging and wonder why it&#x27;s unusable.<p>But of course you are stuck with the awkwardness that often things don&#x27;t express so well as text.<p>Another thing is that filter composition is only applicable to small subset of problems (though a larger one than is often thought), going outside that range quickly leads to &quot;unnatural programs&quot; (see <i>Concepts, Techniques, and Models of Computer Programming</i>, <a href="https:&#x2F;&#x2F;www.info.ucl.ac.be&#x2F;~pvr&#x2F;book.html" rel="nofollow">https:&#x2F;&#x2F;www.info.ucl.ac.be&#x2F;~pvr&#x2F;book.html</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-06-13 00:06:58 &#43;0000 UTC">2021-06-13 00:06:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            However, to the post’s point, the glue (the arguments to tr, sed, etc) becomes explicit and easy to identify.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=canary1" target="_blank">canary1</a>   <span class="timeago" data-date="2021-06-12 20:05:14 &#43;0000 UTC">2021-06-12 20:05:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great idea, I wish there were a little more on possible ways to implement it though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TechBro8615" target="_blank">TechBro8615</a>   <span class="timeago" data-date="2021-06-13 00:16:33 &#43;0000 UTC">2021-06-13 00:16:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t understand why “master” is problematic but “first class” is okay.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-06-13 03:04:58 &#43;0000 UTC">2021-06-13 03:04:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps because the passengers in steerage had some choice in the matter, and didn&#x27;t generally get sold, separated from their family, and tortured on arrival.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=euroderf" target="_blank">euroderf</a>   <span class="timeago" data-date="2021-06-13 05:39:57 &#43;0000 UTC">2021-06-13 05:39:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Best of breed&quot; always makes me think of eugenics gone awry.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

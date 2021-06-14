@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/silent-data-corruptions-at-scale/">
+
+
+    <title>Silent Data Corruptions at Scale - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Silent Data Corruptions at Scale - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/silent-data-corruptions-at-scale/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/silent-data-corruptions-at-scale/">
+<meta name="twitter:title" content="Silent Data Corruptions at Scale - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Silent Data Corruptions at Scale - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T14:49:31JST",
+    "dateModified": "2021-06-12T14:49:31JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="http://muratbuffalo.blogspot.com/2021/06/silent-data-corruptions-at-scale.html">Silent Data Corruptions at Scale</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=paulsutter" target="_blank">paulsutter</a>   <span class="timeago" data-date="2021-06-12 17:28:39 &#43;0000 UTC">2021-06-12 17:28:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps run a complex “idle process” that exercises the major functional areas of the CPU and can detect such failures so that such cores&#x2F;cpus can be isolated &#x2F; decommissioned. Really should be part of Linux<p>Anyone know of a suitable program for such a process?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=willvarfar" target="_blank">willvarfar</a>   <span class="timeago" data-date="2021-06-12 20:23:45 &#43;0000 UTC">2021-06-12 20:23:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are programs, used for testing and “fuzzing” compilers, that generate random programs based on a seed.<p>When a node runs a random program, it doesn’t know if the output is correct.  But it could report the seed and result to a central database.<p>Then, if you had a several nodes, and two nodes ran the same seed and got different output, that would mean something was wrong and needed investigation.<p>There are also programs for reducing such programs down to a minimum test case.  So once a discrepancy is found, it can be reduced to some small program that recreates it.<p>I once worked on a compiler backend and a CI job generated random C programs and compared x86 output. against the novel cpu simulator.  Any discrepancies found were auto reduced by these tools and then a ticket was automatically created.  Lots of our bugs were found and fixed this way.<p>(My memory is we used C-reduce for the reductions.  I can’t remember the tool we used for generating the test programs, but there are several.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ot" target="_blank">ot</a>   <span class="timeago" data-date="2021-06-12 20:57:31 &#43;0000 UTC">2021-06-12 20:57:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would assume that most large fleets have background periodic tasks that perform basic self-checks (the fleets I know about certainly do).<p>Using &quot;idle&quot; cycles is not a great idea though:<p>- They may seem &quot;free&quot;, but in fact you would end up using more power: CPU turns itself off during idle time, and you&#x27;d replace that with an intensive process. Power (and, as a consequence, cooling) is one of the main costs of a data center.<p>- Machines that are properly utilized (close to 100% CPU utilization) would get less coverage, and those are the ones that need it the most.<p>So it is better to allocate a certain percentage of your CPU budget to self checks, based on risk and sensitivity of the tests. And have some easy way to put a machine under stress testing if it is suspected of having rare memory or CPU errors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=makomk" target="_blank">makomk</a>   <span class="timeago" data-date="2021-06-12 18:44:42 &#43;0000 UTC">2021-06-12 18:44:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The general reckoning seems to be that it wouldn&#x27;t be possible to write such a program without internal knowledge available only to the CPU manufacturer, and maybe not even then - modern CPUs are too complicated and have too much stuff going on that&#x27;s not under direct control of the software running on them,
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tinus_hn" target="_blank">tinus_hn</a>   <span class="timeago" data-date="2021-06-13 09:50:48 &#43;0000 UTC">2021-06-13 09:50:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Windows does this sometimes, it causes mysterious excessive cpu usage attributed to ‘memory compression’.<p>I presume in theory this would be using idle time only but in practice it’ll slow down your system a lot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anotherhue" target="_blank">anotherhue</a>   <span class="timeago" data-date="2021-06-12 17:46:06 &#43;0000 UTC">2021-06-12 17:46:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            zfs scrub might be compelling.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=imperialdrive" target="_blank">imperialdrive</a>   <span class="timeago" data-date="2021-06-12 17:40:17 &#43;0000 UTC">2021-06-12 17:40:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This article is a little scary to me, and your idea&#x2F;solution sounds pretty clever!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kevingadd" target="_blank">kevingadd</a>   <span class="timeago" data-date="2021-06-12 18:52:04 &#43;0000 UTC">2021-06-12 18:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are a few game engines that do this while running to detect bad hardware. The resulting &#x27;bad hardware flag&#x27; is tracked and forwarded in crash reports to help sort them out from the &#x27;real&#x27; crash reports (caused by bugs), and the information is also shown to the user when they hit an issue (&#x27;you seem to have bad RAM&#x27;, etc). It&#x27;d be cool to see this turned into a reusable library that could be included by various types of software that is more likely to be impacted by bad hardware and can afford to burn a little cpu&#x2F;gpu while it&#x27;s running - you wouldn&#x27;t want it in background services, but a game or high performance server app might be able to justify it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TazeTSchnitzel" target="_blank">TazeTSchnitzel</a>   <span class="timeago" data-date="2021-06-12 22:18:09 &#43;0000 UTC">2021-06-12 22:18:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; introduce more […] asserts statements<p>I agree that&#x27;s a good idea, but don&#x27;t people usually disable asserts in production?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jboggan" target="_blank">jboggan</a>   <span class="timeago" data-date="2021-06-12 19:20:37 &#43;0000 UTC">2021-06-12 19:20:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As someone building numerous Spark workloads this is quite concerning.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rob_c" target="_blank">rob_c</a>   <span class="timeago" data-date="2021-06-12 23:10:59 &#43;0000 UTC">2021-06-12 23:10:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I raise you the WLCG and OSG computing grids with distributed global datasets. Checksums of transfers and verified reproducibility works wonders.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hermitcrab" target="_blank">hermitcrab</a>   <span class="timeago" data-date="2021-06-12 19:52:24 &#43;0000 UTC">2021-06-12 19:52:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought this was going to be about the UK government.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

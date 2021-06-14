@@ -1,0 +1,1775 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/elevator-saga-an-elevator-programming-game/">
+
+
+    <title>Elevator Saga – An elevator programming game - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Elevator Saga – An elevator programming game - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/elevator-saga-an-elevator-programming-game/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/elevator-saga-an-elevator-programming-game/">
+<meta name="twitter:title" content="Elevator Saga – An elevator programming game - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Elevator Saga – An elevator programming game - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T20:08:05JST",
+    "dateModified": "2021-06-12T20:08:05JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://play.elevatorsaga.com/">Elevator Saga – An elevator programming game</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jun8" target="_blank">Jun8</a>   <span class="timeago" data-date="2021-06-12 22:39:39 &#43;0000 UTC">2021-06-12 22:39:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Made me remember an interesting anecdote: During my PhD at Purdue I had the good luck to take the Pattern Recognition (nowadays would be called ML) course from Prof. Fukunaga, one of the pioneers in the field (<a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Keinosuke_Fukunaga" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Keinosuke_Fukunaga</a>). In one of his classes he mentioned that years ago a company came to him, requesting his expertise in optimizing movement of a bank of elevators. He thought it would be trivial :-) After telling us that all his approaches failed miserably, he had one of his impish laughs and told us that he never worked on that problem again. Miss that guy. Get a copy of his book (<a href="https:&#x2F;&#x2F;books.google.com&#x2F;books&#x2F;about&#x2F;Introduction_to_Statistical_Pattern_Reco.html?id=BIJZTGjTxBgC&amp;printsec=frontcover&amp;source=kp_read_button&amp;newbks=1&amp;newbks_redir=0&amp;gboemv=1" rel="nofollow">https:&#x2F;&#x2F;books.google.com&#x2F;books&#x2F;about&#x2F;Introduction_to_Statist...</a>) if you can, it’s written in the “old style” but very informative.<p>Interesting fact: Gen Fukunaga (<a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Gen_Fukunaga" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Gen_Fukunaga</a>), founder of anime company Funimation, is his son.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=abhgh" target="_blank">abhgh</a>   <span class="timeago" data-date="2021-06-13 02:21:15 &#43;0000 UTC">2021-06-13 02:21:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is this anecdote in the text &quot;Operations Research, An Introduction.&quot; by Hamdy Taha, which I consider to be  a very good example of picking the right tools for the job. An OR group was hired to fix elevator wait times in an office building. After studying the problem they installed full-length mirrors at the entrance to the elevators. Complaints around elevator service disappeared as people were now engaged in watching themselves and others while waiting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=b0afc375b5" target="_blank">b0afc375b5</a>   <span class="timeago" data-date="2021-06-13 03:02:56 &#43;0000 UTC">2021-06-13 03:02:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I first heard of this from Dr. Russell Ackoff&#x27;s Systems Thinking Speech. I had a mini mind blown moment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jyriand" target="_blank">jyriand</a>   <span class="timeago" data-date="2021-06-13 07:41:09 &#43;0000 UTC">2021-06-13 07:41:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me a parable from Are your lights on by Gerald Weinberg.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=labster" target="_blank">labster</a>   <span class="timeago" data-date="2021-06-12 23:49:40 &#43;0000 UTC">2021-06-12 23:49:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve always wondered if the main computer in Star Trek has to be so big just to manage the turbolifts. Three dimensional elevators with multiple exits per level, probably prioritizing routes dynamically based on the passengers and the military alert level. Imagine the algorithms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lloydatkinson" target="_blank">lloydatkinson</a>   <span class="timeago" data-date="2021-06-13 07:49:57 &#43;0000 UTC">2021-06-13 07:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it would fundamentally be a constraint based programming problem, eg the sudoku solvers, travelling salesman implementations, software that tells eg Amazon warehouses which parcels go in the van first based on both size and the route it’s planned so that the driver never had to dig all the parcels out to get the buried ones.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=changoplatanero" target="_blank">changoplatanero</a>   <span class="timeago" data-date="2021-06-13 01:24:45 &#43;0000 UTC">2021-06-13 01:24:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my ML class some students did a project on using reinforcement learning to optimize elevators. They told me that after 100 years of operation the algorithm would have enough data to start working really well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MobileVet" target="_blank">MobileVet</a>   <span class="timeago" data-date="2021-06-13 00:46:24 &#43;0000 UTC">2021-06-13 00:46:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Boiler Up!<p>I had Prof Fukunaga for EE301 I think (Might have been EE202).  I was too young and dumb to recognize his brilliance.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jun8" target="_blank">Jun8</a>   <span class="timeago" data-date="2021-06-13 05:25:33 &#43;0000 UTC">2021-06-13 05:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Awesome, it’s a small world. I was his teaching assistant during the times he taught EE301 (Signals &amp; Systems) so chances are I’ve corrected your exams!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-06-13 03:20:35 &#43;0000 UTC">2021-06-13 03:20:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I started in physics before switching to CS.  I&#x27;m glad the ECE department is good, because the CS department was terrible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=clarkmoody" target="_blank">clarkmoody</a>   <span class="timeago" data-date="2021-06-13 05:19:40 &#43;0000 UTC">2021-06-13 05:19:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I pounded my head on this problem in a multi-agent system course in graduate school. Needless to say, I could not outperform a simple naive algorithm however hard I tried.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=curmudgeon22" target="_blank">curmudgeon22</a>   <span class="timeago" data-date="2021-06-12 23:37:22 &#43;0000 UTC">2021-06-12 23:37:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            During Covid, I&#x27;ve often wished I could reprogram the elevator of the apartment building I live in.  The current rule is only 2 people can be in the elevator at a time.<p>Problems that arise:<p>* Elevator stopping frequently, but already at capacity, slowing down overall performance<p>* Elevator always goes to bottom (or top) first to pick up passengers going up (or down).  This means if your waiting on the ground floor and it&#x27;s a busy time, folks at the parking levels will repeatedly get picked up before you.<p>Possible solutions:<p>* First come, first served (need to remember order of what floor pushed button when)<p>* Ability to set elevator as &quot;full&quot;.  Even if abused by a single person, still better than multiple wasted stops.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextlevelwizard" target="_blank">nextlevelwizard</a>   <span class="timeago" data-date="2021-06-13 05:02:58 &#43;0000 UTC">2021-06-13 05:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean you aren&#x27;t wrong, but also this is all logic tha has existed in elevators for decades, but if your building owner just slaps a piece of paper artificially creating a limit the elevator system won&#x27;t be aware of it. On other hand they could have made an configuration order and paid to change the behavior of the elevator, to reduce its capacity. Then it wouldn&#x27;t make extra stops since it would know that it is at max capacity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=asdfasgasdgasdg" target="_blank">asdfasgasdgasdg</a>   <span class="timeago" data-date="2021-06-13 00:10:20 &#43;0000 UTC">2021-06-13 00:10:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elevator could also make a decent guess at fullness just by recording the discrete changes in weight. It wouldn&#x27;t be perfect but again it would probably be better than allowing user input.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=em-bee" target="_blank">em-bee</a>   <span class="timeago" data-date="2021-06-13 01:00:15 &#43;0000 UTC">2021-06-13 01:00:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i believe all elevators at least have a failsafe to refuse to run if they are overloaded. going from there to tracking and using the actual weight for its programming is not a big step
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kqr" target="_blank">kqr</a>   <span class="timeago" data-date="2021-06-13 06:22:02 &#43;0000 UTC">2021-06-13 06:22:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, elevators know to some accuracy how many people-mass things are in it. It just rarely has reason to use that information.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mortehu" target="_blank">mortehu</a>   <span class="timeago" data-date="2021-06-13 02:19:27 &#43;0000 UTC">2021-06-13 02:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another failure: when there&#x27;s a line, and you already know you&#x27;ll need multiple cars, the elevator button will still only allow you to call one car at a time. Even if several cars are already on your level with the doors closed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=webmaven" target="_blank">webmaven</a>   <span class="timeago" data-date="2021-06-13 03:20:56 &#43;0000 UTC">2021-06-13 03:20:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; Ability to set elevator as &quot;full&quot;. Even if abused by a single person, still better than multiple wasted stops.</i><p>I&#x27;d add a couple of sensors (one for volume and one for weight) to let the elevator itself determine how full it is and act accordingly.<p>I would also still have a &quot;full&quot; button for people to press, but not have the button actually do anything, except maybe light up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joshka" target="_blank">joshka</a>   <span class="timeago" data-date="2021-06-13 05:01:17 &#43;0000 UTC">2021-06-13 05:01:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would a first order approximation of &quot;full&quot; be &quot;has two destinations&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextlevelwizard" target="_blank">nextlevelwizard</a>   <span class="timeago" data-date="2021-06-13 05:06:50 &#43;0000 UTC">2021-06-13 05:06:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could but if passengers knew that it would result into single passengers pressing two car calls so they could get private elevator ride. Rather you would just use the normal passenger counting system i.e. correlating weight scale with photocell cuts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-06-13 00:46:36 &#43;0000 UTC">2021-06-13 00:46:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            During COVID I think it&#x27;s totally reasonable for any person to be able to set the elevator as &quot;full&quot; - if you&#x27;re returning from travel and quarantining, immunocompromised, etc. you might not want to travel with anyone.<p>Also,<p>* Elevator door closes when it&#x27;s not in use - may as well stay open, get some ventilation, and use slightly less energy!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=canada_dry" target="_blank">canada_dry</a>   <span class="timeago" data-date="2021-06-13 02:12:03 &#43;0000 UTC">2021-06-13 02:12:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; any person to be able to set the elevator as &quot;full&quot;<p>Sadly, in an apartment building there are several people who are selfish.  These types would use the feature to monopolize the elevator for moving.<p>&gt; door closes - stay open?<p>Prob to reduce the time to travel to a floor.  If the doors were open it would add another 15secs in addition to the travel time to reach the called floor.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ziptron" target="_blank">ziptron</a>   <span class="timeago" data-date="2021-06-12 23:44:24 &#43;0000 UTC">2021-06-12 23:44:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always wished elevator buttons could toggle. If you accidentally press the wrong floor, just press it again to cancel. This may not work in all situations, but in some situations, it could be a time saver.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rovek" target="_blank">rovek</a>   <span class="timeago" data-date="2021-06-13 08:54:51 &#43;0000 UTC">2021-06-13 08:54:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always try this if I accidentally press a button, or enter an empty lift with a few buttons pressed. One glorious day in a hotel in Penang, I double-pressed a button and my dreams came true, lights out. That one experience will be enough to keep my dreams alive for decades to come
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joshribakoff" target="_blank">joshribakoff</a>   <span class="timeago" data-date="2021-06-13 01:56:38 &#43;0000 UTC">2021-06-13 01:56:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Many modern ones in high rise buildings require you to scan a key fob and&#x2F;or enter the desired floor number, then it tells you which elevator to go wait at. The ones with the key fob often replace your previous selection automatically.<p>There are not buttons in this style of elevator other than door open door close and call for help.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=randomswede" target="_blank">randomswede</a>   <span class="timeago" data-date="2021-06-14 13:46:58 &#43;0000 UTC">2021-06-14 13:46:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A so-called &quot;lobby system&quot;. Works well, IFF people understand that 1 passenger &lt;=&gt; 1 press, instead of having a group of (say) 5 having only one in the group press, then all of them piling in.<p>Used correctly, it can massively improve the elevator usage experience. Used incorrectly, it ends up being worse than a &quot;indicate travel direction&quot; system.<p>Having used it in 3 (I think) buildings with this system, it was definitely used correctly in one, definitely NOT used correctly in another and in the third, I was mostly present sufficiently outside normal working hours that I cannot with certainty state how it was used.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tshaddox" target="_blank">tshaddox</a>   <span class="timeago" data-date="2021-06-13 07:00:14 &#43;0000 UTC">2021-06-13 07:00:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In an office building near me, the security person at reception enters a destination floor and tells you which elevator to step into. There are no controls outside or in the elevator (other than emergency stuff).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mcrae" target="_blank">mcrae</a>   <span class="timeago" data-date="2021-06-13 00:14:30 &#43;0000 UTC">2021-06-13 00:14:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It works this way often in (north-east) Asia. Double-tap a selected floor and it unselects. Brilliant.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thesnide" target="_blank">thesnide</a>   <span class="timeago" data-date="2021-06-13 06:43:10 &#43;0000 UTC">2021-06-13 06:43:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep. My office one does that. I first it was a joke, but it actually is indeed a brilliant scheme to avoid misclicks.<p>And as you seldom unselect, it&#x27;s Huffman coding for the win ;-)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=em-bee" target="_blank">em-bee</a>   <span class="timeago" data-date="2021-06-13 00:56:44 &#43;0000 UTC">2021-06-13 00:56:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            our elevator does that, and i noticed it is quite common in chinese elevators. i can undo all destinations which makes the elevator just stop.<p>living on the top floor of a highrise, i was occasionally able to use that when i realized that i forgot something at home (although most times it takes me longer to realize that than the elevator needs to make it all the way down)<p>it is also very useful when the kids are naughty and press all the buttons for fun
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 06:41:03 &#43;0000 UTC">2021-06-13 06:41:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vishnugupta" target="_blank">vishnugupta</a>   <span class="timeago" data-date="2021-06-13 08:08:35 &#43;0000 UTC">2021-06-13 08:08:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is my top of the wish list feature as well! Then my 9yo son told me the feature exists, just double tap&#x2F;press the desired floor button. I thought he was joking, but no! It works!! How he discovered it I will never know!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=larschdk" target="_blank">larschdk</a>   <span class="timeago" data-date="2021-06-13 07:30:26 &#43;0000 UTC">2021-06-13 07:30:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the reason for this could be to prevent you cancelling other people&#x27;s destinations. I can only imagine the public freakout that could unfold, even if it was accidental.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextlevelwizard" target="_blank">nextlevelwizard</a>   <span class="timeago" data-date="2021-06-13 05:00:51 &#43;0000 UTC">2021-06-13 05:00:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the thing is that elevators are these days way more complex than anybody would even imagine, but the thing also is that there are no tutorials given to people who use them. Also extra features cost extra money and building owners usually just want the very basic stuff for residentals.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-06-12 21:40:14 &#43;0000 UTC">2021-06-12 21:40:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One past discussion, plus a one-commenter:<p><i>Elevator Saga: The Elevator Programming Game</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21425054" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21425054</a> - Nov 2019 (1 comment)<p><i>Elevator Saga – An elevator programming game</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8929314" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8929314</a> - Jan 2015 (104 comments)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=larschdk" target="_blank">larschdk</a>   <span class="timeago" data-date="2021-06-13 07:37:01 &#43;0000 UTC">2021-06-13 07:37:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And sadly it still has some unfixed bugs since 2015 where people don&#x27;t consider the up&#x2F;down indicators correctly, and will not enter the elevator even though the lights are on in the direction they want to go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TheRealNGenius" target="_blank">TheRealNGenius</a>   <span class="timeago" data-date="2021-06-12 21:54:08 &#43;0000 UTC">2021-06-12 21:54:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah disk scheduling algorithms :) <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Elevator_algorithm" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Elevator_algorithm</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Daneel_" target="_blank">Daneel_</a>   <span class="timeago" data-date="2021-06-13 03:07:22 &#43;0000 UTC">2021-06-13 03:07:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Call me weird, but I’ve been fascinated by elevator logic  since I was a child. I had a math curiosities book that dedicated a chapter to it and after reading that I was hooked on knowing more.<p>I wish my knowledge of JavaScript was more than “programming language that’s not Java” so I could actually play this.<p>Could anyone recommend an online introduction to JS so I can attempt to play this?<p>I’m more of a bash guy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GreenWatermelon" target="_blank">GreenWatermelon</a>   <span class="timeago" data-date="2021-06-13 03:30:39 &#43;0000 UTC">2021-06-13 03:30:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you know your way around any programming language, then hop on (<a href="https:&#x2F;&#x2F;learnxinyminutes.com" rel="nofollow">https:&#x2F;&#x2F;learnxinyminutes.com</a>) to quickly get the hang of any other language.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=petee" target="_blank">petee</a>   <span class="timeago" data-date="2021-06-13 19:43:54 &#43;0000 UTC">2021-06-13 19:43:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;www.codecademy.com" rel="nofollow">https:&#x2F;&#x2F;www.codecademy.com</a><p>I didn&#x27;t finish, but I recall enjoying their intro to JS, and managed to write a few working things hah
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=7373737373" target="_blank">7373737373</a>   <span class="timeago" data-date="2021-06-13 08:39:54 &#43;0000 UTC">2021-06-13 08:39:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, to understand the asynchronous nature of Javascript, have a look at this excellent presentation and website:<p><a href="http:&#x2F;&#x2F;latentflip.com&#x2F;loupe&#x2F;" rel="nofollow">http:&#x2F;&#x2F;latentflip.com&#x2F;loupe&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gnramires" target="_blank">gnramires</a>   <span class="timeago" data-date="2021-06-13 06:57:32 &#43;0000 UTC">2021-06-13 06:57:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An interesting improvement over naive operation I thought long ago: idle elevators should go to 1&#x2F;2 maximum floor! You easily cut average wait times in 1&#x2F;2!<p>Problem is, it&#x27;s also energy inefficient. If you get a passenger at floor 1 or 0, you&#x27;ve wasted a lot of movement. On-demand movement wastes minimally.<p>So I&#x27;ve learned of a tradeoff between energy and waiting time -- not just elevator speed, but in algorithms.<p>It&#x27;s fun to consider a minimal energy solution (it takes a very long time to get anywhere ;) ).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gnramires" target="_blank">gnramires</a>   <span class="timeago" data-date="2021-06-13 07:41:38 &#43;0000 UTC">2021-06-13 07:41:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve also learned it&#x27;s a classic under-specified problem. To solve it completely you need, for example:<p>1) distribution of arrival times and destinations of passengers;<p>(For example, if late evening people usually go up, it&#x27;s best to idle on ground floor)<p>2) a &quot;satisfaction function&quot;, giving a measure of performance of your system:<p>You can get low average waiting times and diverging maximum wait time for a busy elevator, simply trade time from a single passenger for others (by e.g. never going to a floor). As long as utilization is significant at all times, this phenomenon exists.<p>Clearly it&#x27;s not only average we care about, but also maximum and minima of transit times.<p>---<p>It&#x27;s a very illuminating modelling exercise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spicybright" target="_blank">spicybright</a>   <span class="timeago" data-date="2021-06-12 22:13:02 &#43;0000 UTC">2021-06-12 22:13:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are real elevators ever coded with logic like mentioned in this thread? Or do they just keep it a simple as possible?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-12 22:28:38 &#43;0000 UTC">2021-06-12 22:28:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They can be. Express elevators and such. But mainly the programs are limited to what floor the elevators idle at because more complicated programs even if more efficient overall often piss people off.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BuildTheRobots" target="_blank">BuildTheRobots</a>   <span class="timeago" data-date="2021-06-12 23:33:56 &#43;0000 UTC">2021-06-12 23:33:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;which floors the elevators idle at...<p>I recently spent 4 months in hospital which left me with an amount of time to kill in an attempt to stay sane. One of the games was trying to get places I was technically allowed but really shouldn&#x27;t have been (&quot;sod your &#x27;no public access&#x27; signs, in not public, I&#x27;m an inpatient!&quot;). Being confined to a wheelchair made the game a bit more difficult.
+One day one of the ward staff mentioned that the building used to have a 4th floor which got mothballed years ago. None of the elevators had a button for it and trying to get up a flight of stairs wasn&#x27;t an option.
+After puzzling for a while, I finally realised that one of the elevators was still set to idle on the 4th floor. Get in the elevator, don&#x27;t press any buttons, read a book for 10 minutes and bam - elevator returns itself to the 4th floor, opens the doors and goes ping. I wheel myself out to find I&#x27;m not just on the 4th floor, but also behind (on the inside of) the locked doors at the top of the stairs, which I counted as a double win ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-13 00:29:44 &#43;0000 UTC">2021-06-13 00:29:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hopefully you don’t have to spend the time again - but if you do it’s very easy to buy the fireman’s key on eBay. You didn’t hear that here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wolrah" target="_blank">wolrah</a>   <span class="timeago" data-date="2021-06-13 02:43:09 &#43;0000 UTC">2021-06-13 02:43:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Relevant video discussing fire keys and other common keys: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=a9b9IYqsb_U" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=a9b9IYqsb_U</a><p>And since this thread is about elevators, I have to also mention another video of theirs: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ZUvGfuLlZus" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=ZUvGfuLlZus</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-06-12 23:58:10 &#43;0000 UTC">2021-06-12 23:58:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s amazing. I&#x27;ll be trying that trick next time I have some time to kill in a building!<p>We also play the game sometimes of getting places we&#x27;re not supposed to (as consultants). Walk around like you&#x27;re from IT and are supposed to be there (technically both true), perhaps with a laptop under your arm, nobody will care what you do to any of the computers there. In schools and hospitals, and probably other places, try (variants of) the city you&#x27;re in as password, perhaps combined with the postal code, and you usually get access to <i>everything</i> because of course the staff needs to actually help you. The username is pre-filled, don&#x27;t worry about that (most of the time that&#x27;s the field with more entropy).<p>It&#x27;s honestly terrifying and short of locking rooms (because some of the personnel needs fast access to computers, preferably faster than plugging in and out smartcards all day long) there just isn&#x27;t really a solution. I&#x27;m pretty sure we could have walked into a surgery room, we steered clear of any place that looked like it might head us into places with patients under actual operation. Why those aren&#x27;t locked I don&#x27;t know, probably there is a good reason so probably they can&#x27;t change that...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 00:38:57 &#43;0000 UTC">2021-06-13 00:38:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spicybright" target="_blank">spicybright</a>   <span class="timeago" data-date="2021-06-13 00:05:50 &#43;0000 UTC">2021-06-13 00:05:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure for surgery rooms (at least), needing someone to rush in to help and having them fumble with ID cards outweighs a bad party trying to, I guess, muck up a surgery or something.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=templeos3" target="_blank">templeos3</a>   <span class="timeago" data-date="2021-06-13 05:51:35 &#43;0000 UTC">2021-06-13 05:51:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very rarely do you have people rushing in to surgery rooms. Despite TV dramas, most surgeries are not high risk, most surgical patients are not critically ill, and those that are tend to be pre-staffed for the risk. OR rooms are not usually locked but the surgical suite sure is. The bigger issue with the surgical suite is proper attire. ICUs are a different matter (where coincidentally I happen to be tonight). Generally all the staff you need is already on the locked side of the unit.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-13 00:28:37 &#43;0000 UTC">2021-06-13 00:28:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            “Men are better than gates” - Gandalf - the real security on the surgery rooms are those in them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=em-bee" target="_blank">em-bee</a>   <span class="timeago" data-date="2021-06-13 01:15:35 &#43;0000 UTC">2021-06-13 01:15:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            in the hospitals that i have been for visits usually the whole intensive care area and other sensitive areas were access controlled. so while the door to the actual surgery room might have been open, you are often not even allowed anywhere near.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=em-bee" target="_blank">em-bee</a>   <span class="timeago" data-date="2021-06-13 01:22:32 &#43;0000 UTC">2021-06-13 01:22:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            our elevator allows undoing pressed buttons. if no buttons are pressed, then the elevator will stop. now you could play a game where you try to get the elevator to stop at a particular floor without pressing that floors button.
+the only downside is that our elevator does not open the doors if no button is pressed, so any off-limit floors would remain inaccessible
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-06-12 23:22:35 &#43;0000 UTC">2021-06-12 23:22:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The logic to pick up passengers is the easy part of a real elevator. Some harder problems: a) Physics. How to drive the motors to move smoothly and efficiently to the desired floor and stop level with the landing. b) Safety and regulatory. There are lots of safety features that need to be implemented, e.g. control by fire fighters. c) Customization. There are lots of special cases, either for customer desires or laws in different states. d) Networking. How do you get the signals from the hall call buttons to the controller and from the controller to the hall lanterns? Tons of wires or a protocol? e) Diagnostics and failure handling. What do you do if something goes wrong? What do you log for maintenance?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=voldemort1968" target="_blank">voldemort1968</a>   <span class="timeago" data-date="2021-06-12 21:50:29 &#43;0000 UTC">2021-06-12 21:50:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was thinking of creating this very thing on several occasions being in an elevator. The logic of elevators is very intriguing and more complicated than people realize.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=7373737373" target="_blank">7373737373</a>   <span class="timeago" data-date="2021-06-12 21:55:28 &#43;0000 UTC">2021-06-12 21:55:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure if this is true. I think all elevators I&#x27;ve encountered followed the elevator&#x2F;SCAN algorithm:<p>&gt; the elevator continues to travel in its current direction (up or down) until empty, stopping only to let individuals off or to pick up new individuals heading in the same direction.<p>with the elevator staying on its last location if there are no new requests and there being no buffering time after a request, first come first served<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Elevator_algorithm" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Elevator_algorithm</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=falldmg" target="_blank">falldmg</a>   <span class="timeago" data-date="2021-06-12 22:09:32 &#43;0000 UTC">2021-06-12 22:09:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you ever seen elevators where you select a floor from the outside and it gets assigned to one of multiple elevators? Those seem like they might be doing something more sophisticated.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=disposedtrolley" target="_blank">disposedtrolley</a>   <span class="timeago" data-date="2021-06-12 22:42:54 &#43;0000 UTC">2021-06-12 22:42:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used to have those elevators where I worked and everybody hated them. I think the algorithm was tuned for efficiency, so you’d be waiting for an elevator for minutes as it tries to batch everyone up, while a dozen other elevators sit idle.<p>This was made worse through the need to specify the number of people who are travelling to a specific floor so the algorithm can allocate enough space in each elevator. Large groups often ignored this so you’d often find that an elevator you’ve waited minutes for is full, and start the dance all over again.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Destination_dispatch" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Destination_dispatch</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-12 23:00:59 &#43;0000 UTC">2021-06-12 23:00:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is the problem - if the system goes beyond “what floor should I idle at” and “do I idle door open” people get mad at it because of apparent unfairness and inefficiency even if it is actually more efficient overall.<p>Same thing happens with traffic lights.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jchw" target="_blank">jchw</a>   <span class="timeago" data-date="2021-06-13 08:24:13 &#43;0000 UTC">2021-06-13 08:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This got downvoted, but I’m pretty sure it is objectively correct. I feel like the same sentiment occurs with one queue vs multiple queues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-13 13:47:24 &#43;0000 UTC">2021-06-13 13:47:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Continued small motion in a long single queue feels “fairer” than multiple queues - and may actually be.<p>But I also know most people prefer a driving trip where they’re continually moving rather than one where they’re basically stopped - even if the second is shorter in time.<p>“Apparent fairness” is an important design criteria for dealing with the public. Even if the system is actually incredibly unfair.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dialogbox" target="_blank">dialogbox</a>   <span class="timeago" data-date="2021-06-12 22:07:27 &#43;0000 UTC">2021-06-12 22:07:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is true only for the single elevator system. If there are multiple elevators, the system could be extremely complicated.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextlevelwizard" target="_blank">nextlevelwizard</a>   <span class="timeago" data-date="2021-06-13 05:09:29 &#43;0000 UTC">2021-06-13 05:09:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This works if you have only a single elevator, but if you have a group of elevators that work together and serve same set of floors you can start optimizing the trips for example journey time vs wait time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lloydatkinson" target="_blank">lloydatkinson</a>   <span class="timeago" data-date="2021-06-12 22:37:59 &#43;0000 UTC">2021-06-12 22:37:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What am I doing wrong?<p><pre><code>        for(elevator of elevators) {
+            elevator.on(&#x27;idle&#x27;, () =&gt; {
+                &#x2F;&#x2F;do some logic with elevator
+            })
+        }
+</code></pre>
+It only seems to run for the second elevator rather than both of them?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mercora" target="_blank">mercora</a>   <span class="timeago" data-date="2021-06-12 22:56:08 &#43;0000 UTC">2021-06-12 22:56:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i likely ran into the same or a related issue. i dont know much about javascript though.<p><pre><code>        for(var i = 0; i &lt; elevators.length; i++) {
+            elevators[i].on(&quot;idle&quot;, function() {
+                for(var j = 0; j &lt; floors.length; j++) {
+                    elevators[i].goToFloor(j);
+                }
+            })
+        }
+</code></pre>
+it only works for &quot;i &lt; 1&quot; and then only the second elevator moves... its kinda sad as i immediately enjoyed playing ...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=garaetjjte" target="_blank">garaetjjte</a>   <span class="timeago" data-date="2021-06-12 23:16:03 &#43;0000 UTC">2021-06-12 23:16:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think this was discussed there: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8933979" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8933979</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mercora" target="_blank">mercora</a>   <span class="timeago" data-date="2021-06-12 23:22:23 &#43;0000 UTC">2021-06-12 23:22:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this did indeed help understanding and fixing the issue.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=davnicwil" target="_blank">davnicwil</a>   <span class="timeago" data-date="2021-06-12 23:51:20 &#43;0000 UTC">2021-06-12 23:51:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just in case this is interesting, a potentially more elegant way to solve this with modern JS is to use &#x27;for(let i&#x27; instead of &#x27;for(var i&#x27;.<p>The reason is that &#x27;let&#x27; gives &#x27;i&#x27; &#x27;block scope&#x27;, meaning that each iteration of the loop block gets its own scope so that &#x27;i&#x27; isn&#x27;t overwritten each time, and each function you declare captures the value of &#x27;i&#x27; at the time it was declared.<p>In other words - the way you originally expected &#x27;var&#x27; to behave <i>is</i> how &#x27;let&#x27; behaves!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pazqo" target="_blank">pazqo</a>   <span class="timeago" data-date="2021-06-13 13:20:20 &#43;0000 UTC">2021-06-13 13:20:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You should be able to accomplish the same with elevators.forEach((elevator) =&gt; {})
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lloydatkinson" target="_blank">lloydatkinson</a>   <span class="timeago" data-date="2021-06-14 07:53:11 &#43;0000 UTC">2021-06-14 07:53:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It could, but favouring FP I&#x27;d use for..of for imperative loops where I need to do side-effects, or use .map which is nicer anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=emiphil" target="_blank">emiphil</a>   <span class="timeago" data-date="2021-06-13 01:47:25 &#43;0000 UTC">2021-06-13 01:47:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            for (elevator ... Like that is making a new global variable called elevator which is getting overwritten on the next loop. You need to for(const elevator... (or let).<p>The other thread is the same answer but for a slightly different case
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=umvi" target="_blank">umvi</a>   <span class="timeago" data-date="2021-06-13 01:41:34 &#43;0000 UTC">2021-06-13 01:41:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Should be `for (let elevator of elevators)`
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lloydatkinson" target="_blank">lloydatkinson</a>   <span class="timeago" data-date="2021-06-13 07:45:03 &#43;0000 UTC">2021-06-13 07:45:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh my god you’re right, oops. I wouldn’t normally make that mistake but no IDE and coding at night apparently isn’t a good mix!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=muddywater" target="_blank">muddywater</a>   <span class="timeago" data-date="2021-06-13 14:06:17 &#43;0000 UTC">2021-06-13 14:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re building an API to monitor elevators and stuff inside buildings. There are smart and dumb elevators. In any case, no one is actively using the data yet to improve our experiences like mentioned on this thread...sometimes we just wish we knew when to take the stairs.<p>If you&#x27;re curious to view the kind of data streaming from a building or basic elevator, see here: (<a href="https:&#x2F;&#x2F;onboarddata.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;onboarddata.io&#x2F;</a>), python SDK is on Github (<a href="https:&#x2F;&#x2F;github.com&#x2F;onboard-data&#x2F;client-py" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;onboard-data&#x2F;client-py</a>). Every building is different. Some elevators have data on flooding, weight, inspection, electricity usage, while others do not.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=petee" target="_blank">petee</a>   <span class="timeago" data-date="2021-06-13 19:49:56 &#43;0000 UTC">2021-06-13 19:49:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most hotels I&#x27;ve stayed at seem to be significantly limited on speed; anything &lt;=5 floors is almost always faster to just head for the stairs and not even bother waiting. After a week, it&#x27;s 6 floors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jmchuster" target="_blank">jmchuster</a>   <span class="timeago" data-date="2021-06-13 06:49:39 &#43;0000 UTC">2021-06-13 06:49:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you like these programming games, localmotion has one where you schedule taxis to pick up passengers between buildings.<p><a href="https:&#x2F;&#x2F;www.getlocalmotion.com&#x2F;code-challenge" rel="nofollow">https:&#x2F;&#x2F;www.getlocalmotion.com&#x2F;code-challenge</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Aeolun" target="_blank">Aeolun</a>   <span class="timeago" data-date="2021-06-12 23:42:21 &#43;0000 UTC">2021-06-12 23:42:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, this reminds me of the elevator banks in my office. I’m sure there’s something going on there. It can let me know which of 8 elevators is coming to pick me up as soon as I press the button.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SMAAART" target="_blank">SMAAART</a>   <span class="timeago" data-date="2021-06-13 01:30:10 &#43;0000 UTC">2021-06-13 01:30:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>            elevator.goToFloor(0);
+            elevator.goToFloor(1);
+            elevator.goToFloor(2);
+            elevator.goToFloor(3);
+            elevator.goToFloor(4);</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=juloo" target="_blank">juloo</a>   <span class="timeago" data-date="2021-06-13 16:06:05 &#43;0000 UTC">2021-06-13 16:06:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s annoying that it doesn&#x27;t highlight syntax errors. It&#x27;s even worse than that because it&#x27;s intercepting the syntax error for logging purpose and loses any informations. You get unrelated errors in the app&#x27;s code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adenozine" target="_blank">adenozine</a>   <span class="timeago" data-date="2021-06-12 21:36:09 &#43;0000 UTC">2021-06-12 21:36:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used to interview programmers with an elevator programming problem. Neat to see it expanded so excellently and cleanly in this piece. Well done!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alasdair_" target="_blank">alasdair_</a>   <span class="timeago" data-date="2021-06-12 22:21:44 &#43;0000 UTC">2021-06-12 22:21:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had this question during a Google interview. The interviewer became annoyed when I suggested that an elevator that sometimes went backwards to pick ip someone on a just-missed floor could at least be interesting, if not perfectly efficient.<p>They had a preconceived idea that they wanted a stateless system and didn’t like my stateful approach, even if it was potentially better for end users.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adenozine" target="_blank">adenozine</a>   <span class="timeago" data-date="2021-06-12 23:29:28 &#43;0000 UTC">2021-06-12 23:29:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that&#x27;s one reason I stopped doing like code-this-thing style of interviews. There&#x27;s no point in contriving problems for someone, we could both be working on something useful. I think for me at least, the main attribute I look for in a candidate for a developer role is the ability-to-avoid-shitty-solutions-ness of someone. If they steer themselves from bad ideas well, the rest can be taught by presentation and practice with the rest of the team.<p>I&#x27;ve had a similar idea around measuring how many riders make calls over say the past 100 rides, and then trying to calculate how efficient it might be to deviate a few floors either direction to grab someone close-by. It&#x27;s an interesting hole to climb into.<p>Did you get the gig at google?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=em-bee" target="_blank">em-bee</a>   <span class="timeago" data-date="2021-06-13 00:50:22 &#43;0000 UTC">2021-06-13 00:50:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the problem is having particular expectations at the outcome, which is wrong. even after hiring, if i have a particular expectation how problems are to be solved, then that will lead to disappointment, micromanagement and disempowerment of my developers. i did use elevatorsaga in interviews with good results. having someone making such an unusual suggestion in an interview would be a plus for me. this person is thinking out of the box. and it would lead to a discussion of the difference of optimizing solutions for overall performance vs user expectations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alasdair_" target="_blank">alasdair_</a>   <span class="timeago" data-date="2021-06-13 01:05:30 &#43;0000 UTC">2021-06-13 01:05:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn’t. I tried again later in my career but ended up taking up Facebook’s offer before the final Google round.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-12 23:02:01 &#43;0000 UTC">2021-06-12 23:02:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s an example of a thing that may work well but would piss users off - it apparently reversing would annoy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Thorrez" target="_blank">Thorrez</a>   <span class="timeago" data-date="2021-06-13 03:23:56 &#43;0000 UTC">2021-06-13 03:23:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not just annoy. Some users might think they accidentally got on the wrong elevator (&quot;oops, I got on a down elevator instead of an up elevator&quot;) and leave the elevator at the next floor to ask for a new elevator.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 03:20:00 &#43;0000 UTC">2021-06-13 03:20:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=grensley" target="_blank">grensley</a>   <span class="timeago" data-date="2021-06-13 04:04:45 &#43;0000 UTC">2021-06-13 04:04:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really like just asking &quot;how do elevators work&quot;?<p>It&#x27;s so open ended and they can talk about anything from the algorithm, to the mechanical design of elevators, to the UI, to a high-level discussion of all the different components.<p>Really lets you know quickly which parts of systems candidates are interested in.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=petee" target="_blank">petee</a>   <span class="timeago" data-date="2021-06-13 19:54:13 &#43;0000 UTC">2021-06-13 19:54:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An advanced level of this game should have you implement your logic with mechanical relays. Those relay banks are always fascinating
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sleepy_keita" target="_blank">sleepy_keita</a>   <span class="timeago" data-date="2021-06-12 23:32:35 &#43;0000 UTC">2021-06-12 23:32:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve always been fascinated with elevator algorithms. This is awesome!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=asiachick" target="_blank">asiachick</a>   <span class="timeago" data-date="2021-06-12 21:32:15 &#43;0000 UTC">2021-06-12 21:32:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t remember the article but I remember reading about a building management game where the reviewer believed the entire game was based around the elevator management code and that writing that code was fun for the programmer but the game itself was not fun for the player.<p>It looks like this highlights the &quot;fun for the programmer&quot; part.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SaberTail" target="_blank">SaberTail</a>   <span class="timeago" data-date="2021-06-12 23:28:56 &#43;0000 UTC">2021-06-12 23:28:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As aidenn0 said, this sounds like SimTower and its sequel Yoot Tower. There&#x27;s a section of the manual[1] called &quot;A Message From Yoot Saito, Creator of Sim Tower&quot; that describes how he started creating it because he was curious about elevator programming.<p>[1] <a href="https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;SimTower_-_Manual_-_PC&#x2F;page&#x2F;n7&#x2F;mode&#x2F;2up" rel="nofollow">https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;SimTower_-_Manual_-_PC&#x2F;page&#x2F;n7&#x2F;m...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-06-12 21:37:24 &#43;0000 UTC">2021-06-12 21:37:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe Sim Tower?  The game was pretty boring, but building and managing elevators to keep people happy was a fun challenge.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=noduerme" target="_blank">noduerme</a>   <span class="timeago" data-date="2021-06-13 08:31:41 &#43;0000 UTC">2021-06-13 08:31:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sim Tower and Sim Ant were both great network-building games. They seemed boring until you really delved into the details. Maxis was really genius up until EA bought them. Here&#x27;s a pretty cool project they did that never came to light...<p><a href="https:&#x2F;&#x2F;www.gamesradar.com&#x2F;simrefinery-the-lost-oil-plant-game-from-maxis-is-now-playable-in-your-browser&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.gamesradar.com&#x2F;simrefinery-the-lost-oil-plant-ga...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SMAAART" target="_blank">SMAAART</a>   <span class="timeago" data-date="2021-06-13 01:27:20 &#43;0000 UTC">2021-06-13 01:27:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            elevator.goToFloor(1);
+elevator.goToFloor(2);
+elevator.goToFloor(0);
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jtsummers" target="_blank">Jtsummers</a>   <span class="timeago" data-date="2021-06-13 01:28:22 &#43;0000 UTC">2021-06-13 01:28:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That (or a slight variation) works for the first couple of levels. Then it gets harder.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SamBam" target="_blank">SamBam</a>   <span class="timeago" data-date="2021-06-13 02:25:40 &#43;0000 UTC">2021-06-13 02:25:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was happy that my solution for level 4 was also accepted for level 5 and 6. Only a small tweak was needed for level 7, as now moves were counted instead of time.<p>The next level required no passenger to wait longer that a certain amount of time, and I would have had to trash half my program, so I quit for now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

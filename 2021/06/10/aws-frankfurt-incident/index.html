@@ -1,0 +1,2458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/10/aws-frankfurt-incident/">
+
+
+    <title>AWS Frankfurt incident - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="AWS Frankfurt incident - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/aws-frankfurt-incident/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/10/aws-frankfurt-incident/">
+<meta name="twitter:title" content="AWS Frankfurt incident - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "AWS Frankfurt incident - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-10T22:29:15JST",
+    "dateModified": "2021-06-10T22:29:15JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://status.aws.amazon.com/#EU_block">AWS Frankfurt incident</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 02:06:23 &#43;0000 UTC">2021-06-11 02:06:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            6:54 PM PDT<p>Starting at 1:18 PM PDT we experienced connectivity issues to some EC2 instances, increased API errors rates, and degraded performance for some EBS volumes within a single Availability Zone in the EU-CENTRAL-1 Region.<p>At 4:26 PM PDT, network connectivity was restored and the majority of affected instances and EBS volumes began to recover.<p>At 4:33 PM PDT, increased API error rates and latencies had also returned to normal levels. The issue has been resolved and the service is operating normally. The root cause of this issue was a failure of a control system which disabled multiple air handlers in the affected Availability Zone. 
+These air handlers move cool air to the servers and equipment, and when they were disabled, ambient temperatures began to rise. Servers and networking equipment in the affected Availability Zone began to power-off when unsafe temperatures were reached. Unfortunately, because this issue impacted several redundant network switches, a larger number of EC2 instances in this single Availability Zone lost network connectivity.<p>While our operators would normally had been able to restore cooling before impact, a fire suppression system activated inside a section of the affected Availability Zone. When this system activates, the data center is evacuated and sealed, and a chemical is dispersed to remove oxygen from the air to extinguish any fire. In order to recover the impacted instances and network equipment, we needed to wait until the fire department was able to inspect the facility. 
+After the fire department determined that there was no fire in the data center and it was safe to return, the building needed to be re-oxygenated before it was safe for engineers to enter the facility and restore the affected networking gear and servers. The fire suppression system that activated remains disabled. This system is designed to require smoke to activate and should not have discharged. This system will remain inactive until we are able to determine what triggered it improperly.<p>In the meantime, alternate fire suppression measures are being used to protect the data center. Once cooling was restored and the servers and network equipment was re-powered, affected instances recovered quickly. A very small number of remaining instances and volumes that were adversely affected by the increased ambient temperatures and loss of power remain unresolved.<p>We continue to work to recover those last affected instances and volumes, and have opened notifications for the remaining impacted customers via the Personal Health Dashboard. For immediate recovery of those resources, we recommend replacing any remaining affected instances or volumes if possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xs83" target="_blank">xs83</a>   <span class="timeago" data-date="2021-06-11 06:25:55 &#43;0000 UTC">2021-06-11 06:25:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            3.6 roentgen, not great, not terrible
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=varjag" target="_blank">varjag</a>   <span class="timeago" data-date="2021-06-11 08:06:59 &#43;0000 UTC">2021-06-11 08:06:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This system is designed to require smoke to activate and should not have discharged.<p>The Smoke Detector cloud instance was down for some reason so the system had to go with temperature!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bawolff" target="_blank">bawolff</a>   <span class="timeago" data-date="2021-06-11 02:17:40 &#43;0000 UTC">2021-06-11 02:17:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, sounds like the start of some implausible hollywood heist movie.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-11 02:54:41 &#43;0000 UTC">2021-06-11 02:54:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gordon, we cannot predict how long the system can operate at this level, nor how long the reading will take. Please work as quickly as you can. Uh...it&#x27;s probably not a problem...probably...but I&#x27;m showing a small discrepancy in...well, no, it&#x27;s well within acceptable bounds again. Sustaining sequence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dharmab" target="_blank">dharmab</a>   <span class="timeago" data-date="2021-06-11 03:06:08 &#43;0000 UTC">2021-06-11 03:06:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Tenet, the protagonist and his partner trigger a halon system in a building to force an evacuation as part of a heist.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=philjohn" target="_blank">philjohn</a>   <span class="timeago" data-date="2021-06-11 07:55:13 &#43;0000 UTC">2021-06-11 07:55:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I remember the summer job I had working in the European HQ of a chemical company. I was managing servers and thus had access to the server room - after the stern safety lecture about the Halon suppression system and being informed that &quot;if the alarm goes off, don&#x27;t even bother going for the respirator on the wall, just bolt it out of there double quick&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toyg" target="_blank">toyg</a>   <span class="timeago" data-date="2021-06-11 10:31:43 &#43;0000 UTC">2021-06-11 10:31:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the first season of Mr Robot, when they want to create financial chaos by wiping records of all debt, iirc they trigger a fire alert in a datacenter to force a backup wipe of some sort.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=freeflight" target="_blank">freeflight</a>   <span class="timeago" data-date="2021-06-11 14:37:50 &#43;0000 UTC">2021-06-11 14:37:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They pretty much ransomwared all the digital records on the E Corp servers by encrypting them.<p>The paper records they destroyed by blowing up a whole building, with hacked UPS systems. [0]<p>[0] <a href="https:&#x2F;&#x2F;www.geekwire.com&#x2F;2016&#x2F;mr-robot-rewind-pwning-battery-backups-explosive-season-finale&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.geekwire.com&#x2F;2016&#x2F;mr-robot-rewind-pwning-battery...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Symbiote" target="_blank">Symbiote</a>   <span class="timeago" data-date="2021-06-11 10:13:34 &#43;0000 UTC">2021-06-11 10:13:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A very small number of remaining instances and volumes that were adversely affected by the increased ambient temperatures and loss of power remain unresolved.<p>No noticeable smoke, but that does sound a bit closer to a fire than they planned for.<p>Either some system(s) not shutting down when the ambient temperature becomes high, or the ambient temperature was so hot it damaged powered-off equipment (!).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brentcetinich" target="_blank">brentcetinich</a>   <span class="timeago" data-date="2021-06-11 13:40:41 &#43;0000 UTC">2021-06-11 13:40:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been in this situation , maintenance on cooling tower 1 engineer put it into bypass mode so he can work on it safely (in case bms decides to turn it on while he is on it.) When he left the site he forgot to take it out of bypass mode. every few days the BMS rotates the cooling towers switched off tower B and turned on tower A which was still in bypss mode… so air was blowing but the water was not circulating. the temperature graphs show the effected floors of data Center space heat up very quickly. there was a lot of permanently damaged equipment 24&#x2F;7 human operators ignored many warning about ambient temperature and Low humidity assuming it was system error ( does it look hot on the cameras?? shrug ??  ) various equipment have different power down temperatures  the halon did not trigger for us. some equipment did not for whatever reason shutdown when they hit the cutoff temps and cooked themselves. I suspect the Low humidity caused too much static and that’s where the damage was from..<p>I guess thats something hard to test for , let’s put this switch in an oven and run it to make sure it auto powers down at 80c :) every time we release a firmware.<p>was a problem from multiple vendors who issued bios &#x2F; firmware patches. Cisco, dell, Emc, brocade.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=paranoidrobot" target="_blank">paranoidrobot</a>   <span class="timeago" data-date="2021-06-11 10:29:52 &#43;0000 UTC">2021-06-11 10:29:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s always a risk that equipment that was running fine, will fail when powered back on, even if not damaged otherwise by the incident.<p>Thermal expansion&#x2F;contraction is one thing - a solder joint that was marginal might have contracted enough to actually break.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kube-system" target="_blank">kube-system</a>   <span class="timeago" data-date="2021-06-11 13:20:29 &#43;0000 UTC">2021-06-11 13:20:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC it is common to experience a lot of spinning disk failures after a cooling failure.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=trhway" target="_blank">trhway</a>   <span class="timeago" data-date="2021-06-11 06:46:51 &#43;0000 UTC">2021-06-11 06:46:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;a fire suppression system activated inside a section of the affected Availability Zone. When this system activates, the data center is evacuated and sealed, and a chemical is dispersed to remove oxygen from the air to extinguish any fire.<p>sounds like on a submarine. On submarine the people who couldn&#x27;t make it out of the sealed section in time, would use the personal breathing device - i wonder if AWS has such thing in the datacenter, and how do they make sure that all people are out from a huge datacenter. Several years ago a Russian nuclear sub on a sea trials after refit had the fire suppression system activated in the section where a bunch  of people gathered - crew and the navy yard civilians, probably they celebrated drinking and smoking - and insufficient number of the breathing devices combined with lack of skills to quickly use it on the part of the civilians resulted in 20 deaths and 40 injured (lung damage, etc.), mostly the civilians.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=t0mas88" target="_blank">t0mas88</a>   <span class="timeago" data-date="2021-06-11 07:37:30 &#43;0000 UTC">2021-06-11 07:37:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is why you have those annoying kind of rules like &quot;only 8 people allowed in this room&quot;. And then of course that gets ignored because 15 people easily fit inside. All fine until you find out there aren&#x27;t enough breathing&#x2F;floating&#x2F;rescue kind of things for more than 8 people.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=antoinealb" target="_blank">antoinealb</a>   <span class="timeago" data-date="2021-06-11 08:50:16 &#43;0000 UTC">2021-06-11 08:50:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My guess for &quot;how to make sure all people are out&quot;: typically in such industrial, high security facilities, each people going in would have to badge at each door, i.e. no holding the door for a group of people. Combined with many locked doors, this allows you to know exactly who is in which part of the building.<p>That, plus you typically dont go and hangout on the DC floor, only the personel who is really required gets to go in.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=darkwater" target="_blank">darkwater</a>   <span class="timeago" data-date="2021-06-11 12:58:35 &#43;0000 UTC">2021-06-11 12:58:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; My guess for &quot;how to make sure all people are out&quot;: typically in such industrial, high security facilities, each people going in would have to badge at each door, i.e. no holding the door for a group of people. Combined with many locked doors, this allows you to know exactly who is in which part of the building.<p>Holding doors was always a problem, but I guess that nowadays badges can have RFID or some other kind of wireless tracking so even if you hold the door, people in the control room can always know how many people are in each room, all the time. It&#x27;s like 6 years now since the last time I was in a datacenter...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=trhway" target="_blank">trhway</a>   <span class="timeago" data-date="2021-06-11 09:01:28 &#43;0000 UTC">2021-06-11 09:01:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;you typically dont go and hangout on the DC floor, only the personel who is really required gets to go in.<p>times changed. I remember my friend bunch of years ago complaining to me that the DC at their branch of a large well known transnational was the favorite place of the employees for various informal activities, including that he was constantly dealing with used drug paraphernalia being left all over the place.<p>Answer to the comment below: yep, mostly syringes&#x2F;needles.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qlm" target="_blank">qlm</a>   <span class="timeago" data-date="2021-06-11 09:37:32 &#43;0000 UTC">2021-06-11 09:37:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Used drug paraphernalia? Were people shooting up or what? Surely smoking wouldn&#x27;t be possible without alarms going off.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=orbz" target="_blank">orbz</a>   <span class="timeago" data-date="2021-06-11 13:07:11 &#43;0000 UTC">2021-06-11 13:07:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually there are muster stations where a designated emergency captain takes attendance for everyone who is expected to be present and a remote operations center that has access to HRIS data to know who is out&#x2F;on vacation when that attendance is known.<p>Door locks during an emergency are usually denoted to be fail-open so someone doesn&#x27;t get trapped, though that may differ depending on the security level of the facility.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=greggyb" target="_blank">greggyb</a>   <span class="timeago" data-date="2021-06-11 13:26:24 &#43;0000 UTC">2021-06-11 13:26:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Unfortunately, because this issue impacted <i>several redundant network switches,</i> a larger number of EC2 instances in this single Availability Zone lost network connectivity.<p>These may be redundant by a reasonable definition, but they clearly weren&#x27;t here....
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-11 13:45:57 &#43;0000 UTC">2021-06-11 13:45:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They seemed to be redundant in the other sense of the word.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=growt" target="_blank">growt</a>   <span class="timeago" data-date="2021-06-11 12:47:47 &#43;0000 UTC">2021-06-11 12:47:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of my first trip to a datacenter, where the guy who accompanied us said: &quot;In the event of a fire this room is filled with nitrogen in 20 seconds. But don&#x27;t worry: nitrogen is not toxic!&quot; Well, I was a little worried :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 14:21:54 &#43;0000 UTC">2021-06-11 14:21:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heh. Sure. Non toxic, but perhaps the most popular method of assisted suicide. Nothing to worry about.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=roudaki" target="_blank">roudaki</a>   <span class="timeago" data-date="2021-06-11 10:20:26 &#43;0000 UTC">2021-06-11 10:20:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What makes things worse is the most strict security measures in the industry and we always were afraid of fire at this scale when outside parties have to enter pods. And all the checkups after. I dont envy people that worked that and next shift
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tester34" target="_blank">tester34</a>   <span class="timeago" data-date="2021-06-11 13:08:12 &#43;0000 UTC">2021-06-11 13:08:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            boom there goes probably thousands of us dollars
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=k12sosse" target="_blank">k12sosse</a>   <span class="timeago" data-date="2021-06-13 15:01:35 &#43;0000 UTC">2021-06-13 15:01:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s ok. Jeff&#x27;s gonna cover it with employees tips.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Mauricebranagh" target="_blank">Mauricebranagh</a>   <span class="timeago" data-date="2021-06-11 08:38:59 &#43;0000 UTC">2021-06-11 08:38:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bit surprising that they didn&#x27;t override this as there was no fire and take the hit from the over temp.<p>Also they didn&#x27;t have breathing gear (and trained staff)  so you could go in and restart without waiting and also in case of an accident being able to try and rescue people.<p>Back when worked in RnD for the lab where we could have had a Freon leak we had breathing gear just outside and some people trained to use it
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=doikor" target="_blank">doikor</a>   <span class="timeago" data-date="2021-06-11 09:02:58 &#43;0000 UTC">2021-06-11 09:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Also they didn&#x27;t have breathing gear (and trained staff) so you could go in and restart without waiting and also in case of an accident being able to try and rescue people.<p>At that point without actually going in and checking they have no real way of knowing if there really is&#x2F;was a fire or not. So the proper procedure is to let the professionals handle it (wait for the fire department to clear the building). No amount of server downtime is worth sending a &quot;not a firefighter&quot; into a possibly burning building.<p>And facilities like these have strict control of where people can be so they know if someone is in there or not without of going in to check.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=witrak" target="_blank">witrak</a>   <span class="timeago" data-date="2021-06-11 12:43:55 &#43;0000 UTC">2021-06-11 12:43:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So the proper procedure is to let the professionals handle it (wait for the fire department to clear the building).<p>Nevertheless, having breathing gear could allow beginning recovery action just after the fire department finished procedures. This would shorten recovery time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Mauricebranagh" target="_blank">Mauricebranagh</a>   <span class="timeago" data-date="2021-06-11 13:51:25 &#43;0000 UTC">2021-06-11 13:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That was my point and large industrial  sites quiet often have their own internal fire service.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Mauricebranagh" target="_blank">Mauricebranagh</a>   <span class="timeago" data-date="2021-06-11 13:53:41 &#43;0000 UTC">2021-06-11 13:53:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Video cameras maybe or sensors that detect  products of burning  :-)<p>I would hope that they do audit people in and out so i case of accidents you can account for everyone.<p>Oh and these would be trained people
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=darkcha0s" target="_blank">darkcha0s</a>   <span class="timeago" data-date="2021-06-11 08:51:02 &#43;0000 UTC">2021-06-11 08:51:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll gladly take a few minutes of outage, if it means some guy doesn&#x27;t have to run into an oxygenless building with nothing but a breathing apparatus to restart my server
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tetha" target="_blank">tetha</a>   <span class="timeago" data-date="2021-06-11 10:59:24 &#43;0000 UTC">2021-06-11 10:59:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also if you follow AWS HA guidelines, this does not lead to a service outage. We were affected by this and it knocked a dozen or two systems offline for 6 hours or so. AZ redundancy took over and that was it and oncall went back to sleep.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nix23" target="_blank">nix23</a>   <span class="timeago" data-date="2021-06-11 10:15:35 &#43;0000 UTC">2021-06-11 10:15:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just imagine aws would be used to safe life&#x27;s, like medical information&#x27;s.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=darkcha0s" target="_blank">darkcha0s</a>   <span class="timeago" data-date="2021-06-14 09:29:40 &#43;0000 UTC">2021-06-14 09:29:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are using a single region&#x2F;DC to store safety critical data you&#x27;re already doing it wrong, and whoever handles your disaster recovery plan should be fired
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=paranoidrobot" target="_blank">paranoidrobot</a>   <span class="timeago" data-date="2021-06-11 10:34:15 &#43;0000 UTC">2021-06-11 10:34:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was about to reply that AWS shouldn&#x27;t be relied on for safety-critical systems, but someone is probably already doing that.<p>I&#x27;ll revise that to - I hope that whomever is relying on AWS for safety-critical systems at least does it over many regions.  It&#x27;s still dumb, because even AWS occasionally has global&#x2F;multi-region outages, but at least it hopefully reduces the chance for it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sofixa" target="_blank">sofixa</a>   <span class="timeago" data-date="2021-06-11 13:53:35 &#43;0000 UTC">2021-06-11 13:53:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I was about to reply that AWS shouldn&#x27;t be relied on for safety-critical systems, but someone is probably already doing that<p>Wtf, why not? It&#x27;s drastically easier, and probably cheaper, to achieve that level of redundancy with AWS than doing it yourself.<p>&gt; It&#x27;s still dumb, because even AWS occasionally has global&#x2F;multi-region outages<p>Really? Like when? The only <i>potential</i> one you can claim was multi-region, was when S3 us-east-1 was down, and with the old default behaviour - if you didn&#x27;t specify where your S3 bucket is it would pass through us-east-1 to ask where it is - that impacted lazy code that had nothing to do with us-east-1. That&#x27;s almost entirely on developers and such though, so hard to claim it was a multi-region or global outage.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperman1" target="_blank">hyperman1</a>   <span class="timeago" data-date="2021-06-11 10:07:15 &#43;0000 UTC">2021-06-11 10:07:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Strange to see them using PDT as a time zone.  Both customers and local personell would be better served with either UTc or the local time zone.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benglish11" target="_blank">benglish11</a>   <span class="timeago" data-date="2021-06-11 12:55:08 &#43;0000 UTC">2021-06-11 12:55:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AWS does this with all of their outages, presumably because Amazon HQ is in Washington (PDT). I would think UTC would be the preferred &quot;universal&quot; time for communicating these kinds of incidents, because AWS customers span the globe.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 11:29:48 &#43;0000 UTC">2021-06-11 11:29:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ThePowerOfFuet" target="_blank">ThePowerOfFuet</a>   <span class="timeago" data-date="2021-06-11 12:20:24 &#43;0000 UTC">2021-06-11 12:20:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google does it too. &#x27;Murica.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rsync" target="_blank">rsync</a>   <span class="timeago" data-date="2021-06-11 00:29:01 &#43;0000 UTC">2021-06-11 00:29:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            5:19 PM PDT<p>We have restored network connectivity within the affected Availability Zone in the EU-CENTRAL-1 Region. The vast majority of affected EC2 instances have now fully recovered but we’re continuing to work through some EBS volumes that continue to experience degraded performance. The environmental conditions within the affected Availability Zone have now returned to normal levels. We will provide further details on the root cause in a subsequent posts, but can confirm that there was no fire within the facility.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GauntletWizard" target="_blank">GauntletWizard</a>   <span class="timeago" data-date="2021-06-10 23:55:21 &#43;0000 UTC">2021-06-10 23:55:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you have data in Frankfurt, now is the time to test your backups. There&#x27;s going to be a massive rash of failures in the next few months as hardware that was compromised but limping along dies off.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 00:38:44 &#43;0000 UTC">2021-06-11 00:38:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big sale on Frankfurt spot instances coming soon!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=a3n" target="_blank">a3n</a>   <span class="timeago" data-date="2021-06-11 04:59:49 &#43;0000 UTC">2021-06-11 04:59:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A fire sale.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=perihelions" target="_blank">perihelions</a>   <span class="timeago" data-date="2021-06-11 10:50:10 &#43;0000 UTC">2021-06-11 10:50:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s exactly the definition.<p><a href="https:&#x2F;&#x2F;www.merriam-webster.com&#x2F;dictionary&#x2F;fire-sale" rel="nofollow">https:&#x2F;&#x2F;www.merriam-webster.com&#x2F;dictionary&#x2F;fire-sale</a> (&quot;: a sale of merchandise damaged in a fire&quot;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=buremba" target="_blank">buremba</a>   <span class="timeago" data-date="2021-06-11 00:43:20 &#43;0000 UTC">2021-06-11 00:43:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            why?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notatoad" target="_blank">notatoad</a>   <span class="timeago" data-date="2021-06-11 01:14:28 &#43;0000 UTC">2021-06-11 01:14:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the two most likely scenarios where &quot;environmental conditions&quot; prevent access to a DC are fire or cooling failure.  aws says it&#x27;s not a fire, so probably the temperature rose above their allowable safety threshold for access.<p>that&#x27;s not good for computers either
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=midasuni" target="_blank">midasuni</a>   <span class="timeago" data-date="2021-06-11 07:20:50 &#43;0000 UTC">2021-06-11 07:20:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We had a “halon” discharge in a data centre a few years ago. The pressure wave knocked out a whole rack of disks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aequitas" target="_blank">aequitas</a>   <span class="timeago" data-date="2021-06-11 11:42:39 &#43;0000 UTC">2021-06-11 11:42:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Like screaming at your disk?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=derefr" target="_blank">derefr</a>   <span class="timeago" data-date="2021-06-11 01:22:22 &#43;0000 UTC">2021-06-11 01:22:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It could have just been that someone pulled a fire alarm when there wasn&#x27;t a fire, and then they had to wait for the Halon to disperse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 02:07:43 &#43;0000 UTC">2021-06-11 02:07:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Other question, are there Halon detectors that tell you when it is safe? Or just like in MRI&#x2F;NMR rooms simple oxygen meters.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Someone" target="_blank">Someone</a>   <span class="timeago" data-date="2021-06-11 06:37:00 &#43;0000 UTC">2021-06-11 06:37:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nitpick: it’s unlikely this uses Halon. <a href="https:&#x2F;&#x2F;fireandsafetycentre.co.uk&#x2F;blogs&#x2F;extinguisher-types&#x2F;halon-fire-extinguishers" rel="nofollow">https:&#x2F;&#x2F;fireandsafetycentre.co.uk&#x2F;blogs&#x2F;extinguisher-types&#x2F;h...</a>:<p><i>“The EU ban on the use of Halon in fire extinguishers actually came into force in October 2000 and was implemented in the UK in 2003, as a result of scientific research linking Halon and other CFC’s to Ozone depletion. The ban in practice is not total.<p>Existing owners and users of Halon 1211 portable fire extinguishers may be able to claim exemption to the EU ban for certain “Critical Uses”.<p>Broadly speaking this includes limited applications within the aircraft industry, military &#x2F; armed forces, petrochemical industry and some specific marine applications“</i><p>Chances are this facility was built after 2000. I think that makes it extremely unlikely it can claim exemption.<p>See also <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Montreal_Protocol" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Montreal_Protocol</a>, which says<p><i>“The Vienna Convention and the Montreal Protocol have each been ratified by 196 nations and the European Union, making them the first universally ratified treaties in United Nations history”</i>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MaxBarraclough" target="_blank">MaxBarraclough</a>   <span class="timeago" data-date="2021-06-11 09:30:17 &#43;0000 UTC">2021-06-11 09:30:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the linked article, they&#x27;re presumably using either CO2 or &#x27;FE-36&#x27; then?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 14:18:32 &#43;0000 UTC">2021-06-11 14:18:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t know that, thanks next time I buy extiguishers for electronics I&#x27;ll pay more attention.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 01:52:20 &#43;0000 UTC">2021-06-11 01:52:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do we have any idea how long it would take? I would have expected the venting systems to get that out pretty quickly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Proven" target="_blank">Proven</a>   <span class="timeago" data-date="2021-06-11 01:58:07 &#43;0000 UTC">2021-06-11 01:58:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Baseless speculation.<p>And it&#x27;s always the right time to test backups everywhere.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=c_o_n_v_e_x" target="_blank">c_o_n_v_e_x</a>   <span class="timeago" data-date="2021-06-14 03:39:54 &#43;0000 UTC">2021-06-14 03:39:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Former controls system guy and have worked in data centers.  I&#x27;d be concerned about why a control system failure took down multiple air handlers.  Units typically have their own controllers and can be configured to run by themselves without input from a &quot;parent&quot; controller.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 00:18:56 &#43;0000 UTC">2021-06-11 00:18:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 09:46:05 &#43;0000 UTC">2021-06-11 09:46:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 07:02:31 &#43;0000 UTC">2021-06-11 07:02:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simzor" target="_blank">simzor</a>   <span class="timeago" data-date="2021-06-10 22:42:54 &#43;0000 UTC">2021-06-10 22:42:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me that we should get ChaosMonkey up and running. :D
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acid__" target="_blank">acid__</a>   <span class="timeago" data-date="2021-06-10 23:46:24 &#43;0000 UTC">2021-06-10 23:46:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now imagining a literal chaos monkey running around a datacenter with a blowtorch, setting random racks on fire
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 01:50:41 &#43;0000 UTC">2021-06-11 01:50:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a concept for a startup, sell drones&#x2F;robots that randomly put racks on fire.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simzor" target="_blank">simzor</a>   <span class="timeago" data-date="2021-06-11 09:27:53 &#43;0000 UTC">2021-06-11 09:27:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like that idea :D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=plasma" target="_blank">plasma</a>   <span class="timeago" data-date="2021-06-11 01:40:51 &#43;0000 UTC">2021-06-11 01:40:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m curious to hear if anyone&#x27;s multi-az setup (RDS, ECS, etc) handled this event without much of an issue?<p>I assume so but would be nice to know its working as expected!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tetha" target="_blank">tetha</a>   <span class="timeago" data-date="2021-06-11 11:18:24 &#43;0000 UTC">2021-06-11 11:18:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As said in another comment, we had a dozen instances or two affected. Most of the hashi stack just lost a node and chugged along at reduced redundancy. A patroni&#x2F;postgres cluster lost a replica, but automatically re-integrated it into the cluster.  Very nice and smooth.<p>We have mostly found one or two classes of jobs in the orchestration for which nomad stopped retrying deployments before the ec2 instances running the allocations were fully failed and removed from the cluster - and our on-call was unsure how to handle that situation in nomad right. Network and routing were really weird at some point. Additionally, we ended up with a couple of container instances orphaned from the container management, which was strange for a moment.<p>This was made a bit more hectic over here because a second hoster apparently fried their own network at the same time so we needed some time to realize we have two issues.<p>Overall, 5&#x2F;5 Outage, would fail again once we&#x27;ve updated our jobs. We&#x27;re happily close to not caring about such an incident.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kawsper" target="_blank">kawsper</a>   <span class="timeago" data-date="2021-06-11 11:32:00 &#43;0000 UTC">2021-06-11 11:32:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Most of the hashi stack just lost a node and chugged along at reduced redundancy.<p>Amazon had released a version of their AWS Linux edition that rebooted randomly due to a kernel bug, and I was working on our staging cluster, but I didn&#x27;t even notice that I had EC2 instances that randomly rebooted and dropped because Nomad just kept the workload up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mercora" target="_blank">mercora</a>   <span class="timeago" data-date="2021-06-11 07:55:48 &#43;0000 UTC">2021-06-11 07:55:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            note that every AZ assignment is mapped randomly for each account [0];<p>&quot;To ensure that resources are distributed across the Availability Zones for a Region, we independently map Availability Zones to names for each account.&quot;.<p>my eu-central-1a is not necessarily yours.<p>[0] <a href="https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;ram&#x2F;latest&#x2F;userguide&#x2F;working-with-az-ids.html" rel="nofollow">https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;ram&#x2F;latest&#x2F;userguide&#x2F;working-wit...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jen20" target="_blank">jen20</a>   <span class="timeago" data-date="2021-06-12 14:15:30 &#43;0000 UTC">2021-06-12 14:15:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is true, but there is a consistent identifier cross account (likely to make it possible to build multi-account architectures without having to measure network latency between zones manually) - this is the AZ ID instead of the AZ Name [1].<p>[1]: <a href="https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;ram&#x2F;latest&#x2F;userguide&#x2F;working-with-az-ids.html" rel="nofollow">https:&#x2F;&#x2F;docs.aws.amazon.com&#x2F;ram&#x2F;latest&#x2F;userguide&#x2F;working-wit...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 11:35:15 &#43;0000 UTC">2021-06-11 11:35:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tomw1808" target="_blank">tomw1808</a>   <span class="timeago" data-date="2021-06-11 10:07:37 &#43;0000 UTC">2021-06-11 10:07:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We had a few interesting &quot;bugs&quot; appear: Mostly logging went down, but EC2 machines kept running. E.g. We are running a lot in ECS with EC2 machines, like a RabbitMQ cluster with 20 instances all across all AZs. None of the machines died, none of the containers had degraded performance as far as I can tell, but the performance logs just disappear from 21:50 to 22:30 GMT+2. It&#x27;s just blank int he Metrics and Cloudwatch dashboard. Same with other cloudwatch logs.<p>We also do have some EC2s running with nodejs applications and there the aws-sdk just errored out with &quot;UnknownError: 503&quot; and simply stopped logging until we restarted the machines. The machines itself were not stopped at all.<p>Other than that, I can&#x27;t see any effects across our accounts. Also not RDS or anything else. Fascinating. Glad its under control and seemingly nobody died or so.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=clutchdude" target="_blank">clutchdude</a>   <span class="timeago" data-date="2021-06-11 02:28:44 &#43;0000 UTC">2021-06-11 02:28:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It affected services we have that are not located in the impacted AZ.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gkop" target="_blank">gkop</a>   <span class="timeago" data-date="2021-06-11 02:53:00 &#43;0000 UTC">2021-06-11 02:53:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Likewise, our RDS replica experienced degenerate lag, when neither the primary nor replica were in the scorched AZ.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=plasma" target="_blank">plasma</a>   <span class="timeago" data-date="2021-06-11 03:18:14 &#43;0000 UTC">2021-06-11 03:18:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s really interesting.<p>I wonder whether its because a large load of capacity needs suddenly in unaffected AZs put abnormal stress on things like networking to the whole unaffected AZs.<p>My only experience there is in Azure, when they deployed patches for the Heartbleed etc issues, for a few weeks things were much slower in CPU power (our response times just shot up 20% for no reason then recovered a few weeks later) and there were network related timeouts that were abnormal and it all settled down eventually.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xmodem" target="_blank">xmodem</a>   <span class="timeago" data-date="2021-06-11 03:54:36 &#43;0000 UTC">2021-06-11 03:54:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heartbleed? I assume you mean Spectre and Meltdown
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=celticninja" target="_blank">celticninja</a>   <span class="timeago" data-date="2021-06-11 09:44:57 &#43;0000 UTC">2021-06-11 09:44:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your comment is not clear, were you unaware of heartbleed? Or were you questioning if the GP was remembering correctly?<p>For reference <a href="https:&#x2F;&#x2F;heartbleed.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;heartbleed.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisandchris" target="_blank">chrisandchris</a>   <span class="timeago" data-date="2021-06-11 10:32:36 &#43;0000 UTC">2021-06-11 10:32:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is clear. Heartbleed does not affect CPU like Spectre&#x2F;Meltdown did (both migitations increased CPU usage quite a lot).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uniformlyrandom" target="_blank">uniformlyrandom</a>   <span class="timeago" data-date="2021-06-11 14:31:49 &#43;0000 UTC">2021-06-11 14:31:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lost one node in a small ElasicSearch cluster. The incident did not affect the cluster availability. The node was reintegrated into the cluster once it came back online.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adrianpike" target="_blank">adrianpike</a>   <span class="timeago" data-date="2021-06-11 01:53:27 &#43;0000 UTC">2021-06-11 01:53:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A handful of AZ-less managed AWS services were having a bad time(tm) during the peak of the incident, so if anyone was reliant on those they were having a bad time as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ununoctium87" target="_blank">ununoctium87</a>   <span class="timeago" data-date="2021-06-11 08:13:07 &#43;0000 UTC">2021-06-11 08:13:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some instances of our services went down but our deployments are multi-AZ by default so minimal perceptible outage to our customers
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TheP1000" target="_blank">TheP1000</a>   <span class="timeago" data-date="2021-06-11 04:49:11 &#43;0000 UTC">2021-06-11 04:49:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Kinesis data streams and firehouse were down. All but one out of 300 RDSs failed over. One was down for 5 hours.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=plasma" target="_blank">plasma</a>   <span class="timeago" data-date="2021-06-11 08:16:13 &#43;0000 UTC">2021-06-11 08:16:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you able to find out why it didn’t work? Very surprising.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slater" target="_blank">slater</a>   <span class="timeago" data-date="2021-06-10 23:17:40 &#43;0000 UTC">2021-06-10 23:17:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            is it on fire?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samizdis" target="_blank">samizdis</a>   <span class="timeago" data-date="2021-06-11 01:48:15 &#43;0000 UTC">2021-06-11 01:48:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An article in The Register [1] says it wasn&#x27;t a fire, but speculates:<p><i>While we lack any evidence on which to base an assertion, The Register has reported on erupting UPSes and tiny puffs of smoke leading to hypoxic gas being released into data centres.<p>The whole point of hypoxic gas release into data centres is to deprive fires of oxygen. And as humans need oxygen, it can be a while before engineers can return to a data centre.<p>The Register mentions this as it fits the facts offered in this incident, and with AWS’s language about “environmental conditions” preventing entry.</i><p>The Register says that it&#x27;ll update its article if it gets further info.<p>[1] <a href="https:&#x2F;&#x2F;www.theregister.com&#x2F;2021&#x2F;06&#x2F;11&#x2F;aws_eu_central_1_incident&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.theregister.com&#x2F;2021&#x2F;06&#x2F;11&#x2F;aws_eu_central_1_inci...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hallway_monitor" target="_blank">hallway_monitor</a>   <span class="timeago" data-date="2021-06-10 23:41:22 &#43;0000 UTC">2021-06-10 23:41:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right? What temperatures would servers continue to operate at, but would be unsafe for humans?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-06-11 01:09:17 &#43;0000 UTC">2021-06-11 01:09:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was in a server room that overheated and servers started to shut down. AC failed and there was no environmental monitoring.<p>The air was too hot to breathe.<p>I had to take and hold breath to jump in to shut down most important assets.<p>There was redundant air conditioning except for exactly one element: air inlet on the roof. A thin plastic bag blocked it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacquesm" target="_blank">jacquesm</a>   <span class="timeago" data-date="2021-06-11 02:59:11 &#43;0000 UTC">2021-06-11 02:59:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Classic. $0.05 bit of junk causing a very large multiple of damage.<p>Nice case to prove that plastic waste is hazardous though!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-06-11 12:34:03 &#43;0000 UTC">2021-06-11 12:34:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that plastic bag cost couple million.<p>But the offset was definitely increased understanding of the concept of single point of failure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rdines" target="_blank">rdines</a>   <span class="timeago" data-date="2021-06-11 18:07:38 &#43;0000 UTC">2021-06-11 18:07:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            oh my. that reminds me of this story that I hadn&#x27;t thought of in a long time, LOL: <a href="https:&#x2F;&#x2F;www.datacenterknowledge.com&#x2F;archives&#x2F;2012&#x2F;07&#x2F;09&#x2F;outages-surviving-electric-squirrels-ups-failures" rel="nofollow">https:&#x2F;&#x2F;www.datacenterknowledge.com&#x2F;archives&#x2F;2012&#x2F;07&#x2F;09&#x2F;outa...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacquesm" target="_blank">jacquesm</a>   <span class="timeago" data-date="2021-06-11 20:25:28 &#43;0000 UTC">2021-06-11 20:25:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That article references the explosion at &#x27;The Planet&#x27; in 2008, I got caught up in that, that wasn&#x27;t fun at all. Fortunately we had good off-site backups.<p>Never knew about the squirrel angle, thank you!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rdines" target="_blank">rdines</a>   <span class="timeago" data-date="2021-06-12 01:15:44 &#43;0000 UTC">2021-06-12 01:15:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I forgot about that! Glad you came out ok in The Planet explosion, I remember that, it was insane. Fun fact: IBM now owns The Planet’s assets via Softlayer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacquesm" target="_blank">jacquesm</a>   <span class="timeago" data-date="2021-06-12 22:27:50 &#43;0000 UTC">2021-06-12 22:27:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            By the way, we <i>also</i> were hit in 2003 when a transformer exploded.<p>This may be a hint that you don&#x27;t want to colocate where I stuff my machines ;)<p>EV1 was pretty reliable right up to the point that it wasn&#x27;t. Taught me some good lessons about multi-DC availability. Some of which were recently re-learned by the folks at OVH.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 02:06:39 &#43;0000 UTC">2021-06-11 02:06:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was there some work after to add other inlets?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=geoduck14" target="_blank">geoduck14</a>   <span class="timeago" data-date="2021-06-11 02:00:20 &#43;0000 UTC">2021-06-11 02:00:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            BRB. Going to go update my FMEA
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=serpix" target="_blank">serpix</a>   <span class="timeago" data-date="2021-06-11 03:25:54 &#43;0000 UTC">2021-06-11 03:25:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            so, well over 140 Celsius then as there are saunas that are that hot and breathing in them is fine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thebeardisred" target="_blank">thebeardisred</a>   <span class="timeago" data-date="2021-06-11 07:43:13 &#43;0000 UTC">2021-06-11 07:43:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re also not fully clothed and running around in a stress induced panic while in the sauna.<p>Actually, I apologize that was a huge presumption.<p>When _I_ am in a sauna I&#x27;m normally not fully clothed and running around in a stress induced panic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-06-11 09:25:50 &#43;0000 UTC">2021-06-11 09:25:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Presumably you mean Fahrenheit? 100 degrees C is the boiling point of water at sea level. I wouldn&#x27;t want to sit in a room hotter than boiling water. Where as 140 degrees F is 60 degrees C and a little under twice your body&#x27;s natural temperature, or a bit above a really hot Mediterranean summers day. Which seems a much more realistic temperature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=celticninja" target="_blank">celticninja</a>   <span class="timeago" data-date="2021-06-11 09:55:04 &#43;0000 UTC">2021-06-11 09:55:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            60 degrees C is a lot above a really hot Mediterranean summer day. Average temp is 33 degrees in the hottest summer months, and in extremes it may be 40 degrees Celsius. 60 degrees would therefore be almost twice as hot as average or 50% hotter than even the hottest days.<p>Also 60 degrees Celsius would mean it made an appearance here:<p><a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Highest_temperature_recorded_on_Earth#:~:text=The%20current%20official%20highest%20registered,Valley%20in%20the%20United%20States" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Highest_temperature_recorded...</a>.<p>Given that the highest recorded air temperature on earth is 56.7 degrees, you may wish to revise your last sentence.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-06-13 14:27:39 &#43;0000 UTC">2021-06-13 14:27:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>60 degrees C is a lot above a really hot Mediterranean summer day. Average temp is 33 degrees in the hottest summer months, and in extremes it may be 40 degrees Celsius.</i><p>I was thinking 40 degrees. Given &quot;average&quot; isn&#x27;t implied by &quot;really hot&quot;, I&#x27;d say your 40 degree figure falls in line with what I had in mind. But you&#x27;re right that it&#x27;s still a big jump to 60 degrees.<p>Maybe I shouldn&#x27;t have put vague comparisons in my post because it&#x27;s rather distracting from the core point that the GP got their Celsius and Fahrenheit mixed up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Xylakant" target="_blank">Xylakant</a>   <span class="timeago" data-date="2021-06-11 09:56:14 &#43;0000 UTC">2021-06-11 09:56:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The exact temperature that&#x27;s tolerable depends on the sauna, but can exceed 100 degrees C for dry saunas. Air has comparatively little heat capacity, so even at those temperatures, sweat can cool your body fairly efficiently (feels pretty toasty, though). If you add moisture to the air (steam sauna), that temperature becomes unbearable quickly, so those are at lower temperature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-06-11 12:38:48 &#43;0000 UTC">2021-06-11 12:38:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It becomes unbearable not because of heat capacity but because of inability of the body to expel heat.<p>When outside temperature is equal or higher than body temperature the only way to expel heat is through sweating. For this the air must by dry enough (wet bulb temperature less than body temperature). <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Wet-bulb_temperature" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Wet-bulb_temperature</a><p>If body can&#x27;t expel enough heat it results in eventual death.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zimpenfish" target="_blank">zimpenfish</a>   <span class="timeago" data-date="2021-06-11 09:56:07 &#43;0000 UTC">2021-06-11 09:56:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently there are some lunatics who go above 100C in saunas - sometimes they die.<p><a href="https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;news&#x2F;magazine-10912578" rel="nofollow">https:&#x2F;&#x2F;www.bbc.co.uk&#x2F;news&#x2F;magazine-10912578</a><p>But it seems like 175F (80C) would be a normal-ish range. temperature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-06-13 14:30:23 &#43;0000 UTC">2021-06-13 14:30:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It really depends on the type of sauna, local customs, and even then there is still quite a large range due to individual preferences.<p>80 degrees C would generally be the hotter end of spectrum. Some go as low as 40 degrees C
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-11 13:58:11 &#43;0000 UTC">2021-06-11 13:58:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, the article is about a first time someone died in a competitive &quot;world championship&quot; thing with constantly humidified 100+C air with a race about who can tolerate it the longest.<p>Probably people die in saunas all the time in countries where it&#x27;s popular, like they sometimes do when eating, walking, or sleeping or watching tv.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dagw" target="_blank">dagw</a>   <span class="timeago" data-date="2021-06-11 09:57:33 &#43;0000 UTC">2021-06-11 09:57:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Presumably you mean Fahrenheit?</i><p>No Celsius. Admittedly 140 C is very hot (but not unheard of) for a sauna and you should probably not be in for more than 2-3 minutes max at a time. 90-110 C however is pretty standard and really nice. I can highly recommend giving it a try.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-06-13 14:23:45 &#43;0000 UTC">2021-06-13 14:23:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The internet would disagree with you:<p><a href="https:&#x2F;&#x2F;www.sunrisespecialty.com&#x2F;sauna-temperature" rel="nofollow">https:&#x2F;&#x2F;www.sunrisespecialty.com&#x2F;sauna-temperature</a><p><a href="https:&#x2F;&#x2F;www.saunasamurai.com&#x2F;sauna-temperature-how-hot-is-sauna&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.saunasamurai.com&#x2F;sauna-temperature-how-hot-is-sa...</a><p>Given someone died at 110 degrees C in a world championship, I&#x27;d wager 140 isn&#x27;t &quot;hot but not unheard of&quot; and 110 isn&#x27;t &quot;pretty standard&quot; like you claimed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 01:19:42 &#43;0000 UTC">2021-06-11 01:19:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pulling a spec sheet for a typical Dell 1U server, it has an operating range of 5°C to 40°C, and a non-operating (in storage) range of -40°C to 65°C.  I imagine it would survive much higher temps, but it doesn&#x27;t seem recommended.  I would be wary of how reliable anything in that room might be later.<p>Perhaps not the PCB itself, but there&#x27;s typically lots of thin wire around with thin insulation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 02:05:36 &#43;0000 UTC">2021-06-11 02:05:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Insulation usually resist at must higher temperatures.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-11 02:11:37 &#43;0000 UTC">2021-06-11 02:11:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It depends. Some insulation melts at 60-90C.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JacobDotVI" target="_blank">JacobDotVI</a>   <span class="timeago" data-date="2021-06-11 00:36:48 &#43;0000 UTC">2021-06-11 00:36:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it might not be the fire itself, but the fire suppression system might uses gases fatal to humans and so they must wait for those gases to vent &#x2F; dissipate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ta988" target="_blank">ta988</a>   <span class="timeago" data-date="2021-06-11 01:57:37 &#43;0000 UTC">2021-06-11 01:57:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve had servers running in a 35°C room for almost a day. Curiously 3 years later only one hard drive died. And they are &gt;6yo machines. Recent machines are supposed to handle 35°C air intake according to Anandtech and special servers can take more <a href="https:&#x2F;&#x2F;www.anandtech.com&#x2F;show&#x2F;7723&#x2F;free-cooling-the-server-side-of-the-story&#x2F;3" rel="nofollow">https:&#x2F;&#x2F;www.anandtech.com&#x2F;show&#x2F;7723&#x2F;free-cooling-the-server-...</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=offmycloud" target="_blank">offmycloud</a>   <span class="timeago" data-date="2021-06-10 23:56:11 &#43;0000 UTC">2021-06-10 23:56:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If they did have a fire, they&#x27;re probably waiting for all the smoke and FM200 (or other extinguishing agent) to clear out before they send anyone in.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uniformlyrandom" target="_blank">uniformlyrandom</a>   <span class="timeago" data-date="2021-06-10 23:44:32 &#43;0000 UTC">2021-06-10 23:44:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The hardware is heat-resistant, so probably around ~75C (167F).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 01:32:33 &#43;0000 UTC">2021-06-11 01:32:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=redis_mlc" target="_blank">redis_mlc</a>   <span class="timeago" data-date="2021-06-11 01:56:10 &#43;0000 UTC">2021-06-11 01:56:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you can breathe, it should be ok.<p>A lot of DCs after 2000 went from cold to warm based on the failure rates not changing.<p>If you get a chance to tour HE Fremont (the old Apple factory), it&#x27;s not cold.<p>Factoid: most startups in SV started with a rack in a closet, that one day lost air circulation or cooling and went to the boiling point. I recommend people monitor the temp and cut 2 inches off the bottom and top of their closet door to allow passive cooling while you drive back to the office.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniformlyrandom" target="_blank">uniformlyrandom</a>   <span class="timeago" data-date="2021-06-11 00:36:05 &#43;0000 UTC">2021-06-11 00:36:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Last update:<p>The environmental conditions within the affected Availability Zone have now returned to normal levels. We will provide further details on the root cause in a subsequent posts, but *can confirm that there was no fire* within the facility.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrandish" target="_blank">mrandish</a>   <span class="timeago" data-date="2021-06-11 01:08:43 &#43;0000 UTC">2021-06-11 01:08:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmmm, maybe the ambient cooling system failed. No fire but got very toasty.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Hamuko" target="_blank">Hamuko</a>   <span class="timeago" data-date="2021-06-11 06:58:32 &#43;0000 UTC">2021-06-11 06:58:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yup. Cooling system failed -&gt; fire suppression kicked in -&gt; evacuation, chemicals released to displace oxygen.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=intsunny" target="_blank">intsunny</a>   <span class="timeago" data-date="2021-06-11 01:15:44 &#43;0000 UTC">2021-06-11 01:15:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Omg, please Amazon, switch to UTC for timestamps.<p>It is 3AM in Germany, and I&#x27;m tired and I don&#x27;t want to know what PDT is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=plasma" target="_blank">plasma</a>   <span class="timeago" data-date="2021-06-11 01:45:46 &#43;0000 UTC">2021-06-11 01:45:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m surprised these sites don&#x27;t show a localised time with UTC next to it, even the popular statuspage.io doesn&#x27;t do this, blows my mind.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JshWright" target="_blank">JshWright</a>   <span class="timeago" data-date="2021-06-11 02:36:58 &#43;0000 UTC">2021-06-11 02:36:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The other day Zoom posted a status update that listed the time in both CEST, and PST... How did they get daylight saving time right for one and not the other? PST isn&#x27;t a thing for another few months yet...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=schoen" target="_blank">schoen</a>   <span class="timeago" data-date="2021-06-11 06:25:22 &#43;0000 UTC">2021-06-11 06:25:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe a European thought that Americans also use &quot;S&quot; for &quot;Summer&quot; rather than &quot;Standard&quot;?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=a012" target="_blank">a012</a>   <span class="timeago" data-date="2021-06-11 06:13:57 &#43;0000 UTC">2021-06-11 06:13:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And Google too. It makes me wonder who is their audience when they only use USA timezone while their customers are worldwide.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p_l" target="_blank">p_l</a>   <span class="timeago" data-date="2021-06-11 07:07:17 &#43;0000 UTC">2021-06-11 07:07:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google is a bit ... more interesting case, at least known. Namely they fucked up early in history by using local timezone, and when it started biting them it proved cheaper and easier to use that as the one global timezone rather than make everything base on UTC. Since then I heard it referenced as Mountain View Time.<p>OTOH, they could add translation on website for it...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=antoinealb" target="_blank">antoinealb</a>   <span class="timeago" data-date="2021-06-11 08:55:57 &#43;0000 UTC">2021-06-11 08:55:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My &quot;new tab page&quot; in chrome shows me clock for Mountain View, Zurich (local time for me), and a few other relevant ones. Very useful when working accross multiple time zones.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simonmales" target="_blank">simonmales</a>   <span class="timeago" data-date="2021-06-11 07:33:34 &#43;0000 UTC">2021-06-11 07:33:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Annoys me too that a lot of tech companies are reporting in local timezones North American timezones.<p>Whilst in hotel quarantine I hacked a webapp together to show timezones around the world.<p>I did it glance at my remote colleagues local time.<p><a href="https:&#x2F;&#x2F;localtime.app&#x2F;" rel="nofollow">https:&#x2F;&#x2F;localtime.app&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=a012" target="_blank">a012</a>   <span class="timeago" data-date="2021-06-11 08:11:26 &#43;0000 UTC">2021-06-11 08:11:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hope you learnt something while doing that, but I present you <a href="https:&#x2F;&#x2F;www.worldtimebuddy.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.worldtimebuddy.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simonmales" target="_blank">simonmales</a>   <span class="timeago" data-date="2021-06-11 16:49:47 &#43;0000 UTC">2021-06-11 16:49:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks nice. Perhaps not the most friendly thing on mobile.<p>Reminds me of the meeting planner by timeanddate.com (which I use a lot of)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Marazan" target="_blank">Marazan</a>   <span class="timeago" data-date="2021-06-11 09:35:58 &#43;0000 UTC">2021-06-11 09:35:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I doscvered the joy of world time buddy when working on a team that had members in India, UK, Canada, New York and Australia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rad_gruchalski" target="_blank">rad_gruchalski</a>   <span class="timeago" data-date="2021-06-11 10:12:21 &#43;0000 UTC">2021-06-11 10:12:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s a great website: <a href="https:&#x2F;&#x2F;everytimezone.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;everytimezone.com&#x2F;</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ksec" target="_blank">ksec</a>   <span class="timeago" data-date="2021-06-11 03:23:21 &#43;0000 UTC">2021-06-11 03:23:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am sorry I laughed so hard. Frankfurt in PDT.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SahAssar" target="_blank">SahAssar</a>   <span class="timeago" data-date="2021-06-11 07:34:12 &#43;0000 UTC">2021-06-11 07:34:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There actually is a frankfort in PDT: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Frankfort,_Washington" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Frankfort,_Washington</a> . Don&#x27;t think amazon has a datacenter there though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sgt" target="_blank">sgt</a>   <span class="timeago" data-date="2021-06-11 10:35:42 &#43;0000 UTC">2021-06-11 10:35:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Only two residents!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=trhway" target="_blank">trhway</a>   <span class="timeago" data-date="2021-06-11 06:35:29 &#43;0000 UTC">2021-06-11 06:35:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            that can be done to look great on a webpage <a href="https:&#x2F;&#x2F;media.gettyimages.com&#x2F;photos&#x2F;clocks-showing-the-local-hour-on-the-globe-in-melbourne-on-december-picture-id107413225?s=612x612" rel="nofollow">https:&#x2F;&#x2F;media.gettyimages.com&#x2F;photos&#x2F;clocks-showing-the-loca...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=88840-8855" target="_blank">88840-8855</a>   <span class="timeago" data-date="2021-06-11 06:23:46 &#43;0000 UTC">2021-06-11 06:23:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why? Every single time I look on a map, the American continent is in the centre. It only makes sense to use PDT as the only correct timezone. &#x2F;s
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bellyfullofbac" target="_blank">bellyfullofbac</a>   <span class="timeago" data-date="2021-06-11 12:17:09 &#43;0000 UTC">2021-06-11 12:17:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know you&#x27;re being sarcastic, but funny how &quot;localization&quot; affects our perceived reality, looking it up there are also China-centric maps[1], so most Chinese students probably think all world maps are like that.<p>AFAIK most maps I&#x27;ve seen have the longitude 180 degrees West at the left edge, and 180 degrees East on the right.<p>[1] <a href="https:&#x2F;&#x2F;www.quora.com&#x2F;Why-isnt-our-world-map-made-to-look-like-this" rel="nofollow">https:&#x2F;&#x2F;www.quora.com&#x2F;Why-isnt-our-world-map-made-to-look-li...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tester34" target="_blank">tester34</a>   <span class="timeago" data-date="2021-06-11 13:56:11 &#43;0000 UTC">2021-06-11 13:56:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            holy shit<p>I weren&#x27;t aware of that<p>It&#x27;s weird af that I&#x27;ve never saw map where America&#x2F;Asia is in the center
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=redsparrow" target="_blank">redsparrow</a>   <span class="timeago" data-date="2021-06-11 14:48:57 &#43;0000 UTC">2021-06-11 14:48:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s also rare to see maps where south is at the top, but that&#x27;s also an arbitrary decision.  North isn&#x27;t &quot;up&quot; any more than south is.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;South-up_map_orientation" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;South-up_map_orientation</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=88840-8855" target="_blank">88840-8855</a>   <span class="timeago" data-date="2021-06-11 19:59:53 &#43;0000 UTC">2021-06-11 19:59:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is giving me serious headache.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniformlyrandom" target="_blank">uniformlyrandom</a>   <span class="timeago" data-date="2021-06-10 23:43:18 &#43;0000 UTC">2021-06-10 23:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like a status update from Fukushima.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=idownvoted" target="_blank">idownvoted</a>   <span class="timeago" data-date="2021-06-11 07:25:58 &#43;0000 UTC">2021-06-11 07:25:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well then Germany, you know what to do: Ban all AWS data centers!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

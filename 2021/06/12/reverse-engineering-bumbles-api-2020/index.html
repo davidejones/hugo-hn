@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/reverse-engineering-bumbles-api-2020/">
+
+
+    <title>Reverse Engineering Bumble’s API (2020) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Reverse Engineering Bumble’s API (2020) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/reverse-engineering-bumbles-api-2020/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/reverse-engineering-bumbles-api-2020/">
+<meta name="twitter:title" content="Reverse Engineering Bumble’s API (2020) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Reverse Engineering Bumble’s API (2020) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T03:34:27JST",
+    "dateModified": "2021-06-12T03:34:27JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.securityevaluators.com/reverse-engineering-bumbles-api-a2a0d39b3a87">Reverse Engineering Bumble’s API (2020)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperhopper" target="_blank">hyperhopper</a>   <span class="timeago" data-date="2021-06-12 04:11:15 &#43;0000 UTC">2021-06-12 04:11:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s really sad to see so many findings, especially the ones that are exactly the same as issues that tinder had _years_ ago. Did they do no research? Did they just not care?<p>Example, the exact same triangulation issue that allows tracking users happened 6 years ago:<p><a href="https:&#x2F;&#x2F;www.google.com&#x2F;amp&#x2F;s&#x2F;time.com&#x2F;8604&#x2F;tinder-app-user-location-security-flaw&#x2F;%3famp=true" rel="nofollow">https:&#x2F;&#x2F;www.google.com&#x2F;amp&#x2F;s&#x2F;time.com&#x2F;8604&#x2F;tinder-app-user-l...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fatnoah" target="_blank">fatnoah</a>   <span class="timeago" data-date="2021-06-14 16:36:40 &#43;0000 UTC">2021-06-14 16:36:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Bumble issues feels so much worse, IMHO.  All of the &quot;hacks&quot; clearly demonstrate that little of the security, limits, etc. are enforced by the server.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rootsudo" target="_blank">rootsudo</a>   <span class="timeago" data-date="2021-06-12 06:03:34 &#43;0000 UTC">2021-06-12 06:03:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This also worked until recently on telegram, it&#x27;s so novel to me, what was a huge deal with the cell phone AMPS&#x2F;TDMA days and how Kevin Mitnick was caught, is possible now, with someone bored and a day to kill with a waymark and working backwards to try to isolate.<p>I just find it so fascinating, what was only possible by telecom&#x2F;nation states now the average poweruser can do if they really pleased. Then again, API walk, race attacks and such, aren&#x27;t the average power user, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=enedil" target="_blank">enedil</a>   <span class="timeago" data-date="2021-06-12 12:54:39 &#43;0000 UTC">2021-06-12 12:54:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Huh? On telegram you had to explicitly opt in, and there were warnings when you tried to enable this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vmception" target="_blank">vmception</a>   <span class="timeago" data-date="2021-06-12 05:30:27 &#43;0000 UTC">2021-06-12 05:30:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would lean toward not care<p>It doesn&#x27;t affect anything<p>Users still pay, and they were focusing on becoming publicly traded and now are
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hyperhopper" target="_blank">hyperhopper</a>   <span class="timeago" data-date="2021-06-12 07:08:14 &#43;0000 UTC">2021-06-12 07:08:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But not caring implies some kind of tradeoff. If you don&#x27;t care, just don&#x27;t add the feature! Obviously they do care if they knew that their almost identical competitor did it and put was an issue, but decided to add the feature anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IncludeSecurity" target="_blank">IncludeSecurity</a>   <span class="timeago" data-date="2021-06-12 05:29:20 &#43;0000 UTC">2021-06-12 05:29:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My team found the tinder vuln, there are still plenty of location based apps that have that vuln...plenty. :(
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=markwillis82" target="_blank">markwillis82</a>   <span class="timeago" data-date="2021-06-12 08:26:48 &#43;0000 UTC">2021-06-12 08:26:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Out of curiosity, what would be the best way of displaying a rough distance for location on these style apps? (Round to nearest mile? Show a town name?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=g_p" target="_blank">g_p</a>   <span class="timeago" data-date="2021-06-12 14:04:57 &#43;0000 UTC">2021-06-12 14:04:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One approach I&#x27;ve been thinking about in the past (at least as a rough concept) is for the back-end to round both users&#x27; location to an &quot;area&quot; (probably city level or similar), then compute the distance between the centroids of those areas. That way moving around your own city wouldn&#x27;t change the returned distance, nor would the other person&#x27;s moving around their own city. Even spoofing API requests wouldn&#x27;t help much, as you&#x27;d only be able to triangulate which particular area centroid the distance is being measured to, and that is probably something the user is already disclosing on their profile anyway.<p>This could even be done in a relatively private way by only reporting the area level location to the server (not that I imagine many services would want to give up valuable raw location data!), as the server wouldn&#x27;t need anything more granular.<p>Obviously there&#x27;s challenges in more rural areas where population and premises density are lower - how big is the &quot;area&quot; in that case, and is the distance reported that meaningful in these situations?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=correct_horse" target="_blank">correct_horse</a>   <span class="timeago" data-date="2021-06-12 19:45:29 &#43;0000 UTC">2021-06-12 19:45:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The way tinder dealt with it, as I understand, is by dividing the world into a coarse grid. Users were placed in the grid, then distances calculated from the centers of the grid squares. Basically rounding of position, not rounding of distance. They tried rounding distance (calculated from exact positions) but one can exploit that by exploring for the boundary where the distance changes from one integer to another.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raverbashing" target="_blank">raverbashing</a>   <span class="timeago" data-date="2021-06-12 14:12:46 &#43;0000 UTC">2021-06-12 14:12:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Round it to a given precision and maybe fuzz it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=magnostherobot" target="_blank">magnostherobot</a>   <span class="timeago" data-date="2021-06-12 14:42:45 &#43;0000 UTC">2021-06-12 14:42:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            grindr&#x27;s pretty old at this point, and shows you distances to other people _to the metre_.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ryanlol" target="_blank">ryanlol</a>   <span class="timeago" data-date="2021-06-12 09:42:14 &#43;0000 UTC">2021-06-12 09:42:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;triangulation<p>Multilateration, not triangulation :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=notsureaboutpg" target="_blank">notsureaboutpg</a>   <span class="timeago" data-date="2021-06-12 16:42:05 &#43;0000 UTC">2021-06-12 16:42:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Aren&#x27;t they the same company? Aren&#x27;t all of these owned by Match.com? At least the creator of Bumble originally worked at Tinder. Not surprising they are largely the same underneath the marketing
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vkomega" target="_blank">vkomega</a>   <span class="timeago" data-date="2021-06-12 05:04:18 &#43;0000 UTC">2021-06-12 05:04:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How many of you have built very robust and secure restful api&#x27;s, and had no traction? Makes you wonder if craftsmanship even matters for many startups.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dreamer7" target="_blank">dreamer7</a>   <span class="timeago" data-date="2021-06-12 05:17:05 &#43;0000 UTC">2021-06-12 05:17:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most of the things described in this post are easy to mitigate without much additional development effort. Rate limiting, role based access etc are commodities now.<p>Implementing server-side validations is, in my opinion, mandatory. This is even more important for any API with more than 1 client - Android, iOS, Web etc. Not only does it prevent basic security breaches, but also it prevents hard to track bugs. More importantly, why would you not centralise business logic as much as possible instead of having to duplicate it on every client.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ungawatkt" target="_blank">ungawatkt</a>   <span class="timeago" data-date="2021-06-12 06:41:19 &#43;0000 UTC">2021-06-12 06:41:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depending on what you mean by &quot;start-up&quot;, those are all unfortunately still nice-to-haves, not mandatory, for a functioning app. Having just finished a stint as the main dev at a startup, even commodities still take a reasonable amount of effort for a top tier group of 1-5 people to manage, let alone the team you happen to have at the time (meaning not top tier, looking at myself here heh). Roll that into &quot;we got funding and it&#x27;s growth time, no space for architecture changes&quot;, it&#x27;s not hard to see the path to skipping out on some things that are considered basic for a new project at a medium-large scale company. So not really against what you say, just a note that the ideal doesn&#x27;t always match the reality
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dreamer7" target="_blank">dreamer7</a>   <span class="timeago" data-date="2021-06-12 08:39:27 &#43;0000 UTC">2021-06-12 08:39:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand how it ends up like this as I myself run a startup with a small tech team. Typically the issue is that we are always looking to add new features versus trying to fix issues from past. But I still believe that with good principles from the beginning, we will be able to build better software without costing us time
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vmception" target="_blank">vmception</a>   <span class="timeago" data-date="2021-06-12 05:28:21 &#43;0000 UTC">2021-06-12 05:28:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the ability to sell more shares matters, and recurring revenue is the most major component of being able to do that<p>nothing else does<p>its a dating app made to address issues women have had in other dating apps, founded&#x2F;made&#x2F;led by a woman, with the solution being the oxymoron of women messaging male matches first<p>thats it<p>thats the whole story<p>theyre publicly traded now, with a traditional IPO (no SPAC), that is called success
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=weird-eye-issue" target="_blank">weird-eye-issue</a>   <span class="timeago" data-date="2021-06-12 07:28:56 &#43;0000 UTC">2021-06-12 07:28:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Sell more shares&quot;? That&#x27;s not how it works lol
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vmception" target="_blank">vmception</a>   <span class="timeago" data-date="2021-06-12 09:27:17 &#43;0000 UTC">2021-06-12 09:27:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And yet they sold so many in multiple funding rounds, an IPO and now employees dump shares on everyone’s retirement accounts<p>Infinite dilution, baby
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=supermatt" target="_blank">supermatt</a>   <span class="timeago" data-date="2021-06-12 13:16:35 &#43;0000 UTC">2021-06-12 13:16:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author keeps referring to “the REST APIs” but it’s clear from the examples that there is nothing RESTful about the APIs - it’s all some form of RPC over HTTP.<p>Does REST now mean any API over HTTP?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=catillac" target="_blank">catillac</a>   <span class="timeago" data-date="2021-06-12 15:32:19 &#43;0000 UTC">2021-06-12 15:32:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            REST is popular and everyone knows what it is generally. The differences between what is happening in the post (JSON RPC over HTTP) are fairly subtle to a casual reader when compared to REST.<p>For the majority of the target audience (I assume some level of technologist), it’s probably more confusing than not to go through and talk about RPCs. The “rest” of us (haha) know what they mean when they say REST and show RPC.<p>I don’t think this is a hill to die on, or even a big deal whatsoever.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mraza007" target="_blank">mraza007</a>   <span class="timeago" data-date="2021-06-12 04:22:08 &#43;0000 UTC">2021-06-12 04:22:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry this might be a dumb question but how do reverse engineer a service or maybe software
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zachrose" target="_blank">zachrose</a>   <span class="timeago" data-date="2021-06-12 04:35:09 &#43;0000 UTC">2021-06-12 04:35:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Download the Charles app on your iPhone, turn it on, use the app you’re interested in, then look at Charles to see what network calls the app made while you were using it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hamburglar" target="_blank">hamburglar</a>   <span class="timeago" data-date="2021-06-12 06:04:17 &#43;0000 UTC">2021-06-12 06:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or install MITMProxy on your laptop, install your newly-generated root CA cert on your phone, and point your phone’s http proxy to your MITMproxy port.  I prefer this to installing an app on my phone.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tome" target="_blank">tome</a>   <span class="timeago" data-date="2021-06-12 13:25:31 &#43;0000 UTC">2021-06-12 13:25:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Surely the phone notices that the root certificate is not one of those it already knows about?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NovemberWhiskey" target="_blank">NovemberWhiskey</a>   <span class="timeago" data-date="2021-06-12 13:37:36 &#43;0000 UTC">2021-06-12 13:37:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All the device knows is that it trusts some root CAs and not others. You add your personal root CA to the trusted list; so it&#x27;s trusted.<p>Unless the site uses some kind of certificate pinning (c.f. HPKP), one trusted root is as good as another.<p>This is how TLS inspection is done on corporate networks. IT will apply a group policy that puts a company-owned root certificate into the trusted roots on your Windows machine - maybe the same one that&#x27;s used for the rest of your internal PKI.<p>You then issue a subordinate CA from that root, and your web proxy infrastructure (Bluecoat or whatever) then uses that CA to do just-in-time provisioning of certs for whatever domains you&#x27;re intercepting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saagarjha" target="_blank">saagarjha</a>   <span class="timeago" data-date="2021-06-12 16:44:55 &#43;0000 UTC">2021-06-12 16:44:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The phone doesn’t, as the sibling comment mentions, but the app might (if it’s doing certificate pinning).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sbmthakur" target="_blank">sbmthakur</a>   <span class="timeago" data-date="2021-06-12 15:46:27 &#43;0000 UTC">2021-06-12 15:46:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does this work with SSL-pinning enabled?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonladuke0311" target="_blank">jasonladuke0311</a>   <span class="timeago" data-date="2021-06-12 17:05:57 &#43;0000 UTC">2021-06-12 17:05:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, I believe you would have to recompile the app with your cert or use Frida or something  to hook the cert check function.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mraza007" target="_blank">mraza007</a>   <span class="timeago" data-date="2021-06-12 17:11:26 &#43;0000 UTC">2021-06-12 17:11:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow this is very useful and I’ll definitely try that app to see which apps are making what network calls
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 17:45:26 &#43;0000 UTC">2021-06-12 17:45:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tmpz22" target="_blank">tmpz22</a>   <span class="timeago" data-date="2021-06-12 04:31:46 &#43;0000 UTC">2021-06-12 04:31:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apps are built in a client-server configuration where the app is the user facing client and the API is the server. If you listen and manipulate the data sent back and forth to the server you can often do a lot more then what the user interface allows. Whether that’s gathering and analyzing more data or completing actions the server developers never anticipated the client would attempt.<p>Simply put backend developers assume the client will only do what they configure it to do and won’t be tampered with, except with enough effort it can trivially be tampered with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=h0l0cube" target="_blank">h0l0cube</a>   <span class="timeago" data-date="2021-06-12 05:07:58 &#43;0000 UTC">2021-06-12 05:07:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; backend developers assume the client will only do what they configure<p>... if they lack the time (or inclination) to validate the requests properly. Client side validation is important for good UX, but not strictly essential, whereas server side validation ought to be mandatory.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tmpz22" target="_blank">tmpz22</a>   <span class="timeago" data-date="2021-06-12 06:54:58 &#43;0000 UTC">2021-06-12 06:54:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Put more generously there are limitations to the apple development ecosystem and frameworks, and limitations to web frameworks. Combined you combine both sets of limitations - which encourage the developers to throw their hands up.<p>Release engineering mobile apps is a PITA. Backend engineering at a mobile first company is often second fiddle.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h0l0cube" target="_blank">h0l0cube</a>   <span class="timeago" data-date="2021-06-12 07:53:48 &#43;0000 UTC">2021-06-12 07:53:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure how Apple&#x27;s ecosystem or web frameworks limit the validation on a backend, which is pretty much platform agnostic.  The limitations are bound by what a HTTP response can provide, and the error states the front-end devs are willing to handle.  During my time as a mobile&#x2F;web dev, the back-end devs were always compliant with providing the error information where relevant, and would enforce business requirements (e.g., paid users are only authorized to do &#x27;x&#x27;) on the back-end.  Once again, it&#x27;s more expedient to not care, but I think Bumble has the budget and self-interest to care for the examples in the article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mandelbrotwurst" target="_blank">mandelbrotwurst</a>   <span class="timeago" data-date="2021-06-12 05:14:32 &#43;0000 UTC">2021-06-12 05:14:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            “We should probably ______ , but _____ ...”
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rootsudo" target="_blank">rootsudo</a>   <span class="timeago" data-date="2021-06-12 06:05:39 &#43;0000 UTC">2021-06-12 06:05:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can do it a few ways, you can do it as simple as modifying the headers and the get via firebug or such.<p><a href="https:&#x2F;&#x2F;code.tutsplus.com&#x2F;tutorials&#x2F;http-headers-for-dummies--net-8039" rel="nofollow">https:&#x2F;&#x2F;code.tutsplus.com&#x2F;tutorials&#x2F;http-headers-for-dummies...</a><p>You can also capture and analyze network traffic and inject other stuff too.<p>Basically basic OWASP stuff. If the app relies on client side, then the server will trust it 100% of the time and you can do much more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=torh" target="_blank">torh</a>   <span class="timeago" data-date="2021-06-12 07:15:28 &#43;0000 UTC">2021-06-12 07:15:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are a backend developer, never trust client-side. Never.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=allenleein" target="_blank">allenleein</a>   <span class="timeago" data-date="2021-06-12 09:06:17 &#43;0000 UTC">2021-06-12 09:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for asking this question. I have learned a lot from this thread :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mraza007" target="_blank">mraza007</a>   <span class="timeago" data-date="2021-06-12 17:10:49 &#43;0000 UTC">2021-06-12 17:10:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You are welcome and same here the community has been really helpful this is why I love HN
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rootsudo" target="_blank">rootsudo</a>   <span class="timeago" data-date="2021-06-12 06:01:57 &#43;0000 UTC">2021-06-12 06:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I found many of these things too, there&#x27;s also a direct link to the careers page of badoo. I did not know before the IPO and such that badoo owned bumble as I explored the API.<p>Fun stuff.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

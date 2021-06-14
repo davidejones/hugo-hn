@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/prometheus-but-bigger/">
+
+
+    <title>Prometheus, but Bigger - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Prometheus, but Bigger - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/prometheus-but-bigger/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/prometheus-but-bigger/">
+<meta name="twitter:title" content="Prometheus, but Bigger - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Prometheus, but Bigger - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T12:25:51JST",
+    "dateModified": "2021-06-13T12:25:51JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://luizrojo.medium.com/prometheus-but-bigger-b678d8d6b29d">Prometheus, but Bigger</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benchess" target="_blank">benchess</a>   <span class="timeago" data-date="2021-06-13 16:15:52 &#43;0000 UTC">2021-06-13 16:15:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The key constraint here is that the author has no access to persistent disks and can only use object storage for persistence. Otherwise Thanos would be extreme overkill for this number of metrics.<p>Single-node VictoriaMetrics can easily handle 1M metrics&#x2F;sec
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zzyzxd" target="_blank">zzyzxd</a>   <span class="timeago" data-date="2021-06-13 18:02:35 &#43;0000 UTC">2021-06-13 18:02:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Thanos would be extreme overkill for this number of metrics<p>Data volume is just one thing. Thanos makes Prometheus stateless and easy to shard, all in a non-invasive approach that is solid, boring, and just works. The architecture works well in small scale systems. I even use it in a single node k8s cluster in my homelab, pays only about ~$1 a month for Backblaze B2 so I never worry about data retention or disk usage.<p>&gt; Single-node VictoriaMetrics can easily handle 1M metrics&#x2F;sec<p>Even if I have disk access, I would think twice before deploying a database and manage it myself when I don&#x27;t have to. Besides the maintenance burden and potential scaling issues in the future, it may cost you more to use block storage like EBS than S3.<p>Also, Prometheus memory usage overhead for remote write was wild[1], so, good luck with capacity planning and config tweaking.<p>1. <a href="https:&#x2F;&#x2F;prometheus.io&#x2F;docs&#x2F;practices&#x2F;remote_write&#x2F;" rel="nofollow">https:&#x2F;&#x2F;prometheus.io&#x2F;docs&#x2F;practices&#x2F;remote_write&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=znpy" target="_blank">znpy</a>   <span class="timeago" data-date="2021-06-13 21:49:52 &#43;0000 UTC">2021-06-13 21:49:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Single-node VictoriaMetrics can easily handle 1M metrics&#x2F;sec<p>yeah sure but then what will you be posting on Linkedin with buzzwords? &quot;I have installed a boring software on a single machine because it works, performs well enough and it&#x27;s cheap&quot; ? what are you going to say, &quot;I take daily snapshots of the vm because 1-day rpo is fine for me&quot;?<p>How will you get them likes??<p>(this is an ironic comment, before anyone starts a flame)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=luizrojo" target="_blank">luizrojo</a>   <span class="timeago" data-date="2021-06-14 12:58:31 &#43;0000 UTC">2021-06-14 12:58:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The solution here is meant to be expanded easily and to keep things at a low cost.<p>The “insane” prices were from NewRelic, using the Kubernetes integration and infrastructure monitoring. I am based in Brasil, so every price is “times 5” plus taxes.<p>Right now we have a small number of clusters, but it will be growing on a fast pace in the future. For us, monitoring the new clusters will come easy as deploying a couple of new prometheus PODs inside the new cluster, adding a couple lines to our deploy pipeline.<p>As for doing in house, since we have a complete private cloud solution, it makes sense for us, as mentioned by zzyzxd in another comment, Thanos is pretty straight forward and just works, it demands almost zero maintenance, we just keep an eye for storage consumption and new releases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nwmcsween" target="_blank">nwmcsween</a>   <span class="timeago" data-date="2021-06-13 19:29:13 &#43;0000 UTC">2021-06-13 19:29:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I dont understand the need to NiH things, why not clickhouse with weekly, monthly, etc aggregation. It comes with built in sharding, can store time series data somewhat efficiently and doesn&#x27;t have some hack h&#x2F;a setup (in general not thanos).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BurritoAlPastor" target="_blank">BurritoAlPastor</a>   <span class="timeago" data-date="2021-06-14 01:44:37 &#43;0000 UTC">2021-06-14 01:44:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn’t Clickhouse <i>be</i> the NIH solution? Thanos supports Prometheus natively, but Clickhouse doesn’t (or at least doesn’t appear on the integrations list in the Prometheus docs), so you’d have to write an adapter for it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Ne02ptzero" target="_blank">Ne02ptzero</a>   <span class="timeago" data-date="2021-06-13 17:03:16 &#43;0000 UTC">2021-06-13 17:03:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For the monthly expenses, with most of the components running on-premises, there was a 90.61% cost reduction, going from US$ 38,421.25 monthly to US$ 3,608.99, including the AWS services cost.<p>I might be missing something, but $3k&#x2F;month (let alone $38k&#x2F;month) sounds absolutely insane to me for how little metrics they&#x27;re collecting (4k5 metrics per second, 2.7TB of data per year). Is the money going for network bandwidth or something along those lines?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ericbarrett" target="_blank">ericbarrett</a>   <span class="timeago" data-date="2021-06-13 18:27:47 &#43;0000 UTC">2021-06-13 18:27:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AWS, for example, charges for cross-AZ data transfers. Naive setups with multiple AZs (us-west-1a, 1b, etc.) and a centralized Prometheus setup will rack up quite the cost.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gregimba" target="_blank">gregimba</a>   <span class="timeago" data-date="2021-06-13 20:55:47 &#43;0000 UTC">2021-06-13 20:55:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The reducing cross-AZ data transfer savings on one service resulted in a low 6 figure per year savings. Its something we overlooked during initial setup and now its something I check for when dealing with AWS networking.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=otterley" target="_blank">otterley</a>   <span class="timeago" data-date="2021-06-13 22:08:58 &#43;0000 UTC">2021-06-13 22:08:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Out of curiosity, what&#x27;s your plan for recovery during an AZ or regional outage?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=manyxcxi" target="_blank">manyxcxi</a>   <span class="timeago" data-date="2021-06-13 22:27:42 &#43;0000 UTC">2021-06-13 22:27:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If RDS or other “hard to replicate very quickly during disaster” infra is being run I personally would still have cross A-Z replication at minimum, to reduce network costs I would configure the “other zone” as a backup replica only and not for performance clustering.<p>With automation we can spin up full new compute stacks, including load balancers and DNS in about 5-10 minutes per “unique” environment configuration.<p>While it guarantees we could never have a no downtime failover, we’re okay with it and have more than halved our network costs (which admittedly were about number 8 on our AWS bill by cost).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=marcinzm" target="_blank">marcinzm</a>   <span class="timeago" data-date="2021-06-13 22:53:13 &#43;0000 UTC">2021-06-13 22:53:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They say they ingest 226gb per month. The cross-az transfer cost is $0.01 per gb. So that should come out to only $2.26&#x2F;month for them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ericbarrett" target="_blank">ericbarrett</a>   <span class="timeago" data-date="2021-06-13 23:28:04 &#43;0000 UTC">2021-06-13 23:28:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are also storing the data in S3 (ingest bandwidth, storage). Plus running an RDS instance (instance cost, x2 if replicated, bandwidth again possibly x2 or more, IO cost) as well as local storage (EBS size&#x2F;IO cost). And the size of the raw metrics might not be the wire size, especially if it’s uncompressed JSON.  My guess on reviewing the post is that a lot of their <i>savings</i> were inter-AZ bandwidth conservation. But it’s hard to say without poking around in their AWS console :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lcw" target="_blank">lcw</a>   <span class="timeago" data-date="2021-06-13 19:20:06 &#43;0000 UTC">2021-06-13 19:20:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree. I&#x27;m working with a metrics system that takes just over 1 million metrics a second and it has a similar run rate to ~38k a month.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 16:09:26 &#43;0000 UTC">2021-06-13 16:09:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

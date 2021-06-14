@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/python-is-13x-faster-by-just-adjusting-some-compiling-options-for-libpython/">
+
+
+    <title>Python is 1.3x faster by just adjusting some compiling options for libpython - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Python is 1.3x faster by just adjusting some compiling options for libpython - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/python-is-13x-faster-by-just-adjusting-some-compiling-options-for-libpython/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/python-is-13x-faster-by-just-adjusting-some-compiling-options-for-libpython/">
+<meta name="twitter:title" content="Python is 1.3x faster by just adjusting some compiling options for libpython - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Python is 1.3x faster by just adjusting some compiling options for libpython - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T19:52:10JST",
+    "dateModified": "2021-06-12T19:52:10JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://bugs.python.org/issue38980?fbclid=IwAR0cyfahpBywNzbqLCpcfwatOaU6W8UQp7LgVu8KZ8hDc-wKLjLE7wjOs7g">Python is 1.3x faster by just adjusting some compiling options for libpython</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-06-13 01:27:21 &#43;0000 UTC">2021-06-13 01:27:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We changed the url from <a href="https:&#x2F;&#x2F;www.facebook.com&#x2F;dan.colascione&#x2F;posts&#x2F;10107358290728348" rel="nofollow">https:&#x2F;&#x2F;www.facebook.com&#x2F;dan.colascione&#x2F;posts&#x2F;10107358290728...</a>, which is behind a login wall and points to this.<p>Keep in mind that many of the complaints in this thread were posted in the context of that original URL.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jchw" target="_blank">jchw</a>   <span class="timeago" data-date="2021-06-12 22:01:30 &#43;0000 UTC">2021-06-12 22:01:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s nothing wrong with this post factually, but the tone sucks. It has an immensely combative energy for what is not really a charged subject matter.<p>Like sure. Today, a lot of the historical reasons for things seem silly and irrelevant. At one point, they did not seem silly and irrelevant. For compatibility with stuff sticking around from those days, we get some performance penalties that are not strictly necessary. I don’t think anyone is doing that to be an asshole, so the oddly antagonistic tone seems unjustified.<p>And yes, Windows with a module-level namespace is cleaner in this regard, but Windows design is entirely different and has plenty of its own skeletons. ELF does not, to me, feel significantly more horrible than PE. And I’m not speaking from inexperience; I did at least write a couple of ELF and PE parsing softwares over time, most recently go-winloader[1].<p>Do we need to override symbols in the same library? Probably not... <i>kind of</i>. Your modules may in fact not need this. However, libc probably does. Take a look at what symbols libpthread exports on your system some time.<p>I hate to be the person to point this out, but please consider not approaching subjects from this position. It feels alienating, and I have no idea why it’s necessary to have such a tone.<p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;jchv&#x2F;go-winloader" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;jchv&#x2F;go-winloader</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-12 22:41:19 &#43;0000 UTC">2021-06-12 22:41:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed. I was trying to find the words for what I was so put off by the article, but you nailed it. The tone made me want to disagree with it just by default. Luckily I 1) recognize that I am not qualified to have an opinion on the technical details and 2) Ruthlessly crush instinctual responses until I&#x27;ve thought them through with less emotion. (most of the time... I&#x27;m not robot, or perfect)<p>Someone in a sibling thread said it&#x27;s not bad to write like that for catharsis... I guess to blow off steam or something. But if the method of blowing off steam is belittling other smart people that don&#x27;t always make perfect decisions then it&#x27;s probably not a great way to go. If you need to write it for catharsis, go for it, but there&#x27;s no need to publish it.<p>Otherwise, my questions on the technical side: Would this performance hit and the alternative option have been obvious at the time? If so, was there a reasonable trade off for why this approach was taken? Or was this choice only wrong in retrospect?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=galangalalgol" target="_blank">galangalalgol</a>   <span class="timeago" data-date="2021-06-12 23:09:37 &#43;0000 UTC">2021-06-12 23:09:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read it as a way to make a tedious topic more entertaining. It didn&#x27;t seem combative at all. I do identify with your desire to disagree with people whose tone I dislike, even if I intellectually think they are right. I wish I could turn that off.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-06-13 05:08:26 &#43;0000 UTC">2021-06-13 05:08:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s interesting, I have the opposite instinct. I have an urge to agree with and support people who have a more combative or opinionated tone. Strange!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phibz" target="_blank">phibz</a>   <span class="timeago" data-date="2021-06-13 00:28:21 &#43;0000 UTC">2021-06-13 00:28:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read the tone as insecurity. Hey look at me, I figured this out. Aren&#x27;t I smart? All these previous people are dumb. Right? Right!? RIGHT!?!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rjzzleep" target="_blank">rjzzleep</a>   <span class="timeago" data-date="2021-06-13 05:17:58 &#43;0000 UTC">2021-06-13 05:17:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, it must be a cultural thing. I reread it again trying to find this emotion, arrogance or condescending tone different people have read into this, and I really can&#x27;t see it. It&#x27;s just very direct. This is an old engineering decision, why shouldn&#x27;t it be direct?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gradschoolfail" target="_blank">gradschoolfail</a>   <span class="timeago" data-date="2021-06-13 05:33:56 &#43;0000 UTC">2021-06-13 05:33:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Were you reading the facebook post or the forum post? The moderator switched the url; you and GP might be talking about different things?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjzzleep" target="_blank">rjzzleep</a>   <span class="timeago" data-date="2021-06-13 07:17:09 &#43;0000 UTC">2021-06-13 07:17:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I don&#x27;t know anything about the Facebook post. But it&#x27;s not really clear to me why people bragging on their Facebook wall is worth a discussion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-06-12 22:39:59 &#43;0000 UTC">2021-06-12 22:39:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The OP was writing about a 29 year old design decision, and he wasn’t writing about a person. Design decisions don’t have feelings. I found his no holds barred clarity about something as obscure as dynamic linking namespaces made for an easier if still not easy read.<p>But that said, I don’t think dynamic linking is in the ELF spec. I believe that’s a <i>de facto</i> OS + dev tools thing rather than an ELF spec <i>de jure</i> thing. His points are still valid.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtpg" target="_blank">rtpg</a>   <span class="timeago" data-date="2021-06-12 23:25:03 &#43;0000 UTC">2021-06-12 23:25:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is recalling the old Linus debates, but the aggressiveness _doesn&#x27;t improve the clarity_, and is basically upping the word count.<p>I&#x27;m not tone policing but contesting the premise that &quot;aggressive tone&quot; = &quot;direct&quot;. For example<p>&gt;(Windows took a different approach and got it right. In Windows, it&#x27;s okay for multiple DLLs to provide the same symbol, and there&#x27;s no sad and desperate effort to pretend that a single namespace is still cool.)<p>&gt;(Windows got this right, where multiple DLLs can provide the same symbol)<p>There you go. Shorter, and not wasting 3 lines to express your feelings, and _you can still say Windows got it right_.<p>My feeling is that you can go in and describe a thing succinctly and to the point, and actually get your opinion across! It will be more effective, shorter, and your opinions are backed up with fact! No fluff needed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 00:04:50 &#43;0000 UTC">2021-06-13 00:04:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;<i>This is recalling the old Linus debates, but the aggressiveness _doesn&#x27;t improve the clarity_, and is basically upping the word count.</i><p>It drives the point home though, and keeps the energy levels higher.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kranner" target="_blank">kranner</a>   <span class="timeago" data-date="2021-06-13 02:40:20 &#43;0000 UTC">2021-06-13 02:40:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This may be subjective. For others (including me), it drives the irritation level higher and makes it harder to pay attention. Ranty writing fuels my own tendency to get annoyed and ranty; it makes me want to disengage to preserve my own mood. (&quot;Holub on Patterns&quot; is one example of a book I couldn&#x27;t finish because of this quality of the writing.)<p>Personally for me, concise and information-dense writing makes me sit up and pay attention.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-13 00:17:27 &#43;0000 UTC">2021-06-13 00:17:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It drives the point home though<p>Is the argument too weak to do that on its own without the abuse?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 12:14:48 &#43;0000 UTC">2021-06-13 12:14:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the case for all technical arguments.<p>Arguments are seldom weak or strong based on their technical details.<p>Heck, the technical details about this were already known to many people including several involved in build setups, but nobody cared anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=craftinator" target="_blank">craftinator</a>   <span class="timeago" data-date="2021-06-13 01:12:02 &#43;0000 UTC">2021-06-13 01:12:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really found my chakras to be stimulated by the wordy venting as well. That&#x27;s a very good point!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Nullabillity" target="_blank">Nullabillity</a>   <span class="timeago" data-date="2021-06-13 18:01:49 &#43;0000 UTC">2021-06-13 18:01:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, your rewritten version misses the fact that they&#x27;re trying to work around the problem, which is what takes it from &quot;X is wrong because I say so&quot; to &quot;X is causing them tangible problems&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jordigh" target="_blank">jordigh</a>   <span class="timeago" data-date="2021-06-12 22:59:23 &#43;0000 UTC">2021-06-12 22:59:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I found his no holds barred clarity<p>Being right is no excuse for being an asshole.<p>The attitude will appeal to some. It will strike many others in the wrong way and put them on the defensive.<p>There&#x27;s no reason to write this way. A concise, well-articulated, non-combative post will appeal to everyone and still convey the same information.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-06-12 23:02:11 &#43;0000 UTC">2021-06-12 23:02:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t think it’s possible to be an asshole to an inanimate object.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jordigh" target="_blank">jordigh</a>   <span class="timeago" data-date="2021-06-12 23:21:46 &#43;0000 UTC">2021-06-12 23:21:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Someone wrote that inanimate object. Someone likes that inanimate object. Someone thinks that inanimate object has reasons to be the way it is.<p>Attacking that inanimate object is not without emotional repercussions to those related to that object.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=QuadrupleA" target="_blank">QuadrupleA</a>   <span class="timeago" data-date="2021-06-13 03:51:55 &#43;0000 UTC">2021-06-13 03:51:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s necessary to criticize technical work (or any work) as long as the people involved care about achieving good results and making things work.<p>Agreed that we should not be excessively abrasive, and I think the facebook post is leaning that way - but I don&#x27;t think a world without criticism can work - at a certain point in any field you have to face reality, in which some things work and some don&#x27;t, and to protect every person involved from &quot;emotional repercussions&quot; is impossible because generally people&#x27;s beliefs and feelings are all over the map.<p>At any rate I&#x27;m not sure the author of LD_PRELOAD or ELF dynamic symbol interposition is scanning this thread - and after ~30 years distance might have different opinions about them, or at least a thicker skin :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-06-13 05:55:32 &#43;0000 UTC">2021-06-13 05:55:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But the rant isn’t really about the inanimate object. It’s about the author, and it implies a story and paints a character. If there’s a coffee table in a bad place in my office, and I bang my shins into it every morning, there’s a dramatic persona I’m expressing as the person who’s angry at the coffee table. It’s not really about the coffee table - it’s about my relationship. And that’s a strong point of view, and it’s comedic and entertaining because of the strong commitment to that perspective that to everyone else might seem silly and bizarre. It implies a narrative of this person’s commitment to die on the hill of hating linux’s dynamic linking behaviour.<p>Essentially a lot of criticism of the original article seems to be of the form of “reading strong, angry opinions like this make me feel insecure so please don’t do that”. And that might be a good reason to avoid writing like that. But tone policing, and insisting on emotionally desaturated writing has a cost for the reader and the writer. I think it makes us smaller. And it keeps us in our heads rather than in our hearts. That’s just not the way I want to live my life.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 00:06:37 &#43;0000 UTC">2021-06-13 00:06:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;<i>Someone wrote that inanimate object. Someone likes that inanimate object.</i><p>You&#x27;ll find somebody liking everything you can name. Even every attrocity has been done by somebody.<p>Not attacking the person is of course the correct thing.<p>But if you can&#x27;t even attack the attrocity or bad choice, we&#x27;ve gone too far with this sensitivity thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kelnos" target="_blank">kelnos</a>   <span class="timeago" data-date="2021-06-13 00:55:57 &#43;0000 UTC">2021-06-13 00:55:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But in this case it&#x27;s not an atrocity, and whether or not it was even a bad choice (at the time or today) is debatable.  It&#x27;s fine to present an <i>opinion</i> you hold about something, but belittling that thing also tends to implicitly belittle the intellect of people who might agree with that thing, not to mention the people who designed and built that thing.<p>&gt; <i>But if you can&#x27;t even attack...</i><p>Why do we need to <i>attack</i> something?  If we can&#x27;t explain and support our view that something is wrong or a bad decision without resorting to attacks, perhaps our argument isn&#x27;t really that strong?<p>And that&#x27;s the thing.  I don&#x27;t think the author really presented a strong argument; he tried to convince me by verbally trashing the other side, while the actual logical, coherent argument is buried in a sea of disdain.  I think it&#x27;s still not clear what the default should be.  Do we optimize for performance, or for debugability and tinkerability?  I mean, I feel like that&#x27;s one of the classic debates that we still -- and will probably never -- have no hard answer for.<p>Edited to add: I went back and read the linked Python bug tracker issue[0], which honestly I wish was what HN linked to.  It&#x27;s concise, explains the problem, explains why LD_PRELOAD isn&#x27;t all that useful for libpython, specifically why this sort of performance degradation is even worse with a library like libpython, and makes sure to call out that this change only affects libpython and not any other shared libraries, where (implicitly) people might find LD_PRELOAD useful.<p>[0] <a href="https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980" rel="nofollow">https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 12:11:07 &#43;0000 UTC">2021-06-13 12:11:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;<i>Why do we need to attack something? If we can&#x27;t explain and support our view that something is wrong or a bad decision without resorting to attacks, perhaps our argument isn&#x27;t really that strong?</i><p>It&#x27;s rather the opposite: if we don&#x27;t resort to attack, comdent the practice, raise the tone, our argument will be weak.<p>That&#x27;s because it&#x27;s not enough to be right. It also need to be memorable and resontant. Else people&#x27;s eye will just glaze over it.<p>That&#x27;s why this post has 218 comments as of now, and you where involved and will remember it better tomorrow, than some purely technical explanation that probably wouldn&#x27;t even have made it in the first page (or have 0-10 comments, typical of such posts).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-13 00:18:37 &#43;0000 UTC">2021-06-13 00:18:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why can&#x27;t they just present the argument without any abuse at all? Why is there ever any need for the abuse?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 12:12:32 &#43;0000 UTC">2021-06-13 12:12:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, the argument here is:<p>(a) if you attack the practice is not abuse. Abuse is when you attack the person.<p>(b) if you don&#x27;t have a colorful tone and strongly condemn something, for most the complaint wont even register
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-06-13 13:01:47 &#43;0000 UTC">2021-06-13 13:01:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if you don&#x27;t have a colorful tone and strongly condemn something, for most the complaint wont even register<p>Maybe the argument isn&#x27;t actually that good if you need to resort to theatrics to make the point register?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=snet0" target="_blank">snet0</a>   <span class="timeago" data-date="2021-06-13 03:21:50 &#43;0000 UTC">2021-06-13 03:21:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I criticise a portrait, am I not criticising the painter?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zuider" target="_blank">Zuider</a>   <span class="timeago" data-date="2021-06-12 23:17:47 &#43;0000 UTC">2021-06-12 23:17:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even though the vitriol may be directed at an inanimate object, it may be distracting and obnoxious to the person who is reading.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-12 23:24:02 &#43;0000 UTC">2021-06-12 23:24:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless that inanimate object was invented by a person or a group of people, in which case you are indirectly insulting those people.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Diederich" target="_blank">Diederich</a>   <span class="timeago" data-date="2021-06-12 23:10:47 &#43;0000 UTC">2021-06-12 23:10:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; no holds barred clarity<p>There&#x27;s a big difference between &#x27;clarity&#x27; and confrontational, negative language.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kelnos" target="_blank">kelnos</a>   <span class="timeago" data-date="2021-06-13 00:47:45 &#43;0000 UTC">2021-06-13 00:47:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>I found his no holds barred clarity</i><p>I found it not particularly clear at all.  The entire thing can be boiled down to 2 or 3 sentences, or maybe as many as 10 if you want to include more background information.<p>When I was reading it, about halfway through I was thinking &quot;god, when is this mediocre rant going to get to the meat of how to fix the problem?&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-13 16:19:22 &#43;0000 UTC">2021-06-13 16:19:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Design decisions don&#x27;t appear, they are made by people. Going over the top with profanity or LOL&#x27;s or l33t speak might make it more entertaining to read, but anyone even a little predisposed to disagree with your assessment is a lot more likely to go on the defensive. If I said was talking to someone and telling them a design decision I encountered was shitty and bad, and it turns out that was the person who made the decision, I&#x27;m going to be a lot less likely to convince them of my assessment then if I just said &quot;Choosing to do X instead of Y will make it 1.3x faster&quot;.<p>This means the writer is choosing to write for audience entertainment instead of technical advancement &amp; improving the status quo. It&#x27;s not impossible to do both at the same time, without the insulting tone.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jchw" target="_blank">jchw</a>   <span class="timeago" data-date="2021-06-12 23:31:31 &#43;0000 UTC">2021-06-12 23:31:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The OP was writing about a 29 year old design decision, and he wasn’t writing about a person. Design decisions don’t have feelings. I found his no holds barred clarity about something as obscure as dynamic linking namespaces made for an easier if still not easy read.<p>I don&#x27;t think that it would&#x27;ve been hard to maintain the exact same level of clarity regarding the subject matter. Perhaps the read was more entertaining due to the abrasive tone, but was it actually <i>easier to read</i>?<p>Ultimately, design decisions are made by people - if someone made such a takedown of ideas of mine, I would probably be somewhat discouraged, at least as long as I know they are being sincere and not just doing a bit. I don&#x27;t think people should be flinching in their criticisms of ideas, but being fair to nuance and history really would be welcome too. It&#x27;s one thing to point out dysfunctions in things, but it&#x27;s different to pull out a sort of Angry Video Game Nerd-esque personality and drag how horrible things are through the mud.<p>Maybe this post is more in jest than not and I(&#x2F;we?) simply did not pick up on the tone being purely for entertainment value. But that&#x27;s the thing. When people read things like this, I think a lot of people take it too seriously and start to embody this attitude, and it leads to the kind of thought processes where things are either good, or stupid&#x2F;evil&#x2F;whatever, with no room for things that are just &quot;not perfect, but overall fine.&quot;<p>Hell, I feel kind of bad due to how unnecessarily personal my comments regarding this feel. How would the author feel reading this? The fact that I may be right doesn&#x27;t matter, because I&#x27;m not some kind of uncaring asshole, and I think most people are not if they are in the right mind.<p>&gt; But that said, I don’t think dynamic linking is in the ELF spec. I believe that’s a <i>de facto</i> OS + dev tools thing rather than an ELF spec <i>de jure</i> thing. His points are still valid.<p>Like I had said initially, I do not take any issue with the factual content of the post, and agree that most people should be using these compiler flags. And yes, it is, however many years later from when this may have not been the norm, now clearly a good idea to make all of your symbols hidden by default. No disagreements from me. I just hope that people don&#x27;t walk away with the idea that some morons from the past made some horribly stupid mistakes because they just had no idea what they were doing. I wasn&#x27;t there, but it doesn&#x27;t feel like that&#x27;s what happened at all; it feels like as things panned out some things worked out well, and some things did not work out well. Some ideas are more clearly &#x27;bad&#x27; ideas than they were. Even today, it would probably be unwise to assume we still know 100% what we&#x27;re doing. Personally, I think it&#x27;s hard to ever be absolutely sure you are taking the right lessons away from things that don&#x27;t work out well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fpgaminer" target="_blank">fpgaminer</a>   <span class="timeago" data-date="2021-06-12 22:17:45 &#43;0000 UTC">2021-06-12 22:17:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not OP, but I read the &quot;antagonistic&quot; style of the post as just the usual catharsis humor.  All in-jest.  I&#x27;ve used that style of writing plenty before.  It&#x27;s a good way to blow off the steam of working with these rather absurd, archaic systems that we have to tackle on a daily basis.  Programming can feel a bit kafkaesque at times, so a bit of aggressive&#x2F;dark humor goes a long way.<p>But I do agree, it felt too thick.  Still a very interesting topic regardless.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hn_throwaway_99" target="_blank">hn_throwaway_99</a>   <span class="timeago" data-date="2021-06-13 00:55:29 &#43;0000 UTC">2021-06-13 00:55:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem I see is that I often see this type of detached, &quot;wow, look at all of these previous shitty decisions!&quot; attitude inject itself, completely unnecessarily, into the workplace.<p>I&#x27;ve actually made it something I won&#x27;t compromise on: I refuse to hire people who I suspect will have this attitude. It&#x27;s one thing to express frustration at previous decisions that make current work more difficult. However, when I see that morph into an arrogance of &quot;how could people have made such a stupid decision&quot; (<i>especially</i> when some of those &quot;people&quot; may still work at the company), without even trying to understand the context of why that decision was made in the first place, it shows to me that person is not an engineer I want to work with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=QuercusMax" target="_blank">QuercusMax</a>   <span class="timeago" data-date="2021-06-13 01:55:34 &#43;0000 UTC">2021-06-13 01:55:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On one team, we had a lot of code that had been written hastily because we were OK with taking on technical debt in order to move more quickly. We&#x27;d reconsider old design decisions and blame &quot;old $me&quot;. It was all done in good fun, and I was happy to take the blame as senior engineer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zitterbewegung" target="_blank">zitterbewegung</a>   <span class="timeago" data-date="2021-06-12 22:21:25 &#43;0000 UTC">2021-06-12 22:21:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It actually seems to miss a few points. (I also agree that the post has not enough levity to balance out the negative tone).<p>1. PEP 445 makes the use case of LD_PRELOAD irrelevant.<p>2. A change like this would go under obvious code review and testing to make it into a released version.<p>3. The risk of a regression would still exist but that can either be caught by #2 or the existing unit testing already in Python.<p>(Disclaimer: I have contributed to the Python codebase)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 10:55:03 &#43;0000 UTC">2021-06-13 10:55:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MaskRay" target="_blank">MaskRay</a>   <span class="timeago" data-date="2021-06-13 20:11:29 &#43;0000 UTC">2021-06-13 20:11:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interposing libc.so symbols in a shared object is not affected by -fno-semantic-interposition or -Bsymbolic<p><a href="https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-16-elf-interposition-and-bsymbolic#interaction-with-ld_preload" rel="nofollow">https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-16-elf-interposition-and-bsy...</a><p>Solaris offers a similar model called direct bindings.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smitty1e" target="_blank">smitty1e</a>   <span class="timeago" data-date="2021-06-13 00:38:23 &#43;0000 UTC">2021-06-13 00:38:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a risk of not knowing the historical context for decisions and getting a bit critical about How Daft The Ancients Were.<p>Much of this is the cruft the author of TFA identifies.<p>But so much of it was just &quot;nature of the beast&quot; at the time.<p>Generosity toward these shortcomings is always in order.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=karmakaze" target="_blank">karmakaze</a>   <span class="timeago" data-date="2021-06-13 02:36:03 &#43;0000 UTC">2021-06-13 02:36:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I couldn&#x27;t see anything wrong with the post, it seems perfectly professional and dry. Then I realize that the link was updated from one with an arbitrary excerpt:<p>&gt; (Windows took a different approach and got it right. In Windows, it&#x27;s okay for multiple DLLs to provide the same symbol, and there&#x27;s no sad and desperate effort to pretend that a single namespace is still cool.)<p>There&#x27;s no need for technical topics to be emotionally charged, it only detracts from communicating the importance, correctness or benefits.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Lammy" target="_blank">Lammy</a>   <span class="timeago" data-date="2021-06-12 22:29:39 &#43;0000 UTC">2021-06-12 22:29:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It has an immensely combative energy for what is not really a charged subject matter.<p>It becomes a charged subject matter when one works at companies like Google and Facebook and gets used to navigating performance reviews.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Twirrim" target="_blank">Twirrim</a>   <span class="timeago" data-date="2021-06-12 23:07:54 &#43;0000 UTC">2021-06-12 23:07:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It becomes a charged subject matter when one works at companies like Google and Facebook and gets used to navigating performance reviews.<p>The way things were at Amazon when I was there, posts like this would count <i>against</i> a Principal Engineer promotion.
+One of the standards engineers are expected to meet is &quot;Respect what has gone before&quot;.  You don&#x27;t know the full details of what was going on at the time, you don&#x27;t know the trade-offs and why, you don&#x27;t know what they did and didn&#x27;t know about the situation and what couldn&#x27;t have been foreseen at the time decisions were made.<p>Generally speaking people aren&#x27;t idiots.  They do the best they can with what they have, under the circumstances they&#x27;re operating within, to meet the goals they have.<p>Almost no one sets out to make a monster impossible to maintain, or with diabolical performance.<p>Treat it with respect, even while you work to replace it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jchw" target="_blank">jchw</a>   <span class="timeago" data-date="2021-06-12 22:37:56 &#43;0000 UTC">2021-06-12 22:37:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is interesting. Not saying you are incorrect, but, I have worked at Google for a few years and didn&#x27;t pick up on this, most people seem abundantly polite. But, I can just as easily chalk that up to limited experience, since there is clearly quite a lot of different things going on in any large company.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-12 22:44:31 &#43;0000 UTC">2021-06-12 22:44:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would this tone of expression be appropriate in navigating performance reviews? I mean the question honestly: My own answer is &quot;no&quot;, but I don&#x27;t know the culture of performance reviews at companies like that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 00:03:38 &#43;0000 UTC">2021-06-13 00:03:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;<i>There’s nothing wrong with this post factually, but the tone sucks. It has an immensely combative energy for what is not really a charged subject matter.</i><p>Perhaps because the subject matter doesn&#x27;t matter.<p>The really important takeaway message is more about the industry&#x2F;community not paying attention to shitty defaults and winging it for decades, than about the potential speedup and&#x2F;or this particular mechanism.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jshen" target="_blank">jshen</a>   <span class="timeago" data-date="2021-06-13 01:18:24 &#43;0000 UTC">2021-06-13 01:18:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He calls himself a troll on his FB profile. Honestly, it’s not surprising that someone who works at FB has a misaligned moral compass.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codelord" target="_blank">codelord</a>   <span class="timeago" data-date="2021-06-12 22:54:13 &#43;0000 UTC">2021-06-12 22:54:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would just read the linked post:<p><a href="https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980?fbclid=IwAR0cyfahpBywNzbqLCpcfwatOaU6W8UQp7LgVu8KZ8hDc-wKLjLE7wjOs7g" rel="nofollow">https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980?fbclid=IwAR0cyfahpBywNzbq...</a><p>As it contains almost the same info without the rant and with better explanation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 01:32:24 &#43;0000 UTC">2021-06-13 01:32:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beervirus" target="_blank">beervirus</a>   <span class="timeago" data-date="2021-06-13 00:58:54 &#43;0000 UTC">2021-06-13 00:58:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And isn’t hosted on Facebook of all things.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Scaevolus" target="_blank">Scaevolus</a>   <span class="timeago" data-date="2021-06-12 21:36:25 &#43;0000 UTC">2021-06-12 21:36:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is true for _libpython_ (the shared library version), which is the default on some distros (RedHat, Fedora, Arch), but many others (Debian, Ubuntu) use statically linked Python and never paid this performance tax.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=usr1106" target="_blank">usr1106</a>   <span class="timeago" data-date="2021-06-13 08:05:00 &#43;0000 UTC">2021-06-13 08:05:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So what do Redhat, Fedora, Arch gain by using the shared libpython? Who except python is using the library?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjw1007" target="_blank">mjw1007</a>   <span class="timeago" data-date="2021-06-13 08:57:52 &#43;0000 UTC">2021-06-13 08:57:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Software that embeds Python uses the library (even on Debian and Ubuntu: they end up building the whole Python source base twice).<p>For example Vim (if so configured), or Postgres PL&#x2F;Python, or the old Apache mod_python.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=usr1106" target="_blank">usr1106</a>   <span class="timeago" data-date="2021-06-13 17:14:31 &#43;0000 UTC">2021-06-13 17:14:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting. Performancewise not having to call a separate executable is of course a good thing. Securitywise process boundaries are better.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-06-12 21:44:20 &#43;0000 UTC">2021-06-12 21:44:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think using Pypy instead of CPython will give you several times the performance boost as any of this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coldtea" target="_blank">coldtea</a>   <span class="timeago" data-date="2021-06-13 00:12:21 &#43;0000 UTC">2021-06-13 00:12:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now you have 10 problems.<p>A reference to the classic line, oft attributed to JWZ:<p>&quot;Some people, when confronted with a problem, think &quot;I know, I&#x27;ll use regular expressions.&quot; Now they have two problems&quot;.<p>The point being, switching from CPython to PyPy does not simply give you the performance boost and that&#x27;s it. It comes with its own tradeoffs, including:<p>(a) trading speed for much more memory consumption<p>(b) slower C FFI - important for all kinds of Python workflows (e.g. Pandas, Numpy, and so on)<p>(c) behind mainline CPython releases, and with subtle incompatibilities<p>(d) slower startup times (due to the JITting involved)<p>(e) different garbage collection model (and less predictable)<p>(f) less support (from companies, distros, etc), fewer ports, less manpower to port quickly to new platforms (e.g. Apple&#x27;s M1).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dharmab" target="_blank">dharmab</a>   <span class="timeago" data-date="2021-06-12 22:15:32 &#43;0000 UTC">2021-06-12 22:15:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pypy is not  a drop-in replacement for CPython. It does not support many libraries that rely on C extensions, and targets a slightly older version of the language.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nwmcsween" target="_blank">nwmcsween</a>   <span class="timeago" data-date="2021-06-12 23:51:56 &#43;0000 UTC">2021-06-12 23:51:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Assuming pypy does what it says it does: Python -&gt; RPython -&gt; C -&gt; LLVM Clang -&gt; LLVM IR -&gt; &#x27;JIT&#x27;, you&#x27;re still paying a large tax compared to something like RPython -&gt; Some IR -&gt; &#x27;JIT&#x27;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=joshuamorton" target="_blank">joshuamorton</a>   <span class="timeago" data-date="2021-06-13 18:01:09 &#43;0000 UTC">2021-06-13 18:01:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;ve misinterpreted something. The pypy interpreter is written in rpython, but executed code itself never gets translated to rpython.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-06-12 21:54:59 &#43;0000 UTC">2021-06-12 21:54:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Likely, but it doesn&#x27;t work with all applications.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=blopker" target="_blank">blopker</a>   <span class="timeago" data-date="2021-06-12 23:05:56 &#43;0000 UTC">2021-06-12 23:05:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For what it&#x27;s worth, Python 3.10 will add -fno-semantic-interposition when built with --with-optimizations by default. However, the slow down only affects Pythons built with --enabled-shared anyway.<p>The issue is discussed here [0]. I also attempted to backport the fix to the official Python Docker image [1], but wasn&#x27;t able to get much traction. I wish this would land since everyone using these images would get an instant speedup.<p>[0]: <a href="https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980" rel="nofollow">https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980</a>
+[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;docker-library&#x2F;python&#x2F;issues&#x2F;501" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;docker-library&#x2F;python&#x2F;issues&#x2F;501</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwdbaaway" target="_blank">throwdbaaway</a>   <span class="timeago" data-date="2021-06-13 00:33:58 &#43;0000 UTC">2021-06-13 00:33:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; However, the slow down only affects Pythons built with --enabled-shared anyway.<p>On Gentoo, the ebuild for Python and Ruby both have --enable-shared hardcoded.<p>Also, if you use prebuilt Ruby binaries from RVM, those were also built with --enable-shared. And if you build your own Ruby binaries with ruby-build, it also does --enable-shared.<p>So, there are still plenty of opportunities around for instant speedup.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dbt00" target="_blank">dbt00</a>   <span class="timeago" data-date="2021-06-13 00:12:20 &#43;0000 UTC">2021-06-13 00:12:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The people who did the work on finding and implementing this speedup talk about it here.<p><a href="https:&#x2F;&#x2F;fedoraproject.org&#x2F;wiki&#x2F;Changes&#x2F;PythonNoSemanticInterpositionSpeedup" rel="nofollow">https:&#x2F;&#x2F;fedoraproject.org&#x2F;wiki&#x2F;Changes&#x2F;PythonNoSemanticInter...</a><p>They then proposed it for upstreaming here:
+<a href="https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980" rel="nofollow">https:&#x2F;&#x2F;bugs.python.org&#x2F;issue38980</a><p>And that&#x27;s the new default.<p>The link is to a facebook post by someone who neither discovered nor implemented this change.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=temac" target="_blank">temac</a>   <span class="timeago" data-date="2021-06-13 00:53:11 &#43;0000 UTC">2021-06-13 00:53:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            edit: my comment addresses the text from the original link <a href="https:&#x2F;&#x2F;www.facebook.com&#x2F;dan.colascione&#x2F;posts&#x2F;10107358290728348" rel="nofollow">https:&#x2F;&#x2F;www.facebook.com&#x2F;dan.colascione&#x2F;posts&#x2F;10107358290728...</a><p>The author is confused. no-semantic-interposition does not preclude unicity of symbols. There are things like -Wl,-Bsymbolic-functions to relinquish that (and lose strict conformity against the programming language you are using, by the way). When I read a virulent post at least I would like the author to have some deep expertise on the subject, and not mix everything they read about (including related but different matters). I won&#x27;t even talk about the &quot;interposition is useless anyway because clang has an historical bug&quot; part.<p>As for elf shared libs providing a single symbol space, there are arguments for and against.<p>An argument for a single symbol space is that a process with segregated one per dynamic module is a beast the C and C++ standards know nothing about. And don&#x27;t even get me started on processes with multiple different C or C++ runtimes simultaneously (take a look at the list of CRTs loaded in an instance of explorer.exe, it is horrifying). Another one is that you can easily move things around between dynamic libs or split them, etc. If various subsets are actually used by multiple executables, this can be quite useful (lacking that property, note that MS had to invent their own additional virtual&#x2F;redirection layer to refactor the Win32 libs)<p>A practical argument against is that it is &quot;hard&quot; (read: virtually impossible) to dynamically link binary only modules maintained with different-enough toolchains. Likewise for different versions of the same lib (e.g. via transitive deps). But then the question of is this even a good idea shall be asked (well, if you want to load a plugin in a proprietary software I understand this can be wanted -- and this is actually similar to using libs of a proprietary platform; any other use case?)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stereo" target="_blank">stereo</a>   <span class="timeago" data-date="2021-06-12 21:35:40 &#43;0000 UTC">2021-06-12 21:35:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Text if you don&#x27;t want to visit Facebook:<p>Summary: Python is 1.3x faster when compiled in a way that re-examines shitty technical decisions from the 1990s.  
+ELF is the executable and shared library format on Linux and other Unixy systems. It comes to us from 1992&#x27;s Solaris 2.0, from back before even the first season of the X-Files aired. ELF files (like X-Files) are full of barely-understood horrors described only in dusty old documents that nobody reads. If you don&#x27;t know anything about symbol visibility, semantic interposition, relocations, the PLT, and the GOT, ELF will eat your program&#x27;s performance. (Granted, that&#x27;s better than being eaten by some monster from a secret underground government base.)<p>ELF kills performance because it tries too hard to make the new-in-1992 world of dynamic linking look and act like the old world of static linking. ELF goes to tremendous lengths to make sure that every reference to a function or a variable throughout a process refers to the same function or variable no matter what shared library contains each reference. Everything is consistent.<p>This approach is clean, elegant, and wrong: the cost of maintaining this ridiculous bijection between symbol name and symbol address is that each reference to a function or variable needs to go through a table of pointers that the dynamic linker maintains --- even when the reference is one function in a shared library calling another function in the same shared library. Yes, `mylibrary_foo()` in `libmylibrary.so` has to pay for the equivalent of a virtual function call every time it calls `mylibrary_bar()` just in case some other shared library loaded earlier happened to provide a different `mylibrary_bar()`. That basically never happens. (Weak symbols are an exception, but that&#x27;s a subject for a different rant.)<p>(Windows took a different approach and got it right. In Windows, it&#x27;s okay for multiple DLLs to provide the same symbol, and there&#x27;s no sad and desperate effort to pretend that a single namespace is still cool.)<p>There&#x27;s basically one case where anyone actually relies on this ELF table lookup stuff (called &quot;interposition&quot;): `LD_PRELOAD`. `LD_PRELOAD` lets you provide your own implementation of any function in a program by pre-loading a shared library containing that function before a program starts. If your `LD_PRELOAD`ed library provides a `mylibrary_bar()`, the ELF table lookup goo will make sure that `mylibrary_foo()` calls your `LD_PRELOAD`ed `mylibrary_bar()` instead of the one in your program. It&#x27;s nice and dynamic, right? In exchange for every program on earth being massively slower than it has to be all the time, you, programmer, can replace `mylibrary_bar()` with `printf(&quot;XXX calling bar!!!&quot;)` by setting an environment variable. Good trade-off, right?<p>LOL. There is no trade-off. You don&#x27;t get to choose between performance and flexibility. You don&#x27;t get to choose one. You get to choose zero things. Interposition has been broken for years: a certain non-GNU upstart compiler starting with &quot;c&quot; has been committing the unforgivable sin of optimizing calls between functions in the same shared library. Clang will inline that call from `mylibrary_foo()` to `mylibrary_bar()`, ELF be damned, and it&#x27;s right to do so, because interposition is ridiculous and stupid and optimizes for c00l l1inker tr1ckz over the things people buy computers to actually do --- like render 314341 layers of nested iframe.<p>Still, this Clang thing does mean that `LD_PRELOAD` interposition no longer affects <i>all</i> calls, because with Clang, contra the specification, will inline some calls to functions not marked inline --- which breaks some people&#x27;s c00l l1inker tr1ckz . But we&#x27;re all still paying the cost of PLT calls and GOT lookups anyway, all to support a feature (`LD_PRELOAD`) that doesn&#x27;t even work reliably anymore, because, well, why change the defaults?<p>Eventually, someone working on Python (ironically, of all things) noticed this waste of good performance. &quot;Let&#x27;s tell the compiler to do what Clang does accidentally, but all the time, and on purpose&quot;. Python got 30% faster without having to touch a single line of code in the Python interpreter.<p>(This state of affairs is clearly evidence in favor of the software industry&#x27;s assessment of its own intellectual prowess and justifies software people randomly commenting on things outside their alleged expertise.)<p>All programs should be built with `-Bsymbolic` and `-fno-semantic-interposition`. All symbols should be hidden by default. `LD_PRELOAD` still works in this mode, but only for calls _between_ shared libraries, not calls _inside_ shared libraries. One day, I hope as a profession we learn to change the default settings on our tools.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qwertox" target="_blank">qwertox</a>   <span class="timeago" data-date="2021-06-12 22:02:37 &#43;0000 UTC">2021-06-12 22:02:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you. This link asked me to sign in in a very broken page (I block most of Facebook&#x27;s domains), and am wondering if this is just someone who posted it on FB or if it is a post from the engineering team at FB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aioprisan" target="_blank">aioprisan</a>   <span class="timeago" data-date="2021-06-12 22:04:21 &#43;0000 UTC">2021-06-12 22:04:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just someone posting on FB
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-06-12 22:39:34 &#43;0000 UTC">2021-06-12 22:39:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This has interesting parallels with how some languages include the library version in the &quot;symbolic name&quot; (mangled name, fully qualified name etc).<p>This often allows loading of multiple versions of the same dependency in the same program without ugly hacks. Which is grate if you have multiple dependencies which both have the same sub-dependency (each internal only to their dependent) but need different versions.<p>It&#x27;s kinda a nightmare if you run into this problem in languages which don&#x27;t support it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cutler" target="_blank">cutler</a>   <span class="timeago" data-date="2021-06-12 23:55:24 &#43;0000 UTC">2021-06-12 23:55:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hitting Reader quickly on load in Firefox also gets you the text.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-06-12 22:19:27 &#43;0000 UTC">2021-06-12 22:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure this is ok copyright wise.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-12 22:49:25 &#43;0000 UTC">2021-06-12 22:49:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure Facebook&#x27;s privacy intrusions are ok ethically wise. So there&#x27;s competing value systems at work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kzrdude" target="_blank">kzrdude</a>   <span class="timeago" data-date="2021-06-12 22:27:35 &#43;0000 UTC">2021-06-12 22:27:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Completely beside the article - the first specializing, adaptive interpreter (PEP 659) improvements have been merged to CPython these last weeks, and hopefully we can see updates about benchmarks and performance sooner or later.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MaskRay" target="_blank">MaskRay</a>   <span class="timeago" data-date="2021-06-13 03:25:23 &#43;0000 UTC">2021-06-13 03:25:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Folks may be interested in the two blog posts which have more technical details: 
+<a href="https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-09-fno-semantic-interposition" rel="nofollow">https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-09-fno-semantic-interpositio...</a>
+<a href="https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-16-elf-interposition-and-bsymbolic" rel="nofollow">https:&#x2F;&#x2F;maskray.me&#x2F;blog&#x2F;2021-05-16-elf-interposition-and-bsy...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BurningFrog" target="_blank">BurningFrog</a>   <span class="timeago" data-date="2021-06-12 22:24:01 &#43;0000 UTC">2021-06-12 22:24:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m confused.<p>Is this about something I can do to speed up our 3.8 Python code, or about why Python 3.8 is faster than 3.7?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-12 22:54:00 &#43;0000 UTC">2021-06-12 22:54:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it was addressed by python already:<p><i>Eventually, someone working on Python (ironically, of all things) noticed this waste of good performance</i><p>But It would be good to know when &amp; what versions.<p>I&#x27;m also not sure why this is &quot;ironic&quot;. Who else but the experts on python would be more likely to discover this &amp; resolve the issue? Which basically makes the whole thing a non-issue:<p>Python creators made a choice when creating python. A while later they realized they could improve performance by revisiting that choice.<p>The tone of the article makes it sound like this was an embarrassing mistake of massive proportions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ahupp" target="_blank">ahupp</a>   <span class="timeago" data-date="2021-06-12 23:25:13 &#43;0000 UTC">2021-06-12 23:25:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Python creators made a choice when creating python. The tone of the article makes it sound like this was an embarrassing mistake of massive proportions.<p>The article is talking about a bad decision in ELF and dynamic linking, not in Python specifically.  The Python people just discovered that disabling that default behavior was useful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-13 07:51:34 &#43;0000 UTC">2021-06-13 07:51:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the author meant ‘ironic’ due to the very stereotypic view of “Python is slow, why would it care about performance. At least I read it that way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nwmcsween" target="_blank">nwmcsween</a>   <span class="timeago" data-date="2021-06-12 23:47:46 &#43;0000 UTC">2021-06-12 23:47:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+             This isn&#x27;t really an elf issue, more of a python issue, if you have internal symbols hide them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=QuadrupleA" target="_blank">QuadrupleA</a>   <span class="timeago" data-date="2021-06-13 04:04:17 &#43;0000 UTC">2021-06-13 04:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It looks like the mod_wsgi &#x2F; Apache stack I&#x27;ve used for years does indeed use the shared libpython described here (according to running lld on mod_wsgi.so). So this compiler flag could have saved me 30% of a server - or saved my users 23% of the server processing latency of their TTFBs.<p>Though my servers are already overprovisioned, and latency is probably more due to memory &#x2F; IO and... oh nevermind.<p>Kudos to the python devs, looking forward to more speed improvements.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DeathMetal3000" target="_blank">DeathMetal3000</a>   <span class="timeago" data-date="2021-06-14 02:01:15 &#43;0000 UTC">2021-06-14 02:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn’t it .3 times (30%) faster? I think they meant to say 1.3x _as fast_ which is very different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=th0ma5" target="_blank">th0ma5</a>   <span class="timeago" data-date="2021-06-12 21:38:34 &#43;0000 UTC">2021-06-12 21:38:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not entirely related but I recently started playing with the built in &quot;dis&quot; library and it is fun to see the compiled representation of functions that the runtime executes. Just an FYI if you&#x27;re ever bored and are looking to get more familiar with assembly, it is a very approachable thing to play with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stuaxo" target="_blank">stuaxo</a>   <span class="timeago" data-date="2021-06-13 23:37:45 &#43;0000 UTC">2021-06-13 23:37:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Stopping LD_PRELOAD working is pretty big though.<p>This might be OK, if two versions were provided.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-06-12 21:53:43 &#43;0000 UTC">2021-06-12 21:53:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Related: <a href="https:&#x2F;&#x2F;developers.redhat.com&#x2F;blog&#x2F;2020&#x2F;06&#x2F;25&#x2F;red-hat-enterprise-linux-8-2-brings-faster-python-3-8-run-speeds" rel="nofollow">https:&#x2F;&#x2F;developers.redhat.com&#x2F;blog&#x2F;2020&#x2F;06&#x2F;25&#x2F;red-hat-enterp...</a><p>&gt; <i>This article focuses on one specific performance improvement in the python38 package. As we&#x27;ll explain, Python 3.8 is built with the GNU Compiler Collection (GCC)&#x27;s -fno-semantic-interposition flag. Enabling this flag disables semantic interposition, which can increase run speed by as much as 30%.</i><p>(not logged in to FB, so maybe TFA is a reference to this one?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dylan16807" target="_blank">Dylan16807</a>   <span class="timeago" data-date="2021-06-13 00:01:59 &#43;0000 UTC">2021-06-13 00:01:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also <a href="https:&#x2F;&#x2F;pythonspeed.com&#x2F;articles&#x2F;faster-python&#x2F;" rel="nofollow">https:&#x2F;&#x2F;pythonspeed.com&#x2F;articles&#x2F;faster-python&#x2F;</a><p>And having just read that yesterday, I was very confused to open this post and immediately see complaints about the author&#x27;s tone.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevingadd" target="_blank">kevingadd</a>   <span class="timeago" data-date="2021-06-12 21:34:21 &#43;0000 UTC">2021-06-12 21:34:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anyone got an archive link? I can&#x27;t read this without making a Facebook account and signing in
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eptcyka" target="_blank">eptcyka</a>   <span class="timeago" data-date="2021-06-12 21:53:44 &#43;0000 UTC">2021-06-12 21:53:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read it without signing in. The &quot;Not now&quot; link is greyed out and 4 points smaller and not a button. But it&#x27;s there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mct" target="_blank">mct</a>   <span class="timeago" data-date="2021-06-12 21:57:02 &#43;0000 UTC">2021-06-12 21:57:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m seeing &quot;You must log in to continue,&quot; with no &quot;not now&quot; option.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qwertox" target="_blank">qwertox</a>   <span class="timeago" data-date="2021-06-12 22:04:58 &#43;0000 UTC">2021-06-12 22:04:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably expects JavaScript enabled or something. I also don&#x27;t have a &quot;not now&quot; option. No JavaScript, no CSS.<p>Honestly, how can someone into tech post something like this on FB?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-06-12 22:42:33 &#43;0000 UTC">2021-06-12 22:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaving aside whether or not they should want to post it there, I&#x27;m surprised it has an audience.<p>Someone saw it and shared it to HN; enough read it to upvote it this much.. maybe Facebook&#x27;s more popular than I thought! (That sounds silly or sarcastic, but &#x27;among HN users and similar&#x27; I&#x27;m serious.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-06-12 22:55:54 &#43;0000 UTC">2021-06-12 22:55:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did the first time around, but then I closed the tab, and when I wanted to go back to look at something in more detail I was blocked unless I signed in. Luckily someone posted the full text in another comment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Someone" target="_blank">Someone</a>   <span class="timeago" data-date="2021-06-12 23:13:10 &#43;0000 UTC">2021-06-12 23:13:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think I get to see the full text in iOS private mode without logging in. Didn’t have to click away anything, either.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=derefr" target="_blank">derefr</a>   <span class="timeago" data-date="2021-06-12 22:07:50 &#43;0000 UTC">2021-06-12 22:07:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doesn’t gVisor require symbol interposition to do its sandboxing thing? (At least, for binaries with static-linked runtimes, like the type Golang produces by default.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-06-12 22:45:45 &#43;0000 UTC">2021-06-12 22:45:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you have a fully static-linked library you already don&#x27;t have symbol interposition.<p>Furthermore this options still allow the thinks you need interposition for, for calls from&#x2F;to external dynamic linked libraries like libc.<p>But most important gVisor is based around intercepting system calls (over simplified), for which you don&#x27;t need symbol interposition.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=falldmg" target="_blank">falldmg</a>   <span class="timeago" data-date="2021-06-12 22:14:02 &#43;0000 UTC">2021-06-12 22:14:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Symbol interposition? I don&#x27;t know for sure, but I would guess gVisor is using ptrace or another mechanism, to interpose on syscalls, not library calls. But these flags, I believe, only impact interposition of symbols in the same library, so even if gVisor did use interposition for something, it may not matter.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=freediver" target="_blank">freediver</a>   <span class="timeago" data-date="2021-06-13 21:10:00 &#43;0000 UTC">2021-06-13 21:10:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I tested this.<p>tldr;
+I could not replicate speed benefits except for heavy stack usage. Python 3.10 is 8% slower than python 3.8. Python 3.10 with said optimization is 3% slower overall than Python 3.10 without it except for stack usage.<p><pre><code>  Python 3.8
+  python-speed v1.2 using python v3.8.5
+  string&#x2F;mem: 1476.42 ms
+  pi calc&#x2F;math: 1817.37 ms
+  regex: 1984.63 ms
+  fibonnaci&#x2F;stack:  1085.79 ms
+  
+  total:  6364.21 ms (lower is better)
+
+
+
+  Python 3.10 no optimization
+  python-speed v1.2 using python v3.10.0
+  string&#x2F;mem: 1580.52 ms
+  pi calc&#x2F;math: 1796.23 ms
+  regex: 2110.86 ms
+  fibonnaci&#x2F;stack:  1337.18 ms
+  
+  total:  6824.79 ms (lower is better)
+
+
+  Python 3.10 with optimization
+  python-speed v1.2 using python v3.10.0
+  string&#x2F;mem: 1559.45 ms
+  pi calc&#x2F;math: 1821.25 ms
+  regex: 2387.64 ms
+  fibonnaci&#x2F;stack:  1299.8 ms
+ 
+  total:  7068.13 ms (lower is better)
+</code></pre>
+Anything I am missing?
+Tested using <a href="https:&#x2F;&#x2F;github.com&#x2F;vprelovac&#x2F;python-speed" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;vprelovac&#x2F;python-speed</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Black101" target="_blank">Black101</a>   <span class="timeago" data-date="2021-06-13 02:01:21 &#43;0000 UTC">2021-06-13 02:01:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One day it will catch up... performance-wise...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mastrsushi" target="_blank">mastrsushi</a>   <span class="timeago" data-date="2021-06-12 23:29:32 &#43;0000 UTC">2021-06-12 23:29:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Python is like the cockroach equivalent of those shell scripting languages that came out of the late 80s to early 90s.<p>Perl, Ruby, PHP, TCL, and Lua have definetly declined over the years. Python&#x27;s biggest asset seems to be featured rich libraries, rather than the language itself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cutler" target="_blank">cutler</a>   <span class="timeago" data-date="2021-06-13 00:05:10 &#43;0000 UTC">2021-06-13 00:05:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ruby is a much better designed language than Python but the community unfortunately made the mistake of focusing too much on Rails and web development at the expense of diversification. Python is the Skoda of scripting languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ganzuul" target="_blank">ganzuul</a>   <span class="timeago" data-date="2021-06-13 05:44:21 &#43;0000 UTC">2021-06-13 05:44:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            {}, [], and &#x2F; \ are all cumbersome to use on many keyboards because bankers got to them before programmers. Rather than solving the problem in hardware by getting a en-US keyboard we mitigate the RSI in software by choosing languages with less notation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=taeric" target="_blank">taeric</a>   <span class="timeago" data-date="2021-06-13 06:44:21 &#43;0000 UTC">2021-06-13 06:44:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cute, but somewhat ignores picking lisp; which just puts everything in parenthetical lists. :D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aitchnyu" target="_blank">aitchnyu</a>   <span class="timeago" data-date="2021-06-13 09:10:48 &#43;0000 UTC">2021-06-13 09:10:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does it mean in your country? For me, its a company priced out by carmakers who manufactured locally, and screwed over by dealers who didn&#x27;t service cars properly. Ex Fabia owner from India.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cerved" target="_blank">cerved</a>   <span class="timeago" data-date="2021-06-12 22:17:58 &#43;0000 UTC">2021-06-12 22:17:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right post, wrong platform
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

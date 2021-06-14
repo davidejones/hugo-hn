@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/reducing-python-string-memory-use-in-apache-arrow-012-2019/">
+
+
+    <title>Reducing Python String Memory Use in Apache Arrow 0.12 (2019) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Reducing Python String Memory Use in Apache Arrow 0.12 (2019) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/reducing-python-string-memory-use-in-apache-arrow-012-2019/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/reducing-python-string-memory-use-in-apache-arrow-012-2019/">
+<meta name="twitter:title" content="Reducing Python String Memory Use in Apache Arrow 0.12 (2019) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Reducing Python String Memory Use in Apache Arrow 0.12 (2019) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T02:30:39JST",
+    "dateModified": "2021-06-11T02:30:39JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://arrow.apache.org/blog/2019/02/05/python-string-memory-0.12/">Reducing Python String Memory Use in Apache Arrow 0.12 (2019)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=taeric" target="_blank">taeric</a>   <span class="timeago" data-date="2021-06-13 06:47:46 &#43;0000 UTC">2021-06-13 06:47:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Relatedly, perhaps the most impactful performance optimization I let some of the science side know about on my team is to declare columns as categorical in this same basic instance.  The memory and speed gain is impressive.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wumpus" target="_blank">wumpus</a>   <span class="timeago" data-date="2021-06-13 19:16:43 &#43;0000 UTC">2021-06-13 19:16:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be fun to compare the two. Interesting that the blog author is the creator of Pandas and didn&#x27;t include a comparison.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rav" target="_blank">rav</a>   <span class="timeago" data-date="2021-06-13 08:31:01 &#43;0000 UTC">2021-06-13 08:31:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Simple scheme for deduplicating strings in Python:<p><pre><code>    dedup = {}
+    for s in strings:
+        s = dedup.setdefault(s, s)
+        # Do something with s
+</code></pre>
+It hashes each string &quot;s&quot; and looks in the dictionary &quot;dedup&quot; to see if there&#x27;s an existing string object previously in the list &quot;strings&quot;, in which case it uses it, and otherwise it stores the current string object in &quot;dedup&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-06-13 09:55:16 &#43;0000 UTC">2021-06-13 09:55:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Simpler scheme for deduplicating strings in Python: use `sys.intern`. It also specifically increases hash performances because interned strings can be compared by address after a hash collision (and furthermore hash caching means interned strings almost certainly already have their hash computed and stored)<p><pre><code>    for s in strings:
+        s = sys.intern(s)
+        # Do something with s
+</code></pre>
+Depending on your application lifecycle you may want to shove the dedup&#x27;d strings in a set (or in a list, after checking if the identity of what you got from `sys.intern` is different than what you put in) in order to keep them alive: `sys.intern` does not do that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 11:18:46 &#43;0000 UTC">2021-06-13 11:18:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interestingly according to docs this doesn&#x27;t prevent your stirngs from being GC&#x27;d either.<p>&quot;Interned strings are not immortal; you must keep a reference to the return value of intern() around to benefit from it&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-06-13 11:36:46 &#43;0000 UTC">2021-06-13 11:36:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Interestingly according to docs<p>Also the second paragraph of my comment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombela" target="_blank">bombela</a>   <span class="timeago" data-date="2021-06-13 08:37:48 &#43;0000 UTC">2021-06-13 08:37:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            dedup = set(strings)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-06-13 09:55:56 &#43;0000 UTC">2021-06-13 09:55:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While this works for dedup&#x27;ing a single set of strings, it doesn&#x27;t work for dedup&#x27;ing <i>string identities</i> across the application lifetime because you don&#x27;t have a fast way of fetching the deduplicated version from the base.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quietbritishjim" target="_blank">quietbritishjim</a>   <span class="timeago" data-date="2021-06-13 09:55:27 &#43;0000 UTC">2021-06-13 09:55:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then what do you replace this line with?<p><pre><code>    s = dedup.setdefault(s, s)
+</code></pre>
+There&#x27;s not an obvious way to get the object in a set that matches a value you have.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ciupicri" target="_blank">ciupicri</a>   <span class="timeago" data-date="2021-06-13 15:24:41 &#43;0000 UTC">2021-06-13 15:24:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use something like:<p><pre><code>   @functools.cache 
+   def dedup(s): 
+       return sys.intern(s)</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-06-13 16:26:33 &#43;0000 UTC">2021-06-13 16:26:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t sys.intern a cache itself? What does adding another layer of cacheing on top add?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ciupicri" target="_blank">ciupicri</a>   <span class="timeago" data-date="2021-06-13 20:29:38 &#43;0000 UTC">2021-06-13 20:29:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re right, PyUnicode_InternInPlace (which is called by sys.intern) already caches results using a regular Python dictionary, so @functools.cache wouldn&#x27;t add any value.<p>It happened a long time ago, but I think I misread something about sys.intern not being able to handle lots and lots of strings, so I added an extra layer of caching, but it looks like it&#x27;s not needed anymore.<p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;3.10&#x2F;Objects&#x2F;unicodeobject.c#L15794" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;python&#x2F;cpython&#x2F;blob&#x2F;3.10&#x2F;Objects&#x2F;unicodeo...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vletal" target="_blank">vletal</a>   <span class="timeago" data-date="2021-06-13 07:55:27 &#43;0000 UTC">2021-06-13 07:55:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There should be &quot;string deduplication&quot; in the original title. That would be informative and targeted more to Arrow users.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=polskibus" target="_blank">polskibus</a>   <span class="timeago" data-date="2021-06-13 08:03:06 &#43;0000 UTC">2021-06-13 08:03:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            2019
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 12:23:53 &#43;0000 UTC">2021-06-13 12:23:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/cudajl-v33-union-types-debug-info-graph-apis/">
+
+
+    <title>Cuda.jl v3.3: union types, debug info, graph APIs - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Cuda.jl v3.3: union types, debug info, graph APIs - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/cudajl-v33-union-types-debug-info-graph-apis/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/cudajl-v33-union-types-debug-info-graph-apis/">
+<meta name="twitter:title" content="Cuda.jl v3.3: union types, debug info, graph APIs - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Cuda.jl v3.3: union types, debug info, graph APIs - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T21:29:13JST",
+    "dateModified": "2021-06-13T21:29:13JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://juliagpu.org/post/2021-06-10-cuda_3.3/">Cuda.jl v3.3: union types, debug info, graph APIs</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xvilka" target="_blank">xvilka</a>   <span class="timeago" data-date="2021-06-14 03:00:05 &#43;0000 UTC">2021-06-14 03:00:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish more attention would be towards open source alternatives for CUDA, such as AMD&#x27;s ROCm[1][2] and Julia framework using it - AMDGPU.jl[3]. It&#x27;s sad to see so many people praise NVIDIA which is the enemy of open source, openly hostile to anything except their oversized proprietary binary blobs.<p>[1] <a href="https:&#x2F;&#x2F;rocmdocs.amd.com&#x2F;en&#x2F;latest&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;rocmdocs.amd.com&#x2F;en&#x2F;latest&#x2F;index.html</a><p>[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;RadeonOpenCompute&#x2F;ROCm" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;RadeonOpenCompute&#x2F;ROCm</a><p>[3] <a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;AMDGPU.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;AMDGPU.jl</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jpsamaroo" target="_blank">jpsamaroo</a>   <span class="timeago" data-date="2021-06-14 11:59:32 &#43;0000 UTC">2021-06-14 11:59:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AMD has done great work in a very short amount of time, but let&#x27;s not forget that they&#x27;re still <i>very</i> new to the GPU compute game. The ROCm stack is overall still pretty buggy, and definitely hard to build in ways other than what AMD deems officially supported.<p>As AMDGPU.jl&#x27;s maintainer, I do certainly appreciate more users using AMDGPU.jl if they have the ability to, but I don&#x27;t want people to think that it&#x27;s anywhere close in terms of maturity, overall performance, and feature-richness compared to CUDA.jl. If you already have access to an NVIDIA GPU, it&#x27;s painless to setup and should work really well for basically anything you want to with it. I can&#x27;t say the same about AMDGPU.jl right now (although we are definitely getting there).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zamalek" target="_blank">zamalek</a>   <span class="timeago" data-date="2021-06-14 15:53:10 &#43;0000 UTC">2021-06-14 15:53:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Genuine question: why can&#x27;t Vulkan Compute be used instead of CUDA and ROCm?<p>Julia has all the tools required to &quot;magically&quot; transform code into SPIR-V kernels. Couldn&#x27;t `:()` syntax be used to create kernels?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eigenspace" target="_blank">eigenspace</a>   <span class="timeago" data-date="2021-06-14 16:29:19 &#43;0000 UTC">2021-06-14 16:29:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;Vulkan.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;Vulkan.jl</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 05:16:14 &#43;0000 UTC">2021-06-14 05:16:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is not a charity.<p>If the competition to CUDA wants to be taken serioulsy then provide the tooling and polyglot support to do so.<p>OpenCL was stuck in their &quot;C only with printf debugging&quot; mentality for too long, now it is too late.<p>AMD ROCm still isn&#x27;t available in Windows.<p>If I learned anything from wasting my time with Khronos stuff, was that I should have switched to DirectX much earlier.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=krapht" target="_blank">krapht</a>   <span class="timeago" data-date="2021-06-14 03:32:55 &#43;0000 UTC">2021-06-14 03:32:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most people hack on this stuff for work, and time is money. OpenCL is just a lot less productive than CUDA for most tasks. The NVidia price premium isn&#x27;t big enough to make people switch over.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-14 03:57:08 &#43;0000 UTC">2021-06-14 03:57:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree, been doing some cuda as part of my job since 2009, and it works very smooth, you could write non trivial programs after less than one week of learning (if you know C before). When opencl got a little hype, I had a look, I didn&#x27;t manage to run a simple example, and I was asking myself: do I really want to have to use all this boilerplate code? Also at least a while back there is no good fft outside of cuda, maybe that changed though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mixedCase" target="_blank">mixedCase</a>   <span class="timeago" data-date="2021-06-14 03:21:13 &#43;0000 UTC">2021-06-14 03:21:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe if AMD starts caring about ROCm, users might. To this day Navi and newer cards are unsupported.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwertzzz" target="_blank">kwertzzz</a>   <span class="timeago" data-date="2021-06-14 07:29:17 &#43;0000 UTC">2021-06-14 07:29:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is really the main problem. As far as I know, ROCm requires a quite expensive GPU for data centers (if you want to have a current GPU) which makes it quite difficult to build a community around ROCm.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dvfjsdhgfv" target="_blank">dvfjsdhgfv</a>   <span class="timeago" data-date="2021-06-14 07:33:16 &#43;0000 UTC">2021-06-14 07:33:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would love to, however for practically all tasks I need only the CUDA backend is available, not ROCm - an that is of course bad not just for open source, but also for the owners of AMD GPUs. The popularity of Nvidia&#x27;s solution is so overwhelming AMD would need to do something revolutionary in order to catch up (supporting Windows and macOS wouldn&#x27;t hurt either).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sebow" target="_blank">sebow</a>   <span class="timeago" data-date="2021-06-14 09:12:34 &#43;0000 UTC">2021-06-14 09:12:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AMD has the capacity now to make something equivalent and at least on-par.(Remember that they&#x27;re way more open to open projects than Nvidia, at least on Linux)<p>They just have to fix their documentation and release plans, their roadmap.ROCm looks decent-enough on paper, but when you try to install it and get started, suddenly you find more appealing spending hundreds of dollars more on locked-down hardware and proprietary libraries.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=up6w6" target="_blank">up6w6</a>   <span class="timeago" data-date="2021-06-14 01:15:54 &#43;0000 UTC">2021-06-14 01:15:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A fun fact is that the GPUCompiler, which compiles the code to run in GPU&#x27;s, is the current way to generate binaries without hiding the whole ~200mb of julia runtime in the binary.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;GPUCompiler.jl&#x2F;" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;GPUCompiler.jl&#x2F;</a> <a href="https:&#x2F;&#x2F;github.com&#x2F;tshort&#x2F;StaticCompiler.jl&#x2F;" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;tshort&#x2F;StaticCompiler.jl&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=snicker7" target="_blank">snicker7</a>   <span class="timeago" data-date="2021-06-14 06:10:19 &#43;0000 UTC">2021-06-14 06:10:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AKA Julia does GPU better than CPU.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aardvarkr" target="_blank">aardvarkr</a>   <span class="timeago" data-date="2021-06-13 22:49:20 &#43;0000 UTC">2021-06-13 22:49:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Who knew that Julia could do CUDA work too? Every day I grow more and more impressed with the language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eigenspace" target="_blank">eigenspace</a>   <span class="timeago" data-date="2021-06-13 23:42:11 &#43;0000 UTC">2021-06-13 23:42:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It also happens to be one of the most easy and reliable ways I know of to install CUDA on your machine. Everything is handled through the artifact system so you don&#x27;t have to mess with downloading it yourself and making sure you have the right versions and such.<p>(Before someone complains, you can also opt out of this and direct the library to a version you installed yourself)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=krastanov" target="_blank">krastanov</a>   <span class="timeago" data-date="2021-06-14 01:06:14 &#43;0000 UTC">2021-06-14 01:06:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you elaborate a bit on this? I know that a gigantic bunch of libraries are involved that is usually terrible to install but Julia does it for you in the equivalent of a python virtual-env. However, aren&#x27;t there also Linux kernel components that are necessary? How are those installed?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KenoFischer" target="_blank">KenoFischer</a>   <span class="timeago" data-date="2021-06-14 02:19:43 &#43;0000 UTC">2021-06-14 02:19:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, there&#x27;s a kernel component which needs to be installed, but that&#x27;s usually pretty easy these days, because it&#x27;s usually one of<p>1) You&#x27;re using a container-ish environment where the host kernel has the CUDA drivers installed anyway (but your base container image probably doesn&#x27;t have the userspace libraries)<p>2) The kernel driver comes with your OS distribution, but the userspace libraries are outdated (userspace libraries here includes things like JIT compilers, which have lots of bugs and need frequent updates) or don&#x27;t have some of the optional components that have restrictive redistribution clauses<p>3) Your sysadmin installed everything, but then helpfully moved the CUDA libraries into some obscure system specific directory where no software can find it.<p>4) You need to install the kernel driver yourself, so you find it on the NVIDIA website, but don&#x27;t realize there&#x27;s another 5 separate installers you need for all the optional libraries.<p>5) Maybe you have the NVIDIA-provided libraries, but then you need to figure out how to get the third-party libraries that depend on them installed. Given the variety of ways to install CUDA, this is a pretty hard problem to solve for other ecosystems.<p>In Julia, as long as you have the kernel driver, everything else will get automatically set up and installed for you. As a result, people are usually up and running with GPUs in a few minutes in Julia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ChrisRackauckas" target="_blank">ChrisRackauckas</a>   <span class="timeago" data-date="2021-06-14 02:13:25 &#43;0000 UTC">2021-06-14 02:13:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CUDA.jl installs all of the CUDA drivers and associated libraries like cudnn for you if you don&#x27;t have them. Those are all vendered via the Yggdrasil system so that users don&#x27;t have to deal with it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=krastanov" target="_blank">krastanov</a>   <span class="timeago" data-date="2021-06-14 04:30:44 &#43;0000 UTC">2021-06-14 04:30:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CUDA.jl does not install the actual kernel driver, right? I do not really see how it can do that and the sibling comment does confirm that the kernel driver is not managed by Julia.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwertzzz" target="_blank">kwertzzz</a>   <span class="timeago" data-date="2021-06-14 06:55:03 &#43;0000 UTC">2021-06-14 06:55:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, you would still need to the NVIDIA kernel driver (preferably the most current one). Desktop users typically have it already installed. But the main difficulty in my opinion is to install CUDA (with CuDNN,...). Even the TensorFlow documentation [0] is outdated  in this regards as it covers only Ubuntu 18.04.
+The installation process of CUDA.jl is really quite good and reliable. Per default it downloads it own version of CUDA and CuDNN, or you can use a system-wide CUDA installation by setting some environment variables [1].<p>[0] <a href="https:&#x2F;&#x2F;www.tensorflow.org&#x2F;install&#x2F;gpu" rel="nofollow">https:&#x2F;&#x2F;www.tensorflow.org&#x2F;install&#x2F;gpu</a>
+[1] <a href="https:&#x2F;&#x2F;cuda.juliagpu.org&#x2F;stable&#x2F;installation&#x2F;overview&#x2F;" rel="nofollow">https:&#x2F;&#x2F;cuda.juliagpu.org&#x2F;stable&#x2F;installation&#x2F;overview&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=version_five" target="_blank">version_five</a>   <span class="timeago" data-date="2021-06-13 22:56:08 &#43;0000 UTC">2021-06-13 22:56:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I last experimented with CUDA.jl a year ago, and it was very useable then. This is a good reminder to re-evaluate the Julia deep learning ecosystem. If I were working for myself I would definitely try to do more with Julia (for machine learning). Realistically, python has such an established base that it will take some time to get orgs that are already all in on python to come over.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=queuebert" target="_blank">queuebert</a>   <span class="timeago" data-date="2021-06-14 03:05:23 &#43;0000 UTC">2021-06-14 03:05:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just finished setting up a new machine to run some Kaggle stuff. Both Tensorflow and PyTorch had issues with CUDA versions and dependencies that weren&#x27;t immediately fixed with a clean virtualenv, while <i>both</i> Knet.jl and Flux.jl installed flawlessly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wdroz" target="_blank">wdroz</a>   <span class="timeago" data-date="2021-06-14 06:44:29 &#43;0000 UTC">2021-06-14 06:44:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For Pytorch and Tensorflow, you can use conda to install them with the right CUDA and cudnn versions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kwertzzz" target="_blank">kwertzzz</a>   <span class="timeago" data-date="2021-06-14 07:18:17 &#43;0000 UTC">2021-06-14 07:18:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For Pytorch, I had no issues with conda. But with Tensorflow from conda, the training process just hangs (consuming 100% of CPU but no GPU resources, despite my GPUs are recognized). I got more luck with installing Tensorflow with pip. Given the fact that Tensorflow documentation does not mention conda, I wondering how well this is supported.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wdroz" target="_blank">wdroz</a>   <span class="timeago" data-date="2021-06-14 17:14:29 &#43;0000 UTC">2021-06-14 17:14:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You install cudatoolkit from conda then tensorflow with pip.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dnautics" target="_blank">dnautics</a>   <span class="timeago" data-date="2021-06-14 00:23:05 &#43;0000 UTC">2021-06-14 00:23:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s not dumb to target Greenfield users: just installing python gpu wheels is often difficult enough that several companies exist (indirectly) because it&#x27;s so difficult to do right (e.g. selling a gpu PC with that stuff preinstalled)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pabs3" target="_blank">pabs3</a>   <span class="timeago" data-date="2021-06-14 01:39:44 &#43;0000 UTC">2021-06-14 01:39:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are there similar things for other types of GPUs?<p>Edit: the site has one project per GPU type, shame there isn&#x27;t one interface that works with every GPU type instead.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jpsamaroo" target="_blank">jpsamaroo</a>   <span class="timeago" data-date="2021-06-14 12:06:18 &#43;0000 UTC">2021-06-14 12:06:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For kernel programming, <a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;KernelAbstractions.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;KernelAbstractions.jl</a> (shortened to KA) is what the JuliaGPU team has been developing as a unified programming interface for GPUs of any flavor. It&#x27;s not significantly different from the (basically identical) interfaces exposed by CUDA.jl and AMDGPU.jl, so it&#x27;s easy to transition to. I think the event system in KA is also far superior to CUDA&#x27;s native synchronization system, since it allows one to easily express graphs of dependencies between kernels and data transfers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eigenspace" target="_blank">eigenspace</a>   <span class="timeago" data-date="2021-06-14 02:54:14 &#43;0000 UTC">2021-06-14 02:54:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;AMDGPU.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;AMDGPU.jl</a><p><a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;oneAPI.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;oneAPI.jl</a><p>These are both less mature than CUDA.jl, but are in active development.<p>&gt; Edit: the site has one project per GPU type, shame there isn&#x27;t one interface that works with every GPU type instead.<p>That would be <a href="https:&#x2F;&#x2F;juliagpu.github.io&#x2F;KernelAbstractions.jl" rel="nofollow">https:&#x2F;&#x2F;juliagpu.github.io&#x2F;KernelAbstractions.jl</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pabs3" target="_blank">pabs3</a>   <span class="timeago" data-date="2021-06-14 03:32:21 &#43;0000 UTC">2021-06-14 03:32:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;KernelAbstractions.jl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaGPU&#x2F;KernelAbstractions.jl</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=krastanov" target="_blank">krastanov</a>   <span class="timeago" data-date="2021-06-14 01:56:58 &#43;0000 UTC">2021-06-14 01:56:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These libraries provide the same API, so from a user perspective, as long as you do not need low-level access, it does not matter what your GPU is.<p>However, the low-level library for AMD GPUs is more of an alpha quality in Julia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Karrot_Kream" target="_blank">Karrot_Kream</a>   <span class="timeago" data-date="2021-06-14 01:36:51 &#43;0000 UTC">2021-06-14 01:36:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really looking forward to Turing.jl gaining CUDA support
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 01:14:41 &#43;0000 UTC">2021-06-14 01:14:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

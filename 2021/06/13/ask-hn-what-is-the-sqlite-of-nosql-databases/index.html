@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/ask-hn-what-is-the-sqlite-of-nosql-databases/">
+
+
+    <title>Ask HN: What is the SQLite of nosql databases? - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Ask HN: What is the SQLite of nosql databases? - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/ask-hn-what-is-the-sqlite-of-nosql-databases/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/ask-hn-what-is-the-sqlite-of-nosql-databases/">
+<meta name="twitter:title" content="Ask HN: What is the SQLite of nosql databases? - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Ask HN: What is the SQLite of nosql databases? - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T06:47:03JST",
+    "dateModified": "2021-06-13T06:47:03JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="">Ask HN: What is the SQLite of nosql databases?</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ludocode" target="_blank">ludocode</a>   <span class="timeago" data-date="2021-06-13 07:30:35 &#43;0000 UTC">2021-06-13 07:30:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As others have mentioned you have lots of options: LMDB, LevelDB&#x2F;RocksDB, BerkeleyDB. For what it&#x27;s worth, I spent a long time looking for an embedded key-value store for my current native project since I didn&#x27;t need the full complexity of SQL. In the end I chose... SQLite.<p>All of these embedded NoSQL databases seem to be missing critical features. One such feature for my use case is database compaction. Last I checked, an LMDB database file can never shrink. Full compaction of LevelDB is slow and complicated (as I understand it essentially breaks the levels optimization which is the whole point of the thing.) SQLite meanwhile supports fast incremental vacuum, and it can be triggered manually or automatically.<p>SQLite just has everything. Plus the reliability is unmatched. Even if you just need a single table that maps blob keys to blob values, I would still recommend SQLite over any NoSQL database today.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=justsomeuser" target="_blank">justsomeuser</a>   <span class="timeago" data-date="2021-06-13 13:35:57 &#43;0000 UTC">2021-06-13 13:35:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also there are high quality libraries for every language
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=creshal" target="_blank">creshal</a>   <span class="timeago" data-date="2021-06-13 07:27:54 &#43;0000 UTC">2021-06-13 07:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The SQLite of NoSQL is still SQLite: <a href="https:&#x2F;&#x2F;www.sqlite.org&#x2F;json1.html" rel="nofollow">https:&#x2F;&#x2F;www.sqlite.org&#x2F;json1.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andrey_utkin" target="_blank">andrey_utkin</a>   <span class="timeago" data-date="2021-06-13 07:27:43 &#43;0000 UTC">2021-06-13 07:27:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Filesystem.<p>Linux has VFS cache which is very robust and efficient.<p>Remember that it is typical for programs to read &#x2F;etc&#x2F;nsswitch.conf, &#x2F;etc&#x2F;resolve.conf and tons of others at startup time - the filesystem is <i>the</i> datasource in Unix tradition, so the machinery is very well optimized.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ludocode" target="_blank">ludocode</a>   <span class="timeago" data-date="2021-06-13 08:04:29 &#43;0000 UTC">2021-06-13 08:04:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem with this is that if your records&#x2F;documents are small, you&#x27;re wasting huge amounts of space because each file uses a full filesystem block. If you have, say, ten thousand records where each is 200 bytes, a decent database would store that in a bit over 2MB. Storing these as individual files on a filesystem with 4kB blocks will take up at least 40MB. This is a huge amount of wasted space, not to mention slow. (Some filesystems do support tail packing but that won&#x27;t fully solve the problem.)<p>Not to mention all the other problems with this. The filesystem has a complete lack of higher-level features: no transactions, no snapshots, no indexing beyond filenames, no easy robustness guarantees (doing fsync() properly is a lot more complicated than it appears.) Honestly for modern apps the filesystem is just terrible at storing any internal mutable app data.<p>Once you start writing code to store auxiliary indices, synchronize writes, or pack multiple records per file, well at that point you&#x27;re just implementing your own database. This might make sense if, say, you have a special way of compressing your data (like git). But generally you&#x27;re better off using a real embedded database.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-06-13 22:41:01 &#43;0000 UTC">2021-06-13 22:41:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For simple stuff I&#x27;ve had success keeping an in-memory data structure as the source of truth, and just persisting the whole thing to a file (JSON or otherwise) via a debounced function. Assuming you only have one process (or at least one main process), you only have to read the file on startup and can be pretty relaxed about your write strategy
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-13 09:30:41 &#43;0000 UTC">2021-06-13 09:30:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some filesystem can store small data directly in inode. Limit for ext4 is 160 bytes though.<p><a href="https:&#x2F;&#x2F;unix.stackexchange.com&#x2F;questions&#x2F;197570&#x2F;is-it-possible-to-store-data-directly-inside-an-inode-on-a-unix-linux-filesyst" rel="nofollow">https:&#x2F;&#x2F;unix.stackexchange.com&#x2F;questions&#x2F;197570&#x2F;is-it-possib...</a><p><a href="https:&#x2F;&#x2F;ext4.wiki.kernel.org&#x2F;index.php&#x2F;Ext4_Disk_Layout#Inline_Data" rel="nofollow">https:&#x2F;&#x2F;ext4.wiki.kernel.org&#x2F;index.php&#x2F;Ext4_Disk_Layout#Inli...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rektide" target="_blank">rektide</a>   <span class="timeago" data-date="2021-06-13 15:04:01 &#43;0000 UTC">2021-06-13 15:04:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            btrfs has this too. it&#x27;d be cool if dirent_t could those this so one could quickly iterate thought these inline data.<p><a href="https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;libc&#x2F;manual&#x2F;html_node&#x2F;Directory-Entries.html" rel="nofollow">https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;libc&#x2F;manual&#x2F;html_node&#x2F;Directory...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 15:03:24 &#43;0000 UTC">2021-06-13 15:03:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 10:56:21 &#43;0000 UTC">2021-06-13 10:56:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;ll only be wasting space proportional to the number of objects, and the overhead is much smaller on ext4 (default fs on most linux distros) like the sibling comment explains. Most databases are quite small, and most of the rest are less than huge, so in most cases you won&#x27;t be wasting huge amounts of space.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=quantumofalpha" target="_blank">quantumofalpha</a>   <span class="timeago" data-date="2021-06-14 08:53:48 &#43;0000 UTC">2021-06-14 08:53:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Overhead seems to be about 4KiB, at least using default ext4 parameters:<p><pre><code>  # zfs create -V 100G -b 4096 tank&#x2F;test &amp;&amp; mkfs.ext4 -v &#x2F;dev&#x2F;zvol&#x2F;tank&#x2F;test &amp;&amp; mount &#x2F;dev&#x2F;zvol&#x2F;tank&#x2F;test &#x2F;mnt &amp;&amp; cd &#x2F;mnt
+  # df -k .
+  Filesystem     1K-blocks  Used Available Use% Mounted on
+  &#x2F;dev&#x2F;zd16      102626232    24  97366944   1% &#x2F;mnt
+  # for x in `seq 1000000`; do echo $x &gt;$x; done  # create 1M tiny files
+  # df -k .
+  Filesystem     1K-blocks    Used Available Use% Mounted on
+  &#x2F;dev&#x2F;zd16      102626232 4022348  93344620   5% &#x2F;mnt
+  # bc -l
+  (97366944-93344620)*1024&#x2F;1000000  # free space diff per file
+  4118.859776
+</code></pre>
+Plus you&#x27;re wasting an inode per record - a limited resource in ext4, increasing which requires reformatting. You&#x27;d probably run out of inodes much sooner than out of space.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-14 16:18:34 &#43;0000 UTC">2021-06-14 16:18:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, indeed the inline data option is not enabled even by the latest e2fsprogs even though the feay has been there a long time.<p>Re inodes, this is a good point too. These definitely reduce the size of db that fs works nicely for.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quantumofalpha" target="_blank">quantumofalpha</a>   <span class="timeago" data-date="2021-06-13 10:29:01 &#43;0000 UTC">2021-06-13 10:29:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This has a large overhead - easily a few kilobytes per file, depending on filesystem. Poor locality - your data gets scattered across entire disk; even on SSD this matters to some extent. And also starts to break down in some ways already at O(100k) files, e.g. globs in command line stop working. You can work around by splitting files into different directories but at that point it&#x27;s just easier to use a normal database.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=quantumofalpha" target="_blank">quantumofalpha</a>   <span class="timeago" data-date="2021-06-13 07:05:46 &#43;0000 UTC">2021-06-13 07:05:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t the main feature of nosql supposed to be easy horizontal scalability, the exact opposite of storing everything in a single file?<p>If you just need a r&#x2F;w store for some jsons in a single file, why not sqlite? You can put arbitrary-length blobs into it. Some sql will be involved but you can hide it in a wrapper class tailored to your application with a few dozen lines of code or so.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jare" target="_blank">Jare</a>   <span class="timeago" data-date="2021-06-13 07:28:24 &#43;0000 UTC">2021-06-13 07:28:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Isn&#x27;t the main feature of nosql supposed to be easy horizontal scalability<p>There&#x27;s no strict definition of nosql so everyone can choose their own. My personal take (in broad terms) follows:<p>No, that&#x27;s not a feature of nosql. Nosql means not relational, which in turn means no guarantees about the relationship between two objects, i.e. no atomicity of access across multiple objects (for either read or write operations). A consequence of this lack of atomicity is that it&#x27;s easy to store different objects in different places, thus opening up opportunities for horizontal scalability. Caveat: those opportunities can be taken away by other choices you make. If you decide to offer and enforce transactions, you are bringing atomicity back into the system, and thus making horizontal scalability hard again. Or you may decide you want a nosql-in-a-file.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gary_0" target="_blank">gary_0</a>   <span class="timeago" data-date="2021-06-13 07:21:27 &#43;0000 UTC">2021-06-13 07:21:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You can put arbitrary-length blobs into it.<p>And it&#x27;s quite suitable for this purpose: <a href="https:&#x2F;&#x2F;www.sqlite.org&#x2F;fasterthanfs.html" rel="nofollow">https:&#x2F;&#x2F;www.sqlite.org&#x2F;fasterthanfs.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=etaioinshrdlu" target="_blank">etaioinshrdlu</a>   <span class="timeago" data-date="2021-06-13 07:16:56 &#43;0000 UTC">2021-06-13 07:16:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Practically, NoSQL also seems to just mean &quot;Not-SQL&quot; as stuff like Redis is often lumped in it, which is about the opposite of easy horizontal scalability.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Rochus" target="_blank">Rochus</a>   <span class="timeago" data-date="2021-06-13 09:06:32 &#43;0000 UTC">2021-06-13 09:06:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SQLite has a backend which is well suited as a key-value store.<p>Here is a NoSql database based on the SQLite backend: <a href="https:&#x2F;&#x2F;github.com&#x2F;rochus-keller&#x2F;Udb" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rochus-keller&#x2F;Udb</a>.<p>I use it in many of my apps, e.g. <a href="https:&#x2F;&#x2F;github.com&#x2F;rochus-keller&#x2F;CrossLine" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rochus-keller&#x2F;CrossLine</a>. It&#x27;s lean and fast, and supports objects, indices, hierarchical &quot;globals&quot; like ANSI-M and transactions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CRConrad" target="_blank">CRConrad</a>   <span class="timeago" data-date="2021-06-14 16:45:28 &#43;0000 UTC">2021-06-14 16:45:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mostly, but actually not totally, kidding: *.INI files.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=teekay" target="_blank">teekay</a>   <span class="timeago" data-date="2021-06-13 07:40:31 &#43;0000 UTC">2021-06-13 07:40:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of those I&#x27;ve tried is LiteDB - <a href="https:&#x2F;&#x2F;github.com&#x2F;mbdavid&#x2F;LiteDB" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mbdavid&#x2F;LiteDB</a>. I liked it.<p>It&#x27;s small yet capable. If you are familiar with MongoDB, you will feel right at home.<p>It&#x27;s great for .NET developers as it&#x27;s written in C# but since it&#x27;s Netstandard 1.3 compatible, you can presumably run it under Ubuntu or Mac OS or wherever else the new .NET 5 runtime works. I&#x27;ve got a C# app running on ARM64 the other day - just saying.<p>I wrote about my experience playing with LiteDB here - <a href="https:&#x2F;&#x2F;tomaskohl.com&#x2F;code&#x2F;2020-04-07&#x2F;trying-out-litedb&#x2F;" rel="nofollow">https:&#x2F;&#x2F;tomaskohl.com&#x2F;code&#x2F;2020-04-07&#x2F;trying-out-litedb&#x2F;</a>. It&#x27;s not an in-depth look at all, just a few notes from the field, so to speak.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 07:51:58 &#43;0000 UTC">2021-06-13 07:51:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NoSQL databases have many different different data models. Eg object, document, graph, and key&#x2F;value DBs. In a lot of cases you should probably just use something on top of SQLite, but you should say more about your requirements.<p>An interesting one I ran into recently is Datalevin, a Datalog DB on top of LMDB for Clojure: <a href="https:&#x2F;&#x2F;github.com&#x2F;juji-io&#x2F;datalevin" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;juji-io&#x2F;datalevin</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tincholio" target="_blank">tincholio</a>   <span class="timeago" data-date="2021-06-13 16:07:51 &#43;0000 UTC">2021-06-13 16:07:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d add Crux to this... it&#x27;s document-oriented, but still generates attribute-level indices, and is also Datalog based. It can be used on top of RocksDB, LMDB, or many other (more scalable) backends (Kafka being the canonical one).<p>It&#x27;s really awesome, and the team behind it are super responsive and helpful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=erk__" target="_blank">erk__</a>   <span class="timeago" data-date="2021-06-13 07:12:09 &#43;0000 UTC">2021-06-13 07:12:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably something like LMDB [0] or Tkrzw [1], though nosql is a bit more diverse in a way SQL is not so it is hard to give a clear answer.<p>[0]: <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Lightning_Memory-Mapped_Database" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Lightning_Memory-Mapped_Data...</a>
+[1]: <a href="https:&#x2F;&#x2F;dbmx.net&#x2F;tkrzw&#x2F;" rel="nofollow">https:&#x2F;&#x2F;dbmx.net&#x2F;tkrzw&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eqvinox" target="_blank">eqvinox</a>   <span class="timeago" data-date="2021-06-13 07:30:07 &#43;0000 UTC">2021-06-13 07:30:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1 for LMDB, ended up there researching simple local key-value stores for my own use.<p>GDBM and BerkeleyDB are the &quot;grey beard&quot; references, but their 80&#x27;s &amp; 90&#x27;s heritage shows.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adamansky" target="_blank">adamansky</a>   <span class="timeago" data-date="2021-06-13 07:14:37 &#43;0000 UTC">2021-06-13 07:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Take a look on the ejdb2 <a href="https:&#x2F;&#x2F;ejdb.org" rel="nofollow">https:&#x2F;&#x2F;ejdb.org</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maxk42" target="_blank">maxk42</a>   <span class="timeago" data-date="2021-06-13 07:27:10 &#43;0000 UTC">2021-06-13 07:27:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Take a look at UnQLite: <a href="https:&#x2F;&#x2F;unqlite.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;unqlite.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tpt" target="_blank">Tpt</a>   <span class="timeago" data-date="2021-06-13 08:57:00 &#43;0000 UTC">2021-06-13 08:57:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like sled that is a nice embedded key value store written in Rust: <a href="https:&#x2F;&#x2F;sled.rs&#x2F;" rel="nofollow">https:&#x2F;&#x2F;sled.rs&#x2F;</a><p>However, it is still in heavy development and a bit of a moving target even if the developers are currently heading toward stabilization of the file format.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xiphias2" target="_blank">xiphias2</a>   <span class="timeago" data-date="2021-06-13 07:09:13 &#43;0000 UTC">2021-06-13 07:09:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            BerkerleyDB is an older, simpler one, LevelDB &#x2F; RocksDB are more modern, maintained, better for SSD workload
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Rochus" target="_blank">Rochus</a>   <span class="timeago" data-date="2021-06-13 09:40:41 &#43;0000 UTC">2021-06-13 09:40:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            BerkerleyDB is rather complex and has a dual license (AGPL and commercial).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=abrookewood" target="_blank">abrookewood</a>   <span class="timeago" data-date="2021-06-13 23:38:57 &#43;0000 UTC">2021-06-13 23:38:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you want Mongita. It was featured on HN a while ago: &quot;Mongita is to MongoDB as SQLite is to SQL (github.com&#x2F;scottrogowski)&quot;
+<a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26881915" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26881915</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jf22" target="_blank">jf22</a>   <span class="timeago" data-date="2021-06-14 12:37:15 &#43;0000 UTC">2021-06-14 12:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            RavenDb would be what I would use.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=1vuio0pswjnm7" target="_blank">1vuio0pswjnm7</a>   <span class="timeago" data-date="2021-06-13 08:07:27 &#43;0000 UTC">2021-06-13 08:07:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cdb_(software)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cdb_(software)</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kenOfYugen" target="_blank">kenOfYugen</a>   <span class="timeago" data-date="2021-06-13 07:43:54 &#43;0000 UTC">2021-06-13 07:43:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I ended up writing a small wrapper on top of SQLite based on this: <a href="https:&#x2F;&#x2F;dgl.cx&#x2F;2020&#x2F;06&#x2F;sqlite-json-support" rel="nofollow">https:&#x2F;&#x2F;dgl.cx&#x2F;2020&#x2F;06&#x2F;sqlite-json-support</a><p>With proper concurrency control, it can work very well even for multi process applications.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Abishek_Muthian" target="_blank">Abishek_Muthian</a>   <span class="timeago" data-date="2021-06-13 19:39:30 &#43;0000 UTC">2021-06-13 19:39:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are also persistent key-value store like dbm as part of standard library in python and several 3rd party implementations like bitcask for Go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway888abc" target="_blank">throwaway888abc</a>   <span class="timeago" data-date="2021-06-13 06:50:33 &#43;0000 UTC">2021-06-13 06:50:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check LiteStore as bonus you have api included<p><a href="https:&#x2F;&#x2F;h3rald.com&#x2F;litestore&#x2F;" rel="nofollow">https:&#x2F;&#x2F;h3rald.com&#x2F;litestore&#x2F;</a><p><a href="https:&#x2F;&#x2F;github.com&#x2F;h3rald&#x2F;litestore" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;h3rald&#x2F;litestore</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quickthrower2" target="_blank">quickthrower2</a>   <span class="timeago" data-date="2021-06-13 23:07:58 &#43;0000 UTC">2021-06-13 23:07:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An object reference :-)<p>In memory, high performance, no schema. Get the object to journal to disk and you are almost there!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Blackthorn" target="_blank">Blackthorn</a>   <span class="timeago" data-date="2021-06-13 07:17:37 &#43;0000 UTC">2021-06-13 07:17:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tkrzw is basically the modern dbm &#x2F; berkeleydb
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oofabz" target="_blank">oofabz</a>   <span class="timeago" data-date="2021-06-13 07:48:58 &#43;0000 UTC">2021-06-13 07:48:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I second this. For those who don&#x27;t know, tkrzw is the less-memorably-named successor of Tokyo Cabinet and Kyoto Cabinet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cpach" target="_blank">cpach</a>   <span class="timeago" data-date="2021-06-13 08:48:29 &#43;0000 UTC">2021-06-13 08:48:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is one supposed to pronounce “tkrzw”? (^_^)<p>Tango Kilo?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pistoriusp" target="_blank">pistoriusp</a>   <span class="timeago" data-date="2021-06-13 07:37:51 &#43;0000 UTC">2021-06-13 07:37:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Json on the filesystem
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nicodds" target="_blank">nicodds</a>   <span class="timeago" data-date="2021-06-13 07:54:57 &#43;0000 UTC">2021-06-13 07:54:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally, I like very much leveldb&#x2F;rocksdb. They&#x27;re very fast and solid.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=RustyRussell" target="_blank">RustyRussell</a>   <span class="timeago" data-date="2021-06-13 07:40:28 &#43;0000 UTC">2021-06-13 07:40:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d nominate TDB (the trivial database). It&#x27;s small, robust, effective
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 06:56:19 &#43;0000 UTC">2021-06-13 06:56:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amachefe" target="_blank">amachefe</a>   <span class="timeago" data-date="2021-06-13 07:36:06 &#43;0000 UTC">2021-06-13 07:36:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For now, see Postgres as one
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=basiclaser" target="_blank">basiclaser</a>   <span class="timeago" data-date="2021-06-13 08:24:59 &#43;0000 UTC">2021-06-13 08:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lodb
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dvfjsdhgfv" target="_blank">dvfjsdhgfv</a>   <span class="timeago" data-date="2021-06-13 07:20:15 &#43;0000 UTC">2021-06-13 07:20:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My guess is that although you basically describe BerkeleyDB you probably want Redis.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=voodoochilo" target="_blank">voodoochilo</a>   <span class="timeago" data-date="2021-06-13 07:42:49 &#43;0000 UTC">2021-06-13 07:42:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;unqlite.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;unqlite.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

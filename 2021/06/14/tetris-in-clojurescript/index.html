@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/tetris-in-clojurescript/">
+
+
+    <title>Tetris in ClojureScript - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Tetris in ClojureScript - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/tetris-in-clojurescript/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/tetris-in-clojurescript/">
+<meta name="twitter:title" content="Tetris in ClojureScript - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Tetris in ClojureScript - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T06:38:12JST",
+    "dateModified": "2021-06-14T06:38:12JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://shaunlebron.github.io/t3tr0s-slides">Tetris in ClojureScript</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cardanome" target="_blank">cardanome</a>   <span class="timeago" data-date="2021-06-14 16:47:11 &#43;0000 UTC">2021-06-14 16:47:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was the final push I needed to learn Clojurescript.<p>Absolute awesome work.<p>I always kept my distance from Clojure because of the reliance on the Java ecosystem but having a productive and stable language that is a pleasure to work in and that transpiles to JavaScript seems like a good deal. Plus a solid REPL-based workflow and rapid prototyping support, something I sometimes miss from more static languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hatch_q" target="_blank">hatch_q</a>   <span class="timeago" data-date="2021-06-14 17:24:08 &#43;0000 UTC">2021-06-14 17:24:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks nice in demo... github shows also the ugly bits.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tartoran" target="_blank">tartoran</a>   <span class="timeago" data-date="2021-06-14 14:12:12 &#43;0000 UTC">2021-06-14 14:12:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Shaun Lebron has a bunch of interesting stuff on his github[0]
+involving closurescript.<p>I haven&#x27;t toyed with closurescript yet, if anyone has any experience with it, what are its strengths and weaknesses? I&#x27;
+ve been learning scheme&#x2F;racket for the past year and for learning purposes Dr Racket is more than enough for now, but sometime in the future I&#x27;d like to branch out of that.<p>[0]: <a href="https:&#x2F;&#x2F;shaunlebron.github.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;shaunlebron.github.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shivekkhurana" target="_blank">shivekkhurana</a>   <span class="timeago" data-date="2021-06-14 16:10:40 &#43;0000 UTC">2021-06-14 16:10:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wrote about my journey covering Clojure&#x27;s pros and cons:
+<a href="https:&#x2F;&#x2F;medium.com&#x2F;swlh&#x2F;what-i-learned-after-writing-clojure-for-424-days-straight-8884ec471f8e" rel="nofollow">https:&#x2F;&#x2F;medium.com&#x2F;swlh&#x2F;what-i-learned-after-writing-clojure...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jjwiseman" target="_blank">jjwiseman</a>   <span class="timeago" data-date="2021-06-14 17:39:17 &#43;0000 UTC">2021-06-14 17:39:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;It has a slow startup time. Clojure runs on the JVM and has a significantly slower startup time compared to Node. Again, this is only a problem from an outsider’s perspective. We have REPL. You start the app only once, and it keeps running in the background. You can interactively include new changes, without having to startup every time.&quot;<p>I&#x27;ve been using Clojure for about 8 years and this is one of the talking points I find most annoying. The slow startup time is a disadvantage, and it should be owned. It disqualifies clojure from a large class of applications and if you&#x27;re not honest about it you lose credibility, and you retard potential attempts to solve it. It doesn&#x27;t mean you can&#x27;t write software with Clojure, but be honest about the fact that it makes lots of types of usage (not all) a poor match.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CraigJPerry" target="_blank">CraigJPerry</a>   <span class="timeago" data-date="2021-06-14 17:33:29 &#43;0000 UTC">2021-06-14 17:33:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your talk linked from <a href="https:&#x2F;&#x2F;shivekkhurana.medium.com&#x2F;reaching-flow-state-with-clojures-repl-231f0f28d972" rel="nofollow">https:&#x2F;&#x2F;shivekkhurana.medium.com&#x2F;reaching-flow-state-with-cl...</a> was absolutely brilliant.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=souenzzo" target="_blank">souenzzo</a>   <span class="timeago" data-date="2021-06-14 14:31:41 &#43;0000 UTC">2021-06-14 14:31:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            - Low changes&#x2F;grow. This demo was written in 2014 and it probably still look like as if it had been written in 2020.
+- Easy interop with any npm library. Just import and use it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sova" target="_blank">sova</a>   <span class="timeago" data-date="2021-06-14 17:03:24 &#43;0000 UTC">2021-06-14 17:03:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ClojureScript is awesome.<p>There are several tools available for live-coding (REPL-driven development) such as more recent shadowcljs or the older Figwheel.<p>Rum is a powerful wrapper over React.js and you can live code and see instantaneous results in the browser (using shadowcljs or figwheel).<p>ClojureScript&#x27;s strengths largely stem from Clojure -- collections as fundamental types, REPL, macros, immutable datastructures* and lovely syntax.<p>As far as cons go, it takes some time to start up a REPL and making release builds is an extra step, but should work just fine unless you&#x27;re a newbie like me and you leave strange unnecessary lines in your code.  Javascript and js&#x2F;CSS interop is there, but it&#x27;s not super obvious and takes some getting used to what it looks like -- luckily there are enough online writeups to make that process easier.<p>The addage &quot;why clojurescript?  Because clojure rocks and javascript reaches&quot; sums up nicely the motivation.<p>You can have largely isomorphic code on the front-end and back-end, which lends nicely to creating server-side rendered versions of SPAs for search engine indexing and fast load times.  However, the server-side copy and the client rendered copy must match exactly for this to work, which can be a bit of a &quot;thread the needle&quot; kind of problem.<p>* immutable datastructures are awesome, contrast with mutable datastructures and &quot;location oriented programming&quot; -- any time you &quot;edit&quot; a value you&#x27;re actually creating a new datum.  This is done with atoms (immutable data stores that need to be dereferenced to retrieve their value) and operations such as swap! and reset! that either apply a function to the current value of an atom, resulting in a fresh new atom with the new value, or overwrite the atom completely with some value, respectively.<p>So yeah, if you like live-coding and appreciate the power of lisp, it&#x27;s a really nice fit.  Yes, the way to do stuff is &quot;opinionated&quot; but it&#x27;s opinionated in what many years of trudging through the tar pit* would suggest is the right (only?) way to do things.<p>* Out of the Tar Pit [<a href="http:&#x2F;&#x2F;curtclifton.net&#x2F;papers&#x2F;MoseleyMarks06a.pdf" rel="nofollow">http:&#x2F;&#x2F;curtclifton.net&#x2F;papers&#x2F;MoseleyMarks06a.pdf</a>]<p>I highly recommend Rich Hickey&#x27;s talk &quot;Are we there yet?&quot; to give you an overview of the motivations behind Clojure and subsequently ClojureScript.  [<a href="https:&#x2F;&#x2F;www.infoq.com&#x2F;presentations&#x2F;Are-We-There-Yet-Rich-Hickey&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.infoq.com&#x2F;presentations&#x2F;Are-We-There-Yet-Rich-Hi...</a>]
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dgb23" target="_blank">dgb23</a>   <span class="timeago" data-date="2021-06-14 09:32:48 &#43;0000 UTC">2021-06-14 09:32:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great work!<p>I love the idea of making code and data alive, interactive and illustrative. Reminds me a bit of Bret Victor&#x27;s talks, essays and prototypes illustrating how interactive, graphical thinking can enhance understanding and even creation.<p>Imagine our editors doing this by default, what it would mean for documentation, code quality and enhancing our ability to understand and communicate these concepts with augmented code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lgrapenthin" target="_blank">lgrapenthin</a>   <span class="timeago" data-date="2021-06-14 10:17:03 &#43;0000 UTC">2021-06-14 10:17:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check out some of the videos on Youtube of the Genera Symbolics Lisp Machine platform.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KurtMueller" target="_blank">KurtMueller</a>   <span class="timeago" data-date="2021-06-14 13:59:22 &#43;0000 UTC">2021-06-14 13:59:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Shaun also released the really neat Parinfer package as well:<p><a href="https:&#x2F;&#x2F;shaunlebron.github.io&#x2F;parinfer&#x2F;" rel="nofollow">https:&#x2F;&#x2F;shaunlebron.github.io&#x2F;parinfer&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rejectedandsad" target="_blank">rejectedandsad</a>   <span class="timeago" data-date="2021-06-14 16:10:08 &#43;0000 UTC">2021-06-14 16:10:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was surprised to see the repository was Archived. Is it not being maintained now?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisoakman" target="_blank">chrisoakman</a>   <span class="timeago" data-date="2021-06-14 16:19:31 &#43;0000 UTC">2021-06-14 16:19:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I maintain an updated fork: <a href="https:&#x2F;&#x2F;github.com&#x2F;oakmac&#x2F;parinfer" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;oakmac&#x2F;parinfer</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=enlyth" target="_blank">enlyth</a>   <span class="timeago" data-date="2021-06-14 10:18:48 &#43;0000 UTC">2021-06-14 10:18:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is really cool and well done, thanks for sharing.<p>One question I have though, is the square piece supposed to rotate like that, i.e. shift up and down while rotating? I think this might be a bug.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nlitened" target="_blank">nlitened</a>   <span class="timeago" data-date="2021-06-14 10:43:38 &#43;0000 UTC">2021-06-14 10:43:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, the rotation function could see some ergonomics improvements with minimal code changes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=elwell" target="_blank">elwell</a>   <span class="timeago" data-date="2021-06-14 14:13:35 &#43;0000 UTC">2021-06-14 14:13:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s really cool; thanks for sharing the code in an understandable way.<p>Here&#x27;s a little &#x27;game&#x27; I&#x27;m working on with some simple physics in ClojureScript: <a href="https:&#x2F;&#x2F;github.com&#x2F;celwell&#x2F;wordsmith" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;celwell&#x2F;wordsmith</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klaudioz" target="_blank">klaudioz</a>   <span class="timeago" data-date="2021-06-14 12:01:55 &#43;0000 UTC">2021-06-14 12:01:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which tool was used to create the presentation ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AtroxDev" target="_blank">AtroxDev</a>   <span class="timeago" data-date="2021-06-14 12:12:42 &#43;0000 UTC">2021-06-14 12:12:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            looks like it is custom built: <a href="https:&#x2F;&#x2F;github.com&#x2F;shaunlebron&#x2F;t3tr0s-slides" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;shaunlebron&#x2F;t3tr0s-slides</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AQXt" target="_blank">AQXt</a>   <span class="timeago" data-date="2021-06-14 11:43:23 &#43;0000 UTC">2021-06-14 11:43:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s one of the coolest programming demos I&#x27;ve ever seen!<p>Suggestion: make the completed rows fade asynchronously.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

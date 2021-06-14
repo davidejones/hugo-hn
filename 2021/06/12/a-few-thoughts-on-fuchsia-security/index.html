@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/a-few-thoughts-on-fuchsia-security/">
+
+
+    <title>A few thoughts on Fuchsia security - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="A few thoughts on Fuchsia security - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/a-few-thoughts-on-fuchsia-security/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/a-few-thoughts-on-fuchsia-security/">
+<meta name="twitter:title" content="A few thoughts on Fuchsia security - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "A few thoughts on Fuchsia security - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T21:11:49JST",
+    "dateModified": "2021-06-12T21:11:49JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.cr0.org/2021/06/a-few-thoughts-on-fuchsia-security.html">A few thoughts on Fuchsia security</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 00:17:38 &#43;0000 UTC">2021-06-13 00:17:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For system-level folks, Rust is one of the most exciting security developments of the past few decades. It elegantly solves problems which smart people were saying could not be solved. Fuchsia has a lot of code, and we made sure that much of it (millions of LoC) was in Rust.<p>&gt; Our kernel, Zircon, is not in Rust. Not yet anyway. But it is in a nice, lean subset of C++ which I consider a vast improvement over C.<p>A few thoughts on this.<p>1. Why is it that Chrome hasn&#x27;t had more Rust adoption? It&#x27;s so obvious - Chrome constantly has to make the tradeoff of security vs performance with regards to things like parsing in sandboxed code. There&#x27;s so much potential - Firefox started with the obvious place, encoding and decoding, which are too dangerous for C&#x2F;C++ but too performance sensitive for OOP.<p>Feels like it&#x27;s gotta be organizational, and somehow Fuschia has managed to break off from the part of Google that&#x27;s still clutching to C++.<p>2. I&#x27;d be interested in hearing more about the design of Fuschia. Rust in userland is cool, or kernel modules too, but a memory unsafe kernel is an unfortunate thing. Even just the teaser of &quot;not yet at least&quot; is changing my view on the OS (I find the idea of another memory unsafe kernel&#x2F;userland more depressing than exciting, even if there are neat things like capabilities).<p>3. Also curious to hear about their experience with a strict subset of C++. Again, looking at Chrome, we now see common ITW exploits - and Chrome is perhaps the single most fuzzed piece of software in the world, and leverages many modern C++ techniques (or the Google equivalent of them).<p>As for the rest, verified execution seems interesting - is this like what iOS does, where it&#x27;s basically impossible to RWX (except with an escape hatch for JITs, but behind a permission boundary)?<p>TBH if Google pivots Fuschia to do something interesting like bottom-up memory safety with novel isolation mechanisms, I&#x27;ll bite. Until then, I&#x27;ll wallow in this awful pit we continue to dig ourselves into.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=esprehn" target="_blank">esprehn</a>   <span class="timeago" data-date="2021-06-13 01:33:42 &#43;0000 UTC">2021-06-13 01:33:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The web platform code in Chromium uses a C++ garbage collector [1] which gets a lot of benefits of a memory safe language and integrates well with V8&#x2F;JS. That fixed the vast majority of issues without having to rewrite any of the code in another language.<p>[1] <a href="https:&#x2F;&#x2F;chromium.googlesource.com&#x2F;chromium&#x2F;src&#x2F;+&#x2F;refs&#x2F;heads&#x2F;main&#x2F;third_party&#x2F;blink&#x2F;renderer&#x2F;platform&#x2F;heap&#x2F;BlinkGCAPIReference.md" rel="nofollow">https:&#x2F;&#x2F;chromium.googlesource.com&#x2F;chromium&#x2F;src&#x2F;+&#x2F;refs&#x2F;heads&#x2F;...</a><p>See also the recent posts from the V8 team, ex.
+<a href="https:&#x2F;&#x2F;v8.dev&#x2F;blog&#x2F;high-performance-cpp-gc" rel="nofollow">https:&#x2F;&#x2F;v8.dev&#x2F;blog&#x2F;high-performance-cpp-gc</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 02:38:23 &#43;0000 UTC">2021-06-13 02:38:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, I totally disagree with you. I&#x27;m well aware of how Chromium&#x27;s C++ code works, and I&#x27;m aware of oilpan, I don&#x27;t think it&#x27;s fair at all to say it solves memory safety issues.<p>Proof&#x27;s in the pudding. ITW exploits are there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 16:18:53 &#43;0000 UTC">2021-06-13 16:18:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While Rust has safer defaults, exploits are still possible depending on how well unsafe {} blocks are manually checked for correctness.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 17:47:04 &#43;0000 UTC">2021-06-13 17:47:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, which means you can grep for vulnerabilities.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 17:49:49 &#43;0000 UTC">2021-06-13 17:49:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Logic errors in unsafe blocks usually aren&#x27;t grepable.<p>Speaking from experience using managed languages, and almost safe systems languages, with unsafe blocks support.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 17:57:14 &#43;0000 UTC">2021-06-13 17:57:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes they are, you just grep for &quot;unsafe&quot;. Speaking from a career in information security, vuln research, and as a rust engineer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 18:01:06 &#43;0000 UTC">2021-06-13 18:01:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It requires a human to actually look at the contents of the unsafe block.<p>Most of the time those humans are even rarer than those that validate unit tests are properly written.<p>Also you cannot grep for unsafe in binary libraries.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 20:39:19 &#43;0000 UTC">2021-06-13 20:39:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It requires a human to actually look at the contents of the unsafe block.<p>Yes, that&#x27;s an incredible capability - that a human can actually look to find bugs, that&#x27;s insane, that&#x27;s huge.<p>&gt; Most of the time those humans are even rarer than those that validate unit tests are properly written.<p>Maybe, maybe. Is it rarer than fuzzing with sanitizers though? Or rarer than serious sandboxing efforts? When unsafe has been used gratuitously in Rust libraries the community has pushed back, to a fault.<p>I don&#x27;t know what it is you want to try to argue here though. My questions were really targeted to someone <i>at Google</i> who can speak more directly to what I&#x27;ve been seeing for years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 05:22:42 &#43;0000 UTC">2021-06-14 05:22:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am trying to argue that just by using a safer systems programming language, the security exploits don&#x27;t go away.<p>Someone needs to take care that the remaining 30% are taken care of.<p>While the unsafe blocks are still responsible for the remaining 70% if no one bothers to actually validate them.<p>Actix Web is a very good example, how the community still has to learn how to deal with such issues, and how effective the security would have been, if its security wasn&#x27;t validated by fellow humans.<p>Yes it is definitly better than C, C++ or Objective-C, just not zero effort to keep it safe.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=est31" target="_blank">est31</a>   <span class="timeago" data-date="2021-06-13 18:30:51 &#43;0000 UTC">2021-06-13 18:30:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your &gt;95% of your codebase doesn&#x27;t feature unsafe, your rare human with the review skills only has to look at the remaining 5%, maybe 10% in order to understand what the 5% are doing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 19:23:25 &#43;0000 UTC">2021-06-13 19:23:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, we all know how every project has unit tests, follows TDD best practices, is part of a CI&#x2F;CD pipeline and has exemplary documentation.<p>Unsafe blocks are better than not having them, provided there is such human.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pronlover723" target="_blank">pronlover723</a>   <span class="timeago" data-date="2021-06-13 00:59:46 &#43;0000 UTC">2021-06-13 00:59:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why is it that Chrome hasn&#x27;t had more Rust adoption?<p>Mostly likely because Chrome started in C++ (WebKit) and so there is millions of lines of existing C++. Fuchsia, being new, didn&#x27;t have that legacy.<p>Note: they&#x27;re looking into it<p><a href="https:&#x2F;&#x2F;www.chromium.org&#x2F;Home&#x2F;chromium-security&#x2F;memory-safety&#x2F;rust-and-c-interoperability" rel="nofollow">https:&#x2F;&#x2F;www.chromium.org&#x2F;Home&#x2F;chromium-security&#x2F;memory-safet...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 07:35:59 &#43;0000 UTC">2021-06-13 07:35:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fuchsia&#x27;s kernel (Zircon) is based on LK [0] [1] (&quot;Little Kernel&quot;), it&#x27;s not a from scratch thing. Would be interesting to know when LK started, the first commit[2] in the git repo is a big code drop so doesn&#x27;t tell the story.<p>[0] <a href="https:&#x2F;&#x2F;fuchsia.dev&#x2F;fuchsia-src&#x2F;concepts&#x2F;kernel&#x2F;zx_and_lk" rel="nofollow">https:&#x2F;&#x2F;fuchsia.dev&#x2F;fuchsia-src&#x2F;concepts&#x2F;kernel&#x2F;zx_and_lk</a>
+[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;littlekernel&#x2F;lk" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;littlekernel&#x2F;lk</a>
+[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;littlekernel&#x2F;lk&#x2F;commit&#x2F;1d0df6996457273367e6d9d9d08bf6adb0fc9b65" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;littlekernel&#x2F;lk&#x2F;commit&#x2F;1d0df6996457273367...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pkulak" target="_blank">pkulak</a>   <span class="timeago" data-date="2021-06-13 06:06:30 &#43;0000 UTC">2021-06-13 06:06:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not WebKit, KHTML. ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 01:07:56 &#43;0000 UTC">2021-06-13 01:07:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jillesvangurp" target="_blank">jillesvangurp</a>   <span class="timeago" data-date="2021-06-13 12:57:04 &#43;0000 UTC">2021-06-13 12:57:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very simple, the Chrome and ChromeOS code bases mostly predate Rust becoming a thing. It&#x27;s a complex code base. Replacing any of it is a big task. It took Mozilla many years to develop Rust and use it in their own browser, which is likely to be ongoing work for many years to come. Additionally, developers familiar with the Chrome&#x2F;ChromeOS code base are probably very hard core C++ developers. Switching to Rust is not going to happen just like that. They&#x27;d have to want it and agree on doing it. And then they&#x27;d have to learn it and get productive with it.<p>Fuchsia development has been ongoing for quite long as well but most of the code base is from more recent times. When they first announced Fuchsia, they did not talk about Rust at all. But obviously they managed to attract some Rust developers since then and perhaps made a conscious choice to not use C++ for new development and try to contain what they had already as much as they could where it was already there.<p>It&#x27;s one of those high level technology choices that kind of became an obvious one a few years ago. If your goal is to develop fast and secure software, Rust seems the preferable language. Google has the track record to prove that C &amp; C++ are inherently risky since despite decades of trying to prevent issues, they regularly have to deal with them still. Including in new code. I imagine somebody at a high level just drew a line in the sand and put a stop to most new C++ development on Fuchsia. Do it right the first time. Or something like that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-13 07:24:43 &#43;0000 UTC">2021-06-13 07:24:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read a possibly dated view by a security researcher that slowly introducing Rust into a C&#x2F;C++ codebase may actually make the codebase less secure — since the C part can be made aware&#x2F;can mitigate memory errors while in pure Rust, there is no such thing due to lack of need - so a buffer overflow can potentially cause bigger problems this way.<p>If someone with more knowledge on C and Rust compilers and security, I would be interested in their opinion on this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=est31" target="_blank">est31</a>   <span class="timeago" data-date="2021-06-13 18:49:38 &#43;0000 UTC">2021-06-13 18:49:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; slowly introducing Rust into a C&#x2F;C++ codebase may actually make the codebase less secure<p>I think to some extent this <i>used</i> to be true, and to some extent still is.<p>Rust didn&#x27;t always have MIRI support which points out if you try to do some unsound thing. Maybe 4 years ago you would have been the first person to use a specific niche static analyzer that builds on LLVM with Rust, so there would have been bugs inevitably. Same goes for wanting to analyze both the C and Rust that call each other. So static analyzer support has improved I think.<p>Also, C is better <i>understood</i> while in Rust it&#x27;s less obvious how things need to look like. With better understood I don&#x27;t mean by the developers who write the code, but from a language specification point of view. E.g. views have evolved on how accessible uninitialized memory should be in unsafe Rust, so MaybeUninit has been added. It&#x27;s only two years old at this point.<p>Also there is the issue of safe interfaces between languages. In the days before cxx, if you had a &quot;safe&quot; cpp smart pointer, moving it to Rust and back would have involved possibly more unsafety than operating on that smart pointer yourself.<p>There has also been the long standing issue of unwinding at FFI boundaries.<p>If you have a codebase with 5 thousand lines of cpp and now replace 1 thousand lines with a Rust component of 500 lines, it might still be a better idea to just keep the old solution and give it a thorough review. It&#x27;s different I think if you have a codebase with 5 <i>million</i> lines of cpp though and replace one component of 50k lines that has a clean interface but is an extreme source of vulnerabilities. It&#x27;s a question of how dangerous &quot;surface&quot; is between the two languages.<p>Does all of this mean you shouldn&#x27;t invest into Rust? Absolutely no. If it&#x27;s a 5k lines codebase, you can rewrite it completely. If it&#x27;s a 5 million lines codebase, I&#x27;m <i>sure</i> you&#x27;ll find a security bug ridden component that is well isolated that you can replace.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 17:43:19 &#43;0000 UTC">2021-06-13 17:43:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m knowledgeable on C and Rust and security and it sounds like a red herring to me.<p>It&#x27;s unclear what they&#x27;re trying to say, but a charitable interpretation would be that C code assumes unsafety, therefor mitigations are in place. But it&#x27;s actually the opposite situation - rustc is generally quite aggressive about turning mitigations on, and adopts them very quickly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=steveklabnik" target="_blank">steveklabnik</a>   <span class="timeago" data-date="2021-06-13 13:22:47 &#43;0000 UTC">2021-06-13 13:22:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is unclear to me exactly what you’re saying, so it’s hard to give an opinion. Do you happen to have a link?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fdjm" target="_blank">fdjm</a>   <span class="timeago" data-date="2021-06-13 04:11:58 &#43;0000 UTC">2021-06-13 04:11:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;why wasn&#x27;t Zircon written in Rust&quot;: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;cpuGoogle&#x2F;status&#x2F;1397265884251525122?s=20" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;cpuGoogle&#x2F;status&#x2F;1397265884251525122?s=2...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rvz" target="_blank">rvz</a>   <span class="timeago" data-date="2021-06-13 05:21:35 &#43;0000 UTC">2021-06-13 05:21:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The actual reason:<p>&gt; In conclusion. Too early, lack of experts, rapid evolution pains. It was stacking risk on top of an already risky project.<p>Rust was extremely immature and too early to be used in an OS at the time. It just hit 1.0. By then, Fuchsia already wrote its kernel Magenta (now Zircon) in C++.<p>In short, it did not make sense to write the OS kernel in Rust from both a technical and business standpoint at the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 11:22:21 &#43;0000 UTC">2021-06-13 11:22:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust is not the only game in town though, there are the traditional estabilished safer alternatives to C++.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chakkepolja" target="_blank">chakkepolja</a>   <span class="timeago" data-date="2021-06-13 11:43:47 &#43;0000 UTC">2021-06-13 11:43:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Dude it&#x27;s a kernel. What other alternatives do you suggest? ATS and all sound nice for academic projects but it&#x27;s an industry project (even if some research purpose is there) they have different tradeoffs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_why_of_y" target="_blank">the_why_of_y</a>   <span class="timeago" data-date="2021-06-13 12:49:44 &#43;0000 UTC">2021-06-13 12:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ada has been around since the 1980s and works in this space; see for example Muen separation kernel: <a href="https:&#x2F;&#x2F;muen.sk&#x2F;" rel="nofollow">https:&#x2F;&#x2F;muen.sk&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chakkepolja" target="_blank">chakkepolja</a>   <span class="timeago" data-date="2021-06-13 13:14:59 &#43;0000 UTC">2021-06-13 13:14:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ada is not even as popular as rust. Betting on Ada is not viable for Google.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 14:31:24 &#43;0000 UTC">2021-06-13 14:31:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NVidia thinks otherwise,<p><a href="https:&#x2F;&#x2F;www.adacore.com&#x2F;company&#x2F;partners&#x2F;nvidia" rel="nofollow">https:&#x2F;&#x2F;www.adacore.com&#x2F;company&#x2F;partners&#x2F;nvidia</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aaron-santos" target="_blank">aaron-santos</a>   <span class="timeago" data-date="2021-06-13 16:21:11 &#43;0000 UTC">2021-06-13 16:21:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m curious what you think the risk management strategies are for NVidia and Google projects and why they are the same.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 17:50:41 &#43;0000 UTC">2021-06-13 17:50:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Two companies that play on the same league, curious to see you think otherwise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-13 18:59:09 &#43;0000 UTC">2021-06-13 18:59:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure they don&#x27;t need my recommendation, and the whole thing is moot today if Rust has fixed the issues in the years since.<p>But to play with counterfactual history: Apparently Go is fairly big there. There was a Usenix paper about a Go kernel a while back, and there&#x27;s also gVisor. Then there is Ada, and Kotlin native, and various safe dialects of C. MS did one in .NET - there were lots of options.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 21:03:24 &#43;0000 UTC">2021-06-13 21:03:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are papers with Python kernels. Doesn&#x27;t mean Python&#x27;s a good language for writing a kernel. gVisor had to fight Go quite a lot, I think it was a huge mistake for them to choose it.<p>Ada is the only language you&#x27;ve mentioned that really fits IMO. One of the safe languages like P would be interesting but it&#x27;s unproven in the space.<p>As for Ada, it&#x27;s a sad story, but ultimately the language is unlikely to gain traction after too many early mistakes (particularly around licensing).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-14 05:43:17 &#43;0000 UTC">2021-06-14 05:43:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Of course I now had to go dig up the reference due to the flippant Python kernel comparison :)<p>The benefits and costs of writing a POSIX kernel in a high-level language<p>Cody Cutler, M. Frans Kaashoek, Robert T. Morris MIT CSAIL<p><a href="https:&#x2F;&#x2F;www.usenix.org&#x2F;conference&#x2F;osdi18&#x2F;presentation&#x2F;cutler" rel="nofollow">https:&#x2F;&#x2F;www.usenix.org&#x2F;conference&#x2F;osdi18&#x2F;presentation&#x2F;cutler</a><p>So its from quite a prestigious institution, has at least one big authors, and concludes that it works quite well and recommends it over C for new kernels and VMMs.<p>I also disagree the &quot;no traction&quot; argument about Ada since it&#x27;s been used in real projects and had a big enough developer community for a long time, and is alive and well. People can surely pick up new programming languages when they join a new project, I know I&#x27;ve done it many times. Tooling licensing should be fine as well since GNAT is available under GPL + Licensing exception, same as Google has been using with GCC since dawn of time, and under the Adacore license which Google probably can afford.<p>So, I hold that there were many other options vs Rust. Including the others in my original comment that we didn&#x27;t get to in details. Except  Kotlin Native, I made a timeline mistake there,  it was too early in 2016.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 14:32:45 &#43;0000 UTC">2021-06-13 14:32:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Several 80&#x27;s kernels had enough Mesa, Modula-2 and Object Pascal on them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 04:51:38 &#43;0000 UTC">2021-06-13 04:51:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, I appreciate the context here although I didn&#x27;t actually ask that question.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vinkelhake" target="_blank">vinkelhake</a>   <span class="timeago" data-date="2021-06-13 06:47:44 &#43;0000 UTC">2021-06-13 06:47:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Re parsing: there&#x27;s work being done on Wuffs which is meant for decoding data formats safely <i>and</i> efficiently. It&#x27;s a new language, but it&#x27;s one that compiles into C code.<p>It&#x27;s a Google project, and I wouldn&#x27;t be surprised if it eventually makes its way into Chrome.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;google&#x2F;wuffs" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;google&#x2F;wuffs</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tylerhou" target="_blank">tylerhou</a>   <span class="timeago" data-date="2021-06-13 12:18:07 &#43;0000 UTC">2021-06-13 12:18:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wuffs is not a Google project; it&#x27;s a project whose code happens to be owned by Google. Most likely it&#x27;s some engineer&#x27;s side project and while I wouldn&#x27;t be surprised if it was incorporated into a Google project, it&#x27;s definitely not inevitable. It has probably the same odds as any other well-maintained open source project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vinkelhake" target="_blank">vinkelhake</a>   <span class="timeago" data-date="2021-06-13 13:05:23 &#43;0000 UTC">2021-06-13 13:05:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I fully acknowledge that the README says that it&#x27;s not an official Google <i>product</i>. But rather than debating the exact &quot;Google status&quot; of the project, here&#x27;s the tracking bug[1] for its integration into Skia (the low level graphics library in Chromium). Here&#x27;s the tracking bug[2] for its integration into Flutter.<p>[1] <a href="https:&#x2F;&#x2F;bugs.chromium.org&#x2F;p&#x2F;skia&#x2F;issues&#x2F;detail?id=8235" rel="nofollow">https:&#x2F;&#x2F;bugs.chromium.org&#x2F;p&#x2F;skia&#x2F;issues&#x2F;detail?id=8235</a>
+[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter&#x2F;issues&#x2F;23838" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter&#x2F;issues&#x2F;23838</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fpoling" target="_blank">fpoling</a>   <span class="timeago" data-date="2021-06-13 07:19:23 &#43;0000 UTC">2021-06-13 07:19:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Chromium still uses C++14, not even C++17, due to binary comparability with PNaCl plugins. In 2022 the support for those will be retired, then more options will be possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-06-13 09:31:51 &#43;0000 UTC">2021-06-13 09:31:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So PNaCl is a plugin API that depends on the C++ ABI? What a spectacularly bad idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gostsamo" target="_blank">gostsamo</a>   <span class="timeago" data-date="2021-06-13 00:55:41 &#43;0000 UTC">2021-06-13 00:55:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually, Chrome were evaluating rust for there case. They were pretty much for it but they had to make it interface with the existing C++ codebase. Here is the relevant discussion:<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=24211691" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=24211691</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 01:00:48 &#43;0000 UTC">2021-06-13 01:00:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah they&#x27;ve been evaluating it for years, and then I read that document and it frankly felt like a poison pill. Reading that document it sounds very much like it&#x27;s &quot;how do we keep writing C++ while addressing the growing interest in rust&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=olliej" target="_blank">olliej</a>   <span class="timeago" data-date="2021-06-13 02:31:48 &#43;0000 UTC">2021-06-13 02:31:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, the problem here is very real - rust doesn&#x27;t have a reasonable c++ interop story, which means you have to rewrite potentially very large amounts of code at once and hope you don&#x27;t regress anything. At the same time you have to continue normal development work, which is necessarily still C++, because again, you can&#x27;t adopt rust in small sections.<p>Basically to rewrite one DOM feature in rust would have a high likelihood of requiring rewriting the entire DOM implementation in rust, which would also require rearchitecting. While doing that other people would be wanting to continue working, but they don&#x27;t have a rust build to work on so they have to continue in c++, thus sadness and conflicts. The other solution is to implement features in rust, and use a c++ wrapper to interface with that rust implementation, but now you&#x27;ve lost the memory safety advantages of rust (most of which are lifetime related, not bounds checking), and the C++ interface itself could be exciting as it could end up having to marshal other types.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pcwalton" target="_blank">pcwalton</a>   <span class="timeago" data-date="2021-06-13 03:05:45 &#43;0000 UTC">2021-06-13 03:05:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  No, the problem here is very real - rust doesn&#x27;t have a reasonable c++ interop story, which means you have to rewrite potentially very large amounts of code at once and hope you don&#x27;t regress anything. At the same time you have to continue normal development work, which is necessarily still C++, because again, you can&#x27;t adopt rust in small sections.<p>This was a somewhat more accurate summary a few years ago (though saying &quot;you can&#x27;t adopt rust in small sections&quot; ignores the fact that Firefox among others did just that), but the cxx crate has made huge strides lately, and it&#x27;s much more feasible now to interoperate at a deep level between Rust and C++. (In fact, dealing with this interoperability constitutes a large part of my job nowadays, and thanks to cxx it performs swimmingly.) We&#x27;re even starting to talk about advanced features like seamless C++ async&#x2F;await support in cxx.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=verdagon" target="_blank">verdagon</a>   <span class="timeago" data-date="2021-06-13 04:13:42 &#43;0000 UTC">2021-06-13 04:13:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would love your opinion on whether migrating to Rust is a good idea for us, since you&#x27;re experienced in this realm.<p>My team has a Java project that&#x27;s written in a modern OO style. We defined &quot;modern&quot; OO as encapsulation and polymorphism, without inheritance, and it fits our use case very well.<p>We don&#x27;t want to give up the benefits we get from the OO architecture, for good reasons that I won&#x27;t get into here (because I don&#x27;t want this to de-rail into a OO bash-fest, as fun as they are!)<p>The conundrum: In my experience, Rust doesn&#x27;t support polymorphism very well. When the borrow checker meets polymorphism, a lot of state is forced into parameters (state which is inherent; we already keep state to an absolute minimum), which opens it up to mutation from all sorts of places; not very encapsulated.<p>We <i>can</i> have a bunch of private member Rc&lt;RefCell&lt;T&gt;&gt;s instead of bringing in all state via parameters, but it&#x27;s unidiomatic, and in the end we&#x27;d probably have something slower and less safe than our original Java program.<p>The question: Is there any way to make Rust a good fit for a use case like ours?<p>(The same problems would apply to C++ codebases, though it&#x27;s a little more convincing for them, since C++ isn&#x27;t as safe as Java)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-06-13 05:40:43 &#43;0000 UTC">2021-06-13 05:40:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not the GP, but is your problem that you have a complex object-graph without clearly defined owners of objects (as is common in GC&#x27;d languages, especially OOP ones)?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=verdagon" target="_blank">verdagon</a>   <span class="timeago" data-date="2021-06-13 13:24:13 &#43;0000 UTC">2021-06-13 13:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a pretty clear tree of ownership, actually. Looking at any given component, it&#x27;s fairly easy to know when a component is a &quot;subcomponent&quot; (owned) or whether it&#x27;s a reference to some other component elsewhere (borrowed). Some of us are C++ veterans, so we tend to think in terms of single ownership no matter what language we&#x27;re in.<p>There are a few references in our &quot;main&quot; (so to speak) where its ownership would be clearer if we stored them in local variables and <i>then</i> handed them to the only component that used it, but that&#x27;s a cosmetic concern, really.<p>There are very few (if any) places where we actually make use of Java&#x27;s shared ownership. The only place I can think of is where we cache some files, and farm out &quot;shared&quot; references to any file. Still, at that point, the cache could be considered the owner, with a slight adjustment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=glandium" target="_blank">glandium</a>   <span class="timeago" data-date="2021-06-13 09:31:27 &#43;0000 UTC">2021-06-13 09:31:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            cxx doesn&#x27;t necessarily help for cases like refactoring legacy C++ code. It seems to require more work than bindgen. I suspect switching to cxx in Firefox, to replace bindgen, would be quite involved.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=haberman" target="_blank">haberman</a>   <span class="timeago" data-date="2021-06-13 03:28:54 &#43;0000 UTC">2021-06-13 03:28:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can Rust instantiate a C++ template?  How do you interop across interfaces that use templates?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pcwalton" target="_blank">pcwalton</a>   <span class="timeago" data-date="2021-06-13 03:33:45 &#43;0000 UTC">2021-06-13 03:33:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes! The tutorial for cxx shows how you can use common templated types like std::vector: <a href="https:&#x2F;&#x2F;cxx.rs&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;cxx.rs&#x2F;index.html</a><p>More details are in the crate documentation: <a href="https:&#x2F;&#x2F;docs.rs&#x2F;cxx&#x2F;1.0.49&#x2F;cxx&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.rs&#x2F;cxx&#x2F;1.0.49&#x2F;cxx&#x2F;</a><p>Note that the philosophy of cxx isn&#x27;t to support all of C++&#x27;s semantics (templates make this impossible in the limit as Rust has no SFINAE rule for example), but rather to support the important use cases that arise in practice.<p>It&#x27;s also worth noting that, these days, bindgen has support for instantiating C++ templates, though it operates at a much lower level. Compared to cxx, bindgen is oriented more toward being comprehensive than being easy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vlovich123" target="_blank">vlovich123</a>   <span class="timeago" data-date="2021-06-13 03:57:16 &#43;0000 UTC">2021-06-13 03:57:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you gotten a chance to use cxx in a large “production” “legacy” c++ codebase? It’s great but there’s quite a few roadblocks that I encountered even trying something I would have considered that should be “easy”. I could easily imagine that Chromium would have an even tougher time. Some highlights:<p>* if you’re not careful, you’ll end up with linkage issues if you link in multiple crates. This means 1 uber create that has all your Rust dependencies. This can mess with parallelism in your build since Cargo isn’t coordinating with the broader system.<p>* speaking of build systems, chromium probably wouldn’t use create meaning extra build system integration, especially since they don’t use Bazel&#x2F;Blaze.<p>* cxx still can’t pass across certain types (Arc and Option being the big ones) and is missing a general story for extending it with custom types.<p>* cxx can frequently cause you to have to reach to unsafe anyway because the lifetime semantics you want to express cannot be done in pure Rust because the other half lives in c++.<p>Don’t get me wrong. Rust is fantastic and a joy to use. Dismissing the challenges a project like Chromium has as “they just want to stick to c++” isn’t a fair look at the situation. Lots of smart people work on these projects and are keenly aware of Rust. Additionally managers and executives are keenly aware of the security benefits so there’s definitely downward pressure to try to adopt these  (and large efforts spent investigating how to enable this whole maintaining developer velocity).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=haberman" target="_blank">haberman</a>   <span class="timeago" data-date="2021-06-13 04:20:12 &#43;0000 UTC">2021-06-13 04:20:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the references, I&#x27;ll definitely have to check those out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 02:41:58 &#43;0000 UTC">2021-06-13 02:41:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Replacing small components like a single codec or parser wouldn&#x27;t require anywhere near what Google is asking for in that document. I&#x27;m not saying to replace V8 with Rust.<p>&gt; but now you&#x27;ve lost the memory safety advantages of rust<p>No you haven&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsnell" target="_blank">jsnell</a>   <span class="timeago" data-date="2021-06-13 02:54:55 &#43;0000 UTC">2021-06-13 02:54:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But replacing small isolated components is not a very interesting option. It means you&#x27;re paying the costs of a multi-language codebase, in terms of build complexity, having to duplicate infrastructure, and siloing of  developers.<p>In return you&#x27;ll only be getting limited benefits from it, since the usage will only be restricted to few cases and a full migration can never happen. Every single decision on what language to use for a component in becomes a hard to reverse (&quot;will this component always remain a leaf node with a really simple interface?&quot;), slowing down decision making and ossifying the architecture.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 03:12:17 &#43;0000 UTC">2021-06-13 03:12:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But replacing small isolated components is not a very interesting option.<p>I seriously disagree. Again, I mentioned things like JSON parsing which deal with untrusted data but also are too performance sensitive to move OOP. Chromium&#x27;s own security guidelines explicitly states that you should never mix memory unsafe code with inprocess code with untrusted input.<p>I strongly believe you&#x27;d get significant returns by incrementally replacing components like that with Rust.<p>&gt;  Every single decision on what language to use for a component in becomes a hard to reverse<p>This is purely an organizational issue in my opinion. If the decision were made to follow the guidelines their security team has laid out, there is no question or slow-down. The guidelines are very competent and clear; memory unsafe, untrusted input, in-process - pick one at most.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=esprehn" target="_blank">esprehn</a>   <span class="timeago" data-date="2021-06-13 03:46:20 &#43;0000 UTC">2021-06-13 03:46:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have examples of exploits in the non-sandboxed JSON parser? That code doesn&#x27;t appear to have any security&#x2F;memory safety related fixes in the last 2 years: <a href="https:&#x2F;&#x2F;chromium.googlesource.com&#x2F;chromium&#x2F;src.git&#x2F;+log&#x2F;refs&#x2F;heads&#x2F;main&#x2F;base&#x2F;json" rel="nofollow">https:&#x2F;&#x2F;chromium.googlesource.com&#x2F;chromium&#x2F;src.git&#x2F;+log&#x2F;refs...</a><p>It&#x27;s not clear what the return would be from rewriting that code in rust.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 03:52:50 &#43;0000 UTC">2021-06-13 03:52:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JSON is just a straightforward example because it&#x27;s easy to understand how it falls into Chromium&#x27;s threat model. Feel free to replace it with font parsing, audio&#x2F;video codecs, etc, and you&#x27;ll find thousands of relevant vulns.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pcwalton" target="_blank">pcwalton</a>   <span class="timeago" data-date="2021-06-13 03:15:44 &#43;0000 UTC">2021-06-13 03:15:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Being able to add new features without greatly expanding the attack surface is important for security. When new components of Firefox have been written in Rust, there have empirically been far fewer security problems to shake out than when they&#x27;ve been written in C++.<p>Is Rust of more limited benefit when it&#x27;s only being used for certain components as opposed to the entire codebase? Sure. But is it still worth using for new code? Frequently, yes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benreesman" target="_blank">benreesman</a>   <span class="timeago" data-date="2021-06-13 14:36:13 &#43;0000 UTC">2021-06-13 14:36:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where is this big, heavy, commercially important piece of software written in Rust? What am I missing?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 17:44:27 &#43;0000 UTC">2021-06-13 17:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t really know why you&#x27;re asking this, but there are many.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 09:47:33 &#43;0000 UTC">2021-06-13 09:47:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 10:34:00 &#43;0000 UTC">2021-06-13 10:34:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; FIDL, our IPC system, is a joy. I often smile when debating designs, because whether or not something is in-process or out-of-process can sometimes feel like a small implementation detail to people.<p>It also applies, partially to COM&#x2F;UWP, with the &quot;small&quot; difference that to this day, Borland&#x2F;Codegear&#x2F;Embarcadero tooling, is ages ahead of the notepad like experience for the IDL files.<p>Sometimes I wish the WinDev team would spend some time with IPC implementations on other platforms to understand what they are missing, regarding their Stockholm syndrome in COM tooling.<p>With Fuchsia there is yet another example to learn from.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rdpintqogeogsaa" target="_blank">rdpintqogeogsaa</a>   <span class="timeago" data-date="2021-06-13 06:26:15 &#43;0000 UTC">2021-06-13 06:26:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>It&#x27;s backed by D.J. Bernstein&#x27;s excellent Salsa20 with seeding from hardware</i><p>I wonder why they stuck with Salsa20 instead of ChaCha20. The latter has got better performance characteristics and is by now more popular, having found its way e.g. into TLSv1.3.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vbezhenar" target="_blank">vbezhenar</a>   <span class="timeago" data-date="2021-06-13 07:58:22 &#43;0000 UTC">2021-06-13 07:58:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            According to the documentation they&#x27;re actually using ChaCha20: <a href="https:&#x2F;&#x2F;fuchsia.dev&#x2F;fuchsia-src&#x2F;concepts&#x2F;kernel&#x2F;cprng" rel="nofollow">https:&#x2F;&#x2F;fuchsia.dev&#x2F;fuchsia-src&#x2F;concepts&#x2F;kernel&#x2F;cprng</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hortense" target="_blank">hortense</a>   <span class="timeago" data-date="2021-06-13 09:55:40 &#43;0000 UTC">2021-06-13 09:55:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s accurate:<p><a href="https:&#x2F;&#x2F;fuchsia.googlesource.com&#x2F;fuchsia&#x2F;+&#x2F;8b2bb8a5d1a0&#x2F;zircon&#x2F;kernel&#x2F;lib&#x2F;crypto&#x2F;prng.cc#110" rel="nofollow">https:&#x2F;&#x2F;fuchsia.googlesource.com&#x2F;fuchsia&#x2F;+&#x2F;8b2bb8a5d1a0&#x2F;zirc...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coolreader18" target="_blank">coolreader18</a>   <span class="timeago" data-date="2021-06-13 13:28:03 &#43;0000 UTC">2021-06-13 13:28:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, it&#x27;s updated in the article now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nomoreplease" target="_blank">nomoreplease</a>   <span class="timeago" data-date="2021-06-13 03:25:33 &#43;0000 UTC">2021-06-13 03:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What’s the goals for Fuschia? To replace Android or ChromeOS?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vbezhenar" target="_blank">vbezhenar</a>   <span class="timeago" data-date="2021-06-13 08:07:30 &#43;0000 UTC">2021-06-13 08:07:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMO their ambitious goal is to replace both Android and ChromeOS.<p>From <a href="https:&#x2F;&#x2F;fuchsia.googlesource.com&#x2F;fuchsia&#x2F;+&#x2F;refs&#x2F;heads&#x2F;main&#x2F;docs&#x2F;contribute&#x2F;governance&#x2F;rfcs&#x2F;0082_starnix.md" rel="nofollow">https:&#x2F;&#x2F;fuchsia.googlesource.com&#x2F;fuchsia&#x2F;+&#x2F;refs&#x2F;heads&#x2F;main&#x2F;d...</a><p>&gt; This document proposes a mechanism for running unmodified Linux programs on Fuchsia. The programs are run in a userspace process whose system interface is compatible with the Linux ABI. Rather than using the Linux kernel to implement this interface, we will implement the interface in a Fuchsia userspace program, called starnix. Largely, starnix will serve as a compatibility layer, translating requests from the Linux client program to the appropriate Fuchsia subsystem.<p>So they will be able to run unmodified Linux binaries which should allow for a smooth transition from Android&#x2F;Linux.<p>I&#x27;m not even sure that they&#x27;ll rebrand Android at that point, as kernel for users is invisible. My guess is they&#x27;ll just replace Linux with Fuchsia.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whereistimbo" target="_blank">whereistimbo</a>   <span class="timeago" data-date="2021-06-13 10:37:25 &#43;0000 UTC">2021-06-13 10:37:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hell, even their approach is to retrofit Linux binaries rather than trying to modify Android to run on Fuchsia. Android is a different beast itself, I&#x27;d rather see a better, reworked Android runtime and HAL that is idiomatic to Fuchsia rather than this one. The same could be said for ChromeOS too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhoad" target="_blank">mhoad</a>   <span class="timeago" data-date="2021-06-13 07:04:35 &#43;0000 UTC">2021-06-13 07:04:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This seemed like an interesting take <a href="https:&#x2F;&#x2F;twitter.com&#x2F;indiequest1&#x2F;status&#x2F;1402947985923846149" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;indiequest1&#x2F;status&#x2F;1402947985923846149</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ginko" target="_blank">ginko</a>   <span class="timeago" data-date="2021-06-13 09:07:29 &#43;0000 UTC">2021-06-13 09:07:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To get rid of the GPL licensed Linux kernel so they can eventually make it closed source.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alexmcc81" target="_blank">alexmcc81</a>   <span class="timeago" data-date="2021-06-13 10:33:18 &#43;0000 UTC">2021-06-13 10:33:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Obviously this is a reason otherwise Fuchsia would have the same licence. However Google probably doesn&#x27;t care that much about having an option to keep it closed source. Antagonism to the GPL comes mainly from Hardware vendors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_ph_" target="_blank">_ph_</a>   <span class="timeago" data-date="2021-06-13 14:18:09 &#43;0000 UTC">2021-06-13 14:18:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They cannot make anything of Fuchsia, which has been released under a permissive license retroactively open source. If Fuchsia replaces Linux on a large scale, they cannot take that away. What Google could do is having a closed source branch or release custom builds of Fuchsia, which have closed source in it. While there are certainly some szenarios which could be worrysome, it depends on the open source community on how much Google can get away with that. If only the open source parts are used, closed source version would just not have much meaning.<p>And of course, there would be some very legit reasons not to use GPL - like embedding ZFS into the kernel. Which would be no license issue for Fuchsia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-13 10:25:28 &#43;0000 UTC">2021-06-13 10:25:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They&#x27;re replacing Linux with another open source OS so they can make it closed source? Riiight.<p>I think the main reason is so they can provide a stable driver ABI so that it becomes possible to update Android.<p>They&#x27;re probably also frustrated with Linux&#x27;s security (hence this post) and having to maintain out of tree patches (e.g. Binder).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 10:45:12 &#43;0000 UTC">2021-06-13 10:45:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Treble already provides that stable ABI, since Android 8 Linux drivers are considered legacy on Android and all newer drivers must use Treble IPC for certification.<p>PS 4 uses an open source OS, how much have you seen of it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pkulak" target="_blank">pkulak</a>   <span class="timeago" data-date="2021-06-13 06:08:15 &#43;0000 UTC">2021-06-13 06:08:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, to replace the OS on the Nest Hub, so far.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=refulgentis" target="_blank">refulgentis</a>   <span class="timeago" data-date="2021-06-13 03:36:33 &#43;0000 UTC">2021-06-13 03:36:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be a good kernel. One imagines that, insomuch as a good kernel is part of an OS, that it could &#x27;replace&#x27; Android and Chrome OS. But the days of platforms getting sunset are a day of the past, the Android runtime survives and will survive for years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edgyquant" target="_blank">edgyquant</a>   <span class="timeago" data-date="2021-06-13 04:06:16 &#43;0000 UTC">2021-06-13 04:06:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe.  I think they’ll continue rolling it out to simple devices for a few years while they do extensive testing and fix any issues that arise but I do believe their long term goal is for it to be a replacement for <i>all</i> their various Linux based OSs (since it is supposed to be able to run on simple devices all the way up to smart phones and PCs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sebe" target="_blank">sebe</a>   <span class="timeago" data-date="2021-06-13 04:18:22 &#43;0000 UTC">2021-06-13 04:18:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you down load, and build, fuchsia, the fx cmd can list boards and products.<p>I recall a early goal of fuchsia was to be able to build fuchsia with fuchsia, I wonder when the workstation build will be up to that stage.<p>fx list-boards
+arm64
+as370
+chromebook-x64
+*
+qemu-arm64
+qemu-x64
+toulouse
+vim2
+vim3
+vs680
+x64
+x64-reduced-perf-variation<p>fx list-products
+bringup
+core
+terminal
+workstation
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rvz" target="_blank">rvz</a>   <span class="timeago" data-date="2021-06-13 05:30:21 &#43;0000 UTC">2021-06-13 05:30:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; To replace Android or ChromeOS?<p>Both. If CastOS (which is Linux-based) for the Google Nest Hub was already replaced via an update, it is completely obvious that Fuchsia is not only here to stay, but will definitely replace Android AND ChromeOS.<p>I think Unix has had its day and its quite refreshing to see a new OS that is designed for security and is <i>actually</i> optimised for modern hardware and CPU architectures from the start.<p>Downvoters: So Google did NOT just replace the Linux-based CastOS on the latest Google Nest Hub update with Fuchsia and it is still an &#x27;experiment&#x27; that some were still hoping for? [0] Are you prepared to present evidence <i>against</i> my answer to the parent&#x27;s question?<p>There is no need to be scared of change, especially when Google inevitably replaces Android and ChromeOS with Fuchsia.<p>[0] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17568335" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17568335</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dTal" target="_blank">dTal</a>   <span class="timeago" data-date="2021-06-13 16:41:51 &#43;0000 UTC">2021-06-13 16:41:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not scared of &quot;change&quot;, I&#x27;m scared of Google. I&#x27;m scared of losing power over my computers. Android is already a huge step back - only its Linux underpinnings allow it to act as a &quot;real computer&quot; in a pinch, and Google is rapidly encroaching on that too [0]. If Google is permitted to execute, unfettered, its vision for what end-user computing should look like, I do not expect it to be terribly empowering or respectful of my ideals, however technically impressive it may be.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;termux&#x2F;termux-packages&#x2F;wiki&#x2F;Termux-and-Android-10" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;termux&#x2F;termux-packages&#x2F;wiki&#x2F;Termux-and-An...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-13 08:27:39 &#43;0000 UTC">2021-06-13 08:27:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Keep in mind that there are many teams at Google and they will need to be convinced. The Fuchsia may have broader ambitions but they seem to be starting with Google’s lesser-known OSes on embedded devices. This is in itself a win at a big company since there are fewer obscure OSes to maintain. That doesn’t necessarily mean that the Android or ChromeOS teams decided to commit just yet, as far as we know.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brmgb" target="_blank">brmgb</a>   <span class="timeago" data-date="2021-06-13 10:14:43 &#43;0000 UTC">2021-06-13 10:14:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google makes a lot of its own network equipments and doesn&#x27;t communicate about what is running on it. Most of it is security critical.<p>Fuchsia might be used more widely that we know inside Google.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=creamytaco" target="_blank">creamytaco</a>   <span class="timeago" data-date="2021-06-13 03:56:32 &#43;0000 UTC">2021-06-13 03:56:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll be surprised if it&#x27;s still around (as in not killed by Google) in a few years. Besides, I don&#x27;t see it ever becoming popular enough to be an alternative to Linux outside of Google.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=edgyquant" target="_blank">edgyquant</a>   <span class="timeago" data-date="2021-06-13 04:04:11 &#43;0000 UTC">2021-06-13 04:04:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why?  It was just officially rolled out to its first devices less than two weeks ago.  It isn’t like a google service that can fail&#x2F;not get enough traction fuchsia already has a bunch of users (anybody with a google or android device) that it could be rolled out to.  I imagine it will not replace android in the next five years but simpler devices it’s almost guaranteed to be the main OS shipped going forward.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-06-13 05:39:36 &#43;0000 UTC">2021-06-13 05:39:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Debating whether things should be in process or out of process just seems so 80s. Ideally everything would just be in a single process. Why are new systems exposing the ability to dereference raw pointers to user programs? There was a brief period in the 00s where it seemed like systems research was moving in the direction of only running safe code, obsoleting the need for hardware isolation. Rust proves it’s possible to do efficiently. One day we’ll get there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brmgb" target="_blank">brmgb</a>   <span class="timeago" data-date="2021-06-13 10:16:36 &#43;0000 UTC">2021-06-13 10:16:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Rust proves it’s possible to do efficiently. One day we’ll get there.<p>Rust is only memory-safe and only as long as you stay away from unsafe code. It is not magic pixie dust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 10:47:05 &#43;0000 UTC">2021-06-13 10:47:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have learned that multiprocessing is the only safe path to program stability, ease of scaling across clusters and less security exploits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-13 13:02:31 &#43;0000 UTC">2021-06-13 13:02:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You still have processes, they just are software isolated rather than hardware isolated. You write everything in a language that can guarantee no unsafe behavior then no hardware checks are needed or any task switching and most of the safety checks are done at compile time:<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Singularity_(operating_system)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Singularity_(operating_system)</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 14:13:44 &#43;0000 UTC">2021-06-13 14:13:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Singularity has a C++ microkernel actually.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;lastweek&#x2F;source-singularity&#x2F;tree&#x2F;master&#x2F;base&#x2F;Kernel&#x2F;Native" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lastweek&#x2F;source-singularity&#x2F;tree&#x2F;master&#x2F;b...</a><p>Microsoft and Oracle have removed CAS and JAAS from CLR&#x2F;JVM respectively as they have failed to provided the software isolated model that was expected from them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-14 00:44:56 &#43;0000 UTC">2021-06-14 00:44:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;The lowest-level x86 interrupt dispatch code is written in assembly language and C. Once this code has done its job, it invokes the kernel, which runtime system and garbage collector are written in Sing# (an extended version of Spec#, itself an extension of C#) and runs in unprotected mode. The hardware abstraction layer is written in C++ and runs in protected mode.&quot;<p>The point is that drivers and apps are managed code and can be software isolated, obviously some of the kernel is unsafe.<p>CAS was fined grain runtime model that added significant overhead and was never close to being verified, software isolation was coarse grained just like a hardware process and had much less overhead with the goal of verification, more here:<p><a href="https:&#x2F;&#x2F;www.microsoft.com&#x2F;en-us&#x2F;research&#x2F;wp-content&#x2F;uploads&#x2F;2016&#x2F;02&#x2F;EuroSys2007_SealedProcesses.pdf" rel="nofollow">https:&#x2F;&#x2F;www.microsoft.com&#x2F;en-us&#x2F;research&#x2F;wp-content&#x2F;uploads&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 05:25:08 &#43;0000 UTC">2021-06-14 05:25:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Software isolation can still be exploited thanks to logical bugs, this was the whole issue with security exploits in Java applets.<p>Hence why there is really no alternative to multi-processes for security critical code.<p>You refer to Singularity, yet after Singularity, Microsoft Research was went down the path of exploriing other alternatives.<p>If the security model was so great, they would have doubled down on it.<p>Instead, after so many interactions, the main researchers have come out with Azure Sphere, which uses C (!) with a custom Linux kernel, and all the security layers are enforced via hardware.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-14 11:27:47 &#43;0000 UTC">2021-06-14 11:27:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hardware isolation can be exploited due to bugs too and have been quite a bit lately so the alternative doesn&#x27;t solve that problem.<p>Conflating Java applet security with software isolated processes as implemented in Singularity is not doing a service to the research work done there. Much of the SIP design was in response to the lessons learned in Java and .Net.<p>The problem with SIP is everything to be isolated must be written in a managed language. That means everyone has to get on board with a managed runtime most likely GC&#x27;d. At one point MS thought they could get everyone on board to .Net but at some point they realized that wasn&#x27;t going to happen and decided its better to go with the status quo of C&#x2F;C++ development.<p>Maybe we will see a resurgence of SIP with Rust or Webassembly. The idea of verifiably safe code where all safety checks are done ahead of time by the compiler has many advantages that can&#x27;t be ignored forever.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 13:41:05 &#43;0000 UTC">2021-06-14 13:41:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I still fail to see your point, because Sing# also allowed for unsafe code, plus those designs were not adopted in Midori, nor Barrelfish.<p>Plus SIP as managed OS aren&#x27;t that different from Mesa&#x2F;Cedar, Lisp Machines, Smalltalk, Oberon. Modula-3.<p>Yes, the overrall security is way better than C and its descendants, but that doesn&#x27;t make it fullproof.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-14 17:00:41 &#43;0000 UTC">2021-06-14 17:00:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The GC was written in an unsafe dialect of Sing#, again app code was not allowed to be unsafe which allowed software rather than hardware isolation.<p>Also Midori used SIP&#x27;s see &quot;Execution Model&quot; here: <a href="http:&#x2F;&#x2F;joeduffyblog.com&#x2F;2015&#x2F;11&#x2F;19&#x2F;asynchronous-everything&#x2F;" rel="nofollow">http:&#x2F;&#x2F;joeduffyblog.com&#x2F;2015&#x2F;11&#x2F;19&#x2F;asynchronous-everything&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-06-13 20:47:09 &#43;0000 UTC">2021-06-13 20:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t really agree, as someone who advocates for Rust usage.<p>&gt; Ideally everything would just be in a single process.<p>Processes are an amazing boundary, probably the most powerful abstraction in existence.<p>&gt; Why are new systems exposing the ability to dereference raw pointers to user programs?<p>This shouldn&#x27;t be possible today - SMAP&#x2F;SMEP are standard now.<p>&gt; obsoleting the need for hardware isolation<p>I think if the last 3 years (sidechannel frenzy) has taught us anything, it&#x27;s that software-isolation is extremely difficult. Even hardare isolation is difficult.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-13 07:27:04 &#43;0000 UTC">2021-06-13 07:27:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is only running safe code? How could then we build a browser with JIT compilation?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-13 12:57:49 &#43;0000 UTC">2021-06-13 12:57:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            First thing that comes to mind is the approach that Jurassic javascript [1] does using .Net IL generation, run that on a .Net based OS like Singularity [2].<p>1. <a href="https:&#x2F;&#x2F;github.com&#x2F;paulbartrum&#x2F;jurassic" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;paulbartrum&#x2F;jurassic</a><p>2. <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Singularity_(operating_system)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Singularity_(operating_system)</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-13 13:25:44 &#43;0000 UTC">2021-06-13 13:25:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So just run a different JIT compiler? Also, the Jurassic name is quite funny when talking about security :D
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SigmundA" target="_blank">SigmundA</a>   <span class="timeago" data-date="2021-06-13 13:35:50 &#43;0000 UTC">2021-06-13 13:35:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The point is your jitting to an intermediate language thats verified and a system level jit actually turns that into machine code, you are never allowed to write machine code directly to memory and execute.<p>V8 basically does this internally with its bytecode, if your whole system was built on that bytecode then you can do software isolation rather than hardware.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-06-14 07:47:08 &#43;0000 UTC">2021-06-14 07:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Inferno is another example of a system that did not expose the ability to dereference raw pointers to user programs: <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Inferno_(operating_system)" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Inferno_(operating_system)</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=posix_me_less" target="_blank">posix_me_less</a>   <span class="timeago" data-date="2021-06-13 08:23:38 &#43;0000 UTC">2021-06-13 08:23:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Ideally everything would just be in a single process.<p>Any real example where this makes sense on an internet-connected device?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-06-14 07:40:36 &#43;0000 UTC">2021-06-14 07:40:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JavaScript
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=plerpin" target="_blank">plerpin</a>   <span class="timeago" data-date="2021-06-13 18:46:50 &#43;0000 UTC">2021-06-13 18:46:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Everything in a single process? Assuming that everything running on the computer is benevolent is a very &quot;so 80s&quot; notion.<p>Rust programmers use unsafe escape hatches all the time BTW.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-06-14 07:40:20 &#43;0000 UTC">2021-06-14 07:40:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Software isolation, the subject of my comment, was not common in the 80s. You’re referring to systems that had no isolation at all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-13 10:41:24 &#43;0000 UTC">2021-06-13 10:41:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Processes provide better security isolation than just language based security (I think that&#x27;s what you&#x27;re talking about). For example with Spectre vulnerabilities they only work within a process (at least the original ones).<p>There are OSes that use the language for safety and have a single process but having to use memory safe languages is a pretty big limitation! Plus I would imagine it is easier to prove process security than language security.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ptrwis" target="_blank">ptrwis</a>   <span class="timeago" data-date="2021-06-13 12:14:01 &#43;0000 UTC">2021-06-13 12:14:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Security was not the goal for software-isolated processes, but performance and getting rid of task-switches. Who knows, maybe this is what MS recently described as &quot;next windows&quot; (naive hope).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-14 05:31:17 &#43;0000 UTC">2021-06-14 05:31:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While WinDev keeps pushing their C++ agenda that hope is definitly naive.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bsder" target="_blank">bsder</a>   <span class="timeago" data-date="2021-06-13 04:55:36 &#43;0000 UTC">2021-06-13 04:55:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only thing which scares me terribly is that I&#x27;m <i>NOT</i> seeing any discussion of real-time problems.<p>Android has an absolutely <i>shit</i> audio stack.  iOS simply destroys Android on this front.<p>Fixing that requires that you architect the entire kernel around making sure that you can service the audio stack in real-time with low latency.<p>The fact that I haven&#x27;t seen even the slightest mention of this makes me worry that the Fuchsia folks haven&#x27;t really learned any lessons from Android and are simply repeating the same mistakes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=surajrmal" target="_blank">surajrmal</a>   <span class="timeago" data-date="2021-06-13 05:56:58 &#43;0000 UTC">2021-06-13 05:56:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fuchsia is designed with real time tasks in mind. The scheduler operates both fair scheduling algorithm as well as a deadline scheduling algorithm. The audio subsystem has it&#x27;s threads scheduled using the deadline constraints. The official docs seems to be missing some content on this unfortunately. <a href="https:&#x2F;&#x2F;fuchsia.dev&#x2F;reference&#x2F;fidl&#x2F;fuchsia.scheduler?hl=en#ProfileProvider.GetDeadlineProfile" rel="nofollow">https:&#x2F;&#x2F;fuchsia.dev&#x2F;reference&#x2F;fidl&#x2F;fuchsia.scheduler?hl=en#P...</a> describes the API which provides the deadline scheduling capability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bsder" target="_blank">bsder</a>   <span class="timeago" data-date="2021-06-13 18:50:31 &#43;0000 UTC">2021-06-13 18:50:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            YAY!  So good to be wrong.  Please make sure that the audio subsystem gets the attention it desperately needs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaba0" target="_blank">kaba0</a>   <span class="timeago" data-date="2021-06-13 07:37:14 &#43;0000 UTC">2021-06-13 07:37:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As far as I know, Android’s less than great audio stack is not due to OS constraint — linux itself has both Jack and the now new pipewire, which doesn’t have any problem with low-latency.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-13 10:49:05 &#43;0000 UTC">2021-06-13 10:49:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Only when not using AAudio.<p>Granted, the NDK is anything but friendly, but the option already exists for the last couple of Android versions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 04:14:29 &#43;0000 UTC">2021-06-14 04:14:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

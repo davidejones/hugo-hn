@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/ssh-quoting/">
+
+
+    <title>SSH quoting - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="SSH quoting - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/ssh-quoting/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/ssh-quoting/">
+<meta name="twitter:title" content="SSH quoting - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "SSH quoting - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T09:33:26JST",
+    "dateModified": "2021-06-12T09:33:26JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.chiark.greenend.org.uk/~cjwatson/blog/ssh-quoting.html">SSH quoting</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jepler" target="_blank">jepler</a>   <span class="timeago" data-date="2021-06-12 14:06:36 &#43;0000 UTC">2021-06-12 14:06:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At $OLDJOB we used to use nfs extensively, and a common desire was to run some command on the system where the files actually resided, after navigating there (with cd in a local terminal).<p>To that end, we developed a script called &quot;yonder&quot;, which let you write &quot;yonder any unix command with awful quoting needs&quot;.  If the filesystem was local, it just executed the command; if it was remote, it took care of all quoting needs, then executing a command like &quot;ssh hostname yonder - ENCODED_MESS&quot;.<p>(A variant, autoyonder, could be used in any shell script by &quot;. autoyonder&quot;, so that any shell script could transparently run &quot;over yonder&quot;)<p>I think that in the end we used the algorithm of:
+    - target directory is &quot;argv[-1]&quot;
+    - concatenate all arguments with a space separating
+    - single-quoting <i>everything</i>, who cares if it&#x27;s needed
+    - replacing single quotes with the 4-byte sequence &#x27;\&#x27;&#x27;
+the quoting method we learned from git.  Earlier versions took advantage of how we had an 8-bit clean commandline but only needed to send 7-bit strings: we just set the high bit on everything, then stripped it off.  The NUL between argv values becomes 0x80, the space within an argument becomes 0xa0, etc., with no special shell interpretation.  Gross but it fit the bill.<p>I don&#x27;t have access to the scripts anymore, but it worked really nicely for the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=an_opabinia" target="_blank">an_opabinia</a>   <span class="timeago" data-date="2021-06-12 16:01:18 &#43;0000 UTC">2021-06-12 16:01:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish this existed except for binaries inside Docker. A fat binary for Windows, macOS and Linux that isn’t really a binary at all, but fetched the thing you want from docker and just runs it. With the local file system.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sharken" target="_blank">sharken</a>   <span class="timeago" data-date="2021-06-12 18:09:17 &#43;0000 UTC">2021-06-12 18:09:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And i wish Microsoft would implement this for the &quot;az vm run-command invoke  --command-id RunPowerShellScript ...&quot; command for Windows Virtual Machines.<p>Here you have JSON quoting along with PowerShell and optionally CMD quoting.<p>Computing should be easier than this.<p><a href="https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;cli&#x2F;azure&#x2F;use-cli-effectively?view=azure-cli-latest#quoting-issues" rel="nofollow">https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;cli&#x2F;azure&#x2F;use-cli-effective...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alblue" target="_blank">alblue</a>   <span class="timeago" data-date="2021-06-12 23:18:51 &#43;0000 UTC">2021-06-12 23:18:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a script for this so that I can use modern Linux tools on macOS buy without having to go down dependency hell trying to get all the versions correct.<p>The script uses its name to look for a corresponding dockerfile&#x2F;container (which it  auto builds if needed) and then mounts the file system inside to allow you to run it on one or mode files locally.<p>See eg<p><a href="https:&#x2F;&#x2F;github.com&#x2F;alblue&#x2F;scripts&#x2F;blob&#x2F;main&#x2F;ctags" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;alblue&#x2F;scripts&#x2F;blob&#x2F;main&#x2F;ctags</a>
+<a href="https:&#x2F;&#x2F;github.com&#x2F;alblue&#x2F;scripts&#x2F;blob&#x2F;main&#x2F;ctags-Dockerfile" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;alblue&#x2F;scripts&#x2F;blob&#x2F;main&#x2F;ctags-Dockerfile</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nine_k" target="_blank">nine_k</a>   <span class="timeago" data-date="2021-06-12 16:42:21 &#43;0000 UTC">2021-06-12 16:42:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            — I have an idea: operating system as a service! For any app, on any platform.<p>— But that&#x27;s the cloud.<p>— No, <i>local</i> operating system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-12 17:23:37 &#43;0000 UTC">2021-06-12 17:23:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            By using $OLDJOB are you saying at every old job you ever held this was the case or just the last one? Because if it&#x27;s just the last one you should have used:<p><pre><code>  const OLDJOB
+</code></pre>
+Not sure why you used a variable in a comment, maybe because this is hackernews and you want to resonate with other programmers?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=otterley" target="_blank">otterley</a>   <span class="timeago" data-date="2021-06-12 17:28:11 &#43;0000 UTC">2021-06-12 17:28:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a well-known idiom that is now decades old.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-12 18:59:51 &#43;0000 UTC">2021-06-12 18:59:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Source?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bshimmin" target="_blank">bshimmin</a>   <span class="timeago" data-date="2021-06-12 21:26:24 &#43;0000 UTC">2021-06-12 21:26:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People used to use shell variables like this a lot in (to name one place) alt.sysadmin.recovery, such that the FAQ even mentions it: <a href="http:&#x2F;&#x2F;www.faqs.org&#x2F;faqs&#x2F;sysadmin-recovery&#x2F;" rel="nofollow">http:&#x2F;&#x2F;www.faqs.org&#x2F;faqs&#x2F;sysadmin-recovery&#x2F;</a> (section 1.3)... meaning people have done this for decades.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-13 15:28:15 &#43;0000 UTC">2021-06-13 15:28:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; $USEE $OF $SHELL $VARIABLES,<p>That&#x27;s obviously being done ironically and not at all similar to the commenter above&#x27;s use of $OLDJOB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-06-12 21:53:23 &#43;0000 UTC">2021-06-12 21:53:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I remember seeing this done all the time, back in the 90&#x27;s on Usenet. It was very common.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=batch12" target="_blank">batch12</a>   <span class="timeago" data-date="2021-06-12 22:09:42 &#43;0000 UTC">2021-06-12 22:09:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just search for it. An example from a 2016 SANS blog post:<p><a href="https:&#x2F;&#x2F;isc.sans.edu&#x2F;diary&#x2F;Applied+Lessons+Learned&#x2F;21107" rel="nofollow">https:&#x2F;&#x2F;isc.sans.edu&#x2F;diary&#x2F;Applied+Lessons+Learned&#x2F;21107</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isodude" target="_blank">isodude</a>   <span class="timeago" data-date="2021-06-12 11:05:57 &#43;0000 UTC">2021-06-12 11:05:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I tend to do like this<p><pre><code>  ssh $server &quot;echo $(cat script|base64 -w0) | base64 -d | bash&quot;
+</code></pre>
+No scp, no quoting hell. Obviously there is other ways of doing it. And also if you run it with the base64 printed out it&#x27;s possible to pass along and the user can still see what will be run.<p>I got good enough on escaping to really give up on it, the worst cases are just not worth the effort.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fooblat" target="_blank">fooblat</a>   <span class="timeago" data-date="2021-06-12 11:28:34 &#43;0000 UTC">2021-06-12 11:28:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting. I do something similar like this:<p><pre><code>    cat $script | ssh $server bash
+</code></pre>
+Haven&#x27;t found a case where this fails yet (but I&#x27;m sure it&#x27;s out there).<p>Edit to add this also works nicely:<p><pre><code>    ssh $server bash &lt; $script
+
+</code></pre>
+Edit to add that I experimented a little and this is a simple way to run remote one liners via ssh:<p><pre><code>    ssh $server bash &lt;&lt;&lt; &#x27;cd &#x2F;tmp; pwd&#x27;</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlokier" target="_blank">jlokier</a>   <span class="timeago" data-date="2021-06-12 14:17:41 &#43;0000 UTC">2021-06-12 14:17:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It fails when $script is something that needs to read data from standard input.<p>I find that happens rather often with remote commands, so much that other quoting approaches are useful to have available
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Izkata" target="_blank">Izkata</a>   <span class="timeago" data-date="2021-06-12 17:58:46 &#43;0000 UTC">2021-06-12 17:58:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ssh has &quot;-n&quot; which I think stops that.  It&#x27;s worked for me most of the time when I end up with that or a similar situation (the once or twice it didn&#x27;t IIRC involved experiments with chaining ssh commands).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jlokier" target="_blank">jlokier</a>   <span class="timeago" data-date="2021-06-12 22:55:01 &#43;0000 UTC">2021-06-12 22:55:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, &quot;-n&quot; has the opposite effect to the one desired.  &quot;-n&quot; is for when you have a server-side command that reads standard input and you want to <i>prevent</i> it from reading from the client side.  &quot;-n&quot; cuts off the standard input so the server-side command reads empty input (&#x2F;dev&#x2F;null).<p>The desired effect is when you want the server-side script to read input from the client environment.  For example so you can give answers to questions, or interact with a terminal program.  That&#x27;s broken by piping $script in as input, and it&#x27;s also broken by &quot;-n&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-12 13:11:20 &#43;0000 UTC">2021-06-12 13:11:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t see an obvious situation where that would fail.  People pipe tar output, rsync, dd, etc, through ssh without issue.  Stdin doesn&#x27;t seem to have quoting issues, which is what you would expect.<p>The base64 in the parent post seems unneeded if you&#x27;re passing through stdin&#x2F;stdout.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rkeene2" target="_blank">rkeene2</a>   <span class="timeago" data-date="2021-06-12 15:16:09 &#43;0000 UTC">2021-06-12 15:16:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I came here to say something like this is way easier.  I have a script which does exactly this for an interactive SSH across a large number of hosts [0] (with -S, shell mode).<p>[0] <a href="https:&#x2F;&#x2F;rkeene.org&#x2F;viewer&#x2F;tmp&#x2F;netexec.sh.htm" rel="nofollow">https:&#x2F;&#x2F;rkeene.org&#x2F;viewer&#x2F;tmp&#x2F;netexec.sh.htm</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumaturgy" target="_blank">thaumaturgy</a>   <span class="timeago" data-date="2021-06-12 17:42:46 &#43;0000 UTC">2021-06-12 17:42:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is the method I ended up using for golem (<a href="https:&#x2F;&#x2F;github.com&#x2F;robsheldon&#x2F;golem" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;robsheldon&#x2F;golem</a>), a tool I wrote for executing server documentation on remotes. Shell quoting was by far the hardest part to get right, and the base64 pipe was the <i>only</i> solution that correctly handled all forms of quoting embedded in the scripts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-12 13:31:56 &#43;0000 UTC">2021-06-12 13:31:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t believe the base64 is really adding anything here.  There aren&#x27;t quoting or data corruption issues with data coming through stdin&#x2F;stdout.   If there were, all the various scripts that pipe tar, dd, rsync, and so on through ssh pipes would have uncovered that.  Just piping the script to bash is enough.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jesboat" target="_blank">jesboat</a>   <span class="timeago" data-date="2021-06-12 14:19:22 &#43;0000 UTC">2021-06-12 14:19:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The script isn&#x27;t being passed over ssh&#x27;s stdin.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 14:22:28 &#43;0000 UTC">2021-06-12 14:22:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-12 14:25:42 &#43;0000 UTC">2021-06-12 14:25:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, meaning what value is all that adding above just:<p>$ cat script | ssh someserver bash
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=comex" target="_blank">comex</a>   <span class="timeago" data-date="2021-06-12 14:51:07 &#43;0000 UTC">2021-06-12 14:51:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The value added is that you’re not using stdin and can use it for something else.<p>Whether that’s actually useful depends on the use case.  Personally I have an ssh wrapper script, somewhat similar (though not using base64), that fixes the quoting so that the argv passed to the wrapper directly corresponds to the argv of the command on the remote end.  It’s meant for interactive use, so the program I’m trying to run could easily be something that reads from stdin, or even an interactive program like sudo or vim that expects stdin&#x2F;stdout to be a tty.  (To make those work, the -t option has to be passed to ssh.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-06-12 19:56:07 &#43;0000 UTC">2021-06-12 19:56:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The equivalent would be of catting the script and piping that to the (remote) bash, but as part of the SSH arguments, not its stdin.<p>So:<p><pre><code>  ssh user@remotehost &quot;$( cat script ) | bash&quot;
+</code></pre>
+Note that shell expansion of<p><pre><code>  $( cat script )
+</code></pre>
+... occurs <i>locally</i>, not on the remote side.  This means that any interpretable elements of the output (c|w)ould <i>also</i> be expanded locally, though I&#x27;m not quite sure what effects this might have.<p>That said, I&#x27;m not clear on exactly on what base64 adds here, though as &quot;script&quot; is directly interpreted and translated by base64, <i>any</i> local shell expansion is avoided.<p>There&#x27;s a #UselessUseOfCat as well.  Method could be simplified to:<p><pre><code>   ssh user@remotehost &quot;$( base64 -w0 &lt;script ) | base64 -d | bash )&quot;
+</code></pre>
+Note that the base64 <i>encoding</i> occurs locally, and <i>decoding</i> remotely, which I think then avoids expansion issues.<p>There&#x27;s still the maximum argument length to worry about though, and that&#x27;s where a script or here document might be preferred.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zeroimpl" target="_blank">zeroimpl</a>   <span class="timeago" data-date="2021-06-12 17:06:35 &#43;0000 UTC">2021-06-12 17:06:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why not just this:<p><pre><code>    ssh $server &quot;$(cat script)&quot;
+</code></pre>
+So far that has worked fine for me. Curious when base64 is required?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isodude" target="_blank">isodude</a>   <span class="timeago" data-date="2021-06-12 20:09:47 &#43;0000 UTC">2021-06-12 20:09:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I tend to save the base64 output sometimes and just run<p>ssh $server &quot;echo &lt;base64-string&gt; | base64 -d | bash&quot;<p>and I can check later wth I was running earlier.<p>Other than that, it just makes it kinda obvious that it will not break in any scenario, period. It just feels better, make sense?<p>As someone wrote here avoiding the expansion issues is really nice.<p>It is also very easy to compress with xz, but hey, then you could just use xz to begin with! Well, I don&#x27;t know how wierd binary data will effect stdout in all scenarios. So yet again I stay with safe. I know that you send tar and what not over ssh pipes, but I really don&#x27;t trust bash that much.<p>Another nice way would be<p>ssh $server bash &lt;&lt;&#x27;EOF&#x27;
+  echo hello world
+ EOF<p>You could not use the stdin then sadly, but that I solvable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Too" target="_blank">Too</a>   <span class="timeago" data-date="2021-06-13 08:59:27 &#43;0000 UTC">2021-06-13 08:59:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did you read the original article? It is mainly talking about the problems with this approach.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andreareina" target="_blank">andreareina</a>   <span class="timeago" data-date="2021-06-12 14:48:11 &#43;0000 UTC">2021-06-12 14:48:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s close to how emacs reads&#x2F;writes remote files via TRAMP. I think it throws gzip in there too but I&#x27;m not entirely clear on the fine details.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xfer" target="_blank">xfer</a>   <span class="timeago" data-date="2021-06-12 17:38:12 &#43;0000 UTC">2021-06-12 17:38:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            powershell has encodedCommand[0] that does this without needing base64.<p>0: <a href="https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;powershell&#x2F;module&#x2F;microsoft.powershell.core&#x2F;about&#x2F;about_pwsh?view=powershell-7.1#-encodedcommand---e---ec" rel="nofollow">https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;powershell&#x2F;module&#x2F;microsoft...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ape4" target="_blank">ape4</a>   <span class="timeago" data-date="2021-06-12 12:02:29 &#43;0000 UTC">2021-06-12 12:02:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if an option for ssh to take a the command as base64  would be useful.  Might encourage this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-12 18:59:41 &#43;0000 UTC">2021-06-12 18:59:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            rsync is smarter it doesn&#x27;t make you transfer the file again if there are no changes. Also if you have keepAlive set in your ssh config running an rsync command followed by ssh to the same server should be instantaneous.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-06-12 11:14:27 &#43;0000 UTC">2021-06-12 11:14:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The key takeaway here is that the SSH client doesn&#x27;t quote the arguments that constitute the command line when it transforms an argument vector to a string, which might be rather unexpected.<p>Why the &quot;exec&quot; SSHv2 request only takes a string and not a vector of strings is anybody&#x27;s guess. Perhaps for Windows compatibility, perhaps because the data representation used for the SSHv2 protocols didn&#x27;t have a variable-length array syntax (though what would&#x27;ve been wrong with a &quot;string cmdline&quot; where each arg is separated by a NUL?).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-14 17:10:27 &#43;0000 UTC">2021-06-14 17:10:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It looks like it&#x27;s done this way on purpose to prevent the SSH client from bypassing restrictions imposed on the user&#x27;s login shell.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hawski" target="_blank">hawski</a>   <span class="timeago" data-date="2021-06-12 12:14:57 &#43;0000 UTC">2021-06-12 12:14:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I first encountered the behavior I thought it was a lazy bug. I was and still am baffled.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chubot" target="_blank">chubot</a>   <span class="timeago" data-date="2021-06-12 13:47:18 &#43;0000 UTC">2021-06-12 13:47:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Shell&#x27;s &#x27;echo&#x27; and &#x27;eval&#x27; have the same issue.  They just dumbly concatenate their arguments with a space!<p>In <a href="https:&#x2F;&#x2F;www.oilshell.org" rel="nofollow">https:&#x2F;&#x2F;www.oilshell.org</a>, the simple_echo and simple_eval_builtin options make it so that echo and eval accept ONLY one argument.  This means you have to use this style:<p><pre><code>    echo $x $y    # illegal
+    echo &quot;$x $y&quot;  # allowed since it&#x27;s a single argument
+   
+    write -- $x $y  # legal and respect explicit separator
+</code></pre>
+There&#x27;s a separate &quot;write&quot; builtin that is more sane because we avoid changing the behavior of existing builtins, even when there is an option set.<p>This is also illegal when there&#x27;s word splitting, but Oil doesn&#x27;t have it (it turns on simple_word_eval [1] and simple_echo_builtin at the same time):<p><pre><code>    echo $x     
+</code></pre>
+This ssh behavior is probably of the same vintage.  Since it&#x27;s an external comand, the best we could do it wrap it with &quot;myssh&quot; or something similar, which doesn&#x27;t have this pitfall.<p>[1] <a href="http:&#x2F;&#x2F;www.oilshell.org&#x2F;blog&#x2F;2021&#x2F;04&#x2F;simple-word-eval.html" rel="nofollow">http:&#x2F;&#x2F;www.oilshell.org&#x2F;blog&#x2F;2021&#x2F;04&#x2F;simple-word-eval.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 14:13:20 &#43;0000 UTC">2021-06-12 14:13:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bombcar" target="_blank">bombcar</a>   <span class="timeago" data-date="2021-06-12 15:22:47 &#43;0000 UTC">2021-06-12 15:22:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It likely wasn’t considered and now changing it would break many things.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pgn674" target="_blank">pgn674</a>   <span class="timeago" data-date="2021-06-12 13:30:55 &#43;0000 UTC">2021-06-12 13:30:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Shell parsing is hard.<p>In general, not for SSH specifically, I tend to close quoted bash strings instead of trying to figure out how many escapes I need. Especially useful for awk and sed.<p>For example:<p><pre><code>  $ echo &quot;One Two Three&quot; | awk &#x27;{print &quot;&#x27;&quot;&#x27;&quot;&#x27;&quot;$2&quot; here&#x27;&quot;&#x27;&quot;&#x27;&quot;}&#x27;
+  &#x27;Two here&#x27;
+</code></pre>
+Ok, maybe escapes would have been easier in this particular example.<p><pre><code>  $ echo &quot;One Two Three&quot; | awk &#x27;{print &quot;\&#x27;&quot;$2&quot; here\&#x27;&quot;}&#x27;
+  &gt;
+</code></pre>
+No wait, that doesn&#x27;t work. Why didn&#x27;t that work?<p><pre><code>  $ echo &quot;One Two Three&quot; | awk &#x27;{print &quot;\\&#x27;&quot;$2&quot; here\\&#x27;&quot;}&#x27;
+  awk: cmd. line:1: {print &quot;\\
+  awk: cmd. line:1:        ^ unterminated string
+  awk: cmd. line:1: {print &quot;\\
+  awk: cmd. line:1:        ^ syntax error
+</code></pre>
+...Nevermind, my original way is still better for me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegionMammal978" target="_blank">LegionMammal978</a>   <span class="timeago" data-date="2021-06-12 18:05:18 &#43;0000 UTC">2021-06-12 18:05:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find it rather annoying to escape single quotes within single-quoted strings in the shell. Really, there are only two options, both of which are rather verbose:<p><pre><code>  $ echo &#x27;A&#x27;\&#x27;&#x27;A, B&#x27;&quot;&#x27;&quot;&#x27;B&#x27;
+  A&#x27;A, B&#x27;B
+</code></pre>
+I suppose that there&#x27;s a few different commands that would work for your example:<p><pre><code>  $ echo &quot;One Two Three&quot; | awk &#x27;{print &quot;&#x27;&quot;&#x27;&quot;&#x27;&quot;$2&quot; here&#x27;&quot;&#x27;&quot;&#x27;&quot;}&#x27; # original
+  $ echo &quot;One Two Three&quot; | awk {print\ \&quot;\&#x27;\&quot;\$2\&quot;\ here\&#x27;\&quot;}
+  $ echo &quot;One Two Three&quot; | awk &#x27;{print &quot;&#x27;\&#x27;&#x27;&quot;$2&quot; here&#x27;\&#x27;&#x27;&quot;}&#x27;
+  $ echo &quot;One Two Three&quot; | awk &quot;{print \&quot;&#x27;\&quot;\$2\&quot; here&#x27;\&quot;}&quot;
+</code></pre>
+To be fair, though, the argument {print &quot;&#x27;&quot;$2&quot; here&#x27;&quot;} looks pretty weird if you&#x27;re not used to working with awk.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inopinatus" target="_blank">inopinatus</a>   <span class="timeago" data-date="2021-06-12 10:44:50 &#43;0000 UTC">2021-06-12 10:44:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My advice is not to try, because the blast radius of getting it wrong can be large, the most hazardous form being a quoted sudo bash -c on the other side.<p>For any one-liner of sufficient complexity such that the quoting matters, I’ll instead invoke the shell remotely and pipe command(s) to it over the transport of stdin.<p>Special case: when data must be read from stdin, I’ll scp the line to a mktemp’d file and invoke that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=prussian" target="_blank">prussian</a>   <span class="timeago" data-date="2021-06-12 13:45:30 &#43;0000 UTC">2021-06-12 13:45:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a common problem I see a lot at my current job and the only advice I can give you is just say no. If you must use something akin to system() there are tools bash provides like:<p><pre><code>    printf -v quoted %q &quot;$my_shell_crud&quot;
+</code></pre>
+Or<p><pre><code>    printf %s &quot;${my_shell_crud@Q}&quot;
+</code></pre>
+This problem exists in other unfortunate and unlikely places like:<p><pre><code>    echo &quot;some script&quot; | at ...some time spec
+</code></pre>
+If you don&#x27;t want to use bash, the gnu awk info docs has a snippet that you can use in any awk I know of: <a href="https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;gawk&#x2F;manual&#x2F;html_node&#x2F;Shell-Quoting.html" rel="nofollow">https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;gawk&#x2F;manual&#x2F;html_node&#x2F;Shell-Quo...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silvestrov" target="_blank">silvestrov</a>   <span class="timeago" data-date="2021-06-12 11:13:18 &#43;0000 UTC">2021-06-12 11:13:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Shell parsing is hard.<p>No, shell parsing isn&#x27;t hard.  The SSH protocol is broken:  &quot;Now, the SSH wire protocol only takes a single string as the command&quot;<p>This needs to be fixed.  It should have an execve mode.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-06-12 12:26:14 &#43;0000 UTC">2021-06-12 12:26:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Good idea, but there&#x27;s a history of user accounts with disabled or restricted shells for various reasons. And execve would bypass that. There&#x27;s no real pattern&#x2F;standard for disabled shells, so a fix would be tricky. I suppose you could at least support execve of the login shell plus the command line, but that&#x27;s not what people are really looking for.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pabs3" target="_blank">pabs3</a>   <span class="timeago" data-date="2021-06-12 11:43:15 &#43;0000 UTC">2021-06-12 11:43:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is already a bug open for years:<p><a href="https:&#x2F;&#x2F;bugzilla.mindrot.org&#x2F;show_bug.cgi?id=2283" rel="nofollow">https:&#x2F;&#x2F;bugzilla.mindrot.org&#x2F;show_bug.cgi?id=2283</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jpxw" target="_blank">jpxw</a>   <span class="timeago" data-date="2021-06-12 12:12:44 &#43;0000 UTC">2021-06-12 12:12:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Including mails from the author of this article!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=laurent123456" target="_blank">laurent123456</a>   <span class="timeago" data-date="2021-06-12 16:00:12 &#43;0000 UTC">2021-06-12 16:00:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps it&#x27;s a case of using the wrong tool for the job? A shell is just a simple UI to easily run commands. When you start using it to run commands within Bash, within SSH, within remote Bash, then maybe it&#x27;s time to use a different tool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=deathanatos" target="_blank">deathanatos</a>   <span class="timeago" data-date="2021-06-14 16:50:13 &#43;0000 UTC">2021-06-14 16:50:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what they&#x27;re saying, though? They want to <i>stop</i> running commands through the shell, and start running them directly, with exec() family of functions. SSH&#x27;s protocol currently makes that impossible.<p>Sometimes, I need to run a command on a remote machine, and SSH is basically <i>the</i> protocol&#x2F;tool for that. But I don&#x27;t have a choice, but to involve the shell on the remote. (There might not <i>be</i> a shell locally: I&#x27;ve done SSH with libraries with Python. But you still have to escape for the remote&#x27;s shell, and <i>that</i> is what makes this annoying.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-06-12 14:33:19 &#43;0000 UTC">2021-06-12 14:33:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would rather say &quot;because shell parsing is hard the ssh protocol is broken.&quot; If shell parsing weren&#x27;t hard this wouldn&#x27;t be an issue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=desktopninja" target="_blank">desktopninja</a>   <span class="timeago" data-date="2021-06-12 13:56:24 &#43;0000 UTC">2021-06-12 13:56:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personal goto method is with heredocs:<p><pre><code>  ssh ${TARGET_COMPUTER} &lt;&lt; EOF
+    echo &quot;$USER&quot;
+    echo &quot;\$USER&quot;
+    uptime
+    nproc
+    w
+    last
+  EOF</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=deathanatos" target="_blank">deathanatos</a>   <span class="timeago" data-date="2021-06-12 21:36:18 &#43;0000 UTC">2021-06-12 21:36:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My opinion is that this is a protocol bug. At the very least, there should have been an option for &quot;just transmit this list of args to the other side &amp; exec it&quot;, at least in addition to &quot;run this through whatever shell there is over there&quot;…<p>Such a feature would make so many things easier to script.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=justinmayer" target="_blank">justinmayer</a>   <span class="timeago" data-date="2021-06-12 13:09:14 &#43;0000 UTC">2021-06-12 13:09:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On a totally unrelated note… As Pelican&#x27;s primary maintainer, I love seeing such handy articles published via Pelican. (^_^)<p>* <a href="https:&#x2F;&#x2F;getpelican.com" rel="nofollow">https:&#x2F;&#x2F;getpelican.com</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-06-12 18:27:07 &#43;0000 UTC">2021-06-12 18:27:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With all respect to several of the clever methods shown here, sometimes brute simplicity is the better part of creativity.<p>For any sufficiently complex sequence of commands, I&#x27;ll create a script and either place that on a universally-accessible mountpoint (e.g., where NFS mounts are used), or scp that to the target host as part of execution.  (This is effectively how numerous configuration-management engines operate, as with chef, puppet, and the like.)<p>1. Quoting is a non-issue.<p>2. Parameters to the command being a possible exception.<p>3. The process is reproducible.<p>4. The command(s) can be updated &#x2F; iteratively developed, if necessary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vagab0nd" target="_blank">vagab0nd</a>   <span class="timeago" data-date="2021-06-12 19:49:00 &#43;0000 UTC">2021-06-12 19:49:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Only 2 levels of quoting? Check this out: <a href="https:&#x2F;&#x2F;gist.github.com&#x2F;Faheetah&#x2F;e11bd0315c34ed32e681616e41279ef4" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;Faheetah&#x2F;e11bd0315c34ed32e681616e412...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 20:23:31 &#43;0000 UTC">2021-06-12 20:23:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dfinninger" target="_blank">dfinninger</a>   <span class="timeago" data-date="2021-06-12 14:56:19 &#43;0000 UTC">2021-06-12 14:56:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like the article stops just short of an example that requires a nasty amount of escape sequences and single quotes.<p>If I need to do anything more complex than what the author is discussing I just reach for Python’s shlex.quote() function. The output gets rather hard to follow, but the code is much simpler.<p>I had to set up a script that SSHes into a host, then starts a screen session, then does some grepping&#x2F;filtering on the remote output. Shlex made it possible. I couldn’t have come up with the arcane quoting without entering the maw of insanity!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dundarious" target="_blank">dundarious</a>   <span class="timeago" data-date="2021-06-12 15:44:30 &#43;0000 UTC">2021-06-12 15:44:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Other options that are perhaps faster to use on the fly, are bash&#x2F;zsh&#x27;s builtin printf and GNU&#x27;s printf command, with the %q conversion specifier (modulo the newline&#x2F;trailing space issue).<p>&gt; bash$ printf &quot;%q &quot; \&quot;yo&quot; dude&quot;\&#x27;, it\&#x27;s\ me&#x27;!&#x27; ; echo<p>&gt; \&quot;yo\ dude\&#x27;\, it\&#x27;s\ me\!<p>&gt; $ command printf &quot;%q &quot; \&quot;yo&quot; dude&quot;\&#x27;, it\&#x27;s\ me&#x27;!&#x27; ; echo<p>&gt; \&quot;yo\ dude\&#x27;\, it\&#x27;s\ me\!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 17:51:56 &#43;0000 UTC">2021-06-12 17:51:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ylee" target="_blank">ylee</a>   <span class="timeago" data-date="2021-06-12 18:27:18 &#43;0000 UTC">2021-06-12 18:27:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I run my computing environment on a remote box, to which I `mosh` to and run `tmux` on from a local MacOS box. Anything commandline (including Emacs) runs remotely, and anything graphical (including web browser) runs locally.<p>Sometimes I need to copy text from the remote Emacs session to the local MacOS clipboard in a cleaner way than using MacOS select-and-copy. I ran into the quoting issue because<p><pre><code>  &#x27;
+</code></pre>
+is needed before and after the text being sent to quote it for the shell, but then that character can&#x27;t be sent in said text, breaking the entire pipe. I was stumped for hours before finding a solution by trial and error. I think the comment says it all:<p><pre><code>       ; single quotes necessary to escape
+       ; argument for shell
+       &quot; -c &#x27;&quot;
+       (replace-regexp-in-string
+        &quot;&#x27;&quot;
+               ;;; This can&#x27;t be the simplest way to do this
+        &quot;&#x27;\\&#x27;&#x27;\\&#x27;\\&#x27;&#x27;&#x27;\\&#x27;&#x27;&quot;
+</code></pre>
+(I see from isodude&#x27;s comment that the above indeed isn&#x27;t the simplest way to do this, and should try his solution sometime.)<p>The complete function follows for the curious (and for those who can suggest improvements):<p><pre><code>  ;;; BOS
+  ;;; my-clipboard-kill-ring-save - Send any text to remote clipboard
+  (defun my-clipboard-kill-ring-save (beg end)
+    &quot;Copy region to kill ring with `kill-ring-save&#x27;, and send to
+  remote clipboard.&quot;
+    (interactive &quot;r&quot;)
+    (kill-ring-save beg end)
+    (condition-case nil
+      (let ((my-clip (current-kill 0 t)))
+   (unless (string-equal &quot;&quot; my-clip)
+   (shell-command-to-string ; send it to remote clipboard
+  ; Calls my shell script that takes argument and, on local machine, either
+  ; a) opens it as URL, or b) with the -c option, sends it to local clipboard
+    (concat browse-url-generic-program
+       ; single quotes necessary to escape
+       ; argument for shell
+       &quot; -c &#x27;&quot;
+       (replace-regexp-in-string
+        &quot;&#x27;&quot;
+               ;;; This can&#x27;t be the simplest way to do this
+        &quot;&#x27;\\&#x27;&#x27;\\&#x27;\\&#x27;&#x27;&#x27;\\&#x27;&#x27;&quot;
+        my-clip t t)
+       &quot;&#x27;&quot;)) ; closing of argument
+     (message &quot;Clip \&quot;%s\&quot; sent to remote clipboard.&quot; my-clip)))
+    (error (message &quot;No clip sent to remote clipboard&quot;))))
+
+  (global-set-key (kbd &quot;M-W&quot;) &#x27;my-clipboard-kill-ring-save)
+
+  ;;; EOS</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tgbugs" target="_blank">tgbugs</a>   <span class="timeago" data-date="2021-06-12 19:12:27 &#43;0000 UTC">2021-06-12 19:12:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have found that writing a function and then using `typeset -f` is a reliable way to pass code over ssh. It is also nice because the function call provides a clear boundary indicating which variables come from the source&#x2F;configuring system and which come from the remote&#x2F;executing system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrlonglong" target="_blank">mrlonglong</a>   <span class="timeago" data-date="2021-06-12 16:14:33 &#43;0000 UTC">2021-06-12 16:14:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had similar issues with rsync, ended up using some atrocious form of escape quotation with SSH to even get rsync to do its job. Don&#x27;t get me started on the subject of why Synology still distributes such an old version of rsync on their appliances.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mullikine" target="_blank">mullikine</a>   <span class="timeago" data-date="2021-06-12 12:36:02 &#43;0000 UTC">2021-06-12 12:36:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve solved this problem with the following 2 POSIX functions.<p><a href="https:&#x2F;&#x2F;mullikine.github.io&#x2F;posts&#x2F;missing-posix-shell-functions-cmd-and-myeval&#x2F;" rel="nofollow">https:&#x2F;&#x2F;mullikine.github.io&#x2F;posts&#x2F;missing-posix-shell-functi...</a><p><pre><code>    cmd() { for var in &quot;$@&quot;; do printf &quot;&#x27;%s&#x27; &quot; &quot;$(printf %s &quot;$var&quot; | sed &quot;s&#x2F;&#x27;&#x2F;&#x27;\\\\&#x27;&#x27;&#x2F;g&quot;)&quot;; done | sed &#x27;s&#x2F; $&#x2F;&#x2F;&#x27;; }
+
+    myeval() { eval &quot;$(cmd &quot;$@&quot;)&quot;; }
+</code></pre>
+`cmd` is by far the most useful of the two. It returns the arguments it was given, properly escaped. You can use it to capture the arguments as a string and then pass them to ssh.<p><pre><code>    # The following captures the arguments to the running script as a string.
+    CMD=&quot;$(cmd &quot;$@&quot;)&quot;
+
+    # Another example, could be putting some command into a string.
+    CMD=&quot;$(cmd echo &quot;This will run on the server&quot;)&quot;
+
+    # Then you run ssh as follows.
+    ssh remotehost &quot;$CMD&quot;
+
+    # Or something like this.
+    ssh remotehost &quot;$(cmd echo &quot;This will run on the server&quot;)&quot;
+</code></pre>
+The real power is in nesting!<p><pre><code>    ssh remotehost &quot;$(cmd echo &quot;This will run on the server&quot; &quot;$(cmd &quot;Now I don&#x27;t need&quot; &quot;to worry&quot; &quot;$(cmd About &quot;escaping escapes&quot;)&quot;)&quot;)&quot;
+</code></pre>
+That will generate these escapes.<p><pre><code>    &#x27;ssh&#x27; &#x27;remotehost&#x27; &#x27;&#x27;\&#x27;&#x27;echo&#x27;\&#x27;&#x27; &#x27;\&#x27;&#x27;This will run on the server&#x27;\&#x27;&#x27; &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;Now I don&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;t need&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27; &#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;to worry&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27; &#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;About&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27; &#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;escaping escapes&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;\&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ptx" target="_blank">ptx</a>   <span class="timeago" data-date="2021-06-12 13:51:02 &#43;0000 UTC">2021-06-12 13:51:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why is this downvoted? What&#x27;s the problem with this solution? It looks like the same kind of thing as Python&#x27;s shlex.quote, which should work and about which the manual[1] says:<p><i>&quot;The returned value is a string that can safely be used as one token in a shell command line, for cases where you cannot use a list.&quot;</i><p>[1] <a href="https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;shlex.html#shlex.quote" rel="nofollow">https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;shlex.html#shlex.quote</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mullikine" target="_blank">mullikine</a>   <span class="timeago" data-date="2021-06-12 14:05:55 &#43;0000 UTC">2021-06-12 14:05:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            `myeval` is more subtle.<p>It is like eval but reliably escapes and evaluates the arguments as a single
+command.<p><pre><code>    cmd &#x27;hello &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&quot;simon&#x27; &#x27;thanks&#x27; &#x27;for&#x27; &#x27;lunch&#x27;
+    # Output: &#x27;hello &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&quot;simon&#x27; &#x27;thanks&#x27; &#x27;for&#x27; &#x27;lunch&#x27;
+
+    # The fact that myeval seems useless here is testament to its greatness
+    myeval cmd &#x27;hello &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&quot;simon&#x27; &#x27;thanks&#x27; &#x27;for&#x27; &#x27;lunch&#x27;
+    # Output: &#x27;hello &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&quot;simon&#x27; &#x27;thanks&#x27; &#x27;for&#x27; &#x27;lunch&#x27;
+
+    # eval isn&#x27;t great though
+    eval cmd &#x27;hello &#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&#x27;\&#x27;&#x27;&quot;simon&#x27; &#x27;thanks&#x27; &#x27;for&#x27; &#x27;lunch&#x27;
+    # Error: zsh: unmatched &quot;</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mullikine" target="_blank">mullikine</a>   <span class="timeago" data-date="2021-06-12 13:52:59 &#43;0000 UTC">2021-06-12 13:52:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I made too many edits. HN autovoted down. It&#x27;s legit
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Aachen" target="_blank">Aachen</a>   <span class="timeago" data-date="2021-06-12 14:49:44 &#43;0000 UTC">2021-06-12 14:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think editing your post results in the server downvoting it. Not sure if I understood your comment correctly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bondolo" target="_blank">bondolo</a>   <span class="timeago" data-date="2021-06-12 17:33:00 &#43;0000 UTC">2021-06-12 17:33:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like using<p>echo command | tee | ssh bash -seux<p>as this lets me ensure that command is exactly what I expect  with full control over local vs remote expansion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NovemberWhiskey" target="_blank">NovemberWhiskey</a>   <span class="timeago" data-date="2021-06-12 12:58:13 &#43;0000 UTC">2021-06-12 12:58:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            openssh for the longest time (maybe even now) also did not respect &quot;--&quot; to mean &quot;end of command line options&quot;, which also complicates any attempts to sanitize input for it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rascul" target="_blank">rascul</a>   <span class="timeago" data-date="2021-06-12 15:16:01 &#43;0000 UTC">2021-06-12 15:16:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know when it was added but I&#x27;ve been using it with recent openssh client versions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silviot" target="_blank">silviot</a>   <span class="timeago" data-date="2021-06-12 19:52:04 &#43;0000 UTC">2021-06-12 19:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe the the part that says:<p>&gt; It then joins them with a single space:<p>is incorrect: there is no space added.<p>The system call `exec` [1] (that is used to execute any program, often in combination with `fork`) takes the command and its arguments as parameters. The space is the way humans (at times through scripts) communicate with their shell (that does the fork-exec dance for them) to let it know what exactly to put into these arguments. But when programs like ssh invoke `exec` they just pass command and arguments as strings, with no separator involved.
+Maybe it&#x27;s just nitpicking, but since the article attempts at going into the details of what&#x27;s going on it might be important.<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Exec_(system_call)#Unix,_POSIX,_and_other_multitasking_systems" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Exec_(system_call)#Unix,_POSIX...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=EdSchouten" target="_blank">EdSchouten</a>   <span class="timeago" data-date="2021-06-12 19:57:33 &#43;0000 UTC">2021-06-12 19:57:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. What it says, is correct. All of the arguments passed to SSH are joined together using a single space. This single string is then interpreted by the remote side through &#x27;sh -c &quot;${the entire string}&quot;&#x27;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silviot" target="_blank">silviot</a>   <span class="timeago" data-date="2021-06-12 20:14:07 &#43;0000 UTC">2021-06-12 20:14:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you determine this? I tried on an Ubuntu machine and running `ssh machine sleep 100` I saw the `sleep 100` process as direct child of `sshd`.<p>Also, in the man page for ssh it says:<p>&gt; If a command is specified, it is executed on the remote host instead of a login shell.<p>which sounds to me like a shell is not involved in this case.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=EdSchouten" target="_blank">EdSchouten</a>   <span class="timeago" data-date="2021-06-12 20:48:32 &#43;0000 UTC">2021-06-12 20:48:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I saw the `sleep 100` process as direct child of `sshd`.<p>Keep in mind that shells like Bash do an implicit &#x27;exec&#x27; in case the end of the script is detected, no traps are set, etc. etc. etc.<p>&gt; How do you determine this?<p><pre><code>    $ ssh floeper echo foo &#x27;&amp;&amp;&#x27; echo bar
+    foo
+    bar
+</code></pre>
+Notice how this should have printed &quot;foo &amp;&amp; echo bar&quot; if this was passed to execve() directly.<p>&gt; Also, in the man page for ssh it says:
+&gt; &gt; If a command is specified, it is executed on the remote host instead of a login shell.
+&gt; which sounds to me like a shell is not involved in this case.<p>The emphasis on that sentence from the man page should be on <i>login</i> shell. SSH always spawns a shell, regardless of whether a command is provided or not. It&#x27;s just that it&#x27;s not a <i>login</i> shell if a command is given. Your shellrc file won&#x27;t be run.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=silviot" target="_blank">silviot</a>   <span class="timeago" data-date="2021-06-12 21:52:40 &#43;0000 UTC">2021-06-12 21:52:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TIL about the implicit exec.<p>Details are hard. Thanks for pointing out the way it works!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soheil" target="_blank">soheil</a>   <span class="timeago" data-date="2021-06-12 17:17:43 &#43;0000 UTC">2021-06-12 17:17:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Oh hi, my dubious life choices have been such that this is my specialist subject!<p>Interesting humblebrag. Other than needing to learn command line what is the author referring to here? Learning the order of operation in a commonly used command line isn&#x27;t something to be so proud of.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/beware-of-tight-feedback-loops-2020/">
+
+
+    <title>Beware of Tight Feedback Loops (2020) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Beware of Tight Feedback Loops (2020) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/beware-of-tight-feedback-loops-2020/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/beware-of-tight-feedback-loops-2020/">
+<meta name="twitter:title" content="Beware of Tight Feedback Loops (2020) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Beware of Tight Feedback Loops (2020) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T06:21:04JST",
+    "dateModified": "2021-06-12T06:21:04JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://brianlui.dog/2020/05/10/beware-of-tight-feedback-loops/">Beware of Tight Feedback Loops (2020)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jiggawatts" target="_blank">jiggawatts</a>   <span class="timeago" data-date="2021-06-12 09:31:15 &#43;0000 UTC">2021-06-12 09:31:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tight feedback loops are great for software development, but terrible for systems administration. In my career, I <i>regularly</i> have these conversations:<p>&quot;We did A, it was slow, then we did B, and it was fast.&quot; == &quot;Congratulations, you discovered that the cache works, not that B is faster than A.&quot;<p>&quot;We ran this test on AWS image size such-and-such, and it performed 5% better than the competing product that we tested previously.&quot; == &quot;That&#x27;s just noisy neighbours on a multi-tenant platform, you&#x27;ve learned nothing.&quot;<p>&quot;We ran a test and it succeeded, hence it is now working!&quot; == &quot;The system fails nine out of ten times randomly, you just stopped when you had your first success. Try it again.&quot;<p>This ability to spin up a test environment quickly and run it through a scenario can be intoxicating. People try all sorts of random stuff, see a &quot;win&quot;, and then call it a day without really doing the legwork to prove that they achieved something meaningful.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=josho" target="_blank">josho</a>   <span class="timeago" data-date="2021-06-12 14:37:06 &#43;0000 UTC">2021-06-12 14:37:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We focus far too much time teaching calculus and trigonometry in school. Applied statistics would be far more relevant for nearly everyone.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lootsauce" target="_blank">lootsauce</a>   <span class="timeago" data-date="2021-06-12 18:11:14 &#43;0000 UTC">2021-06-12 18:11:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What % of students struggle and never really get the maths? What % do fine with the maths but never need them in their adult lives? I would argue this is far more than 75% of all people. Same can be argued probably with higher %s for foreign language in the us. I think learning advanced maths and foreign languages are great but I also think we waste insane amounts of human potential and $$$ with the way we go about it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xwolfi" target="_blank">xwolfi</a>   <span class="timeago" data-date="2021-06-12 16:24:37 &#43;0000 UTC">2021-06-12 16:24:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We teach maths too much, we should just give gold bars to every student so they already win at life.<p>Trigonometry in particular is so ingrained in many aspect of applied science that not learning its fundamentals and then pushing to its higher level concepts is going to seriously reduce adaptation capability in students.<p>And if you somehow never need to rotate things, it&#x27;s a good training in applying theoretical rules to concrete problems. In my university, after 2 years of increasingly complex trigonometry, we were left with 3D engine programming and to the fact that opened my mind forever that theoretical mathematics have a purpose.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sobriquet9" target="_blank">sobriquet9</a>   <span class="timeago" data-date="2021-06-12 16:11:32 &#43;0000 UTC">2021-06-12 16:11:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not easy to learn statistics without calculus.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ozim" target="_blank">ozim</a>   <span class="timeago" data-date="2021-06-12 17:12:39 &#43;0000 UTC">2021-06-12 17:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess that parent poster was thinking about probability and mixed it up with statistics.<p>If yes, then I agree with him. People should have more probability lessons at school than trigonometry or calculus.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sobriquet9" target="_blank">sobriquet9</a>   <span class="timeago" data-date="2021-06-12 19:01:33 &#43;0000 UTC">2021-06-12 19:01:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Basic probability (coin flipping, events over trials) by itself is just as useless as basic trigonometry.<p>It only becomes useful as you move from simple combinatorics to continuous distributions, at which point you need differentiation and integration to switch between CDF and PDF. Much in the same way trigonometry becomes useful in physics once you need to deal with vectors and waves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-06-12 17:07:38 &#43;0000 UTC">2021-06-12 17:07:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Basic level doesn&#x27;t need calc
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=marcosdumay" target="_blank">marcosdumay</a>   <span class="timeago" data-date="2021-06-12 17:45:28 &#43;0000 UTC">2021-06-12 17:45:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any part of statistics is completely dependent on calculus. You don&#x27;t get to choose how features are distributed over the set of possible samples. It&#x27;s always some scary looking function without exact solutions.<p>But you don&#x27;t need to teach people all the fundamentals of calculus before they can apply it. Definitions and a small set of pre-made answers are enough to start using it and focusing on the statistics. When (and if) those people decide to learn it more in depth, they can go back to calculus fundamentals, and will have an easier time doing so, because they will know why those things exist.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-06-12 11:31:51 &#43;0000 UTC">2021-06-12 11:31:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have good resources on how to do <i>&quot;the legwork&quot;</i>?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jiggawatts" target="_blank">jiggawatts</a>   <span class="timeago" data-date="2021-06-12 12:30:40 &#43;0000 UTC">2021-06-12 12:30:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This guy has had a few talks at CppCon over the years, and covers the basics of how to attempt benchmarking with <i>actual computer science</i> instead of myth and voodoo rituals: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=koTf7u0v41o" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=koTf7u0v41o</a><p>In practice, it&#x27;s not critical to go <i>that</i> far. In my experience, huge performance wins are trivial to benchmark with just a modicum of effort, and tiny performance wins are typically not worth any effort at all. At FAANG scale they might be, but I don&#x27;t work at a FAANG, so not my problem! :)<p>Simple methods I use and can recommend are:<p>- Ideally, collect data from production, where the change behaves exactly as it would in production because <i>it is</i> production!<p>- Interleave tests on the same machine. E.g.: A, B, A, B, A, B, etc...<p>- Run tests on <i>every</i> machine you can get your hands on over an extended period and draw a histogram or a scatter chart of some sort. You don&#x27;t have to do this at 100% load, it&#x27;s actually better to mix this in with normal workloads. This gives you an idea of the noise versus signal, platform variance, variation due to time of day, etc...<p>- Run tests after a cold boot to get a sense of worst-case performance instead of idealised and often unrealistic &quot;hot loop&quot; performance.<p>- Run tests with different input sizes and draw a graph. Try find the explanation for every feature of the graph.<p>- Be aware of <i>every</i> cache layer in the system. Don&#x27;t forget about the potentially huge RAM or SSD cache of the storage subsystem. Typical SAN arrays now have 256 GB or more. The previous graph above can help, but only if your input size goes <i>waaaay</i> past the biggest cache sizes in the system.<p>As a real-world example: I recently reduced the size of a database platform by a few vCPUs to save on licensing costs, but increased the per-core performance and simultaneously did some network tuning. Some benchmarks showed the same performance, others showed an improvement. Both were extremely noisy before and after the change.<p>I would like to take credit and say that I improved performance while saving money. However, the <i>scientifically honest result</i> is that any performance change is statistically insignificant.<p>The cost saving <i>is</i> significant, because it has very little variance. That&#x27;s good enough, and I don&#x27;t have to make a statement about performance that the numbers can&#x27;t really back up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-12 17:00:47 &#43;0000 UTC">2021-06-12 17:00:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would add always (for network servers) run “open” loads tests with each request being independent of the fates of the other requests, probably from a Poisson distribution (generated by having the delays be pulled from exponential random distribution ( <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Exponential_distribution" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Exponential_distribution</a> ).<p>So many load tools send a request then wait for the reply then send the next. That is basically useless for understanding variance under spiky load and for assessing when a system is below its capacity how stable it is.<p>For real world performance, the variance matters a lot. The code will make some things be cached some not (so the data variability in the test load should follow the same sort of power law that your real traffic does), and even if you get 10% faster at the median if the variance goes up the quality is lower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-06-13 15:59:00 &#43;0000 UTC">2021-06-13 15:59:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The tools I used had a parallel requests option.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CraigJPerry" target="_blank">CraigJPerry</a>   <span class="timeago" data-date="2021-06-12 09:48:27 &#43;0000 UTC">2021-06-12 09:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I disagree, tight feedback loops are always better in every scenario than loose ones. What you do with the new information matters though.<p>E.g. you would always choose to read an accelerometer sensor in a tight loop in a flight control system - however, you wouldn’t just blindly apply the latest reading as an input to your system (accelerometers are extremely noisy, the data looks like complete trash on the front end before applying some kind of averaging filter).<p>Further down the chain on a flight control computer is also a good counterpoint to this idea that you should prefer a more lossy sample rate.<p>Control theory is an established field of study. Better to adopt filtering &amp; PID control strategies than to under sample an input.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=icegreentea2" target="_blank">icegreentea2</a>   <span class="timeago" data-date="2021-06-12 14:16:54 &#43;0000 UTC">2021-06-12 14:16:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s better to adopt filtering instead of reducing your sample rate, only if the opportunity cost of sampling and processing is sufficiently cheap (given scenario). If it&#x27;s relatively expensive to sample and process (which I think apply to many business type scenarios),, just decreasing your sampling rate to more appropriately match your ability to manipulate outcomes make sense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-12 17:03:15 &#43;0000 UTC">2021-06-12 17:03:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The old destructive vs non destructive testing idea.  We measured the screw but we destroyed the screw. It had good quality. Now, how many screws do we need to sacrifice to be on top of our quality?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hackbraten" target="_blank">Hackbraten</a>   <span class="timeago" data-date="2021-06-12 09:54:55 &#43;0000 UTC">2021-06-12 09:54:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; are always better in every scenario than loose ones.<p>Sounds a little unconvincing.<p>&gt; applying some kind of averaging filter<p>How do you choose the size of your averaging window?<p>How do you make sure you don’t catch a systematic bias due to some unrelated event?<p>Control theory may help in some cases (flight control) but possibly less so in others (stock market).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CraigJPerry" target="_blank">CraigJPerry</a>   <span class="timeago" data-date="2021-06-12 10:10:00 &#43;0000 UTC">2021-06-12 10:10:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt; Sounds a little unconvincing.<p>Yeah, it is pretty wooly. How about taking it from the opposite position, almost like a proof by contradiction, e.g. the opposite position might be “you can see better if you look less often”.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fastball" target="_blank">fastball</a>   <span class="timeago" data-date="2021-06-12 15:41:03 &#43;0000 UTC">2021-06-12 15:41:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I feel like you&#x27;re conflating &quot;sampling rate&quot; with &quot;tight feedback loop&quot;. Yes, a higher sampling rate (assuming each sample remains at or above the level of quality of your lower rate samples) is always better. But a tighter <i>feedback loop</i> is one where you are making <i>decisions</i> with that data at a faster clip too. As pointed out in the article (and by yourself), this is not always good. If you are using some averaging filter, as you say, then that is being &quot;looser&quot; about your feedback loop. You are recognizing that just because the accelerometer is telling you that you are going <i>down</i> doesn&#x27;t mean you are <i>about to crash</i>. Someone with an overly tight feedback loop would not be so careful, and might immediately course-correct as soon as they sense they are going down unintentionally.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Retric" target="_blank">Retric</a>   <span class="timeago" data-date="2021-06-12 15:12:40 &#43;0000 UTC">2021-06-12 15:12:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends on the assumptions, tight feedback loops can be based on less information each loop.  For example an image sensor collecting light.<p>In that example you can have excessively tight feedback loops where <i>looking less often let’s you see better.</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ledauphin" target="_blank">ledauphin</a>   <span class="timeago" data-date="2021-06-12 16:07:02 &#43;0000 UTC">2021-06-12 16:07:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would read the opposing position as &quot;you can see better if you look for longer periods of time&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=layoutIfNeeded" target="_blank">layoutIfNeeded</a>   <span class="timeago" data-date="2021-06-12 11:21:37 &#43;0000 UTC">2021-06-12 11:21:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re talking about feedback loops in Control Theory, which is an established scientific field with strong mathematical underpinnings.<p>The article is talking about &quot;feedback loops&quot; in some handwavy business-marketing-whatever bullshit advice sense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ZephyrBlu" target="_blank">ZephyrBlu</a>   <span class="timeago" data-date="2021-06-12 11:31:14 &#43;0000 UTC">2021-06-12 11:31:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article is talking about feedback loops in terms of learning, not &quot;business-marketing-whatever bullshit advice&quot; and I think the author makes this clear.<p>This paragraph sums up the motivation of the article quite nicely:<p><i>&quot;But after achieving proficiency in a field, tight feedback loops are useless. That’s because initially, the learning environment is gentle. The path is well-travelled, there are easily accessible guides, things work according to common sense. As we become proficient, the environment becomes harsher, with noisier feedback. Improving is not as easy. At higher levels of skill, further progression depends on self-learning, on discovering or inventing new practices and knowledge. As skill increases, the gap between optimizing for metrics and optimizing for mastery widens.&quot;</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=drewcoo" target="_blank">drewcoo</a>   <span class="timeago" data-date="2021-06-12 13:50:29 &#43;0000 UTC">2021-06-12 13:50:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was an attempt at a contrarian clickbait blogpost.<p>Obviously noise is a problem. That&#x27;s a separate issue from loop tautness. Tight is a measure of loop size not accuracy of information as the article claims. This is similar to accuracy vs precision.<p>It&#x27;s worth adding that whether or not the right thing is measured is not related to feedback loop size. The &quot;timely&quot; 737 Max example that was peppered in shows this. Clearly what was being measured was not related to the problems the plane had.<p>The unsubstantiated (not even anecdotal) claims based on the author&#x27;s confusion (e.g. data-less diagram of masters preferring loose loops) seem to be the author taking his own advice. They&#x27;re complete speculation, not even pretending to be attached to reality.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p_l" target="_blank">p_l</a>   <span class="timeago" data-date="2021-06-13 15:31:55 &#43;0000 UTC">2021-06-13 15:31:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Attributing 737 MAX issues to tight control loops also shows critical failure in understanding what happened with 737 MAX.<p>The technical details of failures in MCAS system weren&#x27;t the problem. The problem was the decision chain that caused creation of MCAS system, and that one had nothing to do with tight or loose control loops, and everything to do with business incentives perversing safety process.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrchang523" target="_blank">chrchang523</a>   <span class="timeago" data-date="2021-06-12 15:29:49 &#43;0000 UTC">2021-06-12 15:29:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, the author is using &quot;accuracy&quot; when he means &quot;precision&quot; on many occasions, and the lack of awareness of this distinction greatly lowers the blogpost&#x27;s quality.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toss1" target="_blank">toss1</a>   <span class="timeago" data-date="2021-06-12 14:21:25 &#43;0000 UTC">2021-06-12 14:21:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt;When quantifying things, people naturally focus on things that can easily be measured. Measuring the final result doesn’t provide enough quantitative data, so it’s tempting to include the data from intermediate steps. This is an attempt to shorten the feedback loop, and trying to shorten feedback loops is very dangerous in complex systems.<p>This is a really important point that the author sort of glosses over -- adding measurements, or tighter measurements must be done extremely carefully for two reasons:  1) the risk is &#x27;looking for the key under the streetlamp because it&#x27;d better light&#x27;, and 2) unintended side effects.<p>The first will cause data to just be basically irrelevant or even inverse to the desired signal, but people will chase it anyway because it is easy to measure.  The second taps into the management phenomena of &quot;you get the results that you measure&quot;, and create perverse incentives to do the wrong thing, either self-managing, learning, or managing an org.<p>Good article, much more worthwhile than I expected!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-12 17:12:39 &#43;0000 UTC">2021-06-12 17:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also in many processes, there are things going on at various time scales.  Tight feed back loops are good for higher frequency phenomena.  Ignoring the slower phenomena can make you like the kids who see the water retreating, build a sandbox, and then come back in the evening to see it all underwater. So many places have all the log data, terabytes, maybe petabytes, but just for three months. What happened last year?  When can we expect traffic to break this scaling assumption and need a refactor, this year or next?  Impossible to know, unless you make your own copies of summary data and stay around for a few years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toss1" target="_blank">toss1</a>   <span class="timeago" data-date="2021-06-12 22:09:33 &#43;0000 UTC">2021-06-12 22:09:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Excellent points!<p>I&#x27;m actually thinking that this is part of what is going on with all the cries of &quot;Inflation!!&quot; - compared to last years&#x27; numbers, when everything was running at about 40%, of course prices are rebounding, and even overcompensating on the high side - the real question is for how long (there was also a massive hole blown in the money supply, which needs to be backfilled).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrblampo" target="_blank">mrblampo</a>   <span class="timeago" data-date="2021-06-12 09:27:30 &#43;0000 UTC">2021-06-12 09:27:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not so sure about this: &quot;An example of a gentle environment is software development. Outcomes are clearly specified, frameworks are common and work well, and your actions receive instant and accurate feedback.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=krisoft" target="_blank">krisoft</a>   <span class="timeago" data-date="2021-06-12 10:12:42 &#43;0000 UTC">2021-06-12 10:12:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I see what you say. Although I&#x27;m not the author I will try to speculate on what they might mean by &quot;instant and accurate feedback&quot;:<p>I heard the same sentiment from an architect friend. (The kind of architect who designs buildings) He said that in their business you put your best ideas on paper. Most plans then don&#x27;t get built for reasons outside of your control. Projects fail, companies fold. Sometimes your designs can&#x27;t pass review with the authorities because you misunderstood the regulations. Sometimes it can&#x27;t pass review because the local government doesn&#x27;t like your customer. Years down the road some of your plans are built. If there are problems with the design some problems might be obvious immediately, but most will only show up as the building ages. And if there are problems, are they there because you designed it wrong? Or the builders skimped on materials? Or is it maybe because the costumer meddled with your designs? You will never know. The feedback loop is both years long, and the execution is inaccurate.<p>On the other hand besides being an architect he was also dabbling in hobby programming projects. There if he made a syntax error the computer pointed it out to him within seconds. And even when he found a bug after compilation he could be certain it wasn&#x27;t because the compiler saved money by using 10% less screws than specified or something. That is to say the feedback was both fast and accurate. If you had bugs, most probably it was because you made a mistake.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hackbraten" target="_blank">Hackbraten</a>   <span class="timeago" data-date="2021-06-12 10:00:54 &#43;0000 UTC">2021-06-12 10:00:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree with you.<p>Software development is a highly people-driven environment. You can introduce something in your process (e. g. a new framework) but the feedback comes only a year later when it becomes evident that the framework hasn’t been a good fit or was introduced poorly (e. g. team members are quitting, productivity has plummeted, tech debt has piled up).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wongarsu" target="_blank">wongarsu</a>   <span class="timeago" data-date="2021-06-12 12:29:20 &#43;0000 UTC">2021-06-12 12:29:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A year is still blazingly fast. Most plumbers will wait years to try a new way of joining pipes, and it might take decades until it&#x27;s clear if the new way is more reliable.<p>In the time it takes most professions to consider trying a new framework or tool (beyond the early adopters), entire programming languages rise to popularity and fall back into obscurity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danielmarkbruce" target="_blank">danielmarkbruce</a>   <span class="timeago" data-date="2021-06-12 10:05:36 &#43;0000 UTC">2021-06-12 10:05:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The writer almost certainly isn&#x27;t a software engineer. It&#x27;s one of those things where you don&#x27;t know how something works so you imagine the process as much simpler&#x2F;less messy&#x2F;more well defined than it really is...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inopinatus" target="_blank">inopinatus</a>   <span class="timeago" data-date="2021-06-12 10:13:47 &#43;0000 UTC">2021-06-12 10:13:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed, the opposite of all three assertions is true in practically every project I ever worked on. Not sure if the author is joking, or simply has no software dev experience.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ZephyrBlu" target="_blank">ZephyrBlu</a>   <span class="timeago" data-date="2021-06-12 10:20:57 &#43;0000 UTC">2021-06-12 10:20:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the author may be referencing programming moreso than the full software development process.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=candeira" target="_blank">candeira</a>   <span class="timeago" data-date="2021-06-13 09:15:20 &#43;0000 UTC">2021-06-13 09:15:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, and I understood his point because, as a business-minded software engineer, I can map the edit-run-test-debug process to what he calls a tight loop (the Maths Test).<p>I also recognise the  fuzzier process of designing features with stakeholders, implementing them, deploying them and having them tested in the market as something between the Rocket Launch (for the technical process from ideation to deployment and subsequent maintenance) and Stock Picking (for the product&#x2F;market fit).<p>To finish populating the 2x2 matrix, the Novice Bowler approach is more similar to what many of the students used to do back when I was tutoring Algorithms and Data Structures at uni. They&#x27;d throw things at the IDE until it compiled, and call it a day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zupa-hu" target="_blank">zupa-hu</a>   <span class="timeago" data-date="2021-06-12 13:44:53 &#43;0000 UTC">2021-06-12 13:44:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting take, I really like the 2x2 table that brings such clarity. Funnily, my mind immediately jumped to the question on how to convert the feedback loop types to a better one. Of course, the whole point of the article is that it is not always a good idea, but sometimes it may be, and even just being aware of the nature of the problem seems beneficial. Seems like a great addition to a mental model toolbox.<p><pre><code>    ┌────┬────────────────┬──────────────────┐
+    │    │ Accurate       │  Inaccurate      │
+    ├────┼────────────────┼──────────────────┤
+    │    │                │                  │
+    │    │                │                  │
+    │Fast│ Math test     &lt;-- Novice bowler   │
+    │    │                │                  │
+    │    │       ^        │        ^         │
+    ├────┼───────|────────┼────────|─────────┤
+    │    │       |        │        |         │
+    │    │                │                  │
+    │Slow│ Rocket launch &lt;-- Stock picking   │
+    │    │                │                  │
+    │    │                │                  │
+    └────┴────────────────┴──────────────────┘</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aranchelk" target="_blank">aranchelk</a>   <span class="timeago" data-date="2021-06-12 16:49:41 &#43;0000 UTC">2021-06-12 16:49:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t think the author does a good job of explaining the actual problem.<p>The novice bowler example has nothing to do the tightness of the feedback loop. The issue is solely the statistical variation in the results.<p>The novice bowler sometimes bowls too far to the left, sometimes to the right. This isn’t a result of conscious action, rather a lack of control. When the bowler aims for the middle of the lane and the ball randomly goes to the left on one occasion, aiming to the right on the next shot will not fix the problem; it will make it worse.<p>Summarizing the real issue for the bowler: don’t make decisions based on random data. If you don’t know to what extent the data you’re looking at contains a random element, you should try to figure out how much before attempting a correction.<p>Lengthening the feedback loop in this example might involve obscuring the bowler’s vision of the pins once the ball has begun rolling and presenting a video of the results 10 minutes later. It’s hard for me to imagine how this could be anything other than detrimental.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aranchelk" target="_blank">aranchelk</a>   <span class="timeago" data-date="2021-06-12 17:07:36 &#43;0000 UTC">2021-06-12 17:07:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another issue with the article is use of the term “accurate feedback”. It’s conflating two ideas, accuracy of data collection and statistical variation of a system.<p>Back to the bowling example (sorry for harping on it), unless you frequently hallucinate and see the pins fall when they did not, the results in practice are very very accurate. It’s just that they describe a complex system with an initially unknown amount of variation. It’s only through having precise measurements that you can even quantify the variation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=occz" target="_blank">occz</a>   <span class="timeago" data-date="2021-06-12 11:04:19 &#43;0000 UTC">2021-06-12 11:04:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great stuff, in particular the part about arriving at a local maximum is something I&#x27;ve observed a lot as well.<p>I think I was introduced to the concept in some talk about AI, something which I never really pursued. Nevertheless, the concept stuck with me and I&#x27;ve been reminded of it professionally more than once.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danielmarkbruce" target="_blank">danielmarkbruce</a>   <span class="timeago" data-date="2021-06-12 09:22:12 &#43;0000 UTC">2021-06-12 09:22:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What exactly does this process look like:<p>&quot;Next, we eliminate some incorrect worlds by testing them against noisy data. This data should come from intermediate steps and can’t be quantified. If the data conflicts with an imagined future, that future is unlikely to occur. Noisy information may be bad for feedback loops, but it’s great for elimination, because the wider range of outcomes is more effective for pruning. It may even be a bit faster than accurate data, since the variance of accurate data is lower!<p>As we near decision time, we stop the world construction and elimination, and use judgment and experience to pick the best idea out of the remaining ones. Process improvement happens by creating many parallel processes and discarding the ones that are unfit, not by iteratively improving a single process.&quot;<p>I can&#x27;t quite understand what he is saying.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ldjb" target="_blank">ldjb</a>   <span class="timeago" data-date="2021-06-12 09:40:55 &#43;0000 UTC">2021-06-12 09:40:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The author gives an example of this afterwards (analysing shares in a pachinko company).<p>Essentially, you identify numerous hypothetical scenarios, analyse the impact they would have, and use that information to decide whether a particular course of action is a good idea or not.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danielmarkbruce" target="_blank">danielmarkbruce</a>   <span class="timeago" data-date="2021-06-12 10:03:37 &#43;0000 UTC">2021-06-12 10:03:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read the article and the example - I don&#x27;t see it as an example of what he lays out. As you say - he laid out a bunch of questions and answered them. How is that testing anything against noisy data? Why are they intermediate steps? Where is the feedback loop? What if his answers are wrong and&#x2F;or what if his sense for how likely they are is wrong?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lxdesk" target="_blank">lxdesk</a>   <span class="timeago" data-date="2021-06-12 12:19:19 &#43;0000 UTC">2021-06-12 12:19:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What he calls &quot;world construction&quot; involves the development of a rubric custom to the problem.<p>This creates a faster feedback loop <i>inside</i> of the larger, noisier one. Your feedback is now guided around the question of &quot;what makes the rubric itself better?&quot; This can be done on principle, with limited access to external information. Philosophical thinking is eminently suited to this style of problem, but it can be supplemented with short-term empirical studies that add some falsifying points and narrow your cone of uncertainty.<p>At the end you&#x27;ve generated a list of yes&#x2F;no questions forming the rubric of whether the course of action is likely to succeed. It can be turned into a ranking score, or a pass-fail threshold.<p>If you&#x27;re frustrated by the idea of just making it up on principle, that&#x27;s a frustration with philosophy itself; it rarely &quot;works&quot; until you accept some pragmatic premises around what is &quot;good&quot; or &quot;true&quot;. The point of having a large number of questions, using a wide variety of perspectives, is that they test the overall coherency of the premise. Something can work fine from one perspective, and then completely fail in another. When that happens, it&#x27;s a good sign that you have more to improve.<p>It&#x27;s quite an important life skill to practice. It&#x27;s easy to go along with the crowd, but this is a way of breaking away from it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danielmarkbruce" target="_blank">danielmarkbruce</a>   <span class="timeago" data-date="2021-06-13 23:43:22 &#43;0000 UTC">2021-06-13 23:43:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You may well be right - i just literally don&#x27;t understand what you are saying. It&#x27;s too abstract. Can you explain it using his stock example?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iovrthoughtthis" target="_blank">iovrthoughtthis</a>   <span class="timeago" data-date="2021-06-12 10:11:56 &#43;0000 UTC">2021-06-12 10:11:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            so, the more different the thing you want to try, the longer it takes, so the longer the feedback time?<p>i feel like we are conflating tight feedback loops with some other concept that needs to be teased out.<p>small bets can be divergent.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=otikik" target="_blank">otikik</a>   <span class="timeago" data-date="2021-06-12 11:41:57 &#43;0000 UTC">2021-06-12 11:41:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was right there with it until it got to ... the stock market.<p>I get it - we live in a money-oriented society.<p>But presenting a psychological learning model as useful as this one and limiting it to the stock market feels ... narrow minded. It sounds like &quot;being a jedi is nice because you get this fancy tool with which you can cut <i>AND</i> braise sausages at the same time&quot;.<p>Use this to get more healthy. Use this to spend more and better time with your family and friends. Use this to live a more fulfilling life. And sure, use it for the stock market or your day job. But that could be a couple phrases at the end, not the &quot;meat&quot; of the thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-06-12 16:30:16 &#43;0000 UTC">2021-06-12 16:30:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like his alternative (test many scenarios and prune) makes it possible to fool yourself through randomness a different way if you don’t account for the fact that you’re doing multiple comparisons [1].<p>[1] <a href="https:&#x2F;&#x2F;xkcd.com&#x2F;882&#x2F;" rel="nofollow">https:&#x2F;&#x2F;xkcd.com&#x2F;882&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=okareaman" target="_blank">okareaman</a>   <span class="timeago" data-date="2021-06-12 10:24:13 &#43;0000 UTC">2021-06-12 10:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A tight OODA loop is good though<p><a href="https:&#x2F;&#x2F;searchcio.techtarget.com&#x2F;definition&#x2F;OODA-loop" rel="nofollow">https:&#x2F;&#x2F;searchcio.techtarget.com&#x2F;definition&#x2F;OODA-loop</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

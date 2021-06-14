@@ -1,0 +1,3611 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/alien-a-gpuaccelerated-artificial-life-simulation-program/">
+
+
+    <title>ALiEn – a GPU-accelerated artificial life simulation program - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="ALiEn – a GPU-accelerated artificial life simulation program - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/alien-a-gpuaccelerated-artificial-life-simulation-program/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/alien-a-gpuaccelerated-artificial-life-simulation-program/">
+<meta name="twitter:title" content="ALiEn – a GPU-accelerated artificial life simulation program - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "ALiEn – a GPU-accelerated artificial life simulation program - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T12:12:09JST",
+    "dateModified": "2021-06-11T12:12:09JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://alien-project.org/">ALiEn – a GPU-accelerated artificial life simulation program</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 18:19:16 &#43;0000 UTC">2021-06-11 18:19:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I was learning to program, I tried to make a toy artificial life evolution simulation. Particle organisms on a 2D plane had &#x27;dna&#x27; which was a list of heritable traits, like size, speed, number of offspring.  Bigger organisms could eat smaller organisms, but they burn energy faster. 0 energy = death. When two organisms of opposite gender collided and had sufficient energy, they&#x27;d give some of their energy split among the offspring, with each offspring&#x27;s &#x27;dna&#x27; values set to one of the parent&#x27;s +&#x2F;- 5%.<p>As I was developing this, I hadn&#x27;t figured out how I wanted to do food yet, so as an easy first step, I just had a constant amount of energy that was split amongst all organisms on the screen.  Lots of little dots buzzing around, was kind of neat but nothing too special. I left it to run overnight.<p>When I came back I was very surprised:  previously i was running at about 30FPS - now it was running at about 4 seconds per frame.  The screen was filled with dense expanding circles of tiny slow organisms emanating from where organisms had mated and nothing else.<p>My simulation evolved to outsmart my simple food algorithm: when food is divided equally among all organisms, the best strategy is to use minimal energy and maximize offspring count.  I had populated the world with a default offspring count of ~5 and they had evolved to the tens of thousands. The more offspring an organism had, the greater the amount of the energy pool would go to their offspring.<p>It was a very cool &quot;Life, uh, finds a way&quot; moment - that such a simple toy simulation of evolution was able to find an unanticipated optimal solution to the environment I created overnight was very humbling and gave me a lot of respect for the power of evolution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ALittleLight" target="_blank">ALittleLight</a>   <span class="timeago" data-date="2021-06-11 19:38:17 &#43;0000 UTC">2021-06-11 19:38:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I worked on a similar project. One of the heritable traits I had was a quantity of energy that would be passed on to a child. A mother and father organism contributed a random half of their stats to a new child and both parents deducted their caretaker energy and increased the child&#x27;s energy by the same amount.<p>I had a lot of different graphs to show me stats as the simulation continued. One thing I noticed was that after a while of this simulation &quot;average age&quot; started to go way up.<p>At first, I was proud. I thought I had evolved creatures that could live indefinitely in my simulated environment. I kind of had - but it didn&#x27;t work like I thought. At some point the creatures seemed to become immortal and all new creatures died off. I was monitoring &quot;average age at death&quot; which confirmed all the dying creatures were very young and &quot;average generation count&quot; which showed it stabilized midway through the simulation and then locked in place. They got to a place where new organisms died off and there were a bunch of immortal organisms running around.<p>I finally figured out what had gone wrong. The stats, including caretaker energy, could be randomly modified by a small random value up or down whenever a child was produced. Nothing prevented caretaker energy from going negative, and indeed, that&#x27;s what would happen. The simulation would work for a while while only a small number of organisms had negative caretaker energy, but eventually these guys would take over and become the whole population. They could indefinitely sustain themselves by having children, but their children (spawned by two parents who passed on negative energy) would instantly die.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raldi" target="_blank">raldi</a>   <span class="timeago" data-date="2021-06-12 02:29:31 &#43;0000 UTC">2021-06-12 02:29:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Decades ago I read about a simulation aiming to evolve creatures that could walk, or one day run. The fitness function that determined how many offspring you get was “maximum speed ever attained in your life”.<p>They let it run for a while and came back to find all the creatures had evolved into extremely tall, thin stalks that would tip over and never move again. The top would be moving very fast before it hit the ground.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scyzoryk_xyz" target="_blank">scyzoryk_xyz</a>   <span class="timeago" data-date="2021-06-13 08:16:54 &#43;0000 UTC">2021-06-13 08:16:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Our own human intelligence could also seen this kind of side effect. The purpose of it being for us to be better at hunting other animals and gathering extra food. Instead, in just several hundred thousand years we’ve built a bunch of ‘buildings’ and we managed to throw the entire ecosystem out of balance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Matumio" target="_blank">Matumio</a>   <span class="timeago" data-date="2021-06-11 20:20:51 &#43;0000 UTC">2021-06-11 20:20:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a 2018 paper called &quot;The Surprising Creativity of Digital Evolution&quot; which is a collection of similar anecdotes: <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1803.03453" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1803.03453</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rsiqueira" target="_blank">rsiqueira</a>   <span class="timeago" data-date="2021-06-12 02:24:21 &#43;0000 UTC">2021-06-12 02:24:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, great paper!
+&quot;Many researchers in the field of digital evolution have observed their evolving algorithms and organisms subverting their intentions, producing unexpected adaptations, or exhibiting outcomes uncannily convergent with ones in nature. Such stories routinely reveal creativity by evolution in these digital worlds.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 23:34:12 &#43;0000 UTC">2021-06-11 23:34:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Karl Sims is a nice Aptronym for someone who studies evolution in physics simulations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=carlob" target="_blank">carlob</a>   <span class="timeago" data-date="2021-06-12 11:15:57 &#43;0000 UTC">2021-06-12 11:15:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Though Charles would have been better...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 20:15:31 &#43;0000 UTC">2021-06-11 20:15:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My goal with this project was to be able to seed the world with a single proto-organism and have two distinct species -  one predator and one prey - evolve to create a stable ecosystem.<p>I eventually localized food sources and added a bunch of additional rules, but was never able to realize this goal.  I think for predator-prey relationships to evolve in my system it would have required sensory organs and methods to react to local environment.<p>Seems like ALiEn is able to simulate food chains with distinct species - and alas I don&#x27;t have a CUDA GPU - but curious if they&#x27;ve been able to create an ecosystem where predators and prey can coexist in a balanced stable ecosystem.  (In my experiments, it was very easy to get predator population explosion, all of the prey gets eaten, and then all of the predators die)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eloff" target="_blank">eloff</a>   <span class="timeago" data-date="2021-06-12 01:29:51 &#43;0000 UTC">2021-06-12 01:29:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the real world what prevents this outcome? Humans aside. Because it&#x27;s uncommon. Ecosystem diversity? Pathogens?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-12 19:47:08 &#43;0000 UTC">2021-06-12 19:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think this probably happens sometimes in the real world.  However, there usually aren&#x27;t ecosystems with only two species.   Most predators eat multiple prey species, so a predator may hunt the &quot;easy&quot; species to extinction leaving only the harder-to-hunt species remain, which causes the predator population to fall as only a subset of the predators are able to succeed in these harder conditions.<p>Cicadas could be another example of a strategy to deal with prey-decimation - by only emerging every N years, food sources have time time  to regenerate between cycles.  Similarly, many large predators are nomadic - so as they reduce prey availability in one area, they choose to look elsewhere, giving the prey in that area time to recover.<p>I think geography and terrain also helps a lot in the real world:  prey is usually smaller than predators and thus has more hiding spots.  Maybe I should have implemented a &#x27;turtling&#x27; mode, where organisms could spend part of their time immobile and invulnerable, but also not gaining energy, as a way to prevent predation.  I think sensory organs would still probably be necessary to make that strategy work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nitrogen" target="_blank">nitrogen</a>   <span class="timeago" data-date="2021-06-12 16:59:04 &#43;0000 UTC">2021-06-12 16:59:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sometimes the prey can hide?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smusamashah" target="_blank">smusamashah</a>   <span class="timeago" data-date="2021-06-12 02:02:02 &#43;0000 UTC">2021-06-12 02:02:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you managed to evolve huge organisms eating lots of small ones while both species survive than that was a predator and prey stability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-12 19:51:25 &#43;0000 UTC">2021-06-12 19:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I was able to achieve short temporary equilibria, but in every case the predators would slowly die out (and re-evolve later, and die out again), or they&#x27;d be too successful and kill everything.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=protomikron" target="_blank">protomikron</a>   <span class="timeago" data-date="2021-06-11 23:37:02 &#43;0000 UTC">2021-06-11 23:37:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That sounds like a neat idea.<p>I too implemented GOL at some point (when I had a look at SDL) and for fun changed the (boolean) game field to integers that I mapped to grayscale (and later RGB). So instead of killing&#x2F;giving birth to cells you just decrease&#x2F;increase their integer value. The result looks like a spreading fungus (with the classic horizontal&#x2F;vertical&#x2F;diagonal patterns) which can be very chaotic when numbers start to overflow and underflow.<p>It&#x27;s a really fun and engaging way to play with 2d graphics and simulation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cellular" target="_blank">cellular</a>   <span class="timeago" data-date="2021-06-11 23:57:08 &#43;0000 UTC">2021-06-11 23:57:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Definitely! I made some too:<p><a href="https:&#x2F;&#x2F;youtu.be&#x2F;gaFKqOBTj9w" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;gaFKqOBTj9w</a><p>There are a few videos (not just this one) where I tweaked the rules arbitrarily but got realty interesting behavior!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Trex_Egg" target="_blank">Trex_Egg</a>   <span class="timeago" data-date="2021-06-12 09:26:49 &#43;0000 UTC">2021-06-12 09:26:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is way cooler than what I am doing now to learn a language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-12 20:11:53 &#43;0000 UTC">2021-06-12 20:11:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My dad, who was teaching me, wrote the canvas+js 2D visualization for me, while I built the engine that managed the state of the world. When you&#x27;re learning asking for help from those who are more experienced than you is huge.  Also, don&#x27;t be shy about taking someone else&#x27;s thing and modifying it until it does what you want it to do: these are educational projects, you don&#x27;t really need to worry about licensing or those kinds of things.  I learned a lot from &#x27;hacking&#x27; in-browser web games before trying to write my own: cheat at the game, then add a button that improves Qol, then try to add a feature.<p>Try to simulate something that you&#x27;re interested in!  Everyone has their own interests, but I find these kinds of problems a lot of fun to work on.<p>When you&#x27;re learning, it forces you to make reductive approximations and simplifications - you just can&#x27;t do it the &quot;right&quot; way, so try to find a way to get something similar with something close to it.  Trying to model a bunch of simplistic rules that replicate a phenomenon.  Flocking&#x2F;crowd&#x2F;traffic behavior, spread of memes or viruses, growing plants, etc. - the sorts of problems were you have a bunch of tiny particle&#x2F;cells that each have simple behavior but they can interact with each other are very rewarding to get working because simple rules can produce complex system behavior.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=abra0" target="_blank">abra0</a>   <span class="timeago" data-date="2021-06-11 13:31:22 &#43;0000 UTC">2021-06-11 13:31:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;The Autoverse is an artificial life simulator based on a cellular automaton complex enough to represent the substratum of an artificial chemistry. It is deterministic, internally consistent and vaguely resembles real chemistry. Tiny environments, simulated in the Autoverse and filled with populations of a simple, designed lifeform, Autobacterium lamberti, are maintained by a community of enthusiasts obsessed with getting A. lamberti to evolve, something the Autoverse chemistry seems to make extremely difficult.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Permutation_City" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Permutation_City</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wincy" target="_blank">wincy</a>   <span class="timeago" data-date="2021-06-11 13:39:32 &#43;0000 UTC">2021-06-11 13:39:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read that a few years ago, probably because it was recommended here on HN. Absolutely wild book.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spicybright" target="_blank">spicybright</a>   <span class="timeago" data-date="2021-06-11 17:10:30 &#43;0000 UTC">2021-06-11 17:10:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seriously flipped my view of the world on it&#x27;s head for a bit. Then I read it again right after lol
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nynx" target="_blank">nynx</a>   <span class="timeago" data-date="2021-06-11 14:07:46 &#43;0000 UTC">2021-06-11 14:07:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What a coincidence, I just reread that section of permutation city yesterday.<p>I wonder if there is an efficient cellular automata that vaguely approximates the behavior of real chemistry, just like the autoverse.<p>It&#x27;s a shame the garden eden configuration plot point is kind of bunk.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alisonkisk" target="_blank">alisonkisk</a>   <span class="timeago" data-date="2021-06-11 17:35:31 &#43;0000 UTC">2021-06-11 17:35:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Stephen Wolfram says yes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway6734" target="_blank">throwaway6734</a>   <span class="timeago" data-date="2021-06-11 14:21:05 &#43;0000 UTC">2021-06-11 14:21:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This book is absolutely fantastic. Egan is a magnificent writer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hwatwasthat" target="_blank">Hwatwasthat</a>   <span class="timeago" data-date="2021-06-11 15:00:31 &#43;0000 UTC">2021-06-11 15:00:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He is, but sometimes I go cross-eyed reading his books. He likes to explore some crazy topics, which makes for great reading but sometimes confusing reading too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 15:04:22 &#43;0000 UTC">2021-06-11 15:04:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that&#x27;s why my favorite way of reading him is via his short stories. Just enough to get the big idea across and not get lost in too much detail.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IkmoIkmo" target="_blank">IkmoIkmo</a>   <span class="timeago" data-date="2021-06-11 17:31:30 &#43;0000 UTC">2021-06-11 17:31:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you recommend one or two of these short stories? Thank you!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 17:43:22 &#43;0000 UTC">2021-06-11 17:43:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pick up Axiomatic, try the first story (The Infinite Assassin) and see if it grabs you. It&#x27;s got the best parts of something like Snow Crash, which drops you in without much exposition, and lets the visuals&#x2F;action lead. Learning to Be Me from the same collection really stood out to me, it&#x27;s a unique take on the &quot;uploading your consciousness&quot; trope.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=westoncb" target="_blank">westoncb</a>   <span class="timeago" data-date="2021-06-11 18:58:10 &#43;0000 UTC">2021-06-11 18:58:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My recollection from Infinite Assassin is that for someone not pretty literate in mathematics it would nearly be nonsense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway6734" target="_blank">throwaway6734</a>   <span class="timeago" data-date="2021-06-12 01:54:01 &#43;0000 UTC">2021-06-12 01:54:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not a short story, but this is the first work of Egan&#x27;s that I read and I loved it: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Diaspora_(novel)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Diaspora_(novel)</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 17:46:20 &#43;0000 UTC">2021-06-11 17:46:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Into Darkness was another great one from Axiomatic. Also great action, and a seriously intense brooding atmosphere.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=leblancfg" target="_blank">leblancfg</a>   <span class="timeago" data-date="2021-06-11 16:37:42 &#43;0000 UTC">2021-06-11 16:37:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for letting me find my next read! Loved Egan&#x27;s Diaspora years ago, looking forward to this one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arrow7000" target="_blank">arrow7000</a>   <span class="timeago" data-date="2021-06-11 22:36:39 &#43;0000 UTC">2021-06-11 22:36:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Diaspora is one of my all time favourite books
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoeSloth" target="_blank">JoeSloth</a>   <span class="timeago" data-date="2021-06-11 14:07:53 &#43;0000 UTC">2021-06-11 14:07:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was my first thought after looking at the project. Just finished the book.. wild!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-06-12 08:23:17 &#43;0000 UTC">2021-06-12 08:23:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Permutation city was my gateway drug for the excellent Greg Egan bibliography
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-11 12:36:01 &#43;0000 UTC">2021-06-11 12:36:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since the title isn&#x27;t informative: &quot;ALiEn is a GPU-accelerated artificial life simulation program.&quot; <a href="https:&#x2F;&#x2F;alien-project.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;alien-project.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Narishma" target="_blank">Narishma</a>   <span class="timeago" data-date="2021-06-11 12:52:33 &#43;0000 UTC">2021-06-11 12:52:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nvidia GPUs only.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TuringNYC" target="_blank">TuringNYC</a>   <span class="timeago" data-date="2021-06-11 14:13:50 &#43;0000 UTC">2021-06-11 14:13:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve written a lot of software against GPUs, albiet some years back. The main challenge was that many of the best libraries had CUDA support (or CuDNN support on top) but not support for other GPU lines&#x27; frameworks.<p>Getting CUDA to work well is hard. Not hard on your laptop, not hard on <i>a particular machine</i> but hard to work everywhere when you dont know the target environment beforehand -- there are different OSs, different OS versions, different versions of CUDA, different cards with different capabilities. But we did get it to work fairly widely across client machines.<p>The same effort needs to be put into getting things to work for other manufacturers, except a layer deeper since now you&#x27;re not even standardized on CUDA. Many companies just dont make the investment. Our startup didn&#x27;t, because we wouldn&#x27;t find people who could make it work cost effectively.<p>What I really wish is that the other manufacturers would themselves test popular frameworks against a matrix of cards under different operating systems and versions. We see some of that, for example, with the effort of getting TensorFlow to run on Apple&#x27;s m1 and metal. I just dont see a random startup (e.g., mine w&#x2F; 12 employees) being able to achieve this.<p>For example, if I know from the manufacturer that I could get TensorFlow X to work on GPU Y on {Centos N, Ubuntu 18&#x2F;20}, I would gladly expand support to those GPUs. But sometimes you dont know if it is even possible and you spin your wheels for days or weeks -- and if the marketshare for the card is limited, the business justification for the effort is hard to make. The manufacturers can address this issue.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MillenialMan" target="_blank">MillenialMan</a>   <span class="timeago" data-date="2021-06-12 08:32:57 &#43;0000 UTC">2021-06-12 08:32:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How viable is it to replace CUDA with compute shaders?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TuringNYC" target="_blank">TuringNYC</a>   <span class="timeago" data-date="2021-06-13 22:54:22 &#43;0000 UTC">2021-06-13 22:54:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Many organizations writing GPU-compliant software are not actually &quot;writing CUDA&quot; but they are either using key libraries which area using CUDA (e.g., TensorFlow) or it is a layer deeper (e.g., I use a deep learning library, the deep learning library using CuDNN, CuDNN uses CUDA.)<p>Other orgs are using something written in another language that compiles into CUDA.<p>Either way, to replace CUDA, that middle component needs to be replaced by <i>someone</i> and ideally it should be the card manufacturers themselves (IMHO.) I cant imagine any small&#x2F;medium organization having sufficient engineering time to write the middle component and keep them up to date with the slew of new GPUs, OS updates, or new GPU features -- unless it is their core business.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maeln" target="_blank">maeln</a>   <span class="timeago" data-date="2021-06-12 09:38:07 &#43;0000 UTC">2021-06-12 09:38:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Technically it is entirely viable. Vulkan&#x2F;OpenGL compute shaders offer more or less a 1:1 equivalent to every CUDA features.
+It is more of an usability issue. CUDA has been design to be a GPGPU API from the get go and, therefor, tend to be &quot;easier&quot; to use. OpenCL could have been a better replacement, but the API was really not on par with CUDA when it comes to usability. SYCL looks like finally a good answer by the Khronos group but it is so late. You already have a lot of people who know how to use CUDA, a lot of learning resources, etc ...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hhh" target="_blank">hhh</a>   <span class="timeago" data-date="2021-06-11 14:52:47 &#43;0000 UTC">2021-06-11 14:52:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why not use the Nvidia docker runtime and put your application in a container?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=HelloNurse" target="_blank">HelloNurse</a>   <span class="timeago" data-date="2021-06-11 14:58:30 &#43;0000 UTC">2021-06-11 14:58:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you download a RTX 3080 from the Docker registry?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=analognoise" target="_blank">analognoise</a>   <span class="timeago" data-date="2021-06-11 19:34:25 &#43;0000 UTC">2021-06-11 19:34:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The hardware is a hell of a lot cheaper than wasting a week of engineering time though isn&#x27;t it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TuringNYC" target="_blank">TuringNYC</a>   <span class="timeago" data-date="2021-06-11 16:36:09 &#43;0000 UTC">2021-06-11 16:36:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nvidia docker runtime has been more recent. There were some issues with k8s usage and Nvidia docker runtime -- you couldnt use a non-integer number of allocations (e.g., cant split allocation of a GPU).<p>That said, NVIDIA Docker Runtime is <i>awesome</i> now -- however, all this underscores further how much further behind the non-NVIDIA stack is!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=croes" target="_blank">croes</a>   <span class="timeago" data-date="2021-06-11 15:02:58 &#43;0000 UTC">2021-06-11 15:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about OpenCL?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=d110af5ccf" target="_blank">d110af5ccf</a>   <span class="timeago" data-date="2021-06-12 08:11:19 &#43;0000 UTC">2021-06-12 08:11:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenCL certainly has the potential to be a universal API but support for it is surprisingly spotty given its age.<p>For proprietary implementations, Intel appears to have the broadest and most consistent support. Nvidia skipped OpenCL 2.x for some technical reason (IIUC). AMD is a complete mess, for some reason not bothering (!!!) to roll out ROCm support for their two most recent generations of consumer GPUs.<p>In open source &quot;Linux only&quot; land, Mesa mostly supports OpenCL 1.2 (<a href="https:&#x2F;&#x2F;mesamatrix.net&#x2F;#OpenCL" rel="nofollow">https:&#x2F;&#x2F;mesamatrix.net&#x2F;#OpenCL</a>) at this point. So if you&#x27;re targeting Linux specifically then that&#x27;s something at least.<p>Good luck shipping an actual product using OpenCL that will &quot;just work&quot; across a wide variety of hardware and driver versions. POCL and CLVK are both experimental but might manage this &quot;some day&quot;. In the mean time, resign yourself to writing Vulkan compute shaders. (Then realize that even those will only run on Apple devices via MoltenVK, and despair at the state of GPGPU standardization efforts.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shakna" target="_blank">shakna</a>   <span class="timeago" data-date="2021-06-11 15:29:15 &#43;0000 UTC">2021-06-11 15:29:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenCL feels pretty stagnant. Showstopping bugs staying open for years. Card support is incredibly spotty. Feature support isn&#x27;t even near parity with CUDA.<p>This despite v3.0 being released just last year... And completely breaking the API.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-06-11 14:16:13 &#43;0000 UTC">2021-06-11 14:16:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A simple artifical life &#x2F; cellular automaton framework would be a great demo for portable compute shaders. I&#x27;m looking at this as a potential starting point in my compute-shader-101 project. If someone is interested in coding something up, please get in touch.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=goldenkey" target="_blank">goldenkey</a>   <span class="timeago" data-date="2021-06-12 17:59:03 &#43;0000 UTC">2021-06-12 17:59:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;churchofthought&#x2F;Grautamaton" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;churchofthought&#x2F;Grautamaton</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nynx" target="_blank">nynx</a>   <span class="timeago" data-date="2021-06-11 14:20:23 &#43;0000 UTC">2021-06-11 14:20:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d love to help with this. I&#x27;ve been experimenting with rustgpu + wgpu, so I&#x27;d personally go there first probably.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-06-11 14:22:09 &#43;0000 UTC">2021-06-11 14:22:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that looks like probably the most promising stack for the future, but there are certainly rough edges today. See [8] for a possible starting point (a pull into that repo or a link to your own would both be fine here).<p>[8] <a href="https:&#x2F;&#x2F;github.com&#x2F;googlefonts&#x2F;compute-shader-101&#x2F;pull&#x2F;8" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;googlefonts&#x2F;compute-shader-101&#x2F;pull&#x2F;8</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=UncleOxidant" target="_blank">UncleOxidant</a>   <span class="timeago" data-date="2021-06-11 16:43:10 &#43;0000 UTC">2021-06-11 16:43:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And Windows 10 only :(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperluz" target="_blank">hyperluz</a>   <span class="timeago" data-date="2021-06-11 14:11:16 &#43;0000 UTC">2021-06-11 14:11:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What would be the best alternative?
+OpenCL?
+Vulkan?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maeln" target="_blank">maeln</a>   <span class="timeago" data-date="2021-06-12 09:40:52 &#43;0000 UTC">2021-06-12 09:40:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nowaday I think it would be SYCL. It use the same kind of &quot;same source&quot; API that CUDA propose and is portable. Technically it can even use a CUDA backend.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sudosysgen" target="_blank">sudosysgen</a>   <span class="timeago" data-date="2021-06-12 15:47:40 &#43;0000 UTC">2021-06-12 15:47:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve used it with a CUDA backend, it does work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-06-11 14:17:31 &#43;0000 UTC">2021-06-11 14:17:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenCL is sadly stagnant. Vulkan is a good choice but not itself portable. There are frameworks such as wgpu that run compute shaders (among other things) portably across a range of GPU hardware.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ColonelPhantom" target="_blank">ColonelPhantom</a>   <span class="timeago" data-date="2021-06-11 19:14:07 &#43;0000 UTC">2021-06-11 19:14:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In what way is Vulkan not portable? It runs on all operating systems (Windows 7+, Linux, Android, and Apple via MoltenVK) and all GPUs (AMD GCN, nVidia Kepler, Intel), and shaders (compute and rendering) are to my knowledge standardized in the portable SPIR-V bytecode.<p>WGPU is more portable, since it can use not only Vulkan but also other APIs like OpenGL and Direct3D 11, but Vulkan is already very highly portable for almost everyone with a computer modern enough to run anything related to GPU compute.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-06-11 20:14:18 &#43;0000 UTC">2021-06-11 20:14:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s kinda portable, but I&#x27;ve had not-great experiences with MoltenVK - piet-gpu doesn&#x27;t work on it, for reasons I haven&#x27;t dug into. It may be practical for some people to write Vulkan-only code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p1necone" target="_blank">p1necone</a>   <span class="timeago" data-date="2021-06-12 03:52:15 &#43;0000 UTC">2021-06-12 03:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Vulkan is supported on basically <i>all</i> modern platforms except for Apple operating systems, Apple refuses to support open graphics APIs on their platform and there&#x27;s nothing anyone can do about it - this isn&#x27;t a Vulkan problem. Even OpenGL is deprecated and support hasn&#x27;t been updated for years, and that&#x27;s basically the most open graphics API in existence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PixelOfDeath" target="_blank">PixelOfDeath</a>   <span class="timeago" data-date="2021-06-11 21:09:01 &#43;0000 UTC">2021-06-11 21:09:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You basically complain about Vulkan not being portable enough because Apple made their ownTM Vulken-like API instead of actually supporting Vulkan. And some other people made a subset of Vulkan working on top of that.<p>Why don&#x27;t you complain about Apple not supporting Vulkan instead?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=naavis" target="_blank">naavis</a>   <span class="timeago" data-date="2021-06-12 07:24:59 &#43;0000 UTC">2021-06-12 07:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenGL Compute Shaders are one option too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xwdv" target="_blank">xwdv</a>   <span class="timeago" data-date="2021-06-11 13:17:37 &#43;0000 UTC">2021-06-11 13:17:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Who else is there… AMD?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tormeh" target="_blank">tormeh</a>   <span class="timeago" data-date="2021-06-11 13:24:21 &#43;0000 UTC">2021-06-11 13:24:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also Intel. Being Nvidia-only is not very good from an accessibility point-of-view. It means that only ML researchers and about 60% of gamers can run this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cthulhu_" target="_blank">Cthulhu_</a>   <span class="timeago" data-date="2021-06-11 13:37:13 &#43;0000 UTC">2021-06-11 13:37:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thankfully it&#x27;s a specialist software package not aimed at gamers or ML researchers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-11 14:06:25 &#43;0000 UTC">2021-06-11 14:06:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And most people in Hollywood using rendering engines like Optix.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberDildonics" target="_blank">CyberDildonics</a>   <span class="timeago" data-date="2021-06-11 23:57:13 &#43;0000 UTC">2021-06-11 23:57:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No they don&#x27;t. Also optix isn&#x27;t a renderer, it just traces rays and runs shaders on the ray hits on nvidia cards. Memory limitations and immature renderers hinder gpu rendering.  The makers of gpu renderers want you to think it&#x27;s what most companies use, but it is not.<p>Also Hollywood is a city and most computer animation is not done there. The big movie studios aren&#x27;t even in Hollywood except for paramount.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-06-12 07:46:42 &#43;0000 UTC">2021-06-12 07:46:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except that is what companies like OTOY happen to build their products on.<p><a href="https:&#x2F;&#x2F;home.otoy.com&#x2F;render&#x2F;octane-render&#x2F;" rel="nofollow">https:&#x2F;&#x2F;home.otoy.com&#x2F;render&#x2F;octane-render&#x2F;</a><p>As for the rest of the comment, usual Nvidia hate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberDildonics" target="_blank">CyberDildonics</a>   <span class="timeago" data-date="2021-06-12 13:08:09 &#43;0000 UTC">2021-06-12 13:08:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Octane is exactly the type of thing I&#x27;m talking about. This is not what film is rendered with.  It is mostly combinations of PRman, Arnold or proprietary renderers, all software.<p>I don&#x27;t know where you are getting &quot;nvidia hate&quot;, studios that use linux usually use nvidia, mostly because of the drivers.<p>None of this changes that optix is not a renderer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 15:10:16 &#43;0000 UTC">2021-06-11 15:10:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=keymone" target="_blank">keymone</a>   <span class="timeago" data-date="2021-06-11 15:26:19 &#43;0000 UTC">2021-06-11 15:26:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AMD, Intel, Apple, Samsung and all the other mobile chip makers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=keymone" target="_blank">keymone</a>   <span class="timeago" data-date="2021-06-11 13:21:08 &#43;0000 UTC">2021-06-11 13:21:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xwdv" target="_blank">xwdv</a>   <span class="timeago" data-date="2021-06-11 13:25:21 &#43;0000 UTC">2021-06-11 13:25:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            NVDA is 82% of the market and rising.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dijit" target="_blank">dijit</a>   <span class="timeago" data-date="2021-06-11 13:27:06 &#43;0000 UTC">2021-06-11 13:27:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are we celebrating monopolies now?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=411111111111111" target="_blank">411111111111111</a>   <span class="timeago" data-date="2021-06-11 14:18:08 &#43;0000 UTC">2021-06-11 14:18:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the difference between current AMD and Nvidia GPUs isn&#x27;t even that large if viewed from price&#x2F;performance ratio...
+Comparing cards at similar price has AMD having slightly less performance while having significantly more GDDR memory.<p>i still use an RTX3080 though, thankfully got one before the current craze started
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kadoban" target="_blank">kadoban</a>   <span class="timeago" data-date="2021-06-11 19:02:41 &#43;0000 UTC">2021-06-11 19:02:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference between AMD and Nvidia is _huge_ when you look at software support and drivers and etc. Part of this is network effects and part of it is just AMD itself. But the hard reality is I&#x27;d never buy AMD for compute, even if in specs it were better.<p>Just as a random anecdote, I grabbed an AMD 5700xt around when those came out (for gaming). Since I had it sitting around between gaming sessions, I figured I&#x27;d try to use it for some compute, for Go AI training. For _1.5 years_ there existed a showstopping bug with this, it just could not function for all of that time. They _still_ do not support this card in their ROCm library platform last I checked. The focus and support from AMD is just not there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=croes" target="_blank">croes</a>   <span class="timeago" data-date="2021-06-11 15:08:53 &#43;0000 UTC">2021-06-11 15:08:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually they lost 1% and are now at 81%
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-06-11 13:26:37 &#43;0000 UTC">2021-06-11 13:26:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AMD, and Intel, yeah.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jdonaldson" target="_blank">jdonaldson</a>   <span class="timeago" data-date="2021-06-11 15:27:13 &#43;0000 UTC">2021-06-11 15:27:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wanted to give a shot out to Larry Yeager who wrote software for this all the way back in the mid nineties : <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Polyworld" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Polyworld</a><p>He was a professor of mine in grad school, he also did visual effects for The Last Starfighter, and the early work on character recognition in the Apple Newton.  Cool dude.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=carbonguy" target="_blank">carbonguy</a>   <span class="timeago" data-date="2021-06-12 00:50:59 &#43;0000 UTC">2021-06-12 00:50:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Continuing the thread of other individuals who&#x27;ve done interesting work in this area, I&#x27;ve always been a huge fan of Jeffrey Ventrella&#x27;s &quot;Gene Pool&quot;: <a href="http:&#x2F;&#x2F;www.swimbots.com&#x2F;genepool&#x2F;" rel="nofollow">http:&#x2F;&#x2F;www.swimbots.com&#x2F;genepool&#x2F;</a><p>His fractal art is quite compelling as well: <a href="http:&#x2F;&#x2F;www.ventrella.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;www.ventrella.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jordibc" target="_blank">jordibc</a>   <span class="timeago" data-date="2021-06-11 18:11:45 &#43;0000 UTC">2021-06-11 18:11:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, cool dude indeed! Glad you mention him, I was thinking of him when I saw this article. He visited the group where I was doing my PhD many years ago and also gave a fantastic talk on evolution, learning, and artificial life -- I was quite impressed. He has some cool stuff in his website too (<a href="http:&#x2F;&#x2F;shinyverse.org&#x2F;larryy&#x2F;" rel="nofollow">http:&#x2F;&#x2F;shinyverse.org&#x2F;larryy&#x2F;</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ehsankia" target="_blank">ehsankia</a>   <span class="timeago" data-date="2021-06-11 16:25:55 &#43;0000 UTC">2021-06-11 16:25:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also relevant is Karl Sims&#x27; Evolving Virtual Creatures:<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=JBgG_VSP7f8" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=JBgG_VSP7f8</a><p>Not sure how they&#x27;re connected, but I remember being obsessed with that paper and actually recreating it in 2D as a grad project.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scottrogowski" target="_blank">scottrogowski</a>   <span class="timeago" data-date="2021-06-11 12:55:56 &#43;0000 UTC">2021-06-11 12:55:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is amazing. My question is whether there are emergent structures in a long-running sandbox environment? The videos that were posted appeared to have quite complex structures but it was unclear whether they were designed or if they &quot;evolved&quot; from earlier more-basic structures. Would be curious to get the author&#x27;s take.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ericbarrett" target="_blank">ericbarrett</a>   <span class="timeago" data-date="2021-06-11 14:24:19 &#43;0000 UTC">2021-06-11 14:24:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wrote a (<i>much</i> less fancy) cellular automata program I called &quot;evol&quot; [0].  It simulates organisms on a flat grid.  They have opcodes which are randomly permutated from time to time.  If they can collect enough energy, they split; if they lose too much, they die.  Having more opcodes costs more energy.  There is no hinting or designing; everything starts with a simple &quot;MOVE_RANDOM&quot;.<p>If you leave the program running long enough, they do actually evolve different behavior.  Specifically, they will learn to recognize that there are other lifeforms in a direction and then move the opposite direction, reducing competition over the fixed amount of energy in a cell.  You can actually see the population density rise when this happens.  Since the grid wraps, you will generally get them &quot;flowing&quot; in one direction, cooperatively.<p>The world is simple and boring and it doesn&#x27;t have graphics.  Also, since the naive &quot;Dna&quot;&#x2F;opcodes I chose use branching and random number generation, it&#x27;s very slow and can&#x27;t be simulated on a GPU.<p>Fun project nevertheless.  The last few months, I&#x27;ve been slowly rewriting it in Rust and adding more stuff like terrain height.  Haven&#x27;t published the Rust version yet as it&#x27;s incomplete—got hung up on the poor state of its terminal libraries.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;ehbar&#x2F;evol" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ehbar&#x2F;evol</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scottrogowski" target="_blank">scottrogowski</a>   <span class="timeago" data-date="2021-06-12 06:23:17 &#43;0000 UTC">2021-06-12 06:23:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very cool. Interesting to hear that they actually managed to evolve. Would be curious to see what happens when they can eat each-other. Though I recognize that might be significantly more complicated
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ericbarrett" target="_blank">ericbarrett</a>   <span class="timeago" data-date="2021-06-12 14:11:45 &#43;0000 UTC">2021-06-12 14:11:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve been thinking about that for the rewrite! Maybe some chance to incorporate snippets of opcodes from the consumed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danielvf" target="_blank">danielvf</a>   <span class="timeago" data-date="2021-06-11 13:02:16 &#43;0000 UTC">2021-06-11 13:02:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most of these look very designed, though &quot;emerging&quot; from simple rules on agents&#x2F;particles.<p>Others look evolved inside the sandbox. (see doc here: <a href="https:&#x2F;&#x2F;alien-project.org&#x2F;documentation&#x2F;Evolutionexperiments.html" rel="nofollow">https:&#x2F;&#x2F;alien-project.org&#x2F;documentation&#x2F;Evolutionexperiments...</a>)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=harpiaharpyja" target="_blank">harpiaharpyja</a>   <span class="timeago" data-date="2021-06-11 13:12:39 &#43;0000 UTC">2021-06-11 13:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the YouTube videos claims that they are self-replicating structures that were &quot;evolved&quot; in another simulation. So possibly the appearance of being designed comes from the fact that they were selected from the best of whatever was produced by that other simulation and placed together for a video.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scottrogowski" target="_blank">scottrogowski</a>   <span class="timeago" data-date="2021-06-12 06:25:34 &#43;0000 UTC">2021-06-12 06:25:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not a biologist but I understand that isolation is an important factor of diversity and by default, this simulation wouldn&#x27;t have that. So it makes sense to evolve in different areas and put them back into the same area.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=criddell" target="_blank">criddell</a>   <span class="timeago" data-date="2021-06-11 13:21:05 &#43;0000 UTC">2021-06-11 13:21:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you ever seen <a href="http:&#x2F;&#x2F;boxcar2d.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;boxcar2d.com&#x2F;</a>? It requires Flash so it probably doesn&#x27;t work anymore, but it used genetic algorithms to &quot;design&quot; a 2d car to travel over bumpy terrain.<p>It was ported here <a href="https:&#x2F;&#x2F;rednuht.org&#x2F;genetic_cars_2&#x2F;" rel="nofollow">https:&#x2F;&#x2F;rednuht.org&#x2F;genetic_cars_2&#x2F;</a> but it&#x27;s not quite the same thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:03:27 &#43;0000 UTC">2021-06-11 13:03:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=grp000" target="_blank">grp000</a>   <span class="timeago" data-date="2021-06-11 15:32:42 &#43;0000 UTC">2021-06-11 15:32:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the videos mentioned they were evolved in a different simulation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kkotak" target="_blank">kkotak</a>   <span class="timeago" data-date="2021-06-11 19:57:45 &#43;0000 UTC">2021-06-11 19:57:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if multiple simulations show any level of convergence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoeDaDude" target="_blank">JoeDaDude</a>   <span class="timeago" data-date="2021-06-12 01:59:05 &#43;0000 UTC">2021-06-12 01:59:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure if this is just for fun or for research.   Artificial Life is&#x2F;was a field of ressearch for a while, papers were written, books were published, [1][2] etc.  The field sought to study biology and the complexity of living things by experimenting with simulations of the real thing(s).<p>This reminds me of what IMHO is best use of artificial life in a game, Unnatural Selection.  In the game you had to select and breed creatures to go against other enemy creatures. [3][4]<p>[1]  <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Artificial_life" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Artificial_life</a><p>[2]  <a href="https:&#x2F;&#x2F;www.amazon.com&#x2F;Artificial-INSTITUTE-SCIENCES-COMPLEXITY-PROCEEDINGS&#x2F;dp&#x2F;0201525712" rel="nofollow">https:&#x2F;&#x2F;www.amazon.com&#x2F;Artificial-INSTITUTE-SCIENCES-COMPLEX...</a><p>[3]  <a href="https:&#x2F;&#x2F;www.mobygames.com&#x2F;game&#x2F;unnatural-selection" rel="nofollow">https:&#x2F;&#x2F;www.mobygames.com&#x2F;game&#x2F;unnatural-selection</a><p>[4]  <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=zteY_f9DrQA" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=zteY_f9DrQA</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=borrowcheckfml" target="_blank">borrowcheckfml</a>   <span class="timeago" data-date="2021-06-12 03:35:39 &#43;0000 UTC">2021-06-12 03:35:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s still an active research area and the alife conference [0] is quite popular<p>[0] <a href="https:&#x2F;&#x2F;alife.org" rel="nofollow">https:&#x2F;&#x2F;alife.org</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danielvf" target="_blank">danielvf</a>   <span class="timeago" data-date="2021-06-11 12:54:25 &#43;0000 UTC">2021-06-11 12:54:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of my favorite programming game that no one has heard of: <a href="http:&#x2F;&#x2F;grobots.sourceforge.net" rel="nofollow">http:&#x2F;&#x2F;grobots.sourceforge.net</a><p>(Old video of grobots in action at <a href="https:&#x2F;&#x2F;youtu.be&#x2F;BLXKedZHls4?t=801" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;BLXKedZHls4?t=801</a>)<p>Alien looks awesome!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hypertele-Xii" target="_blank">hypertele-Xii</a>   <span class="timeago" data-date="2021-06-11 17:16:58 &#43;0000 UTC">2021-06-11 17:16:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then there&#x27;s Core War from 1984 [1]. 11 years ago I computationally evolved a warrior (a program competing for virtual resources) and submitted it to the nano hill [2], it&#x27;s still ranked top 20 to this day. Every few months the hill emails me the stats of someone trying to beat us with a new warrior :)<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Core_War" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Core_War</a><p>[2] <a href="http:&#x2F;&#x2F;sal.discontinuity.info&#x2F;hill.php?key=nano" rel="nofollow">http:&#x2F;&#x2F;sal.discontinuity.info&#x2F;hill.php?key=nano</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Udik" target="_blank">Udik</a>   <span class="timeago" data-date="2021-06-11 14:17:20 &#43;0000 UTC">2021-06-11 14:17:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is an old artificial life simulator (darwinbots <a href="http:&#x2F;&#x2F;wiki.darwinbots.com&#x2F;w&#x2F;Main_Page" rel="nofollow">http:&#x2F;&#x2F;wiki.darwinbots.com&#x2F;w&#x2F;Main_Page</a> ) that is inspired by grobots-like programming games. Each organism is driven by its own code that can mutate randomly at each reproduction.<p>I&#x27;ve been trying to produce a web version of it. This is where I got so far (before more or less desisting):<p><a href="http:&#x2F;&#x2F;darwinjs.herokuapp.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;darwinjs.herokuapp.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Tempest1981" target="_blank">Tempest1981</a>   <span class="timeago" data-date="2021-06-11 15:01:06 &#43;0000 UTC">2021-06-11 15:01:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nicely done! Very fluid.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Udik" target="_blank">Udik</a>   <span class="timeago" data-date="2021-06-11 15:30:08 &#43;0000 UTC">2021-06-11 15:30:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sackerhews" target="_blank">sackerhews</a>   <span class="timeago" data-date="2021-06-11 13:59:50 &#43;0000 UTC">2021-06-11 13:59:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is why I like reading the comments on HN. I&#x27;d never heard of Grobots, it&#x27;s brilliant!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=buescher" target="_blank">buescher</a>   <span class="timeago" data-date="2021-06-11 14:00:45 &#43;0000 UTC">2021-06-11 14:00:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Grobots looks like RobotWar
+<a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=uSdCtxN96_o" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=uSdCtxN96_o</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hut0" target="_blank">hut0</a>   <span class="timeago" data-date="2021-06-11 21:04:24 &#43;0000 UTC">2021-06-11 21:04:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a similar project that runs right in your browser:<p><a href="https:&#x2F;&#x2F;exophysics.net&#x2F;" rel="nofollow">https:&#x2F;&#x2F;exophysics.net&#x2F;</a><p>It&#x27;s more simple, and more about physics than biology, but the emergent phenomena are pretty interesting nevertheless. This universe comes the closest to a life simulation: <a href="https:&#x2F;&#x2F;exophysics.net&#x2F;exhibit&#x2F;mordial.html" rel="nofollow">https:&#x2F;&#x2F;exophysics.net&#x2F;exhibit&#x2F;mordial.html</a> [based on the Primordial Particle System, <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=makaJpLvbow" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=makaJpLvbow</a>]
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ShamelessC" target="_blank">ShamelessC</a>   <span class="timeago" data-date="2021-06-12 09:02:01 &#43;0000 UTC">2021-06-12 09:02:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;exophysics.net&#x2F;exhibit&#x2F;ogneron.html" rel="nofollow">https:&#x2F;&#x2F;exophysics.net&#x2F;exhibit&#x2F;ogneron.html</a><p>Pretty cool! I see some rare behaviors like maybe there is a weak magnetic property and certain combinations of particles are more prone to it than others? Trying to rationalize this behavior I see after about a minute where some &quot;molecules&quot; seem to start trailing others.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dezmou" target="_blank">dezmou</a>   <span class="timeago" data-date="2021-06-11 13:21:07 &#43;0000 UTC">2021-06-11 13:21:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Imagine if our real world is juste some github project
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cthulhu_" target="_blank">Cthulhu_</a>   <span class="timeago" data-date="2021-06-11 13:37:43 &#43;0000 UTC">2021-06-11 13:37:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s more likely than you think: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Simulation_hypothesis" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Simulation_hypothesis</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phkahler" target="_blank">phkahler</a>   <span class="timeago" data-date="2021-06-11 15:03:17 &#43;0000 UTC">2021-06-11 15:03:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really. If we&#x27;re in a simulation that just begs the question - what is the &quot;real&quot; universe that the simulation is running in. It pushes the question of the nature of our universe up a level where we have zero visibility. No more satisfying that &quot;where was god before he created the universe?&quot;<p>The mathematical universe sidesteps this problem. If there is a concise and complete model of the universe, that is sufficient for it to exist. A simulation might also be considered a mathematical model, and it would exist in the same way even if nothing ever runs the simulation. So I guess maybe it could be a simulation, but we mustn&#x27;t ask what it runs on, but what is the program?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=EMM_386" target="_blank">EMM_386</a>   <span class="timeago" data-date="2021-06-11 15:37:15 &#43;0000 UTC">2021-06-11 15:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The mathematical universe sidesteps this problem. If there is a concise and complete model of the universe, that is sufficient for it to exist.<p>This then leads to how does math exist instead of nothing?   Math is a concept, and if concepts exist then that is not &quot;nothing&quot;.<p>Many people confuse &quot;nothing&quot; with the vacuum of space and particles appearing out of nowhere.  In this case, we have something (space, vacuums, and particles), not nothing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vokep" target="_blank">vokep</a>   <span class="timeago" data-date="2021-06-11 19:16:27 &#43;0000 UTC">2021-06-11 19:16:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because nothing is precisely what does exist.
+But nothing implies something, so my working theory is that nothing&#x27;s implied opposite something is itself the first thing, then some cellular automata like progression results from similar logical self-reference and down the line our physics (and the entirety of every logical permutation of information n-dimensionally) results from that.<p>A similar conception I&#x27;ve heard is that its like something and nothing, at the beginning of time, made a bet whether there&#x27;d be something or nothing, but the act of making the bet was already something, rigging it in something&#x27;s favor. Nothing thought that was bullshit and tried to call it so, and they&#x27;ve been battling it out ever since.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lewispollard" target="_blank">lewispollard</a>   <span class="timeago" data-date="2021-06-11 20:31:16 &#43;0000 UTC">2021-06-11 20:31:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But nothing implies something<p>Put another way, nothing has absolutely no properties - including the property of being nothing, or empty. If an empty nothing lacks the property of being empty, or nothing, then <i>something</i> must arise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lorepieri" target="_blank">lorepieri</a>   <span class="timeago" data-date="2021-06-12 09:04:11 &#43;0000 UTC">2021-06-12 09:04:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m working on writing a paper along those lines. I do believe that the answer to &quot;why there is something rather than nothing?&quot; may be: actually nothing is the only thing that exist, but its instability creates our apparent reality trough  a self-referential observer-observed reality loop. I would love to chat, use my research email.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=EMM_386" target="_blank">EMM_386</a>   <span class="timeago" data-date="2021-06-12 11:02:24 &#43;0000 UTC">2021-06-12 11:02:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A similar conception I&#x27;ve heard is that its like something and nothing, at the beginning of time, made a bet whether there&#x27;d be something or nothing<p>The problem is that nothing can&#x27;t make bets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TchoBeer" target="_blank">TchoBeer</a>   <span class="timeago" data-date="2021-06-11 18:26:57 &#43;0000 UTC">2021-06-11 18:26:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What would it look like for math to not exist?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lorepieri" target="_blank">lorepieri</a>   <span class="timeago" data-date="2021-06-12 09:29:04 &#43;0000 UTC">2021-06-12 09:29:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does science fiction exists? Or Pokemon? In case your view is that they don&#x27;t, you may argue similarly that math is a human made construct (which happen to work well to  describe our universe, but it may be just survivorship bias as we use in physics only the math that works. For instance we discard imaginary solutions to classical motion equations).
+I do believe it is the right view, math is a man made &quot;language&quot; inspired by physics which is more fundamental.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TchoBeer" target="_blank">TchoBeer</a>   <span class="timeago" data-date="2021-06-12 15:58:41 &#43;0000 UTC">2021-06-12 15:58:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If that&#x27;s your view that&#x27;s fine, but it&#x27;s not the view of GP.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 15:14:24 &#43;0000 UTC">2021-06-11 15:14:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It pushes the question of the nature of our universe up a level where we have zero visibility<p>The universe does not owe you visibility into its origins, the lack of it does not make the hypothesis any less likely.<p>&gt; If there is a concise and complete model of the universe, that is sufficient for it to exist.<p>Sounds like the ontological argument [1], one of the worst contortions of apologia ever imagined.<p>[1]: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ontological_argument" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ontological_argument</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Matumio" target="_blank">Matumio</a>   <span class="timeago" data-date="2021-06-11 20:47:17 &#43;0000 UTC">2021-06-11 20:47:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the universe will never leak any information about its origins, then those origins cannot affect us in any way, ever. This doesn&#x27;t make any such hypothesis less likely, but it makes them irrelevant to us.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thomashop" target="_blank">thomashop</a>   <span class="timeago" data-date="2021-06-11 22:55:48 &#43;0000 UTC">2021-06-11 22:55:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If we are in a simulation and this simulation obeys similar constraints to our computational models, we can test hypotheses on the basis of information theory. Or possibly find error-correction codes encoded in string theory as some quantum physicists have suggested.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-11 13:42:22 &#43;0000 UTC">2021-06-11 13:42:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s no evidence we live in a simulation, and a whole lot to suggest we aren’t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zild3d" target="_blank">zild3d</a>   <span class="timeago" data-date="2021-06-11 14:08:25 &#43;0000 UTC">2021-06-11 14:08:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there any evidence suggesting we&#x27;re not in a simulation?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wyager" target="_blank">wyager</a>   <span class="timeago" data-date="2021-06-11 14:21:32 &#43;0000 UTC">2021-06-11 14:21:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A lot of physics seems unnecessarily expensive to compute. Quantum mechanics suggest we either have nonlocality or exponential blowup, both of which cause simulation challenges. With just classical physics you don’t need to deal with that.<p>On the other hand, there are a lot of things that make physics tractable to compute, such as the +++- metric tensor and other factors forbidding causality violations. A universe with closed timelike curves becomes very expensive to compute because you usually have to use implicit solvers that are slow and might not even converge, corresponding to various time travel paradoxes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LandR" target="_blank">LandR</a>   <span class="timeago" data-date="2021-06-11 15:13:58 &#43;0000 UTC">2021-06-11 15:13:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t this all assuming the simulation is running on a &quot;computer&quot; in a universe like ours.<p>Couldn&#x27;t the universe where the simulation runs be so entirely different to ours that computing all that stuff is just easy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p_j_w" target="_blank">p_j_w</a>   <span class="timeago" data-date="2021-06-11 15:44:09 &#43;0000 UTC">2021-06-11 15:44:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Everyone saying it would be computationally expensive to simulate our universe is failing to put their mind outside of the box of our universe. Imagine for a moment that there&#x27;s a universe which compares to our universe similarly to how our world compares to one inside of Conway&#x27;s Game of life.<p>Granted, this scenario doesn&#x27;t provide us with anything we can take action on, but the idea that we&#x27;re in a simulation at all doesn&#x27;t, either.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mLuby" target="_blank">mLuby</a>   <span class="timeago" data-date="2021-06-12 17:54:18 &#43;0000 UTC">2021-06-12 17:54:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some self-replicating &quot;creature&quot; in Conway&#x27;s Game of Life could rowhammer the machine it runs in such that the creature (or a copy of it) now exists outside the Game and is able to replicate across the machine and maybe even across the network. If it takes control of a robot, you could argue it&#x27;s &quot;escaped&quot; its simulation and now exists in our physical world.<p>The odds of all that happening without it being prevented are all but zero.<p>We have a better chance that one of the simulators grows attached and—against protocol—decides to uplift us from the simulation into a form where we can directly communicate with them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-11 16:08:13 &#43;0000 UTC">2021-06-11 16:08:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So you only have to assume physics totally different from ours, and we can’t observe it. Isn’t that a bit of a weak point? And what would be the point of this simulation that has been running for billions of years?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p_j_w" target="_blank">p_j_w</a>   <span class="timeago" data-date="2021-06-11 16:44:11 &#43;0000 UTC">2021-06-11 16:44:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;you only have to assume physics totally different from ours<p>You don&#x27;t have to assume anything is true if you don&#x27;t want to, but if you want to consider whether we&#x27;re living in a simulation, it&#x27;s probably worth considering.<p>&gt;And what would be the point of this simulation that has been running for billions of years?<p>First, it&#x27;s billions of years in our time. Second, what&#x27;s the point of Conway&#x27;s Game of Life?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-11 17:39:12 &#43;0000 UTC">2021-06-11 17:39:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You don&#x27;t have to assume anything is true if you don&#x27;t want to, but if you want to consider whether we&#x27;re living in a simulation, it&#x27;s probably worth considering.<p>Which, for me, is a dead end. It&#x27;s the same as assuming there&#x27;s a God, except the moral implications are worse.<p>&gt; First, it&#x27;s billions of years in our time.<p>So, if billions of years of our time fly by like your average simulation run in &quot;their&quot; universe, the simulation can&#x27;t be very meaningful to them. And it makes the distance between our and &quot;their&quot; physics even larger.<p>&gt; what&#x27;s the point of Conway&#x27;s Game of Life?<p>None, and that&#x27;s why nobody runs one with 10^120 cells for billions of years. And if somebody did, the result would be incomprehensible. The gap between us and our creators must then be incomprehensible for us. All this is so outlandish, that the word &quot;likely&quot; shouldn&#x27;t be anywhere near this discussion.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PaulDavisThe1st" target="_blank">PaulDavisThe1st</a>   <span class="timeago" data-date="2021-06-11 19:13:44 &#43;0000 UTC">2021-06-11 19:13:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your ability to comprehend something is your shortcut to assessing how likely it is?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=StandardFuture" target="_blank">StandardFuture</a>   <span class="timeago" data-date="2021-06-11 18:37:42 &#43;0000 UTC">2021-06-11 18:37:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; And what would be the point of this simulation that has been running for billions of years?<p>There is zero evidence for <i>or</i> against the simulation hypothesis, so why would some random person on HN be able to have the answer to this question even if we are in a simulation or even if we simply assume that we are?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lorepieri" target="_blank">lorepieri</a>   <span class="timeago" data-date="2021-06-12 08:34:04 &#43;0000 UTC">2021-06-12 08:34:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even if it&#x27;s easy, simple simulations would still dominate the space of all possible simulations if the resources of the simulators are finite. So simpler simulations are more likely. (<a href="https:&#x2F;&#x2F;osf.io&#x2F;ca8se" rel="nofollow">https:&#x2F;&#x2F;osf.io&#x2F;ca8se</a> , disclaimer I&#x27;m the author)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ajuc" target="_blank">ajuc</a>   <span class="timeago" data-date="2021-06-11 17:28:07 &#43;0000 UTC">2021-06-11 17:28:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A lot of physics seems unnecessarily expensive to compute.<p>When you make a simple simulation of rigid bodies with classical physics you often get numerically unstable results - bodies jerking against each other, slowly passing through, etc. One common way to solve this is to introduce a &quot;frozen&quot; state. When objects are close enough to be at rest with balanced forces - you mark them as frozen and don&#x27;t compute them every frame to save computing power. You only unfreeze them when some other unfrozen object interacts with them.<p>Additionally hierarchical space indexing algorithms are often used to avoid n^2 comparisons calculating what interacts and what doesn&#x27;t. And these algorithms often use heuristics and hashing functions with collisions to subdivide the problem, which might result in objects becoming unfrozen without actually touching each other.<p>The result from inside this simulation would be weird, nonlinear, nonlocal and look a little like wave function collapse (if particle A whose coordinates hashed through this weird function are the same as those of particle B happens to unfreeze - the particle B unfreezes as well despite not interacting in any way). And this would be probably considered &quot;hard to compute&quot; compared to the simple equations the system developer wanted to simulate.<p>Example that might be more relatable for scientists - it&#x27;s much easier and cheaper computationally to make a numerical simulation for 3-body problem than to make an analytic simulation of it. But describing this numerical simulation behavior in terms of physical equations requires much more complex model than the equations that you wanted to compute in the first place. You have to include implementation details like floating point accuracy, overflows, etc. And if you go far enough you have to add the possibility of space ray hitting a memory cell in the computer that runs your simulation.<p>I&#x27;m not saying this is the reason QM is weird - I don&#x27;t understand QM well enough to form valid hypotheses ;), but I&#x27;m saying we might be mistaking the intention of The Developer with the compromises (s)he made to get there. If you take any imperfect implementation of a simple model and treat it as perfect - the model becomes much more complex.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 15:18:34 &#43;0000 UTC">2021-06-11 15:18:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s like a sim saying that their world would be impossible to run on the desktop in their simulated living room. That is tautologically true.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wyager" target="_blank">wyager</a>   <span class="timeago" data-date="2021-06-11 15:38:50 &#43;0000 UTC">2021-06-11 15:38:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The physics of the simulator would have to be totally different to support a simulation with exponential computational costs. You probably couldn’t have anything like conservation of energy. Polynomial overhead would feel much more plausible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sooheon" target="_blank">sooheon</a>   <span class="timeago" data-date="2021-06-11 16:45:36 &#43;0000 UTC">2021-06-11 16:45:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Consider the physics of the simulator is literally the physics of our current universe. It need not be running on a binary substrate, the computation platform could just be the mass of the universe over time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zild3d" target="_blank">zild3d</a>   <span class="timeago" data-date="2021-06-11 17:10:02 &#43;0000 UTC">2021-06-11 17:10:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A lot of physics seems unnecessarily expensive to compute.<p>Sure, but look at the state of frontend web development :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chimprich" target="_blank">chimprich</a>   <span class="timeago" data-date="2021-06-11 18:50:52 &#43;0000 UTC">2021-06-11 18:50:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A lot of physics seems unnecessarily expensive to compute.<p>How do you know it&#x27;s all computed? To make a convincing simulation, you just need to simulate in detail the bits that are actually being observed.<p>Everything else that happens could just be approximated at larger and larger granularity the further it is away from an observer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wyager" target="_blank">wyager</a>   <span class="timeago" data-date="2021-06-11 21:11:05 &#43;0000 UTC">2021-06-11 21:11:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope, long distance entanglement collapse breaks this. You either need exponential blowup to simulate all possible eigenvalues or you need superluminal coordination.<p>There isn’t actually an observed&#x2F;unobserved distinction in physics. Unless you mean the simulation is specifically targeting humans, which is a vastly more complicated proposal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gremlinsinc" target="_blank">gremlinsinc</a>   <span class="timeago" data-date="2021-06-13 23:59:20 &#43;0000 UTC">2021-06-13 23:59:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Unless you mean the simulation is specifically targeting humans, which is a vastly more complicated proposal.<p>It&#x27;s also the most likely proposal (with current understanding of universe).<p>Axis of Evil (Cosmology) calls into question the Copernicus views of the universe. Essentially saying our solar system is somehow back at the center of the universe.<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=hjVCjdX5XRw" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=hjVCjdX5XRw</a><p>If WE are the subject of the simulation, it&#x27;s likely everything our instruments observe are like the sky on the Truman show - not there, just phantoms of what we would expect to be there with what the simulation wants us to know about physics.<p>There&#x27;s a max speed the speed of light, what if this is the max processing ability of the computer we&#x27;re running on. What if we&#x27;re not on a computer at all but some sort of wetware computer system that grows as it needs to, and never runs out of resources?<p>What if the speed of light in the parent sim is 500x bigger for them, or ours is like a centimeter in comparison.<p>A dream is a simulation, we could all be dream creatures to some huge extra-dimensional being. Not everything pre-supposes human technology.<p>I&#x27;ve seen literal &quot;glitches&quot; in reality, so it&#x27;s pretty easy for me to believe that reality isn&#x27;t something completely set in stone. For others it challenges everything they believe in, for that I say open your mind.<p>Donald Hoffman believes that what we see is like what someone in a VR headset sees, outside the VR headset who knows what that world is like, but in this one -- everything except math (which he believes is universal and extra-universal), is made to fit this universe. Physics, science, all of it is unique only inside the headset. There could be many headsets with different settings running parallel (parallel worlds&#x2F;universes), maybe the speed of light is faster in one than the other, maybe gravity works different, etc... So many things in our understanding are really like &quot;settings&quot; like size of a planck&#x27;s constant, pie, speed of light, etc. Almost reads like a config file.<p>I mean if you buy into a &quot;God&quot; being, if computing is a thing which we have it so why wouldn&#x27;t God? Wouldn&#x27;t it even make more sense for him to just code up a simulation? I mean it&#x27;s gotta be a lot less demanding than building a whole universe from nothing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bingidingi" target="_blank">bingidingi</a>   <span class="timeago" data-date="2021-06-11 16:14:54 &#43;0000 UTC">2021-06-11 16:14:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unnecessarily expensive computation in software? preposterous.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ronyfadel" target="_blank">ronyfadel</a>   <span class="timeago" data-date="2021-06-11 15:21:13 &#43;0000 UTC">2021-06-11 15:21:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe the simulation isn’t optimized, but how do the unnecessarily expensive bits negate the theory that it all is in fact a simulation?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lorepieri" target="_blank">lorepieri</a>   <span class="timeago" data-date="2021-06-12 08:31:27 &#43;0000 UTC">2021-06-12 08:31:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, any evidence of complexity (assuming that simpler universes are more likely) is evidence against the simulation hypothesis: The Simplicity Assumption and Some Implications of the Simulation Argument for our Civilization
+  <a href="https:&#x2F;&#x2F;osf.io&#x2F;ca8se" rel="nofollow">https:&#x2F;&#x2F;osf.io&#x2F;ca8se</a>  
+(I&#x27;m  the author :) )
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zild3d" target="_blank">zild3d</a>   <span class="timeago" data-date="2021-06-12 18:42:08 &#43;0000 UTC">2021-06-12 18:42:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            complexity and simplicity seems pretty biased to human understanding?<p>Just as a thought experiment, I&#x27;d propose that our universe and the human experience <i>is</i> incredibly simple. Humans were only given a limited number of senses so that the simulation can be run in this &quot;low fidelity&quot;. Compared to the thousands of senses a level or two up.  We also are simulated in a simple linear time model, only able to experience a single time at once, greatly reducing the complexity and fidelity needed. Same for the number of dimensions we are able to sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgv" target="_blank">tgv</a>   <span class="timeago" data-date="2021-06-11 15:45:48 &#43;0000 UTC">2021-06-11 15:45:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            1. That the simulator must run something much larger than this world much faster than real time. How feasible is that?<p>2. That the same arguments also apply to our simulator operators. They also inhabit a simulated universe. And so on. Where does it stop, and why?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gremlinsinc" target="_blank">gremlinsinc</a>   <span class="timeago" data-date="2021-06-14 00:08:51 &#43;0000 UTC">2021-06-14 00:08:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Running an ai simulation on an 8 bit nintendo is going to be a lot more complicated, and difficult than running one on a 512^e38 bit (pulled out of ass) 100kth gen Radeon GPU  that won&#x27;t be developed for 1000 years from now...<p>In a universe where time itself could be fluid, where it could be easy to reverse events, rewrite events, etc - making quantum computers work even way better than we ever could because we&#x27;re limited by causality.<p>I mean the people beyond this universe could have 50 senses, like a sense of how far up or down they are, or how much water they can breathe in before they need oxygen if o2 is even a thing, or a sense of time so they can go back&#x2F;forward through time. If they have 50 senses, our 5 sounds like &quot;nothing&quot; to simulate.<p>It&#x27;s all a matter of perspective, I&#x27;m sure an ant feels like they keep pretty busy and nothing could possibly simulate their colonies, but I&#x27;m sure that would be pretty easy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mistermann" target="_blank">mistermann</a>   <span class="timeago" data-date="2021-06-11 19:10:13 &#43;0000 UTC">2021-06-11 19:10:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That so many people believe they have knowledge of all the evidence suggests to me that <i>something very strange</i> is going on here.<p>This may not literally be a simulation, but it seems to behave like one in many ways.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 18:26:06 &#43;0000 UTC">2021-06-11 18:26:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is impossible to know the likelihood as we have no other points of comparison.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lorepieri" target="_blank">lorepieri</a>   <span class="timeago" data-date="2021-06-12 08:41:14 &#43;0000 UTC">2021-06-12 08:41:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is actually possible :)  (with some assumption on the distribution of the simulations)
+Complex sims are less likely, so the likelihood of increasing optional complexity of our sim should be slim, for instance interstellar travel. It&#x27;s still unsolved how much unlikely, but if you have a large enough increase in complexity (say interstellar travel over billions of light years) you will hit sims which are unlikely enough.<p>(<a href="https:&#x2F;&#x2F;osf.io&#x2F;ca8se" rel="nofollow">https:&#x2F;&#x2F;osf.io&#x2F;ca8se</a>, I&#x27;m the author)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ChicagoBoy11" target="_blank">ChicagoBoy11</a>   <span class="timeago" data-date="2021-06-11 13:42:59 &#43;0000 UTC">2021-06-11 13:42:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For folks who like this sort of thing, I will once again make my monthly plug for folks to check out &quot;The Evolution of Cooperation&quot;, by Robert Axelrod.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qvrjuec" target="_blank">qvrjuec</a>   <span class="timeago" data-date="2021-06-11 16:11:39 &#43;0000 UTC">2021-06-11 16:11:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, &quot;The Selfish Gene&quot;. Super fun read. Also, there are a bunch of really interesting videos made to demonstrate concepts like the evolution of altruism on youtube: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=goePYJ74Ydg" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=goePYJ74Ydg</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ehsanu1" target="_blank">ehsanu1</a>   <span class="timeago" data-date="2021-06-11 16:47:39 &#43;0000 UTC">2021-06-11 16:47:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bought it now! I really likes Steven Levy&#x27;s &quot;Artificial Life&quot; as a light introduction to this world. Sadly, the book isn&#x27;t too far out of date despite being 30 years old now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dorkmind" target="_blank">dorkmind</a>   <span class="timeago" data-date="2021-06-11 14:10:45 &#43;0000 UTC">2021-06-11 14:10:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you need to read the first few chapters of After Virtue to appreciate the concept behind creating things for people to enjoy directly; it&#x27;s a form of art, essentially reducing the overgrown calculator known as a &quot;computer&quot; to a beautiful vase holding a flower arrangement.<p>Here is the link: <a href="https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;4.Macintyre&#x2F;page&#x2F;n17&#x2F;mode&#x2F;2up" rel="nofollow">https:&#x2F;&#x2F;archive.org&#x2F;details&#x2F;4.Macintyre&#x2F;page&#x2F;n17&#x2F;mode&#x2F;2up</a><p>This is a sort of test playground for marketing, brands, and so on since the programs occupy a no man&#x27;s land between games, academic research, toys, entertainment, and programming.<p>It also satisfies the self-feeding dogfood condition: similar to games such as RoboWar, it is difficult to resist the temptation to experiment at the simulation level, a phenomenon that could be described as the MFTL effect.<p><a href="http:&#x2F;&#x2F;www.catb.org&#x2F;~esr&#x2F;jargon&#x2F;html&#x2F;M&#x2F;MFTL.html" rel="nofollow">http:&#x2F;&#x2F;www.catb.org&#x2F;~esr&#x2F;jargon&#x2F;html&#x2F;M&#x2F;MFTL.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=croes" target="_blank">croes</a>   <span class="timeago" data-date="2021-06-11 15:11:22 &#43;0000 UTC">2021-06-11 15:11:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not a fan of proprietary frameworks like CUDA.
+Makes you too dependent on the manufacturer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rubatuga" target="_blank">rubatuga</a>   <span class="timeago" data-date="2021-06-12 05:10:03 &#43;0000 UTC">2021-06-12 05:10:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not a fan of ROCM since it doesn&#x27;t work on consumer brands.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xaedes" target="_blank">xaedes</a>   <span class="timeago" data-date="2021-06-11 22:19:17 &#43;0000 UTC">2021-06-11 22:19:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of ParticleLife (for example [1]), which has much simpler, but more random rules. There also emerge lots of interesting organism, but I rarely see replicators.<p>I used this as inpiration and to learn about Unity ECS and made a 3D version with WebGL support [2]; native builds obviously have much better performance. But it is all CPU-only. Anyway. What I found very interesting is dynamically switching between 2d and 3d. Most organisms survive the dimensional increase or reduction and just reconfigure itself to a similar structure.<p>[1] <a href="https:&#x2F;&#x2F;fnky.github.io&#x2F;particle-life&#x2F;" rel="nofollow">https:&#x2F;&#x2F;fnky.github.io&#x2F;particle-life&#x2F;</a>
+[2] <a href="https:&#x2F;&#x2F;particlelife-3d-unity-ecs.github.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;particlelife-3d-unity-ecs.github.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaw27472224" target="_blank">throwaw27472224</a>   <span class="timeago" data-date="2021-06-11 15:37:19 &#43;0000 UTC">2021-06-11 15:37:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            More caviar?<p><a href="https:&#x2F;&#x2F;www.gregegan.net&#x2F;MISC&#x2F;CRYSTAL&#x2F;Crystal.html" rel="nofollow">https:&#x2F;&#x2F;www.gregegan.net&#x2F;MISC&#x2F;CRYSTAL&#x2F;Crystal.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arrow7000" target="_blank">arrow7000</a>   <span class="timeago" data-date="2021-06-11 22:42:29 &#43;0000 UTC">2021-06-11 22:42:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Excellent
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=srer" target="_blank">srer</a>   <span class="timeago" data-date="2021-06-12 01:36:16 &#43;0000 UTC">2021-06-12 01:36:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In no way comparable in sophistication, but I did find making an n-body simulation to be unexpectedly profound.<p>My universe started as a uniform random distribution of small stationary objects, the only rules that existed were gravity (F=gm1m2&#x2F;r^2) and inertia (F=ma).<p>Mass started clumping together, orbiting each other, eventually forming a relatively stable arrangement of what we recognize as stars orbited by planets orbited by moons.<p>With two simple rules to govern my universe, an emergent order had occurred that mirrored my reality.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bioplastic" target="_blank">bioplastic</a>   <span class="timeago" data-date="2021-06-12 10:09:59 &#43;0000 UTC">2021-06-12 10:09:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of SmoothLife.<p>Generalization of Conway&#x27;s &quot;Game of Life&quot; to a continuous domain - SmoothLife (Stephan Rafler) <a href="http:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1111.1567" rel="nofollow">http:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1111.1567</a><p>Video of SmoothLifeL: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=KJe9H6qS82I" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=KJe9H6qS82I</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tut-urut-utut" target="_blank">tut-urut-utut</a>   <span class="timeago" data-date="2021-06-11 12:48:55 &#43;0000 UTC">2021-06-11 12:48:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like Conway&#x27;s game of life next generation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cthulhu_" target="_blank">Cthulhu_</a>   <span class="timeago" data-date="2021-06-11 13:39:48 &#43;0000 UTC">2021-06-11 13:39:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Definitely a kind of cellular automata, I like seeing a different version of that than Game of Life.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danwills" target="_blank">danwills</a>   <span class="timeago" data-date="2021-06-11 22:35:40 &#43;0000 UTC">2021-06-11 22:35:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think you could really call this a cellular automata, as that&#x27;s defined by the cellular-neighbourhood-processing update rule. To put it another way, this looks like a &#x27;vector&#x27; simulation (or automata) compared to GoL&#x27;s &#x27;raster&#x27; update.<p>There are certainly a lot of other fascinating cellar automata though! Even within 2-state-2d-totalistic (the class GoL is from) there&#x27;s loads to see and lots of surprises! Well worth exploring! (there&#x27;s an app called &#x27;golly&#x27; that&#x27;s good for that, and it&#x27;s cousin &#x27;ready&#x27; does related (also &#x27;raster&#x27;) &#x27;reaction-diffusion&#x27; simulations.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=StandardFuture" target="_blank">StandardFuture</a>   <span class="timeago" data-date="2021-06-11 18:26:29 &#43;0000 UTC">2021-06-11 18:26:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could someone explain the obsessive devotion to doing all Artificial &quot;Life&quot; research in terms of Cellular Automata? If you could supply the <i>mathematical</i> reasoning for this, I would be very interested in hearing the answer.<p>And preferably an answer that goes beyond just saying that Von Neumann used Cellular Automata in his ALife research.<p>Also, if anyone knows of alternative methods to CA in studying the properties of life then I would also be interested in learning of these.<p>All in all, I find these procedurally generated art pieces to be rather underwhelming in any serious attempt or study of what artifical life is&#x2F;can be.<p>&gt; digital organisms and evolution<p>This is a claim without definition of what a non-biological organism even is. Could we just claim that any CA, any program is &quot;living&quot; while it is running?<p>I would love to see some formality before claims are made in this area.<p>EDIT: After watching the &quot;Planet Gaia&quot; video [0], I feel even more like the excitement about this is no different than the excitement for a video game and not for actual scientific progress. Cool code and cool visuals. Very little in the way of <i>understanding life better</i>.<p>[0] <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=w9R6zrdl6jM" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=w9R6zrdl6jM</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 18:38:28 &#43;0000 UTC">2021-06-11 18:38:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think many artificial life simulations end up underwhelming because life is incredibly complex, and so it&#x27;s very hard to simulate at scale.  This ALiEn is perhaps the most advanced one I&#x27;ve seen, and it looks like even still they take some shortcuts (like copypasting interesting organisms from previous simulations together to create interesting interactions).<p>What you see as a criticism of this line of research I think is actually its reason:  Life is arguably the most interesting thing in the universe, and if we can create it digitally it <i>will</i> surprise us. Evolution yields insights and solutions that you cannot predict. If we can synthesize what the minimal set of key properties are necessary for artificial lifeforms to create interesting unexpected outcomes, it helps us clarify the definition of what a non-biological organism could be.<p>I&#x27;m personally fascinated by the idea of autonomous digital agents that exist and self replicate while trying to earn cryptocurrency, which is used to pay for the hosting costs of themselves and their progeny.  I think we are about two decades away from this being realized, but in the future, software services could self assemble, replicate imperfectly and evolve to please humans without any humans writing additional code: we&#x27;d just have to code a profitable LUCA, create suitable &#x27;nests&#x27; and pay the organisms that please us.  &quot;What is life&quot; is debatable, but IMO this would be a valid digital lifeform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=StandardFuture" target="_blank">StandardFuture</a>   <span class="timeago" data-date="2021-06-11 18:52:43 &#43;0000 UTC">2021-06-11 18:52:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; so it&#x27;s very hard to simulate at scale.<p>But, this is a very unaddressed point. Why focus on &quot;simulation&quot; when mathematical formalisms &amp; theories could be potentially even more useful? Especially when most &quot;simulations&quot; are running on some arbitrary set of hard-coded assumptions?<p>&gt; What you see as a criticism of this line of research<p>To clarify, I was in no way criticizing ALife research. Quite the opposite. I am actually trying to help ensure it does not get stuck in a rut.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cwkoss" target="_blank">cwkoss</a>   <span class="timeago" data-date="2021-06-11 20:23:23 &#43;0000 UTC">2021-06-11 20:23:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah.  We&#x27;ll speaking personally, mathematical formalisms &amp; theories sound very intimidating, whereas CA-type simulations are so approachable many are &#x27;fun toys&#x27; that kids can enjoy playing with.<p>A mathematically formal approach does sound potentially more useful, but I&#x27;d have no idea how to approach that sort of problem.  I speculate that the venn diagram of people who want to work on these types of problems and also have the depth of formal math understanding to actually achieve it is a small handful of people who have plenty of other interesting problems to work on.<p>Or maybe someone has done this work successfully, but the depth of knowledge required to understand it has prevented wider awareness?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragonwriter" target="_blank">dragonwriter</a>   <span class="timeago" data-date="2021-06-11 18:34:36 &#43;0000 UTC">2021-06-11 18:34:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Could someone explain the obsessive devotion to doing all Artificial &quot;Life&quot; research in terms of Cellular Automata?<p>Uh, it doesn&#x27;t exist. Plenty of A-life research doesn&#x27;t use cellular automata as a model.<p>&gt; Also, if anyone knows of alternative methods to CA in studying the properties of life then I would also be interested in learning of these.<p><a href="https:&#x2F;&#x2F;avida.devosoft.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;avida.devosoft.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=StandardFuture" target="_blank">StandardFuture</a>   <span class="timeago" data-date="2021-06-11 18:46:32 &#43;0000 UTC">2021-06-11 18:46:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <a href="https:&#x2F;&#x2F;avida.devosoft.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;avida.devosoft.org&#x2F;</a><p>Thanks for the link!<p>&gt; Plenty of A-life research doesn&#x27;t use cellular automata as a model.<p>While I would like to believe you on that, one link does not seem sufficient to support the word &quot;plenty&quot; when the ratio of ALife projects built around CAs to not is extremely high.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=edeion" target="_blank">edeion</a>   <span class="timeago" data-date="2021-06-11 20:12:14 &#43;0000 UTC">2021-06-11 20:12:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll at least point to another example: <a href="http:&#x2F;&#x2F;aevol.fr&#x2F;" rel="nofollow">http:&#x2F;&#x2F;aevol.fr&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danwills" target="_blank">danwills</a>   <span class="timeago" data-date="2021-06-11 22:40:30 &#43;0000 UTC">2021-06-11 22:40:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Although they could call this an automata, I think it&#x27;s incorrect to call it a CA as it&#x27;s not cell-neighbourhood based:<p>&quot;A cellular automaton consists of a regular grid of cells, each in one of a finite number of states, such as on and off &quot;<p>From:
+<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cellular_automaton?wprov=sfla1" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cellular_automaton?wprov=sfla1</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=StandardFuture" target="_blank">StandardFuture</a>   <span class="timeago" data-date="2021-06-12 18:04:25 &#43;0000 UTC">2021-06-12 18:04:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not grid based. But that seems like a rather pedantic differentiation to make. It does quite literally utilize the concept of &quot;cells&quot;. [0]<p>I find it interesting that the project seems to have hard-coded emergence with the concept of &quot;tokens&quot;.<p>So, I am much less intrigued by the simulation examples when most of what we are seeing is just a procedurally-generated video game with pre-defined game rules. Much of it is not truly emergent.<p>Again, it&#x27;s a &quot;oh, that&#x27;s cool&quot; kind of factor, but a far cry from contributing to anything in the way of &quot;artificial life&quot; research.<p>[0] <a href="https:&#x2F;&#x2F;alien-project.org&#x2F;documentation&#x2F;Basicnotion.html" rel="nofollow">https:&#x2F;&#x2F;alien-project.org&#x2F;documentation&#x2F;Basicnotion.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kabla" target="_blank">kabla</a>   <span class="timeago" data-date="2021-06-11 15:04:38 &#43;0000 UTC">2021-06-11 15:04:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Definitely going to play around with this. I&#x27;d love to see examples where you have a ton of at first non-usable energy spread out in the world, with some &quot;hot spot&quot; of energy in a corner with some setup allowing for evolving mechanisms. Seeing mechanisms form that are able to utilize the spread-out energy would be really fascinating.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ericol" target="_blank">ericol</a>   <span class="timeago" data-date="2021-06-11 14:43:22 &#43;0000 UTC">2021-06-11 14:43:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Windows + NVIDIA only.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bstar77" target="_blank">bstar77</a>   <span class="timeago" data-date="2021-06-11 15:12:15 &#43;0000 UTC">2021-06-11 15:12:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, seems like a missed opportunity since the Mac&#x2F;Linux crowed would eat this up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fortran77" target="_blank">fortran77</a>   <span class="timeago" data-date="2021-06-11 15:12:30 &#43;0000 UTC">2021-06-11 15:12:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The most popular OS and the most popular GPU? I can run this easily.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dr_kiszonka" target="_blank">dr_kiszonka</a>   <span class="timeago" data-date="2021-06-12 19:18:08 &#43;0000 UTC">2021-06-12 19:18:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are there any similar projects that would help newbies like me to learn a bit about any real area of life sciences, e.g., biochemistry, cell biology, neuroscience in a fun and engaging way? This project looks like tons of fun, but I am too ignorant to judge whether it would teach me anything applicable beyond the scope of this particular bit of software.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 12:46:40 &#43;0000 UTC">2021-06-11 12:46:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ur-whale" target="_blank">ur-whale</a>   <span class="timeago" data-date="2021-06-12 02:34:46 &#43;0000 UTC">2021-06-12 02:34:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reading through the comments, the number of folks who simply can&#x27;t get this running on their system seems to be fairly large.<p>The GPU compute ecosystem is truly in a very sorry state, and NVidia is very much to blame for this: in their quest to get a stranglehold on the market, they&#x27;ve reached a point where things don&#x27;t even work reliably on their <i>own</i> products.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-06-14 05:14:32 &#43;0000 UTC">2021-06-14 05:14:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            WebGL seems to be the only kind-of-robust way to do portable GPU code now, if you don&#x27;t have encyclopedic experience of deploying native GPU apps. Or the time, $$ budget and opportunity cost budget to engage in multiplatform and testing fixing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aetherspawn" target="_blank">aetherspawn</a>   <span class="timeago" data-date="2021-06-11 12:56:20 &#43;0000 UTC">2021-06-11 12:56:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It reminds me of the spaceship game Reassembly. Straight away, I thought: &quot;hey, you could build a massive reassembly with this probably&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nayuki" target="_blank">nayuki</a>   <span class="timeago" data-date="2021-06-11 16:15:15 &#43;0000 UTC">2021-06-11 16:15:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Their favicon really looks like Flickr&#x27;s logo.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=troymc" target="_blank">troymc</a>   <span class="timeago" data-date="2021-06-11 16:22:30 &#43;0000 UTC">2021-06-11 16:22:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While that&#x27;s true, I doubt that will ever be a problem for <i>ALiEn</i> or Flickr.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrxr" target="_blank">chrxr</a>   <span class="timeago" data-date="2021-06-11 20:06:16 &#43;0000 UTC">2021-06-11 20:06:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is going to be a random comment, but the thing that struck me most was how close this person&#x27;s Github username is to my own! github.com&#x2F;chrxr vs github.com&#x2F;chrxh. Feels bizarre. And seeing their actual name it appears there username has the same relationship to their real name as my own username.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hestefisk" target="_blank">hestefisk</a>   <span class="timeago" data-date="2021-06-11 12:39:55 &#43;0000 UTC">2021-06-11 12:39:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is way above my head but looks insanely cool.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eigenvalue" target="_blank">eigenvalue</a>   <span class="timeago" data-date="2021-06-11 15:34:14 &#43;0000 UTC">2021-06-11 15:34:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me of the awesome Scriptbots project by Karpathy (of Tesla self driving fame) from 10 years ago, which I spent countless hours playing with: <a href="https:&#x2F;&#x2F;sites.google.com&#x2F;site&#x2F;scriptbotsevo&#x2F;" rel="nofollow">https:&#x2F;&#x2F;sites.google.com&#x2F;site&#x2F;scriptbotsevo&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ry4nolson" target="_blank">ry4nolson</a>   <span class="timeago" data-date="2021-06-11 14:01:36 &#43;0000 UTC">2021-06-11 14:01:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me of a reddit r&#x2F;nosleep story, &quot;The Life in the Machine&quot;<p><a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;nosleep&#x2F;comments&#x2F;u7zc2&#x2F;the_life_in_the_machine&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;nosleep&#x2F;comments&#x2F;u7zc2&#x2F;the_life_in_...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mikestaub" target="_blank">mikestaub</a>   <span class="timeago" data-date="2021-06-12 09:16:48 &#43;0000 UTC">2021-06-12 09:16:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of this great youtube channel: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YNMkADpvO4w" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YNMkADpvO4w</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bentcorner" target="_blank">bentcorner</a>   <span class="timeago" data-date="2021-06-11 15:11:21 &#43;0000 UTC">2021-06-11 15:11:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of gridworld: <a href="https:&#x2F;&#x2F;store.steampowered.com&#x2F;app&#x2F;396890&#x2F;Gridworld&#x2F;" rel="nofollow">https:&#x2F;&#x2F;store.steampowered.com&#x2F;app&#x2F;396890&#x2F;Gridworld&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gcampos" target="_blank">gcampos</a>   <span class="timeago" data-date="2021-06-11 19:21:51 &#43;0000 UTC">2021-06-11 19:21:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That reminds me of a small game I did last year: <a href="https:&#x2F;&#x2F;gcampos1712.github.io&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;gcampos1712.github.io&#x2F;index.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperluz" target="_blank">hyperluz</a>   <span class="timeago" data-date="2021-06-11 16:47:11 &#43;0000 UTC">2021-06-11 16:47:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Didn&#x27;t work on my AMD 3700x + 64GB + GTX 1070.
+Windows 10 is updated and nvidia drivers too.
+Got only a black screen after clicking &quot;play&quot;
+:(
+Tested both 2.52 and 2.47 versions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 22:49:27 &#43;0000 UTC">2021-06-13 22:49:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperluz" target="_blank">hyperluz</a>   <span class="timeago" data-date="2021-06-11 16:52:52 &#43;0000 UTC">2021-06-11 16:52:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sometimes I see a frozen render.
+Maybe it only work on Intel CPUs...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jhugard" target="_blank">jhugard</a>   <span class="timeago" data-date="2021-06-11 17:05:41 &#43;0000 UTC">2021-06-11 17:05:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope.  Appears to be broken for Nvidia 10 series.  I&#x27;m on Intel with a 1070ti + another user reports issues on the 1080ti (see similar post in this thread; reported to author here: <a href="https:&#x2F;&#x2F;github.com&#x2F;chrxh&#x2F;alien&#x2F;issues&#x2F;21" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;chrxh&#x2F;alien&#x2F;issues&#x2F;21</a>).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hyperluz" target="_blank">hyperluz</a>   <span class="timeago" data-date="2021-06-11 19:43:51 &#43;0000 UTC">2021-06-11 19:43:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just informing that this really worked on an old i7 920 with 24 GB and a RTX 2060 Super (8GB). I didn&#x27;t even need to install the CUDA SDK on this one.<p>Since the i7 920 supports less instructions than the 3700x, it really is a specific problem with the GTX 1070 (8GB)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ChristopherDrum" target="_blank">ChristopherDrum</a>   <span class="timeago" data-date="2021-06-13 22:50:33 &#43;0000 UTC">2021-06-13 22:50:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Aha... well that explains why my 1060-based system didn&#x27;t work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperluz" target="_blank">hyperluz</a>   <span class="timeago" data-date="2021-06-11 17:26:00 &#43;0000 UTC">2021-06-11 17:26:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for letting me know!<p>Later I&#x27;m going to test it on another computer with a RTX 2060 super, but slower CPU and slower interconnections (PCIe).<p>Thanks for the link too. :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 21:53:21 &#43;0000 UTC">2021-06-12 21:53:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leeoniya" target="_blank">leeoniya</a>   <span class="timeago" data-date="2021-06-11 12:52:56 &#43;0000 UTC">2021-06-11 12:52:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            look&#x2F;feel very reminiscent Osmos game, even the audio:<p><a href="https:&#x2F;&#x2F;m.youtube.com&#x2F;watch?v=QADU5SHHO-w" rel="nofollow">https:&#x2F;&#x2F;m.youtube.com&#x2F;watch?v=QADU5SHHO-w</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gimmemahlulz" target="_blank">gimmemahlulz</a>   <span class="timeago" data-date="2021-06-11 13:48:25 &#43;0000 UTC">2021-06-11 13:48:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have no experience with CUDA, is it possible to run this on a normal PC with a 1080ti?<p>I&#x27;ve tried, the program runs but I cant step the simulation even once.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jhugard" target="_blank">jhugard</a>   <span class="timeago" data-date="2021-06-11 16:32:29 &#43;0000 UTC">2021-06-11 16:32:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same problem with my 1070ti (also Pascal architecture).  When first started can pan, zoom, edit, etc.  But, as soon as Run is hit, rendering completely breaks: scroll bars indicate zoom is working, but display never updates.  In addition, program hangs on exit (one CPU is pegged at 100%).<p>Have updated to current CUDA (11.3.1) and current NVidia driver (466.77) with no luck.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jhugard" target="_blank">jhugard</a>   <span class="timeago" data-date="2021-06-11 17:01:19 &#43;0000 UTC">2021-06-11 17:01:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Submitted an issue on GitHub: <a href="https:&#x2F;&#x2F;github.com&#x2F;chrxh&#x2F;alien&#x2F;issues&#x2F;21" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;chrxh&#x2F;alien&#x2F;issues&#x2F;21</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gmadsen" target="_blank">gmadsen</a>   <span class="timeago" data-date="2021-06-11 13:55:28 &#43;0000 UTC">2021-06-11 13:55:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            install cuda drivers. a 1080ti supports cuda
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 13:28:02 &#43;0000 UTC">2021-06-11 13:28:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=johyari" target="_blank">johyari</a>   <span class="timeago" data-date="2021-06-12 16:09:36 &#43;0000 UTC">2021-06-12 16:09:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems like our current definition of life is way too arbitrary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TheCipster" target="_blank">TheCipster</a>   <span class="timeago" data-date="2021-06-12 16:11:16 &#43;0000 UTC">2021-06-12 16:11:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am surprised nobody has mentioned one of the oldest alife simulations: Tierra by Tom Ray (<a href="http:&#x2F;&#x2F;life.ou.edu&#x2F;tierra&#x2F;" rel="nofollow">http:&#x2F;&#x2F;life.ou.edu&#x2F;tierra&#x2F;</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=creamynebula" target="_blank">creamynebula</a>   <span class="timeago" data-date="2021-06-11 15:28:40 &#43;0000 UTC">2021-06-11 15:28:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now what I really want to see is someone who is skilled with it live streaming on twitch.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=divs1210" target="_blank">divs1210</a>   <span class="timeago" data-date="2021-06-11 13:55:21 &#43;0000 UTC">2021-06-11 13:55:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is awesome! Seems very interesting and looks beautiful! Will definitely give it a try!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ganzuul" target="_blank">ganzuul</a>   <span class="timeago" data-date="2021-06-11 15:20:21 &#43;0000 UTC">2021-06-11 15:20:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there any way to build Microsoft Visual Studio 2019 projects in Linux?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SXX" target="_blank">SXX</a>   <span class="timeago" data-date="2021-06-11 21:07:43 &#43;0000 UTC">2021-06-11 21:07:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can try this converter:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;pavelliavonau&#x2F;cmakeconverter" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pavelliavonau&#x2F;cmakeconverter</a><p>And also use Vcpkg for dependencies, but I guess there will be some mess with Nvidia SDKs so you&#x27;ll have to hack around a bit.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=HeavyStorm" target="_blank">HeavyStorm</a>   <span class="timeago" data-date="2021-06-11 20:34:16 &#43;0000 UTC">2021-06-11 20:34:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Smartscreen is blocking the installer... That&#x27;s so annoying.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=RocketSyntax" target="_blank">RocketSyntax</a>   <span class="timeago" data-date="2021-06-11 18:23:19 &#43;0000 UTC">2021-06-11 18:23:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does it have all of the rules of DNA like jumping genes?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=marcodiego" target="_blank">marcodiego</a>   <span class="timeago" data-date="2021-06-11 12:58:26 &#43;0000 UTC">2021-06-11 12:58:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks better than framsticks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tr14" target="_blank">tr14</a>   <span class="timeago" data-date="2021-06-11 13:07:27 &#43;0000 UTC">2021-06-11 13:07:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is amazing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swayvil" target="_blank">swayvil</a>   <span class="timeago" data-date="2021-06-11 23:39:16 &#43;0000 UTC">2021-06-11 23:39:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is heavy. I shall delve.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nimbius" target="_blank">nimbius</a>   <span class="timeago" data-date="2021-06-11 13:44:38 &#43;0000 UTC">2021-06-11 13:44:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;To build alien you need Microsoft Visual Studio 2019.<p>no thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

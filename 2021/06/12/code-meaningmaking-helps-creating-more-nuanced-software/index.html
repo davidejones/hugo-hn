@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/12/code-meaningmaking-helps-creating-more-nuanced-software/">
+
+
+    <title>Code &#39;meaning-making&#39; helps creating more nuanced software - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Code &#39;meaning-making&#39; helps creating more nuanced software - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/code-meaningmaking-helps-creating-more-nuanced-software/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/12/code-meaningmaking-helps-creating-more-nuanced-software/">
+<meta name="twitter:title" content="Code &#39;meaning-making&#39; helps creating more nuanced software - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Code \u0027meaning-making\u0027 helps creating more nuanced software - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-12T09:30:18JST",
+    "dateModified": "2021-06-12T09:30:18JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://psytechread.substack.com/p/understanding-the-meaning-we-make">Code &#39;meaning-making&#39; helps creating more nuanced software</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thom" target="_blank">thom</a>   <span class="timeago" data-date="2021-06-13 14:07:37 &#43;0000 UTC">2021-06-13 14:07:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Been thinking about this stuff a lot recently, partly driven by a couple of threads here about &#x27;good commit messages&#x27; and things like that. We end up with a lot of context and intention outside our code, which I personally think is a massive failing.<p>In my OO days most codebases lacked a layer describing what the actual use cases of the system were. You&#x27;d maybe have a bunch of &#x27;controllers&#x27; in a web app, or a service layer through which everything funnelled, but they were quite light in terms of meaning. In functional programming we talk a lot about pipelines of transformations over data, instead of the chain of policies through which some business information passes. Obviously some people write more or less intention revealing code (and not everybody works in a sort of enterprise environment where this stuff is paramount), but it&#x27;s rarely taught as the entry point of an architecture. The closest is probably just functional tests, which most people appear to hate, and are rarely first class citizens in your codebase.<p>I&#x27;ve been wondering lately if there is some space in programming language design to address these issues. One (impractical and not entirely original) thought experiment I&#x27;ve found interesting is this: what if your codebase was entirely append only? What primitives would you want to be working with? You&#x27;d probably need more hooks, more late binding, more policy objects, to be able to change processes over time. But out of that you&#x27;d get some interesting properties, like a much more structured history of your understanding of each business process, much better than a textual changelog. There was a brief period where DSLs were fashionable but I&#x27;m not sure that&#x27;s the solution, certainly it doesn&#x27;t seem a popular approach these days.<p>Anyway, I found the article interesting. In software there are always two models at work: the model we&#x27;re implementing in code, and a meta-model in the wider world that causes us to change the implemented model. I wonder if there&#x27;s mileage in being able to represent _both_ to some extent in the artefacts we build.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pbourke" target="_blank">pbourke</a>   <span class="timeago" data-date="2021-06-13 16:04:08 &#43;0000 UTC">2021-06-13 16:04:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; most codebases lacked a layer describing what the actual use cases of the system were<p>&gt; I&#x27;ve been wondering lately if there is some space in programming language design to address these issues.<p>I think we often over-index on programming language features to solve these issues. A picture is worth a thousand words and a few good words are worth a thousand lines of code. Most internal systems lack even rudimentary documentation that describes the architecture, operation and use cases for it.<p>Systems in which the designers take the time to write down the way that things are in terms that somehow tie back to the software (function names, class names, etc) would be a vast improvement. The wiki is still an ideal document for this kind of thing - you can link directly to the code from text that discusses it. It’s very helpful to be able to embed diagrams alongside the text as well using a simple graphviz&#x2F;mermaid style notation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rpvnwnkl" target="_blank">rpvnwnkl</a>   <span class="timeago" data-date="2021-06-13 18:24:18 &#43;0000 UTC">2021-06-13 18:24:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you thinking of something like Literate Programming? [<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Literate_programming" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Literate_programming</a>]
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thom" target="_blank">thom</a>   <span class="timeago" data-date="2021-06-13 18:33:42 &#43;0000 UTC">2021-06-13 18:33:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think literate programming moves _some_ context _closer_ to the code. Sadly I think the modern version of this is the notebook, and these are not things that are built to last. But really I&#x27;m picturing working on codebases where lots and lots of freeform text, either in the same file or elsewhere, isn&#x27;t necessary, because the language or framework guides you to express everything all at once. It&#x27;s a fuzzy picture, I&#x27;ll grant you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/14/analysing-bird-songs-with-wigner-transform/">
+
+
+    <title>Analysing bird songs with Wigner transform - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Analysing bird songs with Wigner transform - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/analysing-bird-songs-with-wigner-transform/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/14/analysing-bird-songs-with-wigner-transform/">
+<meta name="twitter:title" content="Analysing bird songs with Wigner transform - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Analysing bird songs with Wigner transform - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-14T02:03:26JST",
+    "dateModified": "2021-06-14T02:03:26JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://soundshader.github.io/hss/gallery/wigner">Analysing bird songs with Wigner transform</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sdenton4" target="_blank">sdenton4</a>   <span class="timeago" data-date="2021-06-14 06:35:20 &#43;0000 UTC">2021-06-14 06:35:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Couple points of gentle critique:<p>It&#x27;s kinda hard to compare the different spectral representations when they&#x27;re zoomed and cropped differently.<p>Spectrograms can be misleading, in a few different ways. Magnitude FFTs discard phase, which we can hear. And our eyes tend to fixate on the peaks, but the noise floor between harmonics in speech had a big impact on perceived quality. Choice of color scheme and gradient changes how we look at the spectrogram: they can emphasize mathematical or coding artifacts we wouldn&#x27;t hear, or hide things which we can hear. At the end of the day, we don&#x27;t hear with our eyes... So a spectrogram is a tool for looking at audio, but not always an &#x27;honest&#x27; one. So I&#x27;m a bit suspect of pouring over slightly different spectrograms, and worrying about which ones look better aesthetically.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=barbegal" target="_blank">barbegal</a>   <span class="timeago" data-date="2021-06-14 10:11:28 &#43;0000 UTC">2021-06-14 10:11:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In which cases can you hear phase? I know you can hear phase from interference where there are two sources but I didn&#x27;t know you can hear phase of a single audio source.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=willis936" target="_blank">willis936</a>   <span class="timeago" data-date="2021-06-14 10:59:07 &#43;0000 UTC">2021-06-14 10:59:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Phase changes over time of single a single tone are audible.  If there is a linearly changing tone and the phase is not tracking exactly (I believe it is square, I&#x27;d need to brush up on my chirp math), this will color the chirp in an audible way.<p>Also the relative phase of multiple tones affects what the actual shape looks like.  A classic example is a square wave.  Yes, it needs all odd harmonics at a sinc(f) magnitude, but it also needs all of those harmonics at specific phases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sdenton4" target="_blank">sdenton4</a>   <span class="timeago" data-date="2021-06-14 17:13:45 &#43;0000 UTC">2021-06-14 17:13:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s an experiment which makes it very obvious that we hear phase.<p>Take some audio signal X and apply the FFT with a 50% overlap between frames. Now randomize (or zero out) the phase, invert back to time-domain, and then take the FFT again and invert again back to the time domain. The resulting signal has &#x27;consistent&#x27; phase between frames due to the extra round trip, but will still sound terrible. (It&#x27;s equivalent to a single round of Griffin-Lim phase reconstruction. You can run more iterations to get something that sounds better, but it&#x27;s still not perfect even if you run an arbitrary number of iterations.)<p>This proves that the information in the magnitude spectrogram is a subset of what we pick up with our ears: There are signals with the same magnitude spectrogram which sound different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=joren-" target="_blank">joren-</a>   <span class="timeago" data-date="2021-06-14 06:49:36 &#43;0000 UTC">2021-06-14 06:49:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As an FYI, if you are interested in the fundamental frequency of birdsong the GitHup repo below might be of interest. It is an STFT + interpolation to get an accurate (potentially quickly changing) frequency estimate:
+<a href="https:&#x2F;&#x2F;github.com&#x2F;JorenSix&#x2F;stft_freq" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JorenSix&#x2F;stft_freq</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_Microft" target="_blank">_Microft</a>   <span class="timeago" data-date="2021-06-14 03:52:26 &#43;0000 UTC">2021-06-14 03:52:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was this work done on data stored in lossy formats? The appendix with the talk about format conversion makes it sound like it. Should this not have been the first thing to be avoided („garbage in, …“)?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gbh444g" target="_blank">gbh444g</a>   <span class="timeago" data-date="2021-06-14 05:25:49 &#43;0000 UTC">2021-06-14 05:25:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, it was mostly mp3 and ogg files. If you&#x27;re suggesting flac would be better, I don&#x27;t think flac adds much clarity over a decent 320 kbps mp3.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-14 10:28:49 &#43;0000 UTC">2021-06-14 10:28:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Gravityloss" target="_blank">Gravityloss</a>   <span class="timeago" data-date="2021-06-14 07:57:39 &#43;0000 UTC">2021-06-14 07:57:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Getting data from the real world always results in noise and artefacts etc. If you&#x27;ve done any kind of work with data, a large part is preprocessing. MP3 seems like a very minor source of problems compared to the potential others. Road noise, other birds, lorries backing up, people talking, mislabeling etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TonyTrapp" target="_blank">TonyTrapp</a>   <span class="timeago" data-date="2021-06-14 10:25:11 &#43;0000 UTC">2021-06-14 10:25:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference however is that formats like MP3 work on the principle of psycho-acoustics, which means they modify the original audio in a way that is meant to be indistinguishable by human hearing, but it could very well cause a difference in the spectrum in places where it matters for the analysis (it can add and <i>remove</i> frequencies).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=willis936" target="_blank">willis936</a>   <span class="timeago" data-date="2021-06-14 11:04:06 &#43;0000 UTC">2021-06-14 11:04:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The compression is not wholesale adding or removing frequencies, it is selectively lowering the magnitude and SNR.  Overall, the RMSE of 320 kbps mp3 against lossless of many common and simple waveforms is very low.  Certainly it is acceptable for something like birdsong measurement.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Gravityloss" target="_blank">Gravityloss</a>   <span class="timeago" data-date="2021-06-14 12:32:35 &#43;0000 UTC">2021-06-14 12:32:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a great point, hadn&#x27;t considered that. You changed my opinion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-14 06:15:11 &#43;0000 UTC">2021-06-14 06:15:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On the other hand it’s not as if bird songs are encoded binary information. They’re complex to our ears, but probably hold up pretty well under common audio compression algorithms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_Microft" target="_blank">_Microft</a>   <span class="timeago" data-date="2021-06-14 06:23:07 &#43;0000 UTC">2021-06-14 06:23:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why would one bother what effects psychoacoustic models might or might not have on your data when you could simply circumvent the problem completely?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=enriquto" target="_blank">enriquto</a>   <span class="timeago" data-date="2021-06-14 06:37:48 &#43;0000 UTC">2021-06-14 06:37:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You are right in the abstract, but these are very high-resolution &quot;lossy&quot; signals.  If you look at the spectral response of the bird songs it falls well inside the part where there is no signal loss.  Your complain is like bothering about a face recognition system because it used lossily compressed but very high-resolution images.  That criticism would be just as nonsensical.<p>A more meaningful criticism would be the use of the wigner transform itself, which seems to produce ringing artifacts in the visualization, not seen on the more common windowed fft.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slver" target="_blank">slver</a>   <span class="timeago" data-date="2021-06-14 07:02:56 &#43;0000 UTC">2021-06-14 07:02:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You assume the author has access to lossless sources, or has the funding and means to produce the recordings themselves. I don&#x27;t have this impression. You work with what you have.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andai" target="_blank">andai</a>   <span class="timeago" data-date="2021-06-14 12:58:19 &#43;0000 UTC">2021-06-14 12:58:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;freesound.org&#x2F;search&#x2F;?q=blackbird" rel="nofollow">https:&#x2F;&#x2F;freesound.org&#x2F;search&#x2F;?q=blackbird</a><p>(Filter by WAV, FLAC, or AIFF.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=squeaky-clean" target="_blank">squeaky-clean</a>   <span class="timeago" data-date="2021-06-14 13:57:34 &#43;0000 UTC">2021-06-14 13:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Try a more obscure bird species, like the one in the original article.<p><a href="https:&#x2F;&#x2F;freesound.org&#x2F;search&#x2F;?q=Eastern+Wood+Pewee" rel="nofollow">https:&#x2F;&#x2F;freesound.org&#x2F;search&#x2F;?q=Eastern+Wood+Pewee</a><p>1 result<p><a href="https:&#x2F;&#x2F;www.xeno-canto.org&#x2F;explore?query=Eastern%20Wood%20Pewee" rel="nofollow">https:&#x2F;&#x2F;www.xeno-canto.org&#x2F;explore?query=Eastern%20Wood%20Pe...</a><p>228 results<p>Furthermore, your search for blackbird on Freesound gives 639 results based on a text match, while xeno-canto gives 7449 results from 32 species, with metadata tagging it by species, location, date, time of day.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andai" target="_blank">andai</a>   <span class="timeago" data-date="2021-06-14 15:10:28 &#43;0000 UTC">2021-06-14 15:10:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you, that&#x27;s a wonderful website!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DemocracyFTW" target="_blank">DemocracyFTW</a>   <span class="timeago" data-date="2021-06-14 09:38:05 &#43;0000 UTC">2021-06-14 09:38:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also see <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27073944" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27073944</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gadders" target="_blank">gadders</a>   <span class="timeago" data-date="2021-06-14 08:45:31 &#43;0000 UTC">2021-06-14 08:45:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re every out and wonder which bird is behind the song you can hear, this is a great app: <a href="https:&#x2F;&#x2F;birdnet.cornell.edu&#x2F;" rel="nofollow">https:&#x2F;&#x2F;birdnet.cornell.edu&#x2F;</a> (Android and IOS)<p>You record a portion of the song, and it uses machine learning to analyse it and tell you the bird with a confidence figure. Works really well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=RobinL" target="_blank">RobinL</a>   <span class="timeago" data-date="2021-06-14 09:55:43 &#43;0000 UTC">2021-06-14 09:55:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Birdnet is great!<p>Once you&#x27;ve identified the bird, you can then listen to a variety of additional recordings on <a href="https:&#x2F;&#x2F;www.xeno-canto.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.xeno-canto.org&#x2F;</a> which I believe is one of the sources used to train the machine learning model.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

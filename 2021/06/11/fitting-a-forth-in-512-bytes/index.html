@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/11/fitting-a-forth-in-512-bytes/">
+
+
+    <title>Fitting a FORTH in 512 bytes - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Fitting a FORTH in 512 bytes - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/fitting-a-forth-in-512-bytes/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/11/fitting-a-forth-in-512-bytes/">
+<meta name="twitter:title" content="Fitting a FORTH in 512 bytes - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Fitting a FORTH in 512 bytes - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-11T02:31:21JST",
+    "dateModified": "2021-06-11T02:31:21JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://niedzejkob.p4.team/bootstrap/miniforth/">Fitting a FORTH in 512 bytes</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cblum" target="_blank">cblum</a>   <span class="timeago" data-date="2021-06-11 21:06:12 &#43;0000 UTC">2021-06-11 21:06:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gonna plug my own sectorforth here: <a href="https:&#x2F;&#x2F;github.com&#x2F;cesarblum&#x2F;sectorforth" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;cesarblum&#x2F;sectorforth</a><p>The linked post is really impressive. The author went way beyond what I did. I&#x27;m especially impressed by the I&#x2F;O stuff.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=musicale" target="_blank">musicale</a>   <span class="timeago" data-date="2021-06-12 00:22:26 &#43;0000 UTC">2021-06-12 00:22:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenBoot&#x2F;Open Firmware[1] also used Forth.<p>Although the standard was withdrawn in 2000, it continued to be used by PowerPC Macs until Apple moved to x86 and EFI&#x2F;UEFI.<p>Open Firmware is now actually open source as OpenBIOS (and OpenBoot is also available under a BSD license.) Apparently it can be used as a qemu boot rom for Linux, BSD, Solaris, and PowerPC versions of Mac OS 9 and OS X.[2]<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Open_Firmware" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Open_Firmware</a><p>[2] <a href="https:&#x2F;&#x2F;www.openfirmware.info&#x2F;OpenBIOS" rel="nofollow">https:&#x2F;&#x2F;www.openfirmware.info&#x2F;OpenBIOS</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=na85" target="_blank">na85</a>   <span class="timeago" data-date="2021-06-11 21:07:50 &#43;0000 UTC">2021-06-11 21:07:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Man, Forth is such a cool language. It really captures (what I perceive to be) the &quot;hacker mentality&quot; of powerful but simple tools, without much overt concern for polish&#x2F;slick interfaces.<p>I mean I know a lot of foundational code of yesteryear was hacked together in C, but C lacks a certain ineffable cachet in my view. A cachet that Forth definitely has.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kabdib" target="_blank">kabdib</a>   <span class="timeago" data-date="2021-06-12 00:35:09 &#43;0000 UTC">2021-06-12 00:35:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FORTH is a fun little class of languages. These are easy to implement; in a few KB you can have a working development environment, with a screen editor, debugger and whatnot.<p>In my experience, FORTH doesn&#x27;t really scale to big projects, or things that need a lot of dynamic allocation. It&#x27;s great at low-level stuff like hardware bringup (we used it on the Atari ST, back in the day, and even the hardware engineers were writing code to exercise their designs), but doing anything at scale is going to be tough. You probably don&#x27;t want to write a modern web server platform in it, for instance. But it&#x27;s probably great on an Arduino with a serial port.<p>There were a lot of games <i>started</i> at Atari in FORTH (&quot;Hey, this is simple! Who needs to hire expensive assembly language programmers?&quot;) but the only project that shipped was the pinball machine &quot;Four by Four&quot;. I saw a bunch of expensive disasters and mostly steered away from it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thesz" target="_blank">thesz</a>   <span class="timeago" data-date="2021-06-12 09:13:59 &#43;0000 UTC">2021-06-12 09:13:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you need dynamic allocation, you can invent a Forth dialect for your specific needs. And implement it in Forth. A domain-specific language for your problem domain, embedded in Forth.<p>Consider control statements like conditionals or loops. They are implemented in Forth to express what is essential for imperative programming.<p>You can just as easily implement region handling much like what Cyclone [1] did. Invent region, dispose region, allocate within region, etc. You can augment semicolon word to not only check for control statements to be valid, but also check for region handling correctness.<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyclone_(programming_language)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cyclone_(programming_language)</a><p>Of course, you have to be either well educated or highly inventive to do that. ;)<p>And at the time of Atari most of programming projects were expensive disasters, not only games written in Forth.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DonHopkins" target="_blank">DonHopkins</a>   <span class="timeago" data-date="2021-06-12 13:42:31 &#43;0000 UTC">2021-06-12 13:42:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21823081" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21823081</a><p>I wrote malloc.fth for Mitch Bradley&#x27;s ForthMacs, which ended up in OpenFirmware:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;openbios&#x2F;openfirmware&#x2F;blob&#x2F;master&#x2F;ofw&#x2F;core&#x2F;ofwcore.fth#L3453" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;openbios&#x2F;openfirmware&#x2F;blob&#x2F;master&#x2F;ofw&#x2F;cor...</a><p><pre><code>    \ Forth dynamic storage managment.
+    \
+    \ By Don Hopkins, University of Maryland
+    \ Modified by Mitch Bradley, Bradley Forthware
+    \ Public Domain
+    \
+    \ First fit storage allocation of blocks of varying size.
+    \ Blocks are prefixed with a usage flag and a length count.
+    \ Free blocks are collapsed downwards during free-memory and while
+    \ searching during allocate-memory.  Based on the algorithm described
+    \ in Knuth&#x27;s _An_Introduction_To_Data_Structures_With_Applications_,
+    \ sections 5-6.2 and 5-6.3, pp. 501-511.
+</code></pre>
+Forth systems running on C libraries can also call back to the native malloc&#x2F;free implementation, but it&#x27;s nice to have a pure FORTH implementation for embedded applications.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=svat" target="_blank">svat</a>   <span class="timeago" data-date="2021-06-12 13:58:53 &#43;0000 UTC">2021-06-12 13:58:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This may be a tangent but I&#x27;ve encountered this code comment before and been confused; nice to be able to reply to its author! The confusion is that there&#x27;s no book by Knuth called &quot;An Introduction to Data Structures With Applications&quot; (and Knuth&#x27;s TAOCP doesn&#x27;t have a section 5.6; his Chapter 5 on Sorting ends with 5.5 and whatever stuff is in TAOCP about memory allocation is Chapter 2; page 501 would put you in &quot;Answers to Exercises&quot;). Most likely what was intended is the book &quot;An Introduction to Data Structures With Applications&quot; by Jean-Paul Tremblay and Paul G. Sorenson (<a href="https:&#x2F;&#x2F;www.amazon.com&#x2F;dp&#x2F;0070651574" rel="nofollow">https:&#x2F;&#x2F;www.amazon.com&#x2F;dp&#x2F;0070651574</a> , ISBN 0070651574, <a href="https:&#x2F;&#x2F;books.google.com&#x2F;books?id=ha4mAAAAMAAJ" rel="nofollow">https:&#x2F;&#x2F;books.google.com&#x2F;books?id=ha4mAAAAMAAJ</a>) which from what I can find online has 7 chapters:<p>1. Information and its storage representation<p>2. The representation and manipulation of strings<p>3. Linear data structures and their storage representation<p>4. Linear data structures and their linked storage representation<p>5. Nonlinear data structures<p>6. Sorting and searching<p>7. File structures<p>And so Chapter 5 probably has a 5–6.2 and 5–6.3 that cover such a memory allocation algorithm.<p>Edit: I found a weird plagiarized&#x2F;condensed version of the book online, and section 5.6 is indeed called &quot;Memory Allocation; Garbage Collection&quot;, so quite likely that the book by Tremblay and Sorenson is what is meant.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=analognoise" target="_blank">analognoise</a>   <span class="timeago" data-date="2021-06-12 14:17:15 &#43;0000 UTC">2021-06-12 14:17:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love HN.<p>&quot;I read your Forth code from 20 years ago, please help me understand your comment string&quot; - to the original author.<p>I am praying this gets resolved. This needs to be on the front page by itself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=svat" target="_blank">svat</a>   <span class="timeago" data-date="2021-06-12 14:33:21 &#43;0000 UTC">2021-06-12 14:33:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well nothing so romantic: I didn&#x27;t read it 20 years ago; more like some time in the last couple of years. And though I vaguely recall seeing this comment in the context of its code (on GitHub?), I may have well ended up there via a HN comment in a thread much like this, so that wouldn&#x27;t be surprising. :-)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DonHopkins" target="_blank">DonHopkins</a>   <span class="timeago" data-date="2021-06-12 16:20:44 &#43;0000 UTC">2021-06-12 16:20:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great question! I vaguely remember reading it in a tan Knuth book, and the subject and algorithm feels very Knuthian to me, but I can&#x27;t remember exactly. But this book has that title and looks like the book I remember having, and also looks like Knuth&#x27;s books, so maybe I got confused and that&#x27;s the book:<p><a href="https:&#x2F;&#x2F;www.amazon.com&#x2F;introduction-structures-applications-McGraw-Hill-computer&#x2F;dp&#x2F;0070651507" rel="nofollow">https:&#x2F;&#x2F;www.amazon.com&#x2F;introduction-structures-applications-...</a><p>Here&#x27;s some old email I wrote about it -- it turns out I did go on to write an interactive Forth window manager (for X10, with pie menus, and you could &quot;fling&quot; windows and it would start a Forth task to bounce them around on the screen -- see hacks.f), which foreshadowed my later work with NeWS (or its original name SunDew, as Mitch called it, which he ported to the Atari ST).<p><a href="https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;" rel="nofollow">https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;</a><p><a href="https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;uwm.f" rel="nofollow">https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;uwm.f</a><p><a href="https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;fuwm-main.f" rel="nofollow">https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;fuwm-main.f</a><p><a href="https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;hacks.f" rel="nofollow">https:&#x2F;&#x2F;donhopkins.com&#x2F;home&#x2F;archive&#x2F;piemenu&#x2F;uwm1&#x2F;hacks.f</a><p>I made a diagnostic test which memory mapped the black and white framebuffer and ran memory allocator tests in video memory, so I could watch them. But I was using a shitty random number generator, and it looked suspicious.<p>Mitch sent me a better one based on the Unix random number generator, but it was pretty shitty too: The low bit alternates between 0 and one, so if you use &quot;RND 1 AND&quot; to flip a coin you get 0 1 0 1 0 ... So Mitch warned me that &quot;Try dividing by two to get rid of the bogus lsb.&quot;<p>After I got it to work, I used it as a screen saver, so people would think my Sun 3&#x2F;160 was broken and would leave it alone.<p>Memory allocators are easy. Random number are hard!<p>To: Mitch Bradley &lt;wmb@sun.com&gt;
+From: Don Hopkins &lt;don@brillig.umd.edu&gt;
+Date: Mon, Jul 28, 1986, 6:16 AM
+Subject: Dynamic storage manager<p>Here&#x27;s a dynamic storage manager I wrote. It runs under cforth and the
+68000 forth.<p>I&#x27;m sending two files: &quot;records.f&quot;, and &quot;dbuf.f&quot;. The first contains
+some words that are used to define records, like in pascal. The second
+is my dynamic storage manager.<p>I wrote an earlier version of this for my Apple ProDOS Forth system,
+as well as a set of string functions that used it.  I&#x27;m going to port
+this much revised (and more portable) version back to the Apple, and
+update the string handling functions.<p>You may want to change the records.f file. I commented out some code
+in dopasrec that optomized field accessing words with zero offset,
+that was not completely portable.<p>I ran it through 100000 tests, and it worked fine. (I can&#x27;t wait to
+port it to the Apple, and run the tests on the hires screen. Not as
+many, though. A Vax 8600 running cforth can do things a 1 MHZ 6502 is
+not allowed to think about.) Bet it would look cool run in the Sun
+screen memory.<p>Mike Gallaher and I will be arriving in Fornicalia around the evening
+of the 9th. We should be getting a rental car. When are you usualy
+around Sun and how do we find you? Mike&#x27;s staying with Gosling.
+I may need a place to stay near Sun for a few days.<p>I&#x27;ll bring a tape of interesting things. I&#x27;ve been doing some work
+with the X window system, enhancing the &quot;uwm&quot; window manager. Do you
+have a X interface for Forth written? If not, I&#x27;ll write it. I would
+love to build an interactive forth window manager.<p>-Don<p>From: Mitch Bradley &lt;wmb@sun.com&gt;
+From: Don Hopkins &lt;don@brillig.umd.edu&gt;
+Date: Mon, Jul 28, 1986, 10:33 AM
+Subject: Storage allocator and stuff<p>Thanks for the code.  I&#x27;ll try it out within the next few days as
+time permits.<p>You can stay with us for 2 or 3 nights if that would help.
+My wife and I have a spare bedroom in our house.<p>Gosling knows where my office is.  I&#x27;m usually in from 9:30 or 10:00
+onwards.  My leaving time is rather variable.<p>I haven&#x27;t done much with X, because I&#x27;ve been doing some stuff with
+Gosling&#x27;s new PostScript-based window system, SunDew.
+You&#x27;ll see when you get here.  X pales in comparison to SunDew.<p>I&#x27;d be happy for you to do any Forth interfaces that interest you.
+I haven&#x27;t been doing much with Forth&#x2F;Unix stuff lately, because I&#x27;ve
+been working on the Atari ST Forth.<p>Mitch<p>From: Mitch Bradley &lt;wmb@sun.com&gt;
+To: Don Hopkins &lt;don@brillig.umd.edu&gt;
+Date: Wed, Jul 30, 1986, 12:44 AM
+Subject: re: records.f<p>Here&#x27;s how to make the &quot;compile-time noop&quot; stuff for the first field
+portable:<p><pre><code>    : donothing ( -- )  does&gt; drop  ;
+
+    : dopasrec  ( -- ) does&gt; @ create  inrecord @ if
+                               walign over   ?dup if
+                                  , dooffsetr   else
+                            donothing immediate then
+                                             +  else
+                                          allot then ;
+</code></pre>
+Now, here&#x27;s how I do the same thing:  The underlying semantics are
+similar, but I believe that my names are more in keeping with accepted
+Forth naming conventions.<p><pre><code>    : struct 0 ;
+    : field:  ( offset size -- offset&#x27; )
+       create over , +
+       does&gt; @ +
+    ;
+    : byte:   &#x2F;c field: ;
+    : word:   &#x2F;w field: ;
+    : long:   &#x2F;l field: ;
+    : normal: &#x2F;n field: ;
+    : union:  0 field: ;
+    : unused  +  ;
+
+    : size:  constant  ;
+    : ;struct drop ;
+
+    \ Example:
+
+    struct
+       byte: &gt;b1
+       byte: &gt;b2
+       word: &gt;w1
+       long: &gt;l1
+    size: &#x2F;foo
+
+    struct
+       byte: &gt;c1
+       7 unused
+       &#x2F;foo field: &gt;foo
+    ;struct
+</code></pre>
+Note the use of &quot;&gt;&quot; instead of &quot;.&quot; to introduce field names.  This is
+consistent with the conventional usage of &quot;&gt;&quot; to denote the conversion
+of one address to another address (as in &gt;NAME , &gt;BODY , etc.).
+&quot;.&quot; is a bad choice because it usually indicates printing or display.<p>A variation on this, which I hope to test one of these days, is to
+give the &quot;struct&quot; word a DOES&gt; clause, which is used as the run-time
+action of the fields.  This would allow you to easily define structures
+based at particular addresses, without having to explicitly mention
+the base address before each structure member.<p>Mitch<p>From: Don Hopkins &lt;don@brillig.umd.edu&gt;
+To: Mitch Bradley &lt;wmb@sun.com&gt;
+Date: Thu, 31 Jul 86 13:44:55 EDT
+Subject: Random number generator<p>The RND word included in the dbuf.f file is evil and should be flushed.
+I ran the test in dbuf.f in stand alone mode in the video
+memory of a Sun-3. I noticed that many of the buffers were just sitting
+there, never getting picked to be freed. I got pissed at the RND
+function and wrote a studly overkill, which gives much more pleasing
+results on the screen. I modified the test to fill each allocated block
+with a random nonzero byte, and to erase memory before freeing it. You
+can really tell what&#x27;s going on. The Sun-3 is a FAST machine!<p>I did some tests with random bit-mashing ones I made up off the top of
+my head, and with the one in the 68000 forth (the same as the one you
+sent me), and was pretty unsuccessful in terms of non-repetitiveness,
+so I wrote this studly wastefull overkill version that gives pleasing 
+effects.<p><pre><code>    create rnd-state  255 &#x2F;n + allot
+
+    : pretty-fucking-random-as-far-as-I-can-tell-without-lots-of-heavy-theoretical-anaylsis ( --- n )
+      rnd  dup 255 and rnd-state +
+      dup c@ rnd-state + c@ seed +! 
+      rnd swap +! ;
+</code></pre>
+I wrote an Apple ProDOS Forth system, based on the FIG 6502 Forth. I&#x27;d
+like to adapt it to be metacompilable. This will make it a lot easier
+to port some of the more modern features that your system has. I&#x27;m
+writing a ProDOS interface for your file system right now in another
+emacs window. I want to add devices that know about reading other
+operating system formats, and other partitions on the hard disk.<p>-Don<p>From: Mitch Bradley &lt;wmb@sun.com&gt;
+To: Don Hopkins &lt;don@brillig.umd.edu&gt;
+Date: 31 Jul 86 10:34:13 PDT (Thu)
+Subject: Re: Random number generator<p>Try this one and let me know how it works.  I copied this one out
+of the Unix library.  Try dividing by two to get rid of the bogus
+lsb.<p><pre><code>    \ 31-bit random number generator.  Uses a linear congruential generator.
+    \ The result is a positive number in the range 0 &lt;= n &lt; 2^31
+    \ The lsb of this number is no good.  It always toggles.
+    \ The rest of the bits are pretty good.
+    decimal
+    lvariable seed
+    : random  ( -- l )
+       seed l@
+       1103515245 *  12345 +
+       th 7fff.ffff land
+       ldup seed l!
+    ;
+</code></pre>
+From: Don Hopkins &lt;don@brillig.umd.edu&gt;
+To: Mitch Bradley &lt;wmb@sun.com&gt;
+Date: Fri, 30 Jan 87 17:15:25 EST
+Subject: multitasking and memory allocation<p>I&#x27;m having some problems with the multitasking package with forth. 
+I&#x27;ve linked in a lot of C code, and that&#x27;s using the unix malloc,
+and forth is using its own simple malloc, for multitasking. I&#x27;m afraid
+there are some weird interactions between multitasking and the linked
+in C code. Do you have some time for a phone call so I can describe what&#x27;s
+going on? I&#x27;m wondering if forth should be using the unix malloc, but
+the details of the interactions between linking in C code, multitasking,
+how, when, and to what symbols are resolved, and the phase of the moon,
+have me quite confused as to what to do to make the damn machine Do What
+I Mean. I&#x27;d like to at lease replace the simple malloc with the nice malloc
+I wrote, but I think it would be a real pain to get the C programs to know
+about that. It seems it&#x27;s easier to call C from forth than forth from C. 
+Have you got any good tricks for doing the latter? Also, when you link in
+two programs that use the same unix libraries, do they each have their own
+copy? (i.e. two competing mallocs?!) If not, how in the world does it work?
+(What sort of monkey wrench do shared libraries throw into the works, and
+is a monkey wrench just the tool needed or what?)<p>-Do
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=svat" target="_blank">svat</a>   <span class="timeago" data-date="2021-06-12 17:44:27 &#43;0000 UTC">2021-06-12 17:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh wow the covers are <i>really</i> similar! Now it totally makes sense that one would remember one for the other; compare the image of Tremblay–Sorenson on Amazon (<a href="https:&#x2F;&#x2F;images-na.ssl-images-amazon.com&#x2F;images&#x2F;I&#x2F;31i7I+eER8L.jpg" rel="nofollow">https:&#x2F;&#x2F;images-na.ssl-images-amazon.com&#x2F;images&#x2F;I&#x2F;31i7I+eER8L...</a>) with that of TAOCP (<a href="https:&#x2F;&#x2F;i.ebayimg.com&#x2F;images&#x2F;g&#x2F;ZKoAAOSwfzZgPA~D&#x2F;s-l640.jpg" rel="nofollow">https:&#x2F;&#x2F;i.ebayimg.com&#x2F;images&#x2F;g&#x2F;ZKoAAOSwfzZgPA~D&#x2F;s-l640.jpg</a> or <a href="https:&#x2F;&#x2F;www.oldbookshopofbordentown.com&#x2F;pictures&#x2F;WE24020.jpg?v=1585332776" rel="nofollow">https:&#x2F;&#x2F;www.oldbookshopofbordentown.com&#x2F;pictures&#x2F;WE24020.jpg...</a>) — sure the colour is technically different when you look at them side-by-side, but with many similarities in the jacket like the font with the small uppercase letters, there&#x27;s a huge overlap.<p>(Thanks for that interesting email thread too.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=guenthert" target="_blank">guenthert</a>   <span class="timeago" data-date="2021-06-12 18:07:24 &#43;0000 UTC">2021-06-12 18:07:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forth on Atari w&#x2F;o mentioning <a href="https:&#x2F;&#x2F;atari8bit.net&#x2F;db&#x2F;?d=cd&amp;g=Books&amp;f=FORTH-on-the-Atari-Learning-by-Using-1982Hofacker" rel="nofollow">https:&#x2F;&#x2F;atari8bit.net&#x2F;db&#x2F;?d=cd&amp;g=Books&amp;f=FORTH-on-the-Atari-...</a>
+Yep, those were the times.<p>FORTH is all fun and such (well, the stack counting gets old after a while), but I have difficulties seeing it in larger, multi-person projects (were there any?).  A good idea who&#x27;s time came and went.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NieDzejkob" target="_blank">NieDzejkob</a>   <span class="timeago" data-date="2021-06-12 00:55:32 &#43;0000 UTC">2021-06-12 00:55:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me of this video on a text processing example with Forth: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=mvrE2ZGe-rs" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=mvrE2ZGe-rs</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=o8r3oFTZPE" target="_blank">o8r3oFTZPE</a>   <span class="timeago" data-date="2021-06-12 07:28:41 &#43;0000 UTC">2021-06-12 07:28:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Two ways to &quot;scale&quot;.  Up or down.  FORTH scales down.<p>Interesting how developers today impicitly assume the term &quot;scale&quot; mean &quot;scale up&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=astrobe_" target="_blank">astrobe_</a>   <span class="timeago" data-date="2021-06-12 08:21:22 &#43;0000 UTC">2021-06-12 08:21:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;scale up&quot; is usually used as a counter-argument to a solution that is perfectly fitted to the scale it is supposed to be used. This is nothing but a salesmen argument.<p>It is not only in the Forth community that one hears disaster stories like: we did the software for client X in 3 weeks with a team of 4 programmers, but after a few decades they lost the know-how of our language so they decided to rewrite in a &quot;modern&quot; language that &quot;can scale&quot;. They hired a team of 40 developers, it took 3 years, and the result is less reliable than the original. The only thing that scaled up were the development and maintenance costs and the only thing that was modernized is HR policy (i.e. let&#x27;s hire disposable developers).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=perl4ever" target="_blank">perl4ever</a>   <span class="timeago" data-date="2021-06-12 03:39:54 &#43;0000 UTC">2021-06-12 03:39:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I associate Forth with astronomy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ollran" target="_blank">ollran</a>   <span class="timeago" data-date="2021-06-12 08:33:46 &#43;0000 UTC">2021-06-12 08:33:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a list of Forth projects used in NASA missions.<p><a href="https:&#x2F;&#x2F;www.forth.com&#x2F;resources&#x2F;space-applications&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.forth.com&#x2F;resources&#x2F;space-applications&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=praptak" target="_blank">praptak</a>   <span class="timeago" data-date="2021-06-12 08:52:13 &#43;0000 UTC">2021-06-12 08:52:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t you mean Fortran?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lebuffon" target="_blank">lebuffon</a>   <span class="timeago" data-date="2021-06-12 13:35:12 &#43;0000 UTC">2021-06-12 13:35:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Surprise. Fortran was used as well but Forth was used quite a bit by NASA. In some ways it is extremely auditable. A handful of assembler functions sit at the bottom the rest is Forth. Minimal numbers of variables in memory if code is written to use the data stack for inputs and outputs to functions. Much easier to certify than GCC. :-)<p>There were a number of Shuttle experiments where the control software was written in Forth. It gives you a control interpreter out of the box and also bit level access to hardware so you can write custom drivers and then script the hardware control in the functions you wrote or compile them where speed is required, using an 8K..12K kernel.<p>The Cassini probe used Forth software running on a Forth 2-stack CPU.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=perl4ever" target="_blank">perl4ever</a>   <span class="timeago" data-date="2021-06-13 04:17:16 &#43;0000 UTC">2021-06-13 04:17:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, and I didn&#x27;t mean spaceflight either. Which Forth was apparently used for but I didn&#x27;t recall until I googled it.<p>I associate Fortran with nuclear reactor engineers. I was told they were some of the earliest users of it, maybe even before it was out of &quot;beta&quot;, so to speak.<p>Quote from 1955:<p>&quot;Considerable effort is now being made by various groups to develop automatic coding techniques which would make the use of a large machine feasible on this kind of problem. The system of greatest interest is Fortran, which is being set up by IBM for the 704; there is some chance that it will be available by the end of the year. To use it, the engineer who is setting up the problem must formulate it in a somewhat modified algebraic notation, which is then entered directly in the machine. As a result, the task of stating detailed machine orders and assigning addresses, which is largely a clerical task and constitutes most of the work of coding, is completely eliminated. Some scepticism has been expressed by experienced programmers, on the grounds that the resulting code would be far less efficient than one designed by hand. Even if this is the case, however, a system of this kind will still have a wide range of applicability in reactor analysis and should be kept in mind in considering future machine work.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rscho" target="_blank">rscho</a>   <span class="timeago" data-date="2021-06-12 08:58:11 &#43;0000 UTC">2021-06-12 08:58:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forth was originally thought of as a &quot;fourth generation&quot; language when Chuck Moore designed it while doing astronomy research.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-06-12 11:27:39 &#43;0000 UTC">2021-06-12 11:27:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            W. Richard Stevens wrote an early primer on Forth for Kitt Peak.<p><a href="http:&#x2F;&#x2F;forth.org&#x2F;tutorials.html" rel="nofollow">http:&#x2F;&#x2F;forth.org&#x2F;tutorials.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chalcolithic" target="_blank">chalcolithic</a>   <span class="timeago" data-date="2021-06-12 19:55:09 &#43;0000 UTC">2021-06-12 19:55:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hope I&#x27;m not breaking any rules by saying that I enjoyed your blog immensely over the years
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bluedino" target="_blank">bluedino</a>   <span class="timeago" data-date="2021-06-12 02:25:58 &#43;0000 UTC">2021-06-12 02:25:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Weren’t some 7800 games written in Forth?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kabdib" target="_blank">kabdib</a>   <span class="timeago" data-date="2021-06-12 08:41:06 &#43;0000 UTC">2021-06-12 08:41:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like a few were: <a href="https:&#x2F;&#x2F;atariage.com&#x2F;forums&#x2F;topic&#x2F;155951-games-written-in-forth&#x2F;" rel="nofollow">https:&#x2F;&#x2F;atariage.com&#x2F;forums&#x2F;topic&#x2F;155951-games-written-in-fo...</a><p>These were written by third parties and published by Atari. Atari did not have any game programmers on the payroll at that point (all the software folks were working on the ST and related things). There might have been some contracting going on, but the days of an Atari employee coming up with a new game idea and shipping a new cartridge were gone.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dingosity" target="_blank">dingosity</a>   <span class="timeago" data-date="2021-06-12 03:01:57 &#43;0000 UTC">2021-06-12 03:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Worms? was a FORTH jam, or at least that&#x27;s what David Maynard said in a recent interview (since it seems this thread is becoming a list of FORTH games.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_0ffh" target="_blank">_0ffh</a>   <span class="timeago" data-date="2021-06-12 09:42:33 &#43;0000 UTC">2021-06-12 09:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, the source is available here: <a href="https:&#x2F;&#x2F;github.com&#x2F;savetz&#x2F;worms" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;savetz&#x2F;worms</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 00:14:37 &#43;0000 UTC">2021-06-12 00:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway81523" target="_blank">throwaway81523</a>   <span class="timeago" data-date="2021-06-12 09:18:25 &#43;0000 UTC">2021-06-12 09:18:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems painful.  I liked this approach better:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;nineties&#x2F;planckforth" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;nineties&#x2F;planckforth</a><p>You start with a very tiny address or bytecode interpreter, much smaller than 512 bytes.  Then you load several levels of bootstrap interpreters into it until you have a fairly featureful Forth.  So that occupies ram but not program space on the target computer.  You would load the non-initial stuff from a remote computer that didn&#x27;t have tiny memory constraints.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperhopper" target="_blank">hyperhopper</a>   <span class="timeago" data-date="2021-06-11 21:02:49 &#43;0000 UTC">2021-06-11 21:02:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find it amusing how often trying to do complex tasks with simple constraints, always ends up back at stack based languages. Probably why the stack based turing machine is academically important.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q-big" target="_blank">q-big</a>   <span class="timeago" data-date="2021-06-11 22:29:18 &#43;0000 UTC">2021-06-11 22:29:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Probably why the stack based turing machine is academically important.<p>A Turing machine is not stack-based, but tape-based. A pushdown automaton (PDA) is stack-based.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bear8642" target="_blank">bear8642</a>   <span class="timeago" data-date="2021-06-12 05:04:31 &#43;0000 UTC">2021-06-12 05:04:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Although turing machine tape emulatable via 2 stacks
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=imode" target="_blank">imode</a>   <span class="timeago" data-date="2021-06-11 23:39:54 &#43;0000 UTC">2021-06-11 23:39:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Two stacks make an automaton Turing Complete. Which is an interesting result.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NieDzejkob" target="_blank">NieDzejkob</a>   <span class="timeago" data-date="2021-06-11 22:47:46 &#43;0000 UTC">2021-06-11 22:47:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suppose that prior art influences things. In my case, I went &quot;a separate text editor won&#x27;t fit, I need a REPL&quot;, and that basically filtered to just Forth and Lisp. It would be interesting to see what subset of Lisp would fit in a bootsector, but I wouldn&#x27;t get my hopes up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=na85" target="_blank">na85</a>   <span class="timeago" data-date="2021-06-11 23:31:39 &#43;0000 UTC">2021-06-11 23:31:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s sectorlisp that appears to fit into two sectors but is yet shy of their single-sector goal: <a href="https:&#x2F;&#x2F;github.com&#x2F;jart&#x2F;sectorlisp" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;jart&#x2F;sectorlisp</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jart" target="_blank">jart</a>   <span class="timeago" data-date="2021-06-12 10:50:28 &#43;0000 UTC">2021-06-12 10:50:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            sectorlisp right now is 800 bytes but it implements LISP well enough that you can use its built-in LISP IDE to implement your own LISP engine on top of sectorlisp using high-level functional programming techniques. <a href="https:&#x2F;&#x2F;youtu.be&#x2F;hvTHZ6E0Abo" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;hvTHZ6E0Abo</a> If we can trim down the code size another 250 bytes then all this will fit in the master boot record.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stcredzero" target="_blank">stcredzero</a>   <span class="timeago" data-date="2021-06-11 20:37:25 &#43;0000 UTC">2021-06-11 20:37:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;To compile a kernel, you need a running kernel.&quot;<p>Why? I guess it depends on how you define &quot;kernel.&quot; But to be able to do a batch process like compilation, you can get away with a little.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spicybright" target="_blank">spicybright</a>   <span class="timeago" data-date="2021-06-11 20:45:52 &#43;0000 UTC">2021-06-11 20:45:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m guessing by kernel he meant any program that can host other programs in some way.<p>Can you clarify what batch process means in this case?<p>I &#x2F;think&#x2F; the authors definition of a kernel is a program that can host other programs in some way.<p>A video game on a boot sector can&#x27;t do that (even though it likely would have it&#x27;s own kernel to function), but some kind of input loop to write memory could.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stcredzero" target="_blank">stcredzero</a>   <span class="timeago" data-date="2021-06-11 22:12:16 &#43;0000 UTC">2021-06-11 22:12:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The old Apple II+ I had as a kid only did one process at a time. For an OS, it basically had what amounted to a REPL for Microsoft BASIC.<p>You don&#x27;t need to host another program to compile something. All you need to do is to read data off disk, then write other data back.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Someone" target="_blank">Someone</a>   <span class="timeago" data-date="2021-06-11 22:23:54 &#43;0000 UTC">2021-06-11 22:23:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And what would do that “read data off disk, then write other data back”, if not a program? Even if you use a monitor (<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Machine_code_monitor" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Machine_code_monitor</a>) to write a program, that’s still a program.<p>The only way to avoid that is to hand-punch a tape or something like that (with lots of practice and patience, it may be possible to program a small PROM or write an early floppy by hand)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ronsor" target="_blank">ronsor</a>   <span class="timeago" data-date="2021-06-11 23:43:40 &#43;0000 UTC">2021-06-11 23:43:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m reminded of the manually-inputted Microsoft BASIC bootloader for the ALTAIR 8800: <a href="https:&#x2F;&#x2F;just8bits.blogspot.com&#x2F;2017&#x2F;03&#x2F;doing-it-in-less-than-bill-gates.html" rel="nofollow">https:&#x2F;&#x2F;just8bits.blogspot.com&#x2F;2017&#x2F;03&#x2F;doing-it-in-less-than...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-12 13:51:14 &#43;0000 UTC">2021-06-12 13:51:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SAI_Peregrinus" target="_blank">SAI_Peregrinus</a>   <span class="timeago" data-date="2021-06-12 02:14:13 &#43;0000 UTC">2021-06-12 02:14:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve compiled some simple C (microcontroller blinky) by hand. Then assembled and linked the output, and written the machine code into a HEX (Intel format) file. Then tested it on the micro. It&#x27;s a rather fun exercise (Type 2 fun).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Something1234" target="_blank">Something1234</a>   <span class="timeago" data-date="2021-06-12 03:26:08 &#43;0000 UTC">2021-06-12 03:26:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is type 2 fun?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwdc" target="_blank">kwdc</a>   <span class="timeago" data-date="2021-06-12 04:34:00 &#43;0000 UTC">2021-06-12 04:34:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fun with extra twists and turns you weren&#x27;t expecting. Usually quite an adventure, some unintended learning and growth. Hopefully a story worth telling.<p>As opposed to the obvious doing an activity for fun.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bear8642" target="_blank">bear8642</a>   <span class="timeago" data-date="2021-06-12 05:06:06 &#43;0000 UTC">2021-06-12 05:06:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fun after the fact.<p>type 1 is fun at the time
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kstrauser" target="_blank">kstrauser</a>   <span class="timeago" data-date="2021-06-11 22:29:43 &#43;0000 UTC">2021-06-11 22:29:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On a Commodore 64, the kernal [sic] was similar to the BIOS on a PC, with display and keyboard handlers, IO routines, etc. When you first turned on the machine, <i>something</i> had to say &quot;** COMMODORE 64 BASIC V2 **&quot;, and that something was the kernal.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=edgyquant" target="_blank">edgyquant</a>   <span class="timeago" data-date="2021-06-11 23:24:59 &#43;0000 UTC">2021-06-11 23:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always kind of thought the kernel was, at its core, the thing that handles processes and hardware io.  Even if you use one of those tiny micro kernels it has to handle processes and present an api through which to communicate with devices (even if it doesn’t handle the devices itself.)  I think it’s true you need a kernel to compile a kernel in this sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=astrobe_" target="_blank">astrobe_</a>   <span class="timeago" data-date="2021-06-12 08:37:35 &#43;0000 UTC">2021-06-12 08:37:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s precisely the joke. &quot;Kernel&quot; here means the minimal feature set that let you compile a kernel. The sentence is tautological, except perhaps for the definition of &quot;minimal&quot;, because there are various flavors of &quot;minimal&quot; (e.g. absolute minimum, practical minimum, ergonomic minimum...).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=musicale" target="_blank">musicale</a>   <span class="timeago" data-date="2021-06-12 00:41:12 &#43;0000 UTC">2021-06-12 00:41:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As the article demonstrates, all you really need is a boot loader.<p>On early machines (large and small) with front panel hardware, you could use switches to manually enter the boot loader into memory and then start it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stan_rogers" target="_blank">stan_rogers</a>   <span class="timeago" data-date="2021-06-12 04:56:32 &#43;0000 UTC">2021-06-12 04:56:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ...and the EDSAC crew decided that that sort of thing was a mug&#x27;s game as far back as 1949, so they added what amounts to a machine to do that for you (the Initial Orders unit). (No, I don&#x27;t <i>really</i> miss the Altair, no matter how ecstatic I was about it in high school. Toogle-booting is fun <i>maybe</i> twice.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NieDzejkob" target="_blank">NieDzejkob</a>   <span class="timeago" data-date="2021-06-11 22:56:13 &#43;0000 UTC">2021-06-11 22:56:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Workarounds exist, like for every other example I mentioned. I am mostly referring to the commonly used dependency graph.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dng88" target="_blank">dng88</a>   <span class="timeago" data-date="2021-06-12 03:01:08 &#43;0000 UTC">2021-06-12 03:01:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Technically not true. As all computer starts with hardware and only that so e input process is needed.  Of course, it really depends on howto define kennel. But you do not need very high level.  Some feedback is better.  Otherwise just input something, computer can take on.  The “software” on the hardware need not be complete.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-11 03:37:09 &#43;0000 UTC">2021-06-11 03:37:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=timonoko" target="_blank">timonoko</a>   <span class="timeago" data-date="2021-06-12 03:25:24 &#43;0000 UTC">2021-06-12 03:25:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There must be lots of ole-school fixed-width machines, which have stack machine built-in. Especially if you decide that top-of-stack means contents of the accumulator(s). To make it a &quot;forth&quot;, you need separate string space, where machine words are linked to symbols. 1+ for example is just INC.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-06-13 06:02:26 &#43;0000 UTC">2021-06-13 06:02:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Many modern RISC architectures have pre-increment and post-decrement addressing modes for all their general-purpose registers, so it&#x27;s very easy and convenient to maintain multiple stacks and implement &quot;NEXT&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sarak12070" target="_blank">sarak12070</a>   <span class="timeago" data-date="2021-06-12 00:33:34 &#43;0000 UTC">2021-06-12 00:33:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Get beautiful glowing face  using papaya mask 
+Step by step guide
+<a href="http:&#x2F;&#x2F;healthwithbeauty.xyz&#x2F;2021&#x2F;06&#x2F;11&#x2F;papaya-yogurt-mask-step-by-step-guide&#x2F;" rel="nofollow">http:&#x2F;&#x2F;healthwithbeauty.xyz&#x2F;2021&#x2F;06&#x2F;11&#x2F;papaya-yogurt-mask-st...</a><p>most dangerous bridge in the world
+<a href="https:&#x2F;&#x2F;www.interestingnews.club&#x2F;2021&#x2F;06&#x2F;most-dangerous-bridge-in-world.html" rel="nofollow">https:&#x2F;&#x2F;www.interestingnews.club&#x2F;2021&#x2F;06&#x2F;most-dangerous-brid...</a><p>Norwegian man dead hangs for 16 minutes to break world record
+<a href="https:&#x2F;&#x2F;www.interestingnews.club&#x2F;2021&#x2F;06&#x2F;norwegian-man-dead-hangs-for-16-minutes.html" rel="nofollow">https:&#x2F;&#x2F;www.interestingnews.club&#x2F;2021&#x2F;06&#x2F;norwegian-man-dead-...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dingosity" target="_blank">dingosity</a>   <span class="timeago" data-date="2021-06-11 22:32:36 &#43;0000 UTC">2021-06-11 22:32:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            people talking about how cool FORTH is. @cblum made his own sector forth. this is my tribe. i honestly thought there were no stack fans left in the world, thanks for proving me wrong.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=garmaine" target="_blank">garmaine</a>   <span class="timeago" data-date="2021-06-12 07:58:56 &#43;0000 UTC">2021-06-12 07:58:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check out Bitcoin’s script language sometime.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tromp" target="_blank">tromp</a>   <span class="timeago" data-date="2021-06-12 12:14:15 &#43;0000 UTC">2021-06-12 12:14:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Postscript, the printer page description language, is a general purpose programming language in common use, also as the basis of PDF.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-06-13 06:03:38 &#43;0000 UTC">2021-06-13 06:03:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One has to implement FORTH oneself to truly grok it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

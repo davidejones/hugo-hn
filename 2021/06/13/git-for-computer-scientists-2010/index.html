@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.82.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/06/13/git-for-computer-scientists-2010/">
+
+
+    <title>Git for Computer Scientists (2010) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Git for Computer Scientists (2010) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/git-for-computer-scientists-2010/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/06/13/git-for-computer-scientists-2010/">
+<meta name="twitter:title" content="Git for Computer Scientists (2010) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Git for Computer Scientists (2010) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-06-13T10:06:13JST",
+    "dateModified": "2021-06-13T10:06:13JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.15f5cccbc1e29fb1929e0949e1bf4961e60580fc971c4f02c278a398217fb57d230b7f7d4d55723192e7808bd1efeb5e006c59e16b06f888a56502320ce1e0c1.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://eagain.net/articles/git-for-computer-scientists/">Git for Computer Scientists (2010)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=umvi" target="_blank">umvi</a>   <span class="timeago" data-date="2021-06-13 15:56:56 &#43;0000 UTC">2021-06-13 15:56:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just think of git as a graph and branches&#x2F;tags as text pointers to nodes in the graph. Doesn&#x27;t seem that complex to me...<p>Maybe I &quot;got gud&quot; though and can no longer empathize with git beginners
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CountSessine" target="_blank">CountSessine</a>   <span class="timeago" data-date="2021-06-13 18:25:30 &#43;0000 UTC">2021-06-13 18:25:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The git plumbing and plumbing commands are straightforward and easy enough to understand once you read about them a bit (I recommend the free Pro Git book online).<p>The original git porcelain commands - <i>git branch</i>, <i>git reset</i>, <i>git pull</i> - are execrable. They’re filled with implementation details (index&#x2F;cache vs staging), weird and suggestive syntax that seems like it should be extensible and widely applicable but isn’t (localbranch:remotebranch), and nuclear-powered self-destruct functionality hidden amongst playthings (git reset vs git reset —hard).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=taberiand" target="_blank">taberiand</a>   <span class="timeago" data-date="2021-06-13 20:31:05 &#43;0000 UTC">2021-06-13 20:31:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It sounds like git in general isn&#x27;t necessarily the problem (at least after getting the basic model down), it&#x27;s specifically the interface and associated foot-guns it sticks in there for beginners (and tired experts) to trip over.<p>Most people most of the time will get by if they grab a decent git GUI, figure out the minimal set of operations they need, and just Google the rest when necessary.<p>My stupidest git mistake was when I was cleaning out a directory of bin and obj folders and included gits obj folder as well. And of course after crying in the corner for a bit I take a little time to look into git commands and I could have just run &#x27;git clean&#x27;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-06-13 20:35:02 &#43;0000 UTC">2021-06-13 20:35:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Two additional bad defaults: crlf handling on Windows, and pull not defaulting to rebase.<p>The message &quot;up to date with origin&#x2F;master&quot; is also misleading, because it doesn&#x27;t check the remote itself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-13 22:03:11 &#43;0000 UTC">2021-06-13 22:03:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pull defaulting to rebase could be a dangerous and chaotic default. If you want to argue that pulling should be fast-forward-only, then I&#x27;d say maybe you have a case.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yencabulator" target="_blank">yencabulator</a>   <span class="timeago" data-date="2021-06-13 23:19:19 &#43;0000 UTC">2021-06-13 23:19:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have aliases ff for fast-forward-only merges and puff for fast-forward-only pulls. I never type `git pull` anymore, and it&#x27;s much harder to shoot your foot off with the aliases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sleepychu" target="_blank">sleepychu</a>   <span class="timeago" data-date="2021-06-13 18:41:14 &#43;0000 UTC">2021-06-13 18:41:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            `git checkout` great for switching to a different commit <i>and</i> for throwing away local unstaged changes!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-13 22:03:54 &#43;0000 UTC">2021-06-13 22:03:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Using `git checkout` with a filename really really really should have a yes&#x2F;no prompt by default, or at least an `-i` option like `rm`.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sleepychu" target="_blank">sleepychu</a>   <span class="timeago" data-date="2021-06-14 10:31:34 &#43;0000 UTC">2021-06-14 10:31:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think `git switch` is an attempt to resolve this
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Izkata" target="_blank">Izkata</a>   <span class="timeago" data-date="2021-06-13 21:57:03 &#43;0000 UTC">2021-06-13 21:57:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, something along these lines is how I&#x27;ve explained it to co-workers as well.  Tossing in &quot;git log --all --oneline --decorate --graph&quot; so they can actually <i>see</i> the graph also helps a lot.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=usr1106" target="_blank">usr1106</a>   <span class="timeago" data-date="2021-06-14 00:27:42 &#43;0000 UTC">2021-06-14 00:27:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>    gitk --all
+</code></pre>
+is even better. Most people don&#x27;t work in front of VT100s today.<p>Actually I work most of the day remotely in `screen` on my office machine. But in case of complicated&#x2F;confusing&#x2F;buggy history&#x2F;branching I fetch for the repo so I can run gitk locally.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rubyist5eva" target="_blank">rubyist5eva</a>   <span class="timeago" data-date="2021-06-13 16:05:07 &#43;0000 UTC">2021-06-13 16:05:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because that&#x27;s exactly what it is, and it&#x27;s not.  When I explain git to newbies in this way, it&#x27;s like something clicks in their brain and they just start to &quot;get it&quot; as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-06-13 18:57:53 &#43;0000 UTC">2021-06-13 18:57:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But then once you get the mental model you spend the other 90% of the time figuring out what magic incantations are needed to transform the graph in the way you want.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=crispyambulance" target="_blank">crispyambulance</a>   <span class="timeago" data-date="2021-06-13 22:40:24 &#43;0000 UTC">2021-06-13 22:40:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The sad thing is you can&#x27;t just &quot;figure it out.&quot; Most folks do &quot;good-enough&quot; after some coaching and memorizing a limited set of commands needed for their workflow-- until something unexpected happens.<p>It could be a typo, or trying something new, or forgetting&#x2F;misunderstanding the intent of some counterintuitive command, or maybe cleaning up an existing problem. All those things can easily put someone in a deep rabbit hole of inside git book or, worse, google search.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nkozyra" target="_blank">nkozyra</a>   <span class="timeago" data-date="2021-06-13 22:52:27 &#43;0000 UTC">2021-06-13 22:52:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well it&#x27;s understandable. Moving nodes in a graph (a tree, really) has a lot of side effects. Couple that with multiple people trying to keep things in sync(ish) and it gets super complex.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rubyist5eva" target="_blank">rubyist5eva</a>   <span class="timeago" data-date="2021-06-14 02:25:51 &#43;0000 UTC">2021-06-14 02:25:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            90% of the time you can achieve what you want with `git rebase -i`
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-13 18:13:36 &#43;0000 UTC">2021-06-13 18:13:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Especially if they took a maths course on graph theory.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Igelau" target="_blank">Igelau</a>   <span class="timeago" data-date="2021-06-13 17:20:33 &#43;0000 UTC">2021-06-13 17:20:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It <i>could</i> be hard if you never took Discrete or another course that introduces graph theory. Or if you cheated your way through or barely scraped by. I can see how a CS freshman or someone from another field might struggle, but even then it&#x27;s more comprehensible than any of the alternatives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=crispyambulance" target="_blank">crispyambulance</a>   <span class="timeago" data-date="2021-06-13 22:32:31 &#43;0000 UTC">2021-06-13 22:32:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The hard part of git has never been the understanding its graph model.<p>The hard part HAS ALWAYS BEEN is memorizing all those badly named and counterintuitive commands.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Igelau" target="_blank">Igelau</a>   <span class="timeago" data-date="2021-06-14 00:39:01 &#43;0000 UTC">2021-06-14 00:39:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even that is only true if you&#x27;re coming from a system where branch, tag, and checkout mean something else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=actually_a_dog" target="_blank">actually_a_dog</a>   <span class="timeago" data-date="2021-06-14 01:07:11 &#43;0000 UTC">2021-06-14 01:07:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that&#x27;s a fine perspective for a computer scientist or graph theorist, myself.  Fortunately, since the article title is &quot;Git for Computer Scientists,&quot; that&#x27;s essentially the approach the article takes. :-)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nerdponx" target="_blank">nerdponx</a>   <span class="timeago" data-date="2021-06-13 17:59:34 &#43;0000 UTC">2021-06-13 17:59:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s pretty much the gist of the article, no?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cerved" target="_blank">cerved</a>   <span class="timeago" data-date="2021-06-13 19:23:18 &#43;0000 UTC">2021-06-13 19:23:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what makes it good :)<p>I had no idea why it took my brain so long to wrap my head around it. Maybe it was blissful ignorance, never sitting down and making a mental model of it. Always looking for a tldr version of doing things. I don&#x27;t know exactly at which point things clicked but it went from bewildering to just makes sense
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cerved" target="_blank">cerved</a>   <span class="timeago" data-date="2021-06-13 19:28:59 &#43;0000 UTC">2021-06-13 19:28:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think all that is needed is an aha moment
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-14 13:20:54 &#43;0000 UTC">2021-06-14 13:20:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the hard part of Git isn&#x27;t the bit you&#x27;ve just described. It&#x27;s the terrible CLI and terminology.<p>Give any Git newbie a decent GUI and a translation for Git terminology into sane terminology and they will have no problems.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=RobRivera" target="_blank">RobRivera</a>   <span class="timeago" data-date="2021-06-13 22:57:01 &#43;0000 UTC">2021-06-13 22:57:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i honestly feel people are allergic to rtfm
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 23:01:45 &#43;0000 UTC">2021-06-13 23:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uhhhhhhhhhhhhhh" target="_blank">uhhhhhhhhhhhhhh</a>   <span class="timeago" data-date="2021-06-14 05:19:13 &#43;0000 UTC">2021-06-14 05:19:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There needs a canonical git repo on which TFM allows a notebook-esque running of the many forms of each command
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jollybean" target="_blank">jollybean</a>   <span class="timeago" data-date="2021-06-13 22:02:42 &#43;0000 UTC">2021-06-13 22:02:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &#x27;complex&#x27; part usually relates to how to manage the graph in terms of what you want to do, and all the odd states that might exist otherwise, especially when syncing with &#x27;other graphs&#x27;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=auggierose" target="_blank">auggierose</a>   <span class="timeago" data-date="2021-06-13 19:51:25 &#43;0000 UTC">2021-06-13 19:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A friend of mine just posted this today, and I totally agree:<p><a href="https:&#x2F;&#x2F;weisser-zwerg.dev&#x2F;posts&#x2F;software-engineering-vcs&#x2F;" rel="nofollow">https:&#x2F;&#x2F;weisser-zwerg.dev&#x2F;posts&#x2F;software-engineering-vcs&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IshKebab" target="_blank">IshKebab</a>   <span class="timeago" data-date="2021-06-14 13:18:46 &#43;0000 UTC">2021-06-14 13:18:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  in my opinion, the majority of projects developed in-house in an organization by a dedicated in-house software engineering team, would be better off following the guiding principles in Why Google Stores Billions of Lines of Code in a Single Repository and rather using something like SVN rather than git.<p>Mmm no thanks! In any case there&#x27;s no reason you can&#x27;t use Git itself as a monorepo! You don&#x27;t have to inflict SVN on people for that.<p>Very weird opinion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-13 17:20:22 &#43;0000 UTC">2021-06-13 17:20:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Will read it, until now, for me,git feels like it tries to get in my way (probably because I think differently). I heard about fossil,(<a href="https:&#x2F;&#x2F;fossil-scm.org&#x2F;home&#x2F;doc&#x2F;trunk&#x2F;www&#x2F;fossil-v-git.wiki" rel="nofollow">https:&#x2F;&#x2F;fossil-scm.org&#x2F;home&#x2F;doc&#x2F;trunk&#x2F;www&#x2F;fossil-v-git.wiki</a>) does anybody have experience with it? Does it suck less?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=booleandilemma" target="_blank">booleandilemma</a>   <span class="timeago" data-date="2021-06-13 18:08:48 &#43;0000 UTC">2021-06-13 18:08:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think there are 2 core principles governing fossil:<p>1) It wants to be the only tool you need to bring with you if you and your fellow developers are going to be stuck on a desert island. It’s not only version control, but also an issue tracker, and more recently a chat app.<p>2) It preserves everything you commit to it. Whereas git lets you polish your commit history before pushing, fossil keeps everything. You can’t alter your local history. All your messy scratch work can’t be cleaned up. It’s visible forever.<p>That second point is what turns me off to it, so I’ve stuck with git for personal projects. When I push up my local code, I like to have a very clean history.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-13 19:19:14 &#43;0000 UTC">2021-06-13 19:19:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks. They really seem to have a bias against deleting (and not so good rationalizations):<a href="https:&#x2F;&#x2F;fossil-scm.org&#x2F;home&#x2F;doc&#x2F;trunk&#x2F;www&#x2F;shunning.wiki" rel="nofollow">https:&#x2F;&#x2F;fossil-scm.org&#x2F;home&#x2F;doc&#x2F;trunk&#x2F;www&#x2F;shunning.wiki</a><p>Apart from that, did you try it, and was it smooth?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=booleandilemma" target="_blank">booleandilemma</a>   <span class="timeago" data-date="2021-06-13 19:48:08 &#43;0000 UTC">2021-06-13 19:48:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I tried it just for an afternoon, but I did find it easy to work with.<p>I find git easy to work with too though, as long as everyone sticks to a well-defined workflow and doesn’t do anything weird.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-14 04:41:10 &#43;0000 UTC">2021-06-14 04:41:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe that is the problem here, we do not have a defined workflow. Do you know of any good workflow sheet for git we can lift ideas from?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stingraycharles" target="_blank">stingraycharles</a>   <span class="timeago" data-date="2021-06-13 18:32:12 &#43;0000 UTC">2021-06-13 18:32:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So if I understand correctly there’s no equivalent to git squash merging branches?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hyperman1" target="_blank">hyperman1</a>   <span class="timeago" data-date="2021-06-13 18:07:31 &#43;0000 UTC">2021-06-13 18:07:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My experience with git is it&#x27;s organically grown, and regularly a mess.  It works reasonably well and in fact is better than a lot of alternatives, but can become a monster quickly and unexpectedly.  My experience with mercurial was better than with git.<p>But none of this matters, as git&#x2F;github&#x2F;gitlab is today the industry standard, or even the category killer for version control. You will have to deal with it in one capacity or another.  So my advice is to deal with git, learn at least up to medium level.  As industry standards go, things could be a lot worse than git.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-13 18:15:12 &#43;0000 UTC">2021-06-13 18:15:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The main thing to know for newbies is as long as you don’t force push to a remote branch, it is safe. You are creating new state only, not destroying. All errors are
+Recoverable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=usr1106" target="_blank">usr1106</a>   <span class="timeago" data-date="2021-06-14 00:43:21 &#43;0000 UTC">2021-06-14 00:43:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even force pushing is not really a problem. If you don&#x27;t want to keep every typo and braindead approach in history, force push is a required tool.<p>Naturally things go wrong occasionally, but garbage collection is not run often. You only need to know the SHA-1 and you can fetch &quot;lost&quot; commits again.<p>Old SHA-1s can be found in reflog. We also have all pushes automatically announced all in chat, so you can look up previously pushed SHA-1s in chat history (we use gitlab and zulip and those support it out of the box).<p>Of course you still need a mental model how git history (including history rewriting) works, othwerwise you cannot understand what exactly went wrong. And without knowing what went wrong fixing it gets awkward trial and error, which unfortunately many less experienced git users seem to do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-13 18:16:17 &#43;0000 UTC">2021-06-13 18:16:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And don’t expect the command details to make sense. What you want to do is some simple thing in terms of a graph of states, and just google the command if you aren’t sure it it is origin&#x2F;branch or origin space branch.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-06-13 20:37:45 &#43;0000 UTC">2021-06-13 20:37:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can still easily lose uncommitted local state, which is unrecoverable, and also put the checkout into a state from which a newbie finds it hard to escape.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jjice" target="_blank">jjice</a>   <span class="timeago" data-date="2021-06-13 14:52:33 &#43;0000 UTC">2021-06-13 14:52:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Definitely helped a bit. I just graduated from university and am working full time as a developer now. I thought I knew how to use git because I knew how to do feature branching and merging. Boy was I wrong. Within a few weeks at my new job, I&#x27;ve realized that I&#x27;m missing so much useful git knowledge. When I learned about cherry-pick, my mind was blown.<p>My goal right now is to develop a better mental model of git than what I have right now. If anyone has recommendations for resources, please let me know!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=guhidalg" target="_blank">guhidalg</a>   <span class="timeago" data-date="2021-06-13 15:06:59 &#43;0000 UTC">2021-06-13 15:06:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;learngitbranching.js.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;learngitbranching.js.org&#x2F;</a><p>Go through every lesson, understand it, and find yourself more knowledgeable about git usage than 95% of developers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-13 18:20:20 &#43;0000 UTC">2021-06-13 18:20:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So true and so worth the extra knowledge to understand your tools. You should also read about the various knobs on your compiler or interpreter from time to time. I used to reread gcc manual every five years, and now I search on the env variables that affect
+python runtime. Getting ready to that for go build chain now I have 3 or 4 production go things. Similar for my editor and libc and language stblib and kernel APIs, tho they are more diffuse than the gcc manual.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Forge36" target="_blank">Forge36</a>   <span class="timeago" data-date="2021-06-13 22:25:09 &#43;0000 UTC">2021-06-13 22:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was a good way to pass some time :)<p>I look forward to sharing this with others on my team.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlokier" target="_blank">jlokier</a>   <span class="timeago" data-date="2021-06-13 15:18:23 &#43;0000 UTC">2021-06-13 15:18:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was the best resource for me:<p><a href="http:&#x2F;&#x2F;ftp.newartisans.com&#x2F;pub&#x2F;git.from.bottom.up.pdf" rel="nofollow">http:&#x2F;&#x2F;ftp.newartisans.com&#x2F;pub&#x2F;git.from.bottom.up.pdf</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leephillips" target="_blank">leephillips</a>   <span class="timeago" data-date="2021-06-13 20:36:49 &#43;0000 UTC">2021-06-13 20:36:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is a good, clear exposition. Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-06-13 16:35:42 &#43;0000 UTC">2021-06-13 16:35:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Jessica Kerr (jessitron) gives a good git internals talk that you can find on YouTube if that’s a helpful learning style.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-06-13 21:58:33 &#43;0000 UTC">2021-06-13 21:58:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some past threads:<p><i>Git for Computer Scientists</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=3146466" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=3146466</a> - Oct 2011 (15 comments)<p><i>Git for Computer Scientists</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1485612" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1485612</a> - July 2010 (17 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Sr_developer" target="_blank">Sr_developer</a>   <span class="timeago" data-date="2021-06-13 15:33:43 &#43;0000 UTC">2021-06-13 15:33:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me almost every Git teaching resource has gone like this:<p>Step 1.It is explained that Git is a simple program, and that the underlined idea can be understood easily, it is only that other  materials have done a bad job about it.<p>Step 2. Tell the reader a blob is just the  byte object containing the information you are source-controlling. &quot;See how easy it is?&quot;<p>Step 3. Invent their own nomenclature&#x2F;diagrams&#x2F;metaphors for all the other concepts, totally muddling the waters.<p>Step 4. Become one of the resources criticized on Step 1.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=darekkay" target="_blank">darekkay</a>   <span class="timeago" data-date="2021-06-13 19:44:03 &#43;0000 UTC">2021-06-13 19:44:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One day I&#x27;d like to break this circle. I&#x27;ve been doing 2-day Git workshops with a colleague for a few years now, and &quot;to internals or not to internals&quot; is our constant disagreement. I don&#x27;t like talking about blobs, trees and anything below the &quot;commit hash&quot; level because I almost never need it myself.<p>My other personal issue is the complete opposite of the &quot;going way too deep into details&quot; teaching resources: showing clone&#x2F;commit&#x2F;push&#x2F;pull and calling it a day. This leads to resources like ohshitgit.com as things will eventually break when people use commands without understanding what is happening.<p>When doing our workshops, we go through the basics: what is a commit, what is a branch, what is HEAD, what do commands like checkout&#x2F;reset&#x2F;rebase do on graph level. This approach demistifies Git without going into internals. It also takes away the fear of &quot;advanced&quot; topics (like &quot;rewriting&quot; history)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maxnoe" target="_blank">maxnoe</a>   <span class="timeago" data-date="2021-06-13 20:02:56 &#43;0000 UTC">2021-06-13 20:02:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I also take this middle ground, seems to work well for most students
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andi999" target="_blank">andi999</a>   <span class="timeago" data-date="2021-06-13 16:58:58 &#43;0000 UTC">2021-06-13 16:58:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Our IT department refuses to give an introduction to git. Smart guys.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 17:50:36 &#43;0000 UTC">2021-06-13 17:50:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JJMcJ" target="_blank">JJMcJ</a>   <span class="timeago" data-date="2021-06-13 15:57:00 &#43;0000 UTC">2021-06-13 15:57:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As always: <a href="https:&#x2F;&#x2F;xkcd.com&#x2F;1597&#x2F;" rel="nofollow">https:&#x2F;&#x2F;xkcd.com&#x2F;1597&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-06-13 18:21:07 &#43;0000 UTC">2021-06-13 18:21:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is never not funny.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=belter" target="_blank">belter</a>   <span class="timeago" data-date="2021-06-13 18:17:01 &#43;0000 UTC">2021-06-13 18:17:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For the more knowledgeable on Git. What is the current status of the transition from SHA-1 ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beermonster" target="_blank">beermonster</a>   <span class="timeago" data-date="2021-06-13 19:29:47 &#43;0000 UTC">2021-06-13 19:29:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This [1] is useful to read. Sha256 supported (experimentally at least) in Git since 2.29[2]<p>[1] <a href="https:&#x2F;&#x2F;lwn.net&#x2F;Articles&#x2F;811068" rel="nofollow">https:&#x2F;&#x2F;lwn.net&#x2F;Articles&#x2F;811068</a><p>[2]
+ <a href="https:&#x2F;&#x2F;lore.kernel.org&#x2F;lkml&#x2F;xmqqy2k2t77l.fsf@gitster.c.googlers.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;lore.kernel.org&#x2F;lkml&#x2F;xmqqy2k2t77l.fsf@gitster.c.goog...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cerved" target="_blank">cerved</a>   <span class="timeago" data-date="2021-06-13 19:27:20 &#43;0000 UTC">2021-06-13 19:27:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;thenewstack.io&#x2F;git-transitioning-away-from-the-aging-sha-1-hash&#x2F;" rel="nofollow">https:&#x2F;&#x2F;thenewstack.io&#x2F;git-transitioning-away-from-the-aging...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throw0101a" target="_blank">throw0101a</a>   <span class="timeago" data-date="2021-06-13 12:52:03 &#43;0000 UTC">2021-06-13 12:52:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I ran across this little gem recently:<p>&gt; <i>Git gets easier once you get the basic idea that branches are homeomorphic endofunctors mapping submanifolds of a Hilbert space.</i><p>* Isaac Wolkerstorfer, <a href="https:&#x2F;&#x2F;twitter.com&#x2F;agnoster&#x2F;status&#x2F;44636629423497217" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;agnoster&#x2F;status&#x2F;44636629423497217</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeltz" target="_blank">jeltz</a>   <span class="timeago" data-date="2021-06-13 14:28:57 &#43;0000 UTC">2021-06-13 14:28:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have never got all these jokes. When my job switched from Subversion to git it took me about one week plus reading a couple of articles to become more productive in git than I ever was in Subversion. Yes, version control is a bit tricky but git is not that hard to understand and was much easier than contemporary Subversion versions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=avalys" target="_blank">avalys</a>   <span class="timeago" data-date="2021-06-13 16:59:32 &#43;0000 UTC">2021-06-13 16:59:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Things have gotten a little better. But, try to do something off the beaten path in Git, and you may ultimately get the joke.<p>For example: “two weeks ago an intern accidentally committed a file containing IP we’re not allowed to use, we need to erase it from the repository and all developer machines.”<p>Have fun with that one!<p>EDIT: I mean, try to figure this out from the official Git documentation (<a href="https:&#x2F;&#x2F;git-scm.com&#x2F;docs" rel="nofollow">https:&#x2F;&#x2F;git-scm.com&#x2F;docs</a>). No, Stack Overflow and Github are not the official Git documentation. Believe it or not, the idea that &quot;Git is hard to use&quot; predates Stack Overflow.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeltz" target="_blank">jeltz</a>   <span class="timeago" data-date="2021-06-13 19:09:07 &#43;0000 UTC">2021-06-13 19:09:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have had to do it once during the 12 years I have used git, so I seriously doubt that this is why people think git is hard. And I think that googling it would be fine in that case. That said: since I have done it once I could easily figure out how to do it again and it wasn&#x27;t hard, just a bit cumbersome due to git&#x27;s distributed nature.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aardshark" target="_blank">aardshark</a>   <span class="timeago" data-date="2021-06-13 17:45:20 &#43;0000 UTC">2021-06-13 17:45:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is Googling not allowed? This situation is pretty common, so there are plenty of SO answers and articles on how to accomplish rewriting history to erase it from the repo.<p>Removing from developer machines is a separate issue and requires you to be able to coordinate your Devs.<p>If you meant that it&#x27;s not simple to work out from scratch what you should do without lots of reading and trial and error...that kinda goes for a lot of tools, no?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-06-13 18:53:39 &#43;0000 UTC">2021-06-13 18:53:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes but git seems to be one of those tools where laypeople seems to genuinely not be able to derive how to do complex tasks from first principles. Lord knows I can’t. If your Googling doesn’t turn up someone’s who’s had your exact problem you will have to burn a long time figuring out how to do what you want.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yawaramin" target="_blank">yawaramin</a>   <span class="timeago" data-date="2021-06-13 17:37:28 &#43;0000 UTC">2021-06-13 17:37:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s all documented <a href="https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;github&#x2F;authenticating-to-github&#x2F;keeping-your-account-and-data-secure&#x2F;removing-sensitive-data-from-a-repository" rel="nofollow">https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;github&#x2F;authenticating-to-github&#x2F;k...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=u801e" target="_blank">u801e</a>   <span class="timeago" data-date="2021-06-13 19:39:05 &#43;0000 UTC">2021-06-13 19:39:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For example: “two weeks ago an intern accidentally committed a file containing IP we’re not allowed to use, we need to erase it from the repository and all developer machines.”<p>Technically, the issue was actually pushing that commit to the remote repository.<p>I think the best advise one can give people when using it is to to run:<p><pre><code>  git log -p origin&#x2F;master..HEAD
+</code></pre>
+and look at the commit messages and associated diffs to see if there&#x27;s anything there that shouldn&#x27;t be there before the actually run git push.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-06-13 22:00:07 &#43;0000 UTC">2021-06-13 22:00:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;   git log -p origin&#x2F;master..HEAD<p>See THIS is the problem. Ugly, inconsistent, clumsy use of the english language, and confusing.<p>This will go on my git sheet, with a comment as to what it actually does because I don&#x27;t have the time to actually unpack that from first principles. I&#x27;ve got better things to do than become an expert on needlessly complicated software.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=u801e" target="_blank">u801e</a>   <span class="timeago" data-date="2021-06-13 23:59:14 &#43;0000 UTC">2021-06-13 23:59:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; See THIS is the problem. Ugly, inconsistent, clumsy use of the english language, and confusing.<p>It&#x27;s a command line interface, not plain English.  What&#x27;s ugly and inconsistent about the git log command as was quoted in your reply?<p>&gt; I&#x27;ve got better things to do than become an expert on needlessly complicated software.<p>As a software developer, I have to read through a lot of documentation to be able to use programming languages, SQL, data stores, unix utils, etc.  I don&#x27;t see why it would be any different for a VCS.<p>I think the actual issue is that people aren&#x27;t willing to read through the documentation to understand what a command does and what options are available.<p>As for the command itself, the -p switch shows the diff associated with each commit shown with the git-log command.  origin&#x2F;master represents the upstream tracking branch of the master branch (most likely the base branch that the person is working on).  .. represents a range operator and HEAD repesents the commit that&#x27;s the latest commit on the branch on the local machine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-06-14 00:51:19 &#43;0000 UTC">2021-06-14 00:51:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use plenty of command line interfaces everyday. Most of them are pleasant, predictable, and easy to remember. None of them consistently confuse me like git does. (How many different things does &#x27;checkout&#x27; do?)<p>SQL is not only much more intuitive than git, it gives me amazing leverage to deliver value to clients. By comparison, git wastes my time. There&#x27;s zero or minimal competitive advantage to using it over any other VCS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=onei" target="_blank">onei</a>   <span class="timeago" data-date="2021-06-13 17:30:26 &#43;0000 UTC">2021-06-13 17:30:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Erase from the repo, a little non-standard, but fine. Being asked to remove it from all developer machines sounds like someone misunderstood how version control works. Was that a real life example you hit?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=karatinversion" target="_blank">karatinversion</a>   <span class="timeago" data-date="2021-06-13 18:26:05 &#43;0000 UTC">2021-06-13 18:26:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They might have a model of version control in their head that predates distributed version control systems - I never used one myself, but the code base I work on still has scars here and there from the era when only one developer could have any single file checked out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-06-13 20:31:22 &#43;0000 UTC">2021-06-13 20:31:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not a misunderstanding, a requirement. If the developers cannot have that data (legal reasons? Secrets?) it must be deleted.<p>Probably has to be done outside git, though. Maybe one of the corporate virus scanners will let you definite a local signature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yawaramin" target="_blank">yawaramin</a>   <span class="timeago" data-date="2021-06-13 22:47:29 &#43;0000 UTC">2021-06-13 22:47:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s rather simple: remove it from the origin repo using BFG Cleaner or whatever, then ask devs to delete and re-clone the repo. Not everything needs a complex technical solution.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=avalys" target="_blank">avalys</a>   <span class="timeago" data-date="2021-06-13 18:42:59 &#43;0000 UTC">2021-06-13 18:42:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Git clones the entire remote repository to each developer&#x27;s machine. So, if you accidentally committed something you shouldn&#x27;t have two weeks ago, everyone will now have a copy in their local repo. And you can&#x27;t always just tell people to delete their local repos and start again, since they might have local branches they&#x27;re working on, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edp" target="_blank">edp</a>   <span class="timeago" data-date="2021-06-13 18:52:14 &#43;0000 UTC">2021-06-13 18:52:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think this is even possible with SVN or CVS, is it ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MarkSweep" target="_blank">MarkSweep</a>   <span class="timeago" data-date="2021-06-13 19:38:40 &#43;0000 UTC">2021-06-13 19:38:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At least with SVN, the is one option that is pretty similar to git’s filter-branch: svndumpfilter. You dump the entire history of the SVN repo to a file, edit it, and then load it into a new SVN repo. I used this technique to pre-process a repo to remove large files before migrating to Git. The file format is simple enough that you can easily write a program to edit the stream.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wrycoder" target="_blank">wrycoder</a>   <span class="timeago" data-date="2021-06-13 19:51:27 &#43;0000 UTC">2021-06-13 19:51:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s very easy in CVS, which is why some people prefer CVS to any distributed solution.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 17:44:18 &#43;0000 UTC">2021-06-13 17:44:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sigjuice" target="_blank">sigjuice</a>   <span class="timeago" data-date="2021-06-13 23:42:46 &#43;0000 UTC">2021-06-13 23:42:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Curious why the IP address has to be obliterated from history instead of just correcting it in a new commit?  An IP does not seem sensitive like a secret or private key.<p>EDIT:  Sorry, my bad.  I misread.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegionMammal978" target="_blank">LegionMammal978</a>   <span class="timeago" data-date="2021-06-14 00:09:21 &#43;0000 UTC">2021-06-14 00:09:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Presumably they did not mean an Internet Protocol address, but instead data containing disallowed intellectual property.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ojbyrne" target="_blank">ojbyrne</a>   <span class="timeago" data-date="2021-06-14 00:20:56 &#43;0000 UTC">2021-06-14 00:20:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe in this case, IP == Intellectual Property.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SkyMarshal" target="_blank">SkyMarshal</a>   <span class="timeago" data-date="2021-06-13 19:05:48 &#43;0000 UTC">2021-06-13 19:05:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt;I have never got all these jokes.</i><p>If you mean that literally, this joke is referencing another joke meme in the functional programming community, explained here:  <a href="https:&#x2F;&#x2F;blog.merovius.de&#x2F;2018&#x2F;01&#x2F;08&#x2F;monads-are-just-monoids.html" rel="nofollow">https:&#x2F;&#x2F;blog.merovius.de&#x2F;2018&#x2F;01&#x2F;08&#x2F;monads-are-just-monoids....</a><p>If you mean, you don&#x27;t get why people joke about Git being hard, it probably isn&#x27;t for most professional programmers already accustomed to some kind of source control, just perhaps to anyone new to it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jollybean" target="_blank">jollybean</a>   <span class="timeago" data-date="2021-06-13 22:09:36 &#43;0000 UTC">2021-06-13 22:09:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I often wonder about this as well, but I think there must be a difference of opinion of what &#x27;hard&#x27; is.<p>I think that people think they are confident about Git in &#x27;a few weeks&#x27; are basically have a lack of self-awareness. They &#x27;don&#x27;t know what they don&#x27;t know&#x27;.<p>I&#x27;ve seen countless times, developers huddled around someone else&#x27;s computer, trying to figure out what went wrong.<p>I saw a git animation&#x2F;visualisation tool once that animated operations, and I saw things happening I had never seen before, basically a lot of &#x27;loose end&#x27; things that I didn&#x27;t even know existed.<p>I also wonder if that has something to do with the fact that such things are maybe not suited to &#x27;command line&#x27; and are inherently structured.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=question000" target="_blank">question000</a>   <span class="timeago" data-date="2021-06-13 13:02:11 &#43;0000 UTC">2021-06-13 13:02:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Richard Feynman had a joke theory that any purely theoretical mathematical concept when expressed in layman&#x27;s terms devolves into something completely obvious. So does this actually mean something like &quot;git uses branches.&quot;?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 18:22:13 &#43;0000 UTC">2021-06-13 18:22:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=beermonster" target="_blank">beermonster</a>   <span class="timeago" data-date="2021-06-13 12:54:48 &#43;0000 UTC">2021-06-13 12:54:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See also this<p><a href="https:&#x2F;&#x2F;git-man-page-generator.lokaltog.net&#x2F;" rel="nofollow">https:&#x2F;&#x2F;git-man-page-generator.lokaltog.net&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JJMcJ" target="_blank">JJMcJ</a>   <span class="timeago" data-date="2021-06-13 15:55:56 &#43;0000 UTC">2021-06-13 15:55:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reads like the man page for &quot;git rebase&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-06-13 17:03:51 &#43;0000 UTC">2021-06-13 17:03:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A <i>sparse</i> Hilbert space. Beginners make that mistake a lot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SmellTheGlove" target="_blank">SmellTheGlove</a>   <span class="timeago" data-date="2021-06-13 15:52:49 &#43;0000 UTC">2021-06-13 15:52:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is this a joke or serious? I don’t understand enough of the words after “branches” to know. I’m serious btw.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stu2b50" target="_blank">stu2b50</a>   <span class="timeago" data-date="2021-06-13 15:55:58 &#43;0000 UTC">2021-06-13 15:55:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a parody&#x2F;derivation from the monad joke, where one explanation for a monad is that they&#x27;re &quot;just an monoid in the category of endofunctors&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-06-13 13:05:36 &#43;0000 UTC">2021-06-13 13:05:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is that maths soup or a real construct? I can&#x27;t join the dots but I&#x27;m also studying physics so category theory is still slightly Greek to me (I can feel the mathematicians&#x27; noses rising already...)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magnio" target="_blank">magnio</a>   <span class="timeago" data-date="2021-06-13 13:25:32 &#43;0000 UTC">2021-06-13 13:25:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a joke. A well-discussed one.<p><a href="https:&#x2F;&#x2F;softwareengineering.stackexchange.com&#x2F;questions&#x2F;256450&#x2F;are-git-branches-in-fact-homeomorphic-endofunctors-mapping-submanifolds-of-a" rel="nofollow">https:&#x2F;&#x2F;softwareengineering.stackexchange.com&#x2F;questions&#x2F;2564...</a><p><a href="https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;675092&#x2F;does-this-statement-about-hilbert-spaces-make-any-sense" rel="nofollow">https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;675092&#x2F;does-this-st...</a><p><a href="https:&#x2F;&#x2F;cs.stackexchange.com&#x2F;questions&#x2F;12652&#x2F;is-there-a-formal-cs-definition-of-vcs-and-file-versions" rel="nofollow">https:&#x2F;&#x2F;cs.stackexchange.com&#x2F;questions&#x2F;12652&#x2F;is-there-a-form...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=inshadows" target="_blank">inshadows</a>   <span class="timeago" data-date="2021-06-13 13:39:27 &#43;0000 UTC">2021-06-13 13:39:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tl;dr it&#x27;s a random math soup (from first link)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=z77dj3kl" target="_blank">z77dj3kl</a>   <span class="timeago" data-date="2021-06-13 15:51:11 &#43;0000 UTC">2021-06-13 15:51:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s random math words put together and doesn&#x27;t make sense even in isolation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JJMcJ" target="_blank">JJMcJ</a>   <span class="timeago" data-date="2021-06-13 15:55:11 &#43;0000 UTC">2021-06-13 15:55:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or else it&#x27;s research that won a Fields Medal.  There is no middle ground.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 14:58:52 &#43;0000 UTC">2021-06-13 14:58:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-06-13 17:26:57 &#43;0000 UTC">2021-06-13 17:26:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mistrial9" target="_blank">mistrial9</a>   <span class="timeago" data-date="2021-06-13 15:11:05 &#43;0000 UTC">2021-06-13 15:11:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>the industrial-strength rigor of git</i><p><i>don&#x27;t mock or dismiss any of it !</i><p><i>you will do as you must, with every commit</i><p><i>for one line of text</i><p><i>or puzzle of Rust</i><p><i>back to your seat you ignorant grunt</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-06-13 21:58:07 &#43;0000 UTC">2021-06-13 21:58:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m so sick of git.<p>Yes I know what a directed acyclic graph is. No I don&#x27;t know what &#x27;checkout&#x27; will actually do this time when I run the command.<p>It&#x27;s been 10 years. It&#x27;s still confusing people. There&#x27;s still article after article, book after book written on a tool that should be getting out of a programmers way.<p>Let&#x27;s try something else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+
