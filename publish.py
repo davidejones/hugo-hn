@@ -53,28 +53,26 @@ def slugify(name):
 
 async def write_file(data):
     if data:
-        file_name, data_out = '', ''
-        data_id = data.get('id')
-        data_type = data.get('type')
-        if data_type in ('story', 'job'):
-            slug = slugify(data.get('title'))
+        data_type = data.get('type', '')
+        if data_type == 'comment':
+            file_name = Path(f'./data/post/{data["id"]}.yaml')
+            data_out = yaml.dump(data)
+        else:
+            data_title = data.get('title', '')
+            # set 'Ask HN:' or 'Show HN:' set type to ask or show
+            match = re.match(r"^([A-Za-z]+)\s*HN\:.*$", data_title)
+            if match:
+                data_type = match.group(1).lower()
             data['date'] = datetime.fromtimestamp(data.get('time')).isoformat()
             data['linkurl'] = data.get('url')
-            data['slug'] = slug
+            data['slug'] = slugify(data_title)
             data['tags'] = []
-            data['categories'] = []
-            if data.get('time', None):
-                del data['time']
-            if data.get('url', None):
-                del data['url']
-            if data.get('type', None):
-                data['categories'] = ["{}".format(data.get('type'))]
-                del data['type']
-            file_name = Path(f'./content/en/post/{slug}.md')
+            data['categories'] = [data_type] if data_type else []
+            for x in ('time', 'url', 'type'):
+                if x in data:
+                    del data[x]
+            file_name = Path(f'./content/en/post/{data["slug"]}.md')
             data_out = TEMPLATE.format(front_matter=yaml.dump(data).strip(), content="")
-        elif data_type == 'comment':
-            file_name = Path(f'./data/post/{data_id}.yaml')
-            data_out = yaml.dump(data)
 
         # lets write the file if it doesn't exist
         if file_name and not file_name.exists():
@@ -106,15 +104,17 @@ async def worker(queue, session, sem):
         # This data may add more to the queue lets check
         if type(json_data) is list:
             # list of ids e.g [123, 456]
-            for article_id in json_data:
-                queue.put_nowait(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json')
+            ids = json_data
         elif type(json_data) is dict:
-            # an individiual record lets add child records to the queue
-            for comment_id in json_data.get('kids', []):
-                queue.put_nowait(f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json')
-
-            # lets write this record out as a file
+            # an individual record lets add child records to the queue
+            ids = json_data.get('kids', [])
+            # lets write this record to file async
             await write_file(json_data)
+        else:
+            ids = []
+
+        for item_id in ids:
+            queue.put_nowait(f'https://hacker-news.firebaseio.com/v0/item/{item_id}.json')
 
         # Notify the queue that the "work item" has been processed.
         queue.task_done()
@@ -124,12 +124,9 @@ async def start(num_workers):
     # Create a queue that we will use to store our "workload".
     queue = asyncio.Queue()
 
-    # build initial urls
-    urls = [f'https://hacker-news.firebaseio.com/v0/{name}.json' for name in
-            ('topstories', 'askstories', 'showstories', 'jobstories')]
-
     # add initial urls to queue
-    for url in urls:
+    for url in [f'https://hacker-news.firebaseio.com/v0/{name}.json' for name in
+                ('topstories', 'askstories', 'showstories', 'jobstories')]:
         queue.put_nowait(url)
 
     tasks = []
