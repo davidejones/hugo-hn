@@ -1,18 +1,22 @@
-#!/usr/bin/env python3
-import asyncio
-import logging
+# #!/usr/bin/env python3
+import json
+import os
+import functools
+import concurrent.futures
+from datetime import datetime
 import re
-import socket
-
-import requests
-import sh
-import sys
+from pathlib import Path
 import time
 import yaml
-from datetime import datetime
-from os import makedirs
-from pathlib import Path
-from aiohttp import ClientSession, ClientTimeout, TCPConnector
+import asyncio
+import logging
+import aiohttp
+import aiofiles
+import subprocess
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 TEMPLATE = """\
 ---
@@ -21,11 +25,6 @@ TEMPLATE = """\
 
 {content}
 """
-
-ROOT_DIR = Path.cwd()
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 
 def timing(f):
@@ -52,189 +51,117 @@ def slugify(name):
     return re.sub(r'\s', '-', out)
 
 
-def create_item(item):
-    """
-    Takes a hacker news json object and creates a hugo markdown page from it
-    :param item: dict of article data
-    """
-    slug = slugify(item.get('title'))
-    file_name = './content/en/post/{}.md'.format(slug)
-    with open(file=file_name, mode='w', encoding='utf-8') as f:
-        item['date'] = datetime.fromtimestamp(item.get('time')).isoformat()
-        item['linkurl'] = item.get('url')
-        item['slug'] = slug
-        item['tags'] = []
-        item['categories'] = []
-        if item.get('time', None):
-            del item['time']
-        if item.get('url', None):
-            del item['url']
-        if item.get('type', None):
-            item['categories'] = ["{}".format(item.get('type'))]
-            del item['type']
-        f.write(TEMPLATE.format(front_matter=yaml.dump(item).strip(), content=""))
+async def write_file(data):
+    if data:
+        data_type = data.get('type', '')
+        if data_type == 'comment':
+            file_name = Path(f'./data/post/{data["id"]}.yaml')
+            data_out = yaml.dump(data)
+        else:
+            data_title = data.get('title', '')
+            # set 'Ask HN:' or 'Show HN:' set type to ask or show
+            match = re.match(r"^([A-Za-z]+)\s*HN\:.*$", data_title)
+            if match:
+                data_type = match.group(1).lower()
+            data['date'] = datetime.fromtimestamp(data.get('time')).isoformat()
+            data['linkurl'] = data.get('url')
+            data['slug'] = slugify(data_title)
+            data['tags'] = []
+            data['categories'] = [data_type] if data_type else []
+            for x in ('time', 'url', 'type'):
+                if x in data:
+                    del data[x]
+            file_name = Path(f'./content/en/post/{data["slug"]}.md')
+            data_out = TEMPLATE.format(front_matter=yaml.dump(data).strip(), content="")
+
+        # lets write the file if it doesn't exist
+        if file_name and not file_name.exists():
+            async with aiofiles.open(file_name, 'w') as f:
+                await f.write(data_out)
 
 
-def create_comment(comment):
-    """
-    Takes a hacker news json object comment and creates a hugo data yaml file for it
-    :param comment: dict of comment data
-    """
-    if comment:
-        item_id = comment.get('id')
-        file_name = f'./data/post/{item_id}.yaml'
-        with open(file=file_name, mode='w', encoding='utf-8') as f:
-            f.write(yaml.dump(comment))
-
-
-def hugo_build():
-    """
-    Builds the hugo site
-    We overwrite the baseurl all other settings are fine
-    """
-    hugo = sh.hugo.bake(_cwd=str(ROOT_DIR))
-    hugo('--verbose', [], _out=sys.stdout)
-
-
-def get_content_sync(data):
-    """
-    Synchronously hit each hacker news article item for download.
-    :param data: tuple of url and article type
-    :return: list of json responses
-    """
-    responses = []
-    for url, article_type in data:
-        response = requests.get(url)
-        for article_id in response.json():
-            item_request = requests.get('https://hacker-news.firebaseio.com/v0/item/{}.json'.format(article_id))
-            item = item_request.json()
-            item['type'] = article_type
-            responses.append(item)
-    return responses
-
-
-async def get_content_async(data):
-    """
-    Asynchronously hit each hacker news article item for download.
-    :param data: tuple of url and article type
-    :return: list of json responses
-    """
-    parent_tasks = []
-    child_tasks = []
-    timeout = ClientTimeout(total=7*60)
-    connector = TCPConnector(ssl=False, family=socket.AF_INET)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
-        for url, article_type in data:
-            parent_tasks.append(asyncio.create_task(fetch(url, session)))
-        parent_results = await asyncio.gather(*parent_tasks)
-        for index, section in enumerate(parent_results):
-            _, article_type = data[index]
-            for article_id in section:
-                child_tasks.append(asyncio.create_task(
-                    fetch(f'https://hacker-news.firebaseio.com/v0/item/{article_id}.json', session, article_type)))
-        return await asyncio.gather(*child_tasks)
-
-
-async def get_comments_async(data):
-    """
-    Asynchronously hit each hacker news comment item for download.
-    :param data: list of comment ids
-    :return: list of json responses
-    """
-    tasks = []
-    timeout = ClientTimeout(total=7*60)
-    connector = TCPConnector(ssl=False, family=socket.AF_INET)
-    sem = asyncio.Semaphore(100)
-    async with ClientSession(loop=asyncio.get_event_loop(), timeout=timeout, connector=connector) as session:
-        for comment_id in data:
-            tasks.append(asyncio.create_task(bound_fetch(sem, f'https://hacker-news.firebaseio.com/v0/item/{comment_id}.json', session)))
-        return await asyncio.gather(*tasks)
-
-
-async def bound_fetch(sem, url, session, article_type=None):
-    """
-    Async fetch returning
-    :param url: url to hit
-    :param session: open session to make calls with
-    :param article_type: the type name of the article for front matter
-    :return: json response
-    """
+async def fetch(url, session, sem):
     async with sem:
-        async with session.get(url) as response:
-            data = await response.json()
-            if data and article_type:
-                data['type'] = article_type
-            return data
+        async with session.get(url, ssl=False) as response:
+            return await response.json()
 
 
-async def fetch(url, session, article_type=None):
-    """
-    Async fetch returning
-    :param url: url to hit
-    :param session: open session to make calls with
-    :param article_type: the type name of the article for front matter
-    :return: json response
-    """
-    async with session.get(url) as response:
-        data = await response.json()
-        if data and article_type:
-            data['type'] = article_type
-        return data
+async def worker(queue, session, sem):
+    while True:
+        json_data = None
+
+        # Get a "work item" out of the queue.
+        url = await queue.get()
+
+        # download the json, wait for at most 5 seconds
+        try:
+            json_data = await asyncio.wait_for(fetch(url, session, sem), timeout=5)
+        except asyncio.TimeoutError:
+            logger.info(f"Timeout for {url}")
+            # add back to queue for retry?
+            # await queue.put(queue_item)
+
+        # This data may add more to the queue lets check
+        if type(json_data) is list:
+            # list of ids e.g [123, 456]
+            ids = json_data
+        elif type(json_data) is dict:
+            # an individual record lets add child records to the queue
+            ids = json_data.get('kids', [])
+            # lets write this record to file async
+            await write_file(json_data)
+        else:
+            ids = []
+
+        for item_id in ids:
+            queue.put_nowait(f'https://hacker-news.firebaseio.com/v0/item/{item_id}.json')
+
+        # Notify the queue that the "work item" has been processed.
+        queue.task_done()
 
 
-def recurse_comments(comment_ids):
-    """
-    Run the async get comments against a list of comment ids
-    After getting the comments pass those comment child id back through the same function
-    until we have no more to download
-    :param comment_ids: a list of integer ids for comments to retrieve
-    :return: list of comment objects
-    """
-    ret = []
-    if comment_ids:
-        logger.info("Creating {} comments...".format(len(comment_ids)))
-        comments = asyncio.run(get_comments_async(comment_ids))
-        ret.extend(comments)
-        kids = []
-        for comment in comments:
-            if comment:
-                kids.extend(comment.get("kids", []) or [])
-                # create_comment(comment)
-        ret.extend(recurse_comments(kids))
-    return ret
+async def start(num_workers):
+    # Create a queue that we will use to store our "workload".
+    queue = asyncio.Queue()
+
+    # add initial urls to queue
+    for url in [f'https://hacker-news.firebaseio.com/v0/{name}.json' for name in
+                ('topstories', 'askstories', 'showstories', 'jobstories')]:
+        queue.put_nowait(url)
+
+    tasks = []
+    conn = aiohttp.TCPConnector(ttl_dns_cache=300, limit=0)
+    sem = asyncio.Semaphore(100)
+    async with aiohttp.ClientSession(connector=conn) as session:
+        # Create worker tasks to process the queue concurrently.
+        for i in range(num_workers):
+            task = asyncio.create_task(worker(queue, session, sem))
+            tasks.append(task)
+
+        # Wait until the queue is fully processed.
+        await queue.join()
+
+    # Cancel our worker tasks.
+    for task in tasks:
+        task.cancel()
 
 
 @timing
 def main():
-    """
-    Entry function that grabs hacker news content saves it and builds the html site
-    """
     logger.info("Starting publish...")
-    id_data = [('https://hacker-news.firebaseio.com/v0/topstories.json', 'story'),
-               ('https://hacker-news.firebaseio.com/v0/askstories.json', 'ask'),
-               ('https://hacker-news.firebaseio.com/v0/showstories.json', 'show'),
-               ('https://hacker-news.firebaseio.com/v0/jobstories.json', 'job')]
 
-    # responses = get_content_sync(id_data)
-    responses = asyncio.run(get_content_async(id_data))
+    num_workers = int(os.environ.get('num_workers', 100))
 
     # create dirs
-    makedirs('./content/en/post/', exist_ok=True)
-    makedirs('./data/post/', exist_ok=True)
+    Path('./content/en/post/').mkdir(exist_ok=True)
+    Path('./data/post/').mkdir(exist_ok=True)
 
-    logger.info("Creating posts...")
-    comment_ids = []
-    for item in responses:
-        if item:
-            comment_ids.extend(item.get("kids", []) or [])
-            create_item(item)
-
-    comments = recurse_comments(comment_ids)
-    for comment in comments:
-        create_comment(comment)
+    # Download all json and create files
+    asyncio.run(start(num_workers))
+    # asyncio.get_event_loop().run_until_complete(start(num_workers))
 
     logger.info("Building site...")
-    hugo_build()
+    subprocess.run(["hugo", "--verbose"])
 
 
 if __name__ == '__main__':
