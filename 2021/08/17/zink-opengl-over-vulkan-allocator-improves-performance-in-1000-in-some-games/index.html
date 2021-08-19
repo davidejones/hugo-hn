@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/zink-opengl-over-vulkan-allocator-improves-performance-in-1000-in-some-games/">
+
+
+    <title>Zink (OpenGL over Vulkan) allocator improves performance in 1000% in some games - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Zink (OpenGL over Vulkan) allocator improves performance in 1000% in some games - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/zink-opengl-over-vulkan-allocator-improves-performance-in-1000-in-some-games/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/zink-opengl-over-vulkan-allocator-improves-performance-in-1000-in-some-games/">
+<meta name="twitter:title" content="Zink (OpenGL over Vulkan) allocator improves performance in 1000% in some games - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Zink (OpenGL over Vulkan) allocator improves performance in 1000% in some games - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T19:04:53JST",
+    "dateModified": "2021-08-17T19:04:53JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://cgit.freedesktop.org/mesa/mesa/commit/?id=40fdb3212c3ded2150faf952dc2b669991bfbf94">Zink (OpenGL over Vulkan) allocator improves performance in 1000% in some games</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KingMachiavelli" target="_blank">KingMachiavelli</a>   <span class="timeago" data-date="2021-08-17 23:04:17 &#43;0000 UTC">2021-08-17 23:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m pretty confident that the original commit meant 1000% compared to the previous Zink performance - not that it&#x27;s 1000% better than current OpenGL implementations.<p>That said I certainly hope Zink becomes a suitable OpenGL implementation since it would simplify development of open source video drivers. i.e. just implement vulkan and you get OpenGL for free.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rjvs" target="_blank">rjvs</a>   <span class="timeago" data-date="2021-08-18 08:36:43 &#43;0000 UTC">2021-08-18 08:36:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently [1] the game that got 1000% improvement was previously unplayable at ~9fps.<p>1. <a href="https:&#x2F;&#x2F;www.phoronix.com&#x2F;scan.php?page=news_item&amp;px=Zink-Suballocator-Merged" rel="nofollow">https:&#x2F;&#x2F;www.phoronix.com&#x2F;scan.php?page=news_item&amp;px=Zink-Sub...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-18 12:49:53 &#43;0000 UTC">2021-08-18 12:49:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ok, that’s super weird for sure. I think 1000% improvement is not the appropriate description in that case. A more suitable headline would be like, “Zink (OpenGL over Vulkan) allocator now able to play more games at high frame rates”.<p>9 fps is not a video game, that’s a slide show. And indeed, playing tomb raider where you want to make jumps and stuff, I would not play that on 9 fps ever.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=remram" target="_blank">remram</a>   <span class="timeago" data-date="2021-08-18 13:45:52 &#43;0000 UTC">2021-08-18 13:45:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wouldn&#x27;t watch a slideshow going 9 slides per second.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bibaheu" target="_blank">bibaheu</a>   <span class="timeago" data-date="2021-08-17 23:21:03 &#43;0000 UTC">2021-08-17 23:21:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And with DXVK you also get Direct3D for free too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cannyfox91" target="_blank">cannyfox91</a>   <span class="timeago" data-date="2021-08-17 23:05:18 &#43;0000 UTC">2021-08-17 23:05:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I doubt this meant in comparison with native implementations of OpenGL from AMD&#x2F;Nvidia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=greggman3" target="_blank">greggman3</a>   <span class="timeago" data-date="2021-08-18 07:21:21 &#43;0000 UTC">2021-08-18 07:21:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            you can already get OpenGL ES 3.1 in vulkan for free via the ANGLE project
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-18 13:11:08 &#43;0000 UTC">2021-08-18 13:11:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenGL ES won&#x27;t help you with most desktop applications.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cogman10" target="_blank">cogman10</a>   <span class="timeago" data-date="2021-08-17 22:01:38 &#43;0000 UTC">2021-08-17 22:01:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is what I hoped would happen with DirectX as well.<p>Vulkan is a much easier standard for GPU manufactures to get right.  If we could convert all the higher level APIs (such as DirectX and OpenGL) to it, then we could get consistent behavior across a wide range of vendors.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TazeTSchnitzel" target="_blank">TazeTSchnitzel</a>   <span class="timeago" data-date="2021-08-18 10:44:19 &#43;0000 UTC">2021-08-18 10:44:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; consistent behavior across a wide range of vendors<p>It depends what you mean by consistent. Vulkan is a lower-level API and has many things specific to particular kinds of hardware, even if they&#x27;re ostensibly supported everywhere.<p>For example, it is easy for a Vulkan application that has only been tested on desktop GPUs to have serious performance issues and graphical artifacts when run on a mobile GPU. With OpenGL it would at least render correctly, and it might even be performant.<p>It&#x27;s an API where you have to be explicit about everything, and therefore you have to be very careful what you wish for. I&#x27;m a bit worried about how long-term preservation of Vulkan games will work out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-18 13:14:08 &#43;0000 UTC">2021-08-18 13:14:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I&#x27;m a bit worried about how long-term preservation of Vulkan games will work out.<p>If there is anything to worry about, it would be how Vulkan&#x2F;Direct3D 12 limit future GPU architectures.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hamcha" target="_blank">Hamcha</a>   <span class="timeago" data-date="2021-08-17 22:12:29 &#43;0000 UTC">2021-08-17 22:12:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are multiple projects re-implementing older DirectX over either Vulkan and DX12, both have impressive improvements in certain cases. Check out dxvk and dgVoodoo 2!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-17 23:54:27 &#43;0000 UTC">2021-08-17 23:54:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And vkd3d-proton does it for DX12 so you have practically all relevant DX covered with Vulkan translation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=djmips" target="_blank">djmips</a>   <span class="timeago" data-date="2021-08-18 00:07:09 &#43;0000 UTC">2021-08-18 00:07:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funnily there&#x27;s D3D11On12 ie a DX11 wrapper for DX12 amongst, I&#x27;m sure a sea of other wrappers out there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-17 22:03:55 &#43;0000 UTC">2021-08-17 22:03:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a political, not a technical issue. MS and Apple are stuck with their lock-in mentality and until they&#x27;ll change, this fragmented mess will remain in place.<p>At least MS joined OpenXR effort in contrast instead of pushing their own NIH.<p>However this did happen for DirectX as an option. There are dxvk (dx9-11) and vkd3d (dx12) which translate DirectX to Vulkan.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kitsunesoba" target="_blank">kitsunesoba</a>   <span class="timeago" data-date="2021-08-18 00:05:49 &#43;0000 UTC">2021-08-18 00:05:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m not sure about DX12, but my understanding is the Metal was put into production a good deal before there was even a working draft for Vulkan, which makes its existence seem more driven by an immediate need to replace OpenGL ES.<p>I suppose they could’ve dropped Metal right away after Vulkan became usable, but developers tend to get grouchy when APIs change out from under them that frequently.<p>That said there’s no reason they couldn’t support Vulkan alongside Metal, likely with one being a first-party adapter layer for the other.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 00:12:30 &#43;0000 UTC">2021-08-18 00:12:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; developers tend to get grouchy when APIs change out from under them that frequently</i><p>Apple didn&#x27;t care about developers when they let OpenGL rot there, so I don&#x27;t think it was ever a consideration for them. Their idea for developers is <i>&quot;we know better than you what&#x27;s good for you&quot;</i>.<p><i>&gt; That said there’s no reason they couldn’t support Vulkan alongside Metal</i><p>Exactly, and the real reason is - they want their API to work as lock-in rather than allow developers to have options.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 00:21:32 &#43;0000 UTC">2021-08-18 00:21:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Metal is also a <i>far</i> more usable API than Vulkan. Apple wants people to actually be able to implement things with their APIs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 00:39:43 &#43;0000 UTC">2021-08-18 00:39:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nothing (valid) stopped Apple from building such API on top of Vulkan and provide them alongside each other.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cyberdog" target="_blank">Cyberdog</a>   <span class="timeago" data-date="2021-08-18 00:57:11 &#43;0000 UTC">2021-08-18 00:57:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You believe that Apple should support two (three, if you count deprecated but still present OpenGL) different graphics APIs?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jweb_Guru" target="_blank">Jweb_Guru</a>   <span class="timeago" data-date="2021-08-18 05:22:58 &#43;0000 UTC">2021-08-18 05:22:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apple should ideally have supported Vulkan once it became clear that was the way the wind was blowing, and released Metal over Vulkan as a separate runtime that worked on any Vulkan card supporting their blessed feature set.  It&#x27;s a much nicer API, which is good for developers, and it&#x27;s also in their own interests to expose a widely supported API like Vulkan if they care at all about the videogame market (which I suspect they don&#x27;t): as it is, many games will just avoid Apple rather than bother to port their work to Metal, especially since Metal often has a more limited featureset than Vulkan or DX12.<p>This would have been a best-case scenario for everyone, basically.  I&#x27;m sure many people would have been very happy to use Metal on other platforms, and in exchange Apple devices would actually have support from most modern videogames.  However, that ship has probably sailed now, and WebGPU is pretty much &quot;Metal over &lt;X&gt;&quot; where X = Vulkan&#x2F;Dx11&#x2F;Dx12&#x2F;Metal&#x2F;GLES&#x2F;WebGL.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Klonoar" target="_blank">Klonoar</a>   <span class="timeago" data-date="2021-08-18 01:08:46 &#43;0000 UTC">2021-08-18 01:08:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenGL on M1 devices is just a pass through for Metal at this point - and doesn&#x27;t support newer OpenGL features - so it&#x27;s not really worth counting IMO. Just feels like it&#x27;s there for backwards compatibility and nothing more.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 01:06:56 &#43;0000 UTC">2021-08-18 01:06:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They have more than enough resources to support anything. Such as lower level API (Vulkan) for those who need it and higher level one built on top of it for those who need something simpler but more limited.<p>Do you believe Apple are somehow resource strained in not being able to do that many times over?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=my123" target="_blank">my123</a>   <span class="timeago" data-date="2021-08-18 01:12:34 &#43;0000 UTC">2021-08-18 01:12:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (disclaimer, I work at AWS)<p>&gt; Do you believe Apple are somehow resource strained?<p>Oh if only you knew... Yes we are very engineering constrained at those companies. Money doesn&#x27;t replace the fact that there isn&#x27;t enough people around who have the skills <i>and</i> are willing to work there at any price.<p>And on top of that there&#x27;s the opportunity costs of having them work on this instead of something else...<p>When MoltenVK exists as a compatible Vulkan impl on top of Metal already, it&#x27;s very hard to justify this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tigen" target="_blank">tigen</a>   <span class="timeago" data-date="2021-08-18 07:51:17 &#43;0000 UTC">2021-08-18 07:51:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; there isn&#x27;t enough people around who have the skills and are willing to work there at any price<p>I don&#x27;t believe it. They could easily expand their hiring if they were sufficiently motivated. There is a combination of mismatched incentives at the team level and inefficient interviewing processes and requirements.<p>It&#x27;s often in the interest of employees to be inefficient in this regard.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tibbetts" target="_blank">tibbetts</a>   <span class="timeago" data-date="2021-08-18 03:57:38 &#43;0000 UTC">2021-08-18 03:57:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Opportunity cost is totally the analysis. Not just the developers, but the tech writing and support and product marketing and management oversight and continuity planning and support commitment. Building production software in a large organization is 10-50 times more expensive than a random open source hobby project. If you have a team to do that, is yet another graphics API really the best use of their time?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cyberdog" target="_blank">Cyberdog</a>   <span class="timeago" data-date="2021-08-18 01:22:01 &#43;0000 UTC">2021-08-18 01:22:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Do you believe Apple are somehow resource strained in not being able to do that many times over?<p>Actually, yes.<p>Let&#x27;s say Apple has infinite dollars, which is true enough. Therefore they can afford to hire the 100 top graphics API developers in the world and put them to work on Metal.<p>Now they decide they want to support Vulkan. But they can&#x27;t go out and buy the 100 top graphics API developers anymore; those people are already working on Metal. They could get the <i>next</i> top 100 developers, but those people, as a rule, won&#x27;t be quite as good as the people they already have working on Metal.<p>Now I guess they could mix up the teams so that every other person in the top 100 working on Metal gets folded into the Vulkan team and vice versa and have two teams of roughly equal skill working on each. But then they don&#x27;t have a super-team of the top 100 devs working on one project anymore.<p>Now consider that Apple doesn&#x27;t <i>quite</i> have infinite dollars, and that some top-level developers won&#x27;t want to move to Cupertino or whatever else Apple may ask of them, and how do you even judge who the top 100 graphics API developers in the world are?<p>Maybe, even for Apple, the best approach is to get the best developers you can hope to buy and keep all their attention on one project rather than splitting it up.<p>All that said, yes, the ideal is that there would be some successor to OpenGL which enjoys the cross-platform support that it had. But as stated elsewhere in this thread, Metal was released years before Vulkan, so perhaps the onus for that is on those who have developed and adopted Vulkan instead of reaching out to Apple to expand Metal to other platforms (if that would have been acceptable; who knows, maybe they tried but Apple didn&#x27;t allow it).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 03:10:18 &#43;0000 UTC">2021-08-18 03:10:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This doesn&#x27;t make a lot of sense to me. May be it can take a while with training needed developers and etc. but come on, it&#x27;s not some insurmountable problem. Plus Vulkan is supported for example on Windows without MS even lifting a finger.<p>And about your last point - Apple is really the worst candidate to ask for something to collaborate on.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aspaceman" target="_blank">aspaceman</a>   <span class="timeago" data-date="2021-08-18 11:19:54 &#43;0000 UTC">2021-08-18 11:19:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I personally think it&#x27;s feasible to support a Vulkan-&gt;Metal translation layer. Khronos already supports a project that does this, so Apple could take ownership of that responsibility. This would encourage developers to bring their graphics applications to Apple platforms.<p>The idea isn&#x27;t to support multiple APIs, but to translate Vulkan into your API since it&#x27;s a well-documented standard. The main issue would be API incompatibilities, which is the main place Apple could add value.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 16:30:38 &#43;0000 UTC">2021-08-18 16:30:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, there are efforts like that already, like MoltenVK and gfx-rs portability. But they are still workarounds to Apple&#x27;s refusal to cooperate. I.e. they are lock-in breaking tools.<p>It should have been the opposite way - Metal should have been implemented on top of Vulkan.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-17 23:03:29 &#43;0000 UTC">2021-08-17 23:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At least DX12 and Metal have similar semantics to Vulkan. It may be a mess to support multiple platforms without using some kind of translation library, abstraction layer, or off-the-shelf rendering engine, but at least you <i>can</i> work with similar semantics on different platforms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skocznymroczny" target="_blank">skocznymroczny</a>   <span class="timeago" data-date="2021-08-18 08:11:20 &#43;0000 UTC">2021-08-18 08:11:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DX12 yes. Metal, not so much. Yes, it shares some of the features of low-level, explicit APIs, but it&#x27;s still a much higher level API than Vulkan&#x2F;DX12 are. Things like image transitions, memory barriers, synchronization semaphores&#x2F;fences. In Vulkan&#x2F;DX12 you need to grasp those to get a triangle on the screen, in Metal not as much.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-17 23:09:03 &#43;0000 UTC">2021-08-17 23:09:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s still an unnecessary mess driven by lock-in interests. MS and Apple should have collaborated on supporting Vulkan instead and made whatever higher level stuff on top of it already.<p>But you are right, translating DX12 to Vulkan is easier than translating DX9 or DX11 to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 00:43:08 &#43;0000 UTC">2021-08-18 00:43:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lock-in was the end result, but the project that eventually resulted in Vulkan hadn&#x27;t even begun by the time Metal was shipping to developers. Metal was <i>released</i> June 2014, and a project called &quot;OpenGL Next&quot; was started the next month, in July 2014. This project was eventually renamed Vulkan, and wasn&#x27;t available until February 2016.<p>You can say that the lock-in is &quot;unnecessary&quot;, but these things happen for complicated reasons. Fixing the lock-in isn&#x27;t just a switch you can flip.<p>We can dream about a world in which Vulkan came out two years earlier than it did. In the world we live in, Microsoft wanted migration paths for existing DirectX users, and Apple wanted people to take iOS seriously as a platform for developing games. Waiting for OpenGL Next to materialize seemed like a losing game at the time.<p>When Metal and DirectX 12 were under developement, they weren&#x27;t competing with Vulkan... they were competing with a set of techniques for OpenGL called AZDO, and it seemed that OpenGL was lagging further and further behind its alternatives with every passing year.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ben-schaaf" target="_blank">ben-schaaf</a>   <span class="timeago" data-date="2021-08-18 01:24:24 &#43;0000 UTC">2021-08-18 01:24:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Vulkan is derived from AMD&#x27;s Mantle API which came out back in 2013.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 02:01:33 &#43;0000 UTC">2021-08-18 02:01:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, and Mantle is a vendor-specific (AMD only) API which only supported one platform (Windows). There were plans to port it to Linux, but there were never any plans to support other GPUs.<p>That, and Mantle ran on desktop GPUs. Metal was initially targeted at where the gap between API and hardware was the largest, which was mobile GPUs. At least with desktop OpenGL you had the &quot;AZDO&quot; techniques, but on mobile, you had OpenGL ES. Mobile GPUs aren&#x27;t just smaller versions of desktop GPUs, they use radically different ways of drawing on the screen (although this gap is narrowing, as desktop GPUs are becoming more like mobile GPUs... basically, expect to see tiled rendering on desktops in the future).<p>If you were living in 2013, would you say, &quot;Gee, I hope someone else forms a committee to adapt Mantle into something which, in the future, maybe in 2016, I could theoretically use?&quot; Or is it faster to make your own API? Or perhaps you like working with cross-platform steering committees that were, at the time, falling behind and failing to address problems with their APIs?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jhasse" target="_blank">jhasse</a>   <span class="timeago" data-date="2021-08-18 11:59:23 &#43;0000 UTC">2021-08-18 11:59:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would help the committee.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 17:53:46 &#43;0000 UTC">2021-08-18 17:53:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, and that&#x27;s what they did. They were on the committee, helping out. Seems a lot of people have kind of rewritten the narrative here. Or maybe people forgot that committees &amp; steering groups sometimes fall apart, slow to a crawl, or deliver standards that either aren&#x27;t useful to developers or aren&#x27;t feasible for implementers.<p>You&#x27;d be a moron to put all your hopes and dreams in a committee &#x2F; industry working group delivering something to fix the problems with your platform. Sending more engineers to a committee that&#x27;s already moving slowly will just slow things down further. So these companies, while sitting on the committee, worked on alternatives and had backup strategies.<p>Those strategies turned into Metal and DirectX 12, and the committee realized, &quot;Oh, if we don&#x27;t fix the problems with OpenGL, it will become completely irrelevant.&quot; So, in response to this new competition, the OpenGL steering committee started working on OpenGL Next, which later became Vulkan, and about two years later, got released.<p>It&#x27;s amazing what a little competition can do.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 18:20:36 &#43;0000 UTC">2021-08-18 18:20:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Still makes no sense. Vulkan exists. Where are Apple and MS now? They have no excuse not supporting it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 21:08:39 &#43;0000 UTC">2021-08-18 21:08:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why doesn&#x27;t the excuse, &quot;It costs more money to support multiple graphics APIs&quot; make sense? Or how about, &quot;Let&#x27;s keep graphics APIs stable?&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 23:08:40 &#43;0000 UTC">2021-08-18 23:08:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That doesn&#x27;t make lock-in any better and less of a crooked practice.<p>MS execs actually quite explicitly verbalized the idea of it in the past:<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Criticism_of_Microsoft#Vendor_lock-in" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Criticism_of_Microsoft#Vendor_...</a><p>This applies here very well too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-19 02:51:09 &#43;0000 UTC">2021-08-19 02:51:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, I was really hoping that we were having a discussion about the historical reasons why Metal and DX12 exist. Complaining about how evil Apple and Microsoft are was fun and all in the 1990s when I was a kid hanging out on Slashdot, but I&#x27;m just kinda bored of it now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 02:11:13 &#43;0000 UTC">2021-08-18 02:11:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; When Metal and DirectX 12 were under development, they weren&#x27;t competing with Vulkan.</i><p>For huge monsters like MS and Apple the argument of &quot;we already had this, so we can&#x27;t join the collaborative effort&quot; doesn&#x27;t really make sense. They very well can join it and scrap their NIH in the process. They even did that in the past, when their NIH didn&#x27;t manage to cement itself (anyone remembers ActiveX today?).<p>Plus, in this case the idea of common low level GPU API existed before Vulkan was out, namely in Mantle. AMD proposed to collaborate on it to everyone. Which indeed resulted in Vulkan eventually. So they totally could back that instead of pushing their own stuff (that&#x27;s besides the fact that MS literally used same Mantle for making DX12). So I don&#x27;t see them being random bystanders here, but rather someone who deliberately refused to collaborate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 02:30:46 &#43;0000 UTC">2021-08-18 02:30:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  &quot;we already had this, so we can&#x27;t join the collaborative effort&quot; doesn&#x27;t really make sense<p>But the argument &quot;we already have this, so why spend money on that other thing&quot; makes sense, especially if they profit from it and don&#x27;t pay the bill for it (the companies of non MS devs which have to handle that mess do).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 03:16:33 &#43;0000 UTC">2021-08-18 03:16:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For huge monsters like MS and Apple the argument of &quot;we already had this, so we can&#x27;t join the collaborative effort&quot; doesn&#x27;t really make sense.<p>It sounds like there’s a misunderstanding here about what Mantle was. Mantle was not a collaborative effort that different vendors could join in on. Mantle was AMD’s pet project. AMD saying “Hey, why doesn’t everyone use Mantle?” was a non-starter, because as it was, Mantle reflected the architecture of current AMD GPUs. Nvidia or other GPUs would be at a massive disadvantage trying to implement a low-level API that just didn’t fit their architecture right.<p>However, there was indeed a collaborative effort that Apple and Microsoft were a part of. It was the OpenGL steering committee. In 2013, the steering committee was not busy making Vulkan reality. They were instead trying to fix the problems with OpenGL. The more serious problems—the reasons why Vulkan exists—never actually got fixed.<p>This was not a massive surprise. The issues were complicated, and most people thought that OpenGL was falling behind DirectX further each year.<p>&gt; Which indeed resulted in Vulkan eventually.<p>Yeah, in 2016. By that point, developers had been using Metal for almost TWO YEARS and shipping games with it. Some of those games had shipped sequels or spinoffs.<p>The project which eventually resulted in Vulkan, called “OpenGL Next,” hadn’t even BEGUN by the time Metal was released to developers. DirectX 12, I assume, was under heavy development at the time.<p>The story I’ve heard was that the release of Metal was a real kick in the pants for what became the Vulkan effort. If you were to go back in time and rewrite history, and wipe Metal off the face of the planet, who knows what would happen to Vulkan? History is messy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 03:43:48 &#43;0000 UTC">2021-08-18 03:43:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; Yeah, in 2016.</i><p>Not out of the blue. AMD wanted that collaboration and got different parties interested. It took a while to get needed groups together and then develop it until it was out in 2016 (not by AMD alone at that time obviously). Where were Apple and MS when this was happening between 2013 and 2016?<p>Your argument about non-starter is clearly incorrect, since Vulkan did result from it all. So it was possible, but took time. Khronos was already managing OpenGL so they fit the role of overseeing it. Someone else could do it too may be, but no one else stepped up (including same MS and Apple who easily could if they thought they could do better).<p><i>&gt; The story I’ve heard was that the release of Metal was a real kick in the pants for what became the Vulkan effort.</i><p>Apple very well knew there is an interest in the common API. Where were they? Making their Apple only NIH of course. Collaboration takes more time, sure. Did Apple join? No. They never cared.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 04:05:15 &#43;0000 UTC">2021-08-18 04:05:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Your argument about non-starter is clearly incorrect, since Vulkan did result from it all.<p>I’m talking about what people perceived in 2013. You are welcome to judge people’s decisions, using your knowledge of future events, if that’s what you really want to do.<p>&gt; Where were Apple and MS when this was happening between 2013 and 2016?<p>Apple and MS were thinking, correctly, “I bet I can deliver a working API before this committee with representatives from a dozen different companies with competing interests can get off their butts and even figure out what they’re going to name the project.”<p>Those years were years of massive, massive growth for the App Store and the iOS ecosystem. If you could fix major problems that your customers a couple years faster, during a time when sales were growing 50% year over year, you’d want to do it yourself too. There’s only so many engineers at your company with the patience and drive to sit on committees.<p>&gt; Khronos was already managing OpenGL so they fit the role of overseeing it.<p>It was called “OpenGL Next”, not Vulkan, at the time. Well, not when Metal was released, since it didn’t even exist when Metal was released.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 04:42:40 &#43;0000 UTC">2021-08-18 04:42:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; You are welcome to judge people’s decisions, using your knowledge of future events</i><p>If some thought it was a non starter, AMD thought it&#x27;s a good idea that would benefit everyone. Who ended up being right? Not the skeptics, that was my point. The idea was correct and those who backed it helped move it forward. But Apple and MS did the opposite of helping.<p><i>&gt; Apple and MS were thinking, correctly, “I bet I can deliver a working API before this committee with representatives from a dozen different companies</i><p>That was exactly my point. &quot;Correctly&quot; as in <i>&quot;let&#x27;s push lock-in to hook developers on this and make life harder for them if they want to support multiple platforms&quot;.</i> That&#x27;s the approach MS and Apple were using for years. But it&#x27;s not right if you care about making things better for the industry, because it&#x27;s only slowing progress down. I really see no justification for using development tools like APIs for market control, it&#x27;s a crooked practice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-18 18:14:46 &#43;0000 UTC">2021-08-18 18:14:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But Apple and MS did the opposite of helping.<p>I think it&#x27;s pretty absurd to expect Apple and MS to suspend work on graphics APIs until the committee gets around to figure things out. Especially when the committee is already falling behind, and fixing these issues isn&#x27;t even on the agenda yet. I just don&#x27;t understand how someone could blame Apple and Microsoft for developing their own APIs, and then let the OpenGL committee off the hook for completely failing to fix the outstanding issues in the OpenGL API in a timely fashion.<p>Again... and it seems people keep forgetting this part... Metal was released to developers before the project that eventually became Vulkan even started. At the time Metal was released, Vulkan DID NOT EXIST, not even by a different name.<p>&quot;I know, let&#x27;s not work on this important project, and hand it off to an industry working group.&quot; Said no engineer, ever.<p>When a committee fails to produce a working standard, alternatives appear. This is how WHATWG appeared.<p>&gt; That was exactly my point. &quot;Correctly&quot; as in &quot;let&#x27;s push lock-in to hook developers on this and make life harder for them if they want to support multiple platforms&quot;.<p>That&#x27;s just begging the question. If you&#x27;re going to argue, at least make an argument.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-18 18:21:56 &#43;0000 UTC">2021-08-18 18:21:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s absurd is trying to paint them as someone who can&#x27;t simply start supporting Vulkan today and fix this fragmentation mess. Lock-in has no excuse for the likes of them.<p>And I already brought examples above where MS did the right thing, like with OpenXR.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-19 02:44:45 &#43;0000 UTC">2021-08-19 02:44:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They&#x27;re also locked-in to their own software. It&#x27;s not just third-party developers using Metal, but first-party developers too. It would be nothing short of a massive effort, to shift the entire company from Metal to Vulkan. Make no mistake, this is what you&#x27;re asking for. Choosing to support two graphics APIs? No, not gonna happen. This is why Apple deprecated OpenGL in the first place.<p>Nobody believes that Apple could just snap their fingers and start supporting Vulkan today. It just seems too optimistic to me, and these kinds sweeping changes require a lot of coordination. You introduce the Vulkan API internally (which takes time). Then you start with the various low-level frameworks, like Cocoa. With that base in place, you can write transpilers and migration tools to move from Metal shaders to something that compiles to SPIR-V. Perhaps a new backend to an existing compiler? From there, you work up the stack, applying the migration tools. Core Image is a big one. Undoubtedly, you&#x27;d have to back out the changes to some frameworks and try again. At the end, you&#x27;re working on end-user applications like Final Cut.<p>You&#x27;ll also want to build a framework on top of Vulkan to manage resources a bit. Metal has an Objective-C interface and works with ARC, Vulkan is all manual.<p>OpenXR is a <i>lot</i> smaller than Vulkan, and affects a much smaller number of applications. Not really a suitable comparison.<p>I would love for everything to use Vulkan, but I also understand the reasons why things didn&#x27;t turn out that way, and why this is a problem that&#x27;s not easy to solve.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smallstepforman" target="_blank">smallstepforman</a>   <span class="timeago" data-date="2021-08-17 23:03:48 &#43;0000 UTC">2021-08-17 23:03:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So it&#x27;s a slab allocator to reuse recently destroyed buffers.  I&#x27;ve got something similar on my Vulkan engine, but much less lines of code.  I would have thought by now that most libraries&#x2F;engines would be reusing allocated buffers using a slab allocator based design, so it doesn&#x27;t suprise me to see that Zink got it as well.  I would have been suprised if it never had it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=georgeecollins" target="_blank">georgeecollins</a>   <span class="timeago" data-date="2021-08-18 16:12:55 &#43;0000 UTC">2021-08-18 16:12:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, but you have a Vulcan engine.  It&#x27;s nice to get the performance improvement on something written in Open GL.  I think that is the benefit they are touting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cannyfox91" target="_blank">cannyfox91</a>   <span class="timeago" data-date="2021-08-17 23:04:26 &#43;0000 UTC">2021-08-17 23:04:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do we know how this compares to native OpenGL implementations form AMD&#x2F;Nvidia ? It would seem like these optimizations are already implemented on their native drivers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jpetso" target="_blank">jpetso</a>   <span class="timeago" data-date="2021-08-18 11:19:23 &#43;0000 UTC">2021-08-18 11:19:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Phoronix is running some benchmarks again which should be coming out in the next days.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=initplus" target="_blank">initplus</a>   <span class="timeago" data-date="2021-08-17 20:56:52 &#43;0000 UTC">2021-08-17 20:56:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So does this make the case that common opengl implementations are just not very good? If this works so well as a technique why isn&#x27;t it already in use by vendors?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shmerl" target="_blank">shmerl</a>   <span class="timeago" data-date="2021-08-17 21:01:28 &#43;0000 UTC">2021-08-17 21:01:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It means it improves it for itself, bringing it closer to native OpenGL implementations since in that case it was pretty bad, not that it&#x27;s 10 times better than native OpenGL.<p>The description actually says that it borrows heavily from radeonsi (AMD&#x27;s OpenGL implementation), so it means the technique is already used.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=boyadjian" target="_blank">boyadjian</a>   <span class="timeago" data-date="2021-08-17 21:14:10 &#43;0000 UTC">2021-08-17 21:14:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenGL will never die, it will be virtualized with Zink
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wlesieutre" target="_blank">wlesieutre</a>   <span class="timeago" data-date="2021-08-17 21:38:53 &#43;0000 UTC">2021-08-17 21:38:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some places are already using ANGLE for this, which takes WebGL &#x2F; OpenGL ES and translates it to D3D9, D3D11, Vulkan, desktop OpenGL, or Metal (in progress) depending on platform.<p>From my understanding, the main goal here was for Chrome to handle WebGL on Windows using Direct3D because OpenGL driver support on Windows is not good. But it&#x27;s aiming to be a universal graphics shim for many platforms.<p>Chrome, Firefox, Qt, and Krita all use it.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ANGLE_(software)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ANGLE_(software)</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TazeTSchnitzel" target="_blank">TazeTSchnitzel</a>   <span class="timeago" data-date="2021-08-18 10:34:33 &#43;0000 UTC">2021-08-18 10:34:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Safari will be using ANGLE soon too (and thus support WebGL 2 finally).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-08-17 21:52:25 &#43;0000 UTC">2021-08-17 21:52:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was never going to die.  There&#x27;s still Glide wrappers out there, and OpenGL did way better than Glide in the market.<p>Virtualized was always it&#x27;s end game and where well used APIs go to die.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bsder" target="_blank">bsder</a>   <span class="timeago" data-date="2021-08-17 23:06:06 &#43;0000 UTC">2021-08-17 23:06:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That would actually be <i>fine</i> because it would take the problem of OpenGL drivers away from the manufacturers who don&#x27;t give two shits of damn about it.<p>At this point, OpenGL is more important in being <i>fully compatible</i> than in being <i>fully performant</i>.  And none of the graphics card guys care about that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokoon" target="_blank">jokoon</a>   <span class="timeago" data-date="2021-08-17 21:43:18 &#43;0000 UTC">2021-08-17 21:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            that&#x27;s pretty hopeful to hear...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

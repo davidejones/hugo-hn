@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/inplace-parallel-super-scalar-samplesort-ipso/">
+
+
+    <title>In-Place Parallel Super Scalar Samplesort (IPS⁴o) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="In-Place Parallel Super Scalar Samplesort (IPS⁴o) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/inplace-parallel-super-scalar-samplesort-ipso/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/inplace-parallel-super-scalar-samplesort-ipso/">
+<meta name="twitter:title" content="In-Place Parallel Super Scalar Samplesort (IPS⁴o) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "In-Place Parallel Super Scalar Samplesort (IPS⁴o) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T13:23:55JST",
+    "dateModified": "2021-08-18T13:23:55JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/ips4o/ips4o">In-Place Parallel Super Scalar Samplesort (IPS⁴o)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scott_s" target="_blank">scott_s</a>   <span class="timeago" data-date="2021-08-18 13:36:48 &#43;0000 UTC">2021-08-18 13:36:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Academic paper: &quot;Engineering In-place (Shared-memory) Sorting Algorithms&quot;, Michael Axtmann, Sascha Witt, Daniel Ferizovic, Peter Sanders, <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2009.13569" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2009.13569</a><p>To start discussion, I think it&#x27;s interesting to note how I landed on this repo and paper. I got curious about Tim Sort, and some searching on HN brought up a 2018 story, &quot;On the Worst-Case Complexity of TimSort&quot;, <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17883461" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17883461</a>. In the comments, poster lorenzhs has an excellent comment (<a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17884612" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17884612</a>) which points out IPS4o as a sorting algorithm that takes modern hardware into account.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=h2odragon" target="_blank">h2odragon</a>   <span class="timeago" data-date="2021-08-18 15:23:19 &#43;0000 UTC">2021-08-18 15:23:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The parallel version of IPS⁴o requires 16-byte atomic compare-and-exchange instructions to run the fastest. Most CPUs and compilers support 16-byte compare-and-exchange instructions nowadays.<p>I was so thrilled when i got <i>4 byte</i> CAS on Intel, Sparc, and Alpha (all i had were uniproc Alphas but it made the code <i>feel</i> cleaner). Then I wandered into other things and haven&#x27;t been keeping up with this stuff. <i>damn</i> its got fancy.<p>Does memory latency still suck rocks with lots of handwave about &quot;but we have so much <i>width</i> now&quot;?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-18 16:57:53 &#43;0000 UTC">2021-08-18 16:57:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Does memory latency still suck rocks with lots of handwave about &quot;but we have so much width now&quot;?<p>Basically.<p>Intel processors can process something like 2 or 3 load&#x2F;stores per clock cycle to L1 cache at full rate, no questions asked.<p>When you use AVX512 and do 512-bit loads&#x2F;stores (64-byte), that&#x27;s still only 2 or 3 per clock cycle. But if you use typical 64-bit registers, you&#x27;re still only able to do 2 or 3 load&#x2F;stores per cycle. Its not even memory latency here, its literally the execution port that&#x27;s the holdup.<p>-------<p>Now I&#x27;ve never looked at AVX512 &#x2F; AVX2 (256-bit) from the perspective of multithreaded &#x2F; atomic access &#x2F; memory order. But from a performance perspective, that load&#x2F;store is the full 512-bit or 256-bit width and probably atomic.<p>------<p>I&#x27;m assuming the 16-byte atomic compare-and-exchange instructions are NEON on ARM (128-bit width), and probably some AVX instruction I&#x27;m not aware of on Intel&#x2F;AMD (256-bit).<p>EDIT: It seems like the 128-bit instruction on x86 is cmpxchg16b. 512-bit &#x2F; 64-byte cache lines are the unit that the cache operates however. Intel has a TSX-NI (transactional memory) extension that operates over 64-bytes (making it possible to implement a cmpxchg64b, but over multiple instructions). Its not actually AVX512 or AVX2 related at all.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-18 23:09:00 &#43;0000 UTC">2021-08-18 23:09:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; its literally the execution port that&#x27;s the holdup.<p>Is if also a limitation of the register file ports&#x2F;granularity? If not, what would stop Intel go add an instruction that spill and fill a set of gp registers back and forth from memory (e.g. stack)?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h2odragon" target="_blank">h2odragon</a>   <span class="timeago" data-date="2021-08-19 00:09:44 &#43;0000 UTC">2021-08-19 00:09:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Knuth stopped including the &quot;sequential access&quot; stuff just as it came back to usefulness :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chmod775" target="_blank">chmod775</a>   <span class="timeago" data-date="2021-08-18 16:58:47 &#43;0000 UTC">2021-08-18 16:58:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; &quot;but we have so much width now&quot;?<p>We also have 16MB of L3 and smarter prefetching!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

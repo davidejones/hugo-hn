@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/a-fast-alternative-to-the-modulo-reduction-2016/">
+
+
+    <title>A fast alternative to the modulo reduction (2016) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="A fast alternative to the modulo reduction (2016) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/a-fast-alternative-to-the-modulo-reduction-2016/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/a-fast-alternative-to-the-modulo-reduction-2016/">
+<meta name="twitter:title" content="A fast alternative to the modulo reduction (2016) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "A fast alternative to the modulo reduction (2016) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T11:51:36JST",
+    "dateModified": "2021-08-16T11:51:36JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://lemire.me/blog/2016/06/27/a-fast-alternative-to-the-modulo-reduction/">A fast alternative to the modulo reduction (2016)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bbojan" target="_blank">bbojan</a>   <span class="timeago" data-date="2021-08-18 08:53:04 &#43;0000 UTC">2021-08-18 08:53:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This technique is not new. E.g. I remember it described in ARM system developer&#x27;s guide published back in 2004.<p>It shows how to use unsigned 64-bit multiplication to restrict a range of a 32-bit random number generator to 0..N. No shifts are needed, as the result is in the upper 32-bit register.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-18 18:23:20 &#43;0000 UTC">2021-08-18 18:23:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For random numbers, that wont&#x27; be uniform. Suppose we have a good quality, uniformly distributed 32 bit unsigned random number, that we want to reduce, to say, 0..13 which also has a uniform distribution.<p>What we can do take enough bits from the number to cover the range, in this case 4:<p><pre><code>  out = r % 16;
+</code></pre>
+Then, we test whether the value is in the range 0 to 13. If not, we throw the random number away, and try it with a another four bits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pwuille" target="_blank">pwuille</a>   <span class="timeago" data-date="2021-08-18 18:48:19 &#43;0000 UTC">2021-08-18 18:48:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that&#x27;s called rejection sampling, and it&#x27;s the only way to produce truly uniform output if the range doesn&#x27;t evenly divide the input range.<p>However in a setting of say finding buckets in a hashtable which isn&#x27;t a power-of-two size, this would amount to potentially computing multiple hashes. In certain scenarios, that may be unacceptable for computational reasons. If strict uniformity isn&#x27;t required, the approach presented here may be good enough. It won&#x27;t be exactly uniform if the range isn&#x27;t a power of two, but it&#x27;ll be equally <i>close</i> to uniform as modulo reduction is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-18 20:12:02 &#43;0000 UTC">2021-08-18 20:12:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>hashtable which isn&#x27;t a power-of-two size</i><p>I think, I&#x27;d never want to do such a thing, but I will remember this multiplication trick in a legitimate situation where a non-power-of-two residue is being calculated, but the mathematical residue <i>per se</i> is not required.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 21:41:55 &#43;0000 UTC">2021-08-18 21:41:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your non-power-of-two sized hashtable is compile-time-constant, the modulus will get compiled into similarly fast code.  It&#x27;s only needed when the size isn&#x27;t a constant.<p>Particularly for large open hashtables having to double the size of your table to go up to the next power of 2 is a really significant memory overhead... and if the size is variable, the multiply is a lot faster.  It&#x27;s a good technique.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-18 22:35:50 &#43;0000 UTC">2021-08-18 22:35:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A power of two hash table doubling in size just has to adjust a clipping mask. E.g. when the size is 16 we have mask == 0xF. When the size goes to 32, we have mask == 0x1F. Reducing the hash value to the table size is just hash &amp; mask.<p>There is simply no modern use case for non-power-of-two hash tables. Even in open addressing.<p>Table sizes which are prime numbers are theoretically important because they allow techniques like quadratic probing to guarantee to visit every possible table offset, thanks to Euler&#x27;s theorem. This one:<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Euler%27s_theorem" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Euler%27s_theorem</a><p>(Only if n is prime is the phi(n) totient function equal to n - 1, meaning that all values of the congruence are traversed by the successive powers of a.)<p>This will go out the window if you start doubling the table, so that n is no longer prime; you instead need a predetermined sequence of primes to serve as table sizes.<p>Quadratic probing is silly because it&#x27;s been found that linear probing, in spite of its issues, wins in terms of caching performance. The only reason to go to open addressing over chained hashing would be for better caching, due to not chasing chain pointers, and then you might as well reap the full improvement from better caching by using linear probing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 23:44:20 &#43;0000 UTC">2021-08-18 23:44:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There is simply no modern use case for non-power-of-two hash tables. Even in open addressing.There is simply no modern use case for non-power-of-two hash tables.<p>I think I&#x27;d much rather a hash table that needs 32.1 GB actually take 32.1 GB and not 64 GB especially when I need several of them, thank you very much!<p>With the extra memory saved and the TLB&#x2F;cache footprint reduced I can get a lot of performance to offset the minuscule latency difference between a widening multiply and a logical and!<p>In a recent data structure I&#x27;ve worked on, using an algebraic code requiring a couple bisection searches in a couple tiny tables to decode-- to just reduce table entries by 4 bits measurably improved performance, simply from reducing the cache&#x2F;tlb footprint a few percent.  As computers have become faster multiplies and adds have become increasingly free relative to memory latency&#x2F;bandwidth.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NWDD" target="_blank">NWDD</a>   <span class="timeago" data-date="2021-08-18 21:29:46 &#43;0000 UTC">2021-08-18 21:29:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For many use cases biased is good enough.<p>The topic of unbiased bounded generation is pretty interesting itself and both lemire and M.E. O&#x27;Neill (author of pcg) wrote blog posts and an academic paper comparing different approaches (some using as building block the fixed point trick)<p><a href="https:&#x2F;&#x2F;www.pcg-random.org&#x2F;posts&#x2F;bounded-rands.html" rel="nofollow">https:&#x2F;&#x2F;www.pcg-random.org&#x2F;posts&#x2F;bounded-rands.html</a>  <a href="https:&#x2F;&#x2F;lemire.me&#x2F;blog&#x2F;2019&#x2F;06&#x2F;06&#x2F;nearly-divisionless-random-integer-generation-on-various-systems&#x2F;" rel="nofollow">https:&#x2F;&#x2F;lemire.me&#x2F;blog&#x2F;2019&#x2F;06&#x2F;06&#x2F;nearly-divisionless-random...</a> <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1805.10941.pdf" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1805.10941.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thomasmg" target="_blank">thomasmg</a>   <span class="timeago" data-date="2021-08-18 10:06:37 &#43;0000 UTC">2021-08-18 10:06:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes it is not new; I read the multiplication trick was described even in 1986, in &quot;The Metafont book&quot; (Donald E. Knuth). (I don&#x27;t have the book however).<p>But it does look like the technique was forgotten, or at least not used very often in the past.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-08-18 11:10:16 &#43;0000 UTC">2021-08-18 11:10:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is much older than that.<p>If you interpret a random n-bit integer as random fraction &gt;= 0 and &lt; 1, it is obvious that if you multiply it by K you will have a random number &gt;= 0 and &lt; K.<p>If you take the integer part and discard the fractional part, i.e. you keep just the upper word from multiplication, you get a random integer &gt;= 0 and &lt;= (K-1).<p>This was well known since the oldest times when pseudo-random numbers began to be used, i.e. immediately after WW2.
+At that time, before the introduction of the floating-point numbers, interpreting the binary numbers as fractions instead of integers was much more frequent.<p>Using modulo became popular only in higher level languages, where it was more complex to write a double word multiplication, but it is clearly an inferior solution compared to using a multiplication for the same job.<p>Moreover, the multiplicative method ensures that all the integer values possible for the result have the same probabilities, while with the modulo K method it is possible that the last value (K-1) has a lower probability (corresponding to fewer possible values of the input number), which is not what is normally desired.<p>For ancient congruential PRNGs, the modulo method was even worse, because those PRNGs had the lower bits less random than the upper bits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-18 14:11:13 &#43;0000 UTC">2021-08-18 14:11:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  immediately after WW2. At that time, before the introduction of the floating-point numbers<p>Well technically floating point was invented around 1900 and then invented again independently by Zuse in the 30s (all of his computers were floating point machines).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lifthrasiir" target="_blank">lifthrasiir</a>   <span class="timeago" data-date="2021-08-18 11:19:42 &#43;0000 UTC">2021-08-18 11:19:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the multiplicative method ensures that all the integer values possible for the result have the same probabilities<p>Uh, you can&#x27;t do that for any non-power-of-two K. The multiplicative method doesn&#x27;t remove but only moves those lower probabilities around when used without rejection.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-08-18 11:28:29 &#43;0000 UTC">2021-08-18 11:28:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You are right in general, but for the common case, when you want random numbers with the maximum value much less than the maximum integer that can be represented in a word, e.g. you want dice numbers or lottery numbers, the probabilities of the integers produced by multiplication are much more uniform than of those produced by modulo.<p>If you would want a very wide range for the output random numbers, which is seldom the case, the comparison of the methods could be reversed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=atq2119" target="_blank">atq2119</a>   <span class="timeago" data-date="2021-08-18 12:42:14 &#43;0000 UTC">2021-08-18 12:42:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. The two methods are qualitatively equally good. In both cases, some outputs have probability floor(2^n&#x2F;K)&#x2F;2^n while others have probability ceil(2^n&#x2F;K)&#x2F;2^n. The numbers of outputs with each probability are such that they average out to 1&#x2F;K. The only difference is the distribution of which output numbers have which of these two probabilities.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwuille" target="_blank">pwuille</a>   <span class="timeago" data-date="2021-08-18 16:06:18 &#43;0000 UTC">2021-08-18 16:06:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Exactly, both the modulo and the multiplicative method are equally close to uniform. In fact, under the constraint of starting from a uniform input with 2^n possibilities, both produce an output that is as close to uniform as possible. A necessary and sufficient requirement for that is the maximum and minimum number of inputs that maps to any given output differs by at most one, which is the case for both methods.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eternalban" target="_blank">eternalban</a>   <span class="timeago" data-date="2021-08-18 10:43:10 &#43;0000 UTC">2021-08-18 10:43:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Kenneth A. Ross mentions it in passing in his 2006 IBM research report (a great paper btw):<p><i>&quot;We can interpret a 32-bit hash value v as a binary fraction, i.e., the representation of a number between zero and one whose digits after the (binary) decimal point are given by v. Given a hash table size s, we can obtain a slot number by multiplying s and v and shifting right 32-bits. This way, arbitrary table sizes are possible without using expensive division or modulus operations. Computing s∗v can be performed with one 32-bit multiplication (generating a 64- bit result). If s is a 16-bit number, as might be expected for a small hash table, then two 16-bit multiplications, a shift, and a 32-bit addition suffice.&quot;</i><p>Kenneth A. Ross, Efficient Hash Probes on Modern Processors, IBM Research Report RC24100 (W0611-039) November 8, 2006<p><a href="https:&#x2F;&#x2F;dominoweb.draco.res.ibm.com&#x2F;reports&#x2F;rc24100.pdf" rel="nofollow">https:&#x2F;&#x2F;dominoweb.draco.res.ibm.com&#x2F;reports&#x2F;rc24100.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kwillets" target="_blank">kwillets</a>   <span class="timeago" data-date="2021-08-18 15:33:07 &#43;0000 UTC">2021-08-18 15:33:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is new here is the method to remove bias.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-18 18:25:09 &#43;0000 UTC">2021-08-18 18:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t believe it removes bias. By pigeon-hole-principle-related reasoning, you cannot map, say, 65536 values to 17 values without bias.<p>The method redistributes the bias compared to straight modulo.<p>You won&#x27;t get a uniform distribution with this, just a differently shaped one compared to modulo.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pwuille" target="_blank">pwuille</a>   <span class="timeago" data-date="2021-08-18 16:08:03 &#43;0000 UTC">2021-08-18 16:08:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, it&#x27;s not. The method described by ARM is functionally identical, so it is equally biased as the method described in the blog post here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwillets" target="_blank">kwillets</a>   <span class="timeago" data-date="2021-08-18 16:52:03 &#43;0000 UTC">2021-08-18 16:52:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I see, this is one of several posts on this topic. There is a link near the end to the unbiased method, which is more original, but as you note fixed-point multiplication is not new.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pwuille" target="_blank">pwuille</a>   <span class="timeago" data-date="2021-08-18 15:56:23 &#43;0000 UTC">2021-08-18 15:56:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I recently discovered a generalization of this approach, which allows mapping a single hash to multiple independent numbers, each in their own range, while maintaining various uniformity properties.<p>A write-up is here, in case anyone is interested: <a href="https:&#x2F;&#x2F;github.com&#x2F;sipa&#x2F;writeups&#x2F;tree&#x2F;main&#x2F;uniform-range-extraction" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;sipa&#x2F;writeups&#x2F;tree&#x2F;main&#x2F;uniform-range-ext...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwillets" target="_blank">kwillets</a>   <span class="timeago" data-date="2021-08-18 17:14:20 &#43;0000 UTC">2021-08-18 17:14:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This may save random bits, which are generally more costly than the range reduction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=timdaub" target="_blank">timdaub</a>   <span class="timeago" data-date="2021-08-18 08:46:20 &#43;0000 UTC">2021-08-18 08:46:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I recently discovered a problem in this domain of modulo reduction. I&#x27;m looking for a way to create a smaller index for Ethereum accounts that are in the range of 0 to 2^160 [1]. It&#x27;s mainly to reduce gas storage cost [3].<p>Most folks I asked about it, ended up concluding that I&#x27;ll end up with this pidgeon hole effect where it&#x27;ll become likely that an index is suggested multiple times [2].<p>It may not be super cryptographically-sophisticated: But what I want is a hash function that&#x27;s (at least) somewhat aware of collisions without using too much storage. Bloomfilters were recommended - but it seems they need to much storage too. I need to be able to map Ethereum accounts to a smaller sized domain e.g. 0 to 2^32 to safe storage costs in smart contracts.<p>Since I asked on Stackexchange, the problem has become kind of stale and I stopped working on it. But it&#x27;s fascinating and I should continue to dive deeper...<p>Interesting article! Thanks<p>- 1: <a href="https:&#x2F;&#x2F;crypto.stackexchange.com&#x2F;questions&#x2F;91742&#x2F;can-there-be-an-injective-function-that-maps-a-large-set-of-integers-to-a-smalle" rel="nofollow">https:&#x2F;&#x2F;crypto.stackexchange.com&#x2F;questions&#x2F;91742&#x2F;can-there-b...</a><p>- 2: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Pigeonhole_principle" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Pigeonhole_principle</a><p>- 3: <a href="https:&#x2F;&#x2F;github.com&#x2F;rugpullindex&#x2F;honeybatcher" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rugpullindex&#x2F;honeybatcher</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FreakLegion" target="_blank">FreakLegion</a>   <span class="timeago" data-date="2021-08-18 09:21:04 &#43;0000 UTC">2021-08-18 09:21:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are smaller alternatives to Bloom filters, if size is the only issue. A few examples:<p>- <a href="https:&#x2F;&#x2F;github.com&#x2F;0xcb&#x2F;Golomb-coded-map" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;0xcb&#x2F;Golomb-coded-map</a><p>- <a href="https:&#x2F;&#x2F;github.com&#x2F;efficient&#x2F;cuckoofilter" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;efficient&#x2F;cuckoofilter</a><p>- <a href="https:&#x2F;&#x2F;github.com&#x2F;FastFilter&#x2F;xor_singleheader&#x2F;" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;FastFilter&#x2F;xor_singleheader&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=timdaub" target="_blank">timdaub</a>   <span class="timeago" data-date="2021-08-18 13:36:01 &#43;0000 UTC">2021-08-18 13:36:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, helpful links. I&#x27;ve looked into them and found them a great fit for my awesome-ethereum-rollups list [1].<p>- 1 <a href="https:&#x2F;&#x2F;github.com&#x2F;rugpullindex&#x2F;awesome-ethereum-rollups#membership-proof-data-structures" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rugpullindex&#x2F;awesome-ethereum-rollups#mem...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wizzwizz4" target="_blank">wizzwizz4</a>   <span class="timeago" data-date="2021-08-18 08:34:42 &#43;0000 UTC">2021-08-18 08:34:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>I also suspect that in many cases, given a list of IDs you can get reasonable results by doing just ID % . In this case, you can get away without applying a hashing transformation. With your trick, you do need this.</i><p>Reverse the bits before applying the trick.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thxg" target="_blank">thxg</a>   <span class="timeago" data-date="2021-08-18 10:05:55 &#43;0000 UTC">2021-08-18 10:05:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, although the trick is used in the first place in order to replace a 6-cycle division by a 1-cycle multiplication (on x86_64, assuming no CPU stalls). Roughly, in order to still make it a net positive, we have a 4-cycles budget for additional operations. That&#x27;s <i>very</i> tight for reversing the bits of a uint32_t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 21:45:06 &#43;0000 UTC">2021-08-18 21:45:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  used in the first place in order to replace a 6-cycle division by a 1-cycle multiplication<p>Look a generation or two back and you&#x27;ll see that the division is a LOT slower than 6 cycles, too.<p>But it should be noted that if the modulus is a compile time constant the compiler will turn the % into a multiply and add.<p>The riscv bitmanip instruction set has permutes that can reverse the bits in a word (along with other useful permutations).  ... still doesn&#x27;t exist in an actual asic yet.  Maybe some time in my life we&#x27;ll get it on common platforms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deepsun" target="_blank">deepsun</a>   <span class="timeago" data-date="2021-08-18 08:50:49 &#43;0000 UTC">2021-08-18 08:50:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about type conversion? The values were `uint32_t`, but converted to `uint64_t`, doesn&#x27;t that consume cycles as well, or for one operation, optimizer compiles that away?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-18 10:19:49 &#43;0000 UTC">2021-08-18 10:19:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Multiplying two 32-bit numbers yields a 64-bit result down on the CPU instruction level, so the type conversion is basically built in, details may differ by CPU, but here&#x27;s the vanilla x86 multiply which spreads the results over two registers:<p><a href="https:&#x2F;&#x2F;c9x.me&#x2F;x86&#x2F;html&#x2F;file_module_x86_id_210.html" rel="nofollow">https:&#x2F;&#x2F;c9x.me&#x2F;x86&#x2F;html&#x2F;file_module_x86_id_210.html</a><p>...so the compiler could even drop the right-shift and instead just use the register where the upper half of the result is stored.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deepsun" target="_blank">deepsun</a>   <span class="timeago" data-date="2021-08-18 14:00:08 &#43;0000 UTC">2021-08-18 14:00:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, thank you.<p>But the type conversion is on the results, not input. Is it guaranteed that we&#x27;re always multiplying two 32-bit numbers and not two 64-bit numbers in &quot;(uint64_t) x * (uint64_t) N&quot;? Because looking at the code, it&#x27;s more natural to think we&#x27;re multiplying 64-bit integers, so we may need some CPU cycles to make &quot;x&quot; occupy 64 bits first, same for &quot;N&quot;, and then do multiplication on them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwuille" target="_blank">pwuille</a>   <span class="timeago" data-date="2021-08-18 18:18:53 &#43;0000 UTC">2021-08-18 18:18:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The conversion is free, at least on x86-like platforms, because there are no separate 32-bit and 64-bit registers. Instead, there is a fixed shared set of registers, and the instructions signal whether they operate on the 32-bit or 64-bit value on it. When assigning to a register in 32-bit mode the top 32 bits are cleared, so if x and n were loaded into 32-bit registers, a 64-bit multiplication can be applied to it directly, without any conversion instructions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wizzwizz4" target="_blank">wizzwizz4</a>   <span class="timeago" data-date="2021-08-18 09:11:36 &#43;0000 UTC">2021-08-18 09:11:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some CPUs have a single instruction for “multiply but get the high word”.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

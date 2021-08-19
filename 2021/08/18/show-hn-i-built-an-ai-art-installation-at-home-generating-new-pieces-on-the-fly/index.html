@@ -1,0 +1,2671 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-i-built-an-ai-art-installation-at-home-generating-new-pieces-on-the-fly/">
+
+
+    <title>Show HN: I built an AI art installation at home generating new pieces on the fly - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Show HN: I built an AI art installation at home generating new pieces on the fly - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-i-built-an-ai-art-installation-at-home-generating-new-pieces-on-the-fly/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-i-built-an-ai-art-installation-at-home-generating-new-pieces-on-the-fly/">
+<meta name="twitter:title" content="Show HN: I built an AI art installation at home generating new pieces on the fly - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Show HN: I built an AI art installation at home generating new pieces on the fly - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T14:56:55JST",
+    "dateModified": "2021-08-18T14:56:55JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/maxvfischer/DIY-ai-art">Show HN: I built an AI art installation at home generating new pieces on the fly</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 14:58:51 &#43;0000 UTC">2021-08-18 14:58:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just finished my latest project, building an AI art installation at home, generating 100 % unique artworks on the fly. Just push the button below the screen and another one will be displayed. When the button has been pushed, the old artwork is deleted and can&#x27;t be retrieved again.<p>Setup:<p>* An Nvidia Jetson Xavier NX was used for all logic, machine learning inference, art kiosk GUI etc.<p>* A StyleGAN was used to generate the artworks, trained on ~5k images of abstract art.<p>* A passive infrared sensor (SR602) was integrated with the Jetson to reduce screen burn-in. When no movement has been detected around the installation within a pre-defined threshold, the screen shuts off until movement is detected.<p>* A custom control box was built, encapsulating most of the electronics.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TuringNYC" target="_blank">TuringNYC</a>   <span class="timeago" data-date="2021-08-18 17:58:13 &#43;0000 UTC">2021-08-18 17:58:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt; Nvidia Jetson Xavier NX<p>Curious -- since you&#x27;re only doing the inference&#x2F;generation on the frame, and since you&#x27;re not doing it all the time, did you need a Jetson or would an RPI have sufficed? Did you test inference speeds across different edge compute options?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-08-18 18:13:59 &#43;0000 UTC">2021-08-18 18:13:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I think the way I&#x27;d do it (personally) is have an RPi constantly generate new images in the background and cache them until storage is maxed out, then when you hit the button it just fetches the next image from cache.<p>That would allow the frame to be somewhat lower power and also decrease ventilation requirements -- no fan needed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raisedbyninjas" target="_blank">raisedbyninjas</a>   <span class="timeago" data-date="2021-08-18 20:07:34 &#43;0000 UTC">2021-08-18 20:07:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is it me or is this more of a woodworking guide than an AI art guide? I only see a small blurb to <i>put AI art code here</i>. Presumably the button&#x2F;replenish image dir. is a seed component to the AI. I suppose that further removing the art generation from the installation diminishes the magic of art. The engineer in me would further trim this down by pre-generating art on a PC and slap it on an SD card plugged into basic picture digital frame. Or dispense with storage and connect it to Wifi to poll AIArtAsAService.com.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bluerival" target="_blank">bluerival</a>   <span class="timeago" data-date="2021-08-18 22:15:27 &#43;0000 UTC">2021-08-18 22:15:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference between this project and a digital photo frame is as you’ve described - The AI generation. I think the destruction makes it special too, if every unique image disappears forever at the click of a button.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Quarrel" target="_blank">Quarrel</a>   <span class="timeago" data-date="2021-08-18 18:24:15 &#43;0000 UTC">2021-08-18 18:24:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ok, so this is cool as fuck.<p>I don&#x27;t think much of the actually produced art, but the fact that you laid out your whole process makes this drool-worthy. Now it is just a challenge as to- can I do better?<p>Great job.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:36:45 &#43;0000 UTC">2021-08-18 20:36:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glad you like it!<p>Of course you can! Give it a try and share it afterwards ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wombatmobile" target="_blank">wombatmobile</a>   <span class="timeago" data-date="2021-08-18 19:26:15 &#43;0000 UTC">2021-08-18 19:26:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nobody could include more individual photos in the how to.<p>This one has how many gazillion photos?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PebblesRox" target="_blank">PebblesRox</a>   <span class="timeago" data-date="2021-08-18 20:43:08 &#43;0000 UTC">2021-08-18 20:43:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oooh, next step is to create an AI picture frame that generates images based on the photo documentation of its own creation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=prions" target="_blank">prions</a>   <span class="timeago" data-date="2021-08-18 16:21:02 &#43;0000 UTC">2021-08-18 16:21:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is really cool! I&#x27;d love to seed the GAN with my own artwork and generate new pieces in my style
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:49:55 &#43;0000 UTC">2021-08-18 16:49:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Depending on how many artworks you&#x27;ve created, it might be difficult to train a GAN network on them (due to overfitting). What you might try is to train one network with a lot of random artworks, then use a Style-transfer network to convert the generated pieces into your style.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aketchum" target="_blank">aketchum</a>   <span class="timeago" data-date="2021-08-18 19:16:14 &#43;0000 UTC">2021-08-18 19:16:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            couldn&#x27;t you use something like style transfer to take your own artwork&#x27;s style and apply it to the generated art?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:38:08 &#43;0000 UTC">2021-08-18 20:38:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah exactly, that&#x27;s what I meant!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sandGorgon" target="_blank">sandGorgon</a>   <span class="timeago" data-date="2021-08-18 17:03:46 &#43;0000 UTC">2021-08-18 17:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            do you have the code for training ? i wasnt able to find it in your repo. That would be so cool!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 18:04:23 &#43;0000 UTC">2021-08-18 18:04:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I left it out as I wanted people to use their own generative art. Here&#x27;s the implementation I used: <a href="https:&#x2F;&#x2F;github.com&#x2F;taki0112&#x2F;StyleGAN-Tensorflow" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;taki0112&#x2F;StyleGAN-Tensorflow</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sandGorgon" target="_blank">sandGorgon</a>   <span class="timeago" data-date="2021-08-19 14:32:40 &#43;0000 UTC">2021-08-19 14:32:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey thanks! so just put your pictures and run the python script ? and we can take the model and drop-in replace in yoru code ?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bravura" target="_blank">bravura</a>   <span class="timeago" data-date="2021-08-18 19:58:21 &#43;0000 UTC">2021-08-18 19:58:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you actually want to disseminate your work and have many other people try it? Or is that not actually a goal.<p>Right now it really feels like this isn&#x27;t a priority. Which is fine.<p>But if it is a priority that other people replicate your work, I&#x27;m not sure you&#x27;re making this as easy for people as possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:41:15 &#43;0000 UTC">2021-08-18 20:41:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My intension is not for people to replicate my work (the trained GAN-network), but rather supply a tutorial over how to build the installation. Then people can add their own generative art&#x2F;code. It could be ML-generated, or traditional &quot;code-art&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kamilszybalski" target="_blank">kamilszybalski</a>   <span class="timeago" data-date="2021-08-18 17:19:57 &#43;0000 UTC">2021-08-18 17:19:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this comment seeded an interesting idea! Many artists and photographers want to get into the NFT space but they don&#x27;t necessarily have experience in digital art creation.<p>If you could leverage AI to generate digital art based on real artist&#x2F;photographer inputs, perhaps you could create a nice little marketplace business.. or maybe just a simple AI generator plugin for an existing marketplace..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tartoran" target="_blank">tartoran</a>   <span class="timeago" data-date="2021-08-18 18:36:35 &#43;0000 UTC">2021-08-18 18:36:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most artists (with some exceptions) want to have nothing to do with AI generative art. They will simply continue to produce art the way they do with older technologies such as paints and brushes, musical instruments, film equipment, writing tools, and so on. Art making involves a process, a state of mind and there&#x27;s always a human behind it who digests everything around them and spit something out. All these imitative AI art are beautiful in their own way but really have no substance; once the wow factor weans out they won&#x27;t have much of a leg to stand on in my opinion. Art making is a self discovering journey at the same time.<p>Having said that, I&#x27;m curious and somewhat excited to see how these will evolve. As I said, I find them beautiful. As a painter myself there is nothing out there that will make me not paint. Sure, I sometimes use tools but there&#x27;s always the me in there who is in control or driven by my human instinct.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=refsab" target="_blank">refsab</a>   <span class="timeago" data-date="2021-08-19 02:27:39 &#43;0000 UTC">2021-08-19 02:27:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As someone who has been a part of the demo scene in the 90s I find this offensive.<p>Generative art can be a wildly creative process on par with anything a painter works through. It&#x27;s just a different medium.<p>The way you express yourself through art is not threatened by people choosing other ways using different tools. Painting did not become obsolete because someone invented art photography.<p>I do agree with the sentiment about NFT &#x27;artists&#x27; though. Copy pasting a colab notebook, replacing a string and selling the result as NFT is just idiotic.<p>I wonder who the bigger fool is. The one who sells or the one who buys.<p>Demoscene Wikipedia 
+<a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Demoscene" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Demoscene</a><p>Wired article about the demo scene from 1995 
+<a href="https:&#x2F;&#x2F;www.wired.com&#x2F;1995&#x2F;07&#x2F;democoders&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.wired.com&#x2F;1995&#x2F;07&#x2F;democoders&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leppr" target="_blank">leppr</a>   <span class="timeago" data-date="2021-08-19 00:15:49 &#43;0000 UTC">2021-08-19 00:15:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A lot of what we call &quot;art&quot; now means just &quot;pleasant picture&quot;. I could see AI &quot;art&quot; competing on price with stock pictures and cheap illustrations for throwaway&#x2F;placeholder usecases, or when uniqueness is preferred.<p>It&#x27;s already happening with social media profile pictures for instances. Next up could be the filler artworks in hotel rooms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kamilszybalski" target="_blank">kamilszybalski</a>   <span class="timeago" data-date="2021-08-18 19:24:41 &#43;0000 UTC">2021-08-18 19:24:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s good insight. I am not an artist but I&#x27;ve also run this idea by a friend who is. He loves the idea and is curious what a technological interpretation of his work might look like. He&#x27;s also interested in how we might use those interpretations to create a new segment of collections for this brand.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=artur_makly" target="_blank">artur_makly</a>   <span class="timeago" data-date="2021-08-18 21:02:33 &#43;0000 UTC">2021-08-18 21:02:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Everything is a remix. <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=zd-dqUuvLk4" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=zd-dqUuvLk4</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tartoran" target="_blank">tartoran</a>   <span class="timeago" data-date="2021-08-19 00:18:30 &#43;0000 UTC">2021-08-19 00:18:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Made by humans and that is key. They digest what came before and spit out something else, a remix as you call it but which does veer in different directions over time
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=didntknowya" target="_blank">didntknowya</a>   <span class="timeago" data-date="2021-08-18 21:50:50 &#43;0000 UTC">2021-08-18 21:50:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i don&#x27;t know any real artists who actually want to get into the NFT space, only con-artists.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KingFelix" target="_blank">KingFelix</a>   <span class="timeago" data-date="2021-08-18 19:07:56 &#43;0000 UTC">2021-08-18 19:07:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thats what I am thinking about, what kind of images to train on
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phkahler" target="_blank">phkahler</a>   <span class="timeago" data-date="2021-08-18 17:06:07 &#43;0000 UTC">2021-08-18 17:06:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or seed it with XKCD.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=binarymax" target="_blank">binarymax</a>   <span class="timeago" data-date="2021-08-18 20:26:41 &#43;0000 UTC">2021-08-18 20:26:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really beautifully done.  Thank you for sharing it with us!<p>Quick question: can you use the Nvidia Jetson Xavier NX to train a model?  Or can it only be used for inference?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Justin_K" target="_blank">Justin_K</a>   <span class="timeago" data-date="2021-08-18 18:25:42 &#43;0000 UTC">2021-08-18 18:25:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Awesome!  I&#x27;d recommend running your cables behind the drywall, the look is very clean!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:46:50 &#43;0000 UTC">2021-08-18 20:46:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that would&#x27;ve been optimal, but it&#x27;s also a lot more work, so I decided to use cable channels in the end.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-08-18 18:08:40 &#43;0000 UTC">2021-08-18 18:08:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting! I built a generative art frame based on &quot;{Shan, Shui}&quot; by Lingdong Huang<p><a href="https:&#x2F;&#x2F;dheera.net&#x2F;projects&#x2F;einkframe&#x2F;" rel="nofollow">https:&#x2F;&#x2F;dheera.net&#x2F;projects&#x2F;einkframe&#x2F;</a><p>but also planning to use it for neural-net based generative art. I wasn&#x27;t planning on putting a NX in it though, I was thinking of just keeping the Pi Zero in there and have it do all computations in &quot;the cloud&quot; or on a Nano&#x2F;Xavier box sitting elsewhere on the same network.<p>I&#x27;m currently working on a 3-panel version of the above:<p><a href="https:&#x2F;&#x2F;imgur.com&#x2F;a&#x2F;3IfKpb3" rel="nofollow">https:&#x2F;&#x2F;imgur.com&#x2F;a&#x2F;3IfKpb3</a><p>I didn&#x27;t make my own frame though, I designed the dimensions and had it custom-built by a frame company, which was surprisingly affordable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:54:22 &#43;0000 UTC">2021-08-18 20:54:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is amazing!! I actually looked into buying an E-ink screen for this project, but decided not to due to the cost and the lack of compatibility.<p>Was the E-ink screen simple to work with?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-08-18 21:12:11 &#43;0000 UTC">2021-08-18 21:12:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As long as you get the HAT, yes. I had to desolder the header and solder on a 90-degree header to get my low-profile layout, that was a pain. They weren&#x27;t able to ship me a HAT without pins soldered :(<p>The documentation is sparse but they do have one C++ demo example and that&#x27;s pretty much good enough as a reference to do whatever you want.<p>One thing I will caution is to NEVER unplug or plug the display while the board is powered on, I fried one display by doing that, but Waveshare was nice enough to replace it for free one I got a hold of some employee&#x27;s WeChat.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-18 18:47:36 &#43;0000 UTC">2021-08-18 18:47:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is more interesting to me as I&#x27;d never suspect it was generated art.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-08-18 19:08:46 &#43;0000 UTC">2021-08-18 19:08:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah that was what I was going for, guests who come would not even know that there are electronics in the frame, and suddenly the art would change every now and then.<p>Requires drilling a fat hole in the wall to send the USB cable down behind the drywall but meh, needing to patch drywall when moving out isn&#x27;t the end of the world, usually if you chat up the maintainence folk you can get some extra paint of exactly the right color and spackle&#x2F;paint it yourself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=at_a_remove" target="_blank">at_a_remove</a>   <span class="timeago" data-date="2021-08-18 20:25:43 &#43;0000 UTC">2021-08-18 20:25:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What would be amusing is gaze detection such that the art would change only when someone wasn&#x27;t looking for a while, and then maybe only &quot;advance the scroll&quot; an inch or two.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jonbraun" target="_blank">jonbraun</a>   <span class="timeago" data-date="2021-08-18 18:30:03 &#43;0000 UTC">2021-08-18 18:30:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool installation! What was the process of obtaining the 5k abstract art images?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:50:49 &#43;0000 UTC">2021-08-18 20:50:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I scraped them from various art websites.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pfundstein" target="_blank">pfundstein</a>   <span class="timeago" data-date="2021-08-19 00:00:23 &#43;0000 UTC">2021-08-19 00:00:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why not use the artworks themselves as a screensaver?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway158497" target="_blank">throwaway158497</a>   <span class="timeago" data-date="2021-08-18 19:26:34 &#43;0000 UTC">2021-08-18 19:26:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool project. How much does this setup cost you?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 20:50:01 &#43;0000 UTC">2021-08-18 20:50:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, I think The Frame 32&quot; was about $500 and the Nvidia Xavier NX costed as much (including import taxes etc). The other stuff (cable channels, screws, MDF etc) was probably around $50. So a total of around ~$1050.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spoonjim" target="_blank">spoonjim</a>   <span class="timeago" data-date="2021-08-18 15:46:48 &#43;0000 UTC">2021-08-18 15:46:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What country uses those round black outlets?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Guillaume86" target="_blank">Guillaume86</a>   <span class="timeago" data-date="2021-08-18 16:54:17 &#43;0000 UTC">2021-08-18 16:54:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Red countries on this map: <a href="https:&#x2F;&#x2F;world-power-plugs.com&#x2F;plugs-outlets-types" rel="nofollow">https:&#x2F;&#x2F;world-power-plugs.com&#x2F;plugs-outlets-types</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 15:51:14 &#43;0000 UTC">2021-08-18 15:51:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m from Sweden :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nelsnelson" target="_blank">nelsnelson</a>   <span class="timeago" data-date="2021-08-18 18:39:34 &#43;0000 UTC">2021-08-18 18:39:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;i.imgur.com&#x2F;vpBRAjJ.png" rel="nofollow">https:&#x2F;&#x2F;i.imgur.com&#x2F;vpBRAjJ.png</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nine_k" target="_blank">nine_k</a>   <span class="timeago" data-date="2021-08-18 21:17:46 &#43;0000 UTC">2021-08-18 21:17:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This says a lot about building MDF housing for a Jetson (BTW why not plywood?), and devotes literally half a dozen pretty generic lines to the actual art generation code. The algorithm is not discussed, and even art examples are not shown.<p>This is sad, because wooden box building guides are abundant, but art generation guides are less so,
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=orangegreen" target="_blank">orangegreen</a>   <span class="timeago" data-date="2021-08-18 15:44:56 &#43;0000 UTC">2021-08-18 15:44:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if using a color e-ink display would make the art look more appealing on a wall.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qiqitori" target="_blank">qiqitori</a>   <span class="timeago" data-date="2021-08-19 00:46:43 &#43;0000 UTC">2021-08-19 00:46:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s someone who put in a lot of effort into making a realistic-looking photo frame using an LCD: <a href="https:&#x2F;&#x2F;www.claybavor.com&#x2F;blog&#x2F;a-canvas-made-of-pixels" rel="nofollow">https:&#x2F;&#x2F;www.claybavor.com&#x2F;blog&#x2F;a-canvas-made-of-pixels</a><p>(Covered on HN in 2016: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10900439" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10900439</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arsome" target="_blank">arsome</a>   <span class="timeago" data-date="2021-08-18 17:45:37 &#43;0000 UTC">2021-08-18 17:45:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A little white balance work would go a long way I suspect. An OLED panel would really make things pop, but the burn-in issue might be a problem unless you had it rotating very regularly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 15:47:09 &#43;0000 UTC">2021-08-18 15:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It probably will! I actually looked into buying a color e-ink display, but ended up using a The Frame instead for a couple of reasons:<p>* They are incredibly expensive if you want ~32&quot;<p>* I wasn&#x27;t sure that it would&#x27;ve worked together with the Nvidia Xavier NX.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sjg007" target="_blank">sjg007</a>   <span class="timeago" data-date="2021-08-18 16:55:59 &#43;0000 UTC">2021-08-18 16:55:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is the samsung frame?  I am thinking of getting one..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:03:58 &#43;0000 UTC">2021-08-18 21:03:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;re trading of the design for a bit of quality, you&#x27;ll probably get more bang for the buck if you buy a non-designer smart TV. That being said, it&#x27;s still a good TV!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=artur_makly" target="_blank">artur_makly</a>   <span class="timeago" data-date="2021-08-18 21:06:20 &#43;0000 UTC">2021-08-18 21:06:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            wow first time I heard of this beast. <a href="https:&#x2F;&#x2F;www.samsung.com&#x2F;us&#x2F;tvs&#x2F;the-frame&#x2F;highlights&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.samsung.com&#x2F;us&#x2F;tvs&#x2F;the-frame&#x2F;highlights&#x2F;</a>
+looks incredible thanks for sharing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spywaregorilla" target="_blank">spywaregorilla</a>   <span class="timeago" data-date="2021-08-18 16:00:05 &#43;0000 UTC">2021-08-18 16:00:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve had the same thought, but alas. Prices are terrible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Animats" target="_blank">Animats</a>   <span class="timeago" data-date="2021-08-18 18:02:58 &#43;0000 UTC">2021-08-18 18:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now have it automatically issue one NFT every few minutes. Profit!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=landgenoot" target="_blank">landgenoot</a>   <span class="timeago" data-date="2021-08-18 16:15:55 &#43;0000 UTC">2021-08-18 16:15:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool! Could also be nice with a A3 color printer and paper shredder. Banksy-style.<p>This would make it less tv-isih
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mirroregami" target="_blank">mirroregami</a>   <span class="timeago" data-date="2021-08-18 16:45:33 &#43;0000 UTC">2021-08-18 16:45:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really cool. One piece of feedback: Try to get the white balance to better match the warm wight light of the room. The tv will blend in much much better.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:48:03 &#43;0000 UTC">2021-08-18 16:48:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, I&#x27;ll try to improve the balance :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jnwatson" target="_blank">jnwatson</a>   <span class="timeago" data-date="2021-08-18 17:35:04 &#43;0000 UTC">2021-08-18 17:35:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See 1 for an innovative example of auto-calibrating brightness and white balance.<p>1. <a href="https:&#x2F;&#x2F;www.claybavor.com&#x2F;blog&#x2F;a-canvas-made-of-pixels" rel="nofollow">https:&#x2F;&#x2F;www.claybavor.com&#x2F;blog&#x2F;a-canvas-made-of-pixels</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lurker619" target="_blank">lurker619</a>   <span class="timeago" data-date="2021-08-18 18:42:23 &#43;0000 UTC">2021-08-18 18:42:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would it have been easier to generate these images on some cloud gpu and stream&#x2F;send the images to a smart tv? To avoid building and fabricating all the hardware components?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SwiftyBug" target="_blank">SwiftyBug</a>   <span class="timeago" data-date="2021-08-18 18:59:18 &#43;0000 UTC">2021-08-18 18:59:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But then OP would have skipped a lot of the fun
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:01:33 &#43;0000 UTC">2021-08-18 21:01:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Exactly, a big part of the project was to learn about edge-computing and integrating sensors with the GPIOs. But sure, that would&#x27;ve been possible to do.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dekhn" target="_blank">dekhn</a>   <span class="timeago" data-date="2021-08-18 16:46:31 &#43;0000 UTC">2021-08-18 16:46:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The creator of ElectricSheep installs large installations like this.  <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Scott_Draves" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Scott_Draves</a>
+it uses crowdsourced human preference functions to drive the art evolution
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=linguistbreaker" target="_blank">linguistbreaker</a>   <span class="timeago" data-date="2021-08-18 20:44:34 &#43;0000 UTC">2021-08-18 20:44:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check out 77 Million Paintings by Brain Eno<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;77_Million_Paintings" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;77_Million_Paintings</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ekulianova" target="_blank">ekulianova</a>   <span class="timeago" data-date="2021-08-19 14:14:27 &#43;0000 UTC">2021-08-19 14:14:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks very cool! I think there may be a demand for that!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wyldfire" target="_blank">wyldfire</a>   <span class="timeago" data-date="2021-08-18 15:55:02 &#43;0000 UTC">2021-08-18 15:55:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Max Fischer?  By any chance did you petition to keep a Latin class at your private high school? ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:01:48 &#43;0000 UTC">2021-08-18 16:01:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Haha no, but it has definitely help me to hide embarrassing images from my youth on Google ;) It only show images from Rushmore
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reacharavindh" target="_blank">reacharavindh</a>   <span class="timeago" data-date="2021-08-18 19:57:34 &#43;0000 UTC">2021-08-18 19:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As cool as this is, I have been struggling to find a good non-AI digital photo display for my house.<p>The common ones you can buy as “digital photo frame” on Amazon sucks in image quality. I would like a minimalistic digital photo display that is colour accurate, hidpi, preferably have a way to store a handful of hi res images(if not, Adding a Pi-zero for this is still okay). Oh I am not so rich or hosting an art gallery or anything, so, it must be less than 700 bucks(the cost of an iPad). I don’t understand why such a thing doesn’t exist already.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slobot" target="_blank">slobot</a>   <span class="timeago" data-date="2021-08-18 22:41:51 &#43;0000 UTC">2021-08-18 22:41:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did something like this for an install using cheap 10&quot; android tablets and kiosk software I found on the app store. Worked like a charm.<p>** <a href="https:&#x2F;&#x2F;slobots.com&#x2F;2019&#x2F;01&#x2F;gallery-view-i-love-my-robot-at-louise-jones-brown-gallery.html" rel="nofollow">https:&#x2F;&#x2F;slobots.com&#x2F;2019&#x2F;01&#x2F;gallery-view-i-love-my-robot-at-...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quickthrower2" target="_blank">quickthrower2</a>   <span class="timeago" data-date="2021-08-18 20:41:00 &#43;0000 UTC">2021-08-18 20:41:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about an android tablet?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slobot" target="_blank">slobot</a>   <span class="timeago" data-date="2021-08-18 22:32:07 &#43;0000 UTC">2021-08-18 22:32:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As an artist and an avid reader of HN, I find this both fascinating and terrifying (!) at the same time. 
+Before I started painting robots, I painted abstracts and was heavily influenced by Abstract Expressionism. 
+The images that your AI are generating (creating?!) are really cool. Equally as cool is that the images are deleted once a new one is generated, because a lot of the famous artists destroyed or painted over old works.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Sn0wCoder" target="_blank">Sn0wCoder</a>   <span class="timeago" data-date="2021-08-18 16:02:20 &#43;0000 UTC">2021-08-18 16:02:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very cool.  I work from home in my basement and would enjoy such a device.  Any plans to sell them?  Or know of similar devices?  I could probably build one, but most likely would end up in pieces next to my other random projects…
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:07:30 &#43;0000 UTC">2021-08-18 16:07:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, I currently have no plan to sell it. There&#x27;s a lot of overhead involved when selling stuff, and I mostly enjoy building stuff like this :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Sn0wCoder" target="_blank">Sn0wCoder</a>   <span class="timeago" data-date="2021-08-18 18:13:08 &#43;0000 UTC">2021-08-18 18:13:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds good.  Like others have said an API around the generator would be cool too, then all I need is a webpage and a monitor.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=henearkr" target="_blank">henearkr</a>   <span class="timeago" data-date="2021-08-18 18:43:56 &#43;0000 UTC">2021-08-18 18:43:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe a stupid question, but why the Samsung connect box if the Jetson already has a HDMI output?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:07:14 &#43;0000 UTC">2021-08-18 21:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I remember correctly, The Frame 32&quot; only has a One Connect cable connection on the back. The reason is that you won&#x27;t get the flat TV-to-wall surface otherwise.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=A4ET8a8uTh0" target="_blank">A4ET8a8uTh0</a>   <span class="timeago" data-date="2021-08-18 18:18:47 &#43;0000 UTC">2021-08-18 18:18:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            First, I would like to say well done. Not just the project -- it is neat. I particularly appreciate the fact that it includes all the less obvious, to me, pieces like building appropriate box, sanding and so on.<p>I wish more projects were like this ( as in, showed most of the steps ).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:10:20 &#43;0000 UTC">2021-08-18 21:10:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, I appreciate it!<p>I really enjoy writing these guides for others to learn, it forces me to think more about the process :)<p>If you liked this one, I&#x27;ve also written another guide where I built a full-size arcade machine from scratch: <a href="https:&#x2F;&#x2F;github.com&#x2F;maxvfischer&#x2F;DIY-arcade" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;maxvfischer&#x2F;DIY-arcade</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcun4128" target="_blank">jcun4128</a>   <span class="timeago" data-date="2021-08-18 16:03:53 &#43;0000 UTC">2021-08-18 16:03:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if you have to push the button or if it could auto-cycle at some interval. Powering is always interesting do usually need a dedicated power source like a wall plug less you had some other means to get power. Low energy&#x2F;battery&#x2F;harvesting maybe (I saw this runs on a Jetson).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:05:56 &#43;0000 UTC">2021-08-18 16:05:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I actually implemented it so that you have to push the button. By adding a dimension where an artwork you like is just a button-push away from being deleted, it actually makes you enjoy it more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcun4128" target="_blank">jcun4128</a>   <span class="timeago" data-date="2021-08-18 16:31:24 &#43;0000 UTC">2021-08-18 16:31:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is just a thought. I don&#x27;t know if you&#x27;re aware of Github pages (probably) but regarding docs&#x2F;hosting a basic UI with tabbed sections to present a chunked form of the README.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=artur_makly" target="_blank">artur_makly</a>   <span class="timeago" data-date="2021-08-18 21:11:30 &#43;0000 UTC">2021-08-18 21:11:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me a lot of this Japanese Product&#x2F;Service: <a href="https:&#x2F;&#x2F;frm.fm&#x2F;overview" rel="nofollow">https:&#x2F;&#x2F;frm.fm&#x2F;overview</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xrd" target="_blank">xrd</a>   <span class="timeago" data-date="2021-08-18 17:49:46 &#43;0000 UTC">2021-08-18 17:49:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is awesome. Is the StyleGAN code removed (to keep it private)? I see this commit message: &quot;Remove my ML stuff.&quot; I&#x27;m interested in understanding the StyleGAN if you are open to sharing it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 18:06:17 &#43;0000 UTC">2021-08-18 18:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Yeah, I removed it as I want people to use their own generative art in their own build. But if you&#x27;re interested, here&#x27;s the implementation I used: <a href="https:&#x2F;&#x2F;github.com&#x2F;taki0112&#x2F;StyleGAN-Tensorflow" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;taki0112&#x2F;StyleGAN-Tensorflow</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xrd" target="_blank">xrd</a>   <span class="timeago" data-date="2021-08-18 18:13:24 &#43;0000 UTC">2021-08-18 18:13:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m struggling a little bit with using StyleGANs so far. Are you available for a (paid if you prefer) call where I ask you a few questions about it? If so, xrdawson@gmail.com.<p>(I have a connection to Sweden, by the way. My brother lived in Eskilstuna in high school. So, I learned a little bit of Swedish when I visited him. His host brother thought it was really weird I met him and said &quot;jag heter Chris, jag älska naturen!&quot;). But, I would not feel comfortable talking to you in Swedish about StyleGAN. :) ).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:24:33 &#43;0000 UTC">2021-08-18 21:24:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve sent you an email :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ioseph" target="_blank">ioseph</a>   <span class="timeago" data-date="2021-08-18 23:22:43 &#43;0000 UTC">2021-08-18 23:22:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Non tech nitpick: biscuit joining a box made out of mdf seems like massie overkill when plain old wood glue would have absolutely sufficed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oxinabox" target="_blank">oxinabox</a>   <span class="timeago" data-date="2021-08-18 18:12:05 &#43;0000 UTC">2021-08-18 18:12:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love how this read me is as much about woodwork as it is about software
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 18:14:03 &#43;0000 UTC">2021-08-18 18:14:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I truly enjoy working on projects that includes both areas, interesting tech and woodwork :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=snarfmachine" target="_blank">snarfmachine</a>   <span class="timeago" data-date="2021-08-18 16:28:40 &#43;0000 UTC">2021-08-18 16:28:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very cool.  But have you put it up against the AI Turing test? :) <a href="https:&#x2F;&#x2F;gumgum.com&#x2F;guides&#x2F;artificial" rel="nofollow">https:&#x2F;&#x2F;gumgum.com&#x2F;guides&#x2F;artificial</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 16:29:48 &#43;0000 UTC">2021-08-18 16:29:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bupticybee" target="_blank">bupticybee</a>   <span class="timeago" data-date="2021-08-19 03:21:19 &#43;0000 UTC">2021-08-19 03:21:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really fun stuff, perhaps you should use a computer screen instead of producing one
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sova" target="_blank">sova</a>   <span class="timeago" data-date="2021-08-18 15:19:12 &#43;0000 UTC">2021-08-18 15:19:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very beautiful.  If I trained the network on say, just drawings and painting Mondrian did, do you think they&#x27;d converge stylistically?<p>Is a huge (5,000+ items) dataset required to get decent results?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 15:25:59 &#43;0000 UTC">2021-08-18 15:25:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!<p>I think it&#x27;s quite likely that you will heavily overfit the network if you only use a handful of images, where it might end up reconstructing the exact paintings. I only have experience using 5,000+ images.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TheRealNGenius" target="_blank">TheRealNGenius</a>   <span class="timeago" data-date="2021-08-19 04:50:52 &#43;0000 UTC">2021-08-19 04:50:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really cool that you brought up Mondrian, since I literally implemented a Haskell program that generated art in their signature style during college. No AI required at all, just setting some random parameters. Here are some results: <a href="https:&#x2F;&#x2F;imgur.com&#x2F;a&#x2F;rtWkTTl" rel="nofollow">https:&#x2F;&#x2F;imgur.com&#x2F;a&#x2F;rtWkTTl</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mholm" target="_blank">mholm</a>   <span class="timeago" data-date="2021-08-18 15:52:31 &#43;0000 UTC">2021-08-18 15:52:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was thinking the Frame TV had better color grading for the color temperature of the room. Does your video output not take advantage of this?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MikeDelta" target="_blank">MikeDelta</a>   <span class="timeago" data-date="2021-08-18 17:20:27 &#43;0000 UTC">2021-08-18 17:20:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice! Art being lost forever is art in itself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 18:07:44 &#43;0000 UTC">2021-08-18 18:07:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what I think as well, it adds an interesting dimension to the installation
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=itronitron" target="_blank">itronitron</a>   <span class="timeago" data-date="2021-08-18 19:35:42 &#43;0000 UTC">2021-08-18 19:35:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Worth considering that you could purchase a very good painting from a local artist or gallery for much less than the money and time that was spent on this project. While I get that this is a fun project, an actual work of art will provide much more enrichment over the many years that it will outlive an AI art installation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Kiro" target="_blank">Kiro</a>   <span class="timeago" data-date="2021-08-18 20:23:57 &#43;0000 UTC">2021-08-18 20:23:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I prefer this over any static art.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dvtrn" target="_blank">dvtrn</a>   <span class="timeago" data-date="2021-08-18 21:38:26 &#43;0000 UTC">2021-08-18 21:38:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Incredible thing about art is that people value it differently and for different reasons, so maybe the idea of &quot;enrichment&quot; isn&#x27;t something universal?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdoms" target="_blank">mdoms</a>   <span class="timeago" data-date="2021-08-18 19:42:09 &#43;0000 UTC">2021-08-18 19:42:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I build my own furniture. It costs me more than something I could buy of equivalent or better quality. That&#x27;s not the point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fksadfji12" target="_blank">fksadfji12</a>   <span class="timeago" data-date="2021-08-18 21:04:28 &#43;0000 UTC">2021-08-18 21:04:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            lol
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lazlee" target="_blank">lazlee</a>   <span class="timeago" data-date="2021-08-18 19:33:05 &#43;0000 UTC">2021-08-18 19:33:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m curious about, beyond time and labor, how much $$$ the project ran you.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:14:09 &#43;0000 UTC">2021-08-18 21:14:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Frame 32&quot; and Nvidia Xavier NX cost ~$500 each (including import taxes etc), the rest (cable channels, screws etc) ~$50. So a total of around $1050
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lazlee" target="_blank">lazlee</a>   <span class="timeago" data-date="2021-08-19 00:24:03 &#43;0000 UTC">2021-08-19 00:24:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks.  Awesome project buddy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raman162" target="_blank">raman162</a>   <span class="timeago" data-date="2021-08-18 15:52:15 &#43;0000 UTC">2021-08-18 15:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very cool. I now have a reason to get my hands on a Jetson. Also great work on the detailed readme.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:02:58 &#43;0000 UTC">2021-08-18 16:02:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Yeah, the Xavier NX was way more powerful than what I expected!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=artur_makly" target="_blank">artur_makly</a>   <span class="timeago" data-date="2021-08-18 21:01:00 &#43;0000 UTC">2021-08-18 21:01:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            a possible next step &gt; add a motion sensor to *swipe fwd&#x2F;back the artworks. <i>using a smooth pixel morphing blended transition.<p>*or when toilet flushes ;-)</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucidrains" target="_blank">lucidrains</a>   <span class="timeago" data-date="2021-08-18 20:59:45 &#43;0000 UTC">2021-08-18 20:59:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            use CLIP to generate a title for each piece of art, followed by a description with GPT, and it is ready for exhibition
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qq4" target="_blank">qq4</a>   <span class="timeago" data-date="2021-08-18 16:37:14 &#43;0000 UTC">2021-08-18 16:37:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            do you find any of the generated images interesting? there is no thought behind any of them which leads me curious to how captivating they might be.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:43:47 &#43;0000 UTC">2021-08-18 16:43:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some of them are nice, but a lot of them are trash as well. So you need to click a few times before you find something you (I) like
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chorsestudios" target="_blank">chorsestudios</a>   <span class="timeago" data-date="2021-08-18 18:08:47 &#43;0000 UTC">2021-08-18 18:08:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any chance you have a gallery somewhere with some of the nicer images?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 17:48:50 &#43;0000 UTC">2021-08-18 17:48:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:36:32 &#43;0000 UTC">2021-08-18 18:36:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=student2k" target="_blank">student2k</a>   <span class="timeago" data-date="2021-08-19 01:41:17 &#43;0000 UTC">2021-08-19 01:41:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            is there a desktop wallpaper version?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=amirGi" target="_blank">amirGi</a>   <span class="timeago" data-date="2021-08-18 16:15:04 &#43;0000 UTC">2021-08-18 16:15:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is so freakin cool
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:15:35 &#43;0000 UTC">2021-08-18 16:15:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glad you liked it!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hwayne" target="_blank">hwayne</a>   <span class="timeago" data-date="2021-08-18 16:09:45 &#43;0000 UTC">2021-08-18 16:09:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is amazingly cool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:15:52 &#43;0000 UTC">2021-08-18 16:15:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dukeofdoom" target="_blank">dukeofdoom</a>   <span class="timeago" data-date="2021-08-18 17:12:19 &#43;0000 UTC">2021-08-18 17:12:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Samsung phones come with an adapter that can output to HDMI. Is there a phone app that could do something like this on a TV?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dogma1138" target="_blank">dogma1138</a>   <span class="timeago" data-date="2021-08-18 17:31:28 &#43;0000 UTC">2021-08-18 17:31:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can probably run it on a SmartTV directly…
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swayvil" target="_blank">swayvil</a>   <span class="timeago" data-date="2021-08-18 16:21:07 &#43;0000 UTC">2021-08-18 16:21:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice.<p>What do you think of this? : <a href="https:&#x2F;&#x2F;vimeo.com&#x2F;241051006" rel="nofollow">https:&#x2F;&#x2F;vimeo.com&#x2F;241051006</a><p>Also, here&#x27;s a generative art discord : <a href="https:&#x2F;&#x2F;discord.gg&#x2F;gVna7Utm" rel="nofollow">https:&#x2F;&#x2F;discord.gg&#x2F;gVna7Utm</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 16:06:37 &#43;0000 UTC">2021-08-18 16:06:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally believe that art requires intention and some attempt at communication but it&#x27;s an interesting project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jazzyjackson" target="_blank">jazzyjackson</a>   <span class="timeago" data-date="2021-08-18 16:27:51 &#43;0000 UTC">2021-08-18 16:27:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this case I suppose the real artwork is the space of all artworks that the machine is sampling from.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 18:00:44 &#43;0000 UTC">2021-08-18 18:00:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure that makes this installation art in and of itself.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xaedes" target="_blank">xaedes</a>   <span class="timeago" data-date="2021-08-18 16:36:35 &#43;0000 UTC">2021-08-18 16:36:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the generated pixels are not the art. 
+The whole piece is the art, made by the artist, i.e. the OP.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 18:00:02 &#43;0000 UTC">2021-08-18 18:00:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            perhaps the whole installation is art, if as a whole there&#x27;s some kind of overall intention, message, or communication.  Personally having trouble seeing that here.  It&#x27;s more a tech demo.  It&#x27;s a digital picture frame that generates its pictures procedurally from a neural network.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 21:32:18 &#43;0000 UTC">2021-08-18 21:32:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m glad that you&#x27;re bringing this up, because it&#x27;s an interesting (almost philosophical question) around what art is.<p>In my mind, the interesting part in this installation is not necessarily the generated artworks, but rather the fact that they are one push of a button away from being deleted forever. It adds a consumable aspect to the installation, which I think is interesting. Can that evoke emotions and be art in itself?<p>But that being said, I don&#x27;t look at myself as an artist. I&#x27;m a simple Data Scientist enjoying building projects at the intersection of technology, woodwork and art (whatever that is).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 22:19:35 &#43;0000 UTC">2021-08-18 22:19:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;but rather the fact that they are one push of a button away from being deleted forever<p>but how is that expressed or communicated through the installation?  Why should anyone value random patterns generated by a machine that had no intention?<p>I find andy goldsworthy&#x27;s art incredible, and he bases his work almost entirely on this idea of impermanent art (although his is usually found materials).  I&#x27;m not sure its communicated by what you&#x27;ve presented.<p>I think the impermanence of random patterns that don&#x27;t communicate anything is something you can find interesting rather than something thats communicated by the video screen, or the intention of the installation.<p>It&#x27;s a cool project, but ya, still not sold on this being art per se.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cryptoz" target="_blank">cryptoz</a>   <span class="timeago" data-date="2021-08-18 16:28:34 &#43;0000 UTC">2021-08-18 16:28:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Who&#x27;s to say that the AI doesn&#x27;t have intent, and makes no attempt at communication? These are certainly very philosophical questions and I would be ready to stand by the idea that first, there is possibly intent and communication here, and second, I&#x27;ve never heard of this narrow definition of art before. Art is art, defining it so narrowly seems strange to me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 17:59:17 &#43;0000 UTC">2021-08-18 17:59:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s ok to disagree with me - everyone is allowed a different opinion on art.  I&#x27;ll explain a bit more about my opinion, which you are free to disagree with.<p>Personally I don&#x27;t think a machine generating pixels from neural networks trained on intentional art can create art - it can create something that seems very similar because it seems to generate the same or similar output but its missing the process and intention of art.  If an artist draws random shapes with no intention or intent to communicate or evoke thought&#x2F;emotion, all they&#x27;re doing is making shapes, unless the random shapes themselves are an intent to communicate something (which is difficult if they&#x27;re actually random).<p>&#x27;art is art&#x27; is a tautology with no meaning, and defining art in a way that makes some things not art is the only way you can have a useful definition of art.<p>Change my tire?  Art.  Spill chocolate milk on the table?  art.  vomit after drinking too much?  art.  because art is art, right?<p>I guess the question is why you think everything, including things done without intention or intent to communicate, is art?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ozzmotik" target="_blank">ozzmotik</a>   <span class="timeago" data-date="2021-08-18 18:16:58 &#43;0000 UTC">2021-08-18 18:16:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            in the semiotic tradition of Peirce, everything is a sign, signaling some sort of message or meaning. even if there is no evident or inherent intent being encompassed in some chunk of reality, there is still something being signified, and therefore something being communicated. in cases like this, the art is the interpretant formulated by the interpreter, a personal value judgment, rather than some intended value encoded by some given creator of art.<p>just my take on it, maybe it might provide a framework for seeing how even unintentional, stochastic processes can be conceived of as art. :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 18:20:43 &#43;0000 UTC">2021-08-18 18:20:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;in the semiotic tradition of Peirce, everything is a sign<p>Again, if you interpret changing a tire, spilling milk, or the vomiting after drinking too heavily as art, I disagree with you. Are traffic signs art, in and of themselves?  are all signs art?<p>I don&#x27;t think I agree with you.  I&#x27;ve never read peirce and I don&#x27;t do that &#x27;argument from authority&#x27; thing, but given your wording here I don&#x27;t think I agree with what you&#x27;re saying.<p>&gt;the art is the interpretant formulated by the interpreter,<p>So according to pierce, my interpretation of this as not as art is as valid as you thinking its art, since that&#x27;s how im interpreting it?  It doesn&#x27;t seem like a very self consistent idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shadowgovt" target="_blank">shadowgovt</a>   <span class="timeago" data-date="2021-08-18 15:59:24 &#43;0000 UTC">2021-08-18 15:59:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s extremely cool. Well done. :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mfi" target="_blank">mfi</a>   <span class="timeago" data-date="2021-08-18 16:03:21 &#43;0000 UTC">2021-08-18 16:03:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, it was a fun project!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spoonjim" target="_blank">spoonjim</a>   <span class="timeago" data-date="2021-08-18 15:47:30 &#43;0000 UTC">2021-08-18 15:47:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The installation is impressive but the output is underwhelming. Then again, I feel the same about the pieces in most contemporary art museums.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=turtlebits" target="_blank">turtlebits</a>   <span class="timeago" data-date="2021-08-18 18:33:32 &#43;0000 UTC">2021-08-18 18:33:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed, but I think the animated GIF and small, extremely compressed JPGs in the repo don&#x27;t help.  Maybe a youtube video?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scollet" target="_blank">scollet</a>   <span class="timeago" data-date="2021-08-18 17:00:51 &#43;0000 UTC">2021-08-18 17:00:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The art is the installation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghostbrainalpha" target="_blank">ghostbrainalpha</a>   <span class="timeago" data-date="2021-08-18 16:08:05 &#43;0000 UTC">2021-08-18 16:08:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He just needs a higher resolution screen, a screen that is much bigger, and placed inside of very nice frame.  With the cables hidden.<p>Then it&#x27;s ready for the gallery.<p>Especially if you could come up with a way to filter out some of the images that look too much like how a random broken monitor will output.<p>This image in particular feels like &quot;real&quot; art to me.  <a href="https:&#x2F;&#x2F;imgur.com&#x2F;gaJVSs3" rel="nofollow">https:&#x2F;&#x2F;imgur.com&#x2F;gaJVSs3</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=artiszt" target="_blank">artiszt</a>   <span class="timeago" data-date="2021-08-18 16:16:10 &#43;0000 UTC">2021-08-18 16:16:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it&#x27;s okay as it is -- IF, and only IF, the artist says so !<p>Rauschenberg too, as well as Lichtenstein and many others, wouldn&#x27;t have liked it a bit being turned into some hotair egomaniac 0-creative wraped in plastic in some fin-groupies Schnabel&#x27;oesque or Koons&#x27;ian gallery spot
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=guipsp" target="_blank">guipsp</a>   <span class="timeago" data-date="2021-08-18 17:55:53 &#43;0000 UTC">2021-08-18 17:55:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Taking existing art and twisting it is art too. In fact there was a movement I can&#x27;t recall the name of dedicated to this?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pessimizer" target="_blank">pessimizer</a>   <span class="timeago" data-date="2021-08-18 17:04:20 &#43;0000 UTC">2021-08-18 17:04:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If they&#x27;re dead we shouldn&#x27;t worry about what they would think about what we do; we have enough to worry about.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=didntknowya" target="_blank">didntknowya</a>   <span class="timeago" data-date="2021-08-18 21:49:45 &#43;0000 UTC">2021-08-18 21:49:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            great write up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggggtez" target="_blank">ggggtez</a>   <span class="timeago" data-date="2021-08-18 19:38:31 &#43;0000 UTC">2021-08-18 19:38:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like the idea, but the art is meh.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dr-detroit" target="_blank">dr-detroit</a>   <span class="timeago" data-date="2021-08-18 16:27:16 &#43;0000 UTC">2021-08-18 16:27:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Taking things my kid could do into the next generation.  Awesome.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrtweetyhack" target="_blank">mrtweetyhack</a>   <span class="timeago" data-date="2021-08-18 21:11:58 &#43;0000 UTC">2021-08-18 21:11:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this is just proof that any splash of shit is abstract art
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gidam" target="_blank">gidam</a>   <span class="timeago" data-date="2021-08-18 16:36:45 &#43;0000 UTC">2021-08-18 16:36:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it&#x27;s funny what tech people consider Art. LOL
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 16:59:04 &#43;0000 UTC">2021-08-18 16:59:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrits" target="_blank">mrits</a>   <span class="timeago" data-date="2021-08-18 17:28:51 &#43;0000 UTC">2021-08-18 17:28:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hope you aren&#x27;t syncing these random images to your iCloud account!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=huntercross" target="_blank">huntercross</a>   <span class="timeago" data-date="2021-08-18 17:49:37 &#43;0000 UTC">2021-08-18 17:49:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Art shouldn&#x27;t be unlimited. Its ok to call things screensavers, because screensavers are also cool, its just that it isnt art in the sense of &quot;art&quot; the word, if an AI is doing it, its something else, and making it unlimited is not interesting, it is irresponsible. Its the constraints that make art what it is, not simply the definition of an infinite possibility space
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrits" target="_blank">mrits</a>   <span class="timeago" data-date="2021-08-18 17:59:10 &#43;0000 UTC">2021-08-18 17:59:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It certainly isn&#x27;t unlimited. It is confined by resolution and color depth.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fobdkbfjh" target="_blank">fobdkbfjh</a>   <span class="timeago" data-date="2021-08-18 17:58:31 &#43;0000 UTC">2021-08-18 17:58:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re going to gatekeep what art can be, you better have some pretty impressive creative credentials of your own. Some people say &quot;an unlimited edition is meaningless, has no value&quot; and all they really mean is &quot;I&#x27;m conservative, I don&#x27;t see the point of change, and I can&#x27;t think of any way an unlimited edition could be interesting&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-18 19:12:14 &#43;0000 UTC">2021-08-18 19:12:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Having a different opinion isn&#x27;t gatekeeping, it&#x27;s disagreeing.  No one is stopping this person from doing what they want.<p>Second, if your definition of art is unlimited, it&#x27;s hardly useful, so I don&#x27;t think it matters.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swayvil" target="_blank">swayvil</a>   <span class="timeago" data-date="2021-08-18 20:35:04 &#43;0000 UTC">2021-08-18 20:35:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We could call art, &quot;made-objects that get you high with beauty&quot;<p>We could also call art, &quot;byproducts of artistic (beauty-guided) action&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

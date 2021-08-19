@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/rust-api-guidelines-checklist/">
+
+
+    <title>Rust API Guidelines Checklist - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Rust API Guidelines Checklist - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/rust-api-guidelines-checklist/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/rust-api-guidelines-checklist/">
+<meta name="twitter:title" content="Rust API Guidelines Checklist - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Rust API Guidelines Checklist - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T16:41:38JST",
+    "dateModified": "2021-08-18T16:41:38JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://rust-lang.github.io/api-guidelines/checklist.html">Rust API Guidelines Checklist</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AaronFriel" target="_blank">AaronFriel</a>   <span class="timeago" data-date="2021-08-18 17:28:58 &#43;0000 UTC">2021-08-18 17:28:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These are the guidelines that the Rust language standard library holds itself too, and tend to be good advice for authors of libraries.<p>By no means should anyone be intimidated by this. This list is, well, something like a code review guide similar to what you&#x27;d find to make changes to Postgres or Python. New APIs that are part of the standard library need to be be consistent, performant, debuggable, documented, and so on.<p>Following this list for a hobby, side project, or for the 0.1.0 release of a new library is entirely unnecessary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rdpintqogeogsaa" target="_blank">rdpintqogeogsaa</a>   <span class="timeago" data-date="2021-08-18 18:35:07 &#43;0000 UTC">2021-08-18 18:35:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Following this list for a hobby, side project, or for the 0.1.0 release of a new library is entirely unnecessary.</i><p>This may be a hot take, but I&#x27;ll go and take my chances.<p>Following this list for a hobby or side project or even an initial release of a library is a <i>very good idea</i>. It&#x27;s hard to tell what kinds of libraries will or won&#x27;t catch on. As soon as you have downstream users, they will get annoyed by churn. If given a checklist, it seems reasonable to me to expect people to actually follow it out of obligation to your future downstream consumers of the library.<p>Not only that, but I believe that most of the things on that list boils down to good engineering. Following good practice  early on even just in a hobby&#x2F;side project will be rewarded as the project grows.<p>By releasing a library (even as a 0.1.0), you imply that you expect it to be at least usable for <i>some</i> kind of usage. Releasing known-bad code is something nobody would do, especially since every major Git repostory hoster lets you have private repositories.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-18 19:43:08 &#43;0000 UTC">2021-08-18 19:43:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Releasing known-bad code is something nobody would do<p>Mmm. I guess it depends how mischievous people are.<p>Is <a href="https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;misfortunate" rel="nofollow">https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;misfortunate</a> known-bad code? Take misfortunate::Comte which claims to be an ExactSizeIterator but lies and with a simple &quot;tap&quot; from your wand produces an infinite number of cloned Rabbits ?<p>OK, how about Mara&#x27;s <a href="https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;whichever-compiles" rel="nofollow">https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;whichever-compiles</a>  or <a href="https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;nightly-crimes" rel="nofollow">https:&#x2F;&#x2F;crates.io&#x2F;crates&#x2F;nightly-crimes</a> ?<p>I mean, maybe I&#x27;m a bad person for writing misfortunate, but is Mara, Rust&#x27;s library team lead, a bad person?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AaronFriel" target="_blank">AaronFriel</a>   <span class="timeago" data-date="2021-08-18 20:40:18 &#43;0000 UTC">2021-08-18 20:40:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the person you&#x27;re replying to wasn&#x27;t suggesting those are bad people, but it&#x27;s hard to dispute that &quot;misfortunate&quot; which violates trait contracts is &quot;bad code&quot;. It&#x27;s well written, good for some definition of good, but also it will definitely break callers that rely on the invariants traits represent and by that meaning, it is &quot;bad code&quot;.<p>Fortunately, these people are very clever, very good Rust developers and they are not maliciously dropping nightly crimes into widely used crates :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=seoaeu" target="_blank">seoaeu</a>   <span class="timeago" data-date="2021-08-18 18:53:03 &#43;0000 UTC">2021-08-18 18:53:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure you shouldn&#x27;t go out of your way to violate the suggestions on the list, but you also shouldn&#x27;t be afraid to publish a project just because you haven&#x27;t meticulously gone through it and checked off every item
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stouset" target="_blank">stouset</a>   <span class="timeago" data-date="2021-08-18 19:57:46 &#43;0000 UTC">2021-08-18 19:57:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            100%. I haven’t read the whole list yet, but all of them I’ve seen so far are extremely trivial conventions. None of these should be difficult or time-consuming for even a novice Rustscean to follow.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-18 16:42:11 &#43;0000 UTC">2021-08-18 16:42:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            About the guidelines, from <a href="https:&#x2F;&#x2F;rust-lang.github.io&#x2F;api-guidelines&#x2F;about.html" rel="nofollow">https:&#x2F;&#x2F;rust-lang.github.io&#x2F;api-guidelines&#x2F;about.html</a><p>&gt; This is a set of recommendations on how to design and present APIs for the Rust programming language. They are authored largely by the Rust library team, based on experiences building the Rust standard library and other crates in the Rust ecosystem.<p>GitHub repo for the guidelines:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;api-guidelines" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;api-guidelines</a><p>I am submitting the OP link to HN because I believe that these guidelines are useful to many people that have, or wish to, publish Rust crates that other people will then use.<p>Following these guidelines will make the crates we make feel &quot;native to Rust&quot; for other people that want to make use of our crates.<p>I found these guidelines just a couple of days ago for the first time, in spite of having written Rust for several years now. And I suspect that many others may not have read these guidelines and that others will benefit from reading them too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cicero22" target="_blank">Cicero22</a>   <span class="timeago" data-date="2021-08-18 17:08:07 &#43;0000 UTC">2021-08-18 17:08:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wish the checkboxes weren&#x27;t disabled. You can give this a run in console to enable them all (If you trust random code):<p><pre><code>  document.querySelectorAll(&#x27;input:disabled&#x27;).forEach((el) =&gt; el.disabled = false)</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=davidkunz" target="_blank">davidkunz</a>   <span class="timeago" data-date="2021-08-18 17:23:52 &#43;0000 UTC">2021-08-18 17:23:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As someone who doesn&#x27;t write Rust professionally, this list scares me a bit.  Even though many items apply to other programming languages as well (and some are even handled more easily in Rust), it appears to be quite easy to forget something of great importance to some of your users. What if you forgot to derive the Debug&#x2F;Display trait and someone wants to print your struct, or you forgot to implement PartialEq and someone wants to write unit tests? Maybe this doesn&#x27;t really happen in practice, I would be very interested if some experienced Rustaceans could share their experience.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=loa_in_" target="_blank">loa_in_</a>   <span class="timeago" data-date="2021-08-18 17:30:35 &#43;0000 UTC">2021-08-18 17:30:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This does happen in practice. Usually it is remedied by submitting an issue or a PR to your dependency upstream and getting them to fix it.<p>If you&#x27;re really impatient you can implement the trait yourself (with some hacking involved): wrap the type in a new struct and implement the trait there.<p>Why hacking around like that? Rust requires at least one of: the type, or the trait; to be originated in your crate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=davidkunz" target="_blank">davidkunz</a>   <span class="timeago" data-date="2021-08-18 20:15:08 &#43;0000 UTC">2021-08-18 20:15:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just found an interesting reddit thread discussing must-have traits: <a href="https:&#x2F;&#x2F;teddit.net&#x2F;r&#x2F;rust&#x2F;comments&#x2F;p5vsjl&#x2F;is_there_any_reason_not_to_derive_every_possible&#x2F;" rel="nofollow">https:&#x2F;&#x2F;teddit.net&#x2F;r&#x2F;rust&#x2F;comments&#x2F;p5vsjl&#x2F;is_there_any_reaso...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AaronFriel" target="_blank">AaronFriel</a>   <span class="timeago" data-date="2021-08-18 17:31:56 &#43;0000 UTC">2021-08-18 17:31:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In cases like this, since everything is on GitHub it turns out to be pretty easy to make a PR to fix - it&#x27;s usually only a few characters of code change.<p>API names and such are of course breaking changes, but unless you&#x27;re authoring Tokio or Hyper or another huge, important crate in the ecosystem, it&#x27;s really not worth it to do everything on this list.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=duped" target="_blank">duped</a>   <span class="timeago" data-date="2021-08-18 17:31:18 &#43;0000 UTC">2021-08-18 17:31:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not everything is printable, comparable, or equalable (#[derive(Debug PartialEq)] isn&#x27;t guaranteed to work - it has a few preconditions).<p>So you live with it. If you draw a comparison to C++, almost none of these things are implemented for dependencies and there&#x27;s no easy helper to add it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 17:28:38 &#43;0000 UTC">2021-08-18 17:28:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 05:03:46 &#43;0000 UTC">2021-08-19 05:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The part about the naming conventions (<a href="https:&#x2F;&#x2F;rust-lang.github.io&#x2F;api-guidelines&#x2F;naming.html#ad-hoc-conversions-follow-as_-to_-into_-conventions-c-conv" rel="nofollow">https:&#x2F;&#x2F;rust-lang.github.io&#x2F;api-guidelines&#x2F;naming.html#ad-ho...</a>) reminds me of Elixir&#x27;s size and length (<a href="https:&#x2F;&#x2F;hexdocs.pm&#x2F;elixir&#x2F;naming-conventions.html#length-and-size" rel="nofollow">https:&#x2F;&#x2F;hexdocs.pm&#x2F;elixir&#x2F;naming-conventions.html#length-and...</a>). I wonder if there is a way to enforce those conventions with a compiler&#x2F;linter?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 17:55:05 &#43;0000 UTC">2021-08-18 17:55:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The presence of this list is very helpful. Unfortunately, some of the points are controversial.<p>&gt; Types eagerly implement common traits<p>This is particularly concerning to me for multiple reasons. If my 4K structure can be copied, should it derive `Copy`? This leads to users implicitly copying it around instead of using references more aggressively.<p>If all my types implement `PartialEq`, `Debug`, and other stuff, that means a lot of code generation at compile time, which gets hopefully eliminated by LLVM passes. And then we are wondering why Rust compilation&#x2F;linking is so slow :&#x2F;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hcs" target="_blank">hcs</a>   <span class="timeago" data-date="2021-08-18 20:45:41 &#43;0000 UTC">2021-08-18 20:45:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a clippy lint, pedantic and allowed by default, that warns about passing a large type by value.<p><a href="https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rust-clippy&#x2F;master&#x2F;#large_types_passed_by_value" rel="nofollow">https:&#x2F;&#x2F;rust-lang.github.io&#x2F;rust-clippy&#x2F;master&#x2F;#large_types_...</a><p>The default threshold is 256 bytes: <a href="https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust-clippy&#x2F;blob&#x2F;1fc1aee7be6e7e71f12eacd60b9b1040e7640fe4&#x2F;clippy_lints&#x2F;src&#x2F;utils&#x2F;conf.rs#L213" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;rust-lang&#x2F;rust-clippy&#x2F;blob&#x2F;1fc1aee7be6e7e...</a><p>So you might use that as a rule of thumb. But officially, &quot;Generally speaking, if your type can implement Copy, it should.&quot; <a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;marker&#x2F;trait.Copy.html#when-should-my-type-be-copy" rel="nofollow">https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;marker&#x2F;trait.Copy.html#when-sh...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 21:18:00 &#43;0000 UTC">2021-08-18 21:18:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s going to be helpful to enable in WebRender&#x2F;Euclid, thank you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=volta83" target="_blank">volta83</a>   <span class="timeago" data-date="2021-08-18 19:09:48 &#43;0000 UTC">2021-08-18 19:09:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If my 4K structure can be copied, should it derive `Copy`? This leads to users implicitly copying it around instead of using references more aggressively.<p>Rust eliminates unnecessary memcpys, but this is a bit up to you. `Copy` as a synonym of &quot;cheap to copy&quot; is used by some crates, although this is not official AFAIK.<p>&gt; If all my types implement `PartialEq`, `Debug`, and other stuff, that means a lot of code generation at compile time,<p>If you don&#x27;t use these, no LLVM-IR is even generated for these. Rust compiles code &quot;on demand&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 21:16:57 &#43;0000 UTC">2021-08-18 21:16:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then you are at mercy of Rust optimizer. I don&#x27;t want to always think about Rust optimizer when looking at or reviewing the code. I want to see the costs explicitly in the code.<p>Once Copy&#x2F;Debug&#x2F;PartialEq are derived, it will be tempting to use them, so the compile time cost will apply.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=volta83" target="_blank">volta83</a>   <span class="timeago" data-date="2021-08-19 10:22:31 &#43;0000 UTC">2021-08-19 10:22:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These are guidelines that the standard library aims to follow. It does not blindly follow them, and they only represent the values and trade-offs that make sense for the standard library. If your projects have different values and trade-offs, just do your own thing (Rust&#x27;s makes it easier than all other languages I know).<p>If you don&#x27;t want to use a standard library that follows these, just fork it and change it. Rust makes this trivial, and projects that must do this go and just do it.<p>I really don&#x27;t know what point you are trying to make. Implementing Copy for all types that are cheap to copy makes sense for most Rust programmers.<p>That does not mean that it makes sense for _you_, but if you disagree about this not making sense for most, then Rust is probably the wrong language for you, and you should consider using something else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-18 22:47:04 &#43;0000 UTC">2021-08-18 22:47:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an <i>API guide</i>. So what you&#x27;re talking about is deliberately making libraries you provide <i>worse</i> so that people aren&#x27;t tempted to use them, that ought to be ringing some alarm bells.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-18 19:28:20 &#43;0000 UTC">2021-08-18 19:28:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you really believe your users won&#x27;t understand this is a ~4K object and might foolishly copy it when they didn&#x27;t mean to, implement Clone instead so that they can have another one if that&#x27;s what they really meant.<p>If you&#x27;re exaggerating and the object is really 64 bytes, just suck it up and derive Copy, your estimate of how &quot;expensive&quot; it is may well be so wrong that you&#x27;re defeating your own objectives.<p>I&#x27;ve never seen any indication that unneeded PartialEq or Debug for example aren&#x27;t elided by the compiler. In contrast if I need Debug it sure is a pain in the backside to implement it manually in a wrapper type because the owner of the type decided unilaterally that nobody would need that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 21:19:24 &#43;0000 UTC">2021-08-18 21:19:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I want to see the costs in the code, not imply them. Also, profiling programs in Rust often shows full of memcopies.   Saying that they are nicely optimized out is dishonest.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 19:31:42 &#43;0000 UTC">2021-08-18 19:31:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/exploring-clangllvm-optimization-on-programming-horror/">
+
+
+    <title>Exploring Clang/LLVM optimization on programming horror - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Exploring Clang/LLVM optimization on programming horror - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/exploring-clangllvm-optimization-on-programming-horror/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/exploring-clangllvm-optimization-on-programming-horror/">
+<meta name="twitter:title" content="Exploring Clang/LLVM optimization on programming horror - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Exploring Clang\/LLVM optimization on programming horror - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T07:37:11JST",
+    "dateModified": "2021-08-17T07:37:11JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.matthieud.me/2020/exploring-clang-llvm-optimization-on-programming-horror/">Exploring Clang/LLVM optimization on programming horror</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 21:25:18 &#43;0000 UTC">2021-08-17 21:25:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great writeup! This is a nice overview of how LLVM&#x27;s optimization passes compose to produce nicely optimized assembly.<p>One nitpicky observation: mem2reg doesn&#x27;t &quot;move values from memory [...] to registers (directly inside the CPU).&quot; It&#x27;s an SSA expansion pass, taking the minimal SSA form produced by the C&#x2F;C++ frontend to turning it into a more aggressive SSA form by eliminating as many `alloca`s as possible. SSA is characterized by the presence of infinitely many &quot;fresh&quot; <i>abstract</i> registers, none of which correspond to actual CPU registers -- LLVM is responsible at a later stage for performing efficient lowering and allocation of registers&#x2F;stack slots for the SSA registers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberShadow" target="_blank">CyberShadow</a>   <span class="timeago" data-date="2021-08-18 08:30:41 &#43;0000 UTC">2021-08-18 08:30:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not nitpicky at all - I was confused as to why one would want to do register allocation before control&#x2F;data flow analysis. Thanks for the explanation!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maattdd" target="_blank">maattdd</a>   <span class="timeago" data-date="2021-08-18 09:36:44 &#43;0000 UTC">2021-08-18 09:36:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the nitpick, I should have been more precise and write <i>move value from memory to abstract register</i> otherwise it is indeed confusing. I will fix the article and mention your comment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slavik81" target="_blank">slavik81</a>   <span class="timeago" data-date="2021-08-17 22:38:04 &#43;0000 UTC">2021-08-17 22:38:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you give an example of an alloca mem2reg would eliminate?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NobodyNada" target="_blank">NobodyNada</a>   <span class="timeago" data-date="2021-08-17 23:02:51 &#43;0000 UTC">2021-08-17 23:02:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article has an example: in the unoptimized IR generated by the frontend, all the variables are stored in memory on the stack and accessed through pointers stored in registers, whereas after the mem2reg pass variables are stored directly in registers.<p>Memory is mutable whereas SSA registers are immutable, so the compiler frontend just put all the C variables in memory to express the semantics of the C program in the simplest way possible. The mem2reg pass then moved all the variables into SSA registers, by simply creating a new register for each assignment and adding phi nodes to track the flow of variables between basic blocks (like the individual iterations of the loop body).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slavik81" target="_blank">slavik81</a>   <span class="timeago" data-date="2021-08-17 23:40:23 &#43;0000 UTC">2021-08-17 23:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;ve very concisely explained the bits that were unclear to me. Thank you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-17 22:53:58 &#43;0000 UTC">2021-08-17 22:53:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think that would be helpful in learning what&#x27;s going on.<p>Instead, I&#x27;ll point you out to the keyword &quot;Dominator Frontier&quot;, and &quot;SSA Construction Algorithm&quot;.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Static_single_assignment_form#Computing_minimal_SSA_using_dominance_frontiers" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Static_single_assignment_form#...</a><p>You should read that only after you understand SSA and Phi functions in particular. Once you know how Phi works, the next question is the algorithm for how they&#x27;re constructed.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Dominator_(graph_theory)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Dominator_(graph_theory)</a><p>This page may also help.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-17 21:34:51 &#43;0000 UTC">2021-08-17 21:34:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;Passes.html#passes-mem2reg" rel="nofollow">https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;Passes.html#passes-mem2reg</a><p>&gt; -mem2reg: Promote Memory to Register<p>&gt; This file promotes memory references to be register references. It promotes alloca instructions which only have loads and stores as uses. An alloca is transformed by using dominator frontiers to place phi nodes, then traversing the function in depth-first order to rewrite loads and stores as appropriate. This is just the standard SSA construction algorithm to construct “pruned” SSA form.<p>-----------<p><a href="https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;LangRef.html#alloca-instruction" rel="nofollow">https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;LangRef.html#alloca-instruction</a><p>&gt; The ‘alloca’ instruction allocates memory on the stack frame of the currently executing function, to be automatically released when this function returns to its caller. If the address space is not explicitly specified, the object is allocated in the alloca address space from the datalayout string.<p>--------<p>Based on my reading and understanding of alloca and mem2reg above, I have to disagree with your assessment. It seems like alloca roughly corresponds to a &quot;push&quot; in your typical x86 assembly language, or maybe a &quot;add esp, #ofBytes&quot;.<p>By removing alloca instructions, the mem2reg step is turning stack-memory into registers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 21:52:55 &#43;0000 UTC">2021-08-17 21:52:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; By removing alloca instructions, the mem2reg step is turning stack-memory into registers.<p>This is true, but it&#x27;s also misleading: the transformation of stack slots into machine registers is a beneficial <i>side effect</i> of mem2reg. Reducing stack use is an important optimization, but producing an optimal SSA form is even <i>more</i> important, since key passes like folding, DCE and SRoA rely <i>heavily</i> on the SSA form. The &quot;reg&quot; in &quot;mem2reg&quot; refers explicitly to the latter (SSA registers), as the text you&#x27;ve excerpted directly says.<p>You can also prove this to yourself by contriving an IR function that contains more SSA registers than machine registers: you&#x27;ll see that, in addition to any ABI constraints, LLVM will be forced to spill any excess SSA registers back onto the stack.<p>Edit: but also yes, to confirm: `alloca` corresponds more or less directly to `add ESP, &lt;adjust&gt;` within the x86 stack model. But it doesn&#x27;t have to! LLVM&#x27;s semantics are target independent even when the IR isn&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-17 21:56:23 &#43;0000 UTC">2021-08-17 21:56:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gotcha. I think I see what you&#x27;re talking about now.<p>I have crude familiarity with SSA (no personal experience but I&#x27;ve read a book once) but not with LLVM&#x27;s terminology. I&#x27;m looking at the example in the blogpost, and I can see that its clearly adding in the important Phi functions needed<p>Strange that llvm names their aggressive SSA step in this manner. But yes, adding the phi functions in this manner is a very important step before we can think about optimizations.<p>The &quot;inductive variable&quot; is far easier to detect once its in a &quot;Phi-form&quot; so to speak.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 22:03:17 &#43;0000 UTC">2021-08-17 22:03:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s an extremely confusing naming choice! I don&#x27;t know why they did it, but to take a guess: a lot of compiler literature refers to SSA values as &quot;registers,&quot; since the SSA model of a computer program directly corresponds to the concept of an (infinite) register machine in abstract computation.<p>The end result being that we have the same word &quot;register&quot; referring to two <i>opposed</i> resources (one infinite, one extremely finite) :-).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ufo" target="_blank">ufo</a>   <span class="timeago" data-date="2021-08-18 01:15:26 &#43;0000 UTC">2021-08-18 01:15:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not the only place where this terminology confuses people. Another one is &quot;register-based virtual machine&quot;, in the context of interpreters. In that case the registers belong to the  VM and are actually stored in stack memory, not on actual CPU registers. However, people get that confused all the time!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gsnedders" target="_blank">gsnedders</a>   <span class="timeago" data-date="2021-08-17 22:44:50 &#43;0000 UTC">2021-08-17 22:44:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At least historically LLVM has itself been inconsistent in the naming of SSA &quot;values&quot;, and mem2reg is arguably just the most prominent example of the &quot;register&quot; name being used.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-18 12:13:14 &#43;0000 UTC">2021-08-18 12:13:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You can also prove this to yourself by contriving an IR function that contains more SSA registers than machine registers: you&#x27;ll see that, in addition to any ABI constraints, LLVM will be forced to spill any excess SSA registers back onto the stack.<p>Having more SSA register than machine registers does not mean there will be any spilling as unlike SSA registers, machine registers can be reused once the old value is no longer needed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 15:48:07 &#43;0000 UTC">2021-08-18 15:48:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure. To be more precise: you can prove this to yourself by contriving a function that has more <i>live</i> variables&#x2F;values than there are machine registers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-17 21:27:59 &#43;0000 UTC">2021-08-17 21:27:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The core simplification is due to LLVM&#x27;s induction-detection step. Even after doing induction-based proofs in school, until reading this I had the sense that induction is kinda magical and kinda not real.<p>I still cannot fathom how you can encode induction detection into an algorithm, any pointers welcome (keeping it simple, please, and ideally with working code).<p>The only case that makes sense to me is if you did numeric computation against some fixed number of cases and if that worked out then you assume it&#x27;s right.<p>I guess this is what proof assistants do (among other things). Maybe I should look into how to write a basic proof assistant.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcranmer" target="_blank">jcranmer</a>   <span class="timeago" data-date="2021-08-17 22:34:38 &#43;0000 UTC">2021-08-17 22:34:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Induction detection is relatively simple in LLVM IR. The first thing to remember is that the compiler doesn&#x27;t work on the same source code that the human does; it works on a different representation. The canonical loop structure would look something like this:<p><pre><code>  loop.preheader:
+    ; This is the block that executes before the loop does.
+    br label %loop.body;
+
+  loop.body:
+    %i = phi i32 [0, %loop.preheader], [%i.next, %loop.body]
+    %val = phi i1 [0, %loop.preheader], [%val.next, %loop.body]
+    %val.next = xor i1 %val, -1
+    %i.next = add i32 %i, 1
+    %cmp = icmp slt i32 %i, %N
+    br i1 %cmp, %loop.exit, %loop.body
+
+  loop.exit:
+    ; After the loop is done
+</code></pre>
+Because of how phis work, in constructing this form, we immediately realize how to describe a value either in terms of its value in the first iteration (this is the value it takes coming from the preheader), or in terms <i>solely</i> of its value in the previous iteration. In other words, %val.next = f(%val) for some function f, which we can easily identify in the source code.<p>Now, if we can compute the repeated composition of f easily, we can replace the recurrence in the loop with repeated composition. Repeated addition of the same value is multiplication, and repeated multiplication of the same value is exponentiation--that&#x27;s two very easy examples to do so. We recognize that there is no use of the value except of its final occurrence, and so instead of doing the loop, we can generate the composition itself. Thus, after N iterations of the loop, we can conclude that %val.next = f^N(0), and if we can identify the loop iteration count (that&#x27;s %N in this case), we can simply write out f^N instead of having to compute every individual value.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-08-18 07:55:03 &#43;0000 UTC">2021-08-18 07:55:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does LLVM know to simplify f^N ?<p>I&#x27;ve seen LLVM do the same optimization for triangular and pyramidal numbers. Is there a list of hardcoded functions it can handle? Does it try a specific algorithm to find the direct formula?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-08-18 02:45:27 &#43;0000 UTC">2021-08-18 02:45:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So if I&#x27;m understanding this, this only works for loops with a finite number of iterations knowable at compile time, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcranmer" target="_blank">jcranmer</a>   <span class="timeago" data-date="2021-08-18 02:59:37 &#43;0000 UTC">2021-08-18 02:59:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The number of iterations must be knowable, yes. It doesn&#x27;t need to be known as a direct constant value, but it must be computable as a symbolic value as some kind (say, an argument to the function, maybe plus or minus a constant).<p>I haven&#x27;t looked at the exact criteria in this transformation, but it&#x27;s very likely that there are also a couple of constraints on how precisely the loop is structured.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dw-im-here" target="_blank">dw-im-here</a>   <span class="timeago" data-date="2021-08-18 08:50:57 &#43;0000 UTC">2021-08-18 08:50:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Correct, if you don&#x27;t ensure the necessary preconditions are met you quickly run into undecidable problems.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=contravariant" target="_blank">contravariant</a>   <span class="timeago" data-date="2021-08-17 21:39:27 &#43;0000 UTC">2021-08-17 21:39:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well in this case it seems reasonable that they simply added a rule for the specific line:<p><pre><code>    even = !even
+</code></pre>
+and the line<p><pre><code>    numberCompare++
+</code></pre>
+resulting in<p><pre><code>    even = (indvar &amp; 1)
+    numberCompare = indvar
+</code></pre>
+You can then solve from the exit condition that number == numberCompare, which gives you the indvar which can then be substituted into &#x27;even&#x27;.<p>I&#x27;m not saying it isn&#x27;t magical, and certainly requires some symbolic solving, but it&#x27;s doable.<p>Of course the real goal is to eventually get it to optimize<p><pre><code>    while (number != 1) {
+        if (number &amp; 1)
+            number = number * 3 + 1
+        number &gt;&gt;= 1;
+    }</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=missblit" target="_blank">missblit</a>   <span class="timeago" data-date="2021-08-17 22:26:14 &#43;0000 UTC">2021-08-17 22:26:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Of course the real goal is to eventually get it to optimize `while (number != 1) { ... }`<p>Valid C++ programs are guaranteed to be able to make forward progress [1].<p>So if `number` is a normal stack allocated integer (and not volatile, etc), then the infinite looping case is undefined behavior here.<p>So it would be a valid optimization to transform this to `number = 1;`.<p>(And indeed: <a href="https:&#x2F;&#x2F;godbolt.org&#x2F;z&#x2F;eodhfWe6h" rel="nofollow">https:&#x2F;&#x2F;godbolt.org&#x2F;z&#x2F;eodhfWe6h</a> )<p>[1]
+<a href="https:&#x2F;&#x2F;en.cppreference.com&#x2F;w&#x2F;cpp&#x2F;language&#x2F;memory_model" rel="nofollow">https:&#x2F;&#x2F;en.cppreference.com&#x2F;w&#x2F;cpp&#x2F;language&#x2F;memory_model</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 22:46:15 &#43;0000 UTC">2021-08-17 22:46:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=secondcoming" target="_blank">secondcoming</a>   <span class="timeago" data-date="2021-08-17 22:43:26 &#43;0000 UTC">2021-08-17 22:43:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Amazing, but crazy.<p>icc does not make this astounding leap in logic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcranmer" target="_blank">jcranmer</a>   <span class="timeago" data-date="2021-08-18 00:00:38 &#43;0000 UTC">2021-08-18 00:00:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an example of a transformation that is probably more expensive in compile-time than it actually wins in runtime performance. Gcc has explicitly rejected this kind of optimization in the past for precisely that reason.<p>In general, compilers face an iron triangle of optimization: do you want a fast compiler, a small binary, or fast output? Optimizations that help all three are rare (especially ones that aren&#x27;t already implemented in -O1), and even two of the three is often difficult to obtain.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-18 12:30:03 &#43;0000 UTC">2021-08-18 12:30:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is an example of a transformation that is probably more expensive in compile-time<p>Why? Reasoning that the value must be 1 after the loop is not even a loop optimization, just a simple consequence of the branching instruction. This leaves the loop but nothing it computes is used anymore so since C++ guarantees that it exits you can simply remove it.<p>The transformation as a whole might not be useful often, but having a constant for the induction variable after the loop and being able to delete useless loops will both have runtime wins.<p>&gt; In general, compilers face an iron triangle of optimization: do you want a fast compiler, a small binary, or fast output?<p>I often wish compilers provided more options to just brute force a bit more performance out of release builds. You can manually tune many parameters but then you need to know a lot more about how the passes work than just saying --compile-for=5h (or something like that, doesn&#x27;t need to have a hard time limit).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=matttb" target="_blank">matttb</a>   <span class="timeago" data-date="2021-08-18 07:09:03 &#43;0000 UTC">2021-08-18 07:09:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note Gcc does do this, just at -O2 and above, whereas Clang does it on -O1 and above. Gcc also only does it on C++ code whereas Clang does it on both C and C++
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 22:38:37 &#43;0000 UTC">2021-08-17 22:38:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=onedognight" target="_blank">onedognight</a>   <span class="timeago" data-date="2021-08-17 22:55:08 &#43;0000 UTC">2021-08-17 22:55:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe LLVM should add a Collatz[0] optimization pass that would replace your loop with<p><pre><code>    number = 1
+</code></pre>
+for at least up to 64bit types?<p>[0] <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Collatz_conjecture" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Collatz_conjecture</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vnorilo" target="_blank">vnorilo</a>   <span class="timeago" data-date="2021-08-17 22:06:33 &#43;0000 UTC">2021-08-17 22:06:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, basically it&#x27;s about converting iteratively computated state to a function of iteration count.<p>Consider indvar[n] = indvar[n-1] + k, indvar[0] = a. It follows that indvar[n] = a + n * k.<p>This is the type of indvar canonicalization that can zap loops such as the one in the article. Suddenly the final state is just a function of the loop trip count.<p>The return value is replaced with canonicalized indvar. That makes the loop itself dead (nobody observes any of its effects) and removed by subsequent dead code elimination pass.<p>My example transforms addition  to multiplication. Another common one is multiplication into power. That&#x27;s close to what&#x27;s going on in the article example: xor is just a multiplication of signed one-bit integers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-08-17 22:27:52 &#43;0000 UTC">2021-08-17 22:27:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This appears to be the source code: <a href="https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;blob&#x2F;main&#x2F;llvm&#x2F;lib&#x2F;Transforms&#x2F;Scalar&#x2F;IndVarSimplify.cpp" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;llvm&#x2F;llvm-project&#x2F;blob&#x2F;main&#x2F;llvm&#x2F;lib&#x2F;Tran...</a> It&#x27;s long, but it looks well-commented! Some Googling also finds <a href="https:&#x2F;&#x2F;llvm.org&#x2F;devmtg&#x2F;2009-10&#x2F;ScalarEvolutionAndLoopOptimization.pdf" rel="nofollow">https:&#x2F;&#x2F;llvm.org&#x2F;devmtg&#x2F;2009-10&#x2F;ScalarEvolutionAndLoopOptimi...</a> which looks relevant.<p>I think &quot;induction&quot; here isn&#x27;t exactly the sense of proofs by mathematical induction as you learn in school (as in proving something for all positive integers given a base case and a recursive case) - I think all they mean by it is &quot;a loop, over a single integer.&quot; Quoting <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Induction_variable" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Induction_variable</a> :<p>&gt; <i>In computer science, an induction variable is a variable that gets increased or decreased by a fixed amount on every iteration of a loop or is a linear function of another induction variable.</i><p>The description at <a href="https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;courses&#x2F;cs6120&#x2F;2019fa&#x2F;blog&#x2F;ive&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.cs.cornell.edu&#x2F;courses&#x2F;cs6120&#x2F;2019fa&#x2F;blog&#x2F;ive&#x2F;</a> makes it clearer:<p>&gt; <i>An induction variable is any variable whose value can be represented as a function of: loop invariants; the number of loop iterations that have executed; and other induction variables.</i><p>That is to say, the link to proofs-by-induction is that if you have a loop like &quot;for (i = 0; i &lt; 10; i++)&quot;, you can prove the statement &quot;after N loops, i = N&quot;. Why? Because after 0 loops, i = 0 (the first part), and on each loop, i is one greater (the i++ part), and nothing else that happens in the loop changes i (which is what that post means by &quot;loop invariants&quot;).<p>In other words, it&#x27;s not that the compiler is <i>detecting</i> that the programmer is doing induction (the programmer is not, in fact the programmer is simply writing a for loop and not thinking about it), it&#x27;s that the compiler is <i>performing</i> induction on the loop.<p>So a simple case is if you have a loop like<p><pre><code>    int i;
+    for (i = 0; i &lt; 10; i++)
+        printf(&quot;Hi!\n&quot;);
+    printf(&quot;i = %d\n&quot;, i&quot;);
+</code></pre>
+You can prove that at the end of the loop, i = 10, and you don&#x27;t need to do actually increment i during each iteration to get there. And if you didn&#x27;t have that printf (i.e., if the loop body was empty), you could optimize the loop out entirely and just print out 10.<p>So it&#x27;s not terribly magical that LLVM is able to turn<p><pre><code>    while (number != numberCompare)
+    {
+        even = !even;
+        numberCompare++;
+    }
+</code></pre>
+into, in pseudocode,<p><pre><code>    numberCompare = number;
+    even = !!!...!!!even (numberCompare times);
+</code></pre>
+i.e., that it&#x27;s able to get numberCompare out of the loop, to conclude that even in turn is only a function of numberCompare, and then that there&#x27;s no loop left.<p>What&#x27;s more magical to me, I think, is that it&#x27;s able to make sense of &quot;run the ! operation numberCompare times&quot; and turn that into &quot;if (numberCompare % 2 == 1) even = !even&quot;. I don&#x27;t think that&#x27;s too surprising either - a compiler should know that, for booleans, !!foo can be simplified to foo. But repeatedly applying that rule across an <i>abstract</i> number of calls to !!, plus possibly one more, seems pretty clever.<p>If I&#x27;m skimming the code right, that part of the simplification is a different optimization pass entirely. I don&#x27;t know off hand where that&#x27;s implemented. I&#x27;d be curious if someone can find it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-08-18 17:23:06 &#43;0000 UTC">2021-08-18 17:23:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m also very interested in this part. Especially because I know clang will optimize the triangular and pyramidal numbers into constant time computations.<p>(The sum of the first N integers and first N squares respectively)<p>I really wonder what they use for this and how much it generalizes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benmmurphy" target="_blank">benmmurphy</a>   <span class="timeago" data-date="2021-08-17 21:37:24 &#43;0000 UTC">2021-08-17 21:37:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the induction step is pretty cool. it will remove the loop calculating the sum of an arithmetic progression and replace it with just multiplies&#x2F;shifts&#x2F;subtracts and adds.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-08-17 21:20:36 &#43;0000 UTC">2021-08-17 21:20:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These optimizations are on LLVM IR into LLVM IR. So basically every backend benefits. I don&#x27;t think most backend engineers would even understand them. I don&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 21:32:27 &#43;0000 UTC">2021-08-17 21:32:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I don&#x27;t think most backend engineers would even understand them. I don&#x27;t.<p>Most engineers are intimidated by compilers, but they really shouldn&#x27;t be! LLVM&#x27;s source code is <i>very</i> approachable and well-isolated by concern, and most of the fundamental concepts in an optimizing compiler are understandable with a beginner&#x27;s understanding of data structures, assembly, and resource allocation.<p>One slightly funny thing, though: LLVM&#x27;s optimizations are on IR, so every frontend can <i>theoretically</i> benefit from them. However, many assume patterns originating from the C&#x2F;C++ frontend or heavy canonicalization, so you need to be a <i>little</i> careful as a language frontend developer to take full advantage of all optimizations!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-08-17 22:48:23 &#43;0000 UTC">2021-08-17 22:48:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m actually working on an LLVM backend. I&#x27;d read the Dragon Book before, long before, but I think my real education was the LLVM Developer Meeting tutorials.<p>LLVM is pass oriented but broadly there are front ends (Clang, Rust, Fortran), a middle end (LLVM IR SSA optimizations) and multiple in-tree and out-of-tree backends. I was a little resentful of having to write all of 5 lines or so inside of Clang. Otherwise, I happily live in the backend. Doing a merge with a new release is an hour or so of conflict resolution.<p>The pass structure importantly means that you can test your backend code, even at the GlobalISel subpass level, without needing to understand Clang, LLVM, .... Pretty sweet if you ask me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jagger27" target="_blank">jagger27</a>   <span class="timeago" data-date="2021-08-17 22:42:26 &#43;0000 UTC">2021-08-17 22:42:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; so you need to be a little careful as a language frontend developer to take full advantage of all optimizations!<p>So does this mean that it’s possible to express exotic patterns in LLVM-IR that aren’t typically produced when compiling C or C++?<p>Are Rust’s optimizer passes significantly different than clang&#x27;s? I would guess borrow checking has a special pass that wouldn’t be applicable to C.<p>This topic is really fascinating to me!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Rusky" target="_blank">Rusky</a>   <span class="timeago" data-date="2021-08-18 01:51:59 &#43;0000 UTC">2021-08-18 01:51:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust uses basically the same optimizer passes as Clang.<p>Borrow checking is more like a type checking pass, not an optimization pass- it&#x27;s pass&#x2F;fail, and doesn&#x27;t change the IR.<p>Probably the most interesting thing to look at here is Rust&#x27;s use of LLVM noalias metadata. This captures the assumption that, while a reference (of type &amp;T or &amp;mut T) is live, the value it points to is not allowed to change via any other name. (The borrow checker ensures this assumption is valid for safe code, but the rule applies to unsafe code too- the important thing is the reference types.)<p>This metadata enables LLVM to perform more aggressive optimizations of pointer reads and writes. C can actually generate similar metadata via `restrict`, but this is less common because there&#x27;s no borrow checker to verify that it&#x27;s used correctly. And interestingly, LLVM has been very buggy in this area! Rust has had to disable its use of noalias metadata several times as those bugs have been found and fixed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jamincan" target="_blank">jamincan</a>   <span class="timeago" data-date="2021-08-17 23:14:58 &#43;0000 UTC">2021-08-17 23:14:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Notably, the Rust borrow checker has exposed a tonne of bugs in the LLVM noalias optimizations. I believe the latest versions of rustc now have noalias enabled since the LLVM 12 release, but it&#x27;s been a long cycle of enabling it, discovering a bug, and disabling it to this point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sillycross" target="_blank">sillycross</a>   <span class="timeago" data-date="2021-08-18 01:11:42 &#43;0000 UTC">2021-08-18 01:11:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My experience is that LLVM can generally optimize the IR produced from clang frontend <i>a bit</i> better than the IR produced by myself. The advantage is small, but still exists.<p>I think the major reason is that TBAA optimization is only possible if you manually emit those metadata (clang does, but I didn&#x27;t, due to time limitation and fear of aliasing-related bugs).<p>But that LLVM is designed to work best on the pattern emitted by Clang is definitely another reason. In fact, even the official documentation recommends users to emit IR in a way that looks similar to what is emitted by Clang, so you have a better chance to keep the LLVM optimizer happy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aspaceman" target="_blank">aspaceman</a>   <span class="timeago" data-date="2021-08-18 11:15:43 &#43;0000 UTC">2021-08-18 11:15:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A notable topic to throw in the bag here is GPU shading languages.<p>LLVM project is used to compile many different shading languages into a similar IL, then compiled into a bytecode for GPU. The project has been really useful for managing all the compiler infrastructure needed for graphics nowadays imo.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-08-17 22:32:04 &#43;0000 UTC">2021-08-17 22:32:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LLVM is approachable but some things are no better than GCC, I find. In particular I have noticed there seems to be very little high level documentation for the instruction scheduler.<p>I find GCC machine def files actually slightly easier to read than LLVM&#x27;s
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-17 21:28:22 &#43;0000 UTC">2021-08-17 21:28:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            None of these steps are too hard to think about in SSA form (a specific transformation of code that LLVM does near the beginning of its analysis).<p>So the key is to first understand SSA form. After that, a lot of optimization passes become obvious to think about.<p>---------<p>SSA has two bits to understand:<p>1. Single static assignment -- variables can be assigned, but once assigned they can never change. (This part is easy).<p>2. Graph-based, and therefore requires the &#x27;Phi&#x27; function to understand -- variables may take on two different values. EX: &quot;r0&quot; may come from Node#1, while &quot;r0&quot; comes from Node#2. r0 may have been renamed %1 in #1, and %2 in #2. &quot;Phi&quot; is a &quot;fake function&quot; that resolves the ambiguity and kinda makes SSA code &quot;real&quot; again.<p>Hmm, maybe that&#x27;s a bad explanation. But whatever, my point is that understanding &quot;Phi&quot; is the concept you want to focus on in SSA. Phi is the harder part, but its still not that hard to understand.<p>Once you get it, the whole form &quot;clicks&quot; in your brain and you suddenly understand how optimizations can become possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcranmer" target="_blank">jcranmer</a>   <span class="timeago" data-date="2021-08-17 22:00:27 &#43;0000 UTC">2021-08-17 22:00:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another explanation of SSA:<p>SSA is static single assignment. Every variable has a single point of declaration. If you want to change the value of a variable (say, i = i + 1), you instead have to create a new variable. The advantage of this form is that tracking the definition of a variable is trivial; in LLVM IR, to use a variable, you literally pass in a pointer to the instruction that defined it. The inverse, finding all uses of a value, is done by building a use-list: whenever you create an instruction, it adds itself to the use-list of all the values it&#x27;s using, which allows easy iteration of the users of a value.<p>In short, SSA gives you a trivially correct-by-construction to understand the dataflow of a program (at least, that data which lives in registers; memory is more complicated). There&#x27;s no separate analysis that has to be maintained throughout optimizations, and hence a possible source of programs (as there is for failure to maintain the dominator tree through CFG transformations, a historically bug-prone step in LLVM).<p>Now, as you may notice, there are cases where it would seem hard to pin down a <i>single</i> definition of a variable: conditional assignment. SSA solves this by creating Phi values. Phi values can be better thought of as basic block arguments: when you enter a basic block, you must provide a value for each of the phi values in that basic block. The actual value of the phi is dependent on which edge you used to enter a basic block, or in other words, the control dependencies of the code.<p>In short, phis are the intersection of control flow in the code with the dataflow--and they are the only things in that intersection.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-08-17 22:30:25 &#43;0000 UTC">2021-08-17 22:30:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LLVMs IR has linear basic blocks inside a function graph, there are IRs which are graph all the way down as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=srcreigh" target="_blank">srcreigh</a>   <span class="timeago" data-date="2021-08-17 21:36:05 &#43;0000 UTC">2021-08-17 21:36:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            EDIT - nvm, the CS241 UWaterloo course doesn&#x27;t cover SSA.<p>In case anybody&#x27;s interested in learning the basics, here&#x27;s some course notes to a compilers class which I love!<p><a href="http:&#x2F;&#x2F;anthony-zhang.me&#x2F;University-Notes&#x2F;CS241&#x2F;CS241.html" rel="nofollow">http:&#x2F;&#x2F;anthony-zhang.me&#x2F;University-Notes&#x2F;CS241&#x2F;CS241.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-08-17 22:14:53 &#43;0000 UTC">2021-08-17 22:14:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your notes, while honestly very good, don&#x27;t cover data flow analysis or <i>Single Static Assignment</i> (SSA) which is what LLVM IR [1] uses and which are the tools that the article&#x27;s optimizations are based on. Hell, LLVM backend engineers rarely even look at IR. We mostly look at Generic Machine IR [2].<p>[1] <a href="https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;LangRef.html" rel="nofollow">https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;LangRef.html</a><p>[2] <a href="https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;GlobalISel&#x2F;GMIR.html" rel="nofollow">https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;GlobalISel&#x2F;GMIR.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=srcreigh" target="_blank">srcreigh</a>   <span class="timeago" data-date="2021-08-17 23:11:47 &#43;0000 UTC">2021-08-17 23:11:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, my bad. When you said &quot;backend&quot; I thought you mean &quot;HTTP backend&quot; hence my over-simplification. You&#x27;re right -- SSA isn&#x27;t covered in that course. Cheers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dleslie" target="_blank">dleslie</a>   <span class="timeago" data-date="2021-08-17 22:16:02 &#43;0000 UTC">2021-08-17 22:16:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, in my day SFU kept this til 3rd year, as CMPT379 IIRC, and only as an option for Theoretical or Systems paths.<p>Looks like it&#x27;s still 379; not sure about the optional component.<p><a href="http:&#x2F;&#x2F;anoopsarkar.github.io&#x2F;compilers-class&#x2F;" rel="nofollow">http:&#x2F;&#x2F;anoopsarkar.github.io&#x2F;compilers-class&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-17 22:19:27 &#43;0000 UTC">2021-08-17 22:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Decades ago I participated in some group programming contest for universities (in person, not online). We did terribly, but mainly I remember being in awe of how quickly Waterloo was solving the challenges.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thrasumachos" target="_blank">thrasumachos</a>   <span class="timeago" data-date="2021-08-17 21:48:23 &#43;0000 UTC">2021-08-17 21:48:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice that it even provides the right answer for negative numbers as undefined behavior but only when optimizations are enabled!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=titzer" target="_blank">titzer</a>   <span class="timeago" data-date="2021-08-17 23:44:47 &#43;0000 UTC">2021-08-17 23:44:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice catch. One of many instances where C&#x2F;C++ compilers rely on integer wraparound being UB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ufo" target="_blank">ufo</a>   <span class="timeago" data-date="2021-08-18 01:18:18 &#43;0000 UTC">2021-08-18 01:18:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m very curious how it optimizes that recursive version at the end, because it is not tail recursive.<p>Does anyone know? Perhaps it becomes tail recursive after one round of inlining?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pertymcpert" target="_blank">pertymcpert</a>   <span class="timeago" data-date="2021-08-18 07:00:30 &#43;0000 UTC">2021-08-18 07:00:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems the TailRecursionElimination.cpp pass is responsible for that. It has some smarts to know that the xor instruction between the call and return can be turned into an &quot;accumulator&quot;, although what exactly that means I&#x27;m unsure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ufo" target="_blank">ufo</a>   <span class="timeago" data-date="2021-08-18 19:45:58 &#43;0000 UTC">2021-08-18 19:45:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for investigating that!<p>An accumulator is when we add an extra parameter to hold the &quot;loop variable&quot;, like this:<p><pre><code>    bool doit(int n, bool acc)
+    {
+        if (n == 0) return acc;
+        else return doit(n-1, !acc);
+    }
+
+    bool isEven(int n)
+    {
+        return doit(n, true);
+    }
+</code></pre>
+The function is now tail-recursive and behaves similarly to this loop:<p><pre><code>    bool acc = true;
+    while (n != 0) {
+        acc = !acc;
+        n = n - 1;
+    }
+    return acc;
+</code></pre>
+According to the comment on the top of the file, apparently llvm can create this accumulator variable if the operation is associative and commutative. That&#x27;s because after introducing the accumulator, the evaluation order is outside-&gt;inside instead of inside-&gt;outside.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=martincmartin" target="_blank">martincmartin</a>   <span class="timeago" data-date="2021-08-17 22:25:02 &#43;0000 UTC">2021-08-17 22:25:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>you get a linear time O(n) isEven function</i><p>In complexity theory, the size of a problem is the number of bits to represent the input, so if the input integer is <i>i</i>, then the size is <i>n = log_2(i)</i> so the algorithm is actually exponential in the number of bits it takes to represent the input.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-17 22:30:40 &#43;0000 UTC">2021-08-17 22:30:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a strict sense, you&#x27;re right.<p>But in practice, you&#x27;re not. Case in point: matrix multiplication is commonly quoted as O(n^3) (naive), when in fact, the amount of data used is O(n^2), and therefore should be quoted as O(size^2) (quadratic) with respect to data-size. (EDIT: was bad at math for a second).<p>But no, people mean &quot;n-by-n matrix&quot; has &quot;O(n^3) naive&quot; implementation. In practice, the &quot;n&quot; is just whatever is most convenient for a problem.<p>In many cases, n is proportional to the input size. But in other cases (such as the famous matrix multiplication examples), n is the sqrt(input-size).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcranmer" target="_blank">jcranmer</a>   <span class="timeago" data-date="2021-08-18 00:05:23 &#43;0000 UTC">2021-08-18 00:05:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; therefore should be quoted as O(size^2) (quadratic)<p>It&#x27;s actually O(size^1.5), not O(size^2). Well, assuming you&#x27;re talking about θ(n) when you mean O(n) as most people do.<p>[If you&#x27;re not familiar with the difference, Θ(f(n)) means a function that grows as fast as f(n), up to a constant, whereas O(f(n)) is a function that grows no faster. So n^2 is O(n^3) but not Θ(n^3).]
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wittycardio" target="_blank">wittycardio</a>   <span class="timeago" data-date="2021-08-18 00:08:31 &#43;0000 UTC">2021-08-18 00:08:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But it&#x27;s actually quite relevant here. For example with the informal notation you can find all the prime factors of a number N in &quot;O(N)&quot; time , if someone doesn&#x27;t understand the distinction then they might believe that theres a polytime algorithm for factorization.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=trias" target="_blank">trias</a>   <span class="timeago" data-date="2021-08-17 22:28:57 &#43;0000 UTC">2021-08-17 22:28:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            is complexity theory constrained to binary representations? Why should it?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Ar-Curunir" target="_blank">Ar-Curunir</a>   <span class="timeago" data-date="2021-08-17 23:10:53 &#43;0000 UTC">2021-08-17 23:10:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Every base except unary is a constant-factor away from binary, and so is irrelevant asymptotically. We don&#x27;t use unary because it&#x27;s artificially slow.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=creata" target="_blank">creata</a>   <span class="timeago" data-date="2021-08-18 01:35:38 &#43;0000 UTC">2021-08-18 01:35:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See also: <a href="https:&#x2F;&#x2F;medium.com&#x2F;@veedrac&#x2F;why-unary-is-the-best-number-system-cc1e0edfb928" rel="nofollow">https:&#x2F;&#x2F;medium.com&#x2F;@veedrac&#x2F;why-unary-is-the-best-number-sys...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Ar-Curunir" target="_blank">Ar-Curunir</a>   <span class="timeago" data-date="2021-08-18 15:05:39 &#43;0000 UTC">2021-08-18 15:05:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That post is a joke, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 07:41:44 &#43;0000 UTC">2021-08-19 07:41:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PostThisTooFast" target="_blank">PostThisTooFast</a>   <span class="timeago" data-date="2021-08-18 07:38:22 &#43;0000 UTC">2021-08-18 07:38:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice hysterical, non-informative headline.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jagrsw" target="_blank">jagrsw</a>   <span class="timeago" data-date="2021-08-18 07:53:21 &#43;0000 UTC">2021-08-18 07:53:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  O(n) isEven function compared to the obvious constant time O(1) modulo algorithm
+</code></pre>
+In the holy name of nitpickiness: the modulo operation is not always O(1), as div&#x2F;mod CPU instructions have complex internal implementations and require varying number of cycles depending on what the input args are.<p>However, for x%2 it&#x27;ll be probably O(1), both on the cpu level, and b&#x2F;c it&#x27;ll get optimized to something like x&amp;1 by most compilers (at least for unsigned values)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=8192kjshad09-" target="_blank">8192kjshad09-</a>   <span class="timeago" data-date="2021-08-18 08:05:35 &#43;0000 UTC">2021-08-18 08:05:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I will nitpick your nitpick. In a language with arbitrary size integers you&#x27;re right. This is a C++ int, therefore 32&#x2F;64 bits (in all sane cases, ik the spec doesn&#x27;t specify), so the maximum number of cycles is upper bounded. Therefore modulo on C++ ints is is O(1).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jagrsw" target="_blank">jagrsw</a>   <span class="timeago" data-date="2021-08-18 08:42:37 &#43;0000 UTC">2021-08-18 08:42:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But having an upper bound doesn&#x27;t make it O(1) automatically, no? It&#x27;d be like saying that Erastotenes&#x27; sieve is O(1) b&#x2F;c for 64bit integers we know what upper exec time limit is? IMO id&#x27;d be rather creative use of current conventions around comp. complexity, but my knowledge of those topics is bad.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=laszlokorte" target="_blank">laszlokorte</a>   <span class="timeago" data-date="2021-08-18 09:38:13 &#43;0000 UTC">2021-08-18 09:38:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            big O() notation is simply not precise enough (and not meant to be) to be used in such nitpicky discussions. Everything is O(1) for a large anough constant, for example O(live time of the universe).<p>There are other notations like small o(), Omega(), omega() or theta() to capture the asymtotic runtime behavior more or less precisely.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=athrowaway3z" target="_blank">athrowaway3z</a>   <span class="timeago" data-date="2021-08-18 09:12:30 &#43;0000 UTC">2021-08-18 09:12:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It states &quot;constant time O(1) modulo _algorithm_&quot; for implementing an isEven function.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

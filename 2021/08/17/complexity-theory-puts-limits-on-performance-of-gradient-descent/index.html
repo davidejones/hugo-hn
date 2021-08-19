@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/complexity-theory-puts-limits-on-performance-of-gradient-descent/">
+
+
+    <title>Complexity theory puts limits on performance of gradient descent - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Complexity theory puts limits on performance of gradient descent - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/complexity-theory-puts-limits-on-performance-of-gradient-descent/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/complexity-theory-puts-limits-on-performance-of-gradient-descent/">
+<meta name="twitter:title" content="Complexity theory puts limits on performance of gradient descent - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Complexity theory puts limits on performance of gradient descent - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T22:48:27JST",
+    "dateModified": "2021-08-17T22:48:27JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.quantamagazine.org/computer-scientists-discover-limits-of-major-research-algorithm-20210817/">Complexity theory puts limits on performance of gradient descent</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Buttons840" target="_blank">Buttons840</a>   <span class="timeago" data-date="2021-08-18 02:33:50 &#43;0000 UTC">2021-08-18 02:33:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For example, gradient descent is often used in machine learning in ways that don’t require extreme precision. But a machine learning researcher might want to double the precision of an experiment. In that case, the new result implies that they might have to quadruple the running time of their gradient descent algorithm. That’s not ideal, but it is not a deal breaker.<p>&gt; But for other applications, like in numerical analysis, researchers might need to square their precision. To achieve such an improvement, they might have to square the running time of gradient descent, making the calculation completely intractable.<p>I think a silver lining here is that a company having access to 10,000 times as much computing power as a common consumer can only achieve, say, a 10x better model. So the inequality isn&#x27;t as extreme as it could be.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrianN" target="_blank">adrianN</a>   <span class="timeago" data-date="2021-08-18 09:53:21 &#43;0000 UTC">2021-08-18 09:53:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One has to keep in mind that these are worst-case bounds. It is perfectly compatible with the result that someone with access to 10000x the computing power can achieve a 10000x better model for all the functions that we care about in practice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kbelder" target="_blank">kbelder</a>   <span class="timeago" data-date="2021-08-18 17:23:48 &#43;0000 UTC">2021-08-18 17:23:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My general impression is that it&#x27;s fairly easy to get moderately accurate models with simple procedures on cheap hardware... linear regressions, say.  Maybe that&#x27;ll get you 75% predictive accuracy.<p>Then, you apply better techniques, that hit the limits of your PC, and you bring that up to maybe 80%.<p>Then you bring in the PHDs, move your analysis to a cluster or into the cloud, and you gain another 2%.<p>In other words, it&#x27;s more often that 10000x the computing power gives you something like a 1.2x the model quality, not 10000x or even 100x.  Still worth doing for a large enough company, though.<p>Just my experience, and only a generalization.  Some models just can&#x27;t be built without a minimum amount of horsepower, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 05:03:48 &#43;0000 UTC">2021-08-18 05:03:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is that how scientific modelling (ie., modelling of non-computable functions) works though?<p>It&#x27;s not necessarily that squaring precision leads to a &quot;better model&quot;, its that it fails to be a model at all without that precision.<p>Eg., consider a climate model with effects at the first-decimal place, and 10th decimal-place of some measurable quantity vs. time.<p>The effects at the 10th dp. could aggregate to overwhelm the effects at the 1 dp.<p>It isnt that the model is better if it can &quot;compute at the 10th dp&quot; -- its just wildly inaccurate otherwise.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ben_w" target="_blank">ben_w</a>   <span class="timeago" data-date="2021-08-18 07:48:53 &#43;0000 UTC">2021-08-18 07:48:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            10 decimal points reminds me of a conversation I had with my father. Last century my dad was working on radar&#x2F;IFF simulations, and he had an anecdote (if you can call it that) about when they switched from normal to double precision, and needing to get more digits of π (I think from 10 to 20, the way he talked implied some very strange things about the programming language(s) he was using). The third time he told this story, late-teenage-me pointed out that the curvature of spacetime under GR had more impact than the extra digits.<p>While the broader point is valid, IIRC climate (being about average and broad trends) is fine with the imperfections, and handles this by running multiple simulations with slightly different parameters and seeing what usually happens. Weather forecast likewise.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TeMPOraL" target="_blank">TeMPOraL</a>   <span class="timeago" data-date="2021-08-18 09:13:35 &#43;0000 UTC">2021-08-18 09:13:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>The third time he told this story, late-teenage-me pointed out that the curvature of spacetime under GR had more impact than the extra digits.</i><p>That may be true, but in simulations using floating points (which are, as &#x27;mjburgess points out, discrete), there are discrete approximation errors that accumulate with almost any operation, on top of any measurement or modelling approximation errors you may have. On some problems, numerical integration on floats bleeds precision really fast.<p>I recall seeing some problems on numerics labs during university years, where using doubles instead of floats was what made the algorithm converge on a solution instead of endlessly spinning or diverging into infinity. I imagine that ideally, you&#x27;d use a more sophisticated algorithm instead[0] - perhaps one that simulates real numbers with greater precision. But computer power isn&#x27;t infinite (and it certainly wasn&#x27;t infinite in the last century) - floats and doubles are fast, supported by hardware, and you may need that speed to get results in a reasonable timeframe. Using doubles instead of floats may give you just enough precision buffer to make the faster algorithm work.<p>--<p>[0] - A trivial example that I&#x27;m sure is known to anyone doing physical simulations (including for videogames) is using increasingly sophisticated integrators for kinematics. You may start with naive Euler calculating v += aΔt, s += vΔt, but this quickly becomes inaccurate in quite spectacular ways (try simulating springs with naive Euler). So you may then progress through backwards &#x2F; symplectic Euler, and end up with Verlet integration or even reaching for 4th Order Runge-Kutta, to keep the energy in the system more-less conserved as it evolves. And yes, the difference between floats and doubles is also very apparent, especially with Euler methods.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gugagore" target="_blank">gugagore</a>   <span class="timeago" data-date="2021-08-18 14:22:17 &#43;0000 UTC">2021-08-18 14:22:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It sort of sounds like you&#x27;re confusing two different kinds of errors. Euler vs RK4 is an issue of truncation error. It&#x27;s called that because when you approximate a derivative with a finite difference, you can see that you&#x27;ve truncated the infinite Taylor series.<p>Truncation error is present even if there were zero approximation in the elementary floating point operations. I&#x27;m not sure how you mean that the difference between floats and doubles shows up with Euler methods especially.<p>Under no floating point error, you can drive truncation error toward zero by driving the step size toward zero. But the floating point precision sets a floor on how low you can go. Perhaps this is what you meant.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 08:22:22 &#43;0000 UTC">2021-08-18 08:22:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure this is as true as it seems.<p>When creating simulations we do so by defining a computable function (ie., over discrete binary strings) which approximates some non-computable function (ie., over the reals).<p>It is important to note that those non-computable functions are derived, in part, analytically based on theorems which require infinite precision, ie., real numbers.<p>When we define a computable approximation we <i>can</i> only do so by narrowing the simulation to a scale where &quot;the numbers have only a few significant digits&quot;. This is really the only thing we can simulate, and even then, we are using mathematical analysis to derive much of it -- which cannot be simulated.<p>If you really wanted to simulate <i>across scales</i>, ie., run a simulation &quot;from atoms to tables&quot;, i think we&#x27;d be requiring many many many decimal places. It would likely, i think, be physically impossible to do. (Or if not, then atoms to planets would be) -- as the discrete precision required would require a theoretical minimum of mass that would create a black hole.<p>eg., Consider that a table has 10^verylargenumber of &quot;spherical&quot; atoms, and so its aggregate shape would be extremely sensitive to a miscalculation of each atoms shape ... and we would require a precision in PI probably something like 10^-verylargenumber.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wcoenen" target="_blank">wcoenen</a>   <span class="timeago" data-date="2021-08-18 11:57:00 &#43;0000 UTC">2021-08-18 11:57:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Consider that a table has 10^verylargenumber of &quot;spherical&quot; atoms</i><p>That &quot;verylargenumber&quot; exponent is not actually a large number. It&#x27;s probably close to 28.<p>E.g. for a rough estimate, pretend that the table has a mass of 120kg and is made of only carbon atoms. 120000 gram &#x2F; (12 gram&#x2F;mol) = 10000 mol = 6x10^27 &lt; 10^28.<p>On a related note, the estimated number of atoms in the visible universe is around 10^80.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 14:24:24 &#43;0000 UTC">2021-08-18 14:24:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So the volume of one atom can be calculated using, c. 30 dp. of pi -- +3 so that errors do not compound.<p>So we need 30 bits&#x2F;atom to store the volume, for 10^30 atoms -- this is 10^15 petabytes.<p>Suppose we&#x27;re trying to estimate the shape of the table using the relevant state vector for each atom (ie., radius, coordinate, EM-shell, etc.). Ie., how these atoms interact to produce a structure.<p>Then we need perhaps 10 numbers&#x2F;atom, so 10^16 petabytes. And consider the computation.<p>The issue is that macroscopic structuring effects, ie., that the table has its tabular shape also exert a top-down effect constraining the structure of the atoms.<p>We&#x27;d have to solve that problem through iteration. Ie., we compute a shape from local effects only, then iteratively recompute until increasing orders of scale are included.<p>Suppose we perform 1 operation&#x2F;atom to compute an interaction, that&#x27;s 10^30 operations. At 1ns&#x2F;op, we have 10^21 seconds -- <i>optimistically</i>.<p>That&#x27;s one scale, now we need to iterate; given the orders of effects are 1nm...1m that&#x27;s c. 10 scales, say. We&#x27;re now at 10^22 seconds with 10^16 petabytes of data.<p>And also, since we&#x27;re running a 10-fold iteration we need more than 10^30 precision, as errors will compound.<p>This is <i>for a table!</i>. As I said, choose your scale, eg., atom to star, and the storage requirments have an essentially physically impossible mass.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=actually_a_dog" target="_blank">actually_a_dog</a>   <span class="timeago" data-date="2021-08-18 11:41:50 &#43;0000 UTC">2021-08-18 11:41:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That doesn&#x27;t surprise me a lot.  Apparently, you&#x27;d only need 40 digits of pi to compute the area of a circle the size of the visible universe[0].  Pi tends to show up in equations where it&#x27;s being multiplied by relatively small constants like 1&#x2F;2, 2, or 8.  Maybe sometimes you might see a pi^2 times a smallish constant, too.  So, not needing a ton of digits in order to be good enough for numerical models doesn&#x27;t seem crazy at all.<p>---<p>[0]: <a href="https:&#x2F;&#x2F;www.jpl.nasa.gov&#x2F;edu&#x2F;news&#x2F;2016&#x2F;3&#x2F;16&#x2F;how-many-decimals-of-pi-do-we-really-need&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.jpl.nasa.gov&#x2F;edu&#x2F;news&#x2F;2016&#x2F;3&#x2F;16&#x2F;how-many-decimal...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=morpheos137" target="_blank">morpheos137</a>   <span class="timeago" data-date="2021-08-18 12:37:07 &#43;0000 UTC">2021-08-18 12:37:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;only need 40 digits...to calculate area.<p>This comment makes no sense to without the number of significant digits.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=legulere" target="_blank">legulere</a>   <span class="timeago" data-date="2021-08-18 05:04:19 &#43;0000 UTC">2021-08-18 05:04:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            10x is a lot if the market follows a winner takes it all model.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nightski" target="_blank">nightski</a>   <span class="timeago" data-date="2021-08-18 18:44:01 &#43;0000 UTC">2021-08-18 18:44:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought that Deep Learning primarily used stochastic gradient descent.  I did not get deep enough into the article, but wouldn&#x27;t that change the picture?  Or are the computational complexity limits the same?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madsbuch" target="_blank">madsbuch</a>   <span class="timeago" data-date="2021-08-18 06:19:44 &#43;0000 UTC">2021-08-18 06:19:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This would only be implied if gradient descent was the only way to write machine learning.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cblconfederate" target="_blank">cblconfederate</a>   <span class="timeago" data-date="2021-08-18 09:23:01 &#43;0000 UTC">2021-08-18 09:23:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            inequality stems from the fact that others cannot reach the same result, no matter how small it is
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scotth" target="_blank">scotth</a>   <span class="timeago" data-date="2021-08-18 03:04:02 &#43;0000 UTC">2021-08-18 03:04:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is my favorite comment (please don&#x27;t down vote)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=miketery" target="_blank">miketery</a>   <span class="timeago" data-date="2021-08-18 00:15:57 &#43;0000 UTC">2021-08-18 00:15:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Brouwer’s fixed point theorem. The theorem says that for any continuous function, there is guaranteed to be one point that the function leaves unchanged — a fixed point, as it’s known. This is true in daily life. If you stir a glass of water, the theorem guarantees that there absolutely must be one particle of water that will end up in the same place it started from.<p>This seems counter intuitive. Why would this be true? I would have thought that it’s almost impossible for a particle to end up in the same place as it started.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fshbbdssbbgdd" target="_blank">fshbbdssbbgdd</a>   <span class="timeago" data-date="2021-08-18 00:26:32 &#43;0000 UTC">2021-08-18 00:26:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The paragraph leaves out an important constraint: it’s only for functions that map some compact convex set to itself. So, the theory doesn’t apply to the sibling commenter’s example of f(x) = x + 1 because it doesn’t map a compact set to itself.<p>One example of a compact convex set is a circle. Imagine some continuous function that maps a circle to a circle. An easy example is rotation. For rotation, the center stays in the same place. Now imagine some more complicated function that might do rotation, stretching, spiral distortions, whatever you can imagine. But it has to be continuous, meaning you can’t go off one edge and come back on the other side (among other things). Try to draw, or even just imagine a transformation like this and you’ll find that there’s always some point that stays in the same place.<p>For a 3D object like a glass it’s hard to see the same thing intuitively, but Brouwer’s theorem says that it holds (and it also holds for higher-dimensional sets).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevinventullo" target="_blank">kevinventullo</a>   <span class="timeago" data-date="2021-08-18 01:07:58 &#43;0000 UTC">2021-08-18 01:07:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Minor wording nit: rather than the circle, I would say “consider the disc”. Usually in math “circle” means just the boundary whereas “disc” means the circle together with its interior.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OrderlyTiamat" target="_blank">OrderlyTiamat</a>   <span class="timeago" data-date="2021-08-18 11:47:03 &#43;0000 UTC">2021-08-18 11:47:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            thank you, that did clear it up for me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=enriquto" target="_blank">enriquto</a>   <span class="timeago" data-date="2021-08-18 10:46:20 &#43;0000 UTC">2021-08-18 10:46:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For a 3D object like a glass<p>A glass is not convex so this theorem does not apply.  You&#x27;d need other fixed-point theorems for that.  If the glass has a handle the result is trivially false (consider rotating a doughnut, this does not have any fixed point).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FabHK" target="_blank">FabHK</a>   <span class="timeago" data-date="2021-08-18 11:27:27 &#43;0000 UTC">2021-08-18 11:27:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think GP meant the water in the glass (as the article).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=antman" target="_blank">antman</a>   <span class="timeago" data-date="2021-08-18 08:25:52 &#43;0000 UTC">2021-08-18 08:25:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about a circle with 60cm diameter that I move one meter to the right? Something is missing in my understanding of the definition.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=legolas2412" target="_blank">legolas2412</a>   <span class="timeago" data-date="2021-08-18 08:38:17 &#43;0000 UTC">2021-08-18 08:38:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has to map the same set onto itself.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=techwizrd" target="_blank">techwizrd</a>   <span class="timeago" data-date="2021-08-18 00:32:44 &#43;0000 UTC">2021-08-18 00:32:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The devil lies in the details here. Brouwer&#x27;s fixed point theorem says that for a continuous function f that maps a _compact, convex_ set to itself, there must exist a point x₀ such that f(x₀) = x₀. This theorem is only valid for sets that are compact (i.e., closed and bounded) and homeomorphic to convex.<p>I think the 3-dimensional analogy (similar to the stirring of coffee and sugar Brouwer observed) is rather unintuitive. I think some of the proofs are quite beautiful, but I like this analogy from Wikipedia:<p>&gt; Take an ordinary map of a country, and suppose that that map is laid out on a table inside that country. There will always be a &quot;You are Here&quot; point on the map which represents that same point in the country.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 01:34:40 &#43;0000 UTC">2021-08-18 01:34:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As others have mentioned, the article is missing a crucial constraint, which is essentially that it holds on the closed unit ball and spaces homeomorphic to it.<p>As you mentioned, it&#x27;s also not intuitive. It&#x27;s by now well-digested, but it&#x27;s a fairly surprising theorem, even to Brouwer.<p>Finally, it&#x27;s not constructive. Generally you can&#x27;t figure out which point is fixed. If I recall correctly, frustration with this fact fueled Brouwer&#x27;s interest in intuitionism, which gives us a type of logic where some propositions are neither true nor false but essentially undecidable.<p>I&#x27;m not sure what you mean by a &quot;particle&quot; in your sentence. If you mean to go down to the quantum scale, then I&#x27;m sure all sorts of things go wrong in trying to apply the theorem. For one, even talking about the position of a particle at all is very different from talking about a point in Euclidean space.<p>If you don&#x27;t mean to go down to the quantum scale, then lots of maps have fixed points. Rotations an reflections are two large classes of examples.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vlovich123" target="_blank">vlovich123</a>   <span class="timeago" data-date="2021-08-18 02:05:15 &#43;0000 UTC">2021-08-18 02:05:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does intuitionism go beyond Gödel’s incompleteness theorem? Or is it an unrelated thing?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 02:39:07 &#43;0000 UTC">2021-08-18 02:39:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are different things, although &quot;unrelated&quot; might be a bit strong. I&#x27;m sure there are interesting things to say about the incompleteness theorem and intuitionistic logic.<p>Intuitionistic logic is a logic that is weaker than classical logic in the sense that there are some proofs in classical logic that don&#x27;t work in intuitinistic logic. Specifically, the law of the excluded middle (either A is true or not A is true&quot;) does not hold.<p>You can convince yourself that this is a reasonable type of logic by interpreting &quot;A is true&quot; to mean &quot;I have a proof of A&quot;, and likewise &quot;not A is true&quot; means &quot;I have a proof of not A&quot;. Then it&#x27;s pretty reasonable that you neither have a proof of A or of not A.<p>I haven&#x27;t read Godel&#x27;s proof, but my understanding is that he uses intuitionistic logic in some of the key steps. Since facts in intuitionistic logic are also facts in classical logic, then I believe the incompleteness theorem holds in both logics. But I&#x27;m not at all an expert here, so someone please correct me if I&#x27;m wrong.<p>&quot;Intuitionism&quot; also refers to a specific philosophy of mathematics. But a lot of people just use the word to refer to the logic that came out of that philosophical school.<p>Intuitionistic logic is also very common in type theory, so a lot of proof assistants use it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TeMPOraL" target="_blank">TeMPOraL</a>   <span class="timeago" data-date="2021-08-18 08:43:53 &#43;0000 UTC">2021-08-18 08:43:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt;&gt; <i>intuitionism, which gives us a type of logic where some propositions are neither true nor false but essentially undecidable.</i><p>Between math and software development, I feel I&#x27;ve encountered this idea at least three times (+ rediscovered it independently), under different names - &quot;3-value logic&quot;, &quot;3-state booleans&quot; - without ever hearing about &quot;intuitionism&quot;. Thanks for mentioning it, and now I wonder how it all relates (i.e. I&#x27;m about to get stuck on Wikipedia).<p>&gt; <i>interpreting &quot;A is true&quot; to mean &quot;I have a proof of A&quot;, and likewise &quot;not A is true&quot; means &quot;I have a proof of not A&quot;.</i><p>Makes me think of an interesting progression I&#x27;ve also seen when studying maths and then (classical) AI algorithms. You start with boolean logic, then figure out you need to represent lack of knowledge&#x2F;certainty and get 3-state logic. Then someone notices that there are degrees to being sure, and you get fuzzy logic[0], representing logical values as real numbers. And then someone notices that this smells awful lot like probability theory, and you get Bayesian probability as applied to reasoning, with all the extra concepts like using whole probability distributions as first-class logic values.<p>--<p>[0] - I&#x27;m not sure how much mathematical rigour there is to it; it&#x27;s something I&#x27;ve learned when studying AI for videogames.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 10:24:30 &#43;0000 UTC">2021-08-18 10:24:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an interesting point. I haven&#x27;t really thought about the connection between intuitionistic logic and three-valued logic before.<p>They are different logics in general though. 3-value logic is more like the A is True, False or None&#x2F;Unknown.<p>Another interpretation one can put on intuitionistic logic is game semantics. Here a statement is true if the verifier has a winning strategy to prove the proposition. It&#x27;s false if the falsifier has a winning strategy. Then intuitionistic logic corresponds roughly to the idea that some games don&#x27;t have a winning strategy for either player.<p>So here (and in the proofs example I gave above) is that we get an idea of &quot;neither true nor false&quot; that is represented by the lack of an explicit rule for concluding truth or falsity in some cases.<p>In contrast, 3-valued logic gets at the idea of &quot;neither true or false&quot; by introducing another symbol (e.g. &quot;None&quot; or &quot;-1&quot;) together with new operators that operate on sentences with that symbol.<p>So we get one from classical logic by deleting something (namely the law of the excluded middle) and the other by adding something.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 02:17:19 &#43;0000 UTC">2021-08-18 02:17:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skulk" target="_blank">skulk</a>   <span class="timeago" data-date="2021-08-18 02:18:40 &#43;0000 UTC">2021-08-18 02:18:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This philosophy.se post answers that question: <a href="https:&#x2F;&#x2F;philosophy.stackexchange.com&#x2F;questions&#x2F;7194&#x2F;how-is-g%C3%B6dels-incompleteness-theorem-interpreted-in-intuitionistic-logic" rel="nofollow">https:&#x2F;&#x2F;philosophy.stackexchange.com&#x2F;questions&#x2F;7194&#x2F;how-is-g...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-18 02:07:14 &#43;0000 UTC">2021-08-18 02:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Generally you can&#x27;t figure out which point is fixed.<p>So just thinking out loud here but like in the 1d case... The set will be an interval [a,b] Let g(x) = f(x) - x<p>g(a) &gt;= 0 and g(b) &lt;= 0. Now we can use the intermediate value value theorem and binary search to find (get arbitrary close) a point with g(x) = 0 (i.e. fix point of f).<p>Not possible to do such searches in higher dimensions?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 10:12:39 &#43;0000 UTC">2021-08-18 10:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can generally approximate the fixed point. You can possibly do this to arbitrary precision, but I&#x27;m not sure.<p>This is useful for practical applications, but it&#x27;s not the same as knowing the fixed point for mathematical applications.<p>E.g. you may want to prove that some function preserves the irrational number pi. But you may not be able to prove it, only show that computations make your conjecture more and more likely.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ChrisKnott" target="_blank">ChrisKnott</a>   <span class="timeago" data-date="2021-08-18 06:56:34 &#43;0000 UTC">2021-08-18 06:56:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure that even works in 1 dimension...?<p>I don&#x27;t think you necessarily have g(a) &gt;= 0 and g(b) &lt;= 0. Finding the starting points for binary search might be essentially as hard as finding the fixed point.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-18 09:58:23 &#43;0000 UTC">2021-08-18 09:58:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            a &lt;= f(x) &lt;= b<p>Hence a &lt;= f(a), so 0 &lt;= f(a) - a = g(a)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xarici_ishler" target="_blank">xarici_ishler</a>   <span class="timeago" data-date="2021-08-18 00:23:45 &#43;0000 UTC">2021-08-18 00:23:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=oX9aPNF6_h8" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=oX9aPNF6_h8</a><p>This is a great video explaining Brouwer&#x27;s theorem and its (theoretical) application to stirring a cup of water.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 04:16:32 &#43;0000 UTC">2021-08-18 04:16:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hyperbovine" target="_blank">hyperbovine</a>   <span class="timeago" data-date="2021-08-18 12:44:00 &#43;0000 UTC">2021-08-18 12:44:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s counter intuitive because it&#x27;s obviously false as stated: f(x) = 1 + x for x in R. They left out the main assumption of the theorem, namely that the domain of the function is compact, and gets mapped (in)to itself.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=max_" target="_blank">max_</a>   <span class="timeago" data-date="2021-08-18 18:15:30 &#43;0000 UTC">2021-08-18 18:15:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;I would have thought that it’s almost impossible for a particle to end up in the same place as it started.<p>That&#x27;s true on a short time scale. But on a longer time scale, 
+you will eventually visit all possible states of the system.<p>I think this is similar to the concept of ergodicity[0].<p>[0]: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ergodicity" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Ergodicity</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=arketyp" target="_blank">arketyp</a>   <span class="timeago" data-date="2021-08-18 07:20:35 &#43;0000 UTC">2021-08-18 07:20:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I stumbled upon this theorem after trying to come up with a mapping of color space, RGB to RGB, where each color maps to a new one. (It was for a mouse cursor effect in a painting app.) I couldn&#x27;t come up with one, and indeed it is impossible!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chompychop" target="_blank">chompychop</a>   <span class="timeago" data-date="2021-08-18 08:15:14 &#43;0000 UTC">2021-08-18 08:15:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are there any constraints on the mapping? If no, then why not map each intensity value to the immediately next value, and then circle it around? For instance, 0 -&gt; 1, 1 -&gt; 2, 2 -&gt; 3, ...., 255 -&gt; 0.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=voldacar" target="_blank">voldacar</a>   <span class="timeago" data-date="2021-08-18 08:33:07 &#43;0000 UTC">2021-08-18 08:33:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The function you are describing is not continuous, so the theorem does not apply. 
+But yeah, it has no fixed point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 00:28:18 &#43;0000 UTC">2021-08-18 00:28:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joebob42" target="_blank">joebob42</a>   <span class="timeago" data-date="2021-08-18 00:24:07 &#43;0000 UTC">2021-08-18 00:24:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m with this guy. Obviously I&#x27;m missing something or not understanding what is being said here, because to my head f(x) = x+1 changes every single point and is continuous.<p>Or in the glass of water point, what if I pour the water out on the table. It&#x27;s certainly all been moved, yes?<p>(To be clear I&#x27;m obviously wrong &#x2F; not understanding the premise, but I would be curious to know what I&#x27;m missing)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-18 00:34:26 &#43;0000 UTC">2021-08-18 00:34:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It only applies to functions on bounded sets. The reals are not bounded. There are other restrictions, but that is one of them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-18 00:27:27 &#43;0000 UTC">2021-08-18 00:27:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your example function doesn&#x27;t map any compact set back to itself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joebob42" target="_blank">joebob42</a>   <span class="timeago" data-date="2021-08-18 00:36:06 &#43;0000 UTC">2021-08-18 00:36:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep. I notice mention of this additional constraint from another comment. As far as I can tell the article is just incorrect since it misses this constraint up to that point, unless I&#x27;m just a clown and somehow not seeing it.<p>The upside here is that it seems perhaps I wasn&#x27;t missing the premise, and it was just mis-stated :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=voldacar" target="_blank">voldacar</a>   <span class="timeago" data-date="2021-08-18 08:37:09 &#43;0000 UTC">2021-08-18 08:37:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No you are right, quanta sucks. Im sure there are thousands of other people thinking of x+1 and scratching their heads
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SilasX" target="_blank">SilasX</a>   <span class="timeago" data-date="2021-08-18 02:15:54 &#43;0000 UTC">2021-08-18 02:15:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So add &quot;mod p&quot; to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=random314" target="_blank">random314</a>   <span class="timeago" data-date="2021-08-18 02:29:05 &#43;0000 UTC">2021-08-18 02:29:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Transformation is not continuous at the boundary p
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cblconfederate" target="_blank">cblconfederate</a>   <span class="timeago" data-date="2021-08-18 09:31:27 &#43;0000 UTC">2021-08-18 09:31:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s because we think of the drink points as molecules which can indeed move and rearrange in ways that continuous points cannot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-18 00:19:31 &#43;0000 UTC">2021-08-18 00:19:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It only works for some idealized continous fluid. Not for actual water, which is made up of a large but finite amount of molecules.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevinventullo" target="_blank">kevinventullo</a>   <span class="timeago" data-date="2021-08-18 01:16:00 &#43;0000 UTC">2021-08-18 01:16:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even then it doesn’t feel like a great example since it’s not obvious to me that stirring should be a continuous function. E.g. if I put half the glass into a container and then pour the container back into the glass, that is definitely a discontinuous operation!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alanbernstein" target="_blank">alanbernstein</a>   <span class="timeago" data-date="2021-08-18 06:06:14 &#43;0000 UTC">2021-08-18 06:06:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if there is some idealized definition of &quot;stirring&quot; being used here. It seems that actual stirring could conceivably result in <i>any possible rearrangement</i> of particles. As a simple example, which is illustrative even though it seems unlikely as a result of stirring: leave the (x, y) coordinates of each particle the same, while changing the z coordinate as z -&gt; z+k mod h. The result is effectively a discontinuous map (violating the theorem), even though the path of each individual particle must be continuous for physical reasons. Two different notions of continuity here.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=drdeca" target="_blank">drdeca</a>   <span class="timeago" data-date="2021-08-18 01:56:04 &#43;0000 UTC">2021-08-18 01:56:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But stirring doesn’t break the connnectedness of the water like that?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevinventullo" target="_blank">kevinventullo</a>   <span class="timeago" data-date="2021-08-18 03:39:35 &#43;0000 UTC">2021-08-18 03:39:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess wherever you dip the spoon in will break it in a kind of discontinuous way?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drdeca" target="_blank">drdeca</a>   <span class="timeago" data-date="2021-08-18 17:20:32 &#43;0000 UTC">2021-08-18 17:20:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the spoon was one of those spoons with holes in the, non-handle-part, then I think it would have to produce a discontinuity.<p>But for a normal spoon shape, I don’t think dipping it in makes the map between points in the water fail to be continuous.
+I’m somewhat confident that there is a smooth path from an embedding of a cylinder to R^3 to an embedding of a cylinder which is a little taller and has a spoon shape removed from it, into R^3 .
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zbendefy" target="_blank">zbendefy</a>   <span class="timeago" data-date="2021-08-18 11:36:59 &#43;0000 UTC">2021-08-18 11:36:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            watch this, it explains it well: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=csInNn6pfT4" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=csInNn6pfT4</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zitterbewegung" target="_blank">zitterbewegung</a>   <span class="timeago" data-date="2021-08-18 00:36:16 &#43;0000 UTC">2021-08-18 00:36:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, an example of Brouwer&#x27;s fixed point theorem is the Y Combinator in the lambda calculus. See <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Fixed-point_combinator#Y_combinator" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Fixed-point_combinator#Y_combi...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drdeca" target="_blank">drdeca</a>   <span class="timeago" data-date="2021-08-18 01:54:19 &#43;0000 UTC">2021-08-18 01:54:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is the compact space in question there? I don’t see one. Or, I don’t even see an appropriate topology to apply?<p>Are you sure?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tzs" target="_blank">tzs</a>   <span class="timeago" data-date="2021-08-18 13:48:23 &#43;0000 UTC">2021-08-18 13:48:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But for other applications, like in numerical analysis, researchers might need to square their precision. To achieve such an improvement, they might have to square the running time of gradient descent, making the calculation completely intractable<p>There is an easy way to counteract this. Let’s say your original runs in 1000 seconds. Squaring that would give 1000000 seconds. That’s a jump from under 17 minutes to over 11 days.<p>The fix: measure everything in hours. Your original runs in 0.278 hours. Squaring that gives 0.077 hours. Squaring the precision now makes it run 3.6 times faster.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jakeinspace" target="_blank">jakeinspace</a>   <span class="timeago" data-date="2021-08-18 14:01:23 &#43;0000 UTC">2021-08-18 14:01:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume this is a joke, but for those not aware: the correct calculation would be to take a measure of the original running time in terms of CPU cycles or some equivalent unitless value, and square that.  You don&#x27;t want to be squaring values with units attached, because squared hours (or squared seconds) are very much not simple units of time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mmiyer" target="_blank">mmiyer</a>   <span class="timeago" data-date="2021-08-18 18:42:17 &#43;0000 UTC">2021-08-18 18:42:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CPU cycles isn&#x27;t right either - this article is about theoretical CS not about a real machine (squared cycles is meaningless too). It seems the author is saying the algorithm running time is O(n^2) where n is precision. This is approximately cn^2 where c is a constant. Without knowing c we cannot say what squaring the running time precisely means.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dynm" target="_blank">dynm</a>   <span class="timeago" data-date="2021-08-18 10:40:20 &#43;0000 UTC">2021-08-18 10:40:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But a machine learning researcher might want to double the precision of an experiment. In that case, the new result implies that they might have to quadruple the running time of their gradient descent algorithm.<p>&gt; But for other applications, like in numerical analysis, researchers might need to square their precision. To achieve such an improvement, they might have to square the running time of gradient descent<p>I don&#x27;t quite understand this. Say f(p) is the complexity of gradient descent for precision p. The first paragraph seems to imply that f(p) = c×p^2, so that f(2p) = c×4×p^2 = f(p). However, the second paragraph then just seems to imply that f(p) = c×p. Am I missing something?<p>Incidentally, I love that Quanta brings attention to work mostly just on the basis of how important it is. 99% of the other stuff you hear about new research is really just driven by PR departments at the researcher&#x27;s home institutions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mmiyer" target="_blank">mmiyer</a>   <span class="timeago" data-date="2021-08-18 18:47:34 &#43;0000 UTC">2021-08-18 18:47:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If f(p) = cp^2 then f(p^2) = c(p^2)^2 = cp^4 which is square the running time, ignoring constant factors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FabHK" target="_blank">FabHK</a>   <span class="timeago" data-date="2021-08-18 11:30:04 &#43;0000 UTC">2021-08-18 11:30:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now, that article was written by an academic, not a practitioner (my emphasis):<p>&gt; You can imagine a function as a landscape, where the elevation of the land is equal to the value of the function (the <i>“profit”</i>) at that particular spot. Gradient descent searches for the function’s local <i>minimum</i> [...]
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=optimalsolver" target="_blank">optimalsolver</a>   <span class="timeago" data-date="2021-08-18 01:00:10 &#43;0000 UTC">2021-08-18 01:00:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Derivative-free optimization to the rescue!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wenc" target="_blank">wenc</a>   <span class="timeago" data-date="2021-08-18 03:05:13 &#43;0000 UTC">2021-08-18 03:05:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DFO is far slower to converge in general than gradient based methods even when it’s close to the optimum because it doesn’t use derivative information. Newton’s method on the other hand has local quadratic convergence. Not sure I would bet on DFOs to have better performance than gradient methods. DFOs have two advantages: they’re embarrassingly parallelizable and for non convex problems, they don’t succumb as easily to local optima. But they’re not better performing in general.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gerdesj" target="_blank">gerdesj</a>   <span class="timeago" data-date="2021-08-17 23:35:27 &#43;0000 UTC">2021-08-17 23:35:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You say minima and I say maxima; They say maybe over there ... no left a bit.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

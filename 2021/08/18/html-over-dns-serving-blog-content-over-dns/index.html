@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/html-over-dns-serving-blog-content-over-dns/">
+
+
+    <title>HTML over DNS: Serving Blog Content over DNS - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="HTML over DNS: Serving Blog Content over DNS - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/html-over-dns-serving-blog-content-over-dns/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/html-over-dns-serving-blog-content-over-dns/">
+<meta name="twitter:title" content="HTML over DNS: Serving Blog Content over DNS - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "HTML over DNS: Serving Blog Content over DNS - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T07:07:11JST",
+    "dateModified": "2021-08-18T07:07:11JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://jacobkiers.net/hod/">HTML over DNS: Serving Blog Content over DNS</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xg15" target="_blank">xg15</a>   <span class="timeago" data-date="2021-08-19 11:46:32 &#43;0000 UTC">2021-08-19 11:46:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The HTML bit is fun, but the more remarkable takeaway for me is that DoH servers accept cross-origin requests from ordinary javascript. This means two things:<p>- A website can bring its own DoH client and bypass both the OS resolver <i>and</i> the browser&#x27;s trusted DoH resolver for anything except the initial page request.<p>- Any website can now access the full DNS information of any domain: Not just A&#x2F;AAAA records, but also TXT, MX, SRV etc. Record metadata such as TTLs likewise.<p>All of that without requiring any backend infrastructure or exotic web API. It&#x27;s literally just a static HTML file and fetch().<p>That&#x27;s a genuinely new capability that wasn&#x27;t available to websites before public DoH servers became available. I&#x27;m no security expert, but this smells like it should have some implications for web security.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=judge2020" target="_blank">judge2020</a>   <span class="timeago" data-date="2021-08-19 12:36:33 &#43;0000 UTC">2021-08-19 12:36:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; - A website can bring its own DoH client and bypass both the OS resolver and the browser&#x27;s trusted DoH resolver for anything except the initial page request.<p>Not sure about that, since it doesn’t sound like simply requesting answers from the DOH server injects the answer into the DNS cache.<p>And I don’t think this is novel, since anyone could have ran a dns info api before if they really wanted to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-08-19 14:09:42 &#43;0000 UTC">2021-08-19 14:09:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It shouldn&#x27;t because this was always possible if someone really cared to just run their own public server with a &#x2F;dig endpoint. If web security depends on websites not having access to public data that could always be proxied to it then we&#x27;re already screwed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xg15" target="_blank">xg15</a>   <span class="timeago" data-date="2021-08-19 16:48:29 &#43;0000 UTC">2021-08-19 16:48:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>It shouldn&#x27;t because this was always possible if someone really cared to just run their own public server with a &#x2F;dig endpoint.</i><p>A lot of web features had always been possible by simply running them on your own server: Cross-origin requests, generating images on-demand, rendering vector graphics, etc. Nevertheless, when those features became available in the browser - without any additional effort needed from the developer - it had massive effects on the web ecosystem.<p>I can&#x27;t say I have answers, but my suspicion is that it makes a significant difference in friction whether a feature requires you to setup and run your own infrastructure or whether you just need to type in some javascript to use it.<p>&gt; <i>If web security depends on websites not having access to public data that could always be proxied to it then we&#x27;re already screwed.</i><p>To some extent it does - that&#x27;s why you cannot access the body cross-origin GET requests or the contents of cross-origin iframes without those sites opting in - even if no cookies or other credentials are sent with the reqest.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=globular-toast" target="_blank">globular-toast</a>   <span class="timeago" data-date="2021-08-19 13:13:05 &#43;0000 UTC">2021-08-19 13:13:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A script could already bypass DNS by connecting directly to an IP address which could have been either hard coded or come from an API, for example. You could also send it all the other records via some API too. This just means people don&#x27;t have to implement the service themselves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 08:15:23 &#43;0000 UTC">2021-08-19 08:15:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well the content is stored in a DNS Zone file but it is requested using JavaScript to an external HTTP API. I wouldn&#x27;t really call that HTML <i>over</i> DNS but rather &quot;DNS Zone as blog database&quot;.<p>Anyway, this made me think of iodine [1], an IP over DNS solution, which I still run on my main server even though it has a lot less use now than it had until a few years ago when there were a lot of open wifi with captive portals and way less 4G available.<p>[1] <a href="https:&#x2F;&#x2F;code.kyro.se&#x2F;iodine&#x2F;" rel="nofollow">https:&#x2F;&#x2F;code.kyro.se&#x2F;iodine&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dncornholio" target="_blank">dncornholio</a>   <span class="timeago" data-date="2021-08-19 11:16:06 &#43;0000 UTC">2021-08-19 11:16:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or just call it HTML over CloudFlare? That CloudFlare uses DNS on the backend doesn&#x27;t validate DNS being in the title IMHO
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=judge2020" target="_blank">judge2020</a>   <span class="timeago" data-date="2021-08-19 12:38:26 &#43;0000 UTC">2021-08-19 12:38:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            HTML over DoH maybe; i imagine other providers also have an open CORS policy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=RostiB" target="_blank">RostiB</a>   <span class="timeago" data-date="2021-08-19 10:04:46 &#43;0000 UTC">2021-08-19 10:04:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the site is down? - <a href="https:&#x2F;&#x2F;code.kyro.se&#x2F;iodine&#x2F;" rel="nofollow">https:&#x2F;&#x2F;code.kyro.se&#x2F;iodine&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 10:36:45 &#43;0000 UTC">2021-08-19 10:36:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry I was on my smartphone and mistyped the url (it&#x27;s kryo not kyro): <a href="https:&#x2F;&#x2F;code.kryo.se&#x2F;iodine&#x2F;" rel="nofollow">https:&#x2F;&#x2F;code.kryo.se&#x2F;iodine&#x2F;</a><p>Thanks for pointing it out.<p>EDIT: As an aside, I still hate how mobile browsers have the bad habits of reloading tabs (and most of the time loosing content) that you get back to with no reason. If not for this crappy behavior, I would have copy-pasted the URL.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-19 11:27:06 &#43;0000 UTC">2021-08-19 11:27:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On a related note, when the autocomplete system sees that you are typing a URL, it could suggest URLs from browser history as completions, with the most recently visited URLs being shown first. Although, some URLs are long. And it’d suck to complete to the wrong URL, both for reasons of embarrassment in some cases and for reasons of privacy on other cases. So I guess it’s better that autocomplete don’t do that. Also it would probably need to show both title and a thumbnail of the page in the preview because many URLs don’t contain info about what’s on the page. Would be hard to fit sensibly on the screen.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ignoramous" target="_blank">ignoramous</a>   <span class="timeago" data-date="2021-08-19 06:02:39 &#43;0000 UTC">2021-08-19 06:02:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Corollary is, spyware can use DNS to exfiltrate data [0]. Or, send out client-side metrics with cleverly drafted DNS requests [1], or use it as a 3p-cookie replacement [2].<p>[0] <a href="https:&#x2F;&#x2F;unit42.paloaltonetworks.com&#x2F;dns-tunneling-how-dns-can-be-abused-by-malicious-actors&#x2F;" rel="nofollow">https:&#x2F;&#x2F;unit42.paloaltonetworks.com&#x2F;dns-tunneling-how-dns-ca...</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;Jigsaw-Code&#x2F;choir" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Jigsaw-Code&#x2F;choir</a> (disclosure: I co-develop hard-forks of two other related <i>Jigsaw-Code</i> projects)<p>[2] <a href="http:&#x2F;&#x2F;dnscookie.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;dnscookie.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=3pt14159" target="_blank">3pt14159</a>   <span class="timeago" data-date="2021-08-19 10:32:44 &#43;0000 UTC">2021-08-19 10:32:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fun story about this. I know one of the former guys at Xobni back in the day when it was still a thing. They had made an enterprise version that was sold to companies like Apple, Intel, etc. But even though the enterprise software no longer made external API calls, the company still wanted usage metrics so they could monitor feature usage. Knowing how locked down the networks were at companies like this, they exfiltrated the usage data via infrequent DNS requests to their DNS server. Everything was going fine until one day a dozen or so users at Intel stopped reporting. Hours later all of Intel stopped reported. Within the next day other companies started coming offline. Apple first, then some other large tech company and then a whole slew of them.<p>Turns out when you spy on your users word gets around.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=codethief" target="_blank">codethief</a>   <span class="timeago" data-date="2021-08-19 14:51:16 &#43;0000 UTC">2021-08-19 14:51:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure why this should be a corollary <i>now</i>. DNS exfiltration has always been possible, just like the article you linked to says. (I also like to point people to <a href="https:&#x2F;&#x2F;twitter.com&#x2F;rsobers&#x2F;status&#x2F;1293539543115862016" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;rsobers&#x2F;status&#x2F;1293539543115862016</a> in this context because it puts the idea so succinctly.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k4ch0w" target="_blank">k4ch0w</a>   <span class="timeago" data-date="2021-08-19 08:38:29 &#43;0000 UTC">2021-08-19 08:38:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Packet size is a really good detection for this. DNS packets should only be so big ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=richthegeek" target="_blank">richthegeek</a>   <span class="timeago" data-date="2021-08-19 10:33:59 &#43;0000 UTC">2021-08-19 10:33:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So I split my packets up into smaller chunks. Now you need to rate limit DNS. But you still need to allow regular DNS traffic somehow, or you break the internet.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LinuxBender" target="_blank">LinuxBender</a>   <span class="timeago" data-date="2021-08-19 12:49:04 &#43;0000 UTC">2021-08-19 12:49:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And packet rate.  Some corporate firewalls may detect this as abusive and block it leading to questions from the security operations team and the person testing this out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 09:07:51 &#43;0000 UTC">2021-08-19 09:07:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 10:03:58 &#43;0000 UTC">2021-08-19 10:03:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-08-19 14:11:34 &#43;0000 UTC">2021-08-19 14:11:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can even set up a VPN over DNS if you really wanted. <a href="https:&#x2F;&#x2F;github.com&#x2F;yarrick&#x2F;iodine" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;yarrick&#x2F;iodine</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 07:39:19 &#43;0000 UTC">2021-08-19 07:39:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, I&#x27;ll read up on that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=1vuio0pswjnm7" target="_blank">1vuio0pswjnm7</a>   <span class="timeago" data-date="2021-08-19 06:04:28 &#43;0000 UTC">2021-08-19 06:04:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks more like HTML via HTTP, specifically DoH.<p><pre><code>    const dohServer = &quot;https:&#x2F;&#x2F;cloudflare-dns.com&#x2F;dns-query?ct=application&#x2F;dns-json&amp;type=TXT&amp;name=&quot;;
+    const baseDomain = &quot;hod.experiments.jacobkiers.net&quot;;
+</code></pre>
+About 12 years ago I experimented with HTML over UDP DNS by modifying dnstxt from djbdns to output a MIME header.  I could store tiny web pages, i.e., hyperlinks, in a zone file and serve them with tinydns. (This was before the size of DNS packets ballooned with adoption of EDNS.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=1vuio0pswjnm7" target="_blank">1vuio0pswjnm7</a>   <span class="timeago" data-date="2021-08-19 11:22:46 &#43;0000 UTC">2021-08-19 11:22:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually JSON via HTTP.  Then using Javascript to create HTML from the JSON.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ThePhysicist" target="_blank">ThePhysicist</a>   <span class="timeago" data-date="2021-08-19 08:45:58 &#43;0000 UTC">2021-08-19 08:45:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This technique has been a standard exfiltration &amp; C2 (command &amp; control) channel for malware for a long time. Typically malware will make a DNS request for a subdomain where the domain name encodes data or a request, and the response contains e.g. commands.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geocrasher" target="_blank">geocrasher</a>   <span class="timeago" data-date="2021-08-19 05:51:46 &#43;0000 UTC">2021-08-19 05:51:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As someone who has an obsession with base64 encoding (as exemplified by my poorly written shell scripting here: <a href="https:&#x2F;&#x2F;miscdotgeek.com&#x2F;curlytp-every-web-server-is-a-dead-drop&#x2F;" rel="nofollow">https:&#x2F;&#x2F;miscdotgeek.com&#x2F;curlytp-every-web-server-is-a-dead-d...</a> ) I love this. It makes me wonder if some CSS and maybe even a highly compressed image or two could be added.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 08:40:35 &#43;0000 UTC">2021-08-19 08:40:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re obsessed with base64 here is a fun thing for you:<p>A few years ago I randomly remarked that repeated base64 prefix converge to a fixed point. I tweeted [1] the first characters of that string out of amusement, without any additional details.<p>Then someone saw the tweet, found it funny, and did a write-up about it [2], and then there was an interesting discussion on Reddit [3]. There may have been one on HN too, I don&#x27;t remember.<p>Have fun :).<p>[1] <a href="https:&#x2F;&#x2F;twitter.com&#x2F;p4bl0&#x2F;status&#x2F;298900842076045312" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;p4bl0&#x2F;status&#x2F;298900842076045312</a><p>[2] <a href="https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20160313123301&#x2F;https:&#x2F;&#x2F;fmota.eu&#x2F;blog&#x2F;base64-fixed-point.html" rel="nofollow">https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20160313123301&#x2F;https:&#x2F;&#x2F;fmota.eu&#x2F;...</a><p>[3] <a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;compsci&#x2F;comments&#x2F;18234a&#x2F;the_base64_encoder_has_a_fixed_point&#x2F;?sort=confidence" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;compsci&#x2F;comments&#x2F;18234a&#x2F;the_base64_...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 06:25:01 &#43;0000 UTC">2021-08-19 06:25:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice idea. Probably possible, since each resource has an index record, which contains the mime type.<p>I&#x27;ll try it sometime soon (though my CSS skills are basically nonexistent...).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 06:22:44 &#43;0000 UTC">2021-08-19 06:22:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author here: I made it as a proof of concept, just because I could.<p>I used DoH because to the best of my knowledge it&#x27;s not possible to open raw sockets from the browser. Otherwise I&#x27;d have done that.<p>I don&#x27;t think there&#x27;s any practical use. And I did not intend it to have any.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staysafeanon" target="_blank">staysafeanon</a>   <span class="timeago" data-date="2021-08-19 14:53:50 &#43;0000 UTC">2021-08-19 14:53:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;Author here: I made it as a proof of concept, just because I could.<p>Sometimes those are the most satisfying and technologically interesting proof of concepts. Don&#x27;t let any of the detractors here tell you you&#x27;re wasting your time!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=erkkonet" target="_blank">erkkonet</a>   <span class="timeago" data-date="2021-08-19 11:13:24 &#43;0000 UTC">2021-08-19 11:13:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All sites on the .tel domain used to be rendered from DNS. It seems to have changed in 2017 but Wikipedia still says[1]:<p>&quot;In contrast to other top-level domains, .tel information is stored directly within the Domain Name System (DNS) [...] as opposed to the DNS simply returning details (such as IP addresses)&quot;<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;.tel" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;.tel</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beembuild" target="_blank">beembuild</a>   <span class="timeago" data-date="2021-08-19 11:34:47 &#43;0000 UTC">2021-08-19 11:34:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I modified the dnstxt file from djbdns about twelve years ago to output a MIME header for HTML over UDP DNS. I could store hyperlinks for tiny web pages in a zone file and serve them with tinydns. (This was before EDNS exploded the size of DNS packets.)
+regards
+<a href="https:&#x2F;&#x2F;minimilitiamodapk.info&#x2F;" rel="nofollow">https:&#x2F;&#x2F;minimilitiamodapk.info&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PinguTS" target="_blank">PinguTS</a>   <span class="timeago" data-date="2021-08-19 07:34:15 &#43;0000 UTC">2021-08-19 07:34:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wondering why I can&#x27;t query the DNS directly.<p><pre><code>  $ dig posts-2021-08-17-serving-blog-content-over-dns-md.hod.experiments.jacobkiers.net TXT
+  
+  ; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; posts-2021-08-17-serving-blog-content-over-dns-md.hod.experiments.jacobkiers.net TXT
+  ;; global options: +cmd
+  ;; Got answer:
+  ;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 49067
+  ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
+  
+  ;; QUESTION SECTION:
+  ;posts-2021-08-17-serving-blog-content-over-dns-md.hod.experiments.jacobkiers.net. IN TXT
+  
+  ;; AUTHORITY SECTION:
+  hod.experiments.jacobkiers.net. 292 IN SOA home.kie.rs. postmaster.kie.rs. 2021081903 3600 900 604800 3600</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IncRnd" target="_blank">IncRnd</a>   <span class="timeago" data-date="2021-08-19 11:22:11 &#43;0000 UTC">2021-08-19 11:22:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can look at this line.<p>&gt;   ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0<p>That says that the DNS server didn&#x27;t answer - for whatever reason - despite the address of that server being determined.  It could have been a form of HN&#x27;s &quot;hug of death&quot; where the website temporarily goes down when many people start to view it in a short period of time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 07:38:52 &#43;0000 UTC">2021-08-19 07:38:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s weird, it should work. I&#x27;ll investigate when I get home.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PinguTS" target="_blank">PinguTS</a>   <span class="timeago" data-date="2021-08-19 07:51:50 &#43;0000 UTC">2021-08-19 07:51:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just tried it again, now it works like magic. Don&#x27;t know what was wrong.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bqmjjx0kac" target="_blank">bqmjjx0kac</a>   <span class="timeago" data-date="2021-08-19 12:27:43 &#43;0000 UTC">2021-08-19 12:27:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Spooky, maybe you were MITMed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 07:35:30 &#43;0000 UTC">2021-08-19 07:35:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently uses DoH. I don&#x27;t think dig(1) talks DoH, you&#x27;d have to use curl or kdig.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PinguTS" target="_blank">PinguTS</a>   <span class="timeago" data-date="2021-08-19 07:49:28 &#43;0000 UTC">2021-08-19 07:49:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DNS is DNS. You should be able to talk to the NS with DNS over UDP, TCP, or HTTP(s). The protocol used should not matter. The information received should be always the same.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ignoramous" target="_blank">ignoramous</a>   <span class="timeago" data-date="2021-08-19 09:05:21 &#43;0000 UTC">2021-08-19 09:05:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ...in an ideal world
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 07:30:29 &#43;0000 UTC">2021-08-19 07:30:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You might not be able to see it immediately<p>Or at all since the content is entirely injected via JS with no fallback (and the JS uses class fields in case you thought an old browser might be able to load it).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andai" target="_blank">andai</a>   <span class="timeago" data-date="2021-08-19 08:00:14 &#43;0000 UTC">2021-08-19 08:00:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Been wondering about this, how many people are using old browsers? caniuse.com reports [0] 96% support for ES6 classes. The other 4% is divided between Internet Explorer, Opera Mini and obsolete versions of every other browser. So I&#x27;m trying to figure out what kind of people are using such ancient technology and why? What kind of unusual visitors would I be missing out on?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=blowski" target="_blank">blowski</a>   <span class="timeago" data-date="2021-08-19 08:14:43 &#43;0000 UTC">2021-08-19 08:14:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anecdote: I know someone who has some antiquated games that he couldn&#x27;t get working in anything other than a real install of Windows XP. The game has a forum, so he frequently uses IE8 installed on the computer to access it.<p>I guess there are lots of tiny edge cases that look like that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phh" target="_blank">phh</a>   <span class="timeago" data-date="2021-08-19 08:11:23 &#43;0000 UTC">2021-08-19 08:11:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re missing on visitors with disabled (or whitelisted) javascript. On HackerNews that&#x27;ll be pretty common.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andai" target="_blank">andai</a>   <span class="timeago" data-date="2021-08-19 09:28:55 &#43;0000 UTC">2021-08-19 09:28:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s true that people with JavaScript disabled won&#x27;t be able to run <i>any</i> JavaScript, but once they turn it on it should have relatively good feature support -- I suspect the sort of people who know how to disable JavaScript aren&#x27;t using software more than 5 years out of date.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 09:37:24 &#43;0000 UTC">2021-08-19 09:37:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but once they turn it on it should have relatively good feature support<p>How could they even know to tuen it on when all they get is an empty page?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cdubzzz" target="_blank">cdubzzz</a>   <span class="timeago" data-date="2021-08-19 12:22:41 &#43;0000 UTC">2021-08-19 12:22:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are used to it? The number of users who have JS disabled is already small. The number of those users who lack the technical expertise to enable it as needed (and understand when that is necessary — e.g. with a blank or broken page) is probably many, many times smaller.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=judge2020" target="_blank">judge2020</a>   <span class="timeago" data-date="2021-08-19 12:42:40 &#43;0000 UTC">2021-08-19 12:42:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The noscript tag is a thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-19 09:02:41 &#43;0000 UTC">2021-08-19 09:02:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does anyone have a recommendation for a JavaScript whitelisting extension or method for macOS Safari?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 08:25:17 &#43;0000 UTC">2021-08-19 08:25:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 09:36:30 &#43;0000 UTC">2021-08-19 09:36:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; caniuse.com reports [0] 96% support for ES6 classes.<p>Class fields are later addition to classes. And completely unnecessary here, it looks. The class fields are just duplicates of the instance fields, which are always filled.<p>&gt; The other 4% is divided between Internet Explorer, Opera Mini and obsolete versions of every other browser. So I&#x27;m trying to figure out what kind of people are using such ancient technology and why?<p>Unsupported device which can not have recent updates for one reason or an other?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 08:15:07 &#43;0000 UTC">2021-08-19 08:15:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know how to do this without JS.<p>Also, since this was mostly a DNS-focused proof of concept, I don&#x27;t particularly care about that. Not in this case, at least.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 09:35:02 &#43;0000 UTC">2021-08-19 09:35:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You don’t have to “do this without JS” but you could have a fallback to tell JS-less users about it. As is they get a blank page and no idea what’s happening.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 10:22:50 &#43;0000 UTC">2021-08-19 10:22:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fair enough. I have added a fallback.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mobilemidget" target="_blank">mobilemidget</a>   <span class="timeago" data-date="2021-08-19 11:52:05 &#43;0000 UTC">2021-08-19 11:52:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;100s of requests per second&quot;<p>dns works fine at those rates or higher, and you&#x27;ll use caching dns servers of ISPs, scales like no other, geo support etc etc. I think its great idea for public data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IncRnd" target="_blank">IncRnd</a>   <span class="timeago" data-date="2021-08-19 06:38:47 &#43;0000 UTC">2021-08-19 06:38:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks like it was a fun project!<p>For anyone who wants to research the subject, the class of security vulnerabilities are called DNS tunneling.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=luismedel" target="_blank">luismedel</a>   <span class="timeago" data-date="2021-08-19 11:08:41 &#43;0000 UTC">2021-08-19 11:08:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. I recently wrote a Lua-scriptable DNS server called redns[1] (which seems to be a pretty popular name for hobbyist DNS servers, BTW) only to test some of those attacks.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;luismedel&#x2F;redns" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;luismedel&#x2F;redns</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IncRnd" target="_blank">IncRnd</a>   <span class="timeago" data-date="2021-08-19 11:26:44 &#43;0000 UTC">2021-08-19 11:26:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice!<p>Whenever I see regexs hanging off the Internet, my heart skips a beat! :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kix53" target="_blank">kix53</a>   <span class="timeago" data-date="2021-08-19 11:07:10 &#43;0000 UTC">2021-08-19 11:07:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The RR format can be made more efficient. TXT records can contain multiple character strings of up to 255 bytes, and despite their name can contain arbitrary octets. A step further from there would be to use a private use type (65280-65534) so your payload doesn&#x27;t need to be cut into length byte prefixed chunks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=redspl" target="_blank">redspl</a>   <span class="timeago" data-date="2021-08-19 13:32:13 &#43;0000 UTC">2021-08-19 13:32:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            dig @1.1 TXT +short owo{0..201}.xn--kda.waw.pl | sed -E &#x27;s&#x2F;[&quot; ]&#x2F;&#x2F;g&#x27; | base64 -d | mpv -
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fsiefken" target="_blank">fsiefken</a>   <span class="timeago" data-date="2021-08-19 09:42:08 &#43;0000 UTC">2021-08-19 09:42:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this would be nice for the gemini protocol or something linke twtxt as it is more text oriented, one could perhaps use base45 or other base for extra space efficiency.
+for the ultimate in image compression go avif or svg.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sonicggg" target="_blank">sonicggg</a>   <span class="timeago" data-date="2021-08-19 05:58:58 &#43;0000 UTC">2021-08-19 05:58:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s the point though? I can think maybe of reduced latency, but then you usually have the DNS already cached locally. And that takes me to a second point, won&#x27;t you run into problems delivering content updates, given that clients will most likely cache DNS entries?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-19 06:04:59 &#43;0000 UTC">2021-08-19 06:04:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Highly distributed global CDN for free.  You can use a short TTL, though there are lots of misbehaving DNS servers around cache timeouts. &quot;Fetch with DoH&quot; kinda ruins the party, but browsers can&#x27;t do UDP or non-HTTP TCP.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stayanon1" target="_blank">stayanon1</a>   <span class="timeago" data-date="2021-08-19 06:05:53 &#43;0000 UTC">2021-08-19 06:05:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my mind this is a neat proof-of-concept that shows how you can serve content through some absurd method (in this case serving HTML over DNS).
+It may not have &quot;a point&quot; beyond just being an example of what&#x27;s possible!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 07:07:41 &#43;0000 UTC">2021-08-19 07:07:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thewakalix" target="_blank">thewakalix</a>   <span class="timeago" data-date="2021-08-19 06:00:08 &#43;0000 UTC">2021-08-19 06:00:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably &quot;because it&#x27;s there&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobkiers" target="_blank">jacobkiers</a>   <span class="timeago" data-date="2021-08-19 06:25:46 &#43;0000 UTC">2021-08-19 06:25:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that&#x27;s the case indeed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 06:01:45 &#43;0000 UTC">2021-08-19 06:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

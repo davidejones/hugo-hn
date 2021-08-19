@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/system-cpu-usage-and-glibc/">
+
+
+    <title>System CPU Usage and Glibc - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="System CPU Usage and Glibc - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/system-cpu-usage-and-glibc/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/system-cpu-usage-and-glibc/">
+<meta name="twitter:title" content="System CPU Usage and Glibc - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "System CPU Usage and Glibc - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T18:45:16JST",
+    "dateModified": "2021-08-18T18:45:16JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://carun.github.io/2021/08/13/system-cpu-usage-and-glibc.html">System CPU Usage and Glibc</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AshamedCaptain" target="_blank">AshamedCaptain</a>   <span class="timeago" data-date="2021-08-19 12:56:31 &#43;0000 UTC">2021-08-19 12:56:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nothing in this article makes any sense. You simply cannot use MAP_SHARED by default because then it will wreak havoc the moment anyone uses fork() (for anything other than to immediately exec).  And I fail to see absolutely any reason why MAP_SHARED vs MAP_PRIVATE would alter the performance characteristics of multi-threading within the same process, since altought the multiple threads are technically forks&#x2F;clones, they will all share the same VM space irregardles of whether you used MAP_PRIVATE or MAP_SHARED. And neither MAP_SHARED nor MAP_PRIVATE will alter the way entries in the TLB are prepopulated or not, which is going to be at the choice of the processor itself (after at all, it is a _cache_).<p>So can someone please explain? Maybe what he actually wants is madvise or hugetlbfs ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=st_goliath" target="_blank">st_goliath</a>   <span class="timeago" data-date="2021-08-19 13:39:00 &#43;0000 UTC">2021-08-19 13:39:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Nothing in this article makes any sense.<p>Well, that&#x27;s basically it.<p>The author appears to have heard some explanations on Unix &amp; OS internals, but not quite understood them and appears to confuse a lot of things. From the looks of things, I figure the author did some voodoo problem solving and then, convinced of having understood the problem, decided to write an article about it.<p>There&#x27;s a lot of second guessing, e.g. what the mmap flags do, based solely on their name, resulting in the bizarre connection to security guarantees; casually dismissing over-commit (because &quot;nobody would do such a thing&quot;), etc...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-19 16:04:37 &#43;0000 UTC">2021-08-19 16:04:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me a little bit of a lengthy blog article by some FAANG engineer about picking optimal chunk sizes for I&#x2F;O where he did a lot of benchmarking with &#x2F;dev&#x2F;null and &#x2F;dev&#x2F;zero.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scottlamb" target="_blank">scottlamb</a>   <span class="timeago" data-date="2021-08-19 14:04:56 &#43;0000 UTC">2021-08-19 14:04:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So can someone please explain? Maybe what he actually wants is madvise or hugetlbfs ?<p>I think you&#x27;re getting warm. It&#x27;s hard to know anything from this confused article but I&#x27;ll assume they&#x27;re correct that there was only one process, the pages were filled prior to the load test, and there were many minor page faults later. My best guess is that the page faults are due to the kernel&#x27;s moving stuff to transparent huge pages in the background (and struggling to find&#x2F;make unfragmented physical address space). The behavior change was due to the mmap size change they observed: before with the extra bytes the kernel didn&#x27;t initially use huge pages. After, it did, so no background operation was necessary. (Or maybe MAP_SHARED helped because they had them backed by a non tmpfs filesystem, where huge issues aren&#x27;t supported. Or maybe some behavior changes were just because they tested multiple times without rebooting and the physical page space got fragmented. Again, hard to know much from this article.)<p>If I were them, I&#x27;d confirm this by &quot;perf record&quot; or eBPF and&#x2F;or by disabling transparent huge page compaction. Then I&#x27;d switch to using dedicated huge pages, because huge pages really do speed things up by like 15% for a memory heavy workload; they&#x27;re worth it if you can avoid THP&#x27;s sometimes pathological behavior.<p>Edit to add: Here is a much clearer article explaining the same problem. <a href="https:&#x2F;&#x2F;pingcap.com&#x2F;blog&#x2F;why-we-disable-linux-thp-feature-for-databases" rel="nofollow">https:&#x2F;&#x2F;pingcap.com&#x2F;blog&#x2F;why-we-disable-linux-thp-feature-fo...</a> I don&#x27;t agree with the pingcap folks that you should permanently disable THP altogether but they did good debugging.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gopalv" target="_blank">gopalv</a>   <span class="timeago" data-date="2021-08-19 16:10:16 &#43;0000 UTC">2021-08-19 16:10:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If I were them, I&#x27;d confirm this by &quot;perf record&quot; or eBPF and&#x2F;or by disabling transparent huge page compaction<p>The report does look a lot like transparent hugepage defrag moving around memory randomly &amp; system CPU spikes for no good reason.<p>And the workaround is valid, because THP can currently only map anonymous memory regions such as heap and stack space.<p>Literally the first thing I have to do to a Hadoop cluster is go around and turn off the defrag for the multi-threaded bits we have or system CPU goes over 20% as the system goes into workloads.<p>The other way you end up with a thundering herd causing permanent issues is with NUMA balancing (+ false sharing). So if you scale up a system slowly, you end up allocating in the same NUMA zone for a whole section (like a 1Gb array), which makes traversing it faster, but if this happens at the same time as another thread touching the same data, it will get scheduled over in a different zone &amp; the kernel can do a lot of busy work with zone rebalancing as you go above 50% memory usage. This used to be a big deal when the first ccNUMA Intel boxes were coming out &amp; mysql at Yahoo used to have so much trouble with NUMA messing up memory access speed assumptions[1].<p>The 96 core + 235GiB of data suggests there is some NUMA messiness going on for sure, particularly because there&#x27;s a pinned worker to a CPU in the design.<p>The NUMA issues were front-and-center when the Power8 porting of Hadoop was going on , particularly because Java just gives you two things you can tweak directly in the GC (UseNUMA and UseTLAB). Because it was a lot of Cores on the bus (128 cores x 1TB - NUMA is like 1x-4x slower, which is hard to optimize for in a general sense).<p>[1] - <a href="https:&#x2F;&#x2F;blog.jcole.us&#x2F;2012&#x2F;04&#x2F;16&#x2F;a-brief-update-on-numa-and-mysql&#x2F;" rel="nofollow">https:&#x2F;&#x2F;blog.jcole.us&#x2F;2012&#x2F;04&#x2F;16&#x2F;a-brief-update-on-numa-and-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scottlamb" target="_blank">scottlamb</a>   <span class="timeago" data-date="2021-08-19 16:26:49 &#43;0000 UTC">2021-08-19 16:26:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great point about NUMA. It sounds like one request is basically &quot;scan the entire gallery for matches to this image&quot;. This is similar to websearch. The ideal thing  would be for each of the pinned, per-core threads to initialize its own memory region and be responsible for scanning just that memory region, so the 96 threads all work on the same request then move on to the next. This would be more efficient as well as have lower latency at &lt;100% utilization. I don&#x27;t think they&#x27;re doing that or they wouldn&#x27;t have talked about increasing concurrency &quot;from 10, 20, 40, 60, 80 and 96&quot;.<p>&gt; And the workaround is valid, because THP can currently only map anonymous memory regions such as heap and stack space.<p>Also tmpfs, fwiw. <a href="https:&#x2F;&#x2F;www.kernel.org&#x2F;doc&#x2F;html&#x2F;latest&#x2F;admin-guide&#x2F;mm&#x2F;transhuge.html" rel="nofollow">https:&#x2F;&#x2F;www.kernel.org&#x2F;doc&#x2F;html&#x2F;latest&#x2F;admin-guide&#x2F;mm&#x2F;transh...</a> says &quot;Currently THP only works for anonymous memory mappings and tmpfs&#x2F;shmem. But in the future it can expand to other filesystems.&quot; I&#x27;m eagerly waiting for that future...<p>I don&#x27;t think they&#x27;re using tmpfs because they said &quot;The default tmpfs on the host was untouched and was left at 50% (128 GiB)&quot;, and 235 GiB doesn&#x27;t fit in 128 GiB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-19 13:36:08 &#43;0000 UTC">2021-08-19 13:36:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He&#x27;s saying that MAP_PRIVATE|MAP_ANONYMOUS causes copy-on-write not just for forked processes, but for threads using std::vector.  So he redesigned with a RAII wrapper to explicitly use mmap() with MAP_SHARED to avoid the copy-on-write.<p>It&#x27;s confusing because his re-write isn&#x27;t multi-process, but multi-thread.  But then he keeps calling threads processes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AshamedCaptain" target="_blank">AshamedCaptain</a>   <span class="timeago" data-date="2021-08-19 13:43:18 &#43;0000 UTC">2021-08-19 13:43:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; He&#x27;s saying that MAP_PRIVATE|MAP_ANONYMOUS causes copy-on-write not just for forked processes<p>But that is just plain wrong; it&#x27;s practically in the definition of threads that they share the VM between themselves. If MAP_PRIVATE meant &quot;copy-on-write even for threads using std::vector&quot; most multi-threaded programs would stop working, save for perhaps a couple of purely functional  examples.<p>On the positive side, there wouldn&#x27;t be any data-races. :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nyrikki" target="_blank">nyrikki</a>   <span class="timeago" data-date="2021-08-19 17:03:07 &#43;0000 UTC">2021-08-19 17:03:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are using glibc you really need to see what clone() flags are being passed as fork() is just mapping to clone() with defaults now.<p>Now some of the other libc variants used by space optimized containers like alpine will still use the legacy fork()<p>But I constantly see developers confused because they were taught that the v7 style fork() is still used in modern POSIX.<p>It is didactic and not a rule, focusing on clone() helps get past the change in behavior for both threads and processes.<p>This author seems to have missed this change in behavior and went on a few crazy paths.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-19 13:59:47 &#43;0000 UTC">2021-08-19 13:59:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe he means &quot;copy on write&quot; for <i>copies</i> of a std::vector, instead of real copy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-19 12:58:54 &#43;0000 UTC">2021-08-19 12:58:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Several paragraphs don&#x27;t make sense to me:<p>&gt;<i>Our biometric datasets are sized at 1 GiB for easier file management as we could turn on transparent huge pages, if required. So it is guaranteed that mmap is being used under the hood by std::vector, so why was there TLB misses in the first place? That’s because the MAP_PRIVATE flag instructs the kernel to turn off VM_SHARED flag when creating the mapping in the kernel. This causes TLB to be cold and populate it only on demand, via page faults. As long as this translation is small, there’s no overhead. However as the memory pressure increases with concurrency, the kernel has to fight hard to populate TLB.</i><p>There is MAP_POPULATE flag to populate the mapping eagerly without waiting for page faults. I&#x27;m not sure what MAP_SHARED has to do with that.<p><i>&gt; That aside, the reasoning behind glibc allocator’s use of mmap with MAP_PRIVATE|MAP_ANONYMOUS as defaults, is privacy and anonymity. Which makes sense, because we do not want other processes to peak into the memory region of our process. That would be a security nightmare. But I’m not sure I agree on this for inter-thread design. Threads inherently share the same process space and thus the heap. MAP_PRIVATE gets a copy-on-write mapping for performance reasons (may be). MAP_ANONYMOUS will ensure the mapping is initialized to zero. So the performance optimization is wasted away. However this doesn’t make sense for user-space data structures std::vector or malloc for that matter (FWIW, malloc, although a function, has it’s own internal data structure under the hood). No one is going to throw away a memory region after allocation without writing something into it, after all, why else will they allocate in the first place? As the size of memory being requested is large, it makes sense to use MAP_SHARED|MAP_ANONYMOUS as the default in glibc.</i><p>CoW is for separate processes, not just for any tasks. A different thread in the same process writing to a page won&#x27;t trigger a copy. You don&#x27;t need to pass MAP_SHARED to mmap to share memory between threads, the arguments to the clone(2) syscall which created the thread already made sure that you share the memory.<p>What I really suspect happened is that they didn&#x27;t call std::vector::reserve at the start, so there was a lot of overhead when resizing (allocating new memory, copying the content, freeing the old memory) of std::vector, and when they moved to calling mmap directly, they effectively reserved memory at the start, as would happen if they called std::vector::reserve. Unfortunately the post doesn&#x27;t contain enough details to really be sure about that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ReactiveJelly" target="_blank">ReactiveJelly</a>   <span class="timeago" data-date="2021-08-19 13:51:25 &#43;0000 UTC">2021-08-19 13:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the reasoning behind glibc allocator’s use of mmap with MAP_PRIVATE|MAP_ANONYMOUS as defaults, is privacy and anonymity. Which makes sense, because we do not want other processes to peak into the memory region of our process. That would be a security nightmare<p>This is also a big &#x27;hmm&#x27;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amluto" target="_blank">amluto</a>   <span class="timeago" data-date="2021-08-19 13:30:59 &#43;0000 UTC">2021-08-19 13:30:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This causes TLB to be cold and populate it only on demand, via page faults.<p>This article is confused. Page faults populate the page tables, not the TLB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hipokampa" target="_blank">hipokampa</a>   <span class="timeago" data-date="2021-08-19 13:16:59 &#43;0000 UTC">2021-08-19 13:16:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; No one is going to throw away a memory region after allocation without writing something into it, after all, why else will they allocate in the first place?<p>Hah! Just try running a server with vm.overcommit_memory=2.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 13:18:54 &#43;0000 UTC">2021-08-19 13:18:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

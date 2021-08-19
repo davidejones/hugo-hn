@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/homa-a-transport-protocol-to-replace-tcp-for-lowlatency-rpc-in-data-centers/">
+
+
+    <title>Homa, a transport protocol to replace TCP for low-latency RPC in data centers - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Homa, a transport protocol to replace TCP for low-latency RPC in data centers - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/homa-a-transport-protocol-to-replace-tcp-for-lowlatency-rpc-in-data-centers/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/homa-a-transport-protocol-to-replace-tcp-for-lowlatency-rpc-in-data-centers/">
+<meta name="twitter:title" content="Homa, a transport protocol to replace TCP for low-latency RPC in data centers - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Homa, a transport protocol to replace TCP for low-latency RPC in data centers - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T00:48:48JST",
+    "dateModified": "2021-08-17T00:48:48JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.micahlerner.com/2021/08/15/a-linux-kernel-implementation-of-the-homa-transport-protocol.html">Homa, a transport protocol to replace TCP for low-latency RPC in data centers</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ggm" target="_blank">ggm</a>   <span class="timeago" data-date="2021-08-17 04:10:47 &#43;0000 UTC">2021-08-17 04:10:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s missing is a 2021 perspective on why this is or is not useful at scale. Noting, that google does transform edge-IP into some mythic internal protocol which in part explains why google won&#x27;t do IPv6 direct to some things like GCP: they couldn&#x27;t, for a given generation of hardware.<p>Basically: yes, within a DC which is heading to some kind of traefik or HAproxy or other redirection&#x2F;sharder, this could make sense. So.. how does this 2018 approach stack up in 2021
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 09:02:44 &#43;0000 UTC">2021-08-17 09:02:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fwiw IPv6 for Google cloud instances is finally GA (<a href="https:&#x2F;&#x2F;cloud.google.com&#x2F;compute&#x2F;docs&#x2F;ip-addresses&#x2F;configure-ipv6-address" rel="nofollow">https:&#x2F;&#x2F;cloud.google.com&#x2F;compute&#x2F;docs&#x2F;ip-addresses&#x2F;configure...</a>)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ggm" target="_blank">ggm</a>   <span class="timeago" data-date="2021-08-17 10:58:02 &#43;0000 UTC">2021-08-17 10:58:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forgive me if I am wrong but I believe this is only binding v6 to the outside edge of VMs. Not GKE. And the document notes you cannot connect to Google API services over v6.<p>I don&#x27;t want to overdo the curmudgeon thing: I&#x27;m really glad they&#x27;ve started to deploy dual stack, it&#x27;s long b overdue.  And remember that Google has been a strong proponent of v6 in Android and in ietf standards across the board.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 12:37:46 &#43;0000 UTC">2021-08-17 12:37:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh yeah, the IPv6 saga at Google cloud is a long running joke. However this is indeed a decent step forward, in particular this is relevant to the comment I replayed to: in order to reach a VM traffic has to traverse the network fabric, which clearly now supports IPv6.<p>As for GKE that&#x27;s another pair of shoes, probably more related to configuring calico and friends and less about limitations in the low level network fabric.<p>As for Google API, I read somewhere that they disabled it because billing exemption wasn&#x27;t ready.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-08-17 09:29:50 &#43;0000 UTC">2021-08-17 09:29:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; traefik or HAproxy<p>A meta note but it struck me that seeing &quot;traefik&quot; where NGINX usually is is pretty fascinating. I rate it highly because of it&#x27;s support for k8s (I&#x27;ve written before about how wonderful I think it is) but am somewhat unaware of how widely it&#x27;s known. Guess it&#x27;s pretty well known at this point if people casually mention it (then again, the audience is HN after all)!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggm" target="_blank">ggm</a>   <span class="timeago" data-date="2021-08-17 10:59:31 &#43;0000 UTC">2021-08-17 10:59:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It certainly wasn&#x27;t up-sold to me when I was building things out. Maybe hiding the nginx light under the bushel because other tools were explicitly written up
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Horusiath" target="_blank">Horusiath</a>   <span class="timeago" data-date="2021-08-17 05:08:25 &#43;0000 UTC">2021-08-17 05:08:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It targets the properties that Aeron protocol aims for too (<a href="https:&#x2F;&#x2F;github.com&#x2F;real-logic&#x2F;aeron" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;real-logic&#x2F;aeron</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MisterTea" target="_blank">MisterTea</a>   <span class="timeago" data-date="2021-08-17 17:33:31 &#43;0000 UTC">2021-08-17 17:33:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a similar vein, Bell Labs developed the IL protocol in the 90&#x27;s to facilitate better 9p performance on plan 9. It did not work well over the internet due to latency but was beneficial on local networks. It was most useful for disk servers serving root fs to CPU servers and terminals&#x2F;workstations.<p><a href="http:&#x2F;&#x2F;doc.cat-v.org&#x2F;plan_9&#x2F;4th_edition&#x2F;papers&#x2F;il&#x2F;" rel="nofollow">http:&#x2F;&#x2F;doc.cat-v.org&#x2F;plan_9&#x2F;4th_edition&#x2F;papers&#x2F;il&#x2F;</a><p>(edit: forgot to mention IL is still usable on plan 9)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Ericson2314" target="_blank">Ericson2314</a>   <span class="timeago" data-date="2021-08-17 06:48:44 &#43;0000 UTC">2021-08-17 06:48:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a feeling the vast majority of traffic should be pub sub &#x2F; love query not request response, and yet is currently the latter, and this might mean this is shooting for the wrong goalposts.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cprecioso" target="_blank">cprecioso</a>   <span class="timeago" data-date="2021-08-17 09:10:41 &#43;0000 UTC">2021-08-17 09:10:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is love query?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-17 12:16:37 &#43;0000 UTC">2021-08-17 12:16:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d guess it&#x27;s a typo for &quot;live query&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Ericson2314" target="_blank">Ericson2314</a>   <span class="timeago" data-date="2021-08-17 15:41:16 &#43;0000 UTC">2021-08-17 15:41:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes it is, sorry!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cowvin" target="_blank">cowvin</a>   <span class="timeago" data-date="2021-08-17 20:18:46 &#43;0000 UTC">2021-08-17 20:18:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;do you love me?&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hkt" target="_blank">hkt</a>   <span class="timeago" data-date="2021-08-17 13:14:33 &#43;0000 UTC">2021-08-17 13:14:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Baby, don&#x27;t hurt me
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mosseater" target="_blank">mosseater</a>   <span class="timeago" data-date="2021-08-17 03:33:07 &#43;0000 UTC">2021-08-17 03:33:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you summarize why this is better than just using UDP?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-08-17 03:40:29 &#43;0000 UTC">2021-08-17 03:40:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            UDP doesn&#x27;t have reliability, flow control, congestion control, etc. Blasting RPCs over UDP can cause poor performance due to congestion.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bcrl" target="_blank">bcrl</a>   <span class="timeago" data-date="2021-08-17 13:33:34 &#43;0000 UTC">2021-08-17 13:33:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The data center bridging extensions ensure that packets won&#x27;t get lost due to congestion or flow control.  They were created in part because fibre channel over ethernet couldn&#x27;t handle any packet loss in the fabric.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-08-17 21:43:09 &#43;0000 UTC">2021-08-17 21:43:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Running lossless with no congestion control leads to high tail latency though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bcrl" target="_blank">bcrl</a>   <span class="timeago" data-date="2021-08-18 13:45:24 &#43;0000 UTC">2021-08-18 13:45:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quite true.  However, in the case of FCoE, given the performance issues with the Fibre Channel SANs I worked on a few years ago, tail latency in the fabric was the least of the concerns we ran into.  Customers would wonder why their persistent messaging rates tanked when the system started pushing messages to disk.  Meanwhile their SAN can&#x27;t even sustain 100MB&#x2F;s of sequential writes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bullen" target="_blank">bullen</a>   <span class="timeago" data-date="2021-08-17 09:06:00 &#43;0000 UTC">2021-08-17 09:06:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On a switch you could probably trust UDP no?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magicalhippo" target="_blank">magicalhippo</a>   <span class="timeago" data-date="2021-08-17 09:44:31 &#43;0000 UTC">2021-08-17 09:44:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, if by &quot;probably trust&quot; you mean you are happy if that prediction fails every now and then, then sure.<p>If a link is saturated, say via TCP, then UDP data can still get dropped AFAIK.<p>Searching I found this blog post[1] which takes a small stab at it. Would be interesting to try other setups with more data.<p>Regardless, using UDP one should always be prepared to handle dropped and out-of-order packets.<p><a href="https:&#x2F;&#x2F;openmymind.net&#x2F;How-Unreliable-Is-UDP&#x2F;" rel="nofollow">https:&#x2F;&#x2F;openmymind.net&#x2F;How-Unreliable-Is-UDP&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bullen" target="_blank">bullen</a>   <span class="timeago" data-date="2021-08-17 11:12:10 &#43;0000 UTC">2021-08-17 11:12:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That link actually proves my point, thx!<p>Nothing is perfect, so I&#x27;ll keep using UDP on a switch and TCP on the internet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hikikomori" target="_blank">Hikikomori</a>   <span class="timeago" data-date="2021-08-17 12:33:18 &#43;0000 UTC">2021-08-17 12:33:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Has nothing to do with using a switch or not.<p>If send a 1Gbit udp stream over a switch to another machine there will be no drops if both are connected with 1Gbit, the same is true if you use tcp, and over a router assuming its capable of forwarding that amount of traffic. If you have a third machine sending udp or tcp traffic towards the one receiving the 1Gbit udp stream you&#x27;ll have drops on both streams. Doesn&#x27;t matter what protocol you use, if you have congestion you&#x27;ll have drops. You typically use udp if your application is real time, or if you want to create your own reliability mechanism and&#x2F;or avoid issues with devices in the middle that does things with tcp.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magicalhippo" target="_blank">magicalhippo</a>   <span class="timeago" data-date="2021-08-17 13:05:12 &#43;0000 UTC">2021-08-17 13:05:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That was my point. If you design your system so that the links stay well below saturation, then you would not expect to see drops.<p>However they can still occur, maybe due to some unexpected congestion or other issues. So long as your application can deal with that you should be good.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nitrogen" target="_blank">nitrogen</a>   <span class="timeago" data-date="2021-08-17 13:59:47 &#43;0000 UTC">2021-08-17 13:59:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>other issues</i><p>Like intermittent EMI causing bit flips and checksum failures, which happened to me once in an IoT application where the Ethernet cable to an outbuilding was buried next to the power line, and the network would die whenever the furnace kicked on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bullen" target="_blank">bullen</a>   <span class="timeago" data-date="2021-08-17 14:25:17 &#43;0000 UTC">2021-08-17 14:25:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So where can one buy consumer 10Gb&#x2F;s switches?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magicalhippo" target="_blank">magicalhippo</a>   <span class="timeago" data-date="2021-08-17 15:09:22 &#43;0000 UTC">2021-08-17 15:09:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            MikroTik makes some, like the CRS305-1G-4S+IN[1] which is a 5-port variant at a very reasonable price.<p>Nice review by ServeTheHome here[2].<p>[1]: <a href="https:&#x2F;&#x2F;mikrotik.com&#x2F;product&#x2F;crs305_1g_4s_in" rel="nofollow">https:&#x2F;&#x2F;mikrotik.com&#x2F;product&#x2F;crs305_1g_4s_in</a><p>[2]: <a href="https:&#x2F;&#x2F;www.servethehome.com&#x2F;mikrotik-crs305-1g-4sin-review-4-port-must-have-10gbe-switch&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.servethehome.com&#x2F;mikrotik-crs305-1g-4sin-review-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bullen" target="_blank">bullen</a>   <span class="timeago" data-date="2021-08-17 17:00:34 &#43;0000 UTC">2021-08-17 17:00:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thx, say I have 4x 1Gb&#x2F;s old-school eth-port machines that want to saturate their capacity at the same time on one of these, should I just buy 4x 10GBase-T SFP+ transceivers for it?<p>Edit: Apparently LGS105&#x2F;LGS108 has 10Gb&#x2F;s switching capacity allready so I&#x27;m good!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 05:33:31 &#43;0000 UTC">2021-08-17 05:33:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vlovich123" target="_blank">vlovich123</a>   <span class="timeago" data-date="2021-08-17 03:54:41 &#43;0000 UTC">2021-08-17 03:54:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doesn’t SRTP mean that a continuous stream of small packets will DOS any larger packets? I’m sure I’m missing something about how it works.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-17 04:44:21 &#43;0000 UTC">2021-08-17 04:44:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would guess &quot;SRTP&quot; is just the shorthand for something that&#x27;s less simple than that sounds.  It likely has some &quot;starvation protection&quot; in the same way that a typical priority queue does.  Like having in-queue age time bump up the priority.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FrancoisBosun" target="_blank">FrancoisBosun</a>   <span class="timeago" data-date="2021-08-17 04:37:09 &#43;0000 UTC">2021-08-17 04:37:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From my understanding, this is total message size, but packet. If a receiver has two incoming messages, a batch upload and a query for a list, the batch upload may have 10MiB to transmit while the other message may only have 1KiB. This, to improve latency, the smaller message should be prioritized.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wmf" target="_blank">wmf</a>   <span class="timeago" data-date="2021-08-17 05:39:37 &#43;0000 UTC">2021-08-17 05:39:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can avoid starvation by increasing the priority of a job (an RPC in this case) when it hasn&#x27;t made progress for a while. Or you can do weighted scheduling where the shortest job has a higher probability of being scheduled (e.g. WDRR) instead of absolute priority.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 09:05:10 &#43;0000 UTC">2021-08-17 09:05:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ngcc_hk" target="_blank">ngcc_hk</a>   <span class="timeago" data-date="2021-08-17 09:12:01 &#43;0000 UTC">2021-08-17 09:12:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If one use internal ip 128. 10. Etc, why can’t one use another protocol for internal transfer.  That means the internal traffic is cut off not just by ip but also by other internet protocol.<p>The ospf vs Bgp and within organisation why not …
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gardaani" target="_blank">gardaani</a>   <span class="timeago" data-date="2021-08-17 05:15:37 &#43;0000 UTC">2021-08-17 05:15:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quic is similar and standardized by IETF. <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;QUIC" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;QUIC</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KaiserPro" target="_blank">KaiserPro</a>   <span class="timeago" data-date="2021-08-17 12:53:33 &#43;0000 UTC">2021-08-17 12:53:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quic is not designed for internal low latency point to point.<p>Quic is basically the weird semantics of http2 transmuted to UDP with some retransmission logic. But everything is hilariously complex.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-08-17 05:22:58 &#43;0000 UTC">2021-08-17 05:22:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quic is not that similar.  Although SCTP could be given many of the same properties with a slightly customized implementation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-17 15:25:45 &#43;0000 UTC">2021-08-17 15:25:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please can you say a bit more? I keep reading about quic as an sctp replacement? Apart from the &#x27;whole thing encrypted&#x27; thing I&#x27;m wondering what differences there are.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 05:38:25 &#43;0000 UTC">2021-08-17 05:38:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=baybal2" target="_blank">baybal2</a>   <span class="timeago" data-date="2021-08-17 06:52:39 &#43;0000 UTC">2021-08-17 06:52:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Deterministic ethernet varieties been around for a very long time.<p>If you have fabric determinism like Infiniband, and capacity reservation on the receiving side, you can just dispose of connection paradigm, flow control, and thus get great deal of performance, while simplifying everything at the same time.<p>I do not see much use of it though unless you are building something like an airplane.<p>The uncounted PhD hours spent on getting networks to work well do amount to something.<p>Dealing with RDMA aware networking is far beyond the ability of typical web developers.<p>Deterministic Ethernet switches cost a fortune, and are lagging behind the broader Ethernet standard by many years.<p>Making a working capacity reservation setup takes years to perfect as well.<p><i>99.9999...% of web software will most likely *lose* performance if blindly ported to RDMA enabled database, message queue server, or caching.<p>If you don&#x27;t know how the upoll, or iouring like mechanisms work, you can not get any benefit out of RDMA whatsoever</i><p>I once worked for a subcontractor for Alibaba&#x27;s first RDMA enabled datacentre.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ergl" target="_blank">ergl</a>   <span class="timeago" data-date="2021-08-17 08:03:13 &#43;0000 UTC">2021-08-17 08:03:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Dealing with RDMA aware networking is far beyond the ability of typical web developers.<p>Homa is designed for traffic inside a DC, same as RDMA or Infiniband. I don&#x27;t think anyone is proposing to use it for normal web traffic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eternalban" target="_blank">eternalban</a>   <span class="timeago" data-date="2021-08-17 13:20:32 &#43;0000 UTC">2021-08-17 13:20:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which partly (besides the Iranians on the Homa team) explains the name of the protocol. Homa is the Persian ~phoenix, a mythical bird that never touches the ground and is always hovering above:<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Homa_(mythology)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Homa_(mythology)</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-17 15:28:15 &#43;0000 UTC">2021-08-17 15:28:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even inside DCs I thought everything was Web services upon Web services.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

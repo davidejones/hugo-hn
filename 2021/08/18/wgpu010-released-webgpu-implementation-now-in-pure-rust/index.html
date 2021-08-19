@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/wgpu010-released-webgpu-implementation-now-in-pure-rust/">
+
+
+    <title>Wgpu-0.10 released: WebGPU implementation now in pure Rust - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Wgpu-0.10 released: WebGPU implementation now in pure Rust - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/wgpu010-released-webgpu-implementation-now-in-pure-rust/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/wgpu010-released-webgpu-implementation-now-in-pure-rust/">
+<meta name="twitter:title" content="Wgpu-0.10 released: WebGPU implementation now in pure Rust - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Wgpu-0.10 released: WebGPU implementation now in pure Rust - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T21:11:45JST",
+    "dateModified": "2021-08-18T21:11:45JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://gfx-rs.github.io/2021/08/18/release-0.10.html">Wgpu-0.10 released: WebGPU implementation now in pure Rust</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_cart" target="_blank">_cart</a>   <span class="timeago" data-date="2021-08-18 21:50:00 &#43;0000 UTC">2021-08-18 21:50:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As Bevy Engine&#x27;s lead developer (which uses wgpu), this release excites me for a number of reasons:<p>* A smaller (and less abstracted) codebase means that we can more easily extend wgpu with the features we need now and in the future. (ex: XR, ray tracing, exposing raw backend apis). The barrier to entry is so much lower.<p>* It shows that the wgpu team is receptive to our feedback. There was a point during our &quot;new renderer experiments&quot; where we were considering other &quot;flatter&quot; gpu abstractions for our new renderer. They immediately took this into account and kicked off this re-architecture. There were other people with similar feedback so I can&#x27;t take full credit here, but the timing was perfect.<p>* A pure rust stack means that our builds are even simpler. Combine that with Naga for shader reflection and compilation and we can remove a lot of the &quot;build quirks&quot; in our pipeline that come from non-rust dependencies. Windows especially suffers from this type of build weirdness and I&#x27;m excited to not need to deal with that anymore.<p>* The &quot;risk&quot; of treating wgpu as our &quot;main gpu abstraction layer&quot; has gone way down thanks to the last few points. As a result, we have decided to completely remove our old &quot;abstract render layer&quot; in favor of wgpu. This means that wgpu is no longer a &quot;bevy_render backend&quot;. It is now bevy_render&#x27;s core gpu abstraction. This makes our code smaller, simpler, and more compatible with the wider wgpu ecosystem.<p>* There is a work-in-progress WebGL2 backend for the new wgpu. This will hopefully ultimately remove the need for the third party bevy_webgl2 backend (which has served us well, but it has its own quirks and complexities).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=timClicks" target="_blank">timClicks</a>   <span class="timeago" data-date="2021-08-18 22:08:58 &#43;0000 UTC">2021-08-18 22:08:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, this feels like a win-win-win for wgpu, bevy and the rust ecosystem in general
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-18 22:22:29 &#43;0000 UTC">2021-08-18 22:22:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This means that wgpu is no longer a &quot;bevy_render backend&quot;. It is now bevy_render&#x27;s core gpu abstraction.<p>Experience has shown me that you will eventually regret this decision
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_cart" target="_blank">_cart</a>   <span class="timeago" data-date="2021-08-18 23:06:00 &#43;0000 UTC">2021-08-18 23:06:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Snarky answer first: my experience tells me that I won&#x27;t regret this decision :)<p>Real answer: You can use this argument to justify abstracting out literally anything. Clearly we shouldn&#x27;t abstract everything and the details of each specific situation will dictate what abstractions are best (and who should own them). Based on the context that I have, Bevy&#x27;s specific situation will almost certainly benefit from this decision. Bevy needs an &quot;abstract gpu layer&quot;. We are currently maintaining our own (more limited) &quot;abstract gpu layer&quot; that lives on top of wgpu. Both my own experience and user experiences have indicated that this additional layer provides a worse experience: it is harder to maintain, harder to understand (by nature of being &quot;another layer&quot;), it lacks features, it adds overhead. Wgpu _is_ a generic abstraction layer fit for an engine. If I was building an abstract layer from scratch (with direct api backends), it would look a lot like wgpu. I understand the internals. I have a good relationship with the wgpu project lead. They respond to our needs. The second anything changes to make this situation suboptimal (they make massive api changes we don&#x27;t like, they don&#x27;t accept changes we need, they add dependencies we don&#x27;t like, etc) I will happily fork the code and maintain it. I know the internals well enough to know that I couldn&#x27;t do better and that I could maintain it if push comes to shove. The old Bevy abstraction layer adds nothing. In both situations we are free to extend our gpu abstraction with new features &#x2F; backends. The only difference is the overall complexity of the system, which will be massively reduced by removing the intermediate layer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-18 23:23:40 &#43;0000 UTC">2021-08-18 23:23:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A situation will inevitably arise where you’ll be unable to support a new platform in a reasonable amount of time because implementing support for that platform yourself  in wgpu would be a significant undertaking and&#x2F;or distraction. Progress from the community on supporting that platform in wgpu will lag because either you might be the only stakeholder interested in that platform and&#x2F;or modifying wgpu to support that platform may require significant internal restructuring to support the platform in a non-hacky way or it would slow down or increase the complexity  of the other main platforms. This is a hypothetical situation but it’s likely it will eventually happen.<p>Maintaining a fork of wgpu simply for your own project will also likely be more effort than necessary since wgpu is a more general API than bevy requires.<p>The core issue is that bevy uses a subset of wgpu so your own focused and limited abstraction layer will almost always be easier to implement and maintain. Some call this “the rule of least power”  <a href="https:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;tag&#x2F;doc&#x2F;leastPower.html" rel="nofollow">https:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;tag&#x2F;doc&#x2F;leastPower.html</a><p>The meta-core issue is that you and the wgpu team aren’t 100% aligned  on your goals. Maybe you’re aligned on 80% but the 20% will eventually come back to haunt you.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_cart" target="_blank">_cart</a>   <span class="timeago" data-date="2021-08-18 23:52:18 &#43;0000 UTC">2021-08-18 23:52:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Adding new &quot;backends&quot; to an abstraction always includes the risk of not being compatible with the current abstraction and requiring re-architectures. This would be true with our own abstractions as well. I agree that two separate projects often have different goals, but wgpu&#x27;s goals are an (almost) complete subset of our goals: cross platform modern gpu layer that cleanly abstracts Vulkan&#x2F;Metal&#x2F;DX12 and best-effort abstracts older apis, rust-friendly api surface with RAII, limited &quot;lowest common denominator&quot; defaults that run everywhere with opt-in support for advanced features and lifting lowest-common-denominator limits. The biggest divergence is their increased need for safety features to make wgpu a suitable host for WebGPU apis in browsers, but this is something that still benefits us, because it might ultimately allow Bevy apps to &quot;host&quot; less trusted shader code.<p>We&#x27;ve been building out the new renderer and we have already used a huge percentage of wgpu&#x27;s api surface. It will be close to 100% by the time we launch. This proves to me that we do need almost all of the features they provide. Bevy&#x27;s renderer is modular and we need to expose a generic (and safe) gpu api to empower users to build new render features. Wgpu&#x27;s entire purpose is to be that API. I know enough of the details here (because I built my own api, thoroughly reviewed the wgpu code, and did the same for alternatives in the ecosystem) to feel comfortable betting on it. I&#x27;m even more comfortable having reviewed bevy-user-provided wgpu prs that add major new features to wgpu (XR). If you have specific concerns about specific features, I&#x27;m happy to discuss this further.<p>You can link to as many &quot;rules&quot; as you want, but solving a problem in the real world requires a careful balance of many variables and concerns. Rules like &quot;the rule of least power&quot; should be a guiding principle, not something to be followed at all costs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-19 08:11:24 &#43;0000 UTC">2021-08-19 08:11:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since other commenter had concerns about the PS4&#x2F;PS5&#x2F;other consoles wgpu being proprietary due to SDK restrictions (and consequently, Bevy PS4&#x2F;PS5&#x2F;other consoles port being proprietary), I will ask: does this mean that Bevy for consoles will cost money? (apart from the console SDK cost). Will Bevy for consoles be source available, as in, developed exactly like current Bevy but under a non-open source license?<p>Or actually: is it feasible to license console-specific Bevy code as MIT&#x2F;Apache and have the only proprietary bits be the console SDK? (This means having Bevy, an open source project, call a console SDK in the open - is that allowed?)<p>For me those are my main concerns regarding Bevy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gfxgirl" target="_blank">gfxgirl</a>   <span class="timeago" data-date="2021-08-19 07:22:15 &#43;0000 UTC">2021-08-19 07:22:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think wgpu is amazing. But, if I want to take the previous commenter seriously I&#x27;d think about PS5, Switch&#x2F;Switch2, etc as places where someone will have to write a wgpu implementation (non open source since those SDKs don&#x27;t allow it) if you ever decide to ship on those platforms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jweb_Guru" target="_blank">Jweb_Guru</a>   <span class="timeago" data-date="2021-08-19 16:10:38 &#43;0000 UTC">2021-08-19 16:10:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            wgpu&#x27;s recent license change was specifically done to allow these implementations to exist for consoles.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jasper_" target="_blank">Jasper_</a>   <span class="timeago" data-date="2021-08-18 23:36:49 &#43;0000 UTC">2021-08-18 23:36:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As someone who&#x27;s developed and maintained platform backends for all sorts of obscure platforms (actually, it&#x27;s still my day job!), I don&#x27;t think wgpu backends are going to be difficult to develop for any of the remaining platforms APIs still alive.<p>It&#x27;s a pretty well-thought-out API that mirrors most of the modern rendering abstractions seen in game engines.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-18 23:46:59 &#43;0000 UTC">2021-08-18 23:46:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; platforms APIs still alive.<p>The APIs that currently exist are not the cause of the potential issue I am raising.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=epage" target="_blank">epage</a>   <span class="timeago" data-date="2021-08-19 00:17:24 &#43;0000 UTC">2021-08-19 00:17:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And without knowing what those future APIs are like, you can&#x27;t design a future-proof backend API to handle it.  You&#x27;ll design it for the past problems which will be different than future ones.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 01:24:16 &#43;0000 UTC">2021-08-19 01:24:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What you can do is design a backend for your project that is less general and tailored to your specific problems so as to increase the likelihood that it is easier to implement on new platforms that may arise. This is why I mentioned the “rule of least power”<p>For example using drawTriangle(p1, p2, p3) instead of drawPolys(TYPE_TRIANGLE, point_list, n_points). The former is unequivocally easier to implement, the latter requires more complexity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dralley" target="_blank">dralley</a>   <span class="timeago" data-date="2021-08-19 02:46:57 &#43;0000 UTC">2021-08-19 02:46:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And it has been explained to you repeatedly that wgpu is already more or less &quot;least power&quot; - that Bevy already uses most of the API surface and will soon be using nearly all of it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 05:31:28 &#43;0000 UTC">2021-08-19 05:31:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wgpu is the equivalent of “Turing complete” for a graphics API. I think you’re not fully groking the principle of least power if you consider that a “least power” graphics abstraction.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wtetzner" target="_blank">wtetzner</a>   <span class="timeago" data-date="2021-08-19 12:10:34 &#43;0000 UTC">2021-08-19 12:10:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The thing about graphics in general is that typically you want to use whatever the underlying hardware gives you to get the best performance. This can conflict with the law of least power, but so what?<p>You can’t optimize for everything, so you decide what tradeoffs make the most sense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 12:44:40 &#43;0000 UTC">2021-08-19 12:44:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you and likely most people reading this discussion are missing the point. Wgpu is fine and even great as a general purpose API but it’s inappropriate as an application-specific abstraction for a graphics backend. It should absolutely be used to implement the latter.<p>Compare this to the Rust compiler. Rust uses MIR as its intermediate compiler IR for Rust-specific optimizations, because it retains Rust-specific semantics, before it compiles down to LLVM bitcode. If it used LLVM bitcode as its native IR then it would be difficult to implement Rust-specific optimization passes. In this case an application specific graphics API is analogous to MIR and wgpu is analogous to LLVM.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jasper_" target="_blank">Jasper_</a>   <span class="timeago" data-date="2021-08-19 04:50:46 &#43;0000 UTC">2021-08-19 04:50:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know you don&#x27;t really want to hedge too much on your example, but do note that in your attempt to simplify, you accidentally turned an API which can, in theory, draw many triangles into one that only can draw one triangle at a time. What if I want to parallelize the work of drawing triangles?<p>Trying to aggressively simplify without understanding the full design space or surface area is not really a great idea.<p>In the worst case, if you never use, for instance, Timestamp Queries in your engine, you can half-ass a backend and just nop the implementation. Lots of game engines do that kinda thing. So many game engines where half the graphics API implementations were no-op stubs because we never needed the functionality on that platform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 05:34:45 &#43;0000 UTC">2021-08-19 05:34:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; What if I want to parallelize the work of drawing triangles?<p>What if your specific application cannot provide inherently parallel workloads and has no need for an abstraction that can accommodate parallel rendering? In that case porting your app to a new platform requires implementing functionality your application does not need.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danShumway" target="_blank">danShumway</a>   <span class="timeago" data-date="2021-08-19 06:32:05 &#43;0000 UTC">2021-08-19 06:32:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; What if your specific application cannot provide inherently parallel workloads and has no need for an abstraction that can accommodate parallel rendering?<p>Okay, but... what if it <i>does</i>?<p>It&#x27;s one thing to talk about &quot;this could be simpler if you don&#x27;t need more general functionality.&quot; But that&#x27;s also just kind of an assumption that the functionality actually isn&#x27;t needed. The odds that you have to support a platform&#x2F;application that both can&#x27;t handle parallelization and that will be substantially held back by the option even just existing -- I&#x27;m not sure that those odds are actually higher than the odds that you&#x27;ll run into a platform that <i>requires</i> parallelization for decent performance.<p>It feels kind of glib to just state with such certainty that a cross-platform game engine is never going to need to draw arbitrary polygons. That doesn&#x27;t seem to me like a safe assumption at all.<p>I agree with GP here:<p>&gt; Trying to aggressively simplify without understanding the full design space or surface area is not really a great idea.<p>In many cases, needing to no-op some functionality for one or two platforms may end up being a lot better than a situation where you need to hack a bunch of functionality on top of an API that fundamentally is not designed to support that. It&#x27;s a little bit annoying for simpler platforms, but simpler platforms are probably not your biggest fear when thinking about support. The first time that you need to do something other than linearly draw triangles, for any platform you want to support at all, even just one of them, then the API you propose suddenly becomes more complicated and harder to maintain than a single `drawPols` method would be.<p>This is not saying that abstraction or narrowing design space should never happen. It&#x27;s just saying, understand what the design space is before you decide that you&#x27;re never going to need to support something. I expect that the Bevy core team has spent a decent amount of time thinking about what kinds of GPU operations they&#x27;re likely to need for both current and future platforms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 12:48:24 &#43;0000 UTC">2021-08-19 12:48:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It feels kind of glib to just state with such certainty that a cross-platform game engine is never going to need to draw arbitrary polygons.<p>It’s an example
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jweb_Guru" target="_blank">Jweb_Guru</a>   <span class="timeago" data-date="2021-08-19 00:25:13 &#43;0000 UTC">2021-08-19 00:25:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are only like 21 resource types in the whole WebGPU API.  Which of these do you think are going to go away?<p>* Adapter, Device, Queue, Surface<p>* Buffer, Texture, TextureView, Sampler, QuerySet, BindGroup<p>* ShaderModule, BindGroupLayout, PipelineLayout, RenderPipeline, ComputePipeline<p>* CommandEncoder, RenderPassEncoder, ComputePassEncoder, RenderBundleEncoder, RenderBundle, CommandBuffer<p>Adapter, Device, and Surface are abstractions that would be needed no matter what the GPU architecture.  What else is there that&#x27;s even fishy... QuerySet, maybe?  The various kinds of encoders are already abstractions on some platforms, and I guess there are cases where there might be better resource binding abstractions, but I&#x27;m not sure what could cause this set of supported features to change on the hardware other than completely dropping the rasterization pipeline (in which case you can just emulate everything with compute shaders and buffers anyway).  And the relationships between these structures are pretty well-specified, I doubt that will change either.<p>So at that point, at least if you want to stay cross platform, you&#x27;re talking about things like the specific implementation of buffer mapping or tracing or whatever, which is the sort of thing it&#x27;s relatively easy to add as an extension (or refactor to make more configurable).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 23:36:27 &#43;0000 UTC">2021-08-18 23:36:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The core issue is that bevy uses a subset of wgpu so your own focused and limited abstraction layer will almost always be easier to implement and maintain<p>This isn&#x27;t obviously true. WebGPU API surface is fairly small (unlike Vulkan), and Bevy may easily use most of it.<p>Generally speaking, depending on another library always involve some amount of trust. Going the path of zero trust is also possible, but is much less effective.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-18 23:41:41 &#43;0000 UTC">2021-08-18 23:41:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This isn&#x27;t obviously true. WebGPU API surface is fairly small (unlike Vulkan), and Bevy may easily use most of it.<p>Small is not the issue. Generality is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jweb_Guru" target="_blank">Jweb_Guru</a>   <span class="timeago" data-date="2021-08-18 23:53:06 &#43;0000 UTC">2021-08-18 23:53:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Keep in mind that wgpu is intended to be something you can write a game engine in and achieve at least <i>comparable</i> performance to going through something like Vulkan directly.  The WebGPU API is intended to be optimizable enough that even low-level applications don&#x27;t need to reach for their own solutions, and the WebGPU team have worked very hard to find universal and efficient abstractions over the underlying drivers.  It also provides unsafe opt-out functionality for cases where the goal of safety clashes too much with the performance needs of some applications (such as using precompiled shaders).<p>Given all this, what do you think is missing that makes it &quot;too general&quot; for use as the basis of a game engine?  Many of the features you&#x27;re probably thinking of are a nonstarter if you want to be cross-platform, and being efficient cross-platform is a key motivating reason to use wgpu in the first place.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 00:02:14 &#43;0000 UTC">2021-08-19 00:02:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Given all this, what do you think is missing that makes it &quot;too general&quot; for use as the basis of a game engine?<p>My concern isn’t that wgpu’s level of generality makes it unsuitable for implementing a game engine. It’s of course perfectly suitable for implementing a game engine. The concern is around the pitfalls of not architecting your game engine in terms of your own limited graphics abstraction (which may backend to wgpu).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nindalf" target="_blank">nindalf</a>   <span class="timeago" data-date="2021-08-19 06:52:33 &#43;0000 UTC">2021-08-19 06:52:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You’ve made like 15 comments on this thread with this idea. Cart is intent on sticking to his approach even after listening to your point of view.<p>I feel like we could just put this conversation on ice and check back in after 6-12 months. Bevy release notes always reach the top of HN. If they go back to creating an abstraction over wgpu, you can say “I told you so” then. And similarly, if Bevy is able to use this approach to provide support for Android, iOS and web (in addition to existing support for windows, Linux and Mac) then you need to own up to that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 12:52:13 &#43;0000 UTC">2021-08-19 12:52:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You’ve made like 15 comments on this thread with this idea.<p>Yet other people beside Cart in my thread still fail to properly understand the idea and instead think I am suggesting not using wgpu at all.<p>&gt; you can say “I told you so” then<p>My aim isn’t to say “I told you so” it’s to make sure people accurately understand the point I am making. Cart seems to understand the point I am making therefore I have made no further comments to him.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-08-19 10:24:30 &#43;0000 UTC">2021-08-19 10:24:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That depends.<p>I would agree if it were a dependency on third party closed source solution, but wgpu is a thriving and well maintained OSS project.<p>Nothing prevents you from forking it and treating it like your own code in a catastrophic scenario.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=CyberRabbi" target="_blank">CyberRabbi</a>   <span class="timeago" data-date="2021-08-19 13:01:18 &#43;0000 UTC">2021-08-19 13:01:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Nothing prevents you from forking it and treating it like your own code in a catastrophic scenario.<p>It’s much easier for deployment and distribution purposes to add a level of indirection in your codebase than maintain a fork of a large project. Maintaining a fork is a full time job in itself, especially for active projects where you’ll need to constantly be merging new changes and keeping up with the evolution of the internals of the project via the mailing list or other means.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=efnx" target="_blank">efnx</a>   <span class="timeago" data-date="2021-08-18 22:17:53 &#43;0000 UTC">2021-08-18 22:17:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is great. I switched my renderer from OpenGL to wgpu for my engine and I cannot exaggerate how much better the error reporting is. Instead of &quot;working incorrectly&quot; or simply not working and providing a vague error code (like OpenGL), wgpu tells me exactly what I did wrong, which is a life saver.<p>Also - types. Thanks wgpu team!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=porphyra" target="_blank">porphyra</a>   <span class="timeago" data-date="2021-08-18 22:40:45 &#43;0000 UTC">2021-08-18 22:40:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah yes, OpenGL&#x27;s error reporting is notoriously bad. If you forget to call disable on a vertex attribute you might just get a random error 1282 (invalid operation) somewhere down the line in a totally irrelevant part of the code, lol.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skocznymroczny" target="_blank">skocznymroczny</a>   <span class="timeago" data-date="2021-08-19 09:48:41 &#43;0000 UTC">2021-08-19 09:48:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s much better when you use a debug context, although as usual with OpenGL the details vary between graphics card drivers. I had very good debug messages with Nvidia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ComputerGuru" target="_blank">ComputerGuru</a>   <span class="timeago" data-date="2021-08-19 00:32:52 &#43;0000 UTC">2021-08-19 00:32:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does wgpu finally support OpenGL?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-19 00:36:20 &#43;0000 UTC">2021-08-19 00:36:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, we support OpenGL ES-3.0 with a few major caveats.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ComputerGuru" target="_blank">ComputerGuru</a>   <span class="timeago" data-date="2021-08-19 00:39:10 &#43;0000 UTC">2021-08-19 00:39:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s awesome. Wgpu did not support a single Linux machine I tried it on, all with various hardware&#x2F;driver combos, back when OpenGL wasn’t available and later when it was first previewed. It was the only reason I used a different abstraction.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adamnemecek" target="_blank">adamnemecek</a>   <span class="timeago" data-date="2021-08-19 04:04:17 &#43;0000 UTC">2021-08-19 04:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What abstraction did you use?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ComputerGuru" target="_blank">ComputerGuru</a>   <span class="timeago" data-date="2021-08-19 16:35:41 &#43;0000 UTC">2021-08-19 16:35:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            gfx&#x2F;gfx_hal but that was before the complete pivot disguised as a series of updates that left anyone using it for its original purpose SOL.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rhn_mk1" target="_blank">rhn_mk1</a>   <span class="timeago" data-date="2021-08-19 07:49:12 &#43;0000 UTC">2021-08-19 07:49:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is 3.0 a hard requirement, or can 2.0 also work?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-19 12:50:58 &#43;0000 UTC">2021-08-19 12:50:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have to draw the line somewhere. ES 3.0 is already complicated, adding a number of &quot;downlevel&quot; features and limits. ES 2.0 would just be more work that we can&#x27;t take right now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skocznymroczny" target="_blank">skocznymroczny</a>   <span class="timeago" data-date="2021-08-19 09:45:40 &#43;0000 UTC">2021-08-19 09:45:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Good news. I switched to WebGPU from OpenGL for my homemade game engine and I am very happy with it. I don&#x27;t use Rust though, but D, the only time I see Rust code is in the stacktraces when I get an error.<p>Personally, I think there is a lot of potential for WebGPU outside of web&#x2F;Rust ecosystems. WebGPU provides a great balance between awkwardness of OpenGL (global state, suboptimal resource binding patterns) and the verbosity and expertise required for Vulkan (barriers, synchronization, everything are needed even for a basic triangle and it only gets harder from there).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Animats" target="_blank">Animats</a>   <span class="timeago" data-date="2021-08-18 23:56:06 &#43;0000 UTC">2021-08-18 23:56:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using the previous version for months. Underneath Rend3, which handles some of the queuing and threading issues for Wgpu. Not for a web client; for complex 3D content on Linux. It&#x27;s working well. With the new version, I should be able to cross-compile Rust to Windows as well as Linux, and generate a Windows executable without having to use any Microsoft products.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mikevm" target="_blank">mikevm</a>   <span class="timeago" data-date="2021-08-19 08:39:33 &#43;0000 UTC">2021-08-19 08:39:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s your current opinion on Rust viz-a-viz Go? I remember that you had a few complaints about Rust.. I wonder if that has changed? :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 06:25:03 &#43;0000 UTC">2021-08-19 06:25:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The API that Vulkan should have been.<p>Looking forward to see it take up adoption outside of the browsers that are decades away of being an API one can rely on, and without blacklisting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tenaciousDaniel" target="_blank">tenaciousDaniel</a>   <span class="timeago" data-date="2021-08-18 23:05:56 &#43;0000 UTC">2021-08-18 23:05:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So I&#x27;m familiar with WebGPU, but I&#x27;m not really sure why there would be a native (non-web) implementation of it. What are the practical uses of this, as opposed to just using something like Vulkan?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 23:38:44 &#43;0000 UTC">2021-08-18 23:38:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See prior discussion: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23079200" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23079200</a><p>Includes a link to the relevant Fosdem talk;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=enos_feedler" target="_blank">enos_feedler</a>   <span class="timeago" data-date="2021-08-18 23:11:58 &#43;0000 UTC">2021-08-18 23:11:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cross platform. You could build a rust app with a WebGPU target that runs across web and native.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tenaciousDaniel" target="_blank">tenaciousDaniel</a>   <span class="timeago" data-date="2021-08-19 00:17:57 &#43;0000 UTC">2021-08-19 00:17:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah nice, I see. Any particular reason for Rust being used? Just curious, because I would (naively) expect to see similar projects with Golang, C++ etc but I really only see Rust.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-19 00:38:29 &#43;0000 UTC">2021-08-19 00:38:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust is great for this!<p>Google has an implementation of WebGPU called Dawn, which is quite impressive. It&#x27;s written in C++.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 00:45:00 &#43;0000 UTC">2021-08-19 00:45:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jms55" target="_blank">jms55</a>   <span class="timeago" data-date="2021-08-19 00:38:02 &#43;0000 UTC">2021-08-19 00:38:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This implementation is developed by firefox (at least, last I checked). Google has an implementation along similar lines in C++ called dawn, and I&#x27;m pretty sure webkit plans to use dawn. So you see them in Rust&#x2F;C++, but no one has written an implementation in go afaik.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dralley" target="_blank">dralley</a>   <span class="timeago" data-date="2021-08-19 00:46:45 &#43;0000 UTC">2021-08-19 00:46:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A Go implementation would only be usable from Go, whereas Rust and C++ can export a C API that many different languages can use.<p>Plus, using system libraries (DirectX, Villain, Metal, OpenGL) from Go would be a pain and possibly suffer worse from the FFI penalties than just using a higher level library written in Rust&#x2F;C++ to begin with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-19 00:40:58 &#43;0000 UTC">2021-08-19 00:40:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For all we know, Safari on Windows(!) is going to use Dawn. But anything on Apple platforms isn&#x27;t quite clear. They may get their own implementation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kangz" target="_blank">kangz</a>   <span class="timeago" data-date="2021-08-19 11:40:39 &#43;0000 UTC">2021-08-19 11:40:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you meant WebKit on Windows (used for other browsers than Safari). Once Dawn is integrated in WebKit for one OS, it should be easy to extend WebKit to use it on other OSes so maybe it will be a quick way to have WebGPU implemented in Safari?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-19 12:53:08 &#43;0000 UTC">2021-08-19 12:53:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for correcting! For a moment I started wondering if I exposed any confidential info here, phew!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=frutiger" target="_blank">frutiger</a>   <span class="timeago" data-date="2021-08-19 00:59:24 &#43;0000 UTC">2021-08-19 00:59:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Windows version of Safari was discontinued in 2012.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jweb_Guru" target="_blank">Jweb_Guru</a>   <span class="timeago" data-date="2021-08-19 00:35:50 &#43;0000 UTC">2021-08-19 00:35:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s cross-platform, safe, (reasonably) standardized, and fast (in roughly that order of priority).  Even if you only care about the last three, there are not all that many competitors outside of maybe Metal, which is not the API what most people are thinking of when they say they don&#x27;t care about working cross platform :P  Vulkan emulation exists for some older machines, but it&#x27;s generally slow and janky due to the impedence mismatch of trying to build a very low level API on top of a high level one.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 23:44:55 &#43;0000 UTC">2021-08-18 23:44:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An API that is more usable than Vulkan, a better fit for modern hardware and faster than OpenGL, and that runs on top of already existing and well-supported platform APIs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wrnr" target="_blank">wrnr</a>   <span class="timeago" data-date="2021-08-19 00:17:17 &#43;0000 UTC">2021-08-19 00:17:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then rust code using webgpu can compile to wasm. WebGPU does a bit of extra work to make it the safe to run code on the GPU from different domains. Also, Vulkan is not support on most platforms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=astlouis44" target="_blank">astlouis44</a>   <span class="timeago" data-date="2021-08-19 00:26:47 &#43;0000 UTC">2021-08-19 00:26:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            WebGPU is going to be huge for Unity&#x2F;Unreal browser games, and instrumental in architecting the open metaverse via the web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaas" target="_blank">jaas</a>   <span class="timeago" data-date="2021-08-18 22:57:07 &#43;0000 UTC">2021-08-18 22:57:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can&#x2F;will this be used in Firefox at some point?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 23:15:22 &#43;0000 UTC">2021-08-18 23:15:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, in fact in two different ways.<p>1. Firefox uses wgpu for implementing WebGPU.
+2. Applications on wgpu can be compiled in wasm for the web and ran in Firefox Nightly.<p>This is harmed by the fact WebGPU API is still not stable. Hopefully, not for long!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Shadonototro" target="_blank">Shadonototro</a>   <span class="timeago" data-date="2021-08-18 23:34:20 &#43;0000 UTC">2021-08-18 23:34:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I first thought wgpu was WebGPU, i googled and it is not<p><a href="https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;webgpu&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.w3.org&#x2F;TR&#x2F;webgpu&#x2F;</a><p>Naming is important, you want to avoid confusing as much as possible
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 23:45:28 &#43;0000 UTC">2021-08-18 23:45:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            wgpu is an implementation of WebGPU.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=math" target="_blank">math</a>   <span class="timeago" data-date="2021-08-18 23:45:06 &#43;0000 UTC">2021-08-18 23:45:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it is the WebGPU API (targeting both the web and native)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=encryptluks2" target="_blank">encryptluks2</a>   <span class="timeago" data-date="2021-08-18 21:41:53 &#43;0000 UTC">2021-08-18 21:41:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; gfx-rs community’s goal is to make graphics programming in Rust easy, fast, and reliable.<p>Yet one of their main projects involves reliance on the web for graphics programming. This is the opposite of their stated goal in my opinion.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_cart" target="_blank">_cart</a>   <span class="timeago" data-date="2021-08-18 21:56:34 &#43;0000 UTC">2021-08-18 21:56:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yup wgpu has a WebGPU backend, but it also has first-class native backends for Vulkan, Metal, DX12, and OpenGL ES (with upcoming support for DX11 and WebGL). It is designed to be a cross platform graphics API. It isn&#x27;t &quot;web based&quot;, just &quot;web compatible&quot;. And it has super solid &quot;feature detection&quot; that enables you to opt in to &quot;native only&quot; features like push constants.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=encryptluks2" target="_blank">encryptluks2</a>   <span class="timeago" data-date="2021-08-19 16:26:24 &#43;0000 UTC">2021-08-19 16:26:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So then why is this being advertised as a WebGPU implementation if it isn&#x27;t the focus? The title is misleading in that case and instead should just be titled Graphics implementation now in pure Rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zamadatix" target="_blank">zamadatix</a>   <span class="timeago" data-date="2021-08-18 21:50:45 &#43;0000 UTC">2021-08-18 21:50:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You may want to take a look at what exactly WebGPU is and the wgpu repository, particularly the examples subfolder, before drawing conclusions based on the name.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-19 08:21:12 &#43;0000 UTC">2021-08-19 08:21:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wgpu-rs doesn&#x27;t rely on the web. The API is just a simplified Vulkan. The API can be implemented for the web (and Firefox uses wgpu-rs) but it is also adequate for native applications. See <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23079200" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=23079200</a> (that was posted elsewhere in this thread) for more details.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 22:30:56 &#43;0000 UTC">2021-08-18 22:30:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pitaj" target="_blank">pitaj</a>   <span class="timeago" data-date="2021-08-18 21:46:59 &#43;0000 UTC">2021-08-18 21:46:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What are you talking about?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=devwastaken" target="_blank">devwastaken</a>   <span class="timeago" data-date="2021-08-18 22:30:52 &#43;0000 UTC">2021-08-18 22:30:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does WebGPU protect against DOS via shaders, crashes, etc? Games like VRChat, where a user can just make shaders in Unity and have them ran on everyone elses computer - could really benefit from such a thing. There&#x27;s an increase in games that are marketed as being able to create your own content that is displayed for other users in a game.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gfxgirl" target="_blank">gfxgirl</a>   <span class="timeago" data-date="2021-08-19 07:28:24 &#43;0000 UTC">2021-08-19 07:28:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s arguably not wgpu&#x27;s responsibility. It&#x27;s usually the OS&#x27;s. Windows will reset the GPU if it doesn&#x27;t return. Chrome tries to catch it before the OS IIRC.<p>In any case, other than resetting the GPU there is no way to stop DOS via shaders. I can easily write a 3 line shader that has a legit use at 1x1 pixels but will DOS your machine at 2000x2000 pixels. It&#x27;s basically the halting problem. The only known solutions are (a) reset the GPU or (b) design preemptable GPUs
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-19 08:15:13 &#43;0000 UTC">2021-08-19 08:15:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The commenter said about DoS but what about the fact that GPU memory isn&#x27;t protected? What if two different shaders run at the same time at the gpu - will one be able to read the other&#x27;s private memory?<p>There are GPUs that support IOMMU but they cost a fortune. (or is IOMMU a separate feature than just having virtual memory for GPU memory?)<p>Running user-supplied shaders seems like a security nightmare.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=garaetjjte" target="_blank">garaetjjte</a>   <span class="timeago" data-date="2021-08-19 11:28:17 &#43;0000 UTC">2021-08-19 11:28:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All modern GPUs have MMUs that prevent shaders from accessing arbitrary memory. In rare cases where it is absent (like VC4 on Raspberry Pi) driver needs to statically analyze shaders and ensure that all memory accesses are clamped.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kangz" target="_blank">kangz</a>   <span class="timeago" data-date="2021-08-19 11:46:22 &#43;0000 UTC">2021-08-19 11:46:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Other comments explain how that&#x27;s challenging&#x2F;impossible in the general case because GPU don&#x27;t have as good preemption as CPUs and because of the halting problem. However for the VRChat use case you could imagine disallowing unbounded loops so you can estimate the number of instructions and put a reasonable cap on them. This would take care of the DOS and the WebGPU runtime would take care of the rest of the security (OOB, uninitialized data, etc)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-18 23:09:22 &#43;0000 UTC">2021-08-18 23:09:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If there is too much GPU work thrown at a WebGPU implementation, the best it could do is terminate the logical device on timeout.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

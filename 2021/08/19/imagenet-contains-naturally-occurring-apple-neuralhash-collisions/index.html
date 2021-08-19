@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/imagenet-contains-naturally-occurring-apple-neuralhash-collisions/">
+
+
+    <title>ImageNet contains naturally occurring Apple NeuralHash collisions - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="ImageNet contains naturally occurring Apple NeuralHash collisions - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/imagenet-contains-naturally-occurring-apple-neuralhash-collisions/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/imagenet-contains-naturally-occurring-apple-neuralhash-collisions/">
+<meta name="twitter:title" content="ImageNet contains naturally occurring Apple NeuralHash collisions - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "ImageNet contains naturally occurring Apple NeuralHash collisions - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T16:45:28JST",
+    "dateModified": "2021-08-19T16:45:28JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.roboflow.com/nerualhash-collision/">ImageNet contains naturally occurring Apple NeuralHash collisions</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=criticaltinker" target="_blank">criticaltinker</a>   <span class="timeago" data-date="2021-08-19 17:00:41 &#43;0000 UTC">2021-08-19 17:00:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; In order to test things, I decided to search the publicly available ImageNet dataset for collisions between semantically different images. I generated NeuralHashes for all 1.43 million images and searched for organic collisions. By taking advantage of the birthday paradox, and a collision search algorithm that let me search in n(log n) time instead of the naive n^2, I was able to compare the NeuralHashes of over 2 trillion image pairs in just a few hours. </i><p><i>&gt; This is a false-positive rate of 2 in 2 trillion image pairs (1,431,168^2). Assuming the NCMEC database has more than 20,000 images, this represents a slightly higher rate than Apple had previously reported. But, assuming there are less than a million images in the dataset, it&#x27;s probably in the right ballpark. </i><p>It&#x27;s great to see the ingenuity and attention this whole debacle is receiving from the community. Maybe it will lead to advances in perceptual hashing (and also advances in consumer awareness of tech related privacy issues).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bawolff" target="_blank">bawolff</a>   <span class="timeago" data-date="2021-08-19 17:06:49 &#43;0000 UTC">2021-08-19 17:06:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ImageNet is a very well-known data set. Are we sure apple didn&#x27;t test on it when designing this algorithm?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-08-19 17:06:02 &#43;0000 UTC">2021-08-19 17:06:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It doesn’t matter if there are collisions if the two images don’t actually look the same. Do people honestly believe a single CSAM flag from an “innocent” image is going to result in someone going to prison in America?<p>PhotoDNA has existed for over a decade years doing the same thing with no instances that I have heard of.<p>If some corrupt government wants to get you they don’t need this. They can just unilaterally say you’ve done something bad without evidence and imprisonment you. It happens all the time. It’s even happened in America. Just look up DNA exonerations - people have had DNA on the scene that literally proves their innocence and they’re still locked up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bawolff" target="_blank">bawolff</a>   <span class="timeago" data-date="2021-08-19 17:08:46 &#43;0000 UTC">2021-08-19 17:08:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the two images looked the same, then the expected behaviour is a collision, so if collisions matter at all, it would only be for pictures that look different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=minitoar" target="_blank">minitoar</a>   <span class="timeago" data-date="2021-08-19 17:08:04 &#43;0000 UTC">2021-08-19 17:08:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The damage is already done by the time it gets to the point of devices being confiscated.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=endisneigh" target="_blank">endisneigh</a>   <span class="timeago" data-date="2021-08-19 17:09:00 &#43;0000 UTC">2021-08-19 17:09:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you point to a single instance of that happening where it was due to a false positive?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alfalfasprout" target="_blank">alfalfasprout</a>   <span class="timeago" data-date="2021-08-19 16:59:21 &#43;0000 UTC">2021-08-19 16:59:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s been a lot of focus on the likelihood of collisions and whether someone could upload eg; an image with a matching hash to your device to &quot;set you up&quot;, etc. But what&#x27;s still extremely concerning is that there is still no guarantee that the hash list used can&#x27;t be coopted for another purpose (eg; politically insensitive content).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=criticaltinker" target="_blank">criticaltinker</a>   <span class="timeago" data-date="2021-08-19 17:03:32 &#43;0000 UTC">2021-08-19 17:03:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The OP mentions that two countries have to agree to add a file to the list, but you&#x27;re concern is definitely valid:<p><i>&gt; Perhaps the most concerning part of the whole scheme is the database itself. Since the original images are (understandably) not available for inspection, it&#x27;s not obvious how we can trust that a rogue actor (like a foreign government) couldn&#x27;t add non-CSAM hashes to the list to root out human rights advocates or political rivals. Apple has tried to mitigate this by requiring two countries to agree to add a file to the list, but the process for this seems opaque and ripe for abuse. </i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cat199" target="_blank">cat199</a>   <span class="timeago" data-date="2021-08-19 17:05:51 &#43;0000 UTC">2021-08-19 17:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this also punts the debate to the checking process instead of the fact that there even is a process to start with..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=version_five" target="_blank">version_five</a>   <span class="timeago" data-date="2021-08-19 17:08:37 &#43;0000 UTC">2021-08-19 17:08:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes I was about to say the same thing. Hash collisions are an <i>extra</i> concern about what apple is doing, but even if they were as collision free as cryptographic hashes, that would not make the invasion of privacy OK. The technical discussion is something that apple can easily parry and is the wrong framing of this debate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=matsemann" target="_blank">matsemann</a>   <span class="timeago" data-date="2021-08-19 17:03:37 &#43;0000 UTC">2021-08-19 17:03:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>By taking advantage of the birthday paradox, and a collision search algorithm that let me search in n(log n) time instead of the naive n^2</i><p>Someone got more details on that? How does the birthday paradox come into play here?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 17:07:41 &#43;0000 UTC">2021-08-19 17:07:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JimBlackwood" target="_blank">JimBlackwood</a>   <span class="timeago" data-date="2021-08-19 17:04:16 &#43;0000 UTC">2021-08-19 17:04:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is actually really cool to see that those small changes generate the same hash. At least those parts are working well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

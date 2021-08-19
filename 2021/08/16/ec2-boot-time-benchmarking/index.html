@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/ec2-boot-time-benchmarking/">
+
+
+    <title>EC2 Boot Time Benchmarking - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="EC2 Boot Time Benchmarking - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/ec2-boot-time-benchmarking/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/ec2-boot-time-benchmarking/">
+<meta name="twitter:title" content="EC2 Boot Time Benchmarking - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "EC2 Boot Time Benchmarking - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T16:38:16JST",
+    "dateModified": "2021-08-16T16:38:16JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.daemonology.net/blog/2021-08-12-EC2-boot-time-benchmarking.html">EC2 Boot Time Benchmarking</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-08-17 08:16:54 &#43;0000 UTC">2021-08-17 08:16:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So basically, the latency from &quot;CreateInstance&quot; to &quot;I can SSH in&quot; for the fastest AMI is roughly 3 seconds, with max being 8 seconds.<p>That&#x27;s actually pretty solid. If it were 5-10x faster than that you could probably fit that into a lot of interesting use-cases for on-demand workloads. The bottleneck is the EC2 allocation itself, and I&#x27;d be interested in seeing what warm EC2 instances can do for you there.<p>That said, I think for the majority of use cases boot performance is not particularly important. If you want really fast &#x27;boot&#x27; you might just want VMs and containers - that would cut out the 3-8 seconds of instance allocation time, as well as most of the rest of the work.<p>Curious to see a follow up on what&#x27;s going on with FreeBSD - seems like it takes ages to get the network up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-17 11:16:33 &#43;0000 UTC">2021-08-17 11:16:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;If it were 5-10x faster than that you could probably fit that into a lot of interesting use-cases for on-demand workloads<p>That&#x27;s basically lambda although you lose control of the kernel and some of the userspace (although you can use Docker containers and the HTTP interface on Lambda to get some flexibility back)<p>Under the hood, Lambda uses optimized Firecracker VMs for &lt; 1 sec boot<p>&gt;I think for the majority of use cases boot performance is not particularly important<p>Anything with auto scaling. I think CI is probably a big use case (those get torn up and down pretty quickly) and you introduce hairy things like Docker in Docker unprivileged builds trying to run nested in a container
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-08-18 01:13:43 &#43;0000 UTC">2021-08-18 01:13:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, CI is a good use case. Even autoscaling I kinda feel like you need to be a lot faster to make a huge difference tbh though.<p>And yeah, Firecracker is pretty sick, but it&#x27;s also something you can just use yourself on ec2 metal instances, and then you get full control over the kernel and networking too, which is neat.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-17 16:32:42 &#43;0000 UTC">2021-08-17 16:32:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s no fundamental reason Lambda <i>needs</i> to make you lose control of the kernel; I&#x27;d love to have Lambda with a custom kernel, and that doesn&#x27;t seem like it&#x27;d be too difficult to support.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nuclearnice1" target="_blank">nuclearnice1</a>   <span class="timeago" data-date="2021-08-17 17:09:51 &#43;0000 UTC">2021-08-17 17:09:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can do lambda with containers which should get you close, I think.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-17 18:48:22 &#43;0000 UTC">2021-08-17 18:48:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A container does not include the kernel, so it doesn&#x27;t get any closer. I just want a single static binary and a kernel, not a full container.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-08-18 01:25:52 &#43;0000 UTC">2021-08-18 01:25:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder why they don&#x27;t expose a kernel instead of just the rootfs. It&#x27;s hard to imagine a great reason. Maybe they harden their guest kernel?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-19 16:24:12 &#43;0000 UTC">2021-08-19 16:24:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lambda uses a stripped down Linux kernel (afaik it has some syscalls removed)<p>The kernel surface is part of their security model. There&#x27;s some details here <a href="https:&#x2F;&#x2F;www.bschaatsbergen.com&#x2F;behind-the-scenes-lambda" rel="nofollow">https:&#x2F;&#x2F;www.bschaatsbergen.com&#x2F;behind-the-scenes-lambda</a><p>E.g. exposing the kernel would undo some intentional isolation
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-18 03:06:05 &#43;0000 UTC">2021-08-18 03:06:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At one point, Lambda didn&#x27;t expose the ability to write custom runtimes, and only provided runtimes for specific languages. People reverse-engineered those runtimes and figured out how to build custom ones. Eventually, Amazon provided a documented, well-supported way to build and run custom runtimes, but that required documenting the interfaces provided to those runtimes (e.g. environment variables and HTTP APIs instead of language-runtime-specific APIs).<p>I&#x27;d love to see Lambda support custom kernels. That would require a similar approach: document the actual VM interface provided to the kernel, including the virtual hardware and the mechanism used to expose the Lambda API. I&#x27;d guess that they haven&#x27;t yet due to a combination of 1) not enough demand for Lambda with custom kernels and 2) the freedom to modify the kernel&#x2F;hardware interface arbitrarily because they control both sides of it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-08-18 16:31:54 &#43;0000 UTC">2021-08-18 16:31:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I&#x27;d bet that it&#x27;s just a &quot;haven&#x27;t justified this work yet&quot; kinda thing. We just run Firecracker VMs ourselves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 23:10:10 &#43;0000 UTC">2021-08-17 23:10:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 23:06:09 &#43;0000 UTC">2021-08-17 23:06:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cperciva" target="_blank">cperciva</a>   <span class="timeago" data-date="2021-08-17 15:22:25 &#43;0000 UTC">2021-08-17 15:22:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Curious to see a follow up on what&#x27;s going on with FreeBSD - seems like it takes ages to get the network up.</i><p>Our BIOS boot loader is very slow.  I&#x27;ll be writing about FreeBSD boot performance in a later post.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alberth" target="_blank">alberth</a>   <span class="timeago" data-date="2021-08-17 18:30:05 &#43;0000 UTC">2021-08-17 18:30:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi Colin<p>Do you know if there is any plans on FreeBSD creating a super minimal server version that can be used as a docker host ... similar in size to Alpine Linux.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cperciva" target="_blank">cperciva</a>   <span class="timeago" data-date="2021-08-17 18:40:23 &#43;0000 UTC">2021-08-17 18:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know lots of people have made stripped down versions of FreeBSD, e.g. nanobsd.  Beyond that, I&#x27;m not aware of anything specific... but I probably wouldn&#x27;t be since I don&#x27;t pay much attention to the container space.  Try asking on one of the mailing lists maybe?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sjnu" target="_blank">sjnu</a>   <span class="timeago" data-date="2021-08-17 10:19:50 &#43;0000 UTC">2021-08-17 10:19:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where did you get 3? The fastest numbers I could see in the post add up to 7-8s
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-17 11:17:53 &#43;0000 UTC">2021-08-17 11:17:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Per the post it’s 8.4 and independent of the OS:<p>&gt; The first two values — the time taken for a RunInstances API call to successfully return, and the time taken after RunInstances returns before a DescribeInstances call says that the instance is &quot;running&quot; — are consistent across all the AMIs I tested, at roughly 1.5 and 6.9 seconds respectively<p>“Running to available” is what’s in the table, ranging from 1.23s to 70 or so.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rawoke083600" target="_blank">rawoke083600</a>   <span class="timeago" data-date="2021-08-17 16:04:26 &#43;0000 UTC">2021-08-17 16:04:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;use-cases for on-demand workloads.
+Yea true ! Maybe depending on the availability maybe they can &quot;spawn up&quot; some x-amount of &quot;spare servers&quot; to get the median time even lower..
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=citrin_ru" target="_blank">citrin_ru</a>   <span class="timeago" data-date="2021-08-17 13:34:53 &#43;0000 UTC">2021-08-17 13:34:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Curious to see a follow up on what&#x27;s going on with FreeBSD - seems like it takes ages to get the network up.<p>FreeBSD rc executes all rc.d stripts sequentially, in one thread. OpenRC AFAIK can start daemons in parallel, but unfortunately switch to OpenRC was abandoned: <a href="https:&#x2F;&#x2F;reviews.freebsd.org&#x2F;D18578" rel="nofollow">https:&#x2F;&#x2F;reviews.freebsd.org&#x2F;D18578</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 09:43:59 &#43;0000 UTC">2021-08-17 09:43:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lajosbacs" target="_blank">lajosbacs</a>   <span class="timeago" data-date="2021-08-17 08:22:54 &#43;0000 UTC">2021-08-17 08:22:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Benchmark that would interest me would be time from<p>&quot;launch GPU spot instance&quot; to &quot;I can actually use the GPU, at least by running nvidia-smi&quot;.<p>I find that this can take up to 10 minutes and for the more expensive instances, this can mean non-negligible amount of money.<p>Great article BTW
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-08-17 09:42:33 &#43;0000 UTC">2021-08-17 09:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, that explains! I thought somehow the driver installation broke despite having made an AMI of the same instance type with drivers already installed, and so I just run the install shell script every time and then it works. I figured maybe some hardware address is wrong or it&#x27;s subtly different hardware, but it being time-based makes a lot more sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ardenpm" target="_blank">ardenpm</a>   <span class="timeago" data-date="2021-08-17 08:59:15 &#43;0000 UTC">2021-08-17 08:59:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Absolutely, same here. Additionally there seems to be very little consistency with GPU instance start up times, I’ve had 30 seconds one moment and 5 minutes another. Can’t say I’ve experienced 10 minutes luckily.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cinquemb" target="_blank">cinquemb</a>   <span class="timeago" data-date="2021-08-17 09:14:16 &#43;0000 UTC">2021-08-17 09:14:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, less than a few seconds with spot consistently would be nice, but i&#x27;ve never seen it. When I was handling autoscaling via the ec2 api + python + ngnix, the daemon I wrote pretty much had to have a while loop to continuously check connectivity via ssh after a t3a.medium (with ubuntu) was kicked off from `ec2.request_spot_instances`<p>Perhaps I should have been using &quot;Clear Linux 34640&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pojzon" target="_blank">pojzon</a>   <span class="timeago" data-date="2021-08-17 09:38:33 &#43;0000 UTC">2021-08-17 09:38:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably depends on your spot price.. we always set maximum spot price at the price of “on-demand” instances but due to how priorities work it may also sometimes not work when the data center in given region is out of capacity for given type.<p>TBH the bigger issue than boottime for AWS is lack of physical resources to fulfill the demand - this is what most big players are struggling with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lajosbacs" target="_blank">lajosbacs</a>   <span class="timeago" data-date="2021-08-17 10:24:03 &#43;0000 UTC">2021-08-17 10:24:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No no, the spot price matches, the instance boots, you can ssh to it and do everything except using the GPU. E.g. you try to run your pytorch NN training, but it freezes for 5-10 minutes, then it runs fine. If you start your training again, it runs immediately.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-08-17 10:54:32 &#43;0000 UTC">2021-08-17 10:54:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder why there isn&#x27;t a well known firm running these kinds of benchmarks and &quot;true&quot; uptime reporting for the major clouds -- knowing perf stats for S3 or SQS or Kinesis etc in various geos and AZs seems like it would be useful.<p>It&#x27;s not a <i>big</i> edge, but knowing about downtime before others could certainly be an edge
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sixhobbits" target="_blank">sixhobbits</a>   <span class="timeago" data-date="2021-08-17 11:17:12 &#43;0000 UTC">2021-08-17 11:17:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gartner does exactly this - including boot times which are calculated using similar metrics (but over longer time periods and with more runs).<p>Not sure if the data is freely available, but I used to be part of the team at AWS that calculated these. See [0].<p>[0] <a href="https:&#x2F;&#x2F;www.gartner.com&#x2F;en&#x2F;cloud-decisions&#x2F;benchmark-library" rel="nofollow">https:&#x2F;&#x2F;www.gartner.com&#x2F;en&#x2F;cloud-decisions&#x2F;benchmark-library</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-08-17 11:31:59 &#43;0000 UTC">2021-08-17 11:31:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, up until now I only associated Gartner with the magic quadrant, had no idea they had this.<p>It doesn&#x27;t seem like they&#x27;ll give you up to the hour information and you do have to pay for &quot;Gartner for Professionals&quot; which I&#x27;m not familiar with but it&#x27;s definitely out there.<p>The key to this has to be supporting it cross cloud IMO -- people have the AWS vs GCP vs Azure conversation so often and I think most people know that GCP is best performance for the buck, but the other reasons to pick the other two are numerous. Might be nice to have some numbers on just how much performance differs against the others since that&#x27;s one of more quantifiable things to weigh.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-17 16:31:27 &#43;0000 UTC">2021-08-17 16:31:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you know what takes the majority of those 8 seconds on AWS?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-17 16:59:26 &#43;0000 UTC">2021-08-17 16:59:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been doing a lot of work optimizing EC2 boot time lately. I can get an instance up and connecting outbound to a network port in a few hundred milliseconds, with plenty of room left to optimize there. But all instances do indeed seem to take at least 8 seconds to come up on the AWS end, as this article points out. This has been why I haven&#x27;t put much effort into optimizing further, because that 8 seconds is entirely out of my hands.<p>I&#x27;ve tried changing the various parameters under my control: assigning a specific network address rather than making AWS pick one from the VPC, disabling metadata, using a launch template, not using a launch template, using the smallest possible AMI (just a kernel and static binary), using Fast Snapshot Restore on the snapshot in the AMI, etc. None of those makes the slightest difference in instance start time; still ~8 seconds.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zmmmmm" target="_blank">zmmmmm</a>   <span class="timeago" data-date="2021-08-17 08:25:23 &#43;0000 UTC">2021-08-17 08:25:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            would be interested to know the 95th percentiles as well as median (calculated over more runs than 10 I suppose). Its often worst case times that are important rather than average or median.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lucb1e" target="_blank">lucb1e</a>   <span class="timeago" data-date="2021-08-17 09:40:26 &#43;0000 UTC">2021-08-17 09:40:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This. I&#x27;m surprised that even people who are very well-versed in math omit statistics other than an average or, at best, a median. Is it really just me who wonders about, and in this case really expects, variability in the value? Especially given the huge differences, you might have had a few slow or a few lucky starts that shifted the middle value. Probably they saw the raw data and didn&#x27;t notice such huge spikes and would have changed the method if they had, but it&#x27;s not even mentioned so this is pure speculation on my part.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nnx" target="_blank">nnx</a>   <span class="timeago" data-date="2021-08-17 11:05:09 &#43;0000 UTC">2021-08-17 11:05:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What’s the secret of Clear Linux to boot so fast compared to other distributions?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aeyes" target="_blank">aeyes</a>   <span class="timeago" data-date="2021-08-17 13:30:58 &#43;0000 UTC">2021-08-17 13:30:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here is a presentation from 2019 showing how they reduced Kernel boot time from 3s to 300ms: <a href="https:&#x2F;&#x2F;www.linuxplumbersconf.org&#x2F;event&#x2F;4&#x2F;contributions&#x2F;281&#x2F;attachments&#x2F;216&#x2F;617&#x2F;LPC_2019_kernel_fastboot_on_the_way.pdf" rel="nofollow">https:&#x2F;&#x2F;www.linuxplumbersconf.org&#x2F;event&#x2F;4&#x2F;contributions&#x2F;281&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-17 18:36:45 &#43;0000 UTC">2021-08-17 18:36:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s for the automotive embedded version of Linux they created. The AMI isn&#x27;t quite the same, but they have a kernel specifically patched and optimized to run in a kvm hypervisor, they&#x27;re using systemd-boot, which is a bit faster than GRUB, which is likely the bootloader these other distros are using.<p>What else they did would probably require booting into Clear Linux myself and checking it out, but disabling services you don&#x27;t need so systemd isn&#x27;t wasting time, baking all kernel modules you know you&#x27;ll need directly into the kernel instead of storing them as modules, and not using initramfs if you don&#x27;t need it is probably the &quot;general&quot; answer for how to get a faster boot.<p>If you really want ultra-fast, you can turn Linux into a unikernel by compiling the kernel with your application as init, not using any other services at all, and booting via the EFISTUB instead of using a bootloader at all. I don&#x27;t know if the AWS EC2 services provides any way of doing that, though. On your own machine, you can either use efibootmgr from a different booted system on the same BIOS, or by setting boot order in the BIOS, or naming the EFISTUB whatever that magic name is that EFI automatically loads if a boot order isn&#x27;t configured in NVMEM.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-17 11:24:29 &#43;0000 UTC">2021-08-17 11:24:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Restructured the boot sequence and probably stripped everything which did not fit in a server &#x2F; cloud context, also mayhaps removed everything which was not <i>necessary</i> from the base. Not unlike openbsd.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=watermelon0" target="_blank">watermelon0</a>   <span class="timeago" data-date="2021-08-17 12:27:35 &#43;0000 UTC">2021-08-17 12:27:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be interesting to know how fast is bottlerocket[0], which is Amazon&#x27;s optimized OS for running containers, compared to Clear Linux.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;bottlerocket-os&#x2F;bottlerocket" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;bottlerocket-os&#x2F;bottlerocket</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-17 11:22:40 &#43;0000 UTC">2021-08-17 11:22:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Afaik Clear Linux is the one using Intel&#x27;s proprietary compiler optimized for Intel CPUs (so it&#x27;s theoretically generating more efficient code)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-17 11:26:00 &#43;0000 UTC">2021-08-17 11:26:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            “Better compiler options” don’t translate to a 10x lower “time to accessible”.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=paulcarroty" target="_blank">paulcarroty</a>   <span class="timeago" data-date="2021-08-17 14:16:49 &#43;0000 UTC">2021-08-17 14:16:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are using gcc: <a href="https:&#x2F;&#x2F;github.com&#x2F;clearlinux-pkgs&#x2F;gcc" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;clearlinux-pkgs&#x2F;gcc</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-17 11:28:54 &#43;0000 UTC">2021-08-17 11:28:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also would be interesting comparing regions. us-east-1 is by far the largest so would be interesting to see what, say, us-west-1 or us-east-2 look like
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spenczar5" target="_blank">spenczar5</a>   <span class="timeago" data-date="2021-08-17 14:00:57 &#43;0000 UTC">2021-08-17 14:00:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice to see this.<p>Median is an odd metric to use. I think I might truly be more interested in the mean; maybe the geometric mean.<p>I am also very interested in worst-cases with this sort of thing, so the 80th and 95th and 100th percentiles would be helpful.<p>It would be interesting to see plots of distributions, as well: are boot times really unimodal? They seem like they could easily have multiple modes, which could really mess with all of these measures (but especially the median!).<p>Because the script is open source (thank you!) I may try this myself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cperciva" target="_blank">cperciva</a>   <span class="timeago" data-date="2021-08-17 15:19:05 &#43;0000 UTC">2021-08-17 15:19:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used the median mainly because it was robust against any network glitches which occurred during testing.<p>That said, I did my final measurements from inside EC2 (rather than from my laptop over wifi) so it probably wasn&#x27;t necessary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spenczar5" target="_blank">spenczar5</a>   <span class="timeago" data-date="2021-08-17 15:23:32 &#43;0000 UTC">2021-08-17 15:23:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Network glitches will have a one-sided effect: they will make you slower, but never faster. Trimming out the top 25% slowest measurements, or even just using the minimum, can be more effective. Those are common when profiling programs for exactly that reason - the median execution time for a loop might be influenced by OS weirdness like some background job, but the minimum will hopefully really just measure the loop.<p>Anyway - probably not a big deal, probably mostly academic, although modal behavior would be really interesting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cperciva" target="_blank">cperciva</a>   <span class="timeago" data-date="2021-08-17 15:42:56 &#43;0000 UTC">2021-08-17 15:42:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes and no.  If there&#x27;s a network glitch while we&#x27;re polling to see if the instance is &quot;running&quot;, it will result in the &quot;pending-to-running&quot; time being high but the &quot;running-to-port-closed&quot; time being low.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kobalsky" target="_blank">kobalsky</a>   <span class="timeago" data-date="2021-08-17 21:24:31 &#43;0000 UTC">2021-08-17 21:24:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;cperciva&#x2F;ec2-boot-bench&#x2F;blob&#x2F;master&#x2F;ec2-boot-bench&#x2F;main.c" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;cperciva&#x2F;ec2-boot-bench&#x2F;blob&#x2F;master&#x2F;ec2-b...</a><p>C is an interesting choice of laguange for this task. They even implemented a rustic XML parser in there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josnyder" target="_blank">josnyder</a>   <span class="timeago" data-date="2021-08-17 16:35:13 &#43;0000 UTC">2021-08-17 16:35:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I clocked a custom Ubuntu-based AMI at 2.85 seconds for the median of 10 runs.<p><a href="https:&#x2F;&#x2F;gist.github.com&#x2F;hashbrowncipher&#x2F;17a92c6afb9642503876534c89005dd8" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;hashbrowncipher&#x2F;17a92c6afb9642503876...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-17 11:26:41 &#43;0000 UTC">2021-08-17 11:26:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if EFI boot with something like efistub would be a even faster. Afaik EC2 BIOS boots which has some fixed overhead (although Clear Linux still manages to boot very quickly)<p>Also on boot, I &#x2F;think&#x2F; EC2 pulls down the AMI to EBS from S3 so theoretically smaller AMIs might be faster but not sure
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-17 13:44:37 &#43;0000 UTC">2021-08-17 13:44:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My experience with desktop hardware is that traditional BIOS boots faster than EFI, because the former does much less as well. (This is not the difference between &quot;BIOS boot&quot; and &quot;EFI boot&quot; options in an EFI BIOS, but rather a &quot;pure native&quot; BIOS vs &quot;pure native&quot; EFI with the same motherboard.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-19 12:08:12 &#43;0000 UTC">2021-08-19 12:08:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was that with or without a bootloader? My understanding was EFI was marginally faster to initialize (which might not be true based on what you&#x27;re saying) but you could also skip the bootloader and load the kernel directly (EFISTUB) which would also eliminate initram (which seems fine assuming you&#x27;re using vanilla VMs on popular hypervisors&#x2F;providers)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoshTriplett" target="_blank">JoshTriplett</a>   <span class="timeago" data-date="2021-08-17 16:28:00 &#43;0000 UTC">2021-08-17 16:28:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve tested both EFI and BIOS boots on EC2, and they have about the same overhead.<p>And I&#x27;ve tested AMIs that are no bigger than a Linux kernel and a single static binary; times are still on par with what&#x27;s listed here. Still takes 7-8 seconds before the first user-controlled instruction gets to run.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-19 12:10:17 &#43;0000 UTC">2021-08-19 12:10:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gotcha, thanks for the info<p>That&#x27;s a bit disappointing but I guess AWS has spent a lot of time optimizing Lambda vs EC2
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=miyuru" target="_blank">miyuru</a>   <span class="timeago" data-date="2021-08-17 13:34:39 &#43;0000 UTC">2021-08-17 13:34:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; EC2 pulls down the AMI to EBS from S3 so theoretically smaller AMIs might be faster<p>I managed to create a 1GB AMI of debian. Will be interesting to test this.<p><a href="https:&#x2F;&#x2F;blog.miyuru.lk&#x2F;aws-root-volume&#x2F;" rel="nofollow">https:&#x2F;&#x2F;blog.miyuru.lk&#x2F;aws-root-volume&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=glotzerhotze" target="_blank">glotzerhotze</a>   <span class="timeago" data-date="2021-08-17 08:45:20 &#43;0000 UTC">2021-08-17 08:45:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I‘d be interested in the time being spent running user-data modifications, so benchmarking bootstrapping scripts would be possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pojzon" target="_blank">pojzon</a>   <span class="timeago" data-date="2021-08-17 09:41:07 &#43;0000 UTC">2021-08-17 09:41:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isint that strictly depenant on completely different factors like network latency? And kind of bootstrap scripts you wanna run?<p>Or are you talking about cloud-init which is run by AWS themselves before running userdata scripts ?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=usrme" target="_blank">usrme</a>   <span class="timeago" data-date="2021-08-17 13:13:50 &#43;0000 UTC">2021-08-17 13:13:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does anybody know if something like this exists for Azure as well?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zbjornson" target="_blank">zbjornson</a>   <span class="timeago" data-date="2021-08-17 15:12:10 &#43;0000 UTC">2021-08-17 15:12:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            PerfkitBenchmarker has a boot timer like this (time to SSH) that works for all major cloud providers.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;GoogleCloudPlatform&#x2F;PerfKitBenchmarker" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;GoogleCloudPlatform&#x2F;PerfKitBenchmarker</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

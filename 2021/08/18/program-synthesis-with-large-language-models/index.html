@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/program-synthesis-with-large-language-models/">
+
+
+    <title>Program Synthesis with Large Language Models - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Program Synthesis with Large Language Models - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/program-synthesis-with-large-language-models/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/program-synthesis-with-large-language-models/">
+<meta name="twitter:title" content="Program Synthesis with Large Language Models - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Program Synthesis with Large Language Models - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T02:05:07JST",
+    "dateModified": "2021-08-18T02:05:07JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://arxiv.org/abs/2108.07732">Program Synthesis with Large Language Models</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tasdfqwer0897" target="_blank">tasdfqwer0897</a>   <span class="timeago" data-date="2021-08-18 02:55:00 &#43;0000 UTC">2021-08-18 02:55:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey, I am one of the lead authors of this paper. 
+Happy to answer questions.
+This is a twitter thread going over the main results:<p><a href="https:&#x2F;&#x2F;twitter.com&#x2F;gstsdn&#x2F;status&#x2F;1427794393373626368" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;gstsdn&#x2F;status&#x2F;1427794393373626368</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=criticaltinker" target="_blank">criticaltinker</a>   <span class="timeago" data-date="2021-08-18 03:41:24 &#43;0000 UTC">2021-08-18 03:41:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            First, congratulations to you and the other authors - this is a very informative and accessible paper with impressive results.<p><i>&gt; On both datasets, we find that synthesis performance scales log-linearly with model size </i><p>This &quot;scaling law&quot; observation is starting to become a major trend in NLP [1] and other other modalities such as speech recognition [2] and protein structure&#x2F;function prediction [3]. Do you have any insight or commentary to offer regarding the next step in improving program synthesis? For example, will techniques to scale up model size continue to be a primary focus (eg as in [4]), or do you see improvements in Transformer and attention based architectures as essential for pushing the limits of what has been achieved by you and your colleagues?<p><i>&gt; We find that even our best models are generally unable to predict the output of a program given a specific input. </i><p>What do you think about leveraging unsupervised training to improve program synthesis? Could synthesized programs be executed on generated input in a way that supports contrastive learning [5]?<p>Thanks in advance for your time and comments here.<p>[1] Scaling Laws for Neural Language Models
+<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2001.08361" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2001.08361</a><p>[2] Pushing the Limits of Semi-Supervised Learning for Automatic Speech Recognition
+<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2010.10504" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2010.10504</a><p>[3] ProtTrans: Towards Cracking the Language of Life’s Code Through Self-Supervised Learning
+<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2007.06225" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2007.06225</a><p>[4] Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity
+<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2101.03961" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2101.03961</a><p>[5] A Simple Framework for Contrastive Learning of Visual Representations
+<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2108.00587.pdf" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2108.00587.pdf</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tasdfqwer0897" target="_blank">tasdfqwer0897</a>   <span class="timeago" data-date="2021-08-18 03:59:02 &#43;0000 UTC">2021-08-18 03:59:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; do you see improvements in Transformer or attention based architectures as essential...<p>I do personally, but there is some disagreement about this in the field. 
+In fact, I would go further and say that (in addition to using large pre-trained models) we will need methods of training that are pretty substantially different in order to elicit robust reasoning behavior.<p>Even supposing I&#x27;m wrong about this, if you go and look at the scaling plots in figure 3 and try to figure out how big your model would need to be in order to be solving most of these problems, you&#x27;d get a really big number.
+Even if you had such a big model, it would still require post-processing of the samples to actually get the right answers. 
+From the perspective of applications, that&#x27;s fine, but it&#x27;s a little unsatisfying from the perspective of studying intelligence. 
+Even with those caveats (!) these problems aren&#x27;t that hard compared to general software engineering tasks...<p>&gt; What do you think about leveraging unsupervised training to improve program synthesis? Could synthesized programs be executed on generated input in a way that supports contrastive learning [5]?<p>I think this is an interesting idea and someone should try it!
+I do think that, even restricting our attention to just getting neural networks to execute programs, that we will need to do something a little more drastic to robustly get the results we want.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 08:10:33 &#43;0000 UTC">2021-08-18 08:10:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; it&#x27;s a little unsatisfying from the perspective of studying intelligence<p>This power-law behaviour is exactly what you get when modelling a non-computable function.<p>Eg., consider approximating the mean of sin^2(x) over -pi to +pi.<p>If you sample x 10^s times (s = 1, 2, 3, ...) the difference from the non-computable analytic answer (0.5) scales log-linear (ie., power-law).<p><pre><code>    { pwr : 
+            np.log(0.5 - (
+                np.sin(np.linspace(-np.pi, +np.pi, 10**pwr)
+            ) ** 2).mean()) 
+        for pwr in range(1, 8) 
+    }
+</code></pre>
+It is my view that intelligence isn&#x27;t computable, and that any approximation method to some layer of intelligence will run-up against this problem.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-18 14:25:03 &#43;0000 UTC">2021-08-18 14:25:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;re mixing up terminology here, because sin^2(x) is computable.<p>I mean, if there is a process to progressively give better estimates of the output of a function, then this function is computable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 14:43:26 &#43;0000 UTC">2021-08-18 14:43:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            sine is a real-valued function<p>There is a computable version for computable inputs, ie., we ask &quot;what is sin(x)?&quot; for some computable-number x_computable.<p>But there is no computable version for a non-computable real number, x_real.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-18 16:05:03 &#43;0000 UTC">2021-08-18 16:05:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for the clarification.<p>&gt; But there is no computable version for a non-computable real number, x_real.<p>That&#x27;s true[0]. But consider that you will never receive something non-computable as input to a program, ever. (if you&#x27;re allowed to approximate the input until you have enough digits to compute what you need, then the input is computable)<p>Really, I think the best way to view sin(x) is as a function that receives a stream of digits 0.2345345323.. and returns a stream of digits 0.0040933884... - this computable version of sine completely captures every thing we could possibly do with it in a program. Operating with floating point numbers, then, is just mostly truncating the input and output stream.<p>[0] At least in classical logic; in intuitionistic logic, sin : Real -&gt; Real is computable and is equivalent to this idea of receiving and returning streams of digits.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mjburgess" target="_blank">mjburgess</a>   <span class="timeago" data-date="2021-08-18 17:02:17 &#43;0000 UTC">2021-08-18 17:02:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; completely captures every thing we could possibly do with it in a program<p>Yes, but this is far less than nature can do with it -- which is my point, that discrete computation is extremely limited.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-19 08:40:59 &#43;0000 UTC">2021-08-19 08:40:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, I see. Then we&#x27;re in agreement, our digital computers are less powerful than analog computers with unlimited precision. What we don&#x27;t know if such analog computer could exist -- or even if the universe is equivalent to one.<p>That is, we don&#x27;t know if nature is actually continuous. Perhaps spacetime becomes discrete in the Planck scale or something like that (I know past attempts have been unsuccessful, but still, it might be). But if nature is continuous, there is probably a fundamental limitation on harnessing those precision bits past a certain limit. Nature&#x27;s continuous variables might have enough symmetries as to make it Turing-complete. In this case, computation with full real numbers wouldn&#x27;t ever happen in this universe.<p>I mean, if it happens, the Church-Turing thesis would be false, and the consequences would be far more strange.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=YeGoblynQueenne" target="_blank">YeGoblynQueenne</a>   <span class="timeago" data-date="2021-08-18 13:57:55 &#43;0000 UTC">2021-08-18 13:57:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hello Augustus and thanks for posting the link to your co-authored paper on HN.<p>I will have to read the paper more carefully however having quickly scanned the
+paper it seems that it only reports empirical resuls. In particular, there seem
+to be no theoretical results about lernability of programs from natural language
+specifications using large language models. To make it more plain - how do we
+know these techniques work as well as reported on problems other than the ones
+in the dataset introduced in your work?<p>Note that I&#x27;m not asking why you introduced a new dataset, this seems to be
+motivated in the abstract. I&#x27;m asking: how do we know how well this kind of
+thing works (&quot;this kind of thing&quot; being what it says in the title) in the
+general case?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=muds" target="_blank">muds</a>   <span class="timeago" data-date="2021-08-18 03:34:40 &#43;0000 UTC">2021-08-18 03:34:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great work! I found the results in Fig 16 pretty interesting [0]...<p>From response 1, it seems that the model has very little confidence in its decision but get the correct answer while, on the contrary, in response 3, the model seems very confident in its incorrect answer. Is this usually a trend that you see with large models? How hard is it, generally, to make such models &quot;aware&quot; of their own shortcomings?<p>[0]: <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2108.07732.pdf#figure.caption.21" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;2108.07732.pdf#figure.caption.21</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tasdfqwer0897" target="_blank">tasdfqwer0897</a>   <span class="timeago" data-date="2021-08-18 03:49:44 &#43;0000 UTC">2021-08-18 03:49:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it might be a mistake to think that the model is not confident because its response is something a human might say if they were not confident. The model is &#x27;just&#x27; completing the prefix text with something that has high likelihood from its perspective, so it may just be used to, for instance, seeing people hedge in similar conversations it has read in its training data.<p>More generally, whether these models are well-calibrated (that is, they know what they don&#x27;t know) is an important area of research. I don&#x27;t have references offhand, but I think it&#x27;s true broadly speaking that these larger pre-trained models do tend to be better calibrated.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ipsum2" target="_blank">ipsum2</a>   <span class="timeago" data-date="2021-08-18 03:31:07 &#43;0000 UTC">2021-08-18 03:31:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t see it in the paper, but is the code and model going to be released? Would be great to play around with this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tasdfqwer0897" target="_blank">tasdfqwer0897</a>   <span class="timeago" data-date="2021-08-18 03:50:42 &#43;0000 UTC">2021-08-18 03:50:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunately not, but we do release both the programming dataset and the math questions dataset, so in principle you could try those out with one of the open-source models from e.g. huggingFace.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ipsum2" target="_blank">ipsum2</a>   <span class="timeago" data-date="2021-08-18 04:27:19 &#43;0000 UTC">2021-08-18 04:27:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure there are legitimate reasons for not releasing the model, but it would&#x27;ve been a huge boon for the community :(.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rollulus" target="_blank">rollulus</a>   <span class="timeago" data-date="2021-08-18 08:08:29 &#43;0000 UTC">2021-08-18 08:08:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apart from the boon: reproducibility is a major principle of the scientific method.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=trainwithsgd" target="_blank">trainwithsgd</a>   <span class="timeago" data-date="2021-08-18 22:05:55 &#43;0000 UTC">2021-08-18 22:05:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting read! How would you differentiate your paper from OpenAI&#x27;s Codex paper (<a href="https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2107.03374" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2107.03374</a>)? They also show smooth scaling with parameters, that repeated sampling works, and that BLEU score correlates poorly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mountainriver" target="_blank">mountainriver</a>   <span class="timeago" data-date="2021-08-18 03:33:24 &#43;0000 UTC">2021-08-18 03:33:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We find that even our best models are generally unable to predict the output of a program given a specific input.<p>I’ve been thinking on this quite a bit, it’s an interesting property of language models in that they are essentially associative lookup machines.<p>It feels on some level that we need to be combining this kind of reasoning with something like world models.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tasdfqwer0897" target="_blank">tasdfqwer0897</a>   <span class="timeago" data-date="2021-08-18 03:52:51 &#43;0000 UTC">2021-08-18 03:52:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I personally agree that this experiment is evidence that there are certain problems that cannot be solved simply by making the models bigger, and one of the main research questions I&#x27;m interested in is what we need to do to elicit more reasoning-like capabilities from them.<p>There are people who fall more on the side of bitter-lesson&#x2F;scaling-law-maximalism, and I think it&#x27;s probably healthy and valuable that there are people in the research community placing both types of bet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=algo_trader" target="_blank">algo_trader</a>   <span class="timeago" data-date="2021-08-18 14:57:07 &#43;0000 UTC">2021-08-18 14:57:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; elicit more reasoning-like capabilities from them.<p>But will a branch-and-search with some-noisy-evaluator get us there? Obviously this is easier with some domains.<p>Or maybe simply using increasing large &quot;prompts&quot; or &quot;input specification&quot; to specify the desired end result. There might be a while scaling law hiding there ..
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 07:06:07 &#43;0000 UTC">2021-08-18 07:06:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=qualudeheart" target="_blank">qualudeheart</a>   <span class="timeago" data-date="2021-08-18 15:10:36 &#43;0000 UTC">2021-08-18 15:10:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is this scaling trend expected to continue? If so how long?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

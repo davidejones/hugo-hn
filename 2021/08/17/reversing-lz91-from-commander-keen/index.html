@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/reversing-lz91-from-commander-keen/">
+
+
+    <title>Reversing LZ91 from Commander Keen - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Reversing LZ91 from Commander Keen - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/reversing-lz91-from-commander-keen/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/reversing-lz91-from-commander-keen/">
+<meta name="twitter:title" content="Reversing LZ91 from Commander Keen - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Reversing LZ91 from Commander Keen - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T15:26:10JST",
+    "dateModified": "2021-08-17T15:26:10JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.lodsb.com/reversing-lz91-from-commander-keen">Reversing LZ91 from Commander Keen</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pdw" target="_blank">pdw</a>   <span class="timeago" data-date="2021-08-17 21:01:02 &#43;0000 UTC">2021-08-17 21:01:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The article doesn&#x27;t make this explicit, but this game is just using LZEXE. This was an executable file compressor that was very widely used in the early 90s. An early project by Fabrice Bellard!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalCoder" target="_blank">TacticalCoder</a>   <span class="timeago" data-date="2021-08-17 22:55:10 &#43;0000 UTC">2021-08-17 22:55:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh my goodness!  I spend countless hours using LZEXE back in the days and never made the link.  I never realized it was made by Fabrice Bellard!<p>From his homepage:<p>&gt; &quot;I wrote LZEXE in 1989 and 1990 when I was 17.&quot;<p>Incredible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_kdave" target="_blank">_kdave</a>   <span class="timeago" data-date="2021-08-17 22:30:31 &#43;0000 UTC">2021-08-17 22:30:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also tools like CUP386 did that for free, but anyway interesting read.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=albertzeyer" target="_blank">albertzeyer</a>   <span class="timeago" data-date="2021-08-17 21:00:00 &#43;0000 UTC">2021-08-17 21:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that Commander Keen itself was also reverse engineered. The most active project is Commander Genius: <a href="https:&#x2F;&#x2F;clonekeenplus.sourceforge.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;clonekeenplus.sourceforge.io&#x2F;</a> <a href="https:&#x2F;&#x2F;github.com&#x2F;gerstrong&#x2F;Commander-Genius" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;gerstrong&#x2F;Commander-Genius</a>
+(You will find some code by me in this. :))
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=indentit" target="_blank">indentit</a>   <span class="timeago" data-date="2021-08-17 18:51:08 &#43;0000 UTC">2021-08-17 18:51:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forgive me, as I&#x27;ve never disassembled anything myself(!), but would it not be helpful to be able to disassemble an executable into pseudo-code or something (I guess ideally something a bit higher level but re-compilable) alongside the assembly language? It seems to me that it could be much easier to understand what is happening that way, no?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AnIdiotOnTheNet" target="_blank">AnIdiotOnTheNet</a>   <span class="timeago" data-date="2021-08-17 19:39:14 &#43;0000 UTC">2021-08-17 19:39:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;d think so, but it turns out that reversing compiled code in an automated fashion doesn&#x27;t usually produce very readable results:<p><a href="https:&#x2F;&#x2F;derevenets.com&#x2F;examples.html" rel="nofollow">https:&#x2F;&#x2F;derevenets.com&#x2F;examples.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Akronymus" target="_blank">Akronymus</a>   <span class="timeago" data-date="2021-08-18 11:14:06 &#43;0000 UTC">2021-08-18 11:14:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sometimes even assembly is too high level too: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=eunYrrcxXfw" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=eunYrrcxXfw</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mywittyname" target="_blank">mywittyname</a>   <span class="timeago" data-date="2021-08-17 19:50:33 &#43;0000 UTC">2021-08-17 19:50:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sometimes you get lucky and debug information is left in the binary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=davikrr" target="_blank">davikrr</a>   <span class="timeago" data-date="2021-08-17 20:10:10 &#43;0000 UTC">2021-08-17 20:10:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hex-Rays begs to differ.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mips_avatar" target="_blank">mips_avatar</a>   <span class="timeago" data-date="2021-08-17 20:16:49 &#43;0000 UTC">2021-08-17 20:16:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some delta compressors like Google Courgette actually do this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mschuster91" target="_blank">mschuster91</a>   <span class="timeago" data-date="2021-08-17 19:16:15 &#43;0000 UTC">2021-08-17 19:16:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not possible in the most cases - unless you have the exact same version of the compiler that was used <i>and</i> you can figure out the build settings that were used (especially optimizations, but also stuff like include order), you can&#x27;t recreate the assembler code from pseudo &#x2F; C code.<p>Modernizations are especially tricky. Modern compilers can do all sort of weird magic, sometimes combining two or more lines of code into one instruction. Old school compilers don&#x27;t optimize much which is part of why performance-critical parts of game engines were written in Assembler for a long time.<p>Not to mention that some stuff you can do in Assembler has no equivalent in higher-level code (e.g. dealing with raw stack frames), and even Assembler to byte code is nowhere near 1:1 reversible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bugfix" target="_blank">bugfix</a>   <span class="timeago" data-date="2021-08-17 19:47:09 &#43;0000 UTC">2021-08-17 19:47:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You might not get the exact same code, but it is certainly possible to generate C&#x2F;pseudo-code from the binary.<p>IDA Pro and Ghidra can identify functions and generate the equivalent C code. I know that this is not the original code, but it does help a bit when you are trying to get an idea of what a large function doing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kaoD" target="_blank">kaoD</a>   <span class="timeago" data-date="2021-08-17 20:10:28 &#43;0000 UTC">2021-08-17 20:10:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re both right.<p>I&#x27;ve used Ghidra to reverse-engineer a game&#x27;s serialization format[0] and, even though the C-ish result was marginally better than manually tracking registers across the disassembly, it was far from understandable.<p>A great deal of the work was cleaning up the resulting C into something that a human would&#x27;ve written instead of the garbage ASM-with-C-syntax that Ghidra produced.<p>That is nowhere near what OP was suggesting (although useful nonetheless).<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;alvaro-cuesta&#x2F;townsclipper" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;alvaro-cuesta&#x2F;townsclipper</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mschuster91" target="_blank">mschuster91</a>   <span class="timeago" data-date="2021-08-17 20:29:40 &#43;0000 UTC">2021-08-17 20:29:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m actually reverse-engineering a game myself... interestingly, for me Ghidra produces very good results, way better than IDA did ten years ago. On the other hand I may be lucky simply because 1996 Borland C++ is a pretty dumb, unoptimizing compiler and there is absolutely no copy protection or whatever present in the game, not even a dead code elimination.<p>Only thing where Ghidra lacks any form of knowledge of is how to deal with the FS register that is used for SEH on win32... it just marks it as in_FS_offset with no way to tell it that it can replace FS:[0xXX] with appropriate TIB access macros.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stevekemp" target="_blank">stevekemp</a>   <span class="timeago" data-date="2021-08-18 05:37:21 &#43;0000 UTC">2021-08-18 05:37:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Off-Topic but the domain-name for that site is perfect.  (I wonder how many people these days would even recognize it!)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

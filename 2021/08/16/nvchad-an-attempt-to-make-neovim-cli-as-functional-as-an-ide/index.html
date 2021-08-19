@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/nvchad-an-attempt-to-make-neovim-cli-as-functional-as-an-ide/">
+
+
+    <title>NvChad: An attempt to make Neovim CLI as functional as an IDE - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="NvChad: An attempt to make Neovim CLI as functional as an IDE - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/nvchad-an-attempt-to-make-neovim-cli-as-functional-as-an-ide/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/nvchad-an-attempt-to-make-neovim-cli-as-functional-as-an-ide/">
+<meta name="twitter:title" content="NvChad: An attempt to make Neovim CLI as functional as an IDE - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "NvChad: An attempt to make Neovim CLI as functional as an IDE - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T23:35:58JST",
+    "dateModified": "2021-08-16T23:35:58JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/NvChad/NvChad">NvChad: An attempt to make Neovim CLI as functional as an IDE</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hkmaxpro" target="_blank">hkmaxpro</a>   <span class="timeago" data-date="2021-08-19 17:02:45 &#43;0000 UTC">2021-08-19 17:02:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Similar projects:<p>LunarVim <a href="https:&#x2F;&#x2F;github.com&#x2F;lunarvim&#x2F;lunarvim" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lunarvim&#x2F;lunarvim</a><p>Doom Nvim <a href="https:&#x2F;&#x2F;github.com&#x2F;NTBBloodbath&#x2F;doom-nvim" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;NTBBloodbath&#x2F;doom-nvim</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rubyn00bie" target="_blank">rubyn00bie</a>   <span class="timeago" data-date="2021-08-19 17:02:48 &#43;0000 UTC">2021-08-19 17:02:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tangentially: What GUI (presumably some skin on Gnome or KDE) are they using in the screenshots? To be clear, I don&#x27;t mean for NeoVIM, I just mean in general. It looks fucking sweet!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hkmaxpro" target="_blank">hkmaxpro</a>   <span class="timeago" data-date="2021-08-19 17:08:41 &#43;0000 UTC">2021-08-19 17:08:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            bspwm<p>See <a href="https:&#x2F;&#x2F;github.com&#x2F;siduck76&#x2F;dotfiles" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;siduck76&#x2F;dotfiles</a> and <a href="https:&#x2F;&#x2F;github.com&#x2F;NvChad&#x2F;NvChad&#x2F;issues&#x2F;22#issuecomment-813844679" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;NvChad&#x2F;NvChad&#x2F;issues&#x2F;22#issuecomment-8138...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soperj" target="_blank">soperj</a>   <span class="timeago" data-date="2021-08-19 17:07:01 &#43;0000 UTC">2021-08-19 17:07:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d also like to know.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattrighetti" target="_blank">mattrighetti</a>   <span class="timeago" data-date="2021-08-19 17:06:18 &#43;0000 UTC">2021-08-19 17:06:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was wondering the same
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=davidkunz" target="_blank">davidkunz</a>   <span class="timeago" data-date="2021-08-19 16:14:14 &#43;0000 UTC">2021-08-19 16:14:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If someone is interested in using Neovim as an IDE (without pre-configured setups), I recorded a YouTube series: <a href="https:&#x2F;&#x2F;youtube.com&#x2F;playlist?list=PLu-ydI-PCl0OEG0ZEqLRRuCrMJGAAI0tW" rel="nofollow">https:&#x2F;&#x2F;youtube.com&#x2F;playlist?list=PLu-ydI-PCl0OEG0ZEqLRRuCrM...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=clearing" target="_blank">clearing</a>   <span class="timeago" data-date="2021-08-19 16:44:10 &#43;0000 UTC">2021-08-19 16:44:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll be honest. I really like projects like these (Spacemacs  is another one that comes to mind), I&#x27;ve been a Vim user for a decade or so. Now I use IntelliJ since I primarily work with Spring, but for other side projects or one-off tasks these setups are really cool.<p>That being said, if this is intended to be widely adopted&#x2F;viewed like Spacemacs, the marketing and presentation need a bit of work. Between the &#x27;Chad&#x27; signifier and the screenshots sharing a color scheme with a tricked-out desktop and other terminal tabs, it&#x27;s hard to tell if this is a serious standalone project or, to be frank, someone just showing off.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nicolaslem" target="_blank">nicolaslem</a>   <span class="timeago" data-date="2021-08-19 16:22:49 &#43;0000 UTC">2021-08-19 16:22:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s hard for me to imagine anyone installing this project and using it. Even when picking and installing vim plugins one by one it&#x27;s hard to remember what they all do and how to use them. I think it&#x27;s better to see this project as an inspiration, like looking at someone else&#x27;s dotfiles.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjzzleep" target="_blank">rjzzleep</a>   <span class="timeago" data-date="2021-08-19 17:06:33 &#43;0000 UTC">2021-08-19 17:06:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting point. I think it has two sides to it:<p>1. I started using Spacemacs which got me into using Emacs(mainly for org mode in the beginning). I&#x27;m not capable of building an emacs config from scratch(nor do I care).<p>2. In Vim though I already have my vim config and have been customizing it. When I try to use these neovim distributions, they&#x27;re very far off how I configured my vim and I have no idea how to reconcile these two things.<p>I feel like once you are capable enough to configure it on your own, you won&#x27;t really be happy with these things, but neovim is also almost like the ever changing javascript ecosystem. There are new completion engines coming out every day, new file trees, etc. etc. I don&#x27;t feel like changing to the next best lsp engine every 6 months.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=davidkunz" target="_blank">davidkunz</a>   <span class="timeago" data-date="2021-08-19 16:27:57 &#43;0000 UTC">2021-08-19 16:27:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I agree with you. The installation of a plugin is the easy part. Properly configuring it to fit _your_ needs and remembering the commands is the hard part. No all-in-one setups can make this effort go away.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DiabloD3" target="_blank">DiabloD3</a>   <span class="timeago" data-date="2021-08-19 16:13:57 &#43;0000 UTC">2021-08-19 16:13:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think people who are trying to turn Vim into an IDE entirely miss the point on why IDEs, generally, eat productivity, instead of produce productivity.<p>That said, Telescope.nvim is a powerhouse of awesome. This guy did the right thing by making that the centerpiece of his config.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mixedCase" target="_blank">mixedCase</a>   <span class="timeago" data-date="2021-08-19 16:26:50 &#43;0000 UTC">2021-08-19 16:26:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Enlighten us, I am missing the point I guess.
+I&#x27;m way more productive with VS Code than Neovim until I fully configure Neovim to have syntax highlighting, LSP integration, file search and so many other plugins.
+I don&#x27;t think IDEs eat productivity, my only gripes with them are resource consumption, which I can fix to a certain degree, and decentralization overhead, when the IDE is language-specific.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lordleft" target="_blank">lordleft</a>   <span class="timeago" data-date="2021-08-19 16:39:24 &#43;0000 UTC">2021-08-19 16:39:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            VS Code is kind of the ideal example of an IDE because it&#x27;s not an IDE until you want it to be, in the precise ways you want it to be.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=harryvederci" target="_blank">harryvederci</a>   <span class="timeago" data-date="2021-08-19 16:02:05 &#43;0000 UTC">2021-08-19 16:02:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looking good! I&#x27;m too invested in my own config, but will definitely look for some ideas to steal :)<p>Random remark: lots of Dutch words contain &quot;jk&quot;, so insert-remapping that to &lt;ESC&gt; can be quite confusing to some people.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

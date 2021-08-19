@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/lets-write-a-compiler-part-3-a-parser/">
+
+
+    <title>Let&#39;s write a compiler, part 3: A parser - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Let&#39;s write a compiler, part 3: A parser - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/lets-write-a-compiler-part-3-a-parser/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/lets-write-a-compiler-part-3-a-parser/">
+<meta name="twitter:title" content="Let&#39;s write a compiler, part 3: A parser - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Let\u0027s write a compiler, part 3: A parser - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T13:37:08JST",
+    "dateModified": "2021-08-16T13:37:08JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://briancallahan.net/blog/20210816.html">Let&#39;s write a compiler, part 3: A parser</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-16 16:35:47 &#43;0000 UTC">2021-08-16 16:35:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anyone can do whatever they want, and if you do want to write a parser in C this may be a good guide for you. But it&#x27;s hard to understand the benefit to writing a language frontend in C, generally speaking. (An obvious exception might be if you are writing one of the first languages for a new architecture&#x2F;operating system or one where only a C compiler exists.)<p>If you are writing a compiler, you&#x27;ll just be emitting some other language anyway so the parser&#x2F;emitter being in C doesn&#x27;t really give you anything even if you are emitting C.<p>If you are writing an interpreter and you want performance, you&#x27;re going to have to emit bytecode and have a bytecode interpreter. Wanting your bytecode _interpreter_ to be in C could make sense but your frontend could just emit the bytecode to a file and your interpreter written in C could read from that file.<p>It&#x27;s a handwritten parser too so it&#x27;s not like you picked the language so you could use a certain complex or nice parsing library.<p>And it&#x27;s not like the performance (or binary size) of the parser&#x2F;emitter typically matters so much that you need even that part to be so much faster (or smaller) than a parser&#x2F;emitter in Go&#x2F;Java&#x2F;C#&#x2F;whatever.<p>The overhead to writing C makes it a less friendly introduction to the topic if you have never written a compiler or interpreter (or parser, specifically) before.<p>Again, you can do what you want. And if you must do it in C, you will probably value any posts like this. Just wanted to throw out reasons you may not want to do this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=foxfluff" target="_blank">foxfluff</a>   <span class="timeago" data-date="2021-08-16 18:49:48 &#43;0000 UTC">2021-08-16 18:49:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Brian&#x27;s choice to use C is perfectly well justified:<p>&quot;I am thinking that we should choose C to implement our PL&#x2F;0 compiler. Eventually we will want to have this compiler run on many different platforms, including Unix, MS-DOS, and potentially even CP&#x2F;M. C is a language that will run on every platform I would want to run our PL&#x2F;0 compiler on, so C works for me. C also requires no special setup so our usual development platform of vim on OpenBSD will work just fine. Finally, it will help with bootstrapping the self-hosting version of the PL&#x2F;0 compiler, since we in theory could natively compile the C implementation on our target platform then use that to compile the PL&#x2F;0 implementation, also on the target platform.&quot;<p>The reader may learn something from these posts whether they choose to write a compiler in C or not.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-16 19:03:02 &#43;0000 UTC">2021-08-16 19:03:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t mean to debate Brian&#x27;s choice (your quote shows it does fall into my exception anyway) but mention to readers here why they may be more interested in following guides on compiling&#x2F;interpreting implemented in other languages than C.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fishmaster" target="_blank">fishmaster</a>   <span class="timeago" data-date="2021-08-16 22:20:00 &#43;0000 UTC">2021-08-16 22:20:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C is actually a huge disadvantage here for me, since I have no use for it outside of this tutorial which makes it hard to justify learning it on top of learning how a compiler works...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=david2ndaccount" target="_blank">david2ndaccount</a>   <span class="timeago" data-date="2021-08-16 18:15:16 &#43;0000 UTC">2021-08-16 18:15:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C is a simple language and at least used to be a language almost everyone knew.<p>I don’t know why they’re writing the parser using globals though instead of passing a pointer to a parser state struct.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=arcticbull" target="_blank">arcticbull</a>   <span class="timeago" data-date="2021-08-16 19:17:50 &#43;0000 UTC">2021-08-16 19:17:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C is an incredibly complex language, it just appears simple. It&#x27;s simple to get started and incredibly hard to do correctly, like skiing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=retrac" target="_blank">retrac</a>   <span class="timeago" data-date="2021-08-16 19:39:13 &#43;0000 UTC">2021-08-16 19:39:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, those things are not a complexity of C.  They&#x27;re just complex to implement at a lower level.  They&#x27;re complicated in any language, often, if approached at the level C provides.  You have to hand-hold the machine through it.  A C-like implementation of linked lists in an array of memory using pointers, for example, looks just as bad if written in that way in unsafe {} Rust, or even some mutating thing in Haskell.  You can do that if you want, but you don&#x27;t have to.  Those languages allow you to abstract that away very quickly (often already pre-abstracted for you with default approaches).  That&#x27;s what people mean when they say C is simple.  Plain and simple.  Minimal.  You have to do much of the heavy lifting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=arcticbull" target="_blank">arcticbull</a>   <span class="timeago" data-date="2021-08-16 19:41:44 &#43;0000 UTC">2021-08-16 19:41:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Respectfully disagree. A language that fails to adequately provide safeguards to a user is a complex language because it forces all the complexity of dealing with the underlying machine onto the user. These are things a user needs to know to be effective in the language, which in turn makes using the language complex. It&#x27;s a <i>deceptively</i> simple language.<p>C is complex because of what it doesn&#x27;t do, not what it does. That&#x27;s IMO worse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=retrac" target="_blank">retrac</a>   <span class="timeago" data-date="2021-08-16 19:49:56 &#43;0000 UTC">2021-08-16 19:49:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not so much that we&#x27;re disagreeing as arguing different points about the language, I think.  You are right that it is not a simple language to use, in many ways.  Archaic, unnecessarily complicated to implement many standard approaches, and very repetitive.  The header system is just the wrong approach.  Etc.  I wouldn&#x27;t pick it for the main language for a new project, if at all avoidable personally.<p>It&#x27;s very easy to implement, though.  A compiler fits in 32 kilobytes of RAM on some architectures.  Only a handful of control structures.  Limited types.  That&#x27;s the sense of simple that I meant, and which most people meant.  It&#x27;s not a compliment.  It&#x27;s a neutral observation.  It&#x27;s actually C&#x27;s greatest weakness.  It&#x27;s <i>too</i> simple.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arcticbull" target="_blank">arcticbull</a>   <span class="timeago" data-date="2021-08-16 22:08:13 &#43;0000 UTC">2021-08-16 22:08:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think we’re in violent agreement :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IdiocyInAction" target="_blank">IdiocyInAction</a>   <span class="timeago" data-date="2021-08-16 21:00:53 &#43;0000 UTC">2021-08-16 21:00:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C itself is not particularly complex, especially compared to other languages, like C++. It does have a ton of footguns and nasty UB things though.<p>But writing good, safe code in C can be very complex. That doesn&#x27;t make the language itself is complex.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-17 04:09:21 &#43;0000 UTC">2021-08-17 04:09:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>I don’t know why they’re writing the parser using globals though instead of passing a pointer to a parser state struct.</i><p>Because there&#x27;s only one. Why obfuscate that fact? Don&#x27;t be tempted by the cargo-cult to make things more complex than they need to be just to appease some dogmatic &quot;best&quot; practices that actually aren&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway17_17" target="_blank">throwaway17_17</a>   <span class="timeago" data-date="2021-08-17 04:37:46 &#43;0000 UTC">2021-08-17 04:37:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think this is a really good example to point to in discussions of ‘cargo-cult’-ing. GP is merely reciting the standard ‘best’ practice for development in C, and on a more complex project or in another use case, they may be correct to do so. However, as you pointed out, in this case the globals are true single instance ‘objects’ and the use is semantically sensible and justified. It dovetails nicely with some of the DoD vs ECS discussion from the front page earlier today. Do what makes the most sense for your use case for reasons that apply to your project, everything else is abstraction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-16 21:02:05 &#43;0000 UTC">2021-08-16 21:02:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Parsers involve a lot of string processing, which is really inconvenient and easy to get wrong in C.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gnubison" target="_blank">gnubison</a>   <span class="timeago" data-date="2021-08-17 00:03:04 &#43;0000 UTC">2021-08-17 00:03:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, only the lexer deals with strings, and even then… it’s not really creating strings, just extracting some information from them.  Creating strings efficiently and safely is IMO the hard part of string management in C.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fishmaster" target="_blank">fishmaster</a>   <span class="timeago" data-date="2021-08-16 17:58:06 &#43;0000 UTC">2021-08-16 17:58:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The overhead to writing C makes it a less friendly introduction to the topic if you have never written a compiler or interpreter (or parser, specifically) before.<p>That&#x27;s true and was my first thought. C seems like an arcane choice for an introduction course.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arkj" target="_blank">arkj</a>   <span class="timeago" data-date="2021-08-16 17:16:48 &#43;0000 UTC">2021-08-16 17:16:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But it&#x27;s hard to understand the benefit to writing a language frontend in C, generally speaking.<p>The advantage of writing in C is that the language provides very little “high” level features. All you have is just functions and memory so you end up doing everything which is a laborious process but rewarding to the mind especially if you are someone who never did low level programming.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=musicale" target="_blank">musicale</a>   <span class="timeago" data-date="2021-08-16 22:16:15 &#43;0000 UTC">2021-08-16 22:16:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I expect this series is similar to Wirth&#x27;s own chapter on writing a PL&#x2F;0 compiler. It seems to be following the same recursive descent approach, but using C rather than Pascal.<p>Since the implementation is in C, perhaps it might make sense to compile a version of PL&#x2F;0 (&quot;C&#x2F;0&quot;) with C syntax rather than Pascal syntax. It might be possible to get something close to a C&#x2F;0 compiler that could compile its own source code.<p>Though one issue with C is you also need a cpp implementation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-16 16:03:13 &#43;0000 UTC">2021-08-16 16:03:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The author forgot default cases in various switch (tok) statements:<p><pre><code>  static void
+  factor(void)
+  {
+     switch (type) {
+     case TOK_IDENT:
+     case TOK_NUMBER:
+       next();
+       break;
+     case TOK_LPAREN:
+       expect(TOK_LPAREN);
+       expression();
+       expect(TOK_RPAREN);
+     }
+   }
+</code></pre>
+The TOK_ enumeration has a good many more members than just those three. If any other one occurs in the code, or an outright corrupt type value occurs, it silently falls through. If the error is handled at all, it will result in 
+some strange diagnostic, in some higher level code that thinks it has seen an expression with a factor in it.<p>Adding a break after the last block in a switch is a good idea; someone adding a new case might forget. (Wit diagnostic support, like GCC requiring a fallthrough comment, this is less important nowadays).<p>If a switch deliberately falls through for unmatched cases, have<p><pre><code>   default:
+     break;
+</code></pre>
+to express that explicitly.<p>This whole approach of the parser consisting of void functions is poor for 2021. It&#x27;s as if the author is deliberately trolling everyone who has ever taken any level of interest in functional programming.<p>The author will have a hard time fitting the necessary semantic actions into this code, like constructing an abstract syntax tree, and might succumb to the temptation to do it with some hacks which build the structure procedurally using global variables.<p>The parser would be a more future proof if it anticipated the need for backtracking. So that is to say, a function such as factor() above could be considered to be a pattern matching construct, and return a useful value indicating whether it matched or failed to match. Furthermore, if it it failed to match, then it would backtrack, leaving the state of the input stream as it was prior to entry.<p>You can then do interesting things, because you&#x27;re essentially LL(k) now, like speculatively parse the input using several possible constructs in priority order, until one matches.<p>The code inconsistently mixes the use of concrete character constants like &#x27;.&#x27; and &#x27;{&#x27; and #define symbols that expand to character constants like #define TOK_PLUS &#x27;+&#x27;.<p>Using the character constants in the code as in expect(&#x27;+&#x27;) or whatever is clearer. The Yacc approach of using constants for abstract tokens, (which are enumerated starting at some value above 256), and concrete character constants for single-character tokens that denote themselves, is worth mimicking.<p>You&#x27;re not going to redefine TOK_PLUS to something other than &#x27;+&#x27; in the future, and doing so would be like like changing #define FOUR 4 to #define FOUR 5. TOK_PLUS doesn&#x27;t inform any  better than &#x27;+&#x27;, and isn&#x27;t any easier to find with grep.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wott" target="_blank">wott</a>   <span class="timeago" data-date="2021-08-16 16:58:52 &#43;0000 UTC">2021-08-16 16:58:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The author will have a hard time fitting the necessary semantic actions into this code, like constructing an abstract syntax tree,<p>It&#x27;s a declared non-goal.<p>&gt; The code inconsistently mixes the use of concrete character constants like &#x27;.&#x27; and &#x27;{&#x27; and #define symbols that expand to character constants like #define TOK_PLUS &#x27;+&#x27;.
+&gt; Using the character constants in the code as in expect(&#x27;+&#x27;) or whatever is clearer.<p>That&#x27;s not how it works, TOK_* represent whole elements, the element may happen to be a single character, but it can be a word. It would be highly confusing to pass single characters to expect() as you wouldn&#x27;t know at first sight whether it expects a simple character or an element. The TOK_* could as well be assigned a random number as you say in your following sentence. And they were until yesterday :-) I guess it is easier to debug with mnemonic characters.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;ibara&#x2F;pl0c&#x2F;commit&#x2F;aba92627deac3f8cfe086793b28529935378b171#diff-adb748471157c609384d66b3e3c9dfa3368d313556696a53ec2702778614f96d" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ibara&#x2F;pl0c&#x2F;commit&#x2F;aba92627deac3f8cfe08679...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-16 17:25:33 &#43;0000 UTC">2021-08-16 17:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Using character constants for denoting one-character tokens is a time-honored tradition that everyone understands.<p>E.g. GNU Awk:<p><a href="http:&#x2F;&#x2F;git.savannah.gnu.org&#x2F;cgit&#x2F;gawk.git&#x2F;tree&#x2F;awkgram.y?h=gawk-5.1.0#n1774" rel="nofollow">http:&#x2F;&#x2F;git.savannah.gnu.org&#x2F;cgit&#x2F;gawk.git&#x2F;tree&#x2F;awkgram.y?h=g...</a><p>This is readable; it says &quot;I am just what I look like: a terminal symbol corresponding to the actual +&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 17:14:19 &#43;0000 UTC">2021-08-16 17:14:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-16 17:57:07 &#43;0000 UTC">2021-08-16 17:57:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; [building an AST is] a declared non-goal.<p>Then what will be going on after parsing? What will be compiled?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-16 18:56:43 &#43;0000 UTC">2021-08-16 18:56:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compilers can go straight to output without building an AST, which is just one form of output. I should have more generally written about output.<p>Output can be produced procedurally in a single pass. However, it will still require refactoring to work that in. For instance, say we go to a register machine (one that has an unlimited number of registers).  The expression() function needs to know the destination register of the calculation. If it returns void as before, then it has to take it as an argument. Or else, it has to come up with the register and return it.<p>I think that if the target is a stack-based machine, that would be the easiest to work into the parsing scheme. This is because without any context at all. Let&#x27;s use term() as an example:<p>Original recognizer skeleton:<p><pre><code>  static void
+  term(void)
+  {
+    factor();
+
+    while (type == TOK_MULTIPLY || type == TOK_DIVIDE) {
+      next();
+      factor();
+    }
+  }
+</code></pre>
+Stack-based output:<p><pre><code>  static void
+  term(void)
+  {
+    factor(); &#x2F;&#x2F; this now outputs the code which puts the factor on the stack
+
+    while (type == TOK_MULTIPLY || type == TOK_DIVIDE) {
+      next();
+      factor(); &#x2F;&#x2F; of course, likewise outputs code.
+
+      output_stack_operation(type); &#x2F;&#x2F; we just add this
+    }
+  }
+</code></pre>
+What is output_stack_operation_type:<p><pre><code>  static void
+  output_stack_operation_type(int type)
+  {
+     switch (type) {
+     case TOK_MULTIPLY: output_line(&quot;mul&quot;); break;
+     case TOK_DIVIDE: output_line(&quot;div&quot;); break;
+       &#x2F;&#x2F; ...
+     }
+  }
+</code></pre>
+For instance if we see<p><pre><code>  3 * 4 &#x2F; 6
+</code></pre>
+we have the grammar symbols<p><pre><code>  factor TOK_MULTIPLY factor TOK_DIVIDE factor
+</code></pre>
+the term function calls factor() first, and that function produces output, which might be the line:<p><pre><code>  push 3
+</code></pre>
+the term function calls factor() again, so this time the output:<p><pre><code>  push 4
+</code></pre>
+is produced. Then it calls output_stack_operation_type(type) where type is TOK_MULTIPLY. This outputs:<p><pre><code>  mul
+</code></pre>
+The loop continues and further produces<p><pre><code>  push 6
+  div
+</code></pre>
+Because stack code implicitly accesses and returns operands using the stack, the syntax-directed translation for it doesn&#x27;t have to pass around environmental contexts like register allocation info and whatnot.<p>The stack-based operations do not take any argument, and therefore a parser whose functions don&#x27;t return anything and don&#x27;t take any arguments can accommodate stack-based code generation.<p>Stack-based code can be an intermediate representation that is parsed again, and turned into something else, like register-based.<p>If the plan is to go to stack-based output, the code can work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-16 16:25:24 &#43;0000 UTC">2021-08-16 16:25:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I second all this. Reading the blogpost I was wondering how the author will do with this parser to actually build an AST rather than just validating syntax.<p>The thing is that building an AST is typically the kind of thing where &quot;<i>do it with some hacks which build the structure procedurally using global variables</i>&quot; as kazinator said is a sure way to have horrible bugs. The inherently recursive nature of an AST doesn&#x27;t mix very well with procedural manipulation of a global state.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Someone" target="_blank">Someone</a>   <span class="timeago" data-date="2021-08-16 20:10:52 &#43;0000 UTC">2021-08-16 20:10:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t think there will be an AST. <a href="https:&#x2F;&#x2F;briancallahan.net&#x2F;blog&#x2F;20210814.html" rel="nofollow">https:&#x2F;&#x2F;briancallahan.net&#x2F;blog&#x2F;20210814.html</a>: <i>“We will be writing a single-pass compiler for a simple language and immediately output our final output code as soon as our compiler has enough information to do so”</i><p>That “<i>as soon as</i>” implies code will be generated before the entire program has been parsed.<p>Also, for me single-pass implies “no AST”, as you would need at least one pass to construct one, and iterating over an AST counts as another pass for me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pwdisswordfish8" target="_blank">pwdisswordfish8</a>   <span class="timeago" data-date="2021-08-16 21:39:37 &#43;0000 UTC">2021-08-16 21:39:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Single-pass to me also implies a code generator that writes the object file directly, rather than compiling to C or assembly (or some other language) as an intermediate format.  But words don&#x27;t mean anything anymore, so long as people can plausibly convince others that making them feel bad by calling out improper use means that they should be allowed to use words however they want, like a child owed the opportunity to exercise their unbridled spirit.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-17 19:37:32 &#43;0000 UTC">2021-08-17 19:37:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that loading the program into memory is also a pass. Producing an installation image is also a pass, as is installing the program into the target. When we are talking about <i>compiler</i> passes, we don&#x27;t count these, because they are outside the compiler.<p>When we consider a compiler that puts out assembly language, if that works without producing an AST, just by generating assembly in a syntax-directed way as it followed the phrase structure of the code, then we call that a one-pass compiler. What it makes is assembly language, and it does that in one pass.<p>Producing executable code from the assembly requires another pass, but that pass belongs to the assembler. The compiler is not even running, and so it can&#x27;t be a pass of that compiler.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-17 04:27:32 &#43;0000 UTC">2021-08-17 04:27:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>The parser would be a more future proof</i><p>There&#x27;s already plenty of bikeshed here but that just takes the cake. The only code that&#x27;s truly &quot;future proof&quot; is code that you&#x27;re willing to rewrite; which I&#x27;m sure the author is capable of doing if&#x2F;when the need arises.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fishmaster" target="_blank">fishmaster</a>   <span class="timeago" data-date="2021-08-16 14:48:02 &#43;0000 UTC">2021-08-16 14:48:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m thinking about following the tutorial in Julia or Kotlin, but it would be interesting how the code looks in a different language like F#.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BazookaMusic" target="_blank">BazookaMusic</a>   <span class="timeago" data-date="2021-08-16 20:15:53 &#43;0000 UTC">2021-08-16 20:15:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The code isn&#x27;t perfect, it&#x27;s a learning project and still WIP, but you can check the code for a parser for the LOX language ( c-like) from &#x27;Crafting Interpreters&#x27; in this project. &#x27;Ast.fs&#x27; and &#x27;Parser.fs&#x27; should be enough to get an idea of what it&#x27;s doing.You can also google the grammar of the language which is quite simple:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;BazookaMusic&#x2F;FLOX" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;BazookaMusic&#x2F;FLOX</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_benno" target="_blank">the_benno</a>   <span class="timeago" data-date="2021-08-16 19:24:43 &#43;0000 UTC">2021-08-16 19:24:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            F# is an ML-family language, and ML stands for meta-language -- it was designed for language tools and compilers!  Andrew Appel&#x27;s Modern Compiler Implementation in ML is a great resource for code examples that aren&#x27;t exactly F#, but will look damn close.  The book has also been published with C and Java, if you want side-by-side comparisons
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pfdietz" target="_blank">pfdietz</a>   <span class="timeago" data-date="2021-08-16 20:44:37 &#43;0000 UTC">2021-08-16 20:44:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ML was designed to be the metalanguage for the LCF proof system, used to write proof tactics.  It was then recognized to be interesting in its own right as a programming language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the_benno" target="_blank">the_benno</a>   <span class="timeago" data-date="2021-08-16 21:37:45 &#43;0000 UTC">2021-08-16 21:37:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, thanks for the correction and apologies for the inadvertent misinfo.<p>Your comment sent me reading the HOPL paper about SML -- I think I (based on folklore knowledge&#x2F;informal conversations) conflate the original development of ML with subsequent development and standardization around SML.  All of this was well before my time so it&#x27;s quite interesting to read about some of the details.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nikkinana" target="_blank">nikkinana</a>   <span class="timeago" data-date="2021-08-16 15:53:55 &#43;0000 UTC">2021-08-16 15:53:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            yacc is key
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-16 16:38:44 &#43;0000 UTC">2021-08-16 16:38:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Never use Yacc. Just write your own parser.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=arcticbull" target="_blank">arcticbull</a>   <span class="timeago" data-date="2021-08-16 19:23:46 &#43;0000 UTC">2021-08-16 19:23:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lemon is an infinitely better parser generator than Yacc; it solves a lot of the issues that make Yacc terrible to work with: named non-terminals, non-terminal destructors, re-entrancy, etc. It&#x27;s part of the SQLite codebase. Highly recommended.<p>In many cases, though, I think parser combinators thread the needle elegantly - nom in Rust for instance. Or even just a hand-rolled LL(1).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-16 16:48:27 &#43;0000 UTC">2021-08-16 16:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Adding on, the fraction of &quot;real&quot; language implementations using  handwritten parsers vs. parser generators basically seems to be half and half.<p>The Wikipedia list of Bison users even calls out that a number of them switched from Bison to handwritten parsers.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;GNU_Bison#Use" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;GNU_Bison#Use</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-16 16:50:39 &#43;0000 UTC">2021-08-16 16:50:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why would you say that? Yacc and other parser generators exist for a good reason: hand written parsers can be quite hairy to debug and extend, while parser generators offer a domain specific language to specify your grammar and can generate efficient parser code based on it.<p>What are the arguments in favor of manually writing parsers?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-16 17:27:45 &#43;0000 UTC">2021-08-16 17:27:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fundamentally I don&#x27;t think parsing is a problem that&#x27;s complex enough to warrant a custom tool and language. And even if it was Yacc is the wrong tool for the job in most cases.<p>Since most languages are context-sensitive, you almost always have to bend Yacc, which is designed for context-free languages, out of shape to apply it.<p>It&#x27;s a hammer but we hardly have any nails, and the nails can just be pushed in by hand without a hammer, and they&#x27;re the wrong type of nails anyway so that hammer isn&#x27;t really compatible, and top of that it&#x27;s a really expensive hammer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rightbyte" target="_blank">rightbyte</a>   <span class="timeago" data-date="2021-08-16 18:28:32 &#43;0000 UTC">2021-08-16 18:28:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t the context sensitivity handled when you build an AST with the action statements in Yacc?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-16 18:32:08 &#43;0000 UTC">2021-08-16 18:32:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes - so straight away you have to leave the DSL and bypass the formal mode of Yacc. At which point why bother with it? If the first thing you need to do with your tool is hack around it, maybe the tool isn’t so well-designed?<p>And actions often do things like side-effect changes to the lexer state, so it gets worse from there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codr7" target="_blank">codr7</a>   <span class="timeago" data-date="2021-08-16 17:12:44 &#43;0000 UTC">2021-08-16 17:12:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What few seem to realize is that it&#x27;s perfectly possible to abstract out some of the work and create an extensible foundation for manual parsers.<p>Since it&#x27;s all regular code, you can use the full power of the host language to deal with the problem.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;codr7&#x2F;swifties&#x2F;blob&#x2F;main&#x2F;Sources&#x2F;Swifties&#x2F;Parser.swift" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;codr7&#x2F;swifties&#x2F;blob&#x2F;main&#x2F;Sources&#x2F;Swifties...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-16 17:22:19 &#43;0000 UTC">2021-08-16 17:22:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand that, but I still find it easier to write&#x2F;maintain&#x2F;extend a grammar than a parser for that grammar.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-08-16 18:30:35 &#43;0000 UTC">2021-08-16 18:30:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;ve got the right utility functions, a handwritten parser visually maps very directly to its grammar. It won&#x27;t be as concise of course, but cognitively you can work with it almost as if it were just a grammar.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ibains" target="_blank">ibains</a>   <span class="timeago" data-date="2021-08-16 18:07:26 &#43;0000 UTC">2021-08-16 18:07:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This post is good for learning, we have too many “systems“ developed in Java (Hadoop et al - I’m looking at you - you sluggish bugs in the rug), we need more programmers to learn C and build systems in it.<p>Also, you can do this so much easier in scala using parser combinators, if the goal is time to market and the code to be compiled is not very large. Here is an example to see how the approaches compare:
+<a href="https:&#x2F;&#x2F;www.prophecy.io&#x2F;blogs&#x2F;scala-packrat-parser-combinators-for-dsls" rel="nofollow">https:&#x2F;&#x2F;www.prophecy.io&#x2F;blogs&#x2F;scala-packrat-parser-combinato...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-17 02:56:04 &#43;0000 UTC">2021-08-17 02:56:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; …we need more programmers to learn C and build systems in it.<p>I agree with the first, but not the second. C is a valuable language to know, but for security’s sake we need fewer complex programs in it, not more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-08-17 10:59:03 &#43;0000 UTC">2021-08-17 10:59:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While C may be criticized for making it too easy to misuse pointers, for other features that are usually mentioned as security problems for C programs, e.g. out-of-bounds addressing and numeric overflow, the culprit is not the C language, but the manufacturers of the most popular CPUs, e.g. the Intel&#x2F;AMD CPUs.<p>On most modern CPUs, checking for addressing bounds or for overflow is too expensive and the software developers almost always choose speed over correctness.<p>There have been a few C compilers with optional run-time checks for bounds and overflow, but almost nobody used those options for production code.<p>Unlike the Intel&#x2F;AMD ISA, there are other instruction sets which include a variety of exception conditions, for a cheap implementation of the run-time checks (e.g. the IBM POWER ISA), but even there I do not know if the most recent implementations of those architectures have efficient exceptions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-17 04:22:46 &#43;0000 UTC">2021-08-17 04:22:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;security&quot;? You mean the paranoia FUD of Big Tech justifying their enslavement of users and locking them out of their own bought general-purpose-computers --- I mean <i>devices</i> --- to further the authoritarian corporatocracy?<p>&quot;Trusted&quot; computing, DRM, and all its ugly ilk are premised on making things &quot;secure&quot;. Maybe its time we opened our eyes to realise that uncomfortable truth. If the government and the megacorps are scared enough by encryption to want backdoors into our lives, maybe we should want ones into them too.<p>&quot;Those who give up freedom for security deserve neither.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=d110af5ccf" target="_blank">d110af5ccf</a>   <span class="timeago" data-date="2021-08-17 07:15:44 &#43;0000 UTC">2021-08-17 07:15:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The comment you replied to had absolutely nothing to do with encryption or DRM.<p>C being low level means you&#x27;re forced to do many tedious and complicated things manually. This makes the code you write prone to errors which (in the worst case) can be exploited by attackers to run arbitrary code on your system.<p>... but I&#x27;m sure you&#x27;re already well aware of this which leaves me wondering why you wrote what you did.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/asking-nicely-for-root-command-execution-and-getting-it/">
+
+
+    <title>Asking nicely for root command execution and getting it - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Asking nicely for root command execution and getting it - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/asking-nicely-for-root-command-execution-and-getting-it/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/asking-nicely-for-root-command-execution-and-getting-it/">
+<meta name="twitter:title" content="Asking nicely for root command execution and getting it - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Asking nicely for root command execution and getting it - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T21:36:18JST",
+    "dateModified": "2021-08-17T21:36:18JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://rachelbythebay.com/w/2021/08/17/pop/">Asking nicely for root command execution and getting it</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hug" target="_blank">hug</a>   <span class="timeago" data-date="2021-08-18 00:12:17 &#43;0000 UTC">2021-08-18 00:12:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s completely unrelated, but it reminds me of the Metasploit UAC bypass for Windows, called &quot;ask&quot;.<p>Metasploit just pops up a UAC prompt asking for escalation. Yes or no. Over and over and over again.<p>On any machine logged into by a local administrator user, if they&#x27;re the standard kind of careless user, they&#x27;ll just click yes without thinking and they&#x27;re owned. If they&#x27;re cautious, and on a box where UAC presents as a modal dialog, as per its default config, this essentially locks the user out of the OS until they click &quot;yes&quot;... and they&#x27;re owned.<p>On an assessment we did at a local 200-seat business where they ran with admin rights on their local boxes, we got about a 90% escalation rate. The other 10% of people got up from their desks and went to ask the IT guy, which we considered a &quot;pass&quot; in that scenario.<p>Interesting stuff.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smcl" target="_blank">smcl</a>   <span class="timeago" data-date="2021-08-18 10:23:19 &#43;0000 UTC">2021-08-18 10:23:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funny, with the rise of MFA various Authenticator apps are installed on our phones. Some applications (I&#x27;m looking at you, Outlook) will randomly shit themselves and request I hit a button in the app a few times per day, otherwise I&#x27;ll not receive emails or meeting requests. I can <i>easily</i> see this completely defeating the purpose of MFA by numbing people into automatically accepting these notifications.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=corty" target="_blank">corty</a>   <span class="timeago" data-date="2021-08-18 12:14:31 &#43;0000 UTC">2021-08-18 12:14:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the problem isn&#x27;t limited to Microsoft Outlook but to anything bound to ActiveDirectory: Randomly, sometimes multiple times per day, sometimes not for a week, Teams, WebEx and Office365 will re-reqest credentials. In some cases they continue to work even if you ignore the prompts, sometimes they don&#x27;t...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wcarss" target="_blank">wcarss</a>   <span class="timeago" data-date="2021-08-18 13:47:04 &#43;0000 UTC">2021-08-18 13:47:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This happens with google too (though thankfully much less often): when it expires your credentials, it could be for mail, calendar, drive, meet, etc., it all redirects to just a generic &quot;log into google&quot; form, with no mention even of what you&#x27;re logging into, to allow you to remember, &quot;ah yeah, I had a docs tab open&quot;.<p>I think password managers matching domains with credentials might help a little here, but it normalizes finding random tabs with &quot;google&quot; asking for creds down below the point of noise. It often happens right as I log in in the morning to go into my first meetings, and I&#x27;m rushed.<p>Somewhere, someone has likely exploited this by now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=newbamboo" target="_blank">newbamboo</a>   <span class="timeago" data-date="2021-08-18 14:54:59 &#43;0000 UTC">2021-08-18 14:54:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That one has an easy solution: dump google.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=noneeeed" target="_blank">noneeeed</a>   <span class="timeago" data-date="2021-08-18 12:46:02 &#43;0000 UTC">2021-08-18 12:46:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ok, good to hear it&#x27;s not just me.<p>We&#x27;ve recently been aquired and the new company uses Outlook. I can&#x27;t use the desktop app as it <i>constantly</i> asks me to go through the full authentication process. I have to use the web interface which is just fine for me as I mostly use macOS native apps for mail and calendar. I only use outlook to report phishing emails.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=WrtCdEvrydy" target="_blank">WrtCdEvrydy</a>   <span class="timeago" data-date="2021-08-18 00:26:07 &#43;0000 UTC">2021-08-18 00:26:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if &quot;annoying the user into submission&quot; is &quot;social engineering&quot;.<p>We had a similar issue with a library that wouldn&#x27;t install unless root so one of the developers just put his username&#x2F;password into the box in a plaintext file so the script could basically assume it from the command line when needed... told noone about it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hug" target="_blank">hug</a>   <span class="timeago" data-date="2021-08-18 00:51:39 &#43;0000 UTC">2021-08-18 00:51:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep. It&#x27;s worse when working with vendors, and even worse when working with vendors in a Windows-centric environment.<p>&quot;Our application needs to run as domain admin&quot;. No, mate, it absolutely does not. &quot;Well it definitely needs local admin&quot;. No, mate, it doesn&#x27;t even need that. What it <i>usually</i> needs is write-access to a single folder or regkey somewhere that has default ACLs on it that only allow local admins, but trying to have that conversation is a waste of time.<p>Of course as soon as you say something like that, all support bets are off. Depending on the business you&#x27;re working for you either suck it up so you have a &#x27;support agreement&#x27; in place, or you do it properly and never talk to the vendor again. (Or option #3, you rebuild the app in its default &quot;holy shit this is how my business gets owned&quot; mode, place a support call, and have them fix <i>that</i> instance while you watch so you can replicate their efforts elsewhere.)<p>Most of the same set of vendors get their panties in a twist when you tell them their database is on RDS, too, but that&#x27;s a whole different argument to have with these people.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonjayr" target="_blank">jasonjayr</a>   <span class="timeago" data-date="2021-08-18 01:00:53 &#43;0000 UTC">2021-08-18 01:00:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve had to support an app that:<p>1) only ran in MSIE<p>2) required the domain policy to permit VBScript<p>3) required permission to launch + invoke local COM&#x2F;applications<p>4) served over <a href="http:&#x2F;&#x2F;" rel="nofollow">http:&#x2F;&#x2F;</a><p>All just so they could direct MSWord to directly print the server-side generated Sales Order template.<p>I audibly gasped and asked if they knew this put our systems at extreme risk, and the tech talking me through it basically shrugged &quot;it&#x27;s how it works&quot;<p>Thankfully that webapp &#x27;upgraded&#x27; years ago so that&#x27;s no longer how it&#x27;s done, but when it&#x27;s the only way to get orders into your business from one of your top 10 customers, you just setup a workstation to do it :(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=djrogers" target="_blank">djrogers</a>   <span class="timeago" data-date="2021-08-18 02:58:48 &#43;0000 UTC">2021-08-18 02:58:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yep. It&#x27;s worse when working with vendors<p>20 years in the vendor side, and I can count on one hand the number of times a customer followed the recommended process to create a limited user for one of our AD services.  Every other time - just run it as an admin service account, and if they’re  feeling motivated we might get a dedicated admin account created.<p>It’s very frustrating…
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=z3t4" target="_blank">z3t4</a>   <span class="timeago" data-date="2021-08-18 05:53:15 &#43;0000 UTC">2021-08-18 05:53:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cant you just read the files needes then drop privileges ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-08-18 07:42:00 &#43;0000 UTC">2021-08-18 07:42:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t believe you can do that in Windows; your process is bound to the SID it started with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Loranubi" target="_blank">Loranubi</a>   <span class="timeago" data-date="2021-08-18 09:10:27 &#43;0000 UTC">2021-08-18 09:10:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is `AdjustTokenPrivileges` and `CreateRestrictedToken` which can accomplish something like that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=schlowmo" target="_blank">schlowmo</a>   <span class="timeago" data-date="2021-08-18 02:01:00 &#43;0000 UTC">2021-08-18 02:01:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It&#x27;s worse when working with vendors<p>Well this works the other way around too. I found this especially true when delivering software which is considered an interim solution.<p>More than once I got root privileges on customer machines or seen my software run as root because the project owner found it too cumbersome to deal with his own employers security regulations. Or just wasn&#x27;t given the budget to deal with it properly. Sometimes it&#x27;s easier to get an exception than to follow protocol.<p>This is coming back to haunt you if something goes wrong or an interim solution wasn&#x27;t so interim after all. If someone responsible for auditing permissions asks at this later stage it was always the vendors fault.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 02:16:01 &#43;0000 UTC">2021-08-18 02:16:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some software refuses to run as root. It&#x27;s far from perfect, and usually easily circumventable, but it might push a lazy admin to at least create a user for your thing or similar.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=franga2000" target="_blank">franga2000</a>   <span class="timeago" data-date="2021-08-18 10:58:26 &#43;0000 UTC">2021-08-18 10:58:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hate that as a solution. I&#x27;ve had strange issues with software that I couldn&#x27;t debug, but when I ran it as root in a test VM, it worked instantly. So I immediately knew it was a permission issue and started digging through the docs for a list of files it needed access to. I then fixed the permissions for it and ran it without root in production.<p>If the software limited me to not running as root, I would have probably spent far longer debugging other issues and digging through 100s of lines of strace output.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mauvehaus" target="_blank">mauvehaus</a>   <span class="timeago" data-date="2021-08-18 13:24:00 &#43;0000 UTC">2021-08-18 13:24:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think all software should come with the --räikkönen[0] --here-there-be-dragons --yes-i-mean-it set of switches to enable you to do boneheaded stuff when needed.<p>And using them in prod should be grounds for dismissal, or at least pretty severe legal liability if things go wrong as a result.<p>[0] <a href="https:&#x2F;&#x2F;m.youtube.com&#x2F;watch?v=F3d_Cu5Mzbk" rel="nofollow">https:&#x2F;&#x2F;m.youtube.com&#x2F;watch?v=F3d_Cu5Mzbk</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=franga2000" target="_blank">franga2000</a>   <span class="timeago" data-date="2021-08-18 16:13:10 &#43;0000 UTC">2021-08-18 16:13:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really like that idea, actually. Have a blanket &quot;no safety checks whatsoever&quot; flag, but in the ToS it invalidates all warranty and support requirements if in use. This would also make it really obvious in court who was negligent in case of a security breach, since something like &quot;running as root is bad practice&quot; is a lot less clear to a non-technical judge than &quot;they explicitly enabled a flag called --i-know-this-is-insecure-do-it-anyways&quot;, even though the issue (running as root) was the same.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user5994461" target="_blank">user5994461</a>   <span class="timeago" data-date="2021-08-18 01:14:03 &#43;0000 UTC">2021-08-18 01:14:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I honestly wonder who can use these applications these days?<p>Large companies have stopped giving administrator access years ago. The vendor could corrupt their way into some middle manager all they want, they have zero power over procurement and IT, users won&#x27;t get administrator access to use the app.<p>If the app is really unusable, which it is, that must be preventing a whole lot of sales.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hug" target="_blank">hug</a>   <span class="timeago" data-date="2021-08-18 01:34:06 &#43;0000 UTC">2021-08-18 01:34:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Large companies have stopped giving administrator access years ago.<p>This is untrue for low-end enterprise. Orgs with up to 10,000 seats run weird shitty local-admin-required products all over the place, usually due to legacy.<p>In consulting, I would regularly run into core LOB apps that not only required local admin but &quot;couldn&#x27;t&quot; run as a Windows service and required a user to be logged on with the UI window open in order to function.<p>You spend hours using the associated Microsoft toolkit &amp; various shims to make the product function without, but there&#x27;s always another business who just does it the lazy way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hhh" target="_blank">hhh</a>   <span class="timeago" data-date="2021-08-18 01:24:50 &#43;0000 UTC">2021-08-18 01:24:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Microsoft provides toolkits to help with this. I have spent easily 100+ hours churning through a catalogue of applications that &#x27;need local admin&#x27; and have only found one case where it was true, and it was due to a bug that the latest software version fixed. It is almost <i>always</i> a false truth due to cost I feel. I primarily analyzed applications that were for PLCS and other industrial equipment.<p>You can find more information about this here: <a href="https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;deployment&#x2F;planning&#x2F;compatibility-administrator-users-guide" rel="nofollow">https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;deployment&#x2F;planning...</a><p>I run a VM that stays up to date with the latest Windows version that I install the toolkit on for testing.<p>(side tangent, the user of this application insisted they had the latest version, and with it being behind some login that required some form related to ITAR or something to register, we just had to trust him  until I had him download it &#x27;just in case.&#x27;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rckoepke" target="_blank">rckoepke</a>   <span class="timeago" data-date="2021-08-19 00:05:17 &#43;0000 UTC">2021-08-19 00:05:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great timing. I&#x27;m looking for solutions to run Siemens Simatic PDM without being a local admin. Installing it with temporary admin rights seems to silently fail.<p>I&#x27;m also trying to use libpcap and USBPcap without local admin. They request UAC every time I open Wireshark to start a new capture session. (Needed for debugging raw Ethernet and serial stacks)<p>If you have any tips for either of these I am all ears!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=corty" target="_blank">corty</a>   <span class="timeago" data-date="2021-08-19 08:26:06 &#43;0000 UTC">2021-08-19 08:26:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Use npcap and check the settings for the admin-not-required button (forgot the exact name). But generally, accessing raw anything needs elevated rights and should need elevated rights. For a normal user to be able to sniff network and usb traffic is usually a huge security hole and therefore correctly locked away. Not at all comparable to the other cases someone discussed above about some crappy app needing admin to write c:\windows\crappyapp.ico...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcrites" target="_blank">jcrites</a>   <span class="timeago" data-date="2021-08-18 01:47:24 &#43;0000 UTC">2021-08-18 01:47:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve worked for two of the FAANG companies together about 15 years, and I&#x27;ve always had local administrator access and root access to (1) my personal client machines (laptop, desktop on all platforms) (2) my personal development machines on the corporate network (3) my teams&#x27; production machines.<p>I&#x27;m a software developer and wouldn&#x27;t have it any other way. Software developers need root&#x2F;admin access if you expect any development velocity and ability to solve problems in production with expedience. There are too many diagnostic operations that depend on having root&#x2F;admin, and especially fixes to errors.<p>One exception might be if the production fleet is handled by a separate operations team – but I&#x27;m not in favor of this model, which has its own negative impact on velocity&#x2F;delivery speed due to the coordination involved, and the tension between &quot;software developers want to ship&quot; and &quot;operations team wants software to remain unchanging and stable&quot;.<p>I&#x27;m not in favor of operations teams until the software team is overwhelmed with support requests and their velocity is slowing down. In that case, I&#x27;d start with beefing up the support team; and then finally at tremendous scale with high operational burden, hire an operations team &#x2F; SRE team to operate the system.<p>The solution is to make software responsible for owning&#x2F;operating their own systems until they are extremely large scale (Amazon S3 scale) – as scale so large that rare spontaneous faults would eat up a significant percentage of the overall software team&#x27;s time. I&#x27;m not opposed to having frontline customer support in front of the developers, potentially multiple tiers (since a lot of customers need to Read The Fine Manual); but once the escalation hits a developer, to expeditiously solve the problem they need root&#x2F;admin.<p>Your software developers with root&#x2F;admin access should still be logged such that central security team can observe what&#x27;s going on on every machine at the company, via configuration of SSHD, and regular inspection of that config – e.g. a shell that logs off-box command execution in real-time by default, either for all commands or commands root; and this will capture what they&#x27;re doing unless they go very far out of the way to conceal and obfuscate their activities. Even then, the initial steps to begin the concealment will show up in the logs, unless very well obfuscated.)<p>Lastly, if your team runs public web servers, then you need to listen on ports like 80 and 443 while requiring root. Well-written servers drop root immediately after opening the socket, but custom written servers may run on those ports and not drop capabilities and run in a container. For example, Faceook Messenger Platform&#x27;s onboarding instructions and example code –<a href="https:&#x2F;&#x2F;developers.facebook.com&#x2F;docs&#x2F;messenger-platform&#x2F;getting-started&#x2F;webhook-setup" rel="nofollow">https:&#x2F;&#x2F;developers.facebook.com&#x2F;docs&#x2F;messenger-platform&#x2F;gett...</a> – recommends binding a TCP port &gt;1024:<p>```
+app.listen(process.env.PORT || 1337, () =&gt; console.log(&#x27;webhook is listening&#x27;));
+```<p>Aside: Nice and professional port number there. If I&#x27;d written that documentation I would have used 8081 or 8443, and included a discussion of the implications of running a web server on HTTPS (443) or HTTP (80).<p>I understand that having software developers having root&#x2F;admin on their machine is very different than non-tech jobs, but for any jobs in the engineering family it&#x27;s essential. The builders and operators of a system should always have root access to it, because (1) it&#x27;s needed for development throughput (2) they can trivially get root access anyway through a variety of different means, such as incorporating a grant of root access into the code they&#x27;re shipping, with minor obfuscation.<p>At my last company I was also involved in a major effort to make easier to <i>not</i> run software as root. However, for &quot;typical&quot; services running on single-purpose machines or Virtual Machines that don&#x27;t do anything but receive or process commands from any other software, and don&#x27;t run any other software (besides company Infra), I think the risk is low. &quot;root&quot; and &quot;nobody&quot; are marginally different on a machine that runs a single application because an attacker who breaks in can access all of its data anyway.<p>It&#x27;s true that with root an attacker can implant rootkits and more firmly maintain a grasp of the server, but competent FAANG companies (1) require MFA in order to log in to servers besides the initial hardware client in front of the user (2) will audit machines for unexpected changes like what I&#x27;m describing above. I&#x27;m guessing only highly sophisticated attackers like APTs would be able to conceal from those scans, and there will always be the record of initial penetration to review. Incident response will quickly fan out to all machines the pwned machines has communicated with. One of the FAANGs had complete network logs for machines like this and would have been able to inspect the network traffic.<p>Lastly, sophisticated corps employ defense-in-depth and multiple layers of redundancy like (1) you can&#x27;t attempt to log into machines on the network without both being on the VPN and having authenticated certificates from the enterprise root authority, and (2) Bastion machines which can log commands being sent to machines even if the machines themselves don&#x27;t, and so on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hug" target="_blank">hug</a>   <span class="timeago" data-date="2021-08-18 02:12:46 &#43;0000 UTC">2021-08-18 02:12:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I disagree with most of this, to be perfectly honest.<p>For one, devs don&#x27;t need root in prod in the vast majority of shops, which aren&#x27;t FAANG scale. Assuming a nice sane environment where your deploys  to pre-prod mirror your prod environment, I can&#x27;t think of many cases where having root on prod makes much difference. It&#x27;s the inverse of your statement, where places that <i>aren&#x27;t</i> massive should find it feasible to 1:1 their prod environment for the devs to noodle about in.<p>For two, statements like this one make me wary of a blanket policy of devs getting root:<p>&gt; if your team runs public web servers, then you need to listen on ports like 80 and 443 while requiring root.<p>Have you heard of <i>setcap</i> and <i>CAP_NET_BIND_SERVICE</i>, perhaps? I know this is only one example of many where you may &quot;need&quot; root, but in a lot of cases devs just don&#x27;t have the ops knowledge to know what they actually need.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lmm" target="_blank">lmm</a>   <span class="timeago" data-date="2021-08-18 06:37:35 &#43;0000 UTC">2021-08-18 06:37:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For one, devs don&#x27;t need root in prod in the vast majority of shops, which aren&#x27;t FAANG scale. Assuming a nice sane environment where your deploys to pre-prod mirror your prod environment, I can&#x27;t think of many cases where having root on prod makes much difference. It&#x27;s the inverse of your statement, where places that aren&#x27;t massive should find it feasible to 1:1 their prod environment for the devs to noodle about in.<p>You can and should mirror the environment, but it&#x27;s rarely going to be perfect (particularly in terms of traffic), and while it&#x27;s often worth putting time into better test environments, being able to just hop onto a prod machine and properly trace your programs&#x27; behaviour (which often means you need BPF probes or similar) is a gamechanger for fixing production problems quickly.<p>&gt; Have you heard of setcap and CAP_NET_BIND_SERVICE, perhaps? I know this is only one example of many where you may &quot;need&quot; root, but in a lot of cases devs just don&#x27;t have the ops knowledge to know what they actually need.<p>We absolutely don&#x27;t. Would learning it actually be a good use of time though? Linux user accounts are not generally seen as a hard security boundary, local root exploits are ten-a-penny, and the user account that&#x27;s running the service necessarily has full access to the actually important stuff (user data) anyway. Particularly in this age of disposable VMs for single processes, I&#x27;d think the cost-benefit favours running everything as root, giving developers root, and structuring your security model so that your servers don&#x27;t trust each other.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcrites" target="_blank">jcrites</a>   <span class="timeago" data-date="2021-08-18 02:26:27 &#43;0000 UTC">2021-08-18 02:26:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I am aware of these capabilities. However, you as the developer still need to be able to write software that runs as root on the box, both to (likely) install new software version and to drop the capability either shortly before executing the primary application (preferred); or the application drops it shortly after launching (seems to be more common – e.g. Postfix Architecture [1] – probably because the App knows what minimal permissions it needs and this is less work for the user).<p>Meanwhile, as a developer you still need the ability to deploy applications unless some kind of &quot;deployment layer&quot; handles depositing new software versions onto the machine.<p>I&#x27;m also concerned about the lack of root for being able to inspect what&#x27;s going wrong with software on the machine (`ps` and `lsof` and socket-specific equivalents). How do I take a heap dump or stack trace from erroneous software on a prod machine without root? How can I step through the software in a debugger? (You could argue that I shouldn&#x27;t do this but it&#x27;s a tradeoff between velocity and security, the right answer which may depend on the business we&#x27;re in.)<p>Containers are kind-of this but I wouldn&#x27;t use containers as security sandbox, since they&#x27;re not designed for it. User namespaces get close, but I prefer to rely on the hypervisor for this kind of security boundary, not namespaces, cgroups, or containers – because the kernel API is massive and security vulnerabilities are found in it regularly. (Root exploits less often.)<p>How would you build an operate a server in production without root? I honestly don&#x27;t have experience. All of my experience has been running installation scripts as root, and having personal root access for inspecting&#x2F;debugging (potentially even live debugger attaching and stepping); unless the `sudo` commands were very carefully managed I wouldn&#x27;t be able to use the majority of my standard toolkit for fixing problems, and I wouldn&#x27;t be able to fix the problem if I found them.<p>Am I running out of file descriptors because the limit is set too low? OK, bump up the limit. That&#x27;s a code change but I can initiate an emergency recovery by locally changing it on all machines in the fleet.<p>We should also acknowledge that there are different kinds of software systems. If I was working at Coinbase or on Payments at Stripe I might have a different perspective. I previously worked at AWS and now currently work on WhatsApp so I am still incredibly security-conscious, but the level of security required by a product is a negotiable product specification, not a hard-and-fast-rule like the necessary strength of a bridge in civil engineering.<p>[1] Postfix Architecture: <a href="http:&#x2F;&#x2F;www.postfix.org&#x2F;OVERVIEW.html" rel="nofollow">http:&#x2F;&#x2F;www.postfix.org&#x2F;OVERVIEW.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chousuke" target="_blank">chousuke</a>   <span class="timeago" data-date="2021-08-18 06:34:10 &#43;0000 UTC">2021-08-18 06:34:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a developer, you should <i>want</i> as little power on as few servers as needed to do your work. With the unlimited access to do whatever you want, you also get lots of responsibility, which means you need to develop your security-consciousness to near paranoid levels, and that&#x27;s not fun.<p>If it&#x27;s possible for you to log into a server and just become root (hopefully there&#x27;s at least sudo so you don&#x27;t log in directly as root), you have to make sure your personal laptop or workstation is encrypted, your SSH key is passphrase-protected and you use an SSH agent (or even an external physical device) to store your private key. Certainly you should not be using passwords to log in anywhere. You should do these things anyway, but the more direct power you have, the more important it becomes.<p>This is especially true if you have programmatic access to a public cloud somewhere: you <i>do not</i> want any more power than necessary for any longer than necessary because administrator access to eg. an AWS account means that when it leaks your infra can be automatically compromised in less time that you can react in and you can&#x27;t even put firewalls in front because it&#x27;s accessible from the internet.<p>Leave the operations that require real power to CI systems and automated processes where you have some testing and review in the middle. Get your logs and memory dumps shipped out of the system into tools that actually help you make use of them; if you <i>need</i> to debug a live system as root, that should be an exceptional situation that raises all kinds of alarms so that it can be formally accepted.<p>I&#x27;m a guy whose job involves maintaining hundreds of systems and I&#x27;m always happy when I can do it with less power.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcrites" target="_blank">jcrites</a>   <span class="timeago" data-date="2021-08-18 18:28:21 &#43;0000 UTC">2021-08-18 18:28:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; (hopefully there&#x27;s at least sudo so you don&#x27;t log in directly as root<p>Correct, at both FAANG I logged in as myself and had passwordless sudo. (Passwordless sudo being preferable to minimize the number of machines that have user password hashes at the company, since these can be brute-forced when employees set bad passwords).<p>&gt; your SSH key is passphrase-protected and you use an SSH agent<p>I don&#x27;t have long-lived SSH keys. The FAANGs where I&#x27;ve work use short-lived (~24h) SSH client certificates, issued by Single Sign On and a server-trusted SSH Certificate Authority, where the SSO authenticates the user via an MFA (typically FIDO2 or variants with a Yubikey press). (Yes, you can indeed employ CAs with SSH, and generate short-lived certificates [1]). I don&#x27;t generally type my password after signing into my client machine, or possibly once more to authenticate into the corporate web framework (w&#x2F; MFA).<p>After that, every SSH action requires a individual MFA approval. It doesn&#x27;t require a password or any SSH key protected by a password – I think long-lived SSH keys, like you&#x27;d protect by a password, are an anti-pattern because when employees leave the company or change teams you have to remember to revoke them or update their keys. With the SSH CA approach, you simply change which certs it&#x27;s willing to issue to an employee for which servers based on policy; and then people who leave the company can&#x27;t access that system altogether. You get the right behavior by default without anyone remembering to take action during off-boarding.<p>No long-lived SSH keys with passwords. Short-lived SSH certificates don&#x27;t need their own passwords.<p>As a developer operating systems on a suite of servers, it&#x27;s simply a business need for me to have SSH into the (virtual machines that I own) running on those servers (not necessarily the underlying hypervisors – those are an entirely different beast).<p>If you were in the cloud it&#x27;s equivalent to being able to obtain SSH certificate that allows you to log onto e.g. EC2 instances. Or if I&#x27;m a team that&#x27;s operating Bare Metal instances, I can log into those.<p>I don&#x27;t accept that root is less than necessary to do my job. When things go wrong there are too many directions that debugging can go that you cannot explore without root. Like I mentioned, I can&#x27;t take a machine out of service, and attach a debugger to it, and invoke the failing functionality. I can&#x27;t change machine parameters that may fix the problem like memory limits. You can&#x27;t even examine the contents of a number of crucial logs without it.<p>I agree with the principle of least access and employ it in my personal systems as well. At work, I think POLA results in you having root to every machine you&#x27;re responsible for.<p>[1] <a href="https:&#x2F;&#x2F;engineering.fb.com&#x2F;2016&#x2F;09&#x2F;12&#x2F;security&#x2F;scalable-and-secure-access-with-ssh&#x2F;" rel="nofollow">https:&#x2F;&#x2F;engineering.fb.com&#x2F;2016&#x2F;09&#x2F;12&#x2F;security&#x2F;scalable-and-...</a> (Disclosure: the FAANG I currently work for is Facebook)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chousuke" target="_blank">chousuke</a>   <span class="timeago" data-date="2021-08-18 20:15:09 &#43;0000 UTC">2021-08-18 20:15:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SSH certificates are a good solution, though I think you could still use longer-lived SSH identities as part of the authentication process <i>to</i> the system that signs your certificate with MFA on top. I personally really just don&#x27;t like passwords for authentication at all, and SSH is super convenient to use on top of being secure.<p>Having a solution like that in place goes a long way towards reducing the immediate power you have available at any one time, so I don&#x27;t think we disagree much at all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcims" target="_blank">jcims</a>   <span class="timeago" data-date="2021-08-18 06:17:50 &#43;0000 UTC">2021-08-18 06:17:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;We should also acknowledge that there are different kinds of software systems. If I was working at Coinbase or on Payments at Stripe I might have a different perspective.<p>It all boils down to this at the end of the day.  There is clearly some level of tradeoff between control and velocity, and there are valid business cases for setting the dial just about anywhere on the spectrum.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-18 14:14:53 &#43;0000 UTC">2021-08-18 14:14:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is the whole point of container based distributions like Bottlerocket.<p>Also even for Windows, in cloud deployment the only admin access we tend to have in production are dashboards, no one gets to touch the actual machine.<p>In enterprise consulting projects, in security conscious customers, I never got Admin account directly, only temporarily via tooling that would request for it with a couple of hours duration, and installing software required IT tickets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=arpa" target="_blank">arpa</a>   <span class="timeago" data-date="2021-08-18 06:34:12 &#43;0000 UTC">2021-08-18 06:34:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An aside for your aside, in regards of port number: nobody reads documentation for fun. Even a little of tongue-in-cheek like your &quot;unprofessional&quot; example above makes the drudgery bearable (&quot;heh, that&#x27;s elite in leetspeak, ha ha&quot;). It shows that it&#x27;s written by humans, for humans, as opposed to oracle-style soulless corporate suck. You may consider it unprofessional, I consider it humanizing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=floatingatoll" target="_blank">floatingatoll</a>   <span class="timeago" data-date="2021-08-18 06:41:35 &#43;0000 UTC">2021-08-18 06:41:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I once found an easter egg &#x27;kilroy was here&#x27; type paragraph buried deep in an otherwise dry slash &#x27;uninteresting to most people&#x27; document, so I reached out and told the person who&#x27;d left it that I found it. It absolutely made their day. I wouldn&#x27;t do this very often, but it was smoothly integrated with the doc and anyone skimming would have missed it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wging" target="_blank">wging</a>   <span class="timeago" data-date="2021-08-18 06:24:16 &#43;0000 UTC">2021-08-18 06:24:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if your team runs public web servers, then you need to listen on ports like 80 and 443 while requiring root<p>How common is this case, really? I&#x27;d expect most public-facing services, even really high-scale&#x2F;&#x27;special&#x27; stuff, to really be instantiated inside a private network (VPC or suchlike, scoped down to just that service if you&#x27;re lucky) and not internet-accessible, fronted by public-facing load balancers listening on 80&#x2F;443 that the service team doesn&#x27;t need or want to control. AWS&#x27;s ALBs and various equivalents definitely allow for that. In such a situation there&#x27;s no need for the internal port that your service hosts listen on to match the external port (though having root on those boxes may be desirable for many other reasons).<p>(of course, if your public web servers are the load balancers themselves, that is different...)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pmontra" target="_blank">pmontra</a>   <span class="timeago" data-date="2021-08-18 07:03:50 &#43;0000 UTC">2021-08-18 07:03:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even in single machine setups, nginx or apache run on ports 80&#x2F;443 and reverse proxy to the application servers running on unprivileged ports  with unprivileged user ids. It&#x27;s even easier than having to deploy applications as root (ssh often is not configured to allow root logins.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=corty" target="_blank">corty</a>   <span class="timeago" data-date="2021-08-19 08:49:02 &#43;0000 UTC">2021-08-19 08:49:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d even argue that you always always want to use some common webserver or proxy (nginx, apache, haproxy, ...) on 80&#x2F;443 proxying to the application running on 127.0.0.1:8080. Why? Multiple reasons:<p>- Unified TLS config and certificate deployment to your chosen common webserver. Never again having to fiddle with yet another crappy vendor configuration not knowing about anything beyond DES, Java crapping itself with larger certificates, vendors not patching TLS library problems for ages.<p>- Unified log format: Vendors never stick to a proper format, but everyone can read and parse apache logs. Also, easier handling through unified output to syslog&#x2F;logstash&#x2F;whatever.<p>- Unified authentication: No need to wait for all your vendors to support your orgs chosen SSO scheme. Just let your common webserver handle things and pass on some &#x27;X-Authenticated-User: joe&#x27;. Most vendors do handle those.<p>- Additional authentication: Afraid of pre-auth exploits in a vendor&#x27;s crappy application or whatever SQL injection in the login form some internal department concocted? Just have the proxy do an additional authentication step (e.g. negotiate&#x2F;kerberos&#x2F;AD auth), then unauthenticated users cannot harm you and authenticated evil users will be plainly visible in the logs.<p>- Fixing crap: Vendor changed the URL scheme of some webapp again? All the links from the internal wiki are broken now? Have the proxy do some regex-rewriting.<p>As for the various grandparents talking about whatever they did at FAANG: I don&#x27;t believe it, because the above concept is (almost) the same as what e.g. Google is doing with <a href="https:&#x2F;&#x2F;cloud.google.com&#x2F;beyondcorp" rel="nofollow">https:&#x2F;&#x2F;cloud.google.com&#x2F;beyondcorp</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 03:51:31 &#43;0000 UTC">2021-08-18 03:51:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Ntrails" target="_blank">Ntrails</a>   <span class="timeago" data-date="2021-08-18 07:00:49 &#43;0000 UTC">2021-08-18 07:00:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was responsible for an in house tool, it required local admin to write to the event log I think?  I don&#x27;t even think that was a useful feature, but I never explained why or removed it.  Merely demonstrated that debugging crashed out without admin rights.<p>I managed to have local admin on my box by default for as long as I worked there and it was great.<p>Downloading and installing a new VS using my own msdn.  Halycon days
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nicoburns" target="_blank">nicoburns</a>   <span class="timeago" data-date="2021-08-18 01:13:10 &#43;0000 UTC">2021-08-18 01:13:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is so great about this software that people put up with this kind of crap?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_wldu" target="_blank">_wldu</a>   <span class="timeago" data-date="2021-08-18 01:16:41 &#43;0000 UTC">2021-08-18 01:16:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably non-technical managers making technical decisions. They run off or fire anyone who has a clue (seen as obstructionists). After that, it&#x27;s to hell in a hand basket.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 04:33:21 &#43;0000 UTC">2021-08-18 04:33:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=npteljes" target="_blank">npteljes</a>   <span class="timeago" data-date="2021-08-18 17:54:15 &#43;0000 UTC">2021-08-18 17:54:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a technique to use the human component to gain access, so it&#x27;s absolutely social engineering.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithinkso" target="_blank">ithinkso</a>   <span class="timeago" data-date="2021-08-18 07:43:13 &#43;0000 UTC">2021-08-18 07:43:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s the same malware behaviour as &#x27;Yes &#x2F; Remind me later&#x27;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=passivate" target="_blank">passivate</a>   <span class="timeago" data-date="2021-08-19 16:20:56 &#43;0000 UTC">2021-08-19 16:20:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            UAC is not a security boundary, its simply a UX feature. The only reason that so called &#x27;exploit&#x27; works is because the logged in user <i>already has</i> admin privileges. I would not categorize it as an exploit, but yes interesting.<p>Its similar to popping up a fake authentication screen and asking the user to type their admin password.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-18 00:56:07 &#43;0000 UTC">2021-08-18 00:56:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The example from this blog is much worse than that. At least &quot;ask&quot; relies upon the user being an administrator and granting access. This application ran as root already without needing escalation and allowed anyone to run arbitrary commands as pre and post hooks.<p>I can&#x27;t even conceive of what a worse security hole would look like. This is unauthenticated root shell to anyone on the network. Maybe Intel Management Engine is worse since it grants privilege to run instructions and access hardware even the OS can&#x27;t get to?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hermitdev" target="_blank">hermitdev</a>   <span class="timeago" data-date="2021-08-18 02:45:23 &#43;0000 UTC">2021-08-18 02:45:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Around 10 years or so ago, at a previous employer, one could run any command as any other user, root included. No exploits, no custom binaries accepting commands to be run as root. The cause? One character in the rlogin configs on all servers that allowed unathenticated access. Oops.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 03:08:13 &#43;0000 UTC">2021-08-18 03:08:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was that character &quot;+&quot;? :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hermitdev" target="_blank">hermitdev</a>   <span class="timeago" data-date="2021-08-18 03:52:49 &#43;0000 UTC">2021-08-18 03:52:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. Yes it was. :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 02:07:03 &#43;0000 UTC">2021-08-18 02:07:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nowadays, depending on the OS and it&#x27;s configuration, root is not necessarily the end to end all things, but if the servers in question were &quot;normally configured&quot; Linux servers a number of years ago, it was likely equivalent to total access. Including control of the kernel through things like &#x2F;dev&#x2F;mem, &#x2F;dev&#x2F;kmem, and &#x2F;dev&#x2F;ports, which at least were common and accessible to root a while ago.<p>With newer stuff in certain configurations, something that gives you remote execution in the kernel or even lower (your Intel ME Engine example seems like a good one) is a much worse security hole, yeah (but then this one could still be a stepping stone to the worse bug).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=T3OU-736" target="_blank">T3OU-736</a>   <span class="timeago" data-date="2021-08-18 03:08:41 &#43;0000 UTC">2021-08-18 03:08:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TCSEC [1] levels high enough specified that root wasn&#x27;t omnipotent, nor could do things unilaterally, and never without logging. B2 and higher, if memory serves.<p>SGI&#x27;s IRIX could be a part of a B2-level installation (because criteria was applicable to more than just the OS).<p>So much wheel reinvention sometimes...<p>[1] <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Trusted_Computer_System_Evaluation_Criteria" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Trusted_Computer_System_Eval...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Y_Y" target="_blank">Y_Y</a>   <span class="timeago" data-date="2021-08-18 06:55:34 &#43;0000 UTC">2021-08-18 06:55:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So much wheel reinvention sometimes...<p><pre><code>    Users on this system are not permitted to make UNIX puns. This incident will be reported.</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 03:16:41 &#43;0000 UTC">2021-08-18 03:16:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I tried to qualify my statement a lot (&quot;normally configured&quot;, &quot;Linux server&quot;, &quot;number of years ago&quot;...). But I think the subjective viewpoint I gave is probably familiar to a lot of people that used to deal with commodity Linux servers.<p>I share the sentiment with the wheel reinvention, though. This will continue happening...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=c3534l" target="_blank">c3534l</a>   <span class="timeago" data-date="2021-08-18 03:48:54 &#43;0000 UTC">2021-08-18 03:48:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have definitely done some stupid stuff because I was typing when a popup came up which caused me to hit enter on a dialogue before I could even read it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SeriousM" target="_blank">SeriousM</a>   <span class="timeago" data-date="2021-08-18 05:54:55 &#43;0000 UTC">2021-08-18 05:54:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s halirious and funny at the same time! I remember that I pressed yes too often as I was unexperienced long time ago. 
+It&#x27;s interesting to see that microsoft ships a tool to secure and trap the user at the same time :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MesSWK" target="_blank">MesSWK</a>   <span class="timeago" data-date="2021-08-18 07:08:24 &#43;0000 UTC">2021-08-18 07:08:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of what some malware does. One malware &quot;Betabot&quot; would pretend to be a Microsoft program and ask users to click yes [0]. It is claimed it would work 80% of the time which isn&#x27;t surprising if users have the ability to escalate the privilege. Not the most subtle approach to escalate privilege of course.<p>[0] <a href="https:&#x2F;&#x2F;www.ic3.gov&#x2F;Media&#x2F;PDF&#x2F;Y2013&#x2F;PSA130918.pdf" rel="nofollow">https:&#x2F;&#x2F;www.ic3.gov&#x2F;Media&#x2F;PDF&#x2F;Y2013&#x2F;PSA130918.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 05:23:26 &#43;0000 UTC">2021-08-18 05:23:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ma2rten" target="_blank">ma2rten</a>   <span class="timeago" data-date="2021-08-18 04:51:03 &#43;0000 UTC">2021-08-18 04:51:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did people who clicked &quot;yes&quot; eventually report it to IT later?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q-rews" target="_blank">q-rews</a>   <span class="timeago" data-date="2021-08-18 07:21:36 &#43;0000 UTC">2021-08-18 07:21:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s cookie banners in action. When &quot;yes&quot; is a click a way and &quot;no&quot; requires exploring a bad UI and possibly waiting whole seconds and a page refresh, you will expect people to just click yes and get it over with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Thiez" target="_blank">Thiez</a>   <span class="timeago" data-date="2021-08-18 17:03:22 &#43;0000 UTC">2021-08-18 17:03:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which is why it is illegal, of course. Sadly that bit of the law is rarely enforced.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dj_mc_merlin" target="_blank">dj_mc_merlin</a>   <span class="timeago" data-date="2021-08-18 01:46:17 &#43;0000 UTC">2021-08-18 01:46:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The last paragraph hits the nail on the head, it&#x27;s impossible to prevent developers from elevating privileges unless one spends much more time and effort than almost any business is willing to on creating a true zero trust internal environment.<p>Developers have little RCEs throughout the entire system, it&#x27;s how they do their jobs. If even system with millions of dollars worth of design and security reviews regularly get hacked by people with no internal access to it or its source code, how can you hope to stop someone who already has a foothold and can see into the system, including a bunch of its config files?<p>The real answer is not to stop developers from doing so. That&#x27;s a never ending uphill battle. You implement very good logging and RBAC systems instead. Now everybody could hack the system if they wished to, but they would be sued into oblivion if they tried to do it for nefarious reasons.<p>IMO the main purpose of RBAC is not really to stop developers from doing malicious activity, but to stop the stupid ones from breaking the system. The smart ones will be able to get around whatever safeguards you put in, as some of them will undoubtedly be designed by those not so fortunate or experienced. Not every developer has a good understanding of infosec and its many, _many_ ways of circumventing what seems to be an impossible defence. Unless you know all the tricks in the book already, whatever you write is most definitely gonna be swiss cheese.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jnwatson" target="_blank">jnwatson</a>   <span class="timeago" data-date="2021-08-18 14:38:05 &#43;0000 UTC">2021-08-18 14:38:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m consulting with a company that has the opposite:  the developer environment is locked down tight.  Like, they&#x27;ve even managed to disable developer tools in Chrome.<p>It is the least productive environment I&#x27;ve ever been in.  It has made me a lot more aware of how much stuff we download from the internet for development, since I can&#x27;t do that in this situation.<p>Fortunately, I get paid by the hour.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Thiez" target="_blank">Thiez</a>   <span class="timeago" data-date="2021-08-18 17:06:21 &#43;0000 UTC">2021-08-18 17:06:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What purpose could locking down the dev tools possibly serve? Madness.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=acdha" target="_blank">acdha</a>   <span class="timeago" data-date="2021-08-18 18:30:26 &#43;0000 UTC">2021-08-18 18:30:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It could be an attempt to prevent someone from being socially-engineered into running code there – if you open the dev tools on sites like Facebook you&#x27;ll see a warning message telling people not to paste anything in to the dev tools due to attacks like that. It&#x27;s not uncommon for places to set policies based on general concerns and not having exceptions for technical staff.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iamcurious" target="_blank">iamcurious</a>   <span class="timeago" data-date="2021-08-18 18:54:40 &#43;0000 UTC">2021-08-18 18:54:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds fun, are they hiring remotely?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eyelidlessness" target="_blank">eyelidlessness</a>   <span class="timeago" data-date="2021-08-18 03:42:40 &#43;0000 UTC">2021-08-18 03:42:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The risk isn’t internal nefarious actors, it’s internal people who don’t know or don’t care that they’re granting privilege escalation to a wider audience.<p>And zero trust is the only way to mitigate that. There are so many bad security takes in this discussion and I’ve barely read half of it. This isn’t an ignorant community. The implication is that every slightly or significantly bad take is compounded by culture and organizational ignorance.<p>The only solution is systems that can’t be accessed by humans by design. And building better reporting and isolated debugging tools to accommodate that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=closeparen" target="_blank">closeparen</a>   <span class="timeago" data-date="2021-08-18 05:49:59 &#43;0000 UTC">2021-08-18 05:49:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Either you need to change and deploy the debugging tool to support each new investigation, or the input to the debugging tool grows powerful enough that it is <i>effectively</i> a remote shell, if not literally.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=athrowaway3z" target="_blank">athrowaway3z</a>   <span class="timeago" data-date="2021-08-18 08:58:45 &#43;0000 UTC">2021-08-18 08:58:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I couldn&#x27;t disagree more on the implication of organizational ignorance.<p>Your solution isn&#x27;t wrong. It&#x27;s just never going to be cheap and simple enough to expect it as a minimum for every organization.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ramraj07" target="_blank">ramraj07</a>   <span class="timeago" data-date="2021-08-18 04:42:23 &#43;0000 UTC">2021-08-18 04:42:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly what we did in our team, create an RBAC system to allow downstream teams to configure and request advanced stuff but with permission and logging. But then the immediate problem is that some of them has legitimate needs to modify the RBAC system itself! So we ended up creating as good as practically possible audit logging of the rbac system, tied intimately to a users authentication, and let them go wild. Worked pretty well so far (as far as we can tell that is).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattPalmer1086" target="_blank">MattPalmer1086</a>   <span class="timeago" data-date="2021-08-18 08:13:58 &#43;0000 UTC">2021-08-18 08:13:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In most secure places I&#x27;ve worked, devs have no access to prod at all.  In the dev environment they have lots of permissions.  Anyone putting a back door in to the code so they could access it in prod would be looking at a criminal investigation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=concordDance" target="_blank">concordDance</a>   <span class="timeago" data-date="2021-08-18 11:14:29 &#43;0000 UTC">2021-08-18 11:14:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And this drastically slows down diagnosis and fixing of production issues in my experience. Particularly performance issues. Probably by a factor of five or more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MattPalmer1086" target="_blank">MattPalmer1086</a>   <span class="timeago" data-date="2021-08-18 12:01:32 &#43;0000 UTC">2021-08-18 12:01:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree, it makes diagnosis much harder.  It&#x27;s certainly not a free lunch to lock things down. Sometimes that is what&#x27;s required.<p>I&#x27;ve just spent a fair bit of time working on allowing very limited access to prod by devs to investigate core dumps.  Took a lot of argument to get that, but the alternative was moving the core dumps out of prod, and that wouldn&#x27;t fly due to the sensitivity of data that might be exposed.  It&#x27;s certainly not easy working in a highly secure environment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrweasel" target="_blank">mrweasel</a>   <span class="timeago" data-date="2021-08-18 08:21:15 &#43;0000 UTC">2021-08-18 08:21:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Disallowing developers access to production is pretty common in many Danish government contracts. Contracts for new IT systems are normally submitted by at least two companies in tandem. One company will be developing the software, while the other is responsible for operations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mr-wendel" target="_blank">mr-wendel</a>   <span class="timeago" data-date="2021-08-18 00:14:58 &#43;0000 UTC">2021-08-18 00:14:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That last paragraph is hard to argue with:<p><pre><code>  Maybe this is our version of the &quot;infinite monkeys&quot; thing: given enough software people, enough computers, and enough time, someone at a company will eventually grant universal remote root access to anyone who knows how to read some source code.
+</code></pre>
+At one job, way back in the day, I had a dream that a shared web-hosting installer framework could give you root on whatever server hosted your stuff. Went to work the next day and indeed... it was true and trivially easy to exploit.<p>Sadly, it was a custom wallpaper upload feature that ended up being the actual source of shenanigans. You get 3 guesses on what happened and probably need just one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mewse" target="_blank">mewse</a>   <span class="timeago" data-date="2021-08-18 00:59:25 &#43;0000 UTC">2021-08-18 00:59:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You get 3 guesses on what happened and probably need just one.<p>You.. quickly found the issue and patched it, and then balloons and streamers fell from the ceiling as the CEO strode over to shake your hand and pat you on the back and crack open a bottle of champagne to celebrate your promotion and give you a hefty performance bonus for saving the company and Dave Matthews played on the company’s sound system while everyone cheered for you and then when you finally left the celebration and went home you were tired and happy and newly wealthy and had become best friends with literally everyone at the company.<p>…right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mr-wendel" target="_blank">mr-wendel</a>   <span class="timeago" data-date="2021-08-18 14:31:39 &#43;0000 UTC">2021-08-18 14:31:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pretty close, actually. It was Def Leppard playing &quot;Pour Some Sugar On Me&quot; though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eecc" target="_blank">eecc</a>   <span class="timeago" data-date="2021-08-18 06:59:39 &#43;0000 UTC">2021-08-18 06:59:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or your boss’s secretary was pissed at you because they liked that background very much.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=teitoklien" target="_blank">teitoklien</a>   <span class="timeago" data-date="2021-08-18 10:33:37 &#43;0000 UTC">2021-08-18 10:33:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Extra points if boss liked it too
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-08-18 06:54:39 &#43;0000 UTC">2021-08-18 06:54:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zawinski&#x27;s law of software:  &quot;Every program attempts to expand until it can read mail. Those programs which cannot so expand are replaced by ones which can.&quot;<p>The corresponding law of enterprise software:  &quot;Every program expands to provide root access to any arbitrary entity.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lccarrasco" target="_blank">lccarrasco</a>   <span class="timeago" data-date="2021-08-18 01:03:56 &#43;0000 UTC">2021-08-18 01:03:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You get 3 guesses on what happened and probably need just one.<p>They had no validation on file type and you could upload &amp; access a script that executed commands server-side?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mr-wendel" target="_blank">mr-wendel</a>   <span class="timeago" data-date="2021-08-18 16:56:23 &#43;0000 UTC">2021-08-18 16:56:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Bingo.<p>It&#x27;s really not pretty what can happen when you have a juicy target, plenty of time, and a perfect idea of how you can use it to your advantage.<p>Fortunately they weren&#x27;t at all malicious... just looking for ways to grow their little empire to play their war games and hopefully make some cash.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ufo" target="_blank">ufo</a>   <span class="timeago" data-date="2021-08-18 01:04:25 &#43;0000 UTC">2021-08-18 01:04:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m convinced that I&#x27;ll eventually need a name for this inevitability. Rachel&#x27;s Law of Root Exploits?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chucky_z" target="_blank">chucky_z</a>   <span class="timeago" data-date="2021-08-18 00:29:20 &#43;0000 UTC">2021-08-18 00:29:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            timthumb?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mr-wendel" target="_blank">mr-wendel</a>   <span class="timeago" data-date="2021-08-18 00:31:07 &#43;0000 UTC">2021-08-18 00:31:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope... a small almost mom&#x27;n&#x27;pop web hosting company.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TomVDB" target="_blank">TomVDB</a>   <span class="timeago" data-date="2021-08-18 00:44:43 &#43;0000 UTC">2021-08-18 00:44:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of a friend of mine who wanted the ability to have Unix shell access on his work machine from home. (This was early nineties, when Internet log in to work was not a thing.)<p>He ran a service that piped all income emails to a script. If the email contained a magic cookie, the subsequent commands were executed on a shell, and the results emailed back to sender. There were no checks on who the sender was. :-)<p>I don’t think the IT people at his very big telecom equipment company would have approved. They never found out about this stunt, but he was later fired for running a password cracker on the company server farm.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=perlgeek" target="_blank">perlgeek</a>   <span class="timeago" data-date="2021-08-18 11:46:03 &#43;0000 UTC">2021-08-18 11:46:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me of somebody who held my job before I joined.<p>He had questionable test&#x2F;release&#x2F;deployment practices, so they took his root privs away in prod, and instead made him build packages (that was mostly already done before) and hand them to the admin team.<p>Not to be deterred by useless administrative overhead, he added an environment variable where the application would look for code files, defaulting it to somewhere under &#x2F;tmp. Then he could deploy his own hotfixes as a user.<p>The company only found out when one of the two prod servers was rebooted, &#x2F;tmp&#x2F; was wiped, and suddenly one of the two servers exhibited lots of old, already fixed bugs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tgsovlerkhgsel" target="_blank">tgsovlerkhgsel</a>   <span class="timeago" data-date="2021-08-18 03:13:44 &#43;0000 UTC">2021-08-18 03:13:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I disagree with &quot;There were no checks on who the sender was.&quot; - there was a password&#x2F;token authentication. That was the check, and it&#x27;s harder to spoof than a regular sender check would have been back then (nowadays with DKIM etc. the situation is a bit better).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TomVDB" target="_blank">TomVDB</a>   <span class="timeago" data-date="2021-08-18 05:38:16 &#43;0000 UTC">2021-08-18 05:38:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t think the magic cookie was anything deliberately complex, but you’re right that guessing wouldn’t have been very practical.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-08-18 06:51:51 &#43;0000 UTC">2021-08-18 06:51:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the early 1990s, all email was plaintext and transports were unencrypted.<p>In the <i>very</i> early 1990s, PGP didn&#x27;t exist, and the odds that the email <i>content</i> was independently encrypted were low.<p>Any network sniffer or filesystem access would have exposed the cookie.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Gys" target="_blank">Gys</a>   <span class="timeago" data-date="2021-08-18 07:30:16 &#43;0000 UTC">2021-08-18 07:30:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the early 1990s, all email was plaintext and transports were unencrypted.<p>I thought all email is still plaintext? The protocol does not support encryption?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-08-18 07:53:53 &#43;0000 UTC">2021-08-18 07:53:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was trying more to cover the distinction between in-flight and at-rest encryption rather than imply that contents are routinely end-to-end encrypted now.  That&#x27;s <i>sometimes</i> but not <i>always</i> the case.<p>There is an increasing use of encryption-at-rest services (AFAIU Gmail is, though that&#x27;s using a system-level, not user-level, key).  There are some encrypted email services (e.g., Protonmail), in which contents are encrypted both in-flight and at-rest.<p>Not especially relevant to the anecdote here, but a critical concern for messaging opsec:  email <i>metadata</i>, including sender, receiver, and subject, are <i>not</i> encrypted at rest or to the originating, receiving, and possibly transit systems, may also leak information, and are often more valuable and useful than contents themselves.<p>I find myself wondering if my correspondents who can&#x27;t seem to provide contextually useful subject lines are actually doing me a favour, despite the annoyance factor ....
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JeremyNT" target="_blank">JeremyNT</a>   <span class="timeago" data-date="2021-08-18 08:11:23 &#43;0000 UTC">2021-08-18 08:11:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SMTP over TLS is very common today. It&#x27;s not guaranteed, but many emails sent between major providers should actually be encrypted in transit. Gmail actually flags email that was received without TLS with a little red icon indicating its relative insecurity.<p>Back in the 90s, though... not so much.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dredmorbius" target="_blank">dredmorbius</a>   <span class="timeago" data-date="2021-08-18 10:01:22 &#43;0000 UTC">2021-08-18 10:01:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SMTP over TLS is first proposed in RFC 2487, dated January of 1999, AFAIU.<p><a href="https:&#x2F;&#x2F;datatracker.ietf.org&#x2F;doc&#x2F;html&#x2F;rfc2487" rel="nofollow">https:&#x2F;&#x2F;datatracker.ietf.org&#x2F;doc&#x2F;html&#x2F;rfc2487</a><p>Actual widespread implementation didn&#x27;t occur until the 2010s.<p>STARTLS Everywhere launched in 2014.  <a href="https:&#x2F;&#x2F;www.eff.org&#x2F;deeplinks&#x2F;2020&#x2F;04&#x2F;winding-down-starttls-everywhere-project-and-future-secure-email" rel="nofollow">https:&#x2F;&#x2F;www.eff.org&#x2F;deeplinks&#x2F;2020&#x2F;04&#x2F;winding-down-starttls-...</a><p>Google have tracked the prevalence of TLS-based email connections ... since 2014:  <a href="https:&#x2F;&#x2F;transparencyreport.google.com&#x2F;safer-email" rel="nofollow">https:&#x2F;&#x2F;transparencyreport.google.com&#x2F;safer-email</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:46:00 &#43;0000 UTC">2021-08-18 18:46:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=notacoward" target="_blank">notacoward</a>   <span class="timeago" data-date="2021-08-18 12:05:34 &#43;0000 UTC">2021-08-18 12:05:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I was in the kernel group at Encore in 1990-91, I had a habit of never becoming root legitimately. Every time I needed to be root, I cracked it a new way and then patched the hole behind me. It got a bit harder over that time, but never really enough to slow down my regular work. The moral of the story is that, even without people <i>deliberately</i> creating ways to run arbitrary code as root, people who are merely <i>oblivious</i> to security leave plenty of holes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raffraffraff" target="_blank">raffraffraff</a>   <span class="timeago" data-date="2021-08-18 11:56:57 &#43;0000 UTC">2021-08-18 11:56:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We had a ton of them at a company I worked at. They consided themselves a start-up (or &quot;we have a start-up culture&quot; which means &quot;we don&#x27;t bother doing things correctly and everyone works their asses off&quot;). The number of ways you could pwn them from inside and out absolutely astonished me when I first joined. I had come from a stuffy company that had boring stuff like change control, technical architects, project plans etc. I wasn&#x27;t sure how exactly to get stuck into the workload because there was so much wrong, and so much new stuff to build on top of the wrongness. So I decided to deploy a general discovery script that ran ps&#x2F;lsof stuff. The results: lots and lots of stuff running as root, listening on various ports. Next step: running `curl icanhazip.com` (yeah, EC2 classic FTW!) and then hitting the IPs with nmap from outside the network to see what could be reached directly. Maybe nobody did this before, or maybe they did, and they found a lot of scary stuff that they didn&#x27;t have bandwidth to fix and simply ignored it. But right away I had a bunch of SEVs on my hands. Worst case was a provisioning system that was hooked up to AWS, served to the world over port 80, using a super-duper lame password. We also had a very junior professional services team who would implement garbage-fires all over the place based on customer requirements. That whole team was a joke. The real engineering team didn&#x27;t consider them &quot;engineers&quot;. There was little communication between them. Some of the solutions they built were simply horrendous. One implemented a web-based form that allowed the customer... any customer... actually <i>anybody</i>... to stop&#x2F;start a particularly broken part of our product. Kinda like self-service problem resolution for customers, instead of just fixing the cause of the issue. If you discovered this webpage by accident who knows what else you could have done with it before we closed it down. There were other major issues. At one point a mysql server was exposed to the world with root&#x2F;root.<p>Did that company fail? Nope. IPO&#x27;d for billions. And most of the people who put out fires like those for years while the founders told us to our faces that we&#x27;d all be rich... got sod-all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=citrin_ru" target="_blank">citrin_ru</a>   <span class="timeago" data-date="2021-08-18 08:27:24 &#43;0000 UTC">2021-08-18 08:27:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You&#x27;d think this would have touched off a new &quot;golden age&quot; of people being thoughtful about not running things as root unless absolutely necessary, and generally being paranoid about handling subcommands, but that&#x27;s not how it panned out in general. Instead, I&#x27;m pretty sure it pissed off the wrong people, and the rest is pretty much as you would expect.<p>I don&#x27;t change jobs to often to say that this is how every largish company works, but it typical that if you point to a security hole, people are displeased (now they have to fix it). And if you don&#x27;t want many enemies it is better to ignore security problems unless you can fix them yourself.<p>That partially explains the very sad state of corporate security.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=speedgoose" target="_blank">speedgoose</a>   <span class="timeago" data-date="2021-08-18 04:18:02 &#43;0000 UTC">2021-08-18 04:18:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It reminds me an old vulnerability on Mac OS X, where you could nicely ask a root deamon to execute some commands for you through the AppleScript API :<p><pre><code>  osascript -e &#x27;tell app &quot;ARDAgent&quot; to do shell script &quot;whoami&quot;&#x27;</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MattPalmer1086" target="_blank">MattPalmer1086</a>   <span class="timeago" data-date="2021-08-18 08:06:48 &#43;0000 UTC">2021-08-18 08:06:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not uncommon to find these &quot;run arbitrary commands as root&quot; systems, unfortunately.  Seen it many times, and I&#x27;ve never seen one where it was necessary.  Driven either by laziness or ignorance.<p>In one instance, the service people told me they had to have root because they downloaded arbitrary scripts and executed them, so they couldn&#x27;t possibly know what permissions would be required ahead of time... Sigh...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isoprophlex" target="_blank">isoprophlex</a>   <span class="timeago" data-date="2021-08-18 06:18:55 &#43;0000 UTC">2021-08-18 06:18:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;I hit up my little dataset of everything running on any machine in production&quot;<p>People actually have comprehensive overviews of what they&#x27;re running on their landscape?!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cranekam" target="_blank">cranekam</a>   <span class="timeago" data-date="2021-08-18 07:22:19 &#43;0000 UTC">2021-08-18 07:22:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, at this company there was a very neat dataset of, essentially, the output of `ps` on every host taken every N minutes. Metadata about each process also included things like binary build time, commit, open ports, UID&#x2F;GID, etc. It made things like tracking software rollouts or finding hosts that (for whatever reason) were stuck running old code very easy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isoprophlex" target="_blank">isoprophlex</a>   <span class="timeago" data-date="2021-08-18 07:27:32 &#43;0000 UTC">2021-08-18 07:27:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Brilliant in its simplicity, thanks for sharing!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theblazehen" target="_blank">theblazehen</a>   <span class="timeago" data-date="2021-08-18 06:52:04 &#43;0000 UTC">2021-08-18 06:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could be running something like <a href="https:&#x2F;&#x2F;osquery.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;osquery.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=philsnow" target="_blank">philsnow</a>   <span class="timeago" data-date="2021-08-18 09:49:41 &#43;0000 UTC">2021-08-18 09:49:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you can manage to tame it, auditd will give you a much more comprehensive look at what has happened on your machines.  osquery is more like polling (on a long interval because it&#x27;s heavyweight) but auditd is processing events from the kernel.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Johnny555" target="_blank">Johnny555</a>   <span class="timeago" data-date="2021-08-18 01:11:57 &#43;0000 UTC">2021-08-18 01:11:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>They built a list of every pre&#x2F;post command that had been in actual use (by looking through the source tree for clients of that service, naturally), and then turned it into a hard-coded check list. The program would now refuse any pre&#x2F;post commands unless it was one of those already known to it.</i><p><i>This change patched the hole</i><p>It didn&#x27;t really patch the hole so much as it  moved the hole to every command that was in that whitelist of commands that were ok to run as root. The author doesn&#x27;t say when this was, but nowadays there are almost certainly better ways to solve this without letting these pre&#x2F;post setup commands run as root.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-08-18 02:14:13 &#43;0000 UTC">2021-08-18 02:14:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I like to think that this was the mitigation that they applied while they more carefully whittled down the list of commands to zero. I can dream:)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 03:41:25 &#43;0000 UTC">2021-08-18 03:41:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-18 01:26:45 &#43;0000 UTC">2021-08-18 01:26:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree, and chances are one of the whitelisted things would allow you to bootstrap something else.  I&#x27;ve seen attempts to grant limited sudo access by whitelist, and it&#x27;s usually easy to get a shell one way or the other.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hutzlibu" target="_blank">hutzlibu</a>   <span class="timeago" data-date="2021-08-18 07:38:24 &#43;0000 UTC">2021-08-18 07:38:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;but nowadays there are almost certainly better ways to solve this without letting these pre&#x2F;post setup commands run as root.&quot;<p>How?<p>The only clean solution I see (now or anytime in the past), would be to rewrite that &quot;Actual Business Stuff&quot; using the whole.<p>But that is expensive, maybe very expensive (I think this was clients code and going around and telling them to change maybe complex code of theirs ... is not something you want or can afford to do) So they just patched the hole up as much as they could do.<p>So I do consider it a patch(especially if the hardcoded commands as strings are verified commands and do not change or induce something else). Just maybe none that provides full security. But when you look at the state of things in IT in general ... I would say, there is indeed improvement, if at least gaping holes like this one gets fixed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Johnny555" target="_blank">Johnny555</a>   <span class="timeago" data-date="2021-08-18 15:50:26 &#43;0000 UTC">2021-08-18 15:50:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>How?</i><p>No way to answer that without knowing why it needs root.<p><i>especially if the hardcoded commands as strings are verified commands and do not change or induce something else</i><p>But now that invoked program becomes another weak link that can be exploited. And you don&#x27;t even know what those innvoked commands are so don&#x27;t know if anything can be hardcoded other than the path to the executable.<p>Yes, it&#x27;s an improvement in security, but it&#x27;s only one step that probably won&#x27;t be revisited until, for example, someone finds out that there&#x27;s an easily exploited buffer overflow in one of those invoked programs that run as root.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ericbarrett" target="_blank">ericbarrett</a>   <span class="timeago" data-date="2021-08-18 03:29:42 &#43;0000 UTC">2021-08-18 03:29:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            These were pre- and post-deploy jobs for a service (?), so I&#x27;m guessing they were hard-coded as the whole command string.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h2odragon" target="_blank">h2odragon</a>   <span class="timeago" data-date="2021-08-18 03:39:16 &#43;0000 UTC">2021-08-18 03:39:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminded me of this classic: <a href="https:&#x2F;&#x2F;www.exploit-db.com&#x2F;exploits&#x2F;45789" rel="nofollow">https:&#x2F;&#x2F;www.exploit-db.com&#x2F;exploits&#x2F;45789</a><p><a href="https:&#x2F;&#x2F;www.cs.unc.edu&#x2F;~jeffay&#x2F;courses&#x2F;nidsS05&#x2F;attacks&#x2F;seely-RTMworm-89.html#p4.5.3" rel="nofollow">https:&#x2F;&#x2F;www.cs.unc.edu&#x2F;~jeffay&#x2F;courses&#x2F;nidsS05&#x2F;attacks&#x2F;seely...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hnick" target="_blank">hnick</a>   <span class="timeago" data-date="2021-08-18 03:30:01 &#43;0000 UTC">2021-08-18 03:30:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve actually used that whitelist pattern before for legacy software in a non-security context. We had some programs using old stuff, and it was a real hassle to migrate everyone off it due to the massive amount of testing involved. But it was very easy to setup new programs to use something else. The problem was that people just kept calling the old one out of habit.<p>So I just replaced the executable with a wrapper that checked what is calling it, then called the real one if allowed. I can&#x27;t remember how but we probably blocked the original executable from general use, but even if we didn&#x27;t then bypassing this check shows clear intent on the user&#x27;s part. They can&#x27;t claim ignorance, which is enough if it shows up in source code later or dies when we finally remove this software. Meanwhile we could move the other users one by one without any new ones sprouting up.<p>Of course, code reviews, check-in filters, and such might be a nicer solution but this place wasn&#x27;t that organised. So we did what we could, and didn&#x27;t really have to keep an active eye out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sigjuice" target="_blank">sigjuice</a>   <span class="timeago" data-date="2021-08-18 03:31:40 &#43;0000 UTC">2021-08-18 03:31:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does SEV mean?  Googling didn’t turn up anything.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=breput" target="_blank">breput</a>   <span class="timeago" data-date="2021-08-18 03:56:50 &#43;0000 UTC">2021-08-18 03:56:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A &quot;SEV&quot; (severity) is a production failure or incident, usually indicted with a level value.<p>For example, a SEV 0 would be a total system unavailability incident, SEV 1 might be a major issue with parts of the system, SEV 3 is a less critical failure affecting a subset of users, etc.<p>You&#x27;ll typically have a postmortem meeting afterwards to discuss the incident, the root cause, lessons learned, and action items to prevent future occurrences, which is the meeting described in the article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amacneil" target="_blank">amacneil</a>   <span class="timeago" data-date="2021-08-18 03:59:07 &#43;0000 UTC">2021-08-18 03:59:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this context, it refers to an incident. Incidents are often referred to by their severity, such as SEV1, SEV2, etc.<p>E.g.<p><a href="https:&#x2F;&#x2F;www.gremlin.com&#x2F;community&#x2F;tutorials&#x2F;how-to-establish-a-high-severity-incident-management-program&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.gremlin.com&#x2F;community&#x2F;tutorials&#x2F;how-to-establish...</a><p><a href="https:&#x2F;&#x2F;www.atlassian.com&#x2F;incident-management&#x2F;kpis&#x2F;severity-levels" rel="nofollow">https:&#x2F;&#x2F;www.atlassian.com&#x2F;incident-management&#x2F;kpis&#x2F;severity-...</a><p><a href="https:&#x2F;&#x2F;response.pagerduty.com&#x2F;before&#x2F;severity_levels&#x2F;" rel="nofollow">https:&#x2F;&#x2F;response.pagerduty.com&#x2F;before&#x2F;severity_levels&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=emef" target="_blank">emef</a>   <span class="timeago" data-date="2021-08-18 03:45:36 &#43;0000 UTC">2021-08-18 03:45:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SEVerity level of the incident
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaptain" target="_blank">kaptain</a>   <span class="timeago" data-date="2021-08-18 08:57:46 &#43;0000 UTC">2021-08-18 08:57:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The ubiquity of this issue really points to a deeper, admittedly unsolvable issue: morality is not a shared value of significance. Every discussion of security assumes that the primary threat is a purposely malicious actor, not an accident prone one. I understand that people see the shared morality issue as an unsolvable one which is why we try to solve the problem at the software&#x2F;hardware level. But that looks unsolvable too (as per the article).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=raesene9" target="_blank">raesene9</a>   <span class="timeago" data-date="2021-08-18 08:10:20 &#43;0000 UTC">2021-08-18 08:10:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One modern version of this is containerization and container orchestration APIs.<p>Docker&#x2F;ContainerD&#x2F;CRI-O etc are basically command execution as a service.<p>Kubernetes is basically distributed command execution as a service.<p>You can add controls to reduce&#x2F;remove the risk of random people creating root processes on your cluster nodes, but out of the box it&#x27;s usually possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=0xbadcafebee" target="_blank">0xbadcafebee</a>   <span class="timeago" data-date="2021-08-18 00:04:50 &#43;0000 UTC">2021-08-18 00:04:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Developers always ask me why their service needs authentication when it&#x27;s only accessible to every network in the company (or, a little better, the network specific to their app) and doesnt have write access to a dataset. This is as good a reason as any.<p>Assume your service is a remote exploit machine, and that you want to make it as inconvenient to exploit, and as easy to fix, as possible. (If you don&#x27;t think your service is a remote exploit machine... I have news for you...)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-08-18 00:25:07 &#43;0000 UTC">2021-08-18 00:25:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Authentication or authorization?<p>If you let in any user from the company, what difference does it make that it required authentication beforehand? (As the article points out, it could make a difference in incident response if the service is conscientious about logging and log retention, but that&#x27;s a whole different feature that &quot;authentication&quot; doesn&#x27;t get you for free!)<p>If you let in a restricted set of users from the company, that&#x27;s now a business-logic change, not just a technical toggle. How do you determine which users are allowed to use and which ones aren&#x27;t?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=outworlder" target="_blank">outworlder</a>   <span class="timeago" data-date="2021-08-18 00:37:43 &#43;0000 UTC">2021-08-18 00:37:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you let in a restricted set of users from the company, that&#x27;s now a business-logic change<p>No it isn&#x27;t. Just deploy a proxy in front of the app. Nginx works. If you have SSO, presumably you also have some detail on the business unit, or even what corporate mailing lists they are part of. Use that. Only allow requests through if they have been authenticated and the user is allowed to access the app.<p>A business logic change is only needed if you actually need RBAC and have different levels of access permissions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=closeparen" target="_blank">closeparen</a>   <span class="timeago" data-date="2021-08-18 01:31:59 &#43;0000 UTC">2021-08-18 01:31:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As long as no one can get in between nginx and the app. Otherwise it&#x27;s trivial to set whatever header nginx sets and impersonate whomever you like.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=geofft" target="_blank">geofft</a>   <span class="timeago" data-date="2021-08-18 00:56:53 &#43;0000 UTC">2021-08-18 00:56:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was inaccurate about my terminology, oops - you&#x27;re right that &quot;business logic&quot; usually means &quot;code inside the app,&quot; which isn&#x27;t changing.<p>What I mean is that the business context around the app have changed, not simply the technical implementation. Whereas the app may previously have been, say, &quot;Anyone in the company can extract structured data out of certain PDF files,&quot; the app is now &quot;Approved people in the company can extract structured data out of certain PDF files.&quot; How do you get approved? Well, because your app is asserted to be a &quot;remote exploit machine,&quot; possibly even the team that runs the app can&#x27;t just give people access for the asking. They have to demonstrate some genuine business need in a way that&#x27;s sufficient to satisfy the security department, and the security department might need to be involved.<p>This is not a change in how the app is deployed; it is a change in what the app is. It changes the project definition, because the requirement &quot;Anyone at the company can...&quot; not only got dropped, it got replaced with &quot;Most people at the company cannot...&quot;, and in turn it probably changes whether upper management wanted to assign people to work on the project at all. If it&#x27;s getting limited use, maybe it wasn&#x27;t worth building an app for it at all and people should have just transcribed data by hand. Or maybe there was a mediocre SaaS that would do 50% of the job for you, and exploits are their problem, and you should have decided to buy the mediocre thing instead of building a better thing that not enough people can use.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=closeparen" target="_blank">closeparen</a>   <span class="timeago" data-date="2021-08-18 01:37:16 &#43;0000 UTC">2021-08-18 01:37:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;possibly even the team that runs the app can&#x27;t just give people access for the asking. They have to demonstrate some genuine business need in a way that&#x27;s sufficient to satisfy the security department, and the security department might need to be involved.<p>Is that seriously thing? I&#x27;ve often known a security team to demand that something go behind an ACL, and to set some general standards for the management of that ACL (periodic reviews, expiring inactive users, etc), but never to get involved about specific members.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=db48x" target="_blank">db48x</a>   <span class="timeago" data-date="2021-08-18 07:05:56 &#43;0000 UTC">2021-08-18 07:05:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, I’ve worked on systems that I had no business need to operate. Nor even the skill to know how to operate them correctly. I could run the software on my own machine, putting data into a local database, and I could deploy new versions of it to the servers, but no permission to actually use it in production.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fvold" target="_blank">fvold</a>   <span class="timeago" data-date="2021-08-18 08:35:21 &#43;0000 UTC">2021-08-18 08:35:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Every time someone mentions &quot;The Security Department&quot; I&#x27;m reminded of a security review I failed because of the iptable rule `-I INPUT 1 --in-interface lo --jump ACCEPT` was &quot;too permissive&quot; and a &quot;security risk&quot;.<p>Some corporations have morons for security auditors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MattPalmer1086" target="_blank">MattPalmer1086</a>   <span class="timeago" data-date="2021-08-18 08:42:01 &#43;0000 UTC">2021-08-18 08:42:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In most places I&#x27;ve worked, unauthenticated remote services are banned outright.  As you say, authentication on its own isn&#x27;t a particularly strong control if there&#x27;s no authorization. Logging and monitoring are also required for them at a minimum.<p>Adding authorization might involve business logic changes I guess, but who is authorised is a business decision achieved with config&#x2F;administration, not hard coded into the software... I would hope!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gamacodre" target="_blank">gamacodre</a>   <span class="timeago" data-date="2021-08-18 00:32:55 &#43;0000 UTC">2021-08-18 00:32:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read that as &quot;request authentication&quot;, i.e. some way to sign or HMAC the content of the request, with keys given only to the things that need to interact with the service.<p>If users are involved, then yeah you also need some kind of RBAC for it to make any sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 01:02:59 &#43;0000 UTC">2021-08-18 01:02:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ibatindev" target="_blank">ibatindev</a>   <span class="timeago" data-date="2021-08-18 00:44:09 &#43;0000 UTC">2021-08-18 00:44:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would You Kindly?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oh_sigh" target="_blank">oh_sigh</a>   <span class="timeago" data-date="2021-08-18 01:15:28 &#43;0000 UTC">2021-08-18 01:15:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not particularly relevant, but every time I read this blog I get the impression it is more LARPing rather than actual software engineering. Or maybe 2nd&#x2F;3rd hand stories. Or maybe I just happen to have worked in various places that have their shit together a little more than the bloggers employer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-08-18 01:58:34 &#43;0000 UTC">2021-08-18 01:58:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Or maybe I just happen to have worked in various places that have their shit together a little more than the bloggers employer.<p>I hate to break it to you, but nothing in that blog is unusual in Enterprise in my experience. You appear to have been quite lucky:)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjenkins358" target="_blank">bjenkins358</a>   <span class="timeago" data-date="2021-08-18 02:04:13 &#43;0000 UTC">2021-08-18 02:04:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To make the LARP more elaborate I was in the room for the meeting described.  I still have the T-shirt.  This very much happened as described.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oh_sigh" target="_blank">oh_sigh</a>   <span class="timeago" data-date="2021-08-18 02:59:54 &#43;0000 UTC">2021-08-18 02:59:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It wasn&#x27;t just this post, it was all of them (at least, all of them that make their way to HN). But I suppose I will need to update my priors since if this post is vouched for, it should make the other posts more likely to be true rather than less likely.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yuliyp" target="_blank">yuliyp</a>   <span class="timeago" data-date="2021-08-18 04:02:46 &#43;0000 UTC">2021-08-18 04:02:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rachel&#x27;s posts have a thin veneer of pseudo-anonmyization that makes it not blatantly obvious which company each story is from, but I can vouch for a decent number of stories being basically spot on what happened (with a little bit of editorializing around the <i>why</i> things happened the way they did).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bigiain" target="_blank">bigiain</a>   <span class="timeago" data-date="2021-08-18 01:55:31 &#43;0000 UTC">2021-08-18 01:55:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why do I strongly suspect you wouldn’t assume that if it was “Chad by the bay” instead of “Rachel”?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=oh_sigh" target="_blank">oh_sigh</a>   <span class="timeago" data-date="2021-08-18 03:00:24 &#43;0000 UTC">2021-08-18 03:00:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess I&#x27;d have to guess that you&#x27;re sexist against women and projecting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=howinteresting" target="_blank">howinteresting</a>   <span class="timeago" data-date="2021-08-18 03:24:44 &#43;0000 UTC">2021-08-18 03:24:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just FYI, I have direct knowledge of around 20% of the stories she&#x27;s talked about and have personally been involved in some of them, and they&#x27;re all true and not exaggerated. I have no reason to believe the others are any different.<p>Obviously some of the specifics have to be elided because they&#x27;re proprietary information, though.<p>Rachel is one of the very best SREs on the planet. Working with her has been one of the greatest privileges of my professional career.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=atoav" target="_blank">atoav</a>   <span class="timeago" data-date="2021-08-18 05:08:47 &#43;0000 UTC">2021-08-18 05:08:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting read, but as a programmer I wonder.. Who builds a feature that allows users to input <i>arbitrary</i> strings, turns them into <i>unchecked</i> commands from a process that <i>runs as root</i> and has <i>no logging</i> and after all of this doesn&#x27;t realise this on the spot with the hands still on the keyboard that this smells like trouble? If any collegue of mine would do this I either suspect a backdoor or incompetence on such scale they shouldn&#x27;t have the job in the first place.<p>This is like seeing a four inch crack during the construction of a bridge and still pressing on till it collapses. No, it actually is like <i>planning</i> a four inch wide crack into a bridge and finding it through a random inspection a year after. It should not only <i>never happen</i>, it should never even have been considered.<p>I understand that implementing a quick &quot;do whatever you want&quot;-feature  might be practical but:<p>- anything that could get arbitrary strings from network input (or from anything <i>other</i> that has network input) needs to be validated and sanitized<p>- anything that dispatches commands on a machine from user&#x2F;network input should run with the lowest possible privilege<p>- whitelisting is always simpler than blacklisting, but never understimate what a few whitelisted unix commands with arbitrary arguments can do. Maybe writing your own simple DSL is better for such a use case. It could even turn out to be a selling factor if it has a nice GUI
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brianpan" target="_blank">brianpan</a>   <span class="timeago" data-date="2021-08-18 06:10:31 &#43;0000 UTC">2021-08-18 06:10:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let me make this quick tool for the development environment.<p>I&#x27;m not sure what else we&#x27;ll need, let me add some pre&#x2F;post flexibility.<p>We have this useful tool let&#x27;s use it for more things.<p>Let&#x27;s standardize on this. Who wrote this? It&#x27;s ok, we&#x27;ll do a readiness review.<p>We have WHAT in production? This is going to make a crazy blog post.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=atoav" target="_blank">atoav</a>   <span class="timeago" data-date="2021-08-18 07:10:07 &#43;0000 UTC">2021-08-18 07:10:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand <i>that</i>, but the blog post specifically wrote about <i>customers</i> running that code.<p>Sure I sometimes have a little high standards compared to others, but how are we ever gonna fix software if we don&#x27;t stop with the &quot;let me quick...&quot;<p>If you e.g. handle private data of people you should code as if every character you type had the ability to leak a persons data forever (because often it has). Programming is beautiful because it multiplies. If you do a good job, the fruits of your work can make many peoples lives better. The same is true into the other direction: With great power comes great responsibility.<p>I also happen to be a certified electrical engineer. There you also have situations where you&#x27;d want to &quot;just quickly&quot; fix something. Only that you don&#x27;t do it because you would be liable if you burn someone&#x27;s house down or kill them.<p>I&#x27;d love for the whole field to get a little bit more serious about the impact our work has if done badly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cranekam" target="_blank">cranekam</a>   <span class="timeago" data-date="2021-08-18 07:25:29 &#43;0000 UTC">2021-08-18 07:25:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Customer&quot; here meant &quot;another team at the same company running code on the same common platform&quot;. It&#x27;s not like this thing was providing backdoor access to a Mom &amp; Pop pizza shop.<p>(Source: familiar with the incident)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

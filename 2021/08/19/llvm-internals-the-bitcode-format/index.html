@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/llvm-internals-the-bitcode-format/">
+
+
+    <title>LLVM Internals: The Bitcode Format - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="LLVM Internals: The Bitcode Format - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/llvm-internals-the-bitcode-format/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/llvm-internals-the-bitcode-format/">
+<meta name="twitter:title" content="LLVM Internals: The Bitcode Format - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "LLVM Internals: The Bitcode Format - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T13:44:29JST",
+    "dateModified": "2021-08-19T13:44:29JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.yossarian.net/2021/07/19/LLVM-internals-part-1-bitcode-format">LLVM Internals: The Bitcode Format</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-08-19 17:06:37 &#43;0000 UTC">2021-08-19 17:06:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Related: LLVM bitcode modified for sandboxed untrusted code execution, recently deprecated in Chromium: <a href="http:&#x2F;&#x2F;www.chromium.org&#x2F;nativeclient&#x2F;pnacl&#x2F;introduction-to-portable-native-client" rel="nofollow">http:&#x2F;&#x2F;www.chromium.org&#x2F;nativeclient&#x2F;pnacl&#x2F;introduction-to-p...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-19 15:12:26 &#43;0000 UTC">2021-08-19 15:12:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author here: happy to answer any questions about the bitcode format, at least as far as I&#x27;ve explored it :-)<p>This post also has a second part, which I published last week[1]. That part contains even more nitty-gritty details on how the bitstream is actually interpreted, and shows off a proof-of-concept bitstream parser in Rust.<p>[1]: <a href="https:&#x2F;&#x2F;blog.yossarian.net&#x2F;2021&#x2F;08&#x2F;10&#x2F;LLVM-internals-part-2-parsing-the-bitstream" rel="nofollow">https:&#x2F;&#x2F;blog.yossarian.net&#x2F;2021&#x2F;08&#x2F;10&#x2F;LLVM-internals-part-2-...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=housel" target="_blank">housel</a>   <span class="timeago" data-date="2021-08-19 16:21:09 &#43;0000 UTC">2021-08-19 16:21:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People may also find interesting the Open Dylan project&#x27;s alternative implementation of an LLVM bitcode writer, <a href="https:&#x2F;&#x2F;github.com&#x2F;dylan-lang&#x2F;opendylan&#x2F;blob&#x2F;master&#x2F;sources&#x2F;lib&#x2F;llvm&#x2F;bitcode.dylan" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dylan-lang&#x2F;opendylan&#x2F;blob&#x2F;master&#x2F;sources&#x2F;...</a> and <a href="https:&#x2F;&#x2F;github.com&#x2F;dylan-lang&#x2F;opendylan&#x2F;blob&#x2F;master&#x2F;sources&#x2F;lib&#x2F;llvm&#x2F;llvm-bitcode.dylan" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dylan-lang&#x2F;opendylan&#x2F;blob&#x2F;master&#x2F;sources&#x2F;...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-19 16:30:32 &#43;0000 UTC">2021-08-19 16:30:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s actually interesting how many independent implementations of bitcode writers there, given that there are almost no independent bitcode readers (mine is <i>very</i> preliminary, and then there&#x27;s one from Galois[1]).<p>I believe Swift also does their own serialization in LLVM&#x27;s bitstream format[2]. I also saw an implementation of the writer in Swift, but now I&#x27;ve lost it.<p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;GaloisInc&#x2F;llvm-pretty-bc-parser" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;GaloisInc&#x2F;llvm-pretty-bc-parser</a><p>[2]: <a href="https:&#x2F;&#x2F;github.com&#x2F;apple&#x2F;swift&#x2F;blob&#x2F;main&#x2F;docs&#x2F;Serialization.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;apple&#x2F;swift&#x2F;blob&#x2F;main&#x2F;docs&#x2F;Serialization....</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

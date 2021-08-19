@@ -1,0 +1,2205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-popcom-pair-programming-with-lowlatency-screenherostyle-sharing/">
+
+
+    <title>Show HN: Pop.com – pair programming with low-latency, Screenhero-style sharing - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Show HN: Pop.com – pair programming with low-latency, Screenhero-style sharing - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-popcom-pair-programming-with-lowlatency-screenherostyle-sharing/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-popcom-pair-programming-with-lowlatency-screenherostyle-sharing/">
+<meta name="twitter:title" content="Show HN: Pop.com – pair programming with low-latency, Screenhero-style sharing - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Show HN: Pop.com – pair programming with low-latency, Screenhero-style sharing - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T16:25:01JST",
+    "dateModified": "2021-08-18T16:25:01JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://pop.com/home">Show HN: Pop.com – pair programming with low-latency, Screenhero-style sharing</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 16:25:15 &#43;0000 UTC">2021-08-18 16:25:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hello HN! I’m the founder of Pop (<a href="https:&#x2F;&#x2F;pop.com" rel="nofollow">https:&#x2F;&#x2F;pop.com</a>) and formerly the co-founder and CEO of Screenhero. Also on the team are a couple other ex-Slack folks and a former Electron co-maintainer.<p>Pop is the spiritual successor to Screenhero and strives toward the same goal: making remote work better than working together in the same room. After Slack acquired and subsequently killed Screenhero and after becoming remote workers ourselves, we found that none of the Screenhero copycats were really solving the problem adequately. Some are unstable, some are slow, some have poor UX. We decided to get back into the space and build a product that we like to use, leveraging some of the good ideas we came up with working on Screenhero and Slack.<p>With Pop, instead of just talking with your coworkers about concepts with words, the shared screen becomes a shared whiteboard for diagrams and flow charts. Instead of barking out line numbers or function names, it’s faster to highlight the line with a mouse. And instead of telling someone what to type, it’s easier to just show them by typing directly in their text editor. You can start a call directly in the app or with the Slack integration “&#x2F;pop” command and collaborate with coworkers on macOS, Windows, and Linux. Or, if you don’t want to bother someone to download the app, they can join a session via web browser (mobile browsers supported, too!), even without a Pop account.<p>For now, it’s <i>completely free to use</i>. We plan to always maintain a free version, though for heavier team and enterprise use, we’re looking to start charging soon (servers are very much not free). Once we have revenue, we plan to turn some of our attention to adding more remote office features, like spatial audio and presence, and, more broadly, addressing issues of isolation and loneliness in remote work.<p>We’ve bootstrapped the company entirely ourselves and are unbeholden to outside investors. Our goal is to build a product that people enjoy using. We’re not looking for an exit; we’ve been through that and know what it’s like (financially great, but emotionally taxing). We want to create an independent and sustainable company where we are happy to work for our entire careers.<p>Let’s get these out of the way:<p>1. Yes, we’re building on Electron. Yes, we are aware of the performance tradeoffs, but have decided this is the best choice for us. We’re shipping Windows, Mac and Linux clients along with browsers with a four-person team — it’s the only good way right now to do that without features taking six months. We’ve modified the screen sharing pipeline in Chromium to reduce latency as much as possible, because with interactive screen sharing, milliseconds matter.<p>2. Yes, the domain was expensive. Roughly $1.5m. We consider it an asset that is unlikely to depreciate significantly. (The domain actually has an interesting history as a failed precursor to Netflix from Ron Howard and Steven Spielberg <a href="https:&#x2F;&#x2F;www.theguardian.com&#x2F;technology&#x2F;2000&#x2F;sep&#x2F;10&#x2F;internet.filmnews" rel="nofollow">https:&#x2F;&#x2F;www.theguardian.com&#x2F;technology&#x2F;2000&#x2F;sep&#x2F;10&#x2F;internet....</a>)<p>3. No, our non-compete no longer applies — it expired two years after Slack’s ScreenHero acquisition.<p>4. Yes, we were originally called Screen.so. It was not a good name (and HN let us know, thanks!) and we are now very happy with Pop.<p>We’d love you to try Pop and let us know what you think, even and especially if it doesn’t work well for you. The app has gotten exponentially better because our dedicated users tell us about their issues and work with us to get them fixed. And, if you have ideas about how remote work could be more enjoyable, we’re eagerly listening!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ElijahLynn" target="_blank">ElijahLynn</a>   <span class="timeago" data-date="2021-08-18 18:22:25 &#43;0000 UTC">2021-08-18 18:22:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Been using Pop since beta (on Arch Linux) and while it has had a few rough spots along the way, it keeps getting better. Pop does have a public issue tracker that we can submit bug reports and feature requests to as well &gt; <a href="http:&#x2F;&#x2F;support.pop.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;support.pop.com&#x2F;</a>.<p>Pop used to have a roadmap (<a href="https:&#x2F;&#x2F;www.figma.com&#x2F;proto&#x2F;bMYNNI6cy4DL1r0dgOFzjI&#x2F;Screen?node-id=7654%3A0&amp;scaling=min-zoom" rel="nofollow">https:&#x2F;&#x2F;www.figma.com&#x2F;proto&#x2F;bMYNNI6cy4DL1r0dgOFzjI&#x2F;Screen?no...</a>) more visible about the longer term vision which I really liked, it was about creating a constant layer on the desktop where you can just press a hotkey, up comes a list of Pop contacts, and you can basically knock on their door, they get a quick ping and you can be joined together in a second. This is the vision that I am really into and there is an issue to track the progress here &gt; <a href="https:&#x2F;&#x2F;screen.canny.io&#x2F;feature-requests&#x2F;p&#x2F;global-shortcut-to-select-a-teammate-virtual-office-v2" rel="nofollow">https:&#x2F;&#x2F;screen.canny.io&#x2F;feature-requests&#x2F;p&#x2F;global-shortcut-t...</a>.<p>This means no more posting video share links in Slack and the friction to actual pair with someone becomes a couple seconds versus a minute+. Really looking forward to this!!!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 18:25:42 &#43;0000 UTC">2021-08-18 18:25:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We heard an equal number of people excited about being able to jump into a call with a coworker, vs. being worried about yet another layer of distraction. Having said that, we&#x27;ve now built out most of the infrastructure to support that feature (we have a contact list with your team in it), so we&#x27;ll be looking into this soon.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ElijahLynn" target="_blank">ElijahLynn</a>   <span class="timeago" data-date="2021-08-18 20:59:16 &#43;0000 UTC">2021-08-18 20:59:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ahh, I could see some being distracted about that. Suppose one can just set a &quot;status&quot; of &quot;available&quot; or &quot;focused&#x2F;away&quot; to be able to be pinged or not.<p>Good to hear that most of the infra is built out to support this feature!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atatatat" target="_blank">atatatat</a>   <span class="timeago" data-date="2021-08-19 13:03:24 &#43;0000 UTC">2021-08-19 13:03:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. Give our people back the damn office door.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danellis" target="_blank">danellis</a>   <span class="timeago" data-date="2021-08-18 18:56:49 &#43;0000 UTC">2021-08-18 18:56:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yes, we’re building on Electron<p>I hope you&#x27;ll reconsider as your team grows. Developers look at their own app and think the extra resource usage isn&#x27;t too bad, but the more this happens, the more Electron apps I end up running at once. Because Pop includes presence, it&#x27;s something that, if it were more lightweight, I&#x27;d keep running all the time. As it is, if someone wants to call me, they have to first contact me on another platform to ask me to load Pop.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jshier" target="_blank">jshier</a>   <span class="timeago" data-date="2021-08-18 19:18:00 &#43;0000 UTC">2021-08-18 19:18:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This also explains why the screen sharing so much less efficient than Screenhero&#x27;s. I had no idea. Hopefully they can add more control over video quality in the future, as the current implementation seems to go for maximum quality all the time, which interferes with system performance. It being Electron especially explains why it&#x27;s so much more resource intensive than the other solutions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 00:39:42 &#43;0000 UTC">2021-08-19 00:39:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:26:51 &#43;0000 UTC">2021-08-18 19:26:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have tinkered with the idea of a native module solely responsible for screen scrape + encode + send, which would further improve performance.<p>Also worth noting is that there&#x27;s a setting to &quot;reduce power when idle&quot;, which throttles screen scraping frame rate when relative CPU utilization is high. Additionally, you can disable &quot;Use full resolution&quot; to turn off Retina support, which should further improve performance for you. We&#x27;ll work on surfacing these settings better, since it&#x27;s not obvious that they&#x27;re buried inside the settings page.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jshier" target="_blank">jshier</a>   <span class="timeago" data-date="2021-08-18 20:03:50 &#43;0000 UTC">2021-08-18 20:03:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, thanks.<p>&quot;Reduce Power When Idle&quot; is always selected, but there&#x27;s no explanation of what it actually does. I would&#x27;ve expected it to be based off the user being idle in regards to the shared screen (e.g. no input for x time), not based on relative CPU usage calculations. It&#x27;s hard for the system to increase CPU usage if Pop is already consuming most of it, so I wonder how long it takes for this to actually kick in.<p>&quot;Use Full Resolution&quot; also doesn&#x27;t explain what it does, so it&#x27;s unclear how bad the video would get if it was turned off. Even &quot;turn[ing] off Retina support&quot; is unclear, as it doesn&#x27;t tell me what the alternative is. Does it scale down to the 1x version of the screen? Ideally we&#x27;d just have a resolution selector here, for both local and remote.<p>I&#x27;ve also long had issues with the keyboard shortcuts and various settings, again because it&#x27;s unclear how the settings actually effect anything. I&#x27;ve also encountered bugs where just typing certain characters (I think it was &quot;.&quot;) to a remote share toggled my ability to control the remote at all, which was extremely irritating. I really need more explanation of local vs. remote short cuts and which go where and when.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 20:21:43 &#43;0000 UTC">2021-08-18 20:21:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the feedback! You&#x27;re right, we need to improve each of these significantly.<p>Reduce Power When Idle: decreases the frame rate from 30fps gradually down to 15fps when there&#x27;s no user activity after a few seconds, and also drops frame rate due to CPU utilization. But you&#x27;re right, we need to rethink this.<p>Resolutions: yes, it does scale down to 1x, and yes, selecting a resolution would be better.<p>Re: shortcuts, do you remember when it was that you experienced these issues? We had a few bugs around these that have been fixed. We&#x27;re also working on a revamp of our keyboard handling code for all three platforms to address some of the remaining issues. If you&#x27;re still running into a specific issue, let us know via hello@pop.com and we&#x27;ll make sure it&#x27;s fixed in our keyboard overhaul.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=montag" target="_blank">montag</a>   <span class="timeago" data-date="2021-08-19 01:07:36 &#43;0000 UTC">2021-08-19 01:07:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don’t just tinker... make it a grand North Star goal to lose Electron, and make performance your moat.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 01:20:26 &#43;0000 UTC">2021-08-19 01:20:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the provocative phrasing — I really like it!<p>The native module coupled with Electron could be a great solution to the performance issue: it would give native performance for the most critical part of the product, while still providing a cross-platform foundation for a shared user interface across 4 platforms (Mac, Windows, Linux &amp; browsers).<p>Given the feedback today on performance and resource bloat, we&#x27;re going to dive deeper into benchmarking our product against the competition, and will post an update on what we find.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hug" target="_blank">hug</a>   <span class="timeago" data-date="2021-08-19 05:09:45 &#43;0000 UTC">2021-08-19 05:09:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t benchmark yourself against other Electron apps. Just promise yourself you&#x27;ll eventually quit Electron. Electron is nothing more than a deal you make with the devil, selling potential for velocity, only the others are too far gone to even know where they are anymore.<p>When you develop for Electron, you&#x27;re lured in with an attractive proposition, shipping more &amp; sooner than you otherwise could, at the expense of ever being able to make the <i>best</i> version of your app. As a tradeoff, that&#x27;s not too bad. You can at least, with just the few of you, get the product out the door sooner rather than later and pick up your first users. You keep going with Electron, because it has the least friction, allowing you to introduce new features and fix bugs at pace you otherwise couldn&#x27;t sustain.<p>At some point you&#x27;ve listened to the silver tongue&#x27;d serpent for a little too long and you&#x27;ve got a slick app with all the value-adds you could want. Also, a giant user base. And that user base consists of people who all have a vague distaste for the app, but they use it anyway, because that&#x27;s the game, that&#x27;s how they get work done. Dragging everyone a little closer to hell if only by the amount of heat of their laptop CPU is putting out.<p>But hey, at least your app is still not as bad as Teams, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 05:22:46 &#43;0000 UTC">2021-08-19 05:22:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another commenter mentioned how VSCode&#x27;s performance shows that Electron isn&#x27;t terrible [1].<p>Based on the discussion, we&#x27;re going to look a lot deeper into finding ways to reduce Electron&#x27;s memory bloat especially when idle, and reduce CPU usage when screen sharing by attempting to offload the most computationally intensive parts to purely native code, while still leveraging Electron as a unified, cross-platform presentation layer. We&#x27;ll report on our progress on this front, and our goal will be to get the best of both worlds: one cross-platform code-base, coupled with native levels of performance.<p>[1] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28230542" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28230542</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jen20" target="_blank">jen20</a>   <span class="timeago" data-date="2021-08-19 14:27:58 &#43;0000 UTC">2021-08-19 14:27:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed - a key competitor, Tuple, does not use Electron, and as a result I won’t even be taking a second look at Pop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:16:24 &#43;0000 UTC">2021-08-18 19:16:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When you say Pop could be more lightweight, are you talking about CPU or memory usage?<p>Also, do you keep Slack &#x2F; Microsoft Teams &#x2F; Dropbox &#x2F; 1Password &#x2F; VSCode always running, and do you have the same concern with those apps or is it something unique to Pop?<p>Performance is definitely a priority for us, so understanding where you&#x27;re feeling the bloat would be really helpful to us.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cu3PO42" target="_blank">Cu3PO42</a>   <span class="timeago" data-date="2021-08-18 20:55:58 &#43;0000 UTC">2021-08-18 20:55:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me personally, memory usage has been a big concern with the growing number of Electron apps. CPU usage on well-behaved Electron apps in idle seems mostly negligible or at least not significantly worse than on native apps.<p>But memory is a different story. I don&#x27;t always get to work with machines with &quot;enough&quot; memory, so I don&#x27;t keep any apps with a larger memory footprint (let&#x27;s say anything above 50MB) running longer than necessary. More often than not I will try to just use the web app, which will at least not load &quot;yet another copy of Chrome&quot;. Where feasible I will also simply switch to an alternative.<p>Not to backseat engineer too much, but maybe you could look into a smaller native component that can run in the background to listen for incoming &quot;calls&quot; and only loads up Electron (or maybe a native webview) when the user wants to actively use the app.<p>All of that said, it looks like you have a solid product and I wish you success with it.<p>EDIT: It appears that a year ago when your product was still named screen, I also provided some feedback which you acted upon swiftly, so I&#x27;m optimistic you&#x27;ll figure this out as well :-)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 21:38:03 &#43;0000 UTC">2021-08-18 21:38:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a really fair point, and we will look into seeing what we can do to alleviate this resource usage when in the background.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tfsh" target="_blank">tfsh</a>   <span class="timeago" data-date="2021-08-18 20:08:20 &#43;0000 UTC">2021-08-18 20:08:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not OP, but with the apps you&#x27;ve mentioned (and other Electron apps), I&#x27;d be less likely to keep them running (and would prevent them from opening at login) due to their outsized resource impact. Which in turn decreases user retention and my ability to recommend it to others.<p>To add to that screen sharing and video calling is already resource intensive, so whilst the argument could be made - what&#x27;s another 500mb of ram, I&#x27;d expect the client to be as optimised and light weight as possible, because a system under strain is no longer &quot;blazing fast&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danellis" target="_blank">danellis</a>   <span class="timeago" data-date="2021-08-19 04:51:48 &#43;0000 UTC">2021-08-19 04:51:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; When you say Pop could be more lightweight, are you talking about CPU or memory usage?<p>Memory usage. I haven&#x27;t noticed an issue with CPU usage, because I usually only open it briefly and tend not to be doing anything else intensive during that time. If I kept it open for video chat while I was working, maybe it would be an issue, but I currently use Messenger (in the browser, not the app) or Discord.<p>&gt; Slack &#x2F; Microsoft Teams &#x2F; Dropbox &#x2F; 1Password &#x2F; VSCode<p>Slack was definitely a big problem for memory usage, so I don&#x27;t use that much anymore. VSCode I only open while I&#x27;m editing. I wish it worked better over an X connection for that. Dropbox I allow to keep running on my main Mac (although its memory usage is ridiculous for what it does), but only load it as needed on my Mac mini. I use Teams, but that&#x27;s on a work laptop that only runs Teams and Outlook.<p>Discord is the only Electron app that I keep open nearly all the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:58:41 &#43;0000 UTC">2021-08-19 04:58:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the details!<p>Based on the feedback today, we&#x27;re going to look into how we can reduce memory usage overall (especially when idle), and CPU usage especially when screen sharing. We already modify Electron, so we may be able to work out a good middle ground that reduces the footprint significantly, while still giving us the advantages of a shared codebase across our 4 platforms (Mac, Windows, Linux, web).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anotherevan" target="_blank">anotherevan</a>   <span class="timeago" data-date="2021-08-18 21:46:02 &#43;0000 UTC">2021-08-18 21:46:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if you could write a small native app for the presence component that launches the main electron app when needed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nawgz" target="_blank">nawgz</a>   <span class="timeago" data-date="2021-08-18 20:45:38 &#43;0000 UTC">2021-08-18 20:45:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            1Password and Dropbox being on Electron seems absurd.<p>Regardless, you kind of hit on the point - Slack &amp; VSCode are basically non-optional, maybe for other people it&#x27;s some other combo. Pop, on the other hand, only has potential to be &quot;non-optional&quot; for collaborative work. Thus, given that real-time collaboration is not the standard way of working, being a resource hog on the level of &quot;non-optional&quot; apps means you will be shut off first for most users.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 20:59:02 &#43;0000 UTC">2021-08-18 20:59:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a good point. We definitely want it to be a no-brainer for people to keep Pop running. One idea may be for us to look into relinquishing resources while running in the background, which could be a best of both worlds solution.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-19 00:40:29 &#43;0000 UTC">2021-08-19 00:40:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is how I wish more companies used Electron. It makes complete sense to me as a stop-gap when you&#x27;re starting out, need to grow fast, and are still experimenting with your product.<p>Where I get a bit frustrated is when companies <i>stay</i> on Electron. Slack knows—or should know—what type of product it is at this point, and so the developers shouldn&#x27;t be pushing transformative software updates with any kind of frequency. So, step back and take the time to build native versions for each platform. Users will appreciate that their computers are suddenly faster!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 01:01:07 &#43;0000 UTC">2021-08-19 01:01:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Related anecdote: Screenhero&#x27;s UI was originally totally native on the two platforms we supported (Mac and Windows). It was a night-and-day improvement (it looked better, had fewer bugs, was easier to build and maintain) when we moved from native UI to HTML5 (using Awesomium on Windows, and WebView on Mac). However, we&#x27;d then have issues on Mac where a user&#x27;s UI would have glitches because their version of OS X or Safari (often both) weren&#x27;t up-to-date. So it was always a little awkward to tell people that the reason their screen sharing app looked funny was because they needed to update their web browser.<p>Having said this, I think this discussion between Electron vs. Native is a false dichotomy. Performance and developer efficiency are both clearly important, and we don&#x27;t have to maximize one dimension alone. I am confident we&#x27;ll find a way to make Electron far more performant by switching off unnecessary features, such that it provides us just the surface area we need to be able to build great products that are indistinguishable from their native counterparts: except that they&#x27;re quicker to build, easier to debug, are of higher quality (with fewer bugs), and cost less.<p>I know this sounds optimistic, but given the popularity of Electron, coupled with the issue of performance, this is an issue that is certainly going to improve over the coming months and years. Who knows, since ours is one of the more performance-hungry products, we may end up finding a solution that others can leverage as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=O_H_E" target="_blank">O_H_E</a>   <span class="timeago" data-date="2021-08-19 05:08:16 &#43;0000 UTC">2021-08-19 05:08:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As much as I hate to say it, but VScode is a testimony of how performante election can be
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 05:17:10 &#43;0000 UTC">2021-08-19 05:17:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed, it&#x27;s quite an inspiration as to the best Electron can be. I think the trick for an app like ours is to offload the heaviest pieces to native code, and use Electron purely as a presentation layer. This is something we&#x27;re now going to look into.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hadriel" target="_blank">Hadriel</a>   <span class="timeago" data-date="2021-08-19 02:29:57 &#43;0000 UTC">2021-08-19 02:29:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            what do you mean by presence?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 02:36:02 &#43;0000 UTC">2021-08-19 02:36:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Pop, if you add people to your contact list (or connect with Slack), you can see your contacts and team members&#x27; online presence, and can call them from within Pop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=quickthrower2" target="_blank">quickthrower2</a>   <span class="timeago" data-date="2021-08-19 06:08:53 &#43;0000 UTC">2021-08-19 06:08:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Slack runs like shit on my pc. I’ve not been able to answer a call this week: seems to freeze up for the length most people want to dial when there is an incoming call. I hope OP will optimise for performance when using electron.<p>OP: Until you are in the position where your software is forced on people by the pointy-haired managers (like Slack or Jira for example) you’ll need a better performing app or people will give up.<p>Coders especially; we don’t like waiting and emptying our L1 cache to context switch to troubleshooting a comms tool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 06:28:40 &#43;0000 UTC">2021-08-19 06:28:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pop’s performance is something we have spent significant time improving, and we’ll continue to do so. My only ask is for folks to try the product and  judge its performance (or lack  thereof) on its own merits, regardless of presumptions based on our use of Electron. We have thousands of daily active users that continue to use the product happily.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=quickthrower2" target="_blank">quickthrower2</a>   <span class="timeago" data-date="2021-08-19 06:35:03 &#43;0000 UTC">2021-08-19 06:35:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, I’m not saying electron means slow but I think it takes skill to keep any app fast especially on the web stack. Glad this is a focus for you!<p>With the work from home boom you may be often running on lower spec machines than the developers work pc that they are remotely connecting to.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 06:41:26 &#43;0000 UTC">2021-08-19 06:41:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You’re absolutely right, and we do need to do a better job for lower spec machines. Lots of work left to be done, for sure!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=habibur" target="_blank">habibur</a>   <span class="timeago" data-date="2021-08-19 07:08:15 &#43;0000 UTC">2021-08-19 07:08:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not about lower spec machines. It&#x27;s more about using far less resources on very much capable machines, and leave the other resources for other processes, as long as there is a way of doing so.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=t0mbstone" target="_blank">t0mbstone</a>   <span class="timeago" data-date="2021-08-19 04:02:21 &#43;0000 UTC">2021-08-19 04:02:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are looking for screenhero alternatives, you should check out Tuple! Our team has been using it for about a year now and we love it.<p>My favorite part about Tuple is how it HAS NOTHING that overlays the screen. It just hides in the tray.<p>I HATE when these screen sharing apps all try to put floating windows and menus and chrome around the screen edges. Just let me share my screen without getting in the way, dang it! Why is that so much to ask?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:23:14 &#43;0000 UTC">2021-08-19 04:23:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tuple&#x27;s done a good job of their minimalist UI (it&#x27;s largely modeled after Screenhero).<p>With Pop, you can minimize the control panel with 1 click. We&#x27;ll soon also be adding the ability to remove the border around your shared screen entirely (some users have told us it gives them anxiety to not see something that clearly shows them that they&#x27;re sharing their screen, but we&#x27;ve now heard the opposite perspective from enough people to realize we need to support both preferences).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rexreed" target="_blank">rexreed</a>   <span class="timeago" data-date="2021-08-18 21:23:44 &#43;0000 UTC">2021-08-18 21:23:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why is it so important to get an expensive domain? Does the three-letter .com really add that much value? Especially when it&#x27;s not a B2C product &#x2F; offering and specific to a focused audience? I&#x27;d think a three-letter .com would be something with widespread, international appeal to be worth the expense.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flyinglizard" target="_blank">flyinglizard</a>   <span class="timeago" data-date="2021-08-18 21:28:25 &#43;0000 UTC">2021-08-18 21:28:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My personal opinion is that in this case it’s going to make a world of difference. Very difficult to know for sure, not like we have a control group,  but it’s super catchy and feels premium.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 21:36:28 &#43;0000 UTC">2021-08-18 21:36:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed!<p>After starting with screen.so, we realized firsthand the importance of having a name that&#x27;s easy to remember and communicate.<p>Also, instead of viewing the domain as an expense, it&#x27;s more of an enduring asset, which potentially increases its value over time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-19 00:34:50 &#43;0000 UTC">2021-08-19 00:34:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Also, instead of viewing the domain as an expense, it&#x27;s more of an enduring asset, which potentially increases its value over time.<p>Well, except you also can&#x27;t really sell it unless you also shut down the company.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zwayhowder" target="_blank">zwayhowder</a>   <span class="timeago" data-date="2021-08-19 03:46:11 &#43;0000 UTC">2021-08-19 03:46:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            True, but if the product was to fail they&#x27;d at least have one asset that they could recoup some money from.<p>(Not that I think they&#x27;ll fail, it looks very impressive so far).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rexreed" target="_blank">rexreed</a>   <span class="timeago" data-date="2021-08-19 04:16:02 &#43;0000 UTC">2021-08-19 04:16:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes but the creditors &#x2F; investors would gain control of that asset. Is this the best way to spend $1.5M as a startup?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:19:06 &#43;0000 UTC">2021-08-19 04:19:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We don&#x27;t have investors — we&#x27;re 100% bootstrapped, and have full control of all of our assets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benatkin" target="_blank">benatkin</a>   <span class="timeago" data-date="2021-08-18 23:36:59 &#43;0000 UTC">2021-08-18 23:36:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It wasn&#x27;t great that it was called Screen anyway. GNU Screen predated screen.so by decades.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-18 19:31:07 &#43;0000 UTC">2021-08-18 19:31:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please provide a way to voluntarily downgrade stream quality. I understand if people with poor vision require it, but I really don&#x27;t need everything in hi def and definitely don&#x27;t need 3D.<p>A serious issue I&#x27;ve had lately is Teams consuming 90%+ of my total Internet usage. The fact that it is consuming massively more bandwidth even than Netflix doesn&#x27;t seem at all justified. My ISP is throttling me now and again and preventing me from being able to work at all. I understand it isn&#x27;t the place of your company to fix the problem of crappy residential network infrastructure in the United States, but if you want broad adoption from people working from home in the United States, you really have no choice but to accommodate this.<p>Note that the only reason I&#x27;m using Teams is because I&#x27;m required to while working on government contracts because it&#x27;s the only service right now certified to transmit controlled unclassified information.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:36:15 &#43;0000 UTC">2021-08-18 19:36:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a great point. We&#x27;ll add support for this soon, thanks for the idea!<p>We actually have a developer console command you can type to achieve this today if you really need something ASAP:<p>- In the desktop app, click the hamburger menu, and then click the Pop logo 8x to launch Dev Tools<p>- In the console, type setBandwidth(1000) to set the max and min bandwidth to 1000kbps. You can type resetBandwidth() to undo the change.<p>If this doesn&#x27;t work for you, please email us at hello@pop.com to let us know.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=orzig" target="_blank">orzig</a>   <span class="timeago" data-date="2021-08-18 23:04:29 &#43;0000 UTC">2021-08-18 23:04:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is awesome, thank you for your original post and thoughtful replies
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-19 14:31:26 &#43;0000 UTC">2021-08-19 14:31:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Awesome, thanks! Seriously love the responsiveness.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rubiquity" target="_blank">rubiquity</a>   <span class="timeago" data-date="2021-08-18 17:56:50 &#43;0000 UTC">2021-08-18 17:56:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I loved Screenhero. How do I know you won&#x27;t hurt me again?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 18:00:58 &#43;0000 UTC">2021-08-18 18:00:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m explicitly not taking funding for Pop for this exact reason: I want to keep Pop around forever. I know that isn&#x27;t something most people are able to do, and I&#x27;m grateful for my past success that&#x27;s enabled me to do this. But I can tell you that it was incredibly sad for me to see Screenhero die, and I never want that to happen again — both as a founder, but also as a user.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jauco" target="_blank">jauco</a>   <span class="timeago" data-date="2021-08-18 18:03:41 &#43;0000 UTC">2021-08-18 18:03:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably because they learned how much it hurts? (They get money but lose their baby)<p>Going through all the trouble to rebuild the product I doubt they’ll do an acquihire again.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xeno42" target="_blank">xeno42</a>   <span class="timeago" data-date="2021-08-18 18:21:03 &#43;0000 UTC">2021-08-18 18:21:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My team has been using CoScreen (<a href="https:&#x2F;&#x2F;www.coscreen.co&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.coscreen.co&#x2F;</a>) for collaborative meetings and development for much of the last year and it&#x27;s been really transformational.<p>The ease at which anyone can share any window and everyone can instantly interact with it is quite game changing for distributed teams IMO.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-18 17:57:10 &#43;0000 UTC">2021-08-18 17:57:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Previous related threads:<p><i>Show HN: Pop.com – Video Calls, in 3D</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=25497737" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=25497737</a> - Dec 2020 (136 comments)<p><i>Show HN: Screen – screen sharing for remote work, by the cofounder of Screenhero</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22676040" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22676040</a> - March 2020 (203 comments)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hartator" target="_blank">hartator</a>   <span class="timeago" data-date="2021-08-18 18:29:33 &#43;0000 UTC">2021-08-18 18:29:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks dang! I don&#x27;t seem to be able to reply to OP&#x27;s top comment for some reason. Is it a wanted behavior or a bug?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-18 21:09:55 &#43;0000 UTC">2021-08-18 21:09:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We do that sometimes with Show HNs when the top comment is introducing the project. The reason is that there&#x27;s not much difference between &quot;replying to the comment introducing the project&quot; and &quot;replying to the project itself&quot;, i.e. posting a top level comment. But the former end up ranking higher on the page, which can be unfair.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 21:21:29 &#43;0000 UTC">2021-08-18 21:21:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tedmiston" target="_blank">tedmiston</a>   <span class="timeago" data-date="2021-08-19 01:08:32 &#43;0000 UTC">2021-08-19 01:08:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            looks like it&#x27;s restricted for all of us.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dorian-graph" target="_blank">dorian-graph</a>   <span class="timeago" data-date="2021-08-18 18:22:03 &#43;0000 UTC">2021-08-18 18:22:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks interesting!<p>I&#x27;ve used both <a href="https:&#x2F;&#x2F;www.drovio.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.drovio.com&#x2F;</a> (formerly Use-Together) and <a href="https:&#x2F;&#x2F;tuple.app&#x2F;" rel="nofollow">https:&#x2F;&#x2F;tuple.app&#x2F;</a> during the pandemic successfully at work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=borisdesouza" target="_blank">borisdesouza</a>   <span class="timeago" data-date="2021-08-19 01:02:05 &#43;0000 UTC">2021-08-19 01:02:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hands down the best thing to come out for remote collaboration since the pandemic. My team and I have been using pop.com since we discovered it as screen.so. It&#x27;s been amazing! We added it to Slack and it make it seamless for us to get into a pairing session with one command. Prior to pop.com we tried a bunch of other tools but didn&#x27;t find any that gave us the fluidity of collaboration we got with pop.<p>One of our favorite features is the drawing capabilities. It&#x27;s weird to believe that this is the only tool we&#x27;ve used that has perfected drawing - something that has truly helped us collaborate without having to use a virtual whiteboard application.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 06:30:07 &#43;0000 UTC">2021-08-19 06:30:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the positive words!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kirillzubovsky" target="_blank">kirillzubovsky</a>   <span class="timeago" data-date="2021-08-19 06:04:29 &#43;0000 UTC">2021-08-19 06:04:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have been using Pop for 1:1 pair programming sessions with a friend and it’s been great! To me there is a massive value in simplicity and speed with which we can go from zero to working. It’s 100x faster than Zoom or Meet. Two clicks and we are on!<p>Good luck, team Pop!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 06:29:28 &#43;0000 UTC">2021-08-19 06:29:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for the kind words!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=keithnz" target="_blank">keithnz</a>   <span class="timeago" data-date="2021-08-19 00:29:26 &#43;0000 UTC">2021-08-19 00:29:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            - back button from the download is broken
+- connect with discord would be good<p>Not sure how this fits, but often we don&#x27;t get services like this these days because of the pricing model. We like a lot of these kinds of things, and we subscribed to a bunch (many cancelled now), but they all added up and didn&#x27;t really charge us based on our usage. Perhaps we aren&#x27;t the target audience as you want people who integrate this into their regular work so people use it all the time.  But for us, we&#x27;d want all employees to be able to use this, but if we don&#x27;t use it, we pay nothing.  When we do use it, we really want max concurrent users to be charged  (concurrent being not necessarily exact time, but within a day or so ). i.e., if 1 user uses it for 10-15 minutes for the entire month, we want to be charged something representing that usage.  Then we&#x27;d be much more likely to signup and have this kind of thing available if and when we need it.  Or any other model that seems fair for occasional &#x2F; spikey use, psychologically, we just don&#x27;t want to feel like we are paying for something we aren&#x27;t using when we don&#x27;t use it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 00:50:01 &#43;0000 UTC">2021-08-19 00:50:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re pushing out a fix for the back button as I speak, thanks for the heads up! It should be live in ~10 minutes (CI build + test + deploy).<p>Discord: we haven&#x27;t looked into their API yet, but it&#x27;s an oversight on our part. We&#x27;ll take a look soon!<p>Pricing: thanks for the detailed explanation of where you&#x27;re coming from. Your perspective resonates well with ours, which is that we&#x27;d like the amount our customers pay us to be roughly commensurate with the value we provide them.<p>If you&#x27;re truly interested in using Pop and providing feedback, I&#x27;d love to learn more about your team and your background so we can make sure we&#x27;re aware of that perspective as we work on our pricing plan. Feel free to find a time via <a href="https:&#x2F;&#x2F;calendly.com&#x2F;j-pop&#x2F;30min" rel="nofollow">https:&#x2F;&#x2F;calendly.com&#x2F;j-pop&#x2F;30min</a> or drop me a line at j@pop.com. Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pmontra" target="_blank">pmontra</a>   <span class="timeago" data-date="2021-08-19 07:33:02 &#43;0000 UTC">2021-08-19 07:33:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Sorry, your browser isn’t supported.<p>&gt; Please use a supported browser Chrome, Safari, Firefox or download Pop for Linux.<p>I&#x27;m using Firefox 91 on Ubuntu 20.04. Is this a browser version check failing or a some missing capability? Maybe one of the extensions in my browser is blocking something needed by Pop.<p>It seems to work on Vivaldi. At least it gets to the account registration page. I hoped it would work without an account so I didn&#x27;t go any further.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=worble" target="_blank">worble</a>   <span class="timeago" data-date="2021-08-19 07:47:50 &#43;0000 UTC">2021-08-19 07:47:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;ve got an extension disabling WebRTC, turn it off, that worked for me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nathell" target="_blank">nathell</a>   <span class="timeago" data-date="2021-08-18 20:41:37 &#43;0000 UTC">2021-08-18 20:41:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At Fy!, we’ve been using Pop for impromptu remote pair programming sessions for a few months now. The killer feature, for us, is how easy it is to take or surrender control over the sharer’s screen. Much lower friction compared to Zoom or GMeet.<p>It works well, too. There’ve been random hiccups, but nothing too disturbing. Most of the time it just gets out of the way.<p>Thanks for the great tool!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 20:46:55 &#43;0000 UTC">2021-08-18 20:46:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, that&#x27;s great to hear! Please do let us know about the random hiccups at hello@pop.com, since the long tail of issues is surprisingly long in this product space, and so we really appreciate any feedback that can help us improve.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hartator" target="_blank">hartator</a>   <span class="timeago" data-date="2021-08-18 18:33:00 &#43;0000 UTC">2021-08-18 18:33:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been following you guys&#x27; work since Screenhero then Slack integration then Slack reduced integration then Slack killing it (still makes no sense why) then screen.so then now we&#x27;ll give a try to Pop!<p>&gt; Yes, the domain was expensive. Roughly $1.5m. We consider it an asset that is unlikely to depreciate significantly.<p>Congrats on getting it! Hopefully it wasn&#x27;t too much of distraction.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 18:43:16 &#43;0000 UTC">2021-08-18 18:43:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!<p>I worked with <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;user?id=ted0" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;user?id=ted0</a> who was AMAZING at helping find and acquire the domain. I can strongly recommend him as an amazing person to work with. It took a few days to find a domain we loved, and another few days to close the transaction. It was quite an interesting experience!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anotherevan" target="_blank">anotherevan</a>   <span class="timeago" data-date="2021-08-19 03:56:40 &#43;0000 UTC">2021-08-19 03:56:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This HN post was quite timely as I don&#x27;t often need to remote control (usually screen sharing is fine) but there was definitely a case today.<p>One weird thing: Every key typed was doubled. So I&#x27;d type one &quot;m&quot; and on the remote screen would get &quot;mm&quot; in the input field.<p>I&#x27;m on Linux (Arch) and the other end was Windows 10.<p>Other than that, it was VERY smooth and my colleague was quite impressed. He is planning to use to for parental tech support!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:12:20 &#43;0000 UTC">2021-08-19 04:12:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please email us at hello@pop.com so we can figure out how this happened and fix it asap!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=caslon" target="_blank">caslon</a>   <span class="timeago" data-date="2021-08-19 02:27:54 &#43;0000 UTC">2021-08-19 02:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Something initially very light and small (PowWow) turned into something very... not. Is second-system effect the right term here?<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Second-system_effect" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Second-system_effect</a><p>&gt; The second-system effect or second-system syndrome is the tendency of small, elegant, and successful systems to be succeeded by over-engineered, bloated systems, due to inflated expectations and overconfidence.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tibiapejagala" target="_blank">tibiapejagala</a>   <span class="timeago" data-date="2021-08-18 18:33:45 &#43;0000 UTC">2021-08-18 18:33:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since you mentioned in a comment that your non-compete expired, maybe you are also no longer under any NDA. Can explain to a person outside of the startup world how this buy-and-kill works? If not killing a competitor, why? What do they expect a founder to do after killing their baby?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:02:47 &#43;0000 UTC">2021-08-18 19:02:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It wasn’t ever intended to be a buy-and-kill, it’s just unfortunately what ended up happening. When Slack acquired Screenhero, it was with the full intent to bring voice&#x2F;video&#x2F;screen sharing to Slack. The problem was that, post-acquisition, leadership lost interest in what could’ve been a promising feature set and growth vector for Slack (see: Zoom in 2020). Partially because integrating disparate pieces of software is a hard problem and partially because management&#x27;s appetite for investment in the team waned after the first year, building Slack Calls was slow and it was unclear how valuable the feature was to Slack&#x27;s success. Add in the cost of maintaining what is a very complicated and far-reaching implementation for interactive screen sharing, (not just for engineering, but also for policy&#x2F;legal and customer support), it made sense for Slack to kill it.<p>While I was still at Slack, there were retrospective conversations around how Screenhero maybe should have been built on the Slack platform, instead of as a first-party app. However, the acquisition happened so early in the life of Slack that the platform didn&#x27;t really exist yet, so it&#x27;s unclear how we&#x27;d do better if we had to do it all over.<p>With Pop, we&#x27;re doing things the right way. Pop is a standalone app, with a solid Slack integration. It makes it really fast to jump between the two (in fact, it&#x27;s faster to jump into a Pop meeting via Slack, than it is to join a Slack Call!).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mchusma" target="_blank">mchusma</a>   <span class="timeago" data-date="2021-08-18 22:12:52 &#43;0000 UTC">2021-08-18 22:12:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Slack&#x27;s poor calling is baffling to us, and the fact that they are uninterested in making it better is obvious. The quality is so bad, we use google meet for almost everything at the company, even though we would prefer to use the native slack calling.<p>Its actually easier to use other apps than Slack&#x27;s own apps. 
+ For example, you can&#x27;t schedule a recurring slack call that calls all the participants. I would LOVE this feature, if there is a way to add it into slack.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 22:47:11 &#43;0000 UTC">2021-08-18 22:47:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We could actually build this — drop us a line at hello@pop.com and let&#x27;s talk through exactly how this could work with Slack + Pop!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j1elo" target="_blank">j1elo</a>   <span class="timeago" data-date="2021-08-19 01:18:51 &#43;0000 UTC">2021-08-19 01:18:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The way you explain it, looks like if Slack acquired Screenhero in a whim, &quot;just in case we need it&quot;, and <i>afterwards</i> they realized that integrating and maintaining foreign code is a hard to do. Like, I could have told them that piece of wisdom for free.<p>I know, things are always more complex and your comment is no doubt a summarized version of what happened. It just read funny to me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 01:23:05 &#43;0000 UTC">2021-08-19 01:23:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that was ~3 years of learning (and pain) condensed into a short paragraph :D<p>I think one key piece worth emphasizing was: Screenhero&#x27;s core strength was in its interactive screen sharing. Slack&#x27;s main desire was in voice, then video, then screen sharing, then interactive screen sharing — and this &quot;impedance mismatch&quot; is somewhat responsible for where things ended up. By the time we got to the end of that roadmap, the appetite for the final feature was low, while the cost was very high.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Palmik" target="_blank">Palmik</a>   <span class="timeago" data-date="2021-08-18 19:06:17 &#43;0000 UTC">2021-08-18 19:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pop.com is a great domain name. How did you manage to get it, if you don&#x27;t mind sharing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:17:43 &#43;0000 UTC">2021-08-18 19:17:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Discussed here: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28225447" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28225447</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sagivo" target="_blank">sagivo</a>   <span class="timeago" data-date="2021-08-19 03:25:46 &#43;0000 UTC">2021-08-19 03:25:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I named it “Screen” as homage to Screenhero, only to realize that such a generic word makes a terrible brand name, and consequently makes it impossible to find via search engines.<p>So you&#x27;ve changed it to &quot;pop&quot;? I don&#x27;t think you&#x27;re going to get any better here..<p>Btw I&#x27;m an old fan of screenhero.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 03:31:28 &#43;0000 UTC">2021-08-19 03:31:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glad to have you back!<p>And honestly, the feedback on Pop as a name has been overwhelmingly positive :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=j3th9n" target="_blank">j3th9n</a>   <span class="timeago" data-date="2021-08-18 18:33:33 &#43;0000 UTC">2021-08-18 18:33:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The website instantly overheats my computer and made me close it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhash22" target="_blank">mhash22</a>   <span class="timeago" data-date="2021-08-18 18:40:39 &#43;0000 UTC">2021-08-18 18:40:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If this is an issue you can replicate, would you be open to debugging this live with me? If so, please pick a convenient time here: <a href="https:&#x2F;&#x2F;calendly.com&#x2F;mustafa-pop" rel="nofollow">https:&#x2F;&#x2F;calendly.com&#x2F;mustafa-pop</a>. Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brightball" target="_blank">brightball</a>   <span class="timeago" data-date="2021-08-18 18:42:00 &#43;0000 UTC">2021-08-18 18:42:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I miss screen hero, before acquisition.<p>Very glad to hear you’re back in the game!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 18:45:02 &#43;0000 UTC">2021-08-18 18:45:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hopefully we can fill the Screenhero-shaped void in your toolbox with Pop. Please do try it and let us know what you think! We&#x27;re committed to making Pop exceed Screenhero in both functionality and longevity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brightball" target="_blank">brightball</a>   <span class="timeago" data-date="2021-08-18 19:42:49 &#43;0000 UTC">2021-08-18 19:42:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll just drop in my thoughts on pricing that I wrote up back just before Slack.<p><a href="https:&#x2F;&#x2F;www.brightball.com&#x2F;articles&#x2F;screenhero-this-is-your-business-plan" rel="nofollow">https:&#x2F;&#x2F;www.brightball.com&#x2F;articles&#x2F;screenhero-this-is-your-...</a><p>Good luck and I&#x27;ll be keeping an eye on it!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:53:05 &#43;0000 UTC">2021-08-18 19:53:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, thanks for sharing, and for the detailed write up! Please keep the feedback coming (I&#x27;m j@pop.com if you&#x27;d like to keep in touch in the future).<p>I do agree Screenhero should have had a more generous free tier. With Pop, we will likely have a free usage tier when we start charging. We haven&#x27;t mentioned it on the pricing page just yet since everything is currently free and it would complicate the story.<p>I love the analogy you&#x27;ve made with Adobe Acrobat Reader! We definitely want Pop to become the default tool you&#x27;ll use when you want to work remotely with someone on a task together on your computer (pair programming today, but a whole lot more in the future). And I agree that keeping a generous free tier will help us enable that, beyond just the ability to join calls started by paid users.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atonse" target="_blank">atonse</a>   <span class="timeago" data-date="2021-08-18 20:38:50 &#43;0000 UTC">2021-08-18 20:38:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not that anyone can hold a grudge for founders getting acquired, but I think myself and others here just want to make sure this doesn&#x27;t meet the fate of ScreenHero, purchased by Slack and disappeared, ruined, etc.<p>Good to hear you&#x27;re also feeling it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vladharbuz" target="_blank">vladharbuz</a>   <span class="timeago" data-date="2021-08-19 00:25:13 &#43;0000 UTC">2021-08-19 00:25:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m on Firefox on iOS and your website has a few pixels of horizontal overflow. It makes scrolling feel shoddy.<p>Anyway, OG Screenhero user here wishing you good luck with Pop! If Electron is too slow and you need a systems programmer, let me know. :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 00:31:42 &#43;0000 UTC">2021-08-19 00:31:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the heads up on Firefox&#x2F;iOS — we&#x27;ll take a look!<p>Your repertoire of skills is crazy impressive — it&#x27;s really inspiring and amazing to see all the stuff you&#x27;ve built and work you&#x27;ve done. Your manifesto is also exactly the kind of thing the world needs more of. We&#x27;re not currently hiring but I would love to chat with you to exchange notes and war stories if you&#x27;re up for it! Feel free to grab a slot via <a href="https:&#x2F;&#x2F;calendly.com&#x2F;j-pop&#x2F;30min" rel="nofollow">https:&#x2F;&#x2F;calendly.com&#x2F;j-pop&#x2F;30min</a> :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danr4" target="_blank">danr4</a>   <span class="timeago" data-date="2021-08-19 07:56:49 &#43;0000 UTC">2021-08-19 07:56:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I loved screen, but only Debian&#x2F;Fedora killed it for me. No love for other linux distros? :(
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 15:07:02 &#43;0000 UTC">2021-08-19 15:07:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have a .deb and .rpm download, and also have an AUR package. Let me know if you need something else!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spockz" target="_blank">spockz</a>   <span class="timeago" data-date="2021-08-19 04:19:27 &#43;0000 UTC">2021-08-19 04:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We have been using VS Code’s and IntelliJ code with me features. Usually accompanied with just a voice call.<p>What is the added benefit of this? The on screen annotations?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:28:00 &#43;0000 UTC">2021-08-19 04:28:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Similar discussion here: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28224881" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28224881</a><p>In short: when you need to see anything outside the IDE (e.g. a debugger, or even just seeing the running app alongside the IDE), a tool like Pop is very helpful. But you can also use it in conjunction with those IDE features, as Elijah in the above thread said he does.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 21:19:43 &#43;0000 UTC">2021-08-18 21:19:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tanduv" target="_blank">tanduv</a>   <span class="timeago" data-date="2021-08-18 18:02:15 &#43;0000 UTC">2021-08-18 18:02:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Congrats on the launch! How &quot;low&quot; is the latency? The &quot;Live Share&quot; feature is VSCode gets mentioned a lot and has some advantages over traditional screen-sharing as it seems to beam the diffs of the code itself rather than a typical video stream. How do you compare to that?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 18:09:50 &#43;0000 UTC">2021-08-18 18:09:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sending over keystrokes will always be faster than sending across a video stream of your screen. So VSCode Live Share will always be faster. However, in practice, we&#x27;ve found the cost of a few extra milliseconds in latency are far outweighed most of the time by the benefit of being able to interact with any application on the shared screen (and draw).<p>For instance, if you&#x27;re building a webapp, and need to look at the product alongside the code, screen sharing (especially with the ability to draw) is a lot more valuable than being able to type in the IDE.<p>Back when we made Screenhero, we had the option to share a specific app, and what our users told us was that they&#x27;d often start by sharing the IDE, but then realize they wanted a lot more, and so would have to stop and share the entire screen. We eventually dropped the &#x27;window share&#x27; feature for this reason.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ElijahLynn" target="_blank">ElijahLynn</a>   <span class="timeago" data-date="2021-08-18 18:08:48 &#43;0000 UTC">2021-08-18 18:08:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been using VS Live Share too, and it is good, however, I still use a Pop session along with it, as we still need to share the browser at times as well as other things. So, I use both in tandem and will likely continue to do so.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lucas3" target="_blank">lucas3</a>   <span class="timeago" data-date="2021-08-18 20:52:12 &#43;0000 UTC">2021-08-18 20:52:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Helloo!! I found a bug which I can replicate as many as I want.<p>Steps:
+1. Share screen
+2. Change cameras videos to the big option (Out of the 3 options available)
+3. Click on draw<p>Result: You are not able to click elsewhere on the screen, you just keep drawing.<p>Great tool though :D
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 21:50:23 &#43;0000 UTC">2021-08-18 21:50:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is now fixed, thanks for the heads up!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=makstaks" target="_blank">makstaks</a>   <span class="timeago" data-date="2021-08-19 03:53:24 &#43;0000 UTC">2021-08-19 03:53:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Huge fan of Screenhero back in the day so I&#x27;m happy this is back and you have full control over pop.com&#x27;s future.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 04:28:57 &#43;0000 UTC">2021-08-19 04:28:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re happy you&#x27;re happy! Please try out the product and let us know if there&#x27;s anything we can do to improve.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:19:49 &#43;0000 UTC">2021-08-18 18:19:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeremyw" target="_blank">jeremyw</a>   <span class="timeago" data-date="2021-08-18 19:16:49 &#43;0000 UTC">2021-08-18 19:16:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your security doc says 1-on-1 calls are end-to-end encrypted, and I&#x27;m glad for it. Recommend promoting that bit to homepage marketing.<p>Do you expect to be able to make 3+ multiparty calls end-to-end encrypted, eventually?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 19:19:08 &#43;0000 UTC">2021-08-18 19:19:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes! Once it&#x27;s available in WebRTC, we&#x27;ll implement end-to-end encryption for group calls. There is progress being made in this direction: <a href="https:&#x2F;&#x2F;webrtchacks.com&#x2F;true-end-to-end-encryption-with-webrtc-insertable-streams&#x2F;" rel="nofollow">https:&#x2F;&#x2F;webrtchacks.com&#x2F;true-end-to-end-encryption-with-webr...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simonebrunozzi" target="_blank">simonebrunozzi</a>   <span class="timeago" data-date="2021-08-19 04:59:52 &#43;0000 UTC">2021-08-19 04:59:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Congrats on the launch! Can you tell us a bit more about the company? How many of you, where are you based?<p>Also, did you consider using Signalwire APIs [0] to power the service? (disclaimer: I know the team well and I am an early investor)<p>[0]: <a href="https:&#x2F;&#x2F;docs.signalwire.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.signalwire.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cu3PO42" target="_blank">Cu3PO42</a>   <span class="timeago" data-date="2021-08-18 21:08:07 &#43;0000 UTC">2021-08-18 21:08:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a small bug to report with the website: I cannot scroll the Privacy Policy site. This is on Firefox 91 on Windows 10, it does seem to work in Chrome, however.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 21:50:08 &#43;0000 UTC">2021-08-18 21:50:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is now fixed, thanks for the heads up!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DrBenCarson" target="_blank">DrBenCarson</a>   <span class="timeago" data-date="2021-08-18 20:20:47 &#43;0000 UTC">2021-08-18 20:20:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think I remember seeing this when it was screen and being a little confused why you were using daily.co if it’s your core business. Still using daily.co?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-18 20:29:22 &#43;0000 UTC">2021-08-18 20:29:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Our core business is enabling remote work and remote pair programming. WebRTC infrastructure is largely commoditized, and we&#x27;re open to revisiting how we handle our WebRTC infrastructure in the future.<p>Daily is a great infrastructure provider, and moreover, the team was incredible to work with.<p>The reason we switched out from Daily was because we were running into bugs in the product, and weren&#x27;t able to tell whether they were on our end or Daily&#x27;s end. By owning our own infrastructure, this became a non-issue: every bug was ours to find and fix. It turns out most of the issues we had were bugs in our custom modifications to Electron to reduce screen share latency, but we had no way of knowing at the time. Now that we&#x27;ve invested in our own infrastructure, it&#x27;s the path of least resistance to continue using it, but we&#x27;re open to revisiting this decision in the future.<p>The Daily team is stellar to work with, and I strongly recommend them to anyone looking for a WebRTC infrastructure provider.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjot" target="_blank">pjot</a>   <span class="timeago" data-date="2021-08-19 03:24:05 &#43;0000 UTC">2021-08-19 03:24:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My first thought was, “this looks a lot like screenhero”. Glad to see y’all are back!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jsherwani" target="_blank">jsherwani</a>   <span class="timeago" data-date="2021-08-19 03:31:38 &#43;0000 UTC">2021-08-19 03:31:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Glad to be back :D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=presentation" target="_blank">presentation</a>   <span class="timeago" data-date="2021-08-19 02:12:23 &#43;0000 UTC">2021-08-19 02:12:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any thoughts how this compares to Tuple?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=t0mbstone" target="_blank">t0mbstone</a>   <span class="timeago" data-date="2021-08-19 04:11:58 &#43;0000 UTC">2021-08-19 04:11:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like it maybe does a better job of handling video and audio than tuple does, and it looks like it plays nicer when there are multiple people involved.<p>For example, inviting someone to a screen sharing session is as easy as sending them a link.<p>It also has virtual whiteboarding, which Tuple doesn&#x27;t have
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jmacd" target="_blank">jmacd</a>   <span class="timeago" data-date="2021-08-18 22:06:35 &#43;0000 UTC">2021-08-18 22:06:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey @jsherwani Welcome back!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:54:09 &#43;0000 UTC">2021-08-18 18:54:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smoldesu" target="_blank">smoldesu</a>   <span class="timeago" data-date="2021-08-18 17:55:51 &#43;0000 UTC">2021-08-18 17:55:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Am I the only one who can&#x27;t scroll on this page? There appears to be content, but it won&#x27;t let me go anywhere past the front page (Firefox, if it helps)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhash22" target="_blank">mhash22</a>   <span class="timeago" data-date="2021-08-18 18:18:17 &#43;0000 UTC">2021-08-18 18:18:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Scrolling on Firefox should be fixed now. Apologies about that!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hhw3h" target="_blank">hhw3h</a>   <span class="timeago" data-date="2021-08-18 17:58:16 &#43;0000 UTC">2021-08-18 17:58:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can confirm that I&#x27;m unable to scroll on the site while browsing with firefox
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:02:08 &#43;0000 UTC">2021-08-18 18:02:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jpetrucc" target="_blank">jpetrucc</a>   <span class="timeago" data-date="2021-08-18 17:58:14 &#43;0000 UTC">2021-08-18 17:58:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1 for this, I can&#x27;t scroll at all on Firefox. Works on Chrome though
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:05:18 &#43;0000 UTC">2021-08-18 18:05:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:18:20 &#43;0000 UTC">2021-08-18 18:18:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

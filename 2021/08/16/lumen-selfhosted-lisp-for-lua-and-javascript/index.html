@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/lumen-selfhosted-lisp-for-lua-and-javascript/">
+
+
+    <title>Lumen – Self-hosted Lisp for Lua and JavaScript - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Lumen – Self-hosted Lisp for Lua and JavaScript - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/lumen-selfhosted-lisp-for-lua-and-javascript/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/lumen-selfhosted-lisp-for-lua-and-javascript/">
+<meta name="twitter:title" content="Lumen – Self-hosted Lisp for Lua and JavaScript - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Lumen – Self-hosted Lisp for Lua and JavaScript - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T23:22:03JST",
+    "dateModified": "2021-08-16T23:22:03JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/sctb/lumen">Lumen – Self-hosted Lisp for Lua and JavaScript</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yogthos" target="_blank">yogthos</a>   <span class="timeago" data-date="2021-08-17 00:39:00 &#43;0000 UTC">2021-08-17 00:39:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also recommend checking out Fennel <a href="https:&#x2F;&#x2F;fennel-lang.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;fennel-lang.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dgb23" target="_blank">dgb23</a>   <span class="timeago" data-date="2021-08-17 10:04:24 &#43;0000 UTC">2021-08-17 10:04:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Projects like these motivate me to finally start learning emacs and move on from VSCode. That would be my third attempt...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rkangel" target="_blank">rkangel</a>   <span class="timeago" data-date="2021-08-17 13:35:01 &#43;0000 UTC">2021-08-17 13:35:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If it helps - I moved from Emacs to VSCode. It&#x27;s not as simple as &quot;objectively better you just need to know how&quot;.<p>I had invested a lot of work into my emacs config in order to get things working in a usable way. The problem is that every new thing I added needed a whole lot more work. VSCode plugins usually work pretty well out of the box - e.g. I just installed the Elm plugin and it was working immediately with errors shown inline, autocomplete etc. If I had been able to get that going well in Emacs in less than an hour or two I&#x27;d have been pleasantly surprised.<p>VSCode also has two things that Emacs doesn&#x27;t. Live workspace sharing so you can pair program remotely (it&#x27;s fantastic) and the ability work on a repo that&#x27;s the other end of an SSH link (yes Emacs has tramp, not it&#x27;s not in the same league). The SSH stuff works amazingly seamlessly, it&#x27;s been my primary development mode since the start of pandemic.<p>One proviso I will give to my Emacs opinions is that the Language Server Protocol was only just beginning to come in when I switched away. That abstraction level is exactly what Emacs needs (particularly given the threading restrictions) and a lot of language setup might be easier and more uniform if you can take advantage of it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aerique" target="_blank">aerique</a>   <span class="timeago" data-date="2021-08-17 10:19:57 &#43;0000 UTC">2021-08-17 10:19:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Doom Emacs is worth a try.  Comes with Vim bindings by default but these can be disabled.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;hlissner&#x2F;doom-emacs#doom-emacs" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;hlissner&#x2F;doom-emacs#doom-emacs</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tbonesteaks" target="_blank">tbonesteaks</a>   <span class="timeago" data-date="2021-08-17 14:22:55 &#43;0000 UTC">2021-08-17 14:22:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I recently moved to doom-emacs, and I love it. I had been piecemealing together an emacs config for a few years, and sometimes it was fun and sometimes frustrating. But, doom-emacs has so many of the things I need already, and adding a new packages is the same as adding them to regular emacs if you need something it doesn&#x27;t already have.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aerique" target="_blank">aerique</a>   <span class="timeago" data-date="2021-08-17 15:44:18 &#43;0000 UTC">2021-08-17 15:44:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I had the same (also with the i3 window manager and the fish shell): it came with sane[1] defaults to allowed me to chuck out my previous big, grown-over-the-years config and start over much smaller.<p>[1] very subjective but they were mostly similar to my tastes
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 06:28:30 &#43;0000 UTC">2021-08-17 06:28:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have had this discussion with (I believe) one of the maintainers of lumen before: but why the paren-free let?<p>In the beginning of my lisp journey I would have probably jumped on this, but then I found SRFI-71 that extends the regular scheme let with multiple values support in a backwards compatible way. I myself extended SRFI-71 in a small project with support for pattern matching in the multiple values form.<p>None of this would have been possible using a clojure-style let.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=b3n" target="_blank">b3n</a>   <span class="timeago" data-date="2021-08-17 09:47:13 &#43;0000 UTC">2021-08-17 09:47:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; None of this would have been possible using a clojure-style let.<p>Why? Clojure already supports pattern matching in its `let`, e.g.<p><pre><code>    (let [[head &amp; tail] (produces-a-list)] ...)</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 12:29:15 &#43;0000 UTC">2021-08-17 12:29:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That was not my complaint. My complaint is that the [id expr id expr ...] form has no benefits except for people disliking parens at the cost of making the let for impossible to extend in a backwards compatible way.<p>SRFI-71 for scheme extends let with support for values, like so:<p><pre><code>    (let ((q r (quotient&#x2F;reminder 10 3))) ...)
+</code></pre>
+This for is then also extensible (I have added pattern matching on top of it).<p>Clojure&#x27;s is not.<p><pre><code>    (let [q r (hyptohetical-2-value-quotient&#x2F;reminder 10 3)] ...)
+</code></pre>
+Makes no sense in clojure.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-08-17 13:27:56 &#43;0000 UTC">2021-08-17 13:27:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In Clojure land we&#x27;re more picky about paren usage and we&#x27;re used to variants of let that are named explicitly. if-let, when-let, reagent&#x2F;with-let, letfn, etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 16:52:15 &#43;0000 UTC">2021-08-17 16:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would say that all of those are different than what I am saying (if-let and it&#x27;s ilk are a conditional form.<p>But sure. Rich has done many great decisions with regards to clojure. This part is one of the few I don&#x27;t agree with (and maybe regular bit-tries instead of rrb-trees).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pankajdoharey" target="_blank">pankajdoharey</a>   <span class="timeago" data-date="2021-08-17 07:59:32 &#43;0000 UTC">2021-08-17 07:59:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Clojure&#x27;s style *let* is probably a limitation of the JVM&#x27;s inability to do proper tailcalls.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 08:32:35 &#43;0000 UTC">2021-08-17 08:32:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You must have misunderstood. I was referring to the binding syntax. Clojure does<p><pre><code>    (let [a 5 b 6] ...)
+</code></pre>
+whereas scheme and common lisp does<p><pre><code>   (let* ((a 5) (b 6)) ...)
+</code></pre>
+SRFI-71 trivially extends this to do multiple values:<p><pre><code>    (let ((a b (produces-2-values X y))) ...)
+</code></pre>
+Which I extended to to pattern matching:<p><pre><code>    (let ((a (head . tail) (produces-an-atom-and-a-list ...))) ...)</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reitzensteinm" target="_blank">reitzensteinm</a>   <span class="timeago" data-date="2021-08-17 10:12:14 &#43;0000 UTC">2021-08-17 10:12:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Clojure absolutely supports this. (let [[a b] lst]) will destructure lst, binding a as the first element and b as the second. The destructuring then recurses to implement your second example.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 10:38:41 &#43;0000 UTC">2021-08-17 10:38:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That was not my complaint.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reitzensteinm" target="_blank">reitzensteinm</a>   <span class="timeago" data-date="2021-08-17 11:09:00 &#43;0000 UTC">2021-08-17 11:09:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, OK then. Rereading your post hasn&#x27;t made it clearer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bjoli" target="_blank">bjoli</a>   <span class="timeago" data-date="2021-08-17 12:18:38 &#43;0000 UTC">2021-08-17 12:18:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I never claimed clojure couldn&#x27;t do destructuring. That should be pretty clear. My complaint is that it isn&#x27;t extensible without resulting to syntax that is very unlispy.<p>My complaint is the de-parenification of let. Why this form? It is easier to type, maybe, but visually it removes the distinction between binding, and makes any future extensions (like if clojure would gain multiple value support - however unlikely) impossible.<p>The strength of it is clearly visible SRFI-71 for scheme. Regular old let was trivially extensible to handle multiple values. And I trivially extended that to have pattern matching, without breaking any backwards compatibility.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=reitzensteinm" target="_blank">reitzensteinm</a>   <span class="timeago" data-date="2021-08-17 12:46:01 &#43;0000 UTC">2021-08-17 12:46:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think it&#x27;s just the syntax that&#x27;s a roadblock - Clojure is not intended to be extensible in that way. For better or worse, it has batteries included and is highly opinionated.<p>From that perspective, including parens in let just to enable some hypothetical extension makes no sense.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=canadianfella" target="_blank">canadianfella</a>   <span class="timeago" data-date="2021-08-17 12:09:33 &#43;0000 UTC">2021-08-17 12:09:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is your complaint?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ChunkyOnions" target="_blank">ChunkyOnions</a>   <span class="timeago" data-date="2021-08-17 03:30:31 &#43;0000 UTC">2021-08-17 03:30:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think Lumen is also the name of a WASM-based BEAM implementation or something along those lines so I was very confused here
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lawik" target="_blank">lawik</a>   <span class="timeago" data-date="2021-08-17 04:30:26 &#43;0000 UTC">2021-08-17 04:30:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t worry, it is also something related to Laravel. These things happen :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_only_law" target="_blank">the_only_law</a>   <span class="timeago" data-date="2021-08-17 03:32:02 &#43;0000 UTC">2021-08-17 03:32:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; WASM-based BEAM implementation<p>Well you certainly caught my interest...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rgrmrts" target="_blank">rgrmrts</a>   <span class="timeago" data-date="2021-08-17 03:53:22 &#43;0000 UTC">2021-08-17 03:53:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Source: <a href="https:&#x2F;&#x2F;github.com&#x2F;lumen&#x2F;lumen" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lumen&#x2F;lumen</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=guardian5x" target="_blank">guardian5x</a>   <span class="timeago" data-date="2021-08-17 05:30:40 &#43;0000 UTC">2021-08-17 05:30:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lumen is also the name of a new Unreal Engine feature.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

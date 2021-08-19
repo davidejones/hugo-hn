@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/convert-apple-neuralhash-model-for-csam-detection-to-onnx/">
+
+
+    <title>Convert Apple NeuralHash model for CSAM Detection to ONNX - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Convert Apple NeuralHash model for CSAM Detection to ONNX - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/convert-apple-neuralhash-model-for-csam-detection-to-onnx/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/convert-apple-neuralhash-model-for-csam-detection-to-onnx/">
+<meta name="twitter:title" content="Convert Apple NeuralHash model for CSAM Detection to ONNX - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Convert Apple NeuralHash model for CSAM Detection to ONNX - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T07:03:00JST",
+    "dateModified": "2021-08-18T07:03:00JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX">Convert Apple NeuralHash model for CSAM Detection to ONNX</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-18 19:11:25 &#43;0000 UTC">2021-08-18 19:11:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ongoing related threads:<p><i>Apple defends anti-child abuse imagery tech after claims of ‘hash collisions’</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28225706" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28225706</a><p><i>Hash collision in Apple NeuralHash model</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28219068" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28219068</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 09:15:21 &#43;0000 UTC">2021-08-18 09:15:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Neural hash generated here might be a few bits off from one generated on an iOS device. This is expected since different iOS devices generate slightly different hashes anyway. The reason is that neural networks are based on floating-point calculations. The accuracy is highly dependent on the hardware. For smaller networks it won&#x27;t make any difference. But NeuralHash has 200+ layers, resulting in significant cumulative errors.<p>This is a little unexpected. I&#x27;m not sure whether this has any implication on CSAM detection as whole. Wouldn&#x27;t this require Apple to add multiple versions of NeuralHash of the same image (one for each platform&#x2F;hardware) into the database to counter this issue? If that is case, doesn&#x27;t this in turn weak the threshold of the detection as the same image maybe match multiple times in different devices?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwizou" target="_blank">cwizou</a>   <span class="timeago" data-date="2021-08-18 10:12:06 &#43;0000 UTC">2021-08-18 10:12:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This may explain why they (weirdly), only announced it for iOS and iPadOS, as far as I can tell they didn&#x27;t announce it for macOS.<p>My first thought was that they didn&#x27;t want to make the model too easily accessible by putting it on macOS, in order to avoid adversarial attacks.<p>But knowing this now, Intel Macs are an issue as (not as I previously wrote because they differ in floating point implementation to ARM, thanks my123 for the correction) they will have to run the network on a wide variety of GPUs (at the very least multiple AMD archs and Intel&#x27;s iGPU), so maybe that also factored in their decision ? They would have had to deploy multiple  models and (I believe, unless they could make the models exactly converge ?) multiple distinct database server side to check back.<p>To people knowledgeable on the topic, would having two versions of the models increase the attack surface ?<p>Edit: Also, I didn&#x27;t realise that because of how perceptual hashes worked, they would need to have their own threshold to matching, independent of the &quot;30 pictures matched to launch a human review&quot;. Apple&#x27;s communication push implied exact matches. I&#x27;m not sure they used the right tool here (putting aside the fact for now that this is running client side).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kwerk" target="_blank">kwerk</a>   <span class="timeago" data-date="2021-08-18 12:40:35 &#43;0000 UTC">2021-08-18 12:40:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It wasn’t part of the original announcement afaik but is coming to MacOS Monterey: <a href="https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;</a><p>Edit: cwizou correctly points out not all of the features (per Apple) will be on Monterey but the code exists.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwizou" target="_blank">cwizou</a>   <span class="timeago" data-date="2021-08-18 13:01:57 &#43;0000 UTC">2021-08-18 13:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is it ? I checked your link and they separate clearly which features comes to which OS, here&#x27;s how I read it :<p>- Communication safety in Messages<p>&gt; &quot;This feature is coming in an update later this year to accounts set up as families in iCloud for iOS 15, iPadOS 15, and macOS Monterey.&quot;<p>- CSAM detection<p>&gt; &quot;To help address this, new technology in iOS and iPadOS<i>&quot;<p>- Expanding guidance in Siri and Search<p>&gt; &quot;These updates to Siri and Search are coming later this year in an update to iOS 15, iPadOS 15, watchOS 8, and macOS Monterey.</i>&quot;<p>So while the two other features are coming, the CSAM detection is singled out as not coming to macOS.<p>But ! At the same time, and I saw that after the editing window closed, the GitHub repo clearly states that you can get the models from macOS builds 11.4 onwards :<p>&gt; If you have a recent version of macOS (11.4+) or jailbroken iOS (14.7+) installed, simply grab these files from &#x2F;System&#x2F;Library&#x2F;Frameworks&#x2F;Vision.framework&#x2F;Resources&#x2F; (on macOS) or &#x2F;System&#x2F;Library&#x2F;Frameworks&#x2F;Vision.framework&#x2F; (on iOS).<p>So my best guess is, they trialed it on macOS as they did in iOS (and put the model there contrary to what I had assumed) but choose not to enable it yet, perhaps because of the rounding error issue, or something else.<p>Edit : This repo by KhaosT refers to 11.3 for the API availability but it&#x27;s the same ballpark, Apple is already shipping it as part of their Vision framework, under an obfuscated class name, and the code samples runs the model directly on macOS : <a href="https:&#x2F;&#x2F;github.com&#x2F;KhaosT&#x2F;nhcalc&#x2F;blob&#x2F;5f5260295ba584019cbad6233e9272bfad8a8785&#x2F;nhcalc&#x2F;main.swift#L15" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;KhaosT&#x2F;nhcalc&#x2F;blob&#x2F;5f5260295ba584019cbad6...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kwerk" target="_blank">kwerk</a>   <span class="timeago" data-date="2021-08-18 13:12:41 &#43;0000 UTC">2021-08-18 13:12:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah good catch and write up. I believe you’re right and likely a matter of time for Mac. Hard to tell if this means it’s shipping with MacOS but just not enabled yet.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=my123" target="_blank">my123</a>   <span class="timeago" data-date="2021-08-18 11:01:57 &#43;0000 UTC">2021-08-18 11:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The model runs on the GPU or the Neural Engine, CPU arch isn&#x27;t really a factor.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwizou" target="_blank">cwizou</a>   <span class="timeago" data-date="2021-08-18 11:27:26 &#43;0000 UTC">2021-08-18 11:27:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My bad, I edited the previous post, thanks for this. Assuming this runs on Intel&#x27;s iGPU, they would still need the ability to run on AMD&#x27;s GPU for the iMac Pro and Mac Pro, so that&#x27;s at least two extra separate cases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=trangus_1985" target="_blank">trangus_1985</a>   <span class="timeago" data-date="2021-08-18 20:18:43 &#43;0000 UTC">2021-08-18 20:18:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not a user facing feature, and x86 macs are the past already - I doubt they&#x27;ll bother porting it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cyanydeez" target="_blank">cyanydeez</a>   <span class="timeago" data-date="2021-08-18 22:40:54 &#43;0000 UTC">2021-08-18 22:40:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            my primary expectation is this tech will be used for dcma2.0 and &quot;for the kids&quot; is the best way to launch it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eurasiantiger" target="_blank">eurasiantiger</a>   <span class="timeago" data-date="2021-08-18 09:42:16 &#43;0000 UTC">2021-08-18 09:42:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This basically invalidates any claims Apple made about accuracy, and brings up an interesting point about the hashing mechanism: it seems two visually similar images will also have similar hashes. This is interesting because humans quickly learn such patterns: for example, many here will know what dQw4w9WgXcQ is without thinking about it at all.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Closi" target="_blank">Closi</a>   <span class="timeago" data-date="2021-08-18 11:48:22 &#43;0000 UTC">2021-08-18 11:48:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  it seems two visually similar images will also have similar hashes<p>This is by-design - The whole idea of a perceptual hash is that the more similar the two hashes are, the more similar the two images are, so I don&#x27;t think it invalidates any claims.<p>Perceptual hashes are different to a cryptographic hash, where any change in the message would completely change the hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=enriquto" target="_blank">enriquto</a>   <span class="timeago" data-date="2021-08-18 15:52:34 &#43;0000 UTC">2021-08-18 15:52:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The whole idea of a perceptual hash is that the more similar the two hashes are, the more similar the two images are<p>If that is the case, then the word &quot;hash&quot; is terribly mis-applied here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tomesco" target="_blank">tomesco</a>   <span class="timeago" data-date="2021-08-18 16:39:47 &#43;0000 UTC">2021-08-18 16:39:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hash is applied correctly here. A hash function is &quot;any function that can be used to map data of arbitrary size to fixed-size values.&quot; The properties of being a(n) (essentially) unique fingerprint, or of small changes in input causing large changes in output, are properties of cryptographic hashes. Perceptual hashes do not have those properties.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=enriquto" target="_blank">enriquto</a>   <span class="timeago" data-date="2021-08-18 19:07:17 &#43;0000 UTC">2021-08-18 19:07:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Good explanation, thanks.  I only knew about cryptographic hashes, or those that are used for hash tables where you absolutely do not want to have collisions.  Anyhow, I&#x27;m not really comfortable with this usage of the word &quot;hash&quot;.  It is completely opposite of the meaning I&#x27;m used to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=L33tCrown" target="_blank">L33tCrown</a>   <span class="timeago" data-date="2021-08-18 19:03:18 &#43;0000 UTC">2021-08-18 19:03:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe the term fingerprint is better
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-08-18 15:42:21 &#43;0000 UTC">2021-08-18 15:42:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It greatly increases the collision space if you only have to get <i>near</i> a bad number.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eurasiantiger" target="_blank">eurasiantiger</a>   <span class="timeago" data-date="2021-08-18 11:56:18 &#43;0000 UTC">2021-08-18 11:56:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you may have misread my comment: I did not mean that the similarity of hashes invalidates any claims.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-08-18 15:29:42 &#43;0000 UTC">2021-08-18 15:29:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The whole idea of a perceptual hash is that the more similar the two hashes are, the more similar the two images are<p>This is already proven to be inaccurate. There are adversarial hashes and collisions possible in the system. You don’t have to be very skeptically-minded to think that this is intentional. Links to examples of this already posted in this thread.<p>You are banking on an ideal scenario of this technology not the reality.<p>EDIT: Proof on the front page on HN right now <a href="https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issues&#x2F;1" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issue...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wizzwizz4" target="_blank">wizzwizz4</a>   <span class="timeago" data-date="2021-08-18 09:47:52 &#43;0000 UTC">2021-08-18 09:47:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Wouldn&#x27;t this require Apple to add multiple versions of NeuralHash of the same image (one for each platform&#x2F;hardware) into the database to counter this issue?</i><p>Not if their processor architectures are all the same, or close enough that they can write (and have written) an emulation layer to get bit-identical behaviour.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=csmpltn" target="_blank">csmpltn</a>   <span class="timeago" data-date="2021-08-18 13:42:25 &#43;0000 UTC">2021-08-18 13:42:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Floating point arithmetic in an algorithm that can land you in jail? Why not!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 18:24:24 &#43;0000 UTC">2021-08-18 18:24:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This algorithm can not land you in jail. Nobody would be jailed based on this algorithm.<p>The algorithm alerts a human, who actually looks and makes the call.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=therealcamino" target="_blank">therealcamino</a>   <span class="timeago" data-date="2021-08-18 13:14:06 &#43;0000 UTC">2021-08-18 13:14:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it would just require generating the table of hashes once on each type of hardware in use (whether CPU or GPU), then doing the lookup only in the table that matches the hardware that generated it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TuringNYC" target="_blank">TuringNYC</a>   <span class="timeago" data-date="2021-08-18 13:17:32 &#43;0000 UTC">2021-08-18 13:17:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To re-do the hashes, you would need to run it on the original offending photo database, which -- as an unofficial party doing so -- could land you in trouble, wouldn&#x27;t it?<p>And what if you re-do the hashes on a Mac with auto-backup to iCloud -- next think you know the entire offending database has been sync&#x27;d into your iCloud account :-&#x2F;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=enriquto" target="_blank">enriquto</a>   <span class="timeago" data-date="2021-08-18 15:51:17 &#43;0000 UTC">2021-08-18 15:51:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t understand the concept of &quot;slightly different hash&quot;.  Aren&#x27;t hashes supposed to be either equal or completely different?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fizx" target="_blank">fizx</a>   <span class="timeago" data-date="2021-08-18 15:57:06 &#43;0000 UTC">2021-08-18 15:57:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re thinking of cryptographic hashes.  There are many kinds of hash (geographic, perceptual, semantic, etc), many of which are designed to only be slightly different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=richardxia" target="_blank">richardxia</a>   <span class="timeago" data-date="2021-08-18 15:59:18 &#43;0000 UTC">2021-08-18 15:59:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a class of hashes known as locality-sensitive hashes, which are designed to preserve some metric of &quot;closeness&quot;.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Locality-sensitive_hashing" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Locality-sensitive_hashing</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=varispeed" target="_blank">varispeed</a>   <span class="timeago" data-date="2021-08-18 12:01:51 &#43;0000 UTC">2021-08-18 12:01:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are probably using <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Hamming_distance" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Hamming_distance</a> to have a leeway which again adds to a potential of having more false positives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 18:03:15 &#43;0000 UTC">2021-08-18 18:03:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, this and other distance metrics are what are used to do reverse and image similarity lookups with perceptual hashes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=y7" target="_blank">y7</a>   <span class="timeago" data-date="2021-08-18 08:43:46 &#43;0000 UTC">2021-08-18 08:43:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now that the model is known, I wonder how hard it is to create &quot;adversarial collisions&quot;: given an image and a target hash, perturb the image in a way that is barely perceptible for a human, so that it matches the target hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=misterdata" target="_blank">misterdata</a>   <span class="timeago" data-date="2021-08-18 08:53:46 &#43;0000 UTC">2021-08-18 08:53:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently not that hard: <a href="https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issues&#x2F;1" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issue...</a>.<p>See also here: <a href="https:&#x2F;&#x2F;gist.github.com&#x2F;unrealwill&#x2F;c480371c3a4bf3abb29856c29197c0be" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;unrealwill&#x2F;c480371c3a4bf3abb29856c29...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Spivak" target="_blank">Spivak</a>   <span class="timeago" data-date="2021-08-18 19:09:08 &#43;0000 UTC">2021-08-18 19:09:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While super impressive I haven&#x27;t seen the thing that would actually destroy the algorithm which is given a hash and random reference image produce a new image which has that hash and looks like the reference image.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-08-18 23:31:08 &#43;0000 UTC">2021-08-18 23:31:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What you&#x27;ve seen is worse than that.<p>All you need to do to cause trouble right now, would be to get a bad image, hash it yourself, make a collision and distribute that.<p>Let&#x27;s say for the time being that the list hashes themselves will be server-side. You won&#x27;t ever get that list, but you don&#x27;t need it in order to cause a collision. You would need your own supply of CSAM to hash yourself, which while distasteful is clearly also not impossible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 09:31:58 &#43;0000 UTC">2021-08-18 09:31:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It might be useful to read the threat model document. Associated data from client neural hash matches are compared with the known CSAM database again on the server using a private perceptual hash before being forwarded to human reviewers, so all such an attack would do is expose non-private image derivatives to Apple. It would likely not put an account at risk for referral to NCMEC. In this sense, privacy is indeed preserved versus other server scanning solutions where an adversarial perceptual hash (PhotoDNA is effectively public as well, per an article shared on HN) would trigger human review of all the account’s data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=y7" target="_blank">y7</a>   <span class="timeago" data-date="2021-08-18 10:39:16 &#43;0000 UTC">2021-08-18 10:39:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume these &quot;non-private image derivatives&quot; are downscaled versions of the original image. But for downscaling there also are adversarial techniques: perturb an image such that the downscaled version looks like a target image. See <a href="https:&#x2F;&#x2F;bdtechtalks.com&#x2F;2020&#x2F;08&#x2F;03&#x2F;machine-learning-adversarial-image-scaling&#x2F;" rel="nofollow">https:&#x2F;&#x2F;bdtechtalks.com&#x2F;2020&#x2F;08&#x2F;03&#x2F;machine-learning-adversar...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 10:42:33 &#43;0000 UTC">2021-08-18 10:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For the server side component, the challenge is knowing the target of adversarial generation since, again, the perceptual hash used is secret. At that point, you are reduced to the threat present in every other existing CSAM detection system.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=y7" target="_blank">y7</a>   <span class="timeago" data-date="2021-08-18 10:48:01 &#43;0000 UTC">2021-08-18 10:48:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the perceptual hash used is secret<p>Yes, although I&#x27;m sure a sufficiently motivated attacker can obtain some CSAM that they are reasonably sure is present in the database, and generate the NeuralHash themselves.<p>&gt; At that point, you are reduced to the threat present in every other existing CSAM detection system.<p>A difference could be that server-side CSAM detection will  verify the entire image, and not just the image derivative, before notifying the authorities.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 14:57:01 &#43;0000 UTC">2021-08-18 14:57:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yes, although I&#x27;m sure a sufficiently motivated attacker can obtain some CSAM that they are reasonably sure is present in the database, and generate the NeuralHash themselves<p>Remind us what the attack is here?  The neural hash <i>and</i> the visual derivative both have to match for an image to trigger detection.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 15:34:27 &#43;0000 UTC">2021-08-18 15:34:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe something like: an adversary creates an innocuous photo where:<p>* The photo itself is benign.<p>* The photo’s NeuralHash matches known CSAM.<p>* The photo’s image derivative is not benign. It looks visually like CSAM.<p>* The photo’s image derivative matches known CSAM per a private perceptual hash.<p>The above, combined, could have a victim reported to NCMEC without being aware they were targeted. Since Apple operates on image derivatives, they could be fooled unlike other cloud providers. That is the claim.<p>At that point, the victim could point law enforcement to the original CloudKit asset (safety vouchers include a reference to the associate asset) and clear their name. However, involving law enforcement can always be traumatic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 16:07:42 &#43;0000 UTC">2021-08-18 16:07:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, but did I miss something that suggests that all 4 of those conditions can actually be met?  That seems like the part that has been made up.<p>Afaik the image derivative isn’t checked for  <i>looking like</i> CSAM.  It’s checked for looking like the specific CSAM from the database.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 16:57:50 &#43;0000 UTC">2021-08-18 16:57:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CSAM in the database is confidential, so the human reviewer just needs to be plausibly confident that they have CSAM in front of them. However, it’s not clear to me that you can pull off all three simultaneously. Furthermore, the attack doesn’t specify how they would adversarially generate an image derivative for a secret perceptual hash that they can’t run gradient descent on.<p>If someone wanted to plant CSAM and had control of an iCloud account, it seems far easier to send some emails with those images since iCloud Mail is actively scanned and nobody checks their iCloud Mail account, especially not the sent folder.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 17:06:44 &#43;0000 UTC">2021-08-18 17:06:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CSAM in the database is confidential.<p>The question is whether the visual derivatives are checked against derivatives from the database or just against abstract criteria.  That seems to be an unknown.<p>&gt; However, it’s not clear to me that you can pull off all three simultaneously<p>Agreed.  People here seem to keep assuming that you can, but so far nobody has demonstrated that it is possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nlitened" target="_blank">nlitened</a>   <span class="timeago" data-date="2021-08-18 10:09:26 &#43;0000 UTC">2021-08-18 10:09:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; before being forwarded to human reviewers<p>Does that mean that Apple employs people who manually review images known to be child pornography 9-to-5? Is it legal?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 10:25:02 &#43;0000 UTC">2021-08-18 10:25:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, and so does every other major cloud service provider. The working conditions of these people are notoriously difficult and should be the subject of attention.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kemayo" target="_blank">kemayo</a>   <span class="timeago" data-date="2021-08-18 14:13:20 &#43;0000 UTC">2021-08-18 14:13:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d imagine the key is that it&#x27;s &quot;manually review images <i>suspected</i> to be child pornography&quot;. The point of the review process is presumably that there <i>are</i> possible hash-collisions &#x2F; false-positives, so the reviewers are what cause that transition from suspected to known.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 10:29:29 &#43;0000 UTC">2021-08-18 10:29:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TechBro8615" target="_blank">TechBro8615</a>   <span class="timeago" data-date="2021-08-19 03:04:13 &#43;0000 UTC">2021-08-19 03:04:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Privacy is preserved by a team of humans looking at your private photos. Sounds like a good deal. What are we preserving again?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 08:53:31 &#43;0000 UTC">2021-08-18 08:53:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28105849" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28105849</a>, which shows a POC to generate adversarial collisions for any neural network based perceptual hash scheme. The reason it works is because &quot;(the network) is continuous(ly differentiable) and vulnerable to (gradient-)optimisation based attack&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=visarga" target="_blank">visarga</a>   <span class="timeago" data-date="2021-08-18 15:36:17 &#43;0000 UTC">2021-08-18 15:36:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Spy agencies could add CSAM images adversarially modified to match legit content they want to find. Then they need to have someone in Apple&#x27;s team to intercept the reports. This way they can scan for any image.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=m-p-3" target="_blank">m-p-3</a>   <span class="timeago" data-date="2021-08-18 19:58:17 &#43;0000 UTC">2021-08-18 19:58:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That reminded me of the AT&amp;T Room 641A<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Room_641A" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Room_641A</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=madeofpalk" target="_blank">madeofpalk</a>   <span class="timeago" data-date="2021-08-18 15:44:42 &#43;0000 UTC">2021-08-18 15:44:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If this is the level that a &quot;spy agency&quot; is going to get involved, they would already skip all this BS and just upload the images directly to themselves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 09:48:22 &#43;0000 UTC">2021-08-18 09:48:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or for criminals to generate perceptually similar illegal images that are no longer triggered as a &#x27;bad&#x27; hash.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dsign" target="_blank">dsign</a>   <span class="timeago" data-date="2021-08-18 09:25:36 &#43;0000 UTC">2021-08-18 09:25:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So, these adversarial collisions are the images that I need to send to my enemies so that they go to prison when they upload those images to iCloud? It seems trivially easy to exploit.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 09:35:16 &#43;0000 UTC">2021-08-18 09:35:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can technically hide an adversarial collision inside a complete legit normal image. It won’t be seen by human eyes but it will trigger a detection. In addition, you can do the complete opposite by perturbing a CSAM to output complete different hash to circumvent the detection. All of these vulnerabilities are well known for perceptual hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SV_BubbleTime" target="_blank">SV_BubbleTime</a>   <span class="timeago" data-date="2021-08-18 23:43:21 &#43;0000 UTC">2021-08-18 23:43:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So right there seems to be an issue to me. It seems like if you were trading in CSAM, you would run <i>CLEANER -all</i> on anything and everything. Because you know someone has already written that as proof of concept here.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jhanschoo" target="_blank">jhanschoo</a>   <span class="timeago" data-date="2021-08-19 06:26:22 &#43;0000 UTC">2021-08-19 06:26:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder what scenarios are facilitated by sending adversarial collisions over simply sending over CSAM.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=UncleMeat" target="_blank">UncleMeat</a>   <span class="timeago" data-date="2021-08-18 14:43:32 &#43;0000 UTC">2021-08-18 14:43:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. Because, as documented in the published material, hits are also reviewed by humans.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 18:08:52 &#43;0000 UTC">2021-08-18 18:08:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Downscaled derivative images are what are checked, and if the reviewer even suspects that the downscaled image contains sexual content of a minor, they&#x27;re required to report it. At that point, it is the authorities who decide whether or not to continue to investigate and determine if the user possesses CSAM. That investigation alone can ruin lives.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 18:28:27 &#43;0000 UTC">2021-08-18 18:28:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;downscaled&quot; image 360x360. It&#x27;s pretty easy to compare two images at that size to determine if they are the same. You&#x27;re not going to end up investigated unless you actually have actual picture of child pornography. Also, not just one, the process doesn&#x27;t even start until you have a fairly large number.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Xamayon" target="_blank">Xamayon</a>   <span class="timeago" data-date="2021-08-18 20:15:02 &#43;0000 UTC">2021-08-18 20:15:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s highly unlikely that the apple reviewer will have access to the actual image in the database, instead they will assess whether the blurry,b&#x2F;w,etc modified thumbnail could possibly be illegal. Given the level of secrecy surrounding the contents of the DB, even the normal NCMEC reviewers may not have access to those for comparison. There are plenty of CG images, small legal models, or even images of erotic toys which could be used as the base image which would look very suspicious as a low quality thumbnail.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 23:49:49 &#43;0000 UTC">2021-08-18 23:49:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There will be <i>someone</i> along the line who will check that the image is, in fact, the actual listed image. Otherwise, there is no legal case to be made.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-19 02:43:33 &#43;0000 UTC">2021-08-19 02:43:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>There will be someone along the line who will check that the image is, in fact, the actual listed image.</i><p>That someone will be law enforcement, and they will get a warrant for all of your electronic devices in order to determine if you actually have CSAM or not. It&#x27;s literally their job to investigate whether crimes were committed or not. Those investigations alone can ruin lives, even more so if arrests are made based on the tips or suspicions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-08-18 11:52:38 &#43;0000 UTC">2021-08-18 11:52:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can also just send your enemies CSAM, it is more effective at imprisoning them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TechBro8615" target="_blank">TechBro8615</a>   <span class="timeago" data-date="2021-08-19 03:07:16 &#43;0000 UTC">2021-08-19 03:07:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That sounds like a good reason not to create a virtual SWATing vector then.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eknkc" target="_blank">eknkc</a>   <span class="timeago" data-date="2021-08-18 12:00:10 &#43;0000 UTC">2021-08-18 12:00:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They probably would not hold onto them and also now you have a paper trail of sending CSAM to people. But if you were to alter some innocent looking photos and send them to someone, they might store those.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 14:57:55 &#43;0000 UTC">2021-08-18 14:57:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, but that won’t work since innocent looking photos won’t match the visual derivative.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nsizx" target="_blank">nsizx</a>   <span class="timeago" data-date="2021-08-18 09:44:09 &#43;0000 UTC">2021-08-18 09:44:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The images are sent for manual verification before you&#x27;re turned in, so no.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 08:47:31 &#43;0000 UTC">2021-08-18 08:47:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reddit discussion: <a href="https:&#x2F;&#x2F;old.reddit.com&#x2F;r&#x2F;MachineLearning&#x2F;comments&#x2F;p6hsoh&#x2F;p_appleneuralhash2onnx_reverseengineered_apple&#x2F;" rel="nofollow">https:&#x2F;&#x2F;old.reddit.com&#x2F;r&#x2F;MachineLearning&#x2F;comments&#x2F;p6hsoh&#x2F;p_a...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gary17the" target="_blank">gary17the</a>   <span class="timeago" data-date="2021-08-18 09:08:38 &#43;0000 UTC">2021-08-18 09:08:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An interesting tidbit: &quot;Believe it or not, [the NeuralHash algorithm for on-device CSAM detection] already exists as early as iOS 14.3, hidden under obfuscated class names.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=c7DJTLrn" target="_blank">c7DJTLrn</a>   <span class="timeago" data-date="2021-08-18 09:35:28 &#43;0000 UTC">2021-08-18 09:35:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So it was quite literally introduced as a trojan horse.<p>&quot;We&#x27;re so excited to bring you all these new features and bugfixes in iOS 14.3, plus one more thing you&#x27;ll hear about and object to in future. Too bad.&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robertoandred" target="_blank">robertoandred</a>   <span class="timeago" data-date="2021-08-18 14:50:52 &#43;0000 UTC">2021-08-18 14:50:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;ve never heard of feature flags?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hda2" target="_blank">hda2</a>   <span class="timeago" data-date="2021-08-19 03:19:53 &#43;0000 UTC">2021-08-19 03:19:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure apple would like everyone to call their trojan that way. &quot;Feature Flag&quot; lol.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gary17the" target="_blank">gary17the</a>   <span class="timeago" data-date="2021-08-18 15:40:22 &#43;0000 UTC">2021-08-18 15:40:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean like...?<p>let scanFile4CSAM: Bool<p>if #available(iOS 16.0, *) {<p><pre><code>    scanFile4CSAM = true
+</code></pre>
+} else {<p><pre><code>    scanFile4CSAM = is_iCloudPhotosFile &amp;&amp; Device.Settings.is_iCloudPhotosEnabled
+</code></pre>
+}<p>Edit: &quot;These efforts will evolve and expand over time.&quot;[1]<p>[1] <a href="https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 09:22:17 &#43;0000 UTC">2021-08-18 09:22:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In addition to generate the adversarial collisions, someone mentioned that it can also be used to train a decoder network to reverse any NeuralHash back to its input image.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-08-18 10:56:12 &#43;0000 UTC">2021-08-18 10:56:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That assumes that 96 bits of information are sufficient for (in some sense) uniquely describing the input image. Which, on the one hand, is of course the purpose of the system, but on the other is also clearly mathematically impossible (a 360x360 RGB8 image has 3110400 bits of information).<p>That is, for each 96 bit neural hash value, there exist (on average) 2^3110304 unique input images that hash to that same value.<p>Again, these are of course trivial facts, which do not rule out that image recovery (in a &quot;get back something that looks similar to the original input&quot; sense) is possible, but you should be aware that &quot;similar&quot; to the network need not mean &quot;similar&quot; to a human.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xucheng" target="_blank">xucheng</a>   <span class="timeago" data-date="2021-08-18 12:11:08 &#43;0000 UTC">2021-08-18 12:11:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just like any autoencoder, it is not about getting back the exact original, which is of course impossible. It is about summarizing the image in 96bits information, which is quite enough to leak the gist of the original image. For example, [1] talks about reversing Microsoft’s PhotoDNA.<p>&gt; but you should be aware that &quot;similar&quot; to the network need not mean &quot;similar&quot; to a human.<p>With techniques like GAN and DLSS, it is quite possible to generate some photo realistic image being enough similar to the original one, or at least leaking some private information.<p>[1]: <a href="https:&#x2F;&#x2F;www.hackerfactor.com&#x2F;blog&#x2F;index.php?&#x2F;archives&#x2F;929-One-Bad-Apple.html" rel="nofollow">https:&#x2F;&#x2F;www.hackerfactor.com&#x2F;blog&#x2F;index.php?&#x2F;archives&#x2F;929-On...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joe_the_user" target="_blank">joe_the_user</a>   <span class="timeago" data-date="2021-08-18 14:18:17 &#43;0000 UTC">2021-08-18 14:18:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;<i>...but you should be aware that &quot;similar&quot; to the network need not mean &quot;similar&quot; to a human...</i>&quot;<p>EXCEPT... neural hash <i>also</i> claims to be robust to modifications to images that would result in a similar-to-human-image. If the 96 bits is enough to tag such similar-to-humans results, why couldn&#x27;t a brute force approach yield such similar-to-humans images? Indeed, a nefarious person  intent on producing CSAM could set-up something like a generational-adversarial system that the produced CSAM images using the hashes along with other clues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 18:33:43 &#43;0000 UTC">2021-08-18 18:33:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because there are <i>still</i> an absolutely overwhelmingly huge number of different, completely nonsensical images that all generate the same hash, and small perturbations of those nonsensical blobs <i>also</i> generate the same hash.<p>96 bit is just <i>not</i> enough data to generate anything meaningful, just give up on that thought.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eurasiantiger" target="_blank">eurasiantiger</a>   <span class="timeago" data-date="2021-08-18 09:44:57 &#43;0000 UTC">2021-08-18 09:44:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This absolutely needs to be done. Also, does Apple deploy different models for different regions&#x2F;cohorts?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 14:59:11 &#43;0000 UTC">2021-08-18 14:59:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; someone mentioned that it can also be used to train a decoder network to reverse any NeuralHash back to its input image.<p>That someone is simply wrong.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wodenokoto" target="_blank">wodenokoto</a>   <span class="timeago" data-date="2021-08-18 08:43:22 &#43;0000 UTC">2021-08-18 08:43:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; ONNX is an open format built to represent machine learning models. ONNX defines a common set of operators - the building blocks of machine learning and deep learning models - and a common file format to enable AI developers to use models with a variety of frameworks, tools, runtimes, and compilers.<p>- onnx.ai<p>I have never heard of this before and had to look it up. Is it widely used? Can I define a model in onnx and run it &quot;everywhere&quot;, instead of learning pytorch or tensorflow?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=punnerud" target="_blank">punnerud</a>   <span class="timeago" data-date="2021-08-18 09:30:52 &#43;0000 UTC">2021-08-18 09:30:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. Could be that you have to check what operators is available when you move from one framework to another using ONNX. One example is ONNX.js that make it possible to run the model using JavaScript, made by Microsoft. If the operator is not available (ex. ArgMax for WebGL) you have to switch to something equivalent and retrain. List of supported operators for ONNX.js:
+<a href="https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxjs&#x2F;blob&#x2F;master&#x2F;docs&#x2F;operators.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxjs&#x2F;blob&#x2F;master&#x2F;docs&#x2F;operato...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=atty" target="_blank">atty</a>   <span class="timeago" data-date="2021-08-18 16:22:55 &#43;0000 UTC">2021-08-18 16:22:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ONNX is a representation and interchange format that training&#x2F;inference frameworks can use to represent models. However, ONNX does not have a tensor engine of its own. So you would still define and train your model in tensorflow, pytorch, etc, and then save the model in ONNX format, at which point it can be ported to any inference service that supports the ONNX format.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 11:39:23 &#43;0000 UTC">2021-08-18 11:39:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Onnx has really poor support by microsoft. I suspect they&#x27;ve basically abandoned it internally (their onnxjs variant is orders of magnitude slower than tfjs[1]). It&#x27;s a good &#x27;neutral standard&#x27; for the moment but we should all eventually probably move away from it long term.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxjs&#x2F;issues&#x2F;304" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxjs&#x2F;issues&#x2F;304</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akhundelar" target="_blank">akhundelar</a>   <span class="timeago" data-date="2021-08-18 13:47:04 &#43;0000 UTC">2021-08-18 13:47:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ONNX != onnxjs<p>ONNX is a representation format for ML models (mostly neural networks). onnxjs is a just a browser runtime for ONNX models. While it may be true that onnxjs is neglected, please note that the &#x27;main&#x27; runtime, onnxruntime, is under heavy active development[1].<p>Moreover, Microsoft is not the sole steward of the ONNX ecosystem. They are one of many contributors, alongside companies like Facebook, Amazon, Nvidia, and many others [2].<p>I don&#x27;t think ONNX is going away anytime soon. Not so sure about the TF ecosystem though.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxruntime&#x2F;releases" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;onnxruntime&#x2F;releases</a><p>[2] <a href="https:&#x2F;&#x2F;onnx.ai&#x2F;about.html" rel="nofollow">https:&#x2F;&#x2F;onnx.ai&#x2F;about.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 14:18:02 &#43;0000 UTC">2021-08-18 14:18:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve tried inference on the python version of onnx and it usually varies between hitting a OOM limit (while with TF it works fine) to being an order of magnitude slower. Even if the codebase is still being changed I don&#x27;t see much reason for people to use it other than as a convenient distribution format.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=akhundelar" target="_blank">akhundelar</a>   <span class="timeago" data-date="2021-08-18 15:02:38 &#43;0000 UTC">2021-08-18 15:02:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, I did not encounter such discrepancies in my work with these tools.<p>There could be multiple reasons for the degraded performance:<p>- Are we comparing apples to apples here (heh), e.g. ResNet-50 vs ResNet-50?<p>- Was the ONNX model ported from TF? There are known issues with that path (<a href="https:&#x2F;&#x2F;onnxruntime.ai&#x2F;docs&#x2F;how-to&#x2F;tune-performance.html#my-converted-tensorflow-model-is-slow---why" rel="nofollow">https:&#x2F;&#x2F;onnxruntime.ai&#x2F;docs&#x2F;how-to&#x2F;tune-performance.html#my-...</a>)<p>- Have you tried tuning an execution provider for your specific target platform?(<a href="https:&#x2F;&#x2F;onnxruntime.ai&#x2F;docs&#x2F;reference&#x2F;execution-providers&#x2F;#summary-of-supported-execution-providers" rel="nofollow">https:&#x2F;&#x2F;onnxruntime.ai&#x2F;docs&#x2F;reference&#x2F;execution-providers&#x2F;#s...</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 14:12:41 &#43;0000 UTC">2021-08-18 14:12:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Loranubi" target="_blank">Loranubi</a>   <span class="timeago" data-date="2021-08-18 08:56:49 &#43;0000 UTC">2021-08-18 08:56:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes the goal is to run it framework independent. Pytorch for example can export models to ONNX.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 09:19:43 &#43;0000 UTC">2021-08-18 09:19:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=red2awn" target="_blank">red2awn</a>   <span class="timeago" data-date="2021-08-18 10:24:18 &#43;0000 UTC">2021-08-18 10:24:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well you would still need to learn Pytorch&#x2F;tensorflow and define your network there, you then export it to ONNX format for deployment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=figomore" target="_blank">figomore</a>   <span class="timeago" data-date="2021-08-18 13:06:45 &#43;0000 UTC">2021-08-18 13:06:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you need to use pytorch or tensorflow to create the network and train it. After training you export it to ONNX. I suggest you to convert from ONNX to Openvino.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-18 08:38:05 &#43;0000 UTC">2021-08-18 08:38:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So the naysayers were right all along, from the original repository uncovering the &quot;NeuralHash&quot; private APIs:<p>&gt; Resizing the image yields same hash, even down to below 200x100. Cropping or rotating the image yields different hashes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spuz" target="_blank">spuz</a>   <span class="timeago" data-date="2021-08-18 10:06:48 &#43;0000 UTC">2021-08-18 10:06:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What did the naysayers say? That the algorithm wouldn&#x27;t be able to handle cropping and rotation? Did Apple claim that it would?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-18 10:14:57 &#43;0000 UTC">2021-08-18 10:14:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That this tech is sufficient to spy on the population, but insufficient to defeat even basic evasion.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akhundelar" target="_blank">akhundelar</a>   <span class="timeago" data-date="2021-08-18 13:21:23 &#43;0000 UTC">2021-08-18 13:21:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As far as my understanding goes, you can apply a distance measure on the (neural)hashes of the input image and the reference image. A proximity threshold will determine if it&#x27;s a variant of the original image or not. So, it should probably be pretty good at defeating basic evasion.<p>It is not like a cryptographic hash, where altering a single bit will completely change the output.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-18 14:07:23 &#43;0000 UTC">2021-08-18 14:07:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you&#x27;re overestimating the capabilities of neural networks here, and especially ones that we know the exact weights for. It is fairly trivial to generate invisible noise that makes an input image get an entirely different hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 18:15:53 &#43;0000 UTC">2021-08-18 18:15:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perceptual hashing systems that do derivative image lookups don&#x27;t rely on exact hash comparisons, but fuzzy hash comparisons using a distance metric like the Hamming distance to find similar images.<p>If two hashes are off by a bit or two, chances are that the two images are derived from the same, or similar, source image.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-18 20:53:39 &#43;0000 UTC">2021-08-18 20:53:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can restate what I said again for you: I can generate noise that makes the Hamming distance or whatever metric you prefer arbitrarily large without changing the contents noticeably.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=akhundelar" target="_blank">akhundelar</a>   <span class="timeago" data-date="2021-08-18 14:22:00 &#43;0000 UTC">2021-08-18 14:22:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It is fairly trivial to generate invisible noise that makes an input image get an entirely different hash.<p>What I had in mind when referring to &#x27;basic evasion&#x27; was &#x27;cropping or rotating&#x27;, as per your original comment.<p>All that being said, I admit that generating adversarial examples for models with known weights is not a difficult task.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 13:47:41 &#43;0000 UTC">2021-08-18 13:47:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For those wondering why you can&#x27;t just delete these files. On Mac OS Big Sur and later, the system OS is signed by apple and in order to actually delete these files you need to go through a whole bunch of steps that apparently requires completely disabling FileVault (full disk encryption).<p><a href="https:&#x2F;&#x2F;apple.stackexchange.com&#x2F;questions&#x2F;395508&#x2F;can-i-mount-the-root-system-filesystem-as-writable-in-big-sur" rel="nofollow">https:&#x2F;&#x2F;apple.stackexchange.com&#x2F;questions&#x2F;395508&#x2F;can-i-mount...</a><p>So in the end we&#x27;ll be left with a choice.<p>1. Allow Apple to scan your files.<p>2. Disable any kind of encryption letting anyone who steals your laptop access all your files.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=helen___keller" target="_blank">helen___keller</a>   <span class="timeago" data-date="2021-08-18 14:00:06 &#43;0000 UTC">2021-08-18 14:00:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For those wondering why you can&#x27;t just delete these files<p>Maybe I&#x27;m missing context, what files are you referring to?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 14:22:03 &#43;0000 UTC">2021-08-18 14:22:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably the model weight files
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 14:29:14 &#43;0000 UTC">2021-08-18 14:29:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, if the model files are deleted then the software attempting to scan files would obviously have to error out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=easton" target="_blank">easton</a>   <span class="timeago" data-date="2021-08-18 14:10:27 &#43;0000 UTC">2021-08-18 14:10:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On Apple Silicon Macs this isn’t true, as files are encrypted on disk with “data protection” (same thing as on iOS). You can enable FileVault but it’s just extra.<p>Also I’ve edited &#x2F;etc without disabling FileVault, is it just &#x2F;System which is protected this way?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 14:15:14 &#43;0000 UTC">2021-08-18 14:15:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            System is separate I believe. Every single file is cryptographically signed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=djrogers" target="_blank">djrogers</a>   <span class="timeago" data-date="2021-08-18 14:03:49 &#43;0000 UTC">2021-08-18 14:03:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or 3. Disable iCloud Photo Library and have no scanning done at all.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 14:15:54 &#43;0000 UTC">2021-08-18 14:15:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For now. A simple change to hook IOImage load in a future update and it will be.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gjsman-1000" target="_blank">gjsman-1000</a>   <span class="timeago" data-date="2021-08-18 16:37:32 &#43;0000 UTC">2021-08-18 16:37:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except that everything is always like this. A simple change to location services on your phone to be a 24&#x2F;7 reporting system. A simple change to your password manager to send all the passwords in plaintext somewhere.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=joshstrange" target="_blank">joshstrange</a>   <span class="timeago" data-date="2021-08-18 16:48:32 &#43;0000 UTC">2021-08-18 16:48:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is something I don&#x27;t see enough. Like I&#x27;m not terribly fond of these changes but people who are like &quot;Well that&#x27;s it, I&#x27;m leaving iOS&quot; just strike me as either lying or they don&#x27;t understand anything about technology. Like if you&#x27;ve used iCloud &#x2F;anything&#x2F; then Apple &#x2F;could&#x2F; already be scanning it or handing it over the FBI&#x2F;etc. Similarly iOS (and Android unless built from source) is closed source and you already have no idea whats running on it in reality. So knowing all of that, on-device scanning is where you draw the line? That&#x27;s just odd. Every &quot;slippery slope&quot; argument used for this photo scanning should have disqualified &#x2F;every&#x2F; iPhone&#x2F;Stock-Android phone already for these people. The fact these hashes and&#x2F;or some of this code has been in iOS since 14.3 (not activated) already proves these people are full of it since no one noticed or said anything until it was announced (or a day before when the twitter thread went out).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 14:20:21 &#43;0000 UTC">2021-08-18 14:20:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s an interesting adversarial attack. If we reverse engineer the Apple NeuralHash format and replace these files, we could create a system that does a DDoS attack on Apple&#x27;s manual verification system by flooding the system with false positives caused from a faulty NeuralHash. This would overload Apple&#x27;s manual review system and effectively make it uneconomical to run.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scoopertrooper" target="_blank">scoopertrooper</a>   <span class="timeago" data-date="2021-08-18 14:32:21 &#43;0000 UTC">2021-08-18 14:32:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Winning would always be easy if you didn&#x27;t have an adversary. Apple (having access to the original low resolution photo) could build a relatively simple mechanism add a filter in their verification pipeline.<p>Even if they didn&#x27;t have access to the original (for whatever reason), they train their own learning algorithm (supervised by their manual verification checkers) to detect the fake submissions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mirker" target="_blank">mirker</a>   <span class="timeago" data-date="2021-08-18 14:48:28 &#43;0000 UTC">2021-08-18 14:48:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was under the impression that the hashes were the only thing transferred, as the source image is encrypted. (Edit: On second thought, manual reviewing needs the source image.)<p>Anyhow, adversarial attacks transfer reasonably well across models so you could create attacks on models you think Apple would use internally.<p>I’d imagine the first think Apple would do is put attack spammers on an ignore list. However, that would only work until the images start propagating on the wider internet via forums and social media.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scoopertrooper" target="_blank">scoopertrooper</a>   <span class="timeago" data-date="2021-08-18 15:16:51 &#43;0000 UTC">2021-08-18 15:16:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d be curious how the attack could transfer across models. Apple would have access to a huge amount of information about target image that they could include in their analysis and would be denied to the attacker.<p>The crowdsourced attack idea would also be contingent on thousands of people willing being flagged as pedophiles.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mirker" target="_blank">mirker</a>   <span class="timeago" data-date="2021-08-18 16:27:55 &#43;0000 UTC">2021-08-18 16:27:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For transferring, I mean specifically that it is known that attacks transfer in a general sense e.g.,
+<a href="https:&#x2F;&#x2F;www.usenix.org&#x2F;system&#x2F;files&#x2F;sec19-demontis.pdf" rel="nofollow">https:&#x2F;&#x2F;www.usenix.org&#x2F;system&#x2F;files&#x2F;sec19-demontis.pdf</a>
+It’s not easy in this setting due to the information asymmetry, but if someone wants to dedicate the resources it should be possible. They could get N random models and create images that fool all N.<p>For crowdsourcing, I mean that the crowd is a distribution network and not the attack creator (e.g., they are a self-distributing virus&#x2F;“worm”). The attacker takes those images (the initial “worm” programs) and uploads them to reddit as a catchy meme for worldwide distribution. Meme sharers wouldn’t be aware that the meme has a hash collision with CP.<p>The entire defense of this sort of thing is obscurity (further obscured by using “magical” machine learning), since nothing is proven about how collision resistant the algorithm is. At Apple’s scale, it’s as careless as rolling your own crypto hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scoopertrooper" target="_blank">scoopertrooper</a>   <span class="timeago" data-date="2021-08-19 02:31:47 &#43;0000 UTC">2021-08-19 02:31:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is no feedback loop to support the development of the attack. Apple in this case would just be filtering and ignoring false positives without notifying the attacker if they were successful or not.<p>I still don&#x27;t quite see how the &#x27;worm&#x27; would work in practice. It&#x27;s not just a matter of sharing a link to an image, but you have to add it to your photo album. Maybe I&#x27;m getting old, but I don&#x27;t have a single meme-type image in my album.<p>I don&#x27;t think this can be classed as a security by obscurity problem. Security by obscurity fails because they &#x27;key&#x27; (the obscure bit) can&#x27;t be easily changed if it leaks. But given Apple has both the target and candidate images available to it, it can in effect generate a new key at the expense of having to do additional computation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mirker" target="_blank">mirker</a>   <span class="timeago" data-date="2021-08-19 15:27:07 &#43;0000 UTC">2021-08-19 15:27:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The way I think about it is that the attacker has plenty of time (years) to either guess or discover the viability of an attack. For example, inspecting packets and reverse engineering, correlating photos with police visits, creating a hash database using black market data, etc. will all be used to determine if an attack is working.<p>Same thing goes with the worm.  Posting infected memes is one way and that’ll passively get some downloads. Another way is to text the pictures via bots to people and hope their SMS is iCloud backed up. The point is if someone figures out how to make an attack, they (or entity they sell it to) will almost surely spend great effort in social engineering the distribution.<p>I agree that it’s probably not the right term. My main concern though is that the class of attacks that is effective against one model will likely be effective against the entire class of similar models. So Apple’s main defense is the limited feedback loop caused by keeping part of the modeling private rather than a traditional computational complexity defense, which would allow disclosure of the entire implementation. It’s taken <i>one week</i> for the proof of concept to be demonstrated and most of that was likely boilerplate API code; it would take perhaps even less time to retarget if Apple disclosed the entire implementation with a different model. The demonstrated attack was textbook material, so it’s not unreasonable to believe that all attacks are textbook material.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mrits" target="_blank">mrits</a>   <span class="timeago" data-date="2021-08-18 15:40:58 &#43;0000 UTC">2021-08-18 15:40:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does this actually help society? After this announcement child abusers won&#x27;t user their iPhone for this stuff (can&#x27;t believe they did in the first place).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=n8cpdx" target="_blank">n8cpdx</a>   <span class="timeago" data-date="2021-08-18 15:54:57 &#43;0000 UTC">2021-08-18 15:54:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Their approach is so poorly targeted at the claimed problem, and so ineffectual, I don’t think it is reasonable to take them at face value re: what they say they are trying to accomplish.<p>For the folks who are interested in stopping abuse of children, there are many other approaches that would break the market for new abuse and new CSAM. This just isn’t going to move the needle and I have to assume they know that.<p>I’ve completely lost trust in Apple because I can’t understand what their motivations are. I _do_ understand the technology, so I’m pretty tired of articles suggesting this is some sort of misunderstanding and not Apple taking a giant leap towards enabling authoritarianism, and of course building literal thoughtcrime enforcement into end user devices, which is beyond even what 1984 imagined.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kilroy123" target="_blank">kilroy123</a>   <span class="timeago" data-date="2021-08-18 16:18:07 &#43;0000 UTC">2021-08-18 16:18:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is why I suspect something shifted with the government. Like they&#x27;re being forced into doing this somehow.<p>This was the minimal legal requirement or something.<p>The whole thing is baffling to me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 18:21:03 &#43;0000 UTC">2021-08-18 18:21:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>This is why I suspect something shifted with the government. Like they&#x27;re being forced into doing this somehow.</i><p>Seems like undue speculation. The government cares about far more than just CSAM. They care about terrorism, human and drug trafficking, organized crime, gangs, drug manufacturing, fraud etc.<p>This type of speculation only makes sense if Apple intends to expand their CSAM detection system to detect those other things, as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kilroy123" target="_blank">kilroy123</a>   <span class="timeago" data-date="2021-08-18 19:12:49 &#43;0000 UTC">2021-08-18 19:12:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I 100% think Apple intends to expand on it. That&#x27;s why I&#x27;m against it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 20:49:58 &#43;0000 UTC">2021-08-18 20:49:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apple does say something[1] to that effect:<p>&gt; <i>This program is ambitious, and protecting children is an important responsibility. These efforts will evolve and expand over time.</i><p>[1] <a href="https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gjsman-1000" target="_blank">gjsman-1000</a>   <span class="timeago" data-date="2021-08-18 16:38:11 &#43;0000 UTC">2021-08-18 16:38:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does nobody remember the EARN IT Act?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=n8cpdx" target="_blank">n8cpdx</a>   <span class="timeago" data-date="2021-08-18 18:52:10 &#43;0000 UTC">2021-08-18 18:52:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I do remember it, it’s just very weird that Apple hasn’t cited it as a motivation.<p>If they had led with that, we’d be having a conversation about the evildoers in Congress rather than Cupertino.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joshstrange" target="_blank">joshstrange</a>   <span class="timeago" data-date="2021-08-18 16:53:35 &#43;0000 UTC">2021-08-18 16:53:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why do so many people get caught sharing CSAM on FB then?<p>I remember reading about the CSAM ring the FBI (IIRC) infiltrated and ran for a period of time, that group had strict rules on how to access and share material that, if followed, would have completely protected them but the majority of them were sloppy and got caught. Criminals really aren&#x27;t that smart by and large. Will this catch the smartest of them? Probably not, but it will catch a good number I&#x27;m sure.<p>All that said, I&#x27;m not a fan of these changes, I just dislike arguments that don&#x27;t hold water against it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrits" target="_blank">mrits</a>   <span class="timeago" data-date="2021-08-18 18:38:49 &#43;0000 UTC">2021-08-18 18:38:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t seen anyone here having an issue with Facebook scanning for CSAM for the exact reasons you described. Sharing CSAM on social media is frequently abused.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=doctoboggan" target="_blank">doctoboggan</a>   <span class="timeago" data-date="2021-08-18 10:53:38 &#43;0000 UTC">2021-08-18 10:53:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I’m reading this right it seems like the neural hash runs on both MacOS and iOS, since the weights can be found on both systems. I though the neuralhash was only running on iOS?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=c7DJTLrn" target="_blank">c7DJTLrn</a>   <span class="timeago" data-date="2021-08-18 09:16:24 &#43;0000 UTC">2021-08-18 09:16:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The algorithm seems very simple. How does it perform compared with the Marr wavelet algorithm?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=isatty" target="_blank">isatty</a>   <span class="timeago" data-date="2021-08-18 10:04:59 &#43;0000 UTC">2021-08-18 10:04:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Simplicity is a good thing. One of the perception hashes that I found in an URL on HN was literally just compressing the images, converting to grescale, calculating the hamming distance and coalescing that into an n bit hash.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 10:06:35 &#43;0000 UTC">2021-08-18 10:06:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not when it means that simple rotation &#x2F; cropping evades detection.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 09:43:54 &#43;0000 UTC">2021-08-18 09:43:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really disgusting idea: I wonder if it&#x27;s possible for someone to use this as a &#x27;discriminator&#x27; in a GAN to configure a generator to recreate the CP this is trying to avoid distributing in the first place.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wizzwizz4" target="_blank">wizzwizz4</a>   <span class="timeago" data-date="2021-08-18 09:50:11 &#43;0000 UTC">2021-08-18 09:50:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really; there&#x27;s not enough information in the NeuralHashes. You&#x27;d get pictures like this,[0] (from [1]) instead.<p>[0]: <a href="https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;1328&#x2F;129860810-f414259a-3253-43e3-9e8e-a0ef78372233.png" rel="nofollow">https:&#x2F;&#x2F;user-images.githubusercontent.com&#x2F;1328&#x2F;129860810-f41...</a><p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issues&#x2F;1" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;AsuharietYgvar&#x2F;AppleNeuralHash2ONNX&#x2F;issue...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 10:05:11 &#43;0000 UTC">2021-08-18 10:05:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is assuming that adding plausibility constraints wouldn&#x27;t fix this issue. I don&#x27;t know if this is feasible though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mlindner" target="_blank">mlindner</a>   <span class="timeago" data-date="2021-08-18 14:21:59 &#43;0000 UTC">2021-08-18 14:21:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not really correct. That&#x27;s a forcibly created colliding image, that&#x27;s not the output of the NeuralHash. Also as reported elsewhere, it&#x27;s absolutely possible to do so.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 15:01:40 &#43;0000 UTC">2021-08-18 15:01:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, it’s not possible.<p>If you think there is a credible mechanism, please link to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 16:58:34 &#43;0000 UTC">2021-08-18 16:58:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It might have to do with the output possibly being a probability vector as opposed to a binary hash. The whole thing is thus differentiable and optimizable (if a dog image was incorrectly placed in the bad hash bucket it might only be on the border of it while the real CP corresponding to the hash is found at the probabilistic maxima of the hash bucket). Just guessing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 17:04:16 &#43;0000 UTC">2021-08-18 17:04:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That isn’t correct, nor is it credible.<p>See: <a href="https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;pdf&#x2F;Security_Threat_Model_Review_of_Apple_Child_Safety_Features.pdf" rel="nofollow">https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;pdf&#x2F;Security_Threat_Model...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 17:16:11 &#43;0000 UTC">2021-08-18 17:16:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where am I supposed to look in that pdf to understand that it isn&#x27;t correct or credible? It is certainly true that the model has differentiable and thus optimizable outputs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zepto" target="_blank">zepto</a>   <span class="timeago" data-date="2021-08-18 18:08:35 &#43;0000 UTC">2021-08-18 18:08:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry - I posted that link in the wrong place.<p>Either way, if the claim is that it’s possible to reverse engineer CSAM from the hashes, proof is needed, and nobody has provided even a proof of concept.<p>The person <i>I</i> responded to was claiming it had been demonstrated.  I asked for a link to evidence.  You just made a hypothesis about how it <i>might</i> work.  That’s not helpful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:06:39 &#43;0000 UTC">2021-08-18 18:06:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 20:44:50 &#43;0000 UTC">2021-08-18 20:44:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=n8cpdx" target="_blank">n8cpdx</a>   <span class="timeago" data-date="2021-08-18 16:00:07 &#43;0000 UTC">2021-08-18 16:00:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you trying to stop abuse of children, or enforce a standard that the idea of images of children is bad?<p>If you’re actually trying to stop abuse, having the computer create fake CP seems like an ideal outcome, since it would avoid the need for abuse of children.<p>Flooding the market with fakes and then directing consumers of the fakes to whatever mental health resources are available seems like it would fit the claimed problem far better than what apple is currently trying.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=random_moonwalk" target="_blank">random_moonwalk</a>   <span class="timeago" data-date="2021-08-18 09:53:02 &#43;0000 UTC">2021-08-18 09:53:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This would be bizarre - wouldn&#x27;t this mean that Apple are essentially shipping illegal images with their OS? (Subject to some as yet unknown decoder)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-08-18 10:17:52 &#43;0000 UTC">2021-08-18 10:17:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With the right algorithm you can turn any certain string of bits into a certain other string of bits. So is the image in the data, or is it really in the algorithm?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=franga2000" target="_blank">franga2000</a>   <span class="timeago" data-date="2021-08-18 10:42:30 &#43;0000 UTC">2021-08-18 10:42:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the decoder was &quot;trained&quot; on and only works with predictable data, then it might be the algorithm that&#x27;s illegal, but if a completely new illegal image is created, hashed, fed into the decoder and the decoder produces a valid illegal image, then the illegal data must be in the input, not the algorithm.<p>This is basically rule 1 of testing neural networks: if the testing data is different from the training data and the results are still correct, your network is &quot;reading&quot; the data correctly and not just memorising a list of known values. I guess this means you&#x27;d also need to prove that the decoder doesn&#x27;t turn most hashes of non-illegal images into illegal images, but if you also did that, you&#x27;d have a pretty strong case that the illegal data is in the hash.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 10:15:54 &#43;0000 UTC">2021-08-18 10:15:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did Apple use the bad images to train the neural network? If yes, I suppose that makes this possibility more realistic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zimpenfish" target="_blank">zimpenfish</a>   <span class="timeago" data-date="2021-08-18 11:17:34 &#43;0000 UTC">2021-08-18 11:17:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Did Apple use the bad images to train the neural network?<p>NCMEC did, certainly, but I don&#x27;t think Apple ever got the actual images themselves; just the resultant hashes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tvirosi" target="_blank">tvirosi</a>   <span class="timeago" data-date="2021-08-18 11:43:44 &#43;0000 UTC">2021-08-18 11:43:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Makes me wonder if there&#x27;s a possibility of e.g. faces on fbi&#x27;s most wanted being snuck into the dataset somewhere in the chain.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zimpenfish" target="_blank">zimpenfish</a>   <span class="timeago" data-date="2021-08-18 12:04:17 &#43;0000 UTC">2021-08-18 12:04:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if there&#x27;s a possibility of e.g. faces on fbi&#x27;s most wanted being snuck into the dataset<p>Sure, it&#x27;s possible, but that doesn&#x27;t seem to have happened in the past decade of PhotoDNA scanning cloud photos to match hashes provided by NCMEC - why would it suddenly start happening now?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-18 18:25:53 &#43;0000 UTC">2021-08-18 18:25:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Sure, it&#x27;s possible, but that doesn&#x27;t seem to have happened in the past decade of PhotoDNA scanning cloud photos to match hashes provided by NCMEC</i><p>If it&#x27;s happened, it&#x27;s unlikely the public would know about it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-08-18 13:43:47 &#43;0000 UTC">2021-08-18 13:43:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You really don&#x27;t understand the difference in scale distributed sensor netwise between the two different capabilities do you?<p>Server centric is the primitive that gives you periodic batch. Client resident let&#x27;s you build up a real-time detection network.<p>Also, as they say in the financial world: past performance is not indicative of future results. No one would have thought to do so because this step hadn&#x27;t been done. Now that this step has been done it is an easier to sell prospect. This is how the slippery slope works.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zimpenfish" target="_blank">zimpenfish</a>   <span class="timeago" data-date="2021-08-18 20:51:16 &#43;0000 UTC">2021-08-18 20:51:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; periodic batch [] real-time detection network<p>What&#x27;s the realistic difference here between &quot;my phone scans the photo on upload to iCloud Photos&quot; and &quot;iCloud Photos scans the photo when it&#x27;s uploaded&quot;?<p>Latency of upload doesn&#x27;t come into play here because the scan results are part of the uploaded photo metadata; they&#x27;re not submitted distinctly according to Apple&#x27;s technical description.<p>(And given the threshold needed before you can decrypt any of the tagged photos with the client side system, the server side scanning would be much more &quot;real-time&quot; in this case, no?)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ryeguy_24" target="_blank">ryeguy_24</a>   <span class="timeago" data-date="2021-08-18 12:47:00 &#43;0000 UTC">2021-08-18 12:47:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why would Apple expose this API call?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ryeguy_24" target="_blank">ryeguy_24</a>   <span class="timeago" data-date="2021-08-18 12:29:54 &#43;0000 UTC">2021-08-18 12:29:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can someone help me understand how the model was found and extracted?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_fat_santa" target="_blank">_fat_santa</a>   <span class="timeago" data-date="2021-08-18 13:49:55 &#43;0000 UTC">2021-08-18 13:49:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So apparently the code for NeuralHash has been on iOS devices since 14.3 hidden under some  classes. This guy found it and rebuilt  the whole thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=laughingman2" target="_blank">laughingman2</a>   <span class="timeago" data-date="2021-08-18 15:41:07 &#43;0000 UTC">2021-08-18 15:41:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does apple even encrypt the actual image data on device? Their system document says &quot;payload = visual derivative + neural hash&quot; and only that is encrypted with a secondary level encryption. And they didn&#x27;t go through with e2ee for icloud last I heard. This elaborate system makes no sense if they very well could have done it in cloud.<p>It feels like elaborate privacy theatre trojan horse to introduce in device surveillance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hendersoon" target="_blank">hendersoon</a>   <span class="timeago" data-date="2021-08-18 12:35:39 &#43;0000 UTC">2021-08-18 12:35:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Several articles stated that given a perceptual hash you could somehow reverse it into a (very) low resolution image. However the README provides an example hash and it&#x27;s only 24 characters. How is that possible?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gjsman-1000" target="_blank">gjsman-1000</a>   <span class="timeago" data-date="2021-08-18 16:38:42 &#43;0000 UTC">2021-08-18 16:38:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For people wondering why Apple is doing this, does nobody remember the EARN IT Act last year, that was so close to passing?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=2Gkashmiri" target="_blank">2Gkashmiri</a>   <span class="timeago" data-date="2021-08-18 09:27:54 &#43;0000 UTC">2021-08-18 09:27:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            welp. i am no iphone user, nor a dev. just a random guy trying to wrap my head around the concept of this trojan horse of &quot;CSAM&quot; which WILL be used by tyrants and crony governments to spy and persecute their citizens and apple will &quot;have to obey the law&quot;, something they had no business interfering with the rights of customers earlier, now they are active participants.<p>How much do you want to bet google will bring something similar to this to &quot;keep up with the industry demands and partners requests&quot;. That would be the day either i go full lineageOS if they decide to not join the party or a dumb flip phone for ever. i will not subject myself to this because i know the government &quot;WILL&quot; hunt me down for being a dissident.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simondotau" target="_blank">simondotau</a>   <span class="timeago" data-date="2021-08-18 09:45:20 &#43;0000 UTC">2021-08-18 09:45:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google already implemented much the same thing many years ago. Apple is playing catch-up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=franga2000" target="_blank">franga2000</a>   <span class="timeago" data-date="2021-08-18 10:46:59 &#43;0000 UTC">2021-08-18 10:46:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google and every other cloud storage provider has been scanning images that you upload to their servers. This is perfectly justified, since they would be legally and morally accomplices to whatever illegal thing you were doing. But scanning someone&#x27;s locally stored images on a device that they own is a completely different situation.<p>It&#x27;s the difference between the airport  checking my luggage for illegal drugs and the police showing up at every person&#x27;s house once in a while to check if any drugs happen to be on the premises.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simondotau" target="_blank">simondotau</a>   <span class="timeago" data-date="2021-08-19 00:25:16 &#43;0000 UTC">2021-08-19 00:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>It&#x27;s the difference between the airport checking my luggage for illegal drugs and the police showing up at every person&#x27;s house once in a while to check if any drugs happen to be on the premises.</i><p>Actually, you&#x27;re right. That&#x27;s exactly what it&#x27;s like. The former is how your Government routinely invades your privacy; the latter is an unequivocal violation of the Fourth Amendment of the US Constitution.<p>As it is with on-cloud versus on-device scanning. If Apple were compelled by the US Government to expand the on-device scanning to search for anything, that too would be an unequivocal Fourth Amendment violation.<p>Whereas any scanning that occurs on the cloud is not subject to Fourth Amendment protection. It&#x27;s excepted under the so-called &quot;third party doctrine&quot;, which effectively means the Government can rifle through whatever they want for any reason.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zimpenfish" target="_blank">zimpenfish</a>   <span class="timeago" data-date="2021-08-18 11:21:18 &#43;0000 UTC">2021-08-18 11:21:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But scanning someone&#x27;s locally stored images on a device that they own is a completely different situation.<p>They&#x27;re only scanning photos that you upload them to iCloud Photos - this is not (currently) a blanket &quot;we&#x27;ll scan all your local photos whenever&quot; situation.<p>&gt; It&#x27;s the difference between the airport checking my luggage for illegal drugs<p>... and FedEx&#x2F;UPS checking your outgoing packages for drugs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-08-18 13:46:40 &#43;0000 UTC">2021-08-18 13:46:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;... and FedEx&#x2F;UPS checking your outgoing packages for drugs.<p>Interesting USPS isn&#x27;t mentioned there. Another example of 4th Amendment workarounds through private industry? Or are you just not aware of what the USPS equivalent program would be?<p>Genuinely curious.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 17:09:21 &#43;0000 UTC">2021-08-18 17:09:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            USPS x-rays many packages - I’d venture almost all of them shipped from a major population center.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-08-18 20:07:14 &#43;0000 UTC">2021-08-18 20:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lead foil is a thing.<p><a href="https:&#x2F;&#x2F;www.amazon.com&#x2F;lead-foil&#x2F;s?k=lead+foil" rel="nofollow">https:&#x2F;&#x2F;www.amazon.com&#x2F;lead-foil&#x2F;s?k=lead+foil</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 20:20:10 &#43;0000 UTC">2021-08-18 20:20:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks like a good way to get a package marked as suspicious, and suspicious packages have their contents searched.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=salawat" target="_blank">salawat</a>   <span class="timeago" data-date="2021-08-18 21:45:53 &#43;0000 UTC">2021-08-18 21:45:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Until you DDoS the inspection framework. turns out the material is pretty cheap! Heck, I can pay for you to return the lead foil wrapping to be &quot;environmentally conscious by taking on the onus for packaging recycling!&quot; Doubling my in-flight noise ratio, and generating good press.<p>You have to think big. You need people to open a package, inspect, and reseal it.<p>I can make a dropshipping business, turn a profit, and swamp your unboxers to the point you stop trying. I&#x27;m not out to do that, so I wouldn&#x27;t bother, but there are ways, and you&#x27;ll be surprised the hijinks you can get up to when adversarial attack of infrastructure or process is done right. Quite a lot of modern systems that just werk do so because on the whole, people don&#x27;t spend much time being dicks. Unfortunately, my brain seems to have a part that enjoys the challenge in its idle time.<p>Measuring is hard. Especially when someone has their hand on the &quot;noise&quot; dial.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shuckles" target="_blank">shuckles</a>   <span class="timeago" data-date="2021-08-18 22:34:33 &#43;0000 UTC">2021-08-18 22:34:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is quite off-topic from the fourth amendment workaround originally insinuated. I agree modern society depends on trust more than one may expect or wish. DDoSing the USPS to prove it doesn’t seem like a very pro-social idea, and I do like society.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 09:51:22 &#43;0000 UTC">2021-08-18 09:51:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have a link?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwizou" target="_blank">cwizou</a>   <span class="timeago" data-date="2021-08-18 10:27:15 &#43;0000 UTC">2021-08-18 10:27:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They have been scanning Gmail for a while using this, as nearly every provider does :  <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;PhotoDNA" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;PhotoDNA</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 11:06:38 &#43;0000 UTC">2021-08-18 11:06:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From what I can tell, that is not used on Android or user devices though. So it&#x27;s not the same thing as what Apple is doing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cwizou" target="_blank">cwizou</a>   <span class="timeago" data-date="2021-08-18 11:20:14 &#43;0000 UTC">2021-08-18 11:20:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes what Apple does is slightly different technically : they run a network on device, then when you upload the picture to their Cloud services, they attach the hash generated to the picture.<p>It&#x27;s only on their servers that they will do the check against the database of CSAM content. So in that sense, it&#x27;s pretty much the same that what other providers do, it remains attached to their online service, and they check the hash against the database instead of checking the picture (as others do).<p>If you don&#x27;t use their iCloud service, the hash is never checked.<p>I still don&#x27;t think having the client as part of the system is a good thing, but in terms of abuse it&#x27;s about the same thing.<p>What Apple&#x27;s system allow is a way to do a check while keeping the data encrypted in some 3rd party service. That part certainly raises questions should it be extended.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FartyMcFarter" target="_blank">FartyMcFarter</a>   <span class="timeago" data-date="2021-08-18 11:26:27 &#43;0000 UTC">2021-08-18 11:26:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, that makes sense!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ytch" target="_blank">ytch</a>   <span class="timeago" data-date="2021-08-18 10:28:33 &#43;0000 UTC">2021-08-18 10:28:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is this counts?<p><a href="https:&#x2F;&#x2F;www.cbsnews.com&#x2F;news&#x2F;tip-from-google-leads-to-texas-child-porn-arrest&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.cbsnews.com&#x2F;news&#x2F;tip-from-google-leads-to-texas-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=franga2000" target="_blank">franga2000</a>   <span class="timeago" data-date="2021-08-18 10:50:45 &#43;0000 UTC">2021-08-18 10:50:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the article:<p>&gt; &quot;He was trying to get around getting caught, he was trying to keep it inside his email,&quot; said Detective David Nettles of the Houston Metro Internet Crimes Against Children Taskforce reports the station. &quot;I can&#x27;t see that information, I can&#x27;t see that photo, but Google can.&quot;<p>&quot;email&quot; here is presumably Gmail, which Google owns and is responsible for. The dude was storing illegal data on Google servers in plain form. His personal devices were only checked by LEOs after a warrant was issued. Definitely not the same as Apple scanning the images on your device (not their servers).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ytch" target="_blank">ytch</a>   <span class="timeago" data-date="2021-08-18 11:19:05 &#43;0000 UTC">2021-08-18 11:19:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC, Apple will only scans if  iCloud photo is enabled:<p><a href="https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;pdf&#x2F;Expanded_Protections_for_Children_Frequently_Asked_Questions.pdf" rel="nofollow">https:&#x2F;&#x2F;www.apple.com&#x2F;child-safety&#x2F;pdf&#x2F;Expanded_Protections_...</a><p>&gt; This feature only impacts users who have chosen to use iCloud Photos to store their photos.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-08-18 11:56:11 &#43;0000 UTC">2021-08-18 11:56:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a red herring.  It wouldn&#x27;t need to happen on device then, because iCloud Photos are not end to end encrypted and Apple can scan them on the server side today and achieve the same result.<p>The only reason to scan clientside for a cloud service is to scan files that are not uploaded, or are end to end encrypted.<p>Apple already maintains an e2e backdoor (in the form of non e2e iCloud Backup) for the FBI and US intelligence agencies. It is extremely unlikely that they will e2e encrypt iCloud Photos.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CubsFan1060" target="_blank">CubsFan1060</a>   <span class="timeago" data-date="2021-08-18 12:46:18 &#43;0000 UTC">2021-08-18 12:46:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you just hit on exactly what the plan probably was.  I suspect this was the first step in making iCloud photos (not backup) E2E encrypted.<p>I suppose had they not gone down this road, the headlines would have been &quot;Apple makes it easier to share child porn online&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-08-18 14:17:23 &#43;0000 UTC">2021-08-18 14:17:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I said unlikely: they maintain an e2e backdoor in iCloud Backup.  Technically, e2e encrypting iCloud Photos at this point would be a no-op as Apple is already escrowing the device e2e keys in the backup (eg for iMessage).<p>I doubt they&#x27;d bother doing e2e for iCloud Photos if they&#x27;re intentionally not doing it for iCloud Backup.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simondotau" target="_blank">simondotau</a>   <span class="timeago" data-date="2021-08-19 00:17:16 &#43;0000 UTC">2021-08-19 00:17:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Apple is already escrowing the device e2e keys in the backup<p>Citation? I don&#x27;t believe this is correct, or at least it&#x27;s an incomplete assertion.<p>Assuming they do get with the iCloud backup, these keys would be inside the device&#x27;s Keychain file which is encrypted at rest by the Secure Enclave. Thus even with access to a full, unencrypted backup of your iPhone, the keychain itself cannot be decrypted by Apple<p>(It can&#x27;t be decrypted by you either, if it&#x27;s restored to different hardware. This is why iCloud Keychain exists. And that is end-to-end encrypted.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=suifbwish" target="_blank">suifbwish</a>   <span class="timeago" data-date="2021-08-18 15:08:34 &#43;0000 UTC">2021-08-18 15:08:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Dear lord when I read that headline I thought for a second apple was working on a brain implant. Coffee time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

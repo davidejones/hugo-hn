@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/reverseengineering-a-vintage-power-supply-chip-from-die-photos/">
+
+
+    <title>Reverse-engineering a vintage power supply chip from die photos - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Reverse-engineering a vintage power supply chip from die photos - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/reverseengineering-a-vintage-power-supply-chip-from-die-photos/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/reverseengineering-a-vintage-power-supply-chip-from-die-photos/">
+<meta name="twitter:title" content="Reverse-engineering a vintage power supply chip from die photos - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Reverse-engineering a vintage power supply chip from die photos - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T17:37:16JST",
+    "dateModified": "2021-08-18T17:37:16JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.righto.com/2021/08/reverse-engineering-vintage-power.html">Reverse-engineering a vintage power supply chip from die photos</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-19 02:40:29 &#43;0000 UTC">2021-08-19 02:40:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wouldn&#x27;t call the UC384x &quot;vintage&quot;; they are still in production today. Likewise, the TL494&#x2F;KA7500 was very common in PC PSUs and is still in production too --- perhaps you could analyse its die circuitry for comparison.<p><i>For schematics of power supplies using this UC3842 chip, see this site, near the bottom of the page.</i><p>Before looking at the URL I guessed it would be <i>that</i> site. The author is also on YouTube under the name DiodeGoneWild, and not surprisingly posts videos about SMPS electronics too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 17:47:12 &#43;0000 UTC">2021-08-18 17:47:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author here if anyone has questions or comments...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaytaylor" target="_blank">jaytaylor</a>   <span class="timeago" data-date="2021-08-18 18:33:40 &#43;0000 UTC">2021-08-18 18:33:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are the physical dimensions of the chip listed somewhere in the article?  I&#x27;m looking but haven&#x27;t yet found them.<p>At the beginning you say &quot;this very small chip&quot;, and it would be cool to include the actual dimensions.  This will make it possible to get a sense for the size of the features from the magnified die picture.<p>p.s. You write some of the best articles, I love the way you break things down and present them in an approachable way.  Thank you, Ken!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 18:43:24 &#43;0000 UTC">2021-08-18 18:43:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t take measurements, but I think the feature size is about 20 micrometers, which is huge compared to nanometers in modern chips.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kop316" target="_blank">kop316</a>   <span class="timeago" data-date="2021-08-18 18:20:13 &#43;0000 UTC">2021-08-18 18:20:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your blog is incredibly well done, and it is always worth my time (several times over) to read what you post. Thank you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rkagerer" target="_blank">rkagerer</a>   <span class="timeago" data-date="2021-08-18 18:16:29 &#43;0000 UTC">2021-08-18 18:16:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just want to say thanks for these thorough teardowns and wonderfully annotated die photos.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 18:21:19 &#43;0000 UTC">2021-08-18 18:21:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Visual 6502 project is what originally inspired me to look inside integrated circuits and see how they really work. Although ICs seem like mysterious black boxes, you can see what&#x27;s going on. At least until about 1980, and then it gets too complicated for me :-)<p><a href="http:&#x2F;&#x2F;www.visual6502.org&#x2F;JSSim&#x2F;" rel="nofollow">http:&#x2F;&#x2F;www.visual6502.org&#x2F;JSSim&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wuschel" target="_blank">wuschel</a>   <span class="timeago" data-date="2021-08-18 22:38:41 &#43;0000 UTC">2021-08-18 22:38:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What are the challenges in reverse engineering more modern chips?<p>PS awesome blog!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 23:05:51 &#43;0000 UTC">2021-08-18 23:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The main problem is Moore&#x27;s Law, so everything gets smaller and smaller. The old chips I look at have a single metal layer, which makes it much easier to see what&#x27;s going on. And then in the 1990s, feature sizes got smaller than the wavelength of light so my optical microscope can&#x27;t see the features.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 06:24:06 &#43;0000 UTC">2021-08-19 06:24:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-08-18 18:37:03 &#43;0000 UTC">2021-08-18 18:37:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would there be any benefit other than cost to analog power control chips like this rather than DSP controlled power supplies like we typically see today?<p>I&#x27;d imagine that their better response latency is eaten up by downstream capacitors anyway.  Maybe they&#x27;d have better dynamic range to allow them to converge on a clean signal better than a stream of digitized samples that are always probably little off converged one way or the other by some quantum?<p>I&#x27;ll be the first to admin that power control isn&#x27;t my forte though, and most arguments I can come up absolutely sound like the specious stuff you hear out of &#x27;audiophiles&#x27;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=megous" target="_blank">megous</a>   <span class="timeago" data-date="2021-08-18 19:45:05 &#43;0000 UTC">2021-08-18 19:45:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even MCU controlled SPS often times have pure analog control loop, where A&#x2F;D and MCU is there mostly there for monitoring and perhaps digital control of some loop parameters, but the software is not an integral part of the loop itself...<p>Which is perhaps for the good, if you look for example on the boost topology, where saturation of the inductor leads to the shorting of the input through a switching transistor to the ground... :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwr-electronics" target="_blank">pwr-electronics</a>   <span class="timeago" data-date="2021-08-18 21:08:10 &#43;0000 UTC">2021-08-18 21:08:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s an interesting video series describing such a software-configured, hardware-controlled switching controller.<p>Here, Microchip markets this particular line of PIC MCUs as a &quot;field-programmable switch-mode power controller&quot;. But weirdly I haven&#x27;t seen that language on their main site.<p><a href="https:&#x2F;&#x2F;mu.microchip.com&#x2F;getting-started-with-cip-hybrid-power-pwm-controllers-and-mplab-x-smps-design-tools" rel="nofollow">https:&#x2F;&#x2F;mu.microchip.com&#x2F;getting-started-with-cip-hybrid-pow...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barbegal" target="_blank">barbegal</a>   <span class="timeago" data-date="2021-08-18 18:53:52 &#43;0000 UTC">2021-08-18 18:53:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DSPs are more expensive to engineer than these tried and tested chips. If you need the functionality of a DSP then you use one but the core performance of a power supply is relatively unaffected.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=colejohnson66" target="_blank">colejohnson66</a>   <span class="timeago" data-date="2021-08-19 01:18:40 &#43;0000 UTC">2021-08-19 01:18:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe someone else can chime in, but two questions:<p>* How do you know if the base silicon is N-doped or P-doped? (does it matter?)<p>* Why are the layouts of NPN and PNP so different? I’ve seen many die photos and you can (usually) easily tell which transistor is which.<p>* Lastly, are there any guides on learning how to decipher a die shot into a “schematic”? How do I know which colors mean what? (they vary between IC)<p>(if it’s not obvious, I’m still learning about this stuff)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-19 02:23:52 &#43;0000 UTC">2021-08-19 02:23:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The book &quot;The Art of Analog Design&quot; discusses the layouts of components in detail. It says (p280) that theoretically you could make a PNP transistor like an NPN transistor in reverse, but the characteristics of the dopants don&#x27;t work well for this. Boron diffuses rapidly so it doesn&#x27;t work well for a buried P layer. And boron only has 1&#x2F;3 of the solid solubility of phosphorus. The other issue is that the mobility of holes is only 1&#x2F;3 that of electrons in silicon, so there&#x27;s an inherent disadvantage for PNP.<p>I&#x27;m kind of guessing that the substrate silicon is P-type since that seems to be more common. As for the colors, each IC is different. There are charts relating colors to thickness, but that doesn&#x27;t really help me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=msandford" target="_blank">msandford</a>   <span class="timeago" data-date="2021-08-19 02:01:23 &#43;0000 UTC">2021-08-19 02:01:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            N type and p type have different resistance so to get a balanced transistor you need different area proportions of each. If memory serves that is.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-19 02:15:19 &#43;0000 UTC">2021-08-19 02:15:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Holes have lower mobilty than electrons, so P-doped areas must be larger for the same equivalent resistance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=l-albertovich" target="_blank">l-albertovich</a>   <span class="timeago" data-date="2021-08-18 19:40:19 &#43;0000 UTC">2021-08-18 19:40:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love your work, ever since the first time I saw one of your IC RE posts I felt really humbled and inspired by it so I&#x27;d like to take this opportunity to thank you for doing it.<p>Thanks!!!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ForOldHack" target="_blank">ForOldHack</a>   <span class="timeago" data-date="2021-08-18 19:52:05 &#43;0000 UTC">2021-08-18 19:52:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Several months ago, I started reading every new article. This is the first comment I have left in a few weeks.<p>Your posts are fantastic, not only do we get a peek inside, but we learn about how electronics work, and why designers make choices.<p>Thanks!!!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agumonkey" target="_blank">agumonkey</a>   <span class="timeago" data-date="2021-08-18 18:45:00 &#43;0000 UTC">2021-08-18 18:45:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            just a thanking note, for I never had the idea of inspecting power electronics under the hood :)<p>do you think recent GaN power adapters have very different power ICs ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 18:51:28 &#43;0000 UTC">2021-08-18 18:51:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t looked into GaN power adapters. I think they use the same control ICs but GaN transistors, but I&#x27;m not sure. Maybe someone else here knows more?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pwr-electronics" target="_blank">pwr-electronics</a>   <span class="timeago" data-date="2021-08-18 21:55:59 &#43;0000 UTC">2021-08-18 21:55:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The supporting ICs are the same. For now, at least.<p>But because of differences between GaN and Si, the selection of reasonably compatible controllers and gate drivers is smaller. For example, many ICs made for Si are underperformers for GaN, or they might need some &quot;translation&quot; circuitry because of different gate voltage requirements.<p>There are certainly many gains to be made with GaN-specific supporting ICs, but that hasn&#x27;t really happened yet. My personal threshold for acknowledging a fundamentally different technology would be replacing all the Si in the gate drive loop with GaN. The idea is to not hold back the GaN switch from realizing its full potential with slower and less efficient Si.<p>The GaN switch itself is, of course, quite different from a Si power switch.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=baybal2" target="_blank">baybal2</a>   <span class="timeago" data-date="2021-08-19 06:26:53 &#43;0000 UTC">2021-08-19 06:26:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depending on whether you use depletion, or enhancement mode GaN devices. Early GaN devices were JFET, not pure FETs too.<p>Ones designed with power electronics use in mind are made intentionally close to silicon FETs on specs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mikebco" target="_blank">mikebco</a>   <span class="timeago" data-date="2021-08-18 18:29:59 &#43;0000 UTC">2021-08-18 18:29:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you performed any teardowns and analysis of any similar but newer chips? If so, how does architecture and manufacture compare? Have there been any significant changes in state-of-the-art over the last two decades?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 18:36:43 &#43;0000 UTC">2021-08-18 18:36:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve looked at more modern power supplies like a Macbook charger [1]. One difference is they have power factor correction in the frontend. Another difference is they use more advanced power supply topologies, such as a resonant converter. Also, efficiency is a bigger concern.<p>As far as the chips themselves, I haven&#x27;t looked at a modern power supply controller chip, but I&#x27;ve looked at other power chips [2]. The biggest difference is they are CMOS instead of bipolar. They are also much more complex and dense, so I can&#x27;t reverse engineer them with my microscope.<p>[1] <a href="https:&#x2F;&#x2F;www.righto.com&#x2F;2015&#x2F;11&#x2F;macbook-charger-teardown-surprising.html" rel="nofollow">https:&#x2F;&#x2F;www.righto.com&#x2F;2015&#x2F;11&#x2F;macbook-charger-teardown-surp...</a><p>[2] <a href="https:&#x2F;&#x2F;www.righto.com&#x2F;2020&#x2F;05&#x2F;tiny-transformer-inside-decapping.html" rel="nofollow">https:&#x2F;&#x2F;www.righto.com&#x2F;2020&#x2F;05&#x2F;tiny-transformer-inside-decap...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bigiain" target="_blank">bigiain</a>   <span class="timeago" data-date="2021-08-19 01:34:19 &#43;0000 UTC">2021-08-19 01:34:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; They are also much more complex and dense, so I can&#x27;t reverse engineer them with my microscope.<p>What would be the path forward if you chose to try an do that? A different light frequency microscope? Or something way more complex and expensive?<p>(Or would having the imaging capability not matter because the complexity is too high even if you could see it properly?)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nielsbot" target="_blank">nielsbot</a>   <span class="timeago" data-date="2021-08-19 00:55:02 &#43;0000 UTC">2021-08-19 00:55:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ha. I saw the link title and immediately thought &quot;I bet it&#x27;s a link to Ken Shirriff&#x27;s blog&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=londons_explore" target="_blank">londons_explore</a>   <span class="timeago" data-date="2021-08-18 20:43:40 &#43;0000 UTC">2021-08-18 20:43:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It surprises me that even today nearly every power supply has a dedicated chip in like this whose task is switching a transistor on and off with the correct timings to regulate an output voltage, using mostly analogue components.<p>It surprises me that this role hasn&#x27;t been replaced with a tiny ARM core running some firmware to do the same.   The benefit is the core can be self-tuning.  It can detect components going out of spec and warn and&#x2F;or compensate.  It can have digital comms with the rest of the system to set all kinds of parameters, allowing a more flexible design and allowing bug fixes in the field.  It can have lookup tables to tune efficiency for input&#x2F;output voltage, load, etc, in a way an analogue design never could.<p>Considering a tiny microcontroller has a BOM cost of just 4 cents, in the same region as dedicated power supply chips, I don&#x27;t see why software-controller-switched-mode-supplies aren&#x27;t common.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=milankragujevic" target="_blank">milankragujevic</a>   <span class="timeago" data-date="2021-08-18 20:49:57 &#43;0000 UTC">2021-08-18 20:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Too much complexity without any benefit (when adjusted for new failure cases and cost of additional components and complexity).<p>Electronics is mostly KISS, not only motivated by the financial factor but also reliability, manufacturing, etc.<p>So far micro controllers are too expensive, too sensitive to unstable power supply, too complex in general (requiring some support components in some cases, have an additional prefabrication step for flashing firmware by the chip vendor, and cost a lot more.<p>There is no clear advantage to the approach you mentioned.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=userbinator" target="_blank">userbinator</a>   <span class="timeago" data-date="2021-08-19 02:45:44 &#43;0000 UTC">2021-08-19 02:45:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;new failure cases&quot; it adds are rather exciting -- if the MCU locks up or glitches, which they are prone to, then it could short the supply rails and blow the switching transistors, or destroy the connected load by overvoltage. Analog control ICs, while they are not 100% reliable either, have many safeguards built-in that can react nearly instantaneously and don&#x27;t depend on the relatively complex process of executing machine instructions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=londons_explore" target="_blank">londons_explore</a>   <span class="timeago" data-date="2021-08-19 07:15:07 &#43;0000 UTC">2021-08-19 07:15:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are plenty of systems where a software failure leads to permanent hardware failure.   This would just be one more.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=londons_explore" target="_blank">londons_explore</a>   <span class="timeago" data-date="2021-08-19 09:50:27 &#43;0000 UTC">2021-08-19 09:50:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The main benefit is probably a wider flatter efficiency curve.  Instead of saying &quot;this power supply is 98% efficient when delivering 1 Amp (but more like 80% efficient at 0.1 amps or 2 amps), the power supply can adjust the switching frequency to trade off switching losses and output ripple for efficiency if the application allows.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AussieWog93" target="_blank">AussieWog93</a>   <span class="timeago" data-date="2021-08-18 22:38:37 &#43;0000 UTC">2021-08-18 22:38:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve come across a broken laptop before that had a complex power control computer like what you&#x27;ve described.<p>I ended up repairing it by hard-resetting the NVRAM and forcing the power control computer back to its initial &quot;reset&quot; state.<p>This was a common enough problem that the manufacturer had a step-by-step guide showing how to fix it on their website.<p>The moral of the story is that adding complexity, even when that complexity is designed to increase robustness, usually just means that there are more systems that can fail.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kens" target="_blank">kens</a>   <span class="timeago" data-date="2021-08-18 21:42:30 &#43;0000 UTC">2021-08-18 21:42:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, your ARM-powered chip will need some analog-to-digital converters since the feedback signals are analog. And you&#x27;ll need a high-current output driver to control the switching transistor. And some sort of startup circuit to provide power before the processor starts running. And an undervoltage lockout circuit to prevent the processor from malfunctioning if the voltage drops. So you still have a bunch of analog circuitry but you&#x27;ve added an analog-to-digital converter and a microcontroller. There are some applications where this tradeoff makes sense, but in a lot of cases it would just be excess complexity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-08-19 05:55:03 &#43;0000 UTC">2021-08-19 05:55:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is definitely happening in onboard power management for systems with batteries. I suspect it&#x27;s just big generic PSUs that stick to old analog ASICs.<p>Not self-tuning, though, they have to be tuned and all that software written.<p>Dedicated PMIC chips will be mixed signal, with digital control and analog failsafes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwr-electronics" target="_blank">pwr-electronics</a>   <span class="timeago" data-date="2021-08-18 23:27:12 &#43;0000 UTC">2021-08-18 23:27:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can use an MCU as a controller. Here&#x27;s an example.<p><a href="https:&#x2F;&#x2F;youtu.be&#x2F;m8rK9gU30v4" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;m8rK9gU30v4</a><p>The problem is that you can&#x27;t make every controller with an MCU, and you can&#x27;t always make a competitive controller with an MCU.<p>There are already controller ICs that are configurable. In fact, modern controllers are a mix of analog and digital hardware. They do everything an MCU would do in that situation, but faster, less invasively, and with less power. Often, they do more than an MCU because they&#x27;re not slowed down by an instruction cycle.<p>See my comment before last for an example of a software-configurable hardware controller.<p>Condition monitoring is a thing, and it&#x27;s done with MCUs, DSPs, and FPGAs. But controllers sit on the non-isolated side of the gate driver, where they have basically no physical access to any useful signals. That&#x27;s why condition monitoring is separate.<p>The lookup table idea is used for motor control. It&#x27;s called a firing angle table. But that&#x27;s a slower application.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=labcomputer" target="_blank">labcomputer</a>   <span class="timeago" data-date="2021-08-19 03:15:13 &#43;0000 UTC">2021-08-19 03:15:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TI makes some DSP chips with a dedicated peripheral (basically just a high resolution timer with some fancy capture&#x2F;compare units) for doing PWM for power supplies.<p>Supposedly it can also detect shoot-through and modify timing to compensate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-08-18 20:54:27 &#43;0000 UTC">2021-08-18 20:54:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Before switching ICs became ubiquitous it <i>was</i> common to roll your own with an 8-bit micro. It isn&#x27;t cost effective now because of the additional external components, board area, and NRE you&#x27;d need vs the single chip solution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=markrages" target="_blank">markrages</a>   <span class="timeago" data-date="2021-08-18 22:23:37 &#43;0000 UTC">2021-08-18 22:23:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was actually looking into that this week due to chip shortages... it is not cost effective, but if the alternative is sitting and waiting a year for the specialized switch controller to become available again, that NRE doesn&#x27;t look too bad.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

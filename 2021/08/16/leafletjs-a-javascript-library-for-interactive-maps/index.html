@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/leafletjs-a-javascript-library-for-interactive-maps/">
+
+
+    <title>LeafletJS: a JavaScript library for interactive maps - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="LeafletJS: a JavaScript library for interactive maps - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/leafletjs-a-javascript-library-for-interactive-maps/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/leafletjs-a-javascript-library-for-interactive-maps/">
+<meta name="twitter:title" content="LeafletJS: a JavaScript library for interactive maps - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "LeafletJS: a JavaScript library for interactive maps - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T21:32:53JST",
+    "dateModified": "2021-08-16T21:32:53JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://leafletjs.com/">LeafletJS: a JavaScript library for interactive maps</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 06:35:43 &#43;0000 UTC">2021-08-17 06:35:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m the original author of Leaflet, ask me anything! Very happy every time I see it shared on the HN frontpage.<p>If you&#x27;re curious about the story behind Leaflet and how and why it was born 10 years ago, here&#x27;s a short 13-minute presentation on this: <a href="https:&#x2F;&#x2F;youtu.be&#x2F;NLbyHffKQuU" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;NLbyHffKQuU</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=teddmagwell" target="_blank">teddmagwell</a>   <span class="timeago" data-date="2021-08-17 09:45:18 &#43;0000 UTC">2021-08-17 09:45:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for your work!<p>Can you please share your thoughts on advantages and disadvantages of using WebGL vs just &quot;&lt;img&gt;&quot; elements (like on Leaflet homepage) to render tiled photos that require deep zoom.<p>I checked how some photo zoom solutions are made. For example, Google Photos uses tiled img elements, while online photo viewer in Apple iCloud used webgl to render. And I&#x27;m not sure what&#x27;s best and why.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 14:31:46 &#43;0000 UTC">2021-08-17 14:31:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Simply `&lt;img&gt;` elements should be fine for most use cases. WebGL could be used if you need much more fine grained control over the rendering — e.g. custom resampling when resizing like Lanczos filter, special effects, etc. It could also be better for performance but it&#x27;s not certain and depends on the use case.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=6jQhWNYh" target="_blank">6jQhWNYh</a>   <span class="timeago" data-date="2021-08-17 07:46:18 &#43;0000 UTC">2021-08-17 07:46:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Our company made the switch from Leaflet to OpenLayers as we were unable to reproject rasters with different CRS to the map&#x27;s CRS in Leaflet.<p>Is there any plan to add on-the-fly reprojection within Leaflet core? Is it even the core&#x27;s job to deal with projection or should this be done by plugins?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 08:01:26 &#43;0000 UTC">2021-08-17 08:01:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is definitely something we want to leave to plugins, since it’s technically involved, there are multiple ways to go about it with different trade-offs, and it’s not necessary for most use cases. There are multiple plugins for it though, the most recent one being Arrugator from one of Leaflet’s maintainers Ivan: <a href="https:&#x2F;&#x2F;ivan.sanchezortega.es&#x2F;development&#x2F;2021&#x2F;03&#x2F;08&#x2F;introducing-arrugator.html" rel="nofollow">https:&#x2F;&#x2F;ivan.sanchezortega.es&#x2F;development&#x2F;2021&#x2F;03&#x2F;08&#x2F;introdu...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=6jQhWNYh" target="_blank">6jQhWNYh</a>   <span class="timeago" data-date="2021-08-17 12:56:02 &#43;0000 UTC">2021-08-17 12:56:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the reply, that&#x27;s a very interesting plugin!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andion" target="_blank">andion</a>   <span class="timeago" data-date="2021-08-17 07:15:49 &#43;0000 UTC">2021-08-17 07:15:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you for your library and efforts!<p>I always use leaflet when I have to work with maps, and I couldn&#x27;t be more happy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 15:22:13 &#43;0000 UTC">2021-08-17 15:22:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the kind words, that&#x27;s really nice to hear!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=null4bl3" target="_blank">null4bl3</a>   <span class="timeago" data-date="2021-08-17 19:40:00 &#43;0000 UTC">2021-08-17 19:40:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can leaflet replace OpenLayers for scientific purposes?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-18 09:51:40 &#43;0000 UTC">2021-08-18 09:51:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This depends on the scientific purpose. For most cases, I&#x27;d say yes, but I&#x27;m biased, and OpenLayers has the advantage of having all possible features baked in, if you can tolerate the complexity and bloat.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pipy" target="_blank">pipy</a>   <span class="timeago" data-date="2021-08-17 16:10:50 &#43;0000 UTC">2021-08-17 16:10:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi! If I want to create a somewhat more extensible alternative of <a href="https:&#x2F;&#x2F;maps.sensor.community" rel="nofollow">https:&#x2F;&#x2F;maps.sensor.community</a> based on Leaflet, what plugins should I choose?<p>Thanks in advance
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-18 09:54:12 &#43;0000 UTC">2021-08-18 09:54:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t looked closely into all available plugins, but it seems that you can quickly find suitable options by searching for &quot;leaflet wind&quot; and &quot;leaflet hexbin&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mekkkkkk" target="_blank">mekkkkkk</a>   <span class="timeago" data-date="2021-08-16 22:40:20 &#43;0000 UTC">2021-08-16 22:40:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet is fantastic. One of the more interesting use cases I&#x27;ve seen for it is the Guild Wars 2 wiki. They use it heavily to display the game map for regions, areas of interests etc. It&#x27;s quite impressive, and very useful as a player!<p><a href="https:&#x2F;&#x2F;wiki.guildwars2.com&#x2F;wiki&#x2F;Kryta#Interactive_Map" rel="nofollow">https:&#x2F;&#x2F;wiki.guildwars2.com&#x2F;wiki&#x2F;Kryta#Interactive_Map</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phsource" target="_blank">phsource</a>   <span class="timeago" data-date="2021-08-17 06:42:41 &#43;0000 UTC">2021-08-17 06:42:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not even just video games! Leaflet&#x27;s great for real-world non-video games maps of the whole world. It&#x27;s by far the easiest system to make any random old image zoomable and pinchable.<p>My brother and I created a map of our local Costco in Figma and just put it up at <a href="https:&#x2F;&#x2F;costcomap.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;costcomap.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=varrock" target="_blank">varrock</a>   <span class="timeago" data-date="2021-08-17 05:39:00 &#43;0000 UTC">2021-08-17 05:39:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This got me wondering if my favorite game as a kid, RuneScape, also uses Leaflet on their world map for Old School RuneScape (the version I am more familiar with). It turns out they do. Cool!<p><a href="https:&#x2F;&#x2F;oldschool.tools&#x2F;world-map" rel="nofollow">https:&#x2F;&#x2F;oldschool.tools&#x2F;world-map</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dante_dev" target="_blank">dante_dev</a>   <span class="timeago" data-date="2021-08-17 10:52:16 &#43;0000 UTC">2021-08-17 10:52:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, leaflet can be used also outside the map context. We used it to reimplement a &quot;Pick Your Own Seat&quot; component (originally implemented in flash), where the user picks its own seats while buying tickets!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cyberdog" target="_blank">Cyberdog</a>   <span class="timeago" data-date="2021-08-17 02:18:59 &#43;0000 UTC">2021-08-17 02:18:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m a freelance web developer for <a href="https:&#x2F;&#x2F;gamerguides.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;gamerguides.com&#x2F;</a> which also uses Leaflet for video game maps. It&#x27;s a little weird to get working with at first but it turns out it&#x27;s well suited for that sort of use case. I love it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vmarsy" target="_blank">vmarsy</a>   <span class="timeago" data-date="2021-08-16 22:25:36 &#43;0000 UTC">2021-08-16 22:25:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re looking for an actual demo of the product, it seems that the weather map on <a href="https:&#x2F;&#x2F;www.msn.com&#x2F;en-us&#x2F;weather&#x2F;maps?lat=47.6032&amp;lon=-122.33&amp;weaext0=%7B%22l%22%3A%22Seattle%22%2C%22r%22%3A%22WA%22%2C%22c%22%3A%22United+States%22%2C%22i%22%3A%22US%22%2C%22t%22%3A102%2C%22g%22%3A%22en-us%22%7D&amp;city=Seattle%2C+WA&amp;type=airquality&amp;animation=1" rel="nofollow">https:&#x2F;&#x2F;www.msn.com&#x2F;en-us&#x2F;weather&#x2F;maps?lat=47.6032&amp;lon=-122....</a> is powered by leaflet. I really like the work they&#x27;ve done with the wind animations and historical air quality maps
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=avel" target="_blank">avel</a>   <span class="timeago" data-date="2021-08-16 22:36:51 &#43;0000 UTC">2021-08-16 22:36:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s pretty cool, it reminded me of Windy which is also pretty awesome. In fact, peeking at the source of windy, it looks like it also uses Leaflet!<p><a href="https:&#x2F;&#x2F;www.windy.com" rel="nofollow">https:&#x2F;&#x2F;www.windy.com</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=panopticon" target="_blank">panopticon</a>   <span class="timeago" data-date="2021-08-16 22:53:04 &#43;0000 UTC">2021-08-16 22:53:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just discovered that the other week when I was looking for a KML plugin for Leaflet. Windy maintains one!<p><a href="https:&#x2F;&#x2F;github.com&#x2F;windycom&#x2F;leaflet-kml" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;windycom&#x2F;leaflet-kml</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zamadatix" target="_blank">zamadatix</a>   <span class="timeago" data-date="2021-08-17 13:50:01 &#43;0000 UTC">2021-08-17 13:50:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hot damn, an online weather page that doesn&#x27;t perform like I&#x27;m trying to load the radar view over a 56k modem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hutch120" target="_blank">hutch120</a>   <span class="timeago" data-date="2021-08-16 22:59:01 &#43;0000 UTC">2021-08-16 22:59:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting that Windy uses a version from 2018. (v1.4)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anakaine" target="_blank">anakaine</a>   <span class="timeago" data-date="2021-08-17 07:49:17 &#43;0000 UTC">2021-08-17 07:49:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its very heavily customised.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=katabasis" target="_blank">katabasis</a>   <span class="timeago" data-date="2021-08-16 23:44:24 &#43;0000 UTC">2021-08-16 23:44:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a previous life I used Leaflet in some digital art-history publications for the Getty Museum in LA [1]. Leaflet was the MVP of our static-website software stack (&quot;JAMstack&quot; before that was a thing). We used Leaflet to provide maps of the Roman Empire as well as deep-zoom functionality for images of artwork. The library is a gem of open-source web technology, versatile and reliable.<p>[1] <a href="https:&#x2F;&#x2F;www.getty.edu&#x2F;publications&#x2F;romanmosaics&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.getty.edu&#x2F;publications&#x2F;romanmosaics&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ddoolin" target="_blank">ddoolin</a>   <span class="timeago" data-date="2021-08-17 00:10:31 &#43;0000 UTC">2021-08-17 00:10:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OT, but I really love the Getty Museum. Definitely one of the few places worth the trip in LA. If anyone reading has access and hasn&#x27;t been, consider checking it out. It&#x27;s not often you see such a large collection of beautiful antiquities, particularly not in such a nice setting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=parksy" target="_blank">parksy</a>   <span class="timeago" data-date="2021-08-17 03:36:49 &#43;0000 UTC">2021-08-17 03:36:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The first time I used it was to map parks and facilities for a state parks department, must have been in the early 2010s?<p>The design and data called for thousands of nested POIs all searchable by a range of filters (facilities, activities, etc), with pop-up info boxes and automatic clustering groups, with a custom layer from their XML-based geoserver full of park boundaries (polygons) which could filter the POIs within. By design this all required a round-trip to their geoserver which did a spatial query. The specification pushed one of the more popular JS mapping heavyweights of the day (I forget which) which due to the specific mix of required features ended up being painful, slow, janky, and with mobile-responsive becoming the frontend de-jure, a battle against nested layers of opinionated templating abstractions, all of which added up to a couple of hundred KB of dependencies and endless fragile callback-induced race-conditions, slow round-trips to their geoserver, and XML parsing issues. The mapping became a blocker on the project as the weeks wore on - hammer down one gopher, and another head would pop up. Design compromises were being considered to get the job over the line.<p>Enter Leaflet which was considered risky and new at the time, but on a whim and my own time I threw together a quick demo and got permission to spend a few days on it. I replaced weeks of frustrating spaghetti code and rebuilt a faster and more stable solution in a couple of days, polished it up after getting the &quot;nod&quot; and the site was finally ready to launch a couple of days later. Leaflet enabled the solution by being compact, only did the thing it was designed to do and didn&#x27;t interfere elsewhere, and the plugins were tiny, did their job, and did it much more transparently. The main thing I had to do was transform their XML into GeoJSON on our webserver (their backend had only rudimentary GeoJSON support at the time - I think their internal teams either refused or were not allowed to update it?).<p>Anyway didn&#x27;t mean to write a mini-blog post shilling Leaflet, it&#x27;s a great library, my first experience of it was that it saved a seemingly doomed project, it does exactly what it says on the box and not much else, which is perfect when it&#x27;s just a small component of a much larger and more complex project. It&#x27;s my first go-to for interactive map rendering and even non-map stuff, like zoomable gigapixel photos.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=afavour" target="_blank">afavour</a>   <span class="timeago" data-date="2021-08-16 23:22:31 &#43;0000 UTC">2021-08-16 23:22:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve used Leaflet a ton and love it. But I recently tried using it with a vector-based render method (as opposed to the rastered tiles Leaflet uses by default) and couldn’t find anything that worked anywhere near as easily and simply as Leaflet’s standard rendering.<p>I don’t blame the Leaflet folks for this really, rendering map data locally via WebGL is not a simple task. But it’s been depressing to see folks like MapBox close off their vector-based library (and Google’s isn’t open either). There’s an open source of Mapbox’s library but it still feels like the open source world is being left out in the cold compared to how things were just a few years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 06:30:30 &#43;0000 UTC">2021-08-17 06:30:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m the original author of Leaflet and also (as of last 8 years) core developer of Mapbox GL JS. Not pursuing vector rendering in Leaflet is intentional — it&#x27;s designed to be extremely small, simple and lightweight. Vector map rendering is so incredibly difficult to do right that it&#x27;s pretty much impossible without many years of team effort by top engineers and millions in investment.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=appleflaxen" target="_blank">appleflaxen</a>   <span class="timeago" data-date="2021-08-17 10:08:32 &#43;0000 UTC">2021-08-17 10:08:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            can you elaborate on what the biggest challenges are? to a naïve bystander is hard to understand why it would be so hard.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 11:51:38 &#43;0000 UTC">2021-08-17 11:51:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet avoids all the complexity by relying on all the rendering done on the server, while all it has to do is load images.<p>Rendering vector data on the browser with the level of detalization necessary for modern cartography (hundreds of thousands of points in a single view) is not possible with the usual technologies like Canvas &amp; SVG. The only option is WebGL, which is basically a very efficient way to draw triangles. You have to implement all the logic of turning all the data into triangles (tessellating lines, breaking down polygons, implementing anti-aliasing, figuring out collision detection between labels) from scratch, reimplementing difficult computer graphics algorithms from decades ago. This is a MASSIVE amount of work, and hard to do in a performant way.<p>Moreover, client-side vector rendering has even more complexity than server-side technologies like Mapnik, because you can&#x27;t just render something once — you have to do it in real time, 60 frames per second, considering context, making fluid animations when zooming, panning and loading data, etc.<p>You can learn more details about this in my presentation on vector maps e.g. here: <a href="https:&#x2F;&#x2F;youtu.be&#x2F;v-V8SS14R48" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;v-V8SS14R48</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NelsonMinar" target="_blank">NelsonMinar</a>   <span class="timeago" data-date="2021-08-17 00:46:11 &#43;0000 UTC">2021-08-17 00:46:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah Leaflet never really made the jump to vector tiles. There are various ways to add vector drawing to it but as you&#x27;ve noted none of them are quite easy or simple enough.<p>MapLibre.org gives me hope. It&#x27;s a fork of the MapBox GL JS code that intends to be fully open source and independent.<p>Another option for open source vector mapping was Mapzen&#x27;s Tangram. Mapzen shut down, what, two years ago? But they open source released everything. I&#x27;m not sure if Tangram has a life of its own.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bdon" target="_blank">bdon</a>   <span class="timeago" data-date="2021-08-17 00:01:34 &#43;0000 UTC">2021-08-17 00:01:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which vector-based rendering did you use? I&#x27;m working on a new attempt at that here, though not WebGL-based:<p><a href="http:&#x2F;&#x2F;github.com&#x2F;protomaps&#x2F;protomaps.js" rel="nofollow">http:&#x2F;&#x2F;github.com&#x2F;protomaps&#x2F;protomaps.js</a><p>so it would be valuable to know if it can get closer to what you wanted to accomplish.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barnabask" target="_blank">barnabask</a>   <span class="timeago" data-date="2021-08-16 23:55:26 &#43;0000 UTC">2021-08-16 23:55:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I bet you are going to be so happy to hear about <a href="https:&#x2F;&#x2F;maplibre.org" rel="nofollow">https:&#x2F;&#x2F;maplibre.org</a> then.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bebop" target="_blank">bebop</a>   <span class="timeago" data-date="2021-08-16 23:43:03 &#43;0000 UTC">2021-08-16 23:43:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you looked into OpenLayers? Maybe this is something that could be useful: <a href="https:&#x2F;&#x2F;openlayers.org&#x2F;en&#x2F;latest&#x2F;apidoc&#x2F;module-ol_layer_Vector-VectorLayer.html" rel="nofollow">https:&#x2F;&#x2F;openlayers.org&#x2F;en&#x2F;latest&#x2F;apidoc&#x2F;module-ol_layer_Vect...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hamburgerwah" target="_blank">hamburgerwah</a>   <span class="timeago" data-date="2021-08-16 22:03:03 &#43;0000 UTC">2021-08-16 22:03:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have used this and it is excellent. It is a tremendous alternative to all the paid GIS&#x2F;mapping suites.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tshaddox" target="_blank">tshaddox</a>   <span class="timeago" data-date="2021-08-16 22:41:19 &#43;0000 UTC">2021-08-16 22:41:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve used it and it&#x27;s nice for use cases that match very closely to what they support and provide documentation&#x2F;examples for. As a quick drop-in map widget on a web page, it&#x27;s quite nice.<p>I&#x27;ve also used Mapbox which provides a much fancier OpenGL map with fancy things like continuous (smooth) zoom levels. Mapbox feels a lot more like a modern Google Maps-esque mapping widget. <a href="https:&#x2F;&#x2F;docs.mapbox.com&#x2F;mapbox-gl-js&#x2F;example&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.mapbox.com&#x2F;mapbox-gl-js&#x2F;example&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SahAssar" target="_blank">SahAssar</a>   <span class="timeago" data-date="2021-08-16 23:10:04 &#43;0000 UTC">2021-08-16 23:10:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FYI: MapLibre is a fork of the last version of MapBoxGL that did not require payment&#x2F;registration even if you don&#x27;t use mapbox tiles.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 00:08:05 &#43;0000 UTC">2021-08-17 00:08:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gkhartman" target="_blank">gkhartman</a>   <span class="timeago" data-date="2021-08-16 22:20:05 &#43;0000 UTC">2021-08-16 22:20:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll second this. Highly recommended. It was pleasure to work with and hasn&#x27;t had any issues while running in a production environment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hajile" target="_blank">hajile</a>   <span class="timeago" data-date="2021-08-16 22:16:41 &#43;0000 UTC">2021-08-16 22:16:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I used it, I really wished it used JS inheritance rather than its own custom inheritance&#x2F;mixins.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Cyberdog" target="_blank">Cyberdog</a>   <span class="timeago" data-date="2021-08-17 02:22:37 &#43;0000 UTC">2021-08-17 02:22:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            JavaScript inheritance wasn&#x27;t really a thing when Leaflet started out, and definitely not widely-supported (is it even now?).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hajile" target="_blank">hajile</a>   <span class="timeago" data-date="2021-08-17 02:58:41 &#43;0000 UTC">2021-08-17 02:58:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Last I checked, IE11 is the last official holdout (with bugfixes and support) and it has less than 5% marketshare. That gives ES6 somewhere close to 95% marketshare for users that aren&#x27;t running 3-6 year old insecure and outdated browsers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SilverRed" target="_blank">SilverRed</a>   <span class="timeago" data-date="2021-08-16 22:34:11 &#43;0000 UTC">2021-08-16 22:34:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You will pretty much always have to pay for the tileserver service though. The main benefit I saw was that you could trivially switch to any other tile service without being tied in to a particular one like if you used the google maps library.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smelendez" target="_blank">smelendez</a>   <span class="timeago" data-date="2021-08-16 23:31:31 &#43;0000 UTC">2021-08-16 23:31:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depending on the use case, you may be able to host tiles on any web host&#x2F;cdn
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SilverRed" target="_blank">SilverRed</a>   <span class="timeago" data-date="2021-08-16 23:36:10 &#43;0000 UTC">2021-08-16 23:36:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You still have to pay for the server you host it yourself on. Which usually means generating the tiles from scratch rather than relying on some precached ones. The prices for something like mapbox are not outrageous for what they provide.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Cyberdog" target="_blank">Cyberdog</a>   <span class="timeago" data-date="2021-08-17 02:28:53 &#43;0000 UTC">2021-08-17 02:28:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; You still have to pay for the server you host it yourself on.<p>I mean, I guess? Can&#x27;t it be presumed that if you have a web site upon which you wish to place a map, you&#x27;ve already got a web server set up one way or another?<p>&gt; Which usually means generating the tiles from scratch rather than relying on some precached ones.<p>Well, yes. The way I&#x27;ve set it up for my client is basically that we start from a large image which will be the map at its maximum &quot;zoom in level&quot; and run a script which scales the map 50% smaller, dices the image into 256x256 tiles, and saves those tiles with a pre-defined naming scheme (something like Xcoord_Ycoord_Zoomlevel.png - I can&#x27;t recall the details), then scales the original map by 25%, creates tiles from that, and repeats until the entire map can fit into four tiles (512x512). It&#x27;s not terribly difficult stuff for a reasonably capable developer to do, though working with the larger maps can eat up a lot of RAM on the system we run this script on.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aendruk" target="_blank">aendruk</a>   <span class="timeago" data-date="2021-08-17 02:18:51 &#43;0000 UTC">2021-08-17 02:18:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here’s an example of statically hosting map tiles on GitHub Pages:<p><a href="https:&#x2F;&#x2F;seagl.org&#x2F;maps&#x2F;2019" rel="nofollow">https:&#x2F;&#x2F;seagl.org&#x2F;maps&#x2F;2019</a><p>Source: <a href="https:&#x2F;&#x2F;github.com&#x2F;SeaGL&#x2F;seagl.github.io&#x2F;pull&#x2F;148" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;SeaGL&#x2F;seagl.github.io&#x2F;pull&#x2F;148</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vgeek" target="_blank">vgeek</a>   <span class="timeago" data-date="2021-08-17 15:07:55 &#43;0000 UTC">2021-08-17 15:07:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want to roll your own tiles, you get tons of flexibility with your own tileserver, which is great if you want to change naming rules&#x2F;styles&#x2F;etc.. It is a rabbit hole to go down, since mapping is inherently fun.<p><a href="http:&#x2F;&#x2F;maps.stamen.com&#x2F;#toner&#x2F;12&#x2F;37.7706&#x2F;-122.3782" rel="nofollow">http:&#x2F;&#x2F;maps.stamen.com&#x2F;#toner&#x2F;12&#x2F;37.7706&#x2F;-122.3782</a> - they have free tile servers (obviously, donate if you use them) that are relatively styled. They don&#x27;t get updated and may not be 100%, but for small scale uses, they are good enough versus risking going over the free tiers at Mapbox or getting stuck in the Google ecosystem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 22:37:27 &#43;0000 UTC">2021-08-16 22:37:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hdersch" target="_blank">hdersch</a>   <span class="timeago" data-date="2021-08-17 09:34:43 &#43;0000 UTC">2021-08-17 09:34:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are many projects displaying georeferenced photographs using Leaflet, which usually work via precalculated hotspots in image- and mapview. Here&#x27;s a project that uses photogrammetry to link not just some but all points. Clicking the photograph zooms into the corresponding position in the Leaflet-view and vice-versa.<p><a href="https:&#x2F;&#x2F;hdersch.github.io&#x2F;app&#x2F;main.html" rel="nofollow">https:&#x2F;&#x2F;hdersch.github.io&#x2F;app&#x2F;main.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_third_wave" target="_blank">the_third_wave</a>   <span class="timeago" data-date="2021-08-16 22:14:20 &#43;0000 UTC">2021-08-16 22:14:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LeafletJS is not just limited to mapping applications, it is used in LibreOffice online [1] to present pixmaps of rendered documents in the web client.<p>[1] <a href="https:&#x2F;&#x2F;git.libreoffice.org&#x2F;online&#x2F;+&#x2F;master&#x2F;loleaflet&#x2F;README" rel="nofollow">https:&#x2F;&#x2F;git.libreoffice.org&#x2F;online&#x2F;+&#x2F;master&#x2F;loleaflet&#x2F;README</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=c-smile" target="_blank">c-smile</a>   <span class="timeago" data-date="2021-08-16 22:56:31 &#43;0000 UTC">2021-08-16 22:56:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet works as it is in Sciter[1] too. SDK sample: <a href="https:&#x2F;&#x2F;github.com&#x2F;c-smile&#x2F;sciter-js-sdk&#x2F;tree&#x2F;main&#x2F;samples&#x2F;leaflet" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;c-smile&#x2F;sciter-js-sdk&#x2F;tree&#x2F;main&#x2F;samples&#x2F;l...</a><p>So it can be used in pretty much any native desktop application. Including desktop games that use DX11, DX12, Vulkan or Metal graphics.<p>[1] <a href="https:&#x2F;&#x2F;sciter.com" rel="nofollow">https:&#x2F;&#x2F;sciter.com</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theoa" target="_blank">theoa</a>   <span class="timeago" data-date="2021-08-17 07:56:09 &#43;0000 UTC">2021-08-17 07:56:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;mourner&#x2F;projects" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mourner&#x2F;projects</a><p>The above is a list of awesome open source projects Vladimir Agafonkin is involved in.<p>Vlad&#x27;s &quot;Earcut&quot; triangulator - embedded in Three.js - and his solar calculator are efforts that have helped me a lot.<p>I am wondering: have Vlad and Ricardo Cabello AKA &quot;Mr.doob&quot; ever hacked some linear algebra together??
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-16 22:16:43 &#43;0000 UTC">2021-08-16 22:16:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some past related threads:<p><i>How to Make Maps Using Leaflet.js, PostGIS and Chicago Open Data</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19784355" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19784355</a> - April 2019 (20 comments)<p><i>Leaflet – A JavaScript library for mobile-friendly interactive maps</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16149725" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16149725</a> - Jan 2018 (36 comments)<p><i>Leaflet: An open-source JavaScript library for mobile-friendly interactive maps</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=13095390" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=13095390</a> - Dec 2016 (71 comments)<p><i>Leaflet 1.0 – A JavaScript library for mobile-friendly interactive maps</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=12589447" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=12589447</a> - Sept 2016 (99 comments)<p><i>D3 and Leaflet maps (2012)</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=11017763" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=11017763</a> - Feb 2016 (8 comments)<p><i>Show HN: Lens Battle – Make comparing lenses easier (with leaflet.js)</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10279358" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10279358</a> - Sept 2015 (11 comments)<p><i>Show HN: Quizzity – a geographical quiz built on top of a Leaflet map</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8981162" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8981162</a> - Feb 2015 (6 comments)<p><i>Show HN: Traverse City Platmap with Leaflet and D3</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8164315" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=8164315</a> - Aug 2014 (6 comments)<p><i>Testing web map APIs – Google vs OpenLayers vs Leaflet</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=7451375" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=7451375</a> - March 2014 (12 comments)<p><i>Show HN: Earthquakes on Leaflet, Crossfilter and D3</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=5157054" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=5157054</a> - Feb 2013 (7 comments)<p><i>Leaftlet - A Lightweight JavaScript Library for Interactive Maps</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=2746178" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=2746178</a> - July 2011 (21 comments)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mistrial9" target="_blank">mistrial9</a>   <span class="timeago" data-date="2021-08-16 22:34:10 &#43;0000 UTC">2021-08-16 22:34:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            thx dang !
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alyssaxuu" target="_blank">alyssaxuu</a>   <span class="timeago" data-date="2021-08-17 08:54:06 &#43;0000 UTC">2021-08-17 08:54:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Super handy library. I used it for a real-time collaborative map tool [1], it&#x27;s especially useful when it comes to customization, plus it has many plugins which add a lot of functionality. Leaflet Geoman [2] for instance is great for creating all sorts of geometries on the map, I&#x27;ve personally used it for my tool so users can designate areas and paths. So good.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;alyssaxuu&#x2F;mapus" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;alyssaxuu&#x2F;mapus</a><p>[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;geoman-io&#x2F;leaflet-geoman" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;geoman-io&#x2F;leaflet-geoman</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=beezischillin" target="_blank">beezischillin</a>   <span class="timeago" data-date="2021-08-16 22:13:10 &#43;0000 UTC">2021-08-16 22:13:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just a heads up, if you are looking into using this in your project: The popup onclick triggers are currently broken in the latest version under Safari, using an older version solves it.<p>Other than that this is an awesome library with tons of great plugins that I’ve used for years now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mourner" target="_blank">mourner</a>   <span class="timeago" data-date="2021-08-17 06:42:28 &#43;0000 UTC">2021-08-17 06:42:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This should be fixed in the master version, we just didn&#x27;t get our hands on making a patch release yet.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=everybodyknows" target="_blank">everybodyknows</a>   <span class="timeago" data-date="2021-08-17 02:53:14 &#43;0000 UTC">2021-08-17 02:53:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A couple others that may bite:<p>1. Rotation not supported.<p>2. Debug source (leaflet-src.is) reports stale number: “1.6.0” for 1.7.1
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chx" target="_blank">chx</a>   <span class="timeago" data-date="2021-08-16 22:39:46 &#43;0000 UTC">2021-08-16 22:39:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+             <a href="https:&#x2F;&#x2F;automuseums.info&#x2F;" rel="nofollow">https:&#x2F;&#x2F;automuseums.info&#x2F;</a> is using leaflet, it is also doing some server side geoclustering. It&#x27;s a mostly out of the box Drupal 9 site, there&#x27;s custom code but very very little.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokoon" target="_blank">jokoon</a>   <span class="timeago" data-date="2021-08-17 10:44:22 &#43;0000 UTC">2021-08-17 10:44:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s pretty awesome and works well, I&#x27;ve used it to test Spatialite.<p>My only wish is that I want to generate my own raster tiles, but I&#x27;ve seen that planet.osm now is 1.4TB, although the .PBF is only about 60GB.<p>I wish I could generate tiles of areas I want, but it seems the software requirements are pretty big, I&#x27;d rather use spatialite than postGIS, and I have no idea how to generate those tiles. There are a lot of GIS softwares, and most of them are pretty heavy, not to mention there are a lot of different formats which bloats everything.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pugets" target="_blank">pugets</a>   <span class="timeago" data-date="2021-08-17 00:07:35 &#43;0000 UTC">2021-08-17 00:07:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For all you React users (Reactionaries?) out there, there&#x27;s React Leaflet. I&#x27;m in the process of making a little React portfolio app that randomly generates airports within a user-defined distance of each other (for all the indecisive Flight Sim users), and with this library it took all of about 20 minutes to put the airports on a map, draw a line between them, and center the map on them. Really neat stuff.<p><a href="https:&#x2F;&#x2F;react-leaflet.js.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;react-leaflet.js.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bdon" target="_blank">bdon</a>   <span class="timeago" data-date="2021-08-17 00:14:37 &#43;0000 UTC">2021-08-17 00:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            React users can take a look at this component called Pigeon Maps to accomplish a similar user experience in more React DOM compatible way:<p><a href="https:&#x2F;&#x2F;pigeon-maps.js.org" rel="nofollow">https:&#x2F;&#x2F;pigeon-maps.js.org</a><p>Though you miss out on the wide range of Leaflet plugins!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shireboy" target="_blank">shireboy</a>   <span class="timeago" data-date="2021-08-17 02:21:56 &#43;0000 UTC">2021-08-17 02:21:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A great library.  I use it daily for web work. But recently I used it in an ionic framework mobile app.  Simple cross-platform mobile map from a single code base?  Yes please!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=braden_lk" target="_blank">braden_lk</a>   <span class="timeago" data-date="2021-08-16 23:49:12 &#43;0000 UTC">2021-08-16 23:49:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet rocks! We use it for <a href="https:&#x2F;&#x2F;legendkeeper.com" rel="nofollow">https:&#x2F;&#x2F;legendkeeper.com</a>, CRDT-backed knowledge management for RPG game-masters.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 12:22:44 &#43;0000 UTC">2021-08-17 12:22:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ls65536" target="_blank">ls65536</a>   <span class="timeago" data-date="2021-08-16 23:01:05 &#43;0000 UTC">2021-08-16 23:01:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LeafletJS is great! I&#x27;ve been using it successfully with multiple tile layers and a few additional plugins as well (such as leaflet-ruler[0] and RotatedMarker[1]) as the foundation for the map display in my virtual sailing project. Here&#x27;s a sample of what that looks like: <a href="https:&#x2F;&#x2F;i.postimg.cc&#x2F;8z7DMz3T&#x2F;leaflet-sample.png" rel="nofollow">https:&#x2F;&#x2F;i.postimg.cc&#x2F;8z7DMz3T&#x2F;leaflet-sample.png</a><p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;gokertanrisever&#x2F;leaflet-ruler" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;gokertanrisever&#x2F;leaflet-ruler</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;bbecquet&#x2F;Leaflet.RotatedMarker" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;bbecquet&#x2F;Leaflet.RotatedMarker</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cormacrelf" target="_blank">cormacrelf</a>   <span class="timeago" data-date="2021-08-17 09:37:38 &#43;0000 UTC">2021-08-17 09:37:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like the pixels it’s painting on my iPhone are double size, 2x2 squares. I might have some weird experimental WebKit features enabled or something but is that an easy mistake to make with Canvas? I suppose so.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattrighetti" target="_blank">mattrighetti</a>   <span class="timeago" data-date="2021-08-17 00:12:39 &#43;0000 UTC">2021-08-17 00:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This has nothing to do with JS but if you’re looking for something similar for Python I suggest Folium [1] which uses Leaflet.js to render maps on Jupyter notebooks.
+ You can preview the end result here [2]
+[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;python-visualization&#x2F;folium" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;python-visualization&#x2F;folium</a> [2]: <a href="https:&#x2F;&#x2F;python-visualization.github.io&#x2F;folium&#x2F;quickstart.htm" rel="nofollow">https:&#x2F;&#x2F;python-visualization.github.io&#x2F;folium&#x2F;quickstart.htm</a>...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=garminpartenkir" target="_blank">garminpartenkir</a>   <span class="timeago" data-date="2021-08-17 09:32:24 &#43;0000 UTC">2021-08-17 09:32:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LeafletJS looks great, but what&#x27;s the advantage of using it instead of Deck.GL? LeafletJS doesn&#x27;t seem to support WebGL rendering, while Deck.GL does
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benatkin" target="_blank">benatkin</a>   <span class="timeago" data-date="2021-08-16 23:18:01 &#43;0000 UTC">2021-08-16 23:18:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does it compare to this?<p><a href="https:&#x2F;&#x2F;github.com&#x2F;maplibre&#x2F;maplibre-gl-js" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;maplibre&#x2F;maplibre-gl-js</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bdon" target="_blank">bdon</a>   <span class="timeago" data-date="2021-08-17 00:09:03 &#43;0000 UTC">2021-08-17 00:09:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            * Leaflet is based completely on the web platform. It achieves a zoomable slippy map experience by animating DOM elements - usually image tiles.<p>* MapLibre GL JS is a BSD licensed fork of Mapbox GL JS version 1. Instead of consuming bitmap image tiles, it consumes tiles corresponding to the same coordinate extents as the above tiles, but containing tagged geometry features. So instead of sending a PNG image you&#x27;re sending what is essentially an SVG, but in binary format and with some domain-specific compression.<p>* The GL JS renderers also rasterize those vector tiles using WebGL, which means that all the geometry data exists in GPU memory and can be scaled, rotated, and recolored etc in realtime efficiently, and also implement their own limited text rendering so even labels can be rotated in realtime.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benatkin" target="_blank">benatkin</a>   <span class="timeago" data-date="2021-08-17 01:28:25 &#43;0000 UTC">2021-08-17 01:28:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Waterluvian" target="_blank">Waterluvian</a>   <span class="timeago" data-date="2021-08-17 00:58:34 &#43;0000 UTC">2021-08-17 00:58:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet is great for a lot of rudimentary mapping online (99% of what people need). If you’re doing heavier WebGIS I encourage looking at OpenLayers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Rd6n6" target="_blank">Rd6n6</a>   <span class="timeago" data-date="2021-08-17 03:47:17 &#43;0000 UTC">2021-08-17 03:47:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m working on a writing prep web app that will have an interactive map feature. How nice for this to show up on the hn front page, I assumed I’d be making something custom in threejs until now.<p>It’s called plotbinder - the app and it’s website (plotbinder.com, currently nothing is hosted) should go online sometime in September
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nobunagato" target="_blank">nobunagato</a>   <span class="timeago" data-date="2021-08-17 07:51:22 &#43;0000 UTC">2021-08-17 07:51:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing question that I have.
+If I want to use an image as a source of my tiles. 
+Should I split the image into chunks to load them when user moves the map around? Or is there any other way to do that? Are there any tools that would help split an image into those chunks?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jfjjfjfjfjfjfjf" target="_blank">jfjjfjfjfjfjfjf</a>   <span class="timeago" data-date="2021-08-17 10:05:07 &#43;0000 UTC">2021-08-17 10:05:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends on your use case. If it is a very very large image, then yes you should split it into tiles. If the image is simply large and you want to use leaflet as a panning tool, then simply loading it as is should be fine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cdrx" target="_blank">cdrx</a>   <span class="timeago" data-date="2021-08-17 09:08:24 &#43;0000 UTC">2021-08-17 09:08:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are a few tools that will &quot;tile&quot; an image for you. libvips dzsave works well, even for really big images: <a href="https:&#x2F;&#x2F;libvips.github.io&#x2F;libvips&#x2F;API&#x2F;current&#x2F;Making-image-pyramids.md.html" rel="nofollow">https:&#x2F;&#x2F;libvips.github.io&#x2F;libvips&#x2F;API&#x2F;current&#x2F;Making-image-p...</a><p>There are commercial products in this space too (like Maptiler).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gavreh" target="_blank">gavreh</a>   <span class="timeago" data-date="2021-08-17 13:01:00 &#43;0000 UTC">2021-08-17 13:01:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Demonstration of splitting a polygon (GIS concept) using Leaflet: <a href="https:&#x2F;&#x2F;gavinr.github.io&#x2F;split-polygon-demo&#x2F;" rel="nofollow">https:&#x2F;&#x2F;gavinr.github.io&#x2F;split-polygon-demo&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amcaskill" target="_blank">amcaskill</a>   <span class="timeago" data-date="2021-08-16 22:40:24 &#43;0000 UTC">2021-08-16 22:40:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet for R is fantastic as well. It has been a while since I have used R so there might be something better now, but I have fond memories of that package.<p><a href="https:&#x2F;&#x2F;rstudio.github.io&#x2F;leaflet&#x2F;map_widget.html" rel="nofollow">https:&#x2F;&#x2F;rstudio.github.io&#x2F;leaflet&#x2F;map_widget.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gennarro" target="_blank">gennarro</a>   <span class="timeago" data-date="2021-08-16 22:30:27 &#43;0000 UTC">2021-08-16 22:30:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is used on <a href="https:&#x2F;&#x2F;55pl.us&#x2F;find&#x2F;" rel="nofollow">https:&#x2F;&#x2F;55pl.us&#x2F;find&#x2F;</a> if you want to see it live<p>Example: <a href="https:&#x2F;&#x2F;55pl.us&#x2F;nursing-homes&#x2F;27a052&#x2F;" rel="nofollow">https:&#x2F;&#x2F;55pl.us&#x2F;nursing-homes&#x2F;27a052&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lpasselin" target="_blank">lpasselin</a>   <span class="timeago" data-date="2021-08-17 01:41:38 &#43;0000 UTC">2021-08-17 01:41:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Leaflet is great for polygon annotations. It is used by Labelbox and Supervisely.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=math0ne" target="_blank">math0ne</a>   <span class="timeago" data-date="2021-08-17 02:19:40 &#43;0000 UTC">2021-08-17 02:19:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Having worked with leaflet extensively it&#x27;s a pleasure to use.  I&#x27;ve never encountered something I couldn&#x27;t accomplish in the framework.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ve55" target="_blank">ve55</a>   <span class="timeago" data-date="2021-08-16 23:00:28 &#43;0000 UTC">2021-08-16 23:00:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I used leaflet for a previous project involving maps of users (<a href="https:&#x2F;&#x2F;tagmap.io&#x2F;tag&#x2F;slatestarcodex" rel="nofollow">https:&#x2F;&#x2F;tagmap.io&#x2F;tag&#x2F;slatestarcodex</a> is an example of one), and my experience with it was wonderful; I&#x27;d be happy to use it again next time the need arises. The best part about it for me was perhaps how easily configurable it is, including easily adding additional plugins (for example, we used one called MarkerCluster to cluster markers for users if there were hundreds or thousands in the same area. Changing the style of markers, adding new ones, and so on, was also trivial). Nice library and experience in general.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-08-17 04:41:00 &#43;0000 UTC">2021-08-17 04:41:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve done a couple of projects for clients with google maps - what&#x27;s the advantages&#x2F;disadvantages of using this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DanAtC" target="_blank">DanAtC</a>   <span class="timeago" data-date="2021-08-17 06:14:00 &#43;0000 UTC">2021-08-17 06:14:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google Maps prices are now outrageous <a href="https:&#x2F;&#x2F;geoawesomeness.com&#x2F;developers-up-in-arms-over-google-maps-api-insane-price-hike&#x2F;" rel="nofollow">https:&#x2F;&#x2F;geoawesomeness.com&#x2F;developers-up-in-arms-over-google...</a><p>Not to mention respecting the privacy of your users.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=alephnan" target="_blank">alephnan</a>   <span class="timeago" data-date="2021-08-17 04:49:56 &#43;0000 UTC">2021-08-17 04:49:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google maps which descended from Google Earth provides a map of Earth as seen from a satellite.<p>Museums might want a control of their experience without having to collaborate with Google. Or, Fantastical maps for video game or nerdlore.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=antoniuschan99" target="_blank">antoniuschan99</a>   <span class="timeago" data-date="2021-08-16 23:36:42 &#43;0000 UTC">2021-08-16 23:36:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s also react-leaflet for React components<p>Cool to see leaflet mentioned as I’ve been using it this week :P
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ChrisMarshallNY" target="_blank">ChrisMarshallNY</a>   <span class="timeago" data-date="2021-08-17 01:11:14 &#43;0000 UTC">2021-08-17 01:11:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know someone that has used this for quite some time.<p>It’s an excellent library.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

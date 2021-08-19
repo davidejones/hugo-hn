@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/speeding-up-atan2f/">
+
+
+    <title>Speeding up atan2f - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Speeding up atan2f - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/speeding-up-atan2f/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/speeding-up-atan2f/">
+<meta name="twitter:title" content="Speeding up atan2f - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Speeding up atan2f - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T12:26:33JST",
+    "dateModified": "2021-08-17T12:26:33JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://mazzo.li/posts/vectorized-atan2.html">Speeding up atan2f</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gumby" target="_blank">gumby</a>   <span class="timeago" data-date="2021-08-17 14:11:04 &#43;0000 UTC">2021-08-17 14:11:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because of the disregard for the literature common in CS I loved this part:<p>&gt; This is achieved through ...<i>and some cool documents from the 50s</i>.<p>A bit of anecdote: back when I was a research scientist (corporate lab) 30+ years ago I would in fact go downstairs to the library and read — I was still a kid with a lot to learn (and still am).  When I came across (by chance or by someone’s suggestion) something useful to my work I’d photocopy the article and and try it out.  I’d put a comment in the code with the reference.<p>My colleagues in my group would give me (undeserved) credit for my supposed brilliance even though I said in the code where the idea came from and would determinedly point to the very paper on my desk.  This attitude seemed bizarre as the group itself was producing conference papers and even books.<p>(Obviously this was not a universal phenomenon as there were other people in the lab overall, and friends on the net, suggesting papers to read.  But I’ve seen it a lot, from back then up to today)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-17 15:35:12 &#43;0000 UTC">2021-08-17 15:35:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is very unfortunate that in the world of ubiquitous information, ability to just look up a reasonable solution to a well known and well studied problem that has already been solved long ago is practically a superpower.<p>As a developer, I regularly am in a situation where I solved some kind of large problem people had for a long time with significant impact for the company and this mostly with couple google searches.<p>Once I solved a batch task that took 11 hours to complete and reduced it to about 5s of work by looking up a paper on bitemporal indexes. The reactions ranged from &quot;You are awesome!&quot; to &quot;You red a... paper????&quot; to &quot;No, we can&#x27;t have this, this is super advanced code and it surely must have bugs. Can&#x27;t you find an open source library that implements this?&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=refset" target="_blank">refset</a>   <span class="timeago" data-date="2021-08-17 17:24:54 &#43;0000 UTC">2021-08-17 17:24:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; bitemporal indexes [...] Can&#x27;t you find an open source library that implements this?<p>Undoubtedly too late for you, but <a href="https:&#x2F;&#x2F;github.com&#x2F;juxt&#x2F;crux&#x2F;blob&#x2F;master&#x2F;crux-core&#x2F;src&#x2F;crux&#x2F;morton.clj" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;juxt&#x2F;crux&#x2F;blob&#x2F;master&#x2F;crux-core&#x2F;src&#x2F;crux&#x2F;...</a> :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobolus" target="_blank">jacobolus</a>   <span class="timeago" data-date="2021-08-17 17:16:27 &#43;0000 UTC">2021-08-17 17:16:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the most valuable (but often under-appreciated) kinds of work people can do is to take hard-won knowledge that exists somewhere obscure and make it more accessible, e.g. by writing expository survey papers, adding material to Wikipedia, writing documentation, ...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zokier" target="_blank">zokier</a>   <span class="timeago" data-date="2021-08-17 16:57:05 &#43;0000 UTC">2021-08-17 16:57:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It is very unfortunate that in the world of ubiquitous information, ability to just look up a reasonable solution to a well known and well studied problem that has already been solved long ago is practically a superpower<p>Its exactly because information is so ubiquitous and plentiful that finding a reasonable solution is like looking for a needle in a haystack.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-17 17:46:06 &#43;0000 UTC">2021-08-17 17:46:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In most cases in my experience, the people did not face challenge actually grepping the internet for the solution.<p>More likely they just went to roll out their own solution for any number of other reasons:<p>-- For the fun of intellectual challenge (I am guilty of this),<p>-- For having hubris to think they are first to meet that challenge (I have been guilty of this in the past, I no longer make that mistake),<p>-- For having hubris to think they have uniquely best solution to the problem, highly unlikely it is even worth verifying,<p>-- For being superior to everybody else and hence no real reason to dignify other, lesser people, by being interested in their work,<p>-- For feeling there is just too much pressure and no time to do it right or even to take a peek at what is right and how much time it would take,<p>-- For not having enough experience to suspect there might be a solution to this problem,<p>-- Books? Only old people read books,<p>-- Papers? They are for research scientists. I haven&#x27;t finished CS to read papers at work.<p>and so on.<p>There have really been very few concrete problems that I could not find some solution to on the Internet.<p>It is more difficult to find solution to less concrete problems but even with these kinds of problems if you have a habit of regularly seeking knowledge, reading various sources, etc. you will probably amass enough experience and knowledge to deal with most even complex problems on your own.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=djmips" target="_blank">djmips</a>   <span class="timeago" data-date="2021-08-17 19:08:09 &#43;0000 UTC">2021-08-17 19:08:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I regularly hear coders say they cannot understand other people&#x27;s code so they _had_ to write it themselves. Most people can&#x27;t read papers either it seems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-17 20:13:40 &#43;0000 UTC">2021-08-17 20:13:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, that&#x27;s another thing.<p>People lost ability to read anything longer than a tweet with focus and comprehension. Especially new developers.<p>I know this because whatever I put in third and further paragraphs of my tickets is not being red or understood.<p>I sometimes quiz guys on review meetings and I even sometimes put the most important information somewhere in the middle of the ticket. Always with the same result -- they are surprised.<p>Now, to read a paper is to try to imagine being the person who wrote it and appreciate not just written text but also a lot more things that are not necessarily spelled.<p>The same with code -- when I read somebodys code I want to recognize their style, how they approach various problems. Once you know a little bit about their vocabulary you can really speed up reading the rest because you can anticipate what is going to happen next.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nuclearnice1" target="_blank">nuclearnice1</a>   <span class="timeago" data-date="2021-08-17 20:55:49 &#43;0000 UTC">2021-08-17 20:55:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People may have a preference for certainty.<p>They work on the problem. They will make progress and likely solve it.<p>They search the literature they will spend time on research and quite possibly lose days before emerging with nothing to show for it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-18 00:38:35 &#43;0000 UTC">2021-08-18 00:38:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; They search the literature they will spend time on research and quite possibly lose days before emerging with nothing to show for it.<p>I see you prefer lousy results.<p>Also, you read <i>BEFORE</i> you need it.<p>To be literate, educated, knowledgeable developer. And to know where the knowledge is when you need it (because you can&#x27;t remember everything).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nuclearnice1" target="_blank">nuclearnice1</a>   <span class="timeago" data-date="2021-08-18 03:26:49 &#43;0000 UTC">2021-08-18 03:26:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I see you prefer lousy results.<p>I wasn’t stating a preference merely observing another possible reason people don’t research solutions before diving in.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 19:18:33 &#43;0000 UTC">2021-08-17 19:18:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=caf" target="_blank">caf</a>   <span class="timeago" data-date="2021-08-18 04:50:09 &#43;0000 UTC">2021-08-18 04:50:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me a little of<p><i>If Edison had a needle to find in a haystack, he would proceed at once with the diligence of the bee to examine straw after straw until he found the object of his search. … I was a sorry witness of such doings, knowing that a little theory and calculation would have saved him ninety per cent of his labor.</i><p><pre><code>  (Nikola Tesla, 19 October 1931)</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-18 11:27:22 &#43;0000 UTC">2021-08-18 11:27:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually, it would save much more than 90 percent. More like 99.9%. Just take powerful magnet in your hand and start pushing through the haystack until you find it.<p>Which, of course, requires that you somehow know of magnets beforehand.<p>Which is exactly the point -- even if you are in business of finding needles in haystack it pays to have knowledge in other areas, and basically read books and other knowledge sources. You never know when it is going to pay off.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-18 08:08:59 &#43;0000 UTC">2021-08-18 08:08:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; &quot;No, we can&#x27;t have this, this is super advanced code and it surely must have bugs. Can&#x27;t you find an open source library that implements this?&quot;<p>Please tell me this person didn&#x27;t win and they got to keep your solution.<p>(my response would be &quot;let me open source this then&quot;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lmilcin" target="_blank">lmilcin</a>   <span class="timeago" data-date="2021-08-18 11:24:07 &#43;0000 UTC">2021-08-18 11:24:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, they got to keep my solution. I basically told the guy &quot;You are free to propose your own&quot;.<p>As to open sourcing, not going to happen.<p>Companies treat the code as if it was tangible good. If you give it to somebody else you are loosing value.<p>Which is super strange, because code needs to be maintained and why not have other people do it for you if they find it valuable and worth maintaining?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=teddyh" target="_blank">teddyh</a>   <span class="timeago" data-date="2021-08-17 14:18:31 &#43;0000 UTC">2021-08-17 14:18:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve seen an odd use of language, mostly from U.S. Americans, where “intelligent” = “smart” = “<i>knowledgable</i>”.  And conversely, assuming that knowing many things is what makes you smart.  I suspect this is what happened there; they thought you “brilliant” because you knew many things – in their minds, there might not be a difference between the two concepts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dleslie" target="_blank">dleslie</a>   <span class="timeago" data-date="2021-08-17 15:18:56 &#43;0000 UTC">2021-08-17 15:18:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find that disregard for education to be tasteless, but perhaps warranted due to the modern prevalence of &quot;bootcamps&quot; and similar fast-but-shallow programmes.<p>Personally, I love when I get a chance to apply something from a published paper; I will leave a citation as a comment in the code and a brief explanation of how it works and why it was chosen. I have no regrets for having achieved a computing degree, so many years ago.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whatshisface" target="_blank">whatshisface</a>   <span class="timeago" data-date="2021-08-17 14:18:38 &#43;0000 UTC">2021-08-17 14:18:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not brilliant? Use of the written word to pass ideas down between generations is one of the most brilliant ideas in human history, and since nobody around you was doing it, the only explanation is that you independently invented the ethos of the scholar yourself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gumby" target="_blank">gumby</a>   <span class="timeago" data-date="2021-08-17 17:50:11 &#43;0000 UTC">2021-08-17 17:50:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heh heh, Ockham’s razor provides an explanation!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=specialist" target="_blank">specialist</a>   <span class="timeago" data-date="2021-08-17 17:05:49 &#43;0000 UTC">2021-08-17 17:05:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice.<p>I truly miss foraging the stacks. Such delight.<p>Browsing scholar.google.com, resulting in 100s of tabs open, just isn&#x27;t the same.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jjgreen" target="_blank">jjgreen</a>   <span class="timeago" data-date="2021-08-17 22:48:38 &#43;0000 UTC">2021-08-17 22:48:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always found that the smell of old books filled me with the urge to defecate, to the extent that I had to deliberately go for a crap before diving into the stacks. Something of a disadvantage as a pre-internet researcher. I thought I was the only person in the world with this condition, but have subsequently found a couple of other similarly afflicted souls.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IntrepidWorm" target="_blank">IntrepidWorm</a>   <span class="timeago" data-date="2021-08-17 23:14:47 &#43;0000 UTC">2021-08-17 23:14:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a semi-documented phenomenon among book store workers regarding just this: employees at retail stores like Barnes and Noble and Borders Books report famously bad cleanups in their bathrooms on a daily basis, reputedly due to this.<p>See: <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Mariko_Aoki_phenomenon" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Mariko_Aoki_phenomenon</a><p>The academic consensus seems understandably mixed, but it is certainly a fascinating ponder (what a wonderful avenue of research)!<p>I&#x27;d wager any significant breakthroughs in this would certainly be up for consideration for an IgNobel.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jjgreen" target="_blank">jjgreen</a>   <span class="timeago" data-date="2021-08-18 08:55:03 &#43;0000 UTC">2021-08-18 08:55:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has a name! You have made my day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-17 18:47:43 &#43;0000 UTC">2021-08-17 18:47:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But, knowing where to look for, being able to suss out details from papers, having the almost adequate level of conversation to try and contact authors (if still alive...). The ability to put undecypherable formulas into code and to bear stackoverflow&#x27;s requirements for a &#x27;good&#x27; question. Not a set of skills that amounts to nothing. It&#x27;s rare nowadays that I see any copy of a reference textbook on numerical recipes, although we do tons of signal processing and HPC stuff.<p>Recently I rediscovered the ability to compute logs with 64 bits integers with a better precision than double-precision. Man, jumping back into those depths after so many years... Not as easy as reading other people&#x27;s code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_moof" target="_blank">_moof</a>   <span class="timeago" data-date="2021-08-17 22:31:50 &#43;0000 UTC">2021-08-17 22:31:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No one likes to do lit review, which is a shame. I get it - it&#x27;s way less fun to find out someone already bested your cool idea than it is to write code. But it&#x27;s definitely more productive to read the literature!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kbenson" target="_blank">kbenson</a>   <span class="timeago" data-date="2021-08-17 19:55:59 &#43;0000 UTC">2021-08-17 19:55:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; 30+ years ago ... I was still a kid with a lot to learn (and still am).<p>We should all strive to stay young at heart like this. ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacobolus" target="_blank">jacobolus</a>   <span class="timeago" data-date="2021-08-17 17:01:12 &#43;0000 UTC">2021-08-17 17:01:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If someone wants a fast version of <i>x</i> ↦ tan(<i>πx</i>&#x2F;2), let me recommend the approximation:<p><pre><code>  tanpi_2 = function tanpi_2(x) {
+    var y = (1 - x*x);
+    return x * (((-0.000221184 * y + 0.0024971104) * y - 0.02301937096) * y
+      + 0.3182994604 + 1.2732402998 &#x2F; y);
+  }
+</code></pre>
+(valid for -1 &lt;= x &lt;= 1)<p><a href="https:&#x2F;&#x2F;observablehq.com&#x2F;@jrus&#x2F;fasttan" rel="nofollow">https:&#x2F;&#x2F;observablehq.com&#x2F;@jrus&#x2F;fasttan</a> with error: <a href="https:&#x2F;&#x2F;www.desmos.com&#x2F;calculator&#x2F;hmncdd6fuj" rel="nofollow">https:&#x2F;&#x2F;www.desmos.com&#x2F;calculator&#x2F;hmncdd6fuj</a><p>But even better is to avoid trigonometry and angle measures as much as possible. Almost everything can be done better (faster, with fewer numerical problems) with vector methods; if you want a 1-float representation of an angle, use the stereographic projection:<p><pre><code>  stereo = (x, y) =&gt; y&#x2F;(x + Math.hypot(x, y));
+  stereo_to_xy = (s) =&gt; {
+    var q = 1&#x2F;(1 + s*s);
+    return !q ? [-1, 0] : [(1 - s*s)&#x2F;q, 2*s&#x2F;q]; }</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=leowbattle" target="_blank">leowbattle</a>   <span class="timeago" data-date="2021-08-17 17:47:37 &#43;0000 UTC">2021-08-17 17:47:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Almost everything can be done better ... use the stereographic projection<p>I was just learning about stereographic projection earlier. Isn&#x27;t it odd how when you know something you notice it appearing in places.<p>Can you give an example of an operation that could be performed better using stereographic projection rather than angles?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jacobolus" target="_blank">jacobolus</a>   <span class="timeago" data-date="2021-08-17 17:54:12 &#43;0000 UTC">2021-08-17 17:54:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Generally you can just stick to storing 2-coordinate vectors and using vector operations.<p>The places where you might want to convert to a 1-number representation are when you have a lot of numbers you want to store or transmit somewhere. Using the stereographic projection (half-angle tangent) instead of angle measure works better with the floating point number format and uses only rational arithmetic instead of transcendental functions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aj7" target="_blank">aj7</a>   <span class="timeago" data-date="2021-08-17 17:02:53 &#43;0000 UTC">2021-08-17 17:02:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Around 1988, I added phase shift to my optical thin film design program written in Excel 4.0 for the Mac. At the time, this was utterly unique: each spreadsheet row represented a layer and the matrices describing each layer could be calculated right in that row by squashing them down horizontally. The S- and P-polarization matrices could be recorded this way, and the running matrix products similarly maintained.  Finally, using a simple one input table, the reflectance of a typically 25-31 layer laser mirror could be calculated.  And in less than a second on a 20 MHz 68020 (?) Mac II for about 50 wavelengths.  The best part were the graphics which were instantaneous, beautiful, publishable, and pasteable into customer quotations. Semi-technical people could be trained to use the whole thing.<p>Now about the phase shift. In 1988, atan2 didn’t exist. Anywhere. Not in FORTRAN, Basic, Excel, or a C library.  I’m sure phase shift calculators implemented it, each working alone.  For us, it was critical. You see we actually cared not about the phase shift, but its second derivative, the group delay dispersion.  This was the beginning of the femtosecond laser era, and people needed to check whether these broadband laser pulses would be inadvertently stretched by reflection off or transmission through the mirror coating. So atan2, the QUADRANT-PRESERVING arc tangent, is required for a continuous,differential phase function. An Excel function macro did this, with IF statements correcting the quadrant.  And the irony of all this?<p>I CALLED it atan2.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dzdt" target="_blank">dzdt</a>   <span class="timeago" data-date="2021-08-17 19:26:27 &#43;0000 UTC">2021-08-17 19:26:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fortran did have it much earlier.  Per wikipedia atan2 appeared in Fortran IV from IBM in 1961.  <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Atan2" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Atan2</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pklausler" target="_blank">pklausler</a>   <span class="timeago" data-date="2021-08-17 19:48:30 &#43;0000 UTC">2021-08-17 19:48:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And it&#x27;s been in every ANSI &amp; ISO Fortran standard from F&#x27;66 through F&#x27;2018.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=floxy" target="_blank">floxy</a>   <span class="timeago" data-date="2021-08-17 18:03:00 &#43;0000 UTC">2021-08-17 18:03:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Table 8-3, page 8-7 (pdf page 97):<p><a href="http:&#x2F;&#x2F;www.bitsavers.org&#x2F;www.computer.museum.uq.edu.au&#x2F;pdf&#x2F;DEC-10-AFDO-D%20decsystem10%20FORTRAN%20IV%20Programmer&#x27;s%20Reference%20Manual.pdf" rel="nofollow">http:&#x2F;&#x2F;www.bitsavers.org&#x2F;www.computer.museum.uq.edu.au&#x2F;pdf&#x2F;D...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=raphlinus" target="_blank">raphlinus</a>   <span class="timeago" data-date="2021-08-17 19:28:39 &#43;0000 UTC">2021-08-17 19:28:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            1965: <a href="https:&#x2F;&#x2F;www.ecma-international.org&#x2F;publications-and-standards&#x2F;standards&#x2F;ecma-9&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.ecma-international.org&#x2F;publications-and-standard...</a> pdf page 36
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=floxy" target="_blank">floxy</a>   <span class="timeago" data-date="2021-08-17 19:50:23 &#43;0000 UTC">2021-08-17 19:50:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice find.  Anyone have a way to search for old versions &quot;math.h&quot;?  The 1989 version of ANSI C had atan2:<p><a href="https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20161223125339&#x2F;http:&#x2F;&#x2F;flash-gordon.me.uk&#x2F;ansi.c.txt" rel="nofollow">https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20161223125339&#x2F;http:&#x2F;&#x2F;flash-gord...</a><p>...but I wonder when it first hit the scene.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kimixa" target="_blank">kimixa</a>   <span class="timeago" data-date="2021-08-17 20:57:17 &#43;0000 UTC">2021-08-17 20:57:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            According to <a href="https:&#x2F;&#x2F;unix.superglobalmegacorp.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;unix.superglobalmegacorp.com&#x2F;</a> it was in 3bsd libm -<a href="https:&#x2F;&#x2F;unix.superglobalmegacorp.com&#x2F;cgi-bin&#x2F;cvsweb.cgi&#x2F;3BSD&#x2F;lib&#x2F;libm&#x2F;atan.c?rev=1.1.1.1;content-type=text%2Fplain;only_with_tag=MAIN" rel="nofollow">https:&#x2F;&#x2F;unix.superglobalmegacorp.com&#x2F;cgi-bin&#x2F;cvsweb.cgi&#x2F;3BSD...</a><p>3BSD was released at the end of 1979 according to wikipedia, and that&#x27;s just the oldest BSD source I could find, so it may have been in even older versions.<p>Before ANSI&#x2F;ISO C I don&#x27;t think there was really a &quot;math.h&quot; to look for - as it may be different on different systems, but as so many things derive from BSD I wouldn&#x27;t be surprised if it was &quot;de-facto&quot; standardised to what that supported.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Narishma" target="_blank">Narishma</a>   <span class="timeago" data-date="2021-08-17 21:09:46 &#43;0000 UTC">2021-08-17 21:09:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Around 1988, I added phase shift to my optical thin film design program written in Excel 4.0 for the Mac.<p>Excel 4 was released in 1992. In 1988 the only version of Excel that would have been available on the Mac would be the very first one.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=drej" target="_blank">drej</a>   <span class="timeago" data-date="2021-08-17 13:27:32 &#43;0000 UTC">2021-08-17 13:27:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice. Reminds me of an optimisation trick from a while ago: I remember being bottlenecked by one of these trigonometric functions years ago when working with a probabilistic data structure... then I figured the input domain was pretty small (a couple dozen values), so I precomputed those and used an array lookup instead. A huge win in terms of perf, obviously only applicable in these extreme cases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ThePadawan" target="_blank">ThePadawan</a>   <span class="timeago" data-date="2021-08-17 13:37:01 &#43;0000 UTC">2021-08-17 13:37:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the things I recently learned that sounded the most &quot;that can&#x27;t possibly work well enough&quot; is an optimization for sin(x):<p>If abs(x) &lt; 0.1, &quot;sin(x)&quot; is approximated really well by &quot;x&quot;.<p>That&#x27;s it. For small x, just return x.<p>(Obviously, there is some error involved, but for the speedup gained, it&#x27;s a very good compromise)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tzs" target="_blank">tzs</a>   <span class="timeago" data-date="2021-08-17 14:36:09 &#43;0000 UTC">2021-08-17 14:36:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To put some numbers on it, using N terms of the Taylor series for sin(x) [1] with |x| &lt;= 0.1, the maximum error percentage cannot exceed [2]:<p><pre><code>  N  Error Limit
+  1  0.167% (1&#x2F;6%)
+  2  8.35 x 10^-5% (1&#x2F;11980%)
+  3  1.99 x 10^-8% (1&#x2F;50316042%)
+  4  2.76 x 10^-12% (1&#x2F;362275502328%)
+</code></pre>
+Even for |x| as large as 1 the sin(x) = x approximation is within 20%, which is not too bad when you are just doing a rough ballpark calculation, and a two term approximation gets you under 1%. Three terms is under 0.024% (1&#x2F;43%).<p>For |x| up to Pi&#x2F;2 (90°) the one term approximation falls apart. The guarantee from the Taylor series is within 65% (in reality it does better, but is still off by 36%). Two terms is guaranteed to be within 8%, three within 0.5%, and four within 0.02%.<p>Here&#x27;s a quick and dirty little Python program to compute a table of error bounds for a given x [3].<p>[1] x - x^3&#x2F;3! + x^5&#x2F;5! - x^7&#x2F;7! + ...<p>[2] In reality the error will usually be quite a bit below this upper limit. The Taylor series for a given x is a convergent alternating series. That is, it is of the form A0 - A1 + A2 - A3 + ... where all the A&#x27;s have the same sign, |Ak| is a decreasing sequence past some particular k, and |Ak| has a limit of 0 as k goes to infinity. Such a series converges to some value, and if you approximate that by just taking the first N terms the error cannot exceed the first omitted term as long as N is large enough to take you to the point where the sequence from there on is decreasing. This is the upper bound I&#x27;m using above.<p>[3] <a href="https:&#x2F;&#x2F;pastebin.com&#x2F;thN8B7Gf" rel="nofollow">https:&#x2F;&#x2F;pastebin.com&#x2F;thN8B7Gf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MauranKilom" target="_blank">MauranKilom</a>   <span class="timeago" data-date="2021-08-17 21:19:33 &#43;0000 UTC">2021-08-17 21:19:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some trivia, partly stolen from Bruce Dawson[0]:<p>The sin(x) = x approximation is actually exact (in terms of doubles) for |x| &lt; 2^-26 = 1.4e-8. See also [1]. This happens to cover 48.6% of all doubles.<p>Similarly, cos(x) = 1 for |x| &lt; 2^-27 = 7.45e-9 (see [2]).<p>Finally, sin(double(pi)) tells you the error in double(pi) - that is, how far the double representation of pi is away from the &quot;real&quot;, mathematical pi [3].<p>[0]: <a href="https:&#x2F;&#x2F;randomascii.wordpress.com&#x2F;2014&#x2F;10&#x2F;09&#x2F;intel-underestimates-error-bounds-by-1-3-quintillion&#x2F;" rel="nofollow">https:&#x2F;&#x2F;randomascii.wordpress.com&#x2F;2014&#x2F;10&#x2F;09&#x2F;intel-underesti...</a><p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;lattera&#x2F;glibc&#x2F;blob&#x2F;master&#x2F;sysdeps&#x2F;ieee754&#x2F;dbl-64&#x2F;s_sin.c#L216" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lattera&#x2F;glibc&#x2F;blob&#x2F;master&#x2F;sysdeps&#x2F;ieee754...</a><p>[2]: <a href="https:&#x2F;&#x2F;github.com&#x2F;lattera&#x2F;glibc&#x2F;blob&#x2F;master&#x2F;sysdeps&#x2F;ieee754&#x2F;dbl-64&#x2F;s_sin.c#L282" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;lattera&#x2F;glibc&#x2F;blob&#x2F;master&#x2F;sysdeps&#x2F;ieee754...</a><p>[3]: <a href="https:&#x2F;&#x2F;randomascii.wordpress.com&#x2F;2012&#x2F;02&#x2F;25&#x2F;comparing-floating-point-numbers-2012-edition&#x2F;" rel="nofollow">https:&#x2F;&#x2F;randomascii.wordpress.com&#x2F;2012&#x2F;02&#x2F;25&#x2F;comparing-float...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quietbritishjim" target="_blank">quietbritishjim</a>   <span class="timeago" data-date="2021-08-17 13:48:23 &#43;0000 UTC">2021-08-17 13:48:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is precisely the technique discussed in the article: it&#x27;s the first term of the Taylor expansion. Except that the article used more terms of the expansion, and also used very slightly &quot;wrong&quot; coefficients to improve the overall accuracy within the small region.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=RicoElectrico" target="_blank">RicoElectrico</a>   <span class="timeago" data-date="2021-08-17 14:46:17 &#43;0000 UTC">2021-08-17 14:46:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Come on, at this point I&#x27;ve seen this &quot;engineering approximation&quot; memed so many times, even on Instagram ;)<p>What is more interesting to me is that this can be one of rationales behind using radians.<p>And that tan(x)~x also holds for small angles, greatly easing estimations of distance to objects of known size (cf. mil-dot reticle).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lapetitejort" target="_blank">lapetitejort</a>   <span class="timeago" data-date="2021-08-17 15:18:08 &#43;0000 UTC">2021-08-17 15:18:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tan(x)~x because cos(x)~1. It&#x27;s approximations all the way down.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chriswarbo" target="_blank">chriswarbo</a>   <span class="timeago" data-date="2021-08-17 13:47:40 &#43;0000 UTC">2021-08-17 13:47:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a very common assumption in Physics, e.g. <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Pendulum_(mathematics)#Small-angle_approximation" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Pendulum_(mathematics)#Small-a...</a><p>Whether it&#x27;s appropriate in a numerical calculation obviously depends on the possible inputs and the acceptable error bars :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sharikone" target="_blank">sharikone</a>   <span class="timeago" data-date="2021-08-17 13:45:28 &#43;0000 UTC">2021-08-17 13:45:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that you will find that for subnormal numbers any math library will use the identity function for sin(x) and 1 for cos(x)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ThePadawan" target="_blank">ThePadawan</a>   <span class="timeago" data-date="2021-08-17 14:05:24 &#43;0000 UTC">2021-08-17 14:05:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, but the largest subnormal number in single-precision floats is ~ 10^-38.<p>That the sin(x) approximation still works well for 10^-1 (with an error of ~0.01%) is the really cool thing!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jvz01" target="_blank">jvz01</a>   <span class="timeago" data-date="2021-08-17 17:00:35 &#43;0000 UTC">2021-08-17 17:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another good hint is the classical half-angle formulas.  You can often avoid calling sin() and cos() altogether!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Bostonian" target="_blank">Bostonian</a>   <span class="timeago" data-date="2021-08-17 13:49:37 &#43;0000 UTC">2021-08-17 13:49:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why wouldn&#x27;t you at least include the x^3 term in the Taylor series for abs(x) &lt; 0.1?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ThePadawan" target="_blank">ThePadawan</a>   <span class="timeago" data-date="2021-08-17 13:54:26 &#43;0000 UTC">2021-08-17 13:54:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what I assumed would have been a reasonable optimization!<p>What I really found amazing was that rather than reducing the number of multiplications to 2 (to calculate x^3), you can reduce it to 0, and it would still do <i>surprisingly</i> well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mooman219" target="_blank">mooman219</a>   <span class="timeago" data-date="2021-08-17 16:26:37 &#43;0000 UTC">2021-08-17 16:26:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This would be a decent lookup for the atan2 function:<p><a href="https:&#x2F;&#x2F;gist.github.com&#x2F;mooman219&#x2F;19b18ff07bb9d609a103ef0cd059422c" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;mooman219&#x2F;19b18ff07bb9d609a103ef0cd0...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tantalor" target="_blank">tantalor</a>   <span class="timeago" data-date="2021-08-17 13:34:07 &#43;0000 UTC">2021-08-17 13:34:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Memoization" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Memoization</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bluedino" target="_blank">bluedino</a>   <span class="timeago" data-date="2021-08-17 13:38:13 &#43;0000 UTC">2021-08-17 13:38:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Technically</i> it&#x27;s a <i>lookup table</i> if you pre-compute them. Memoization would just be caching them as you do them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tantalor" target="_blank">tantalor</a>   <span class="timeago" data-date="2021-08-17 13:48:22 &#43;0000 UTC">2021-08-17 13:48:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not necessarily, you could &quot;cache&quot; them in a compilation step and then use the table at runtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-08-17 13:39:46 &#43;0000 UTC">2021-08-17 13:39:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tangential at best, but why was the &#x27;r&#x27; dropped from that term? Or why not call it caching? Why the weird &quot;memo-ization&quot;? It makes me think of a mass extinction event where everything is turned into a memo.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=franciscop" target="_blank">franciscop</a>   <span class="timeago" data-date="2021-08-17 13:43:34 &#43;0000 UTC">2021-08-17 13:43:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s explained right in the linked Wikipedia page:<p>&gt; The term &quot;memoization&quot; was coined by Donald Michie in 1968[3] and is derived from the Latin word &quot;memorandum&quot; (&quot;to be remembered&quot;), usually truncated as &quot;memo&quot; in American English, and thus carries the meaning of &quot;turning [the results of] a function into something to be remembered&quot;. While &quot;memoization&quot; might be confused with &quot;memorization&quot; (because they are etymological cognates), &quot;memoization&quot; has a specialized meaning in computing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wongarsu" target="_blank">wongarsu</a>   <span class="timeago" data-date="2021-08-17 13:54:04 &#43;0000 UTC">2021-08-17 13:54:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The term memoization likely precedes the word caching (as related to computing, obviously weapon caches are far older). Memoization was coined in 1968. CPU caches only came about in the 80s as registers became significantly faster than main memory.<p>As wikipedia outlines, the r was dropped because of the memo. It&#x27;s derived from the latin word memorandum that does contain the r, just like memory, but apparently it was more meant as an analogy to written memos.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Const-me" target="_blank">Const-me</a>   <span class="timeago" data-date="2021-08-17 13:46:00 &#43;0000 UTC">2021-08-17 13:46:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder how does it compare with Microsoft’s implementation, there: <a href="https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;DirectXMath&#x2F;blob&#x2F;jan2021&#x2F;Inc&#x2F;DirectXMathVector.inl#L4915-L5104" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;DirectXMath&#x2F;blob&#x2F;jan2021&#x2F;Inc&#x2F;Di...</a><p>Based on the code your version is probably much faster. It would be interesting to compare precision still, MS uses 17-degree polynomial there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pclmulqdq" target="_blank">pclmulqdq</a>   <span class="timeago" data-date="2021-08-17 14:15:03 &#43;0000 UTC">2021-08-17 14:15:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;small error&quot; in this article isn&#x27;t so small when people want exact results.  Unfortunately, a high-degree polynomial is necessary if you want 24 bit precision across the input range for functions like this.<p>That said, I wonder if a rational approximation might not be so bad on modern machines...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=azalemeth" target="_blank">azalemeth</a>   <span class="timeago" data-date="2021-08-17 14:50:14 &#43;0000 UTC">2021-08-17 14:50:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed. I love Padé approximants -- they&#x27;re very underused. Another really fun trick for approximations of expensive functions are turning them into Chebsyshev functions, like Nick Trefethen&#x27;s chebfun package. You can trivially differentiate, integrate and compute chebfun approximations of really horrible special functions (e.g. DE solutions) with fantastic accuracy. Criminally underused.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacobolus" target="_blank">jacobolus</a>   <span class="timeago" data-date="2021-08-17 19:28:27 &#43;0000 UTC">2021-08-17 19:28:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you like Padé approximants, have you been following Trefethen &amp; al.’s recent work on the &quot;AAA&quot; algorithm etc.? <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1612.00337.pdf" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1612.00337.pdf</a> <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1705.10132.pdf" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1705.10132.pdf</a><p>See also the lecture <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=S1upJPMIFfg" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=S1upJPMIFfg</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=azalemeth" target="_blank">azalemeth</a>   <span class="timeago" data-date="2021-08-17 21:47:25 &#43;0000 UTC">2021-08-17 21:47:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, I haven&#x27;t -- thank you very much for sharing. I&#x27;ve only ever used them, e.g. for spectral decomposition in magnetic resonance in a medical setting (1) with the fast Padé transformation, which has a wonderfully deep relationship with the DEs describing magnetic resonance (2).<p>Thanks also for the lecture - I&#x27;ll enjoy. Nick Trefethen is such a good speaker. He taught me in a graduate course in numerical methods -- honestly, I&#x27;d watch those lectures on a loop again.<p>(1) <a href="https:&#x2F;&#x2F;www.ncbi.nlm.nih.gov&#x2F;pmc&#x2F;articles&#x2F;PMC5179227&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.ncbi.nlm.nih.gov&#x2F;pmc&#x2F;articles&#x2F;PMC5179227&#x2F;</a><p>(2) <a href="https:&#x2F;&#x2F;iopscience.iop.org&#x2F;article&#x2F;10.1088&#x2F;0031-9155&#x2F;51&#x2F;5&#x2F;001&#x2F;meta" rel="nofollow">https:&#x2F;&#x2F;iopscience.iop.org&#x2F;article&#x2F;10.1088&#x2F;0031-9155&#x2F;51&#x2F;5&#x2F;00...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=petschge" target="_blank">petschge</a>   <span class="timeago" data-date="2021-08-17 15:02:33 &#43;0000 UTC">2021-08-17 15:02:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            24 bits precision would be possible with the Hastings approximation with 15 terms instead of 6 terms. A naive estimate would be that this requires 2.5 times as much work and could run at 6GB&#x2F;s and take a little less than 5 cycles per element.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Someone" target="_blank">Someone</a>   <span class="timeago" data-date="2021-08-17 18:07:25 &#43;0000 UTC">2021-08-17 18:07:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that remains to be seen. Exact calculations will give you 24 bits, but in computers, floating point calculations typically aren’t exact.<p>If, as this article does, you compute all your intermediate values as 32-bit IEEE floats, it would hugely surprise me if you still got 24 bits of precision after 1 division (to compute y&#x2F;x or x&#x2F;y), 15 multiplications and 14 additions (to evaluate the polynomial) and, sometimes, a subtraction from π&#x2F;2.<p>(That’s a weakness in this article. They point out how fast their code is, but do not show any test that it actually computes approximations to atan2, let alone about how accurate their results are)<p>Getting all the bits right in floating point is expensive.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adgjlsfhk1" target="_blank">adgjlsfhk1</a>   <span class="timeago" data-date="2021-08-17 18:23:08 &#43;0000 UTC">2021-08-17 18:23:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The good news is that the high order terms of the polynomial don&#x27;t notably affect the error. with fma, horner&#x27;s method converges to .5 ULP accuracy. The subtraction with pi&#x2F;2 can also be done without adding inaccuracy by using compensated summation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Const-me" target="_blank">Const-me</a>   <span class="timeago" data-date="2021-08-17 14:41:01 &#43;0000 UTC">2021-08-17 14:41:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  I wonder if a rational approximation might not be so bad on modern machines<p>Uops.info says the throughput of 32-byte FP32 vector division is 5 cycles on Intel, 3.5 cycles on AMD.<p>The throughput of 32-byte vector multiplication is 0.5 cycles. The same is for FMA, which is a single instruction computing a*b+c for 3 float vectors.<p>If the approximation formula only has 1 division where both numerator and denominator are polynomials, and the degree of both polynomials is much lower than 17, the rational version might be not too bad compared to the 17-degree polynomial version.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pclmulqdq" target="_blank">pclmulqdq</a>   <span class="timeago" data-date="2021-08-17 15:37:41 &#43;0000 UTC">2021-08-17 15:37:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A Pade approximation is generally like that.  Especially when you are dealing with singularities, it should be a much smaller polynomial than 17 terms in the numerator and denominator.  I think I&#x27;m going to have to start a blog, and this will be on the list.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=janwas" target="_blank">janwas</a>   <span class="timeago" data-date="2021-08-17 18:02:32 &#43;0000 UTC">2021-08-17 18:02:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed, degree-4 rational polynomials are generally enough for JPEG XL. Code for evaluating them using Horner&#x27;s scheme (just FMAs): <a href="https:&#x2F;&#x2F;github.com&#x2F;libjxl&#x2F;libjxl&#x2F;blob&#x2F;bdde644b94c125a15e532b2572b96306371a7d4e&#x2F;lib&#x2F;jxl&#x2F;rational_polynomial-inl.h" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;libjxl&#x2F;libjxl&#x2F;blob&#x2F;bdde644b94c125a15e532b...</a><p>I initially used Chebfun to approximate them, then a teammate implemented the same Caratheodory-Fejer method in C. We subsequently convert from Chebyshev basis to monomials.<p>Blog sounds good :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stephencanon" target="_blank">stephencanon</a>   <span class="timeago" data-date="2021-08-17 20:57:24 &#43;0000 UTC">2021-08-17 20:57:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if we’re working with batches of points and willing to live with tiny errors, we can produce an atan2 approximation which is 50 times faster than the standard version provided by libc.<p>Which libc, though? I assume glibc, but it&#x27;s frustrating when people talk about libc as though there were a single implementation. Each vendor supplies their own implementation, libc is just a common interface defined by the C library. There is no &quot;standard version&quot; provided by libc.<p>In particular, glibc&#x27;s math functions are not especially fast--Intel&#x27;s and Apple&#x27;s math libraries are 4-5x faster for some functions[1], and often more accurate as well, for example (and both vendors provide vectorized implementations). Even within glibc versions, there have been enormous improvements over the last decade or so, and for some functions there are big performance differences depending on whether or not -fno-math-errno is specified. (I would also note that atan2 has a lot of edge cases, and more than half the work in a standards-compliant libc is in getting those edge cases with zeros and infinities right, which this implementation punts on. There&#x27;s nothing wrong with that, but that&#x27;s a bigger tradeoff for most users than the small loss of accuracy and important to note.)<p>So what are we actually comparing against here? Comparing against a clown-shoes baseline makes for eye-popping numbers, but it&#x27;s not very meaningful.<p>None of this should really take away from the work presented, by the way--the techniques described here are very useful for people interested in this stuff.<p>[1] I don&#x27;t know the current state of atan2f in glibc specifically; it&#x27;s possible that it&#x27;s been improved since last I looked at its performance. But the blog post cites &quot;105.98 cycles &#x2F; element&quot;, which would be glacially slow on any semi-recent hardware, which makes me think something is up here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rostayob" target="_blank">rostayob</a>   <span class="timeago" data-date="2021-08-17 21:14:48 &#43;0000 UTC">2021-08-17 21:14:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (I&#x27;m the author)<p>You&#x27;re right, I should have specified -- it is glibc 2.32-48 . This the source specifying how glibc is built: <a href="https:&#x2F;&#x2F;github.com&#x2F;NixOS&#x2F;nixpkgs&#x2F;blob&#x2F;97c5d0cbe76901da0135b05cdbdfc5b068a7942c&#x2F;pkgs&#x2F;development&#x2F;libraries&#x2F;glibc&#x2F;default.nix" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;NixOS&#x2F;nixpkgs&#x2F;blob&#x2F;97c5d0cbe76901da0135b0...</a> .<p>I&#x27;ve amended the article so that it says `glibc` rather than `libc`, and added a sidenote specifying the version.<p>I link to it statically as indicated in the gist, although I believe that shouldn&#x27;t matter. Also see <a href="https:&#x2F;&#x2F;gist.github.com&#x2F;bitonic&#x2F;d0f5a0a44e37d4f0be03d34d47acb6cf#gistcomment-3864005" rel="nofollow">https:&#x2F;&#x2F;gist.github.com&#x2F;bitonic&#x2F;d0f5a0a44e37d4f0be03d34d47ac...</a> .<p>Note that the hardware is not particularly recent (Q3 2017), but we tend to rent servers which are not exactly on the bleeding edge, so that was my platform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=floxy" target="_blank">floxy</a>   <span class="timeago" data-date="2021-08-17 23:49:31 &#43;0000 UTC">2021-08-17 23:49:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the interesting writeup.  I wonder if it is because glibc has a less-optimized atan2f (for floats).  The double version seems quite involved in glibc anyway:<p><a href="https:&#x2F;&#x2F;sourceware.org&#x2F;git&#x2F;?p=glibc.git;a=blob;f=sysdeps&#x2F;ieee754&#x2F;dbl-64&#x2F;e_atan2.c;h=b77ad2dc6b9561e6396a76db11f6db686f170bb1;hb=ae37d06c7d127817ba43850f0f898b793d42aea7" rel="nofollow">https:&#x2F;&#x2F;sourceware.org&#x2F;git&#x2F;?p=glibc.git;a=blob;f=sysdeps&#x2F;iee...</a><p>...where the atan2f version ends up calling atan, which doesn&#x27;t seem as sophisticated:<p><a href="https:&#x2F;&#x2F;sourceware.org&#x2F;git&#x2F;?p=glibc.git;a=blob;f=sysdeps&#x2F;ieee754&#x2F;flt-32&#x2F;s_atanf.c;h=f61b0f5ef64866fb053a87f9c1a968165ba4de2a;hb=ae37d06c7d127817ba43850f0f898b793d42aea7" rel="nofollow">https:&#x2F;&#x2F;sourceware.org&#x2F;git&#x2F;?p=glibc.git;a=blob;f=sysdeps&#x2F;iee...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stephencanon" target="_blank">stephencanon</a>   <span class="timeago" data-date="2021-08-17 21:21:41 &#43;0000 UTC">2021-08-17 21:21:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for clarifying!<p>Without benchmarking, I would expect atan2f to be around 20-30 cycles per element or less with either Intel&#x27;s or Apple&#x27;s scalar math library, and proportionally faster for their vector libs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rostayob" target="_blank">rostayob</a>   <span class="timeago" data-date="2021-08-17 21:28:58 &#43;0000 UTC">2021-08-17 21:28:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the info.<p>By the way, your writing on floating point arithmetic is very informative -- I even cite a message of yours on FMA in the post itself!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rostayob" target="_blank">rostayob</a>   <span class="timeago" data-date="2021-08-17 21:21:20 &#43;0000 UTC">2021-08-17 21:21:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, regarding edge cases: the only edge cases I do not handle are infinities and the origin. In my case these are both uninteresting: we deal with points from panoramic images, so those both make no sense.<p>I did want to deal with 0s in either coordinates though, and to preserve NaNs.<p>You&#x27;re right that atan2 has a lot of edge cases, which is why it made for an interesting subject. I thought it was neat that the edge cases I did care about fell out fairly naturally from the efficient bit-twiddling.<p>That said, the versions presented in the article post are _not_ conforming, as I remark repeatedly. The article is more about getting people curious about some topics that I think are neat, more than a guide on how to implement those standard functions correctly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hdersch" target="_blank">hdersch</a>   <span class="timeago" data-date="2021-08-17 17:01:31 &#43;0000 UTC">2021-08-17 17:01:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A comparison with one of the many SIMD-mathlibraries would have been fairer than with plain libm. Long time ago I wrote such a dual-platform library for the PS3 (cell-processor) and x86 architecture (outdated, but still available here [1]). Depending on how standard libm implements atan2f, a speedup of 3x to 15x is achieved, without sacrifying accuracy.<p>1. <a href="https:&#x2F;&#x2F;webuser.hs-furtwangen.de&#x2F;~dersch&#x2F;libsimdmath.pdf" rel="nofollow">https:&#x2F;&#x2F;webuser.hs-furtwangen.de&#x2F;~dersch&#x2F;libsimdmath.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=prionassembly" target="_blank">prionassembly</a>   <span class="timeago" data-date="2021-08-17 14:12:06 &#43;0000 UTC">2021-08-17 14:12:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder whether Padé approximants are well known by this kind of researcher. E.g. <a href="http:&#x2F;&#x2F;www-labs.iro.umontreal.ca&#x2F;~mignotte&#x2F;IFT2425&#x2F;Documents&#x2F;EfficientApproximationArctgFunction.pdf" rel="nofollow">http:&#x2F;&#x2F;www-labs.iro.umontreal.ca&#x2F;~mignotte&#x2F;IFT2425&#x2F;Documents...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nimish" target="_blank">nimish</a>   <span class="timeago" data-date="2021-08-17 14:52:17 &#43;0000 UTC">2021-08-17 14:52:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Numerical analysts are definitely familiar. Library authors may not be unless they took a course in function approximation.<p>Personally I prefer chebyshev approximants like chebfun but pade are really good at the cost of a division.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stephencanon" target="_blank">stephencanon</a>   <span class="timeago" data-date="2021-08-17 21:18:38 &#43;0000 UTC">2021-08-17 21:18:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A math library implementor will generally be familiar with at least minimax and Chebyshev approximations, and generally Padé and Carathéodory-Fejér approximations as well. (Source: I implemented math libraries for a decade. We used all of these frequently.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jvz01" target="_blank">jvz01</a>   <span class="timeago" data-date="2021-08-17 16:32:09 &#43;0000 UTC">2021-08-17 16:32:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have developed very fast, accurate, and vectorizable atan() and atan2() implementations, leveraging AVX&#x2F;SSE capabilities.  
+You can find them here [warning: self-signed SSL-Cert].<p><a href="https:&#x2F;&#x2F;fox-toolkit.org&#x2F;wordpress&#x2F;?p=219" rel="nofollow">https:&#x2F;&#x2F;fox-toolkit.org&#x2F;wordpress&#x2F;?p=219</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jvz01" target="_blank">jvz01</a>   <span class="timeago" data-date="2021-08-17 16:57:53 &#43;0000 UTC">2021-08-17 16:57:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Little side-note: algorithm as given is scalar; however, its branch-free, and defined entirely in the header file.  So, compilers will typically be able to vectorize it, and thus achieve speed up directly based on the vector size.  I see potential [but architecture-dependent] optimization using Estrin scheme for evaluating the polynomial.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghusbands" target="_blank">ghusbands</a>   <span class="timeago" data-date="2021-08-17 16:38:25 &#43;0000 UTC">2021-08-17 16:38:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your result is significantly slower than the versions presented in the article, though yours has more terms and so may be more accurate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jvz01" target="_blank">jvz01</a>   <span class="timeago" data-date="2021-08-17 16:41:29 &#43;0000 UTC">2021-08-17 16:41:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, aim was to be acurate down to 1 lsb while significantly faster.  Feel free to drop terms from the polynomial if you can live with less accurate results!<p>The coefficients were generated by a package called Sollya, I&#x27;ve used it a few times to develop accurate chebyshev approximations for functions.<p>Abramowitz &amp; Stegun is another good reference.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-17 19:41:17 &#43;0000 UTC">2021-08-17 19:41:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please, Would you mind one of these days updating your blog post with the instructions you gave to sollya? I&#x27;m trying something stupid with log1p and can&#x27;t get sollya to help, mostly because I&#x27;m not putting enough time to read all the docs...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shoo" target="_blank">shoo</a>   <span class="timeago" data-date="2021-08-17 21:20:08 &#43;0000 UTC">2021-08-17 21:20:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Related -- there&#x27;s a 2011 post from Paul Minero with fast approximations for logarithm, exponential, power, inverse root. <a href="http:&#x2F;&#x2F;www.machinedlearnings.com&#x2F;2011&#x2F;06&#x2F;fast-approximate-logarithm-exponential.html" rel="nofollow">http:&#x2F;&#x2F;www.machinedlearnings.com&#x2F;2011&#x2F;06&#x2F;fast-approximate-lo...</a><p>Minero&#x27;s faster approximate log2, &lt; 1.4% relative error for x in [1&#x2F;100, 10]. Here&#x27;s the simple non-sse version:<p><pre><code>  static inline float 
+  fasterlog2 (float x)
+  {
+    union { float f; uint32_t i; } vx = { x };
+    float y = vx.i;
+    y *= 1.1920928955078125e-7f;
+    return y - 126.94269504f;
+  }
+</code></pre>
+This fastapprox library also includes fast approximations of some other functions that show up in statistical &#x2F; probabilistic calculations -- gamma, digamma, lambert w function. It is BSD licensed, originally lived in google code, copies of the library live on in github, e.g. <a href="https:&#x2F;&#x2F;github.com&#x2F;etheory&#x2F;fastapprox" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;etheory&#x2F;fastapprox</a><p>It&#x27;s also interesting to read through libm. E.g. compare Sun&#x27;s  ~1993 atan2 &amp; atan:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaMath&#x2F;openlibm&#x2F;blob&#x2F;master&#x2F;src&#x2F;e_atan2.c" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaMath&#x2F;openlibm&#x2F;blob&#x2F;master&#x2F;src&#x2F;e_atan...</a><p><a href="https:&#x2F;&#x2F;github.com&#x2F;JuliaMath&#x2F;openlibm&#x2F;blob&#x2F;master&#x2F;src&#x2F;s_atan.c" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;JuliaMath&#x2F;openlibm&#x2F;blob&#x2F;master&#x2F;src&#x2F;s_atan...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zokier" target="_blank">zokier</a>   <span class="timeago" data-date="2021-08-17 14:12:32 &#43;0000 UTC">2021-08-17 14:12:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would have wished to see the error analysis section expanded a bit, or maybe seeing some sort of tests to validate the max error. In particular if the mathematical approximation function arctan* has max error of 1&#x2F;10000 degrees then I&#x27;d naively expect that the float-based implementation to have worse error. Furthermore it&#x27;s not obvious if additional error could be introduced by the division<p><pre><code>    float atan_input = (swap ? x : y) &#x2F; (swap ? y : x);</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pklausler" target="_blank">pklausler</a>   <span class="timeago" data-date="2021-08-17 18:54:31 &#43;0000 UTC">2021-08-17 18:54:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Undoubtedly) stupid question: would it be any faster to project (x, y) to the unit circle (x&#x27;, y&#x27;), then compute acos(x&#x27;) or asin(y&#x27;), and then correct the result based on the signs of x &amp; y?  When converting Cartesian coordinates to polar, the value of r=HYPOT(x, y) is needed anyway, so the projection to the unit circle would be a single division by r.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=drfuchs" target="_blank">drfuchs</a>   <span class="timeago" data-date="2021-08-17 13:37:02 &#43;0000 UTC">2021-08-17 13:37:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn’t CORDIC have done the trick faster? There’s no mention that they even considered it, even though it’s been around for half a century or so.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adrian_b" target="_blank">adrian_b</a>   <span class="timeago" data-date="2021-08-17 13:46:42 &#43;0000 UTC">2021-08-17 13:46:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CORDIC was great for devices that were too simple to include hardware multipliers.<p>CORDIC, in its basic form, produces just 1 bit of result per clock cycle. Only for very low precisions (i.e. with few bits for each result) you would have the chance to overlap enough parallel atan2 computations to achieve a throughput comparable to what you can do with polynomial approximations on modern CPUs, with pipelined multipliers.<p>CORDIC remains useful only for ASIC&#x2F;FPGA implementations, in the cases when the area and the power consumption are much more important than the speed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mzs" target="_blank">mzs</a>   <span class="timeago" data-date="2021-08-17 13:52:02 &#43;0000 UTC">2021-08-17 13:52:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CORDIC unlikely to be faster than this article&#x27;s: &quot;the approximation produces a result every 2 clock cycles&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sorenjan" target="_blank">sorenjan</a>   <span class="timeago" data-date="2021-08-17 14:55:43 &#43;0000 UTC">2021-08-17 14:55:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you handle arrays of values where the array lengths are not a multiple of 8 in this kind of vectorized code? Do you zero pad them before handling them to the vectorized function, or do you run a second loop element by element on the remaining elements after the main one? What happens if you try to do `_mm256_load_ps(&amp;ys[i])` with &lt; 8 elements remaining?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zbjornson" target="_blank">zbjornson</a>   <span class="timeago" data-date="2021-08-17 15:02:40 &#43;0000 UTC">2021-08-17 15:02:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could pad the input as you said, which avoids a &quot;tail loop,&quot; but otherwise you usually do a partial load (load &lt;8 elements into a vector) and store. Some instruction set extensions provide &quot;masked load&#x2F;store&quot; instructions for this, but there are ways to do it without those too.<p>To your last question specifically, if you _mm256_load_ps(&amp;ys[i]) and you&#x27;re at the edge of a page, you&#x27;ll get a segfault. Otherwise you&#x27;ll get undefined values (which can be okay, you could ignore them instead of dealing with a partial load).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-08-17 15:46:44 &#43;0000 UTC">2021-08-17 15:46:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            RISC-V has a solution to this which seems quite elegant - the vector length is set by the program, up to some maximum, and for the final block, it is simply whatever is left:<p><a href="https:&#x2F;&#x2F;gms.tf&#x2F;riscv-vector.html" rel="nofollow">https:&#x2F;&#x2F;gms.tf&#x2F;riscv-vector.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vlovich123" target="_blank">vlovich123</a>   <span class="timeago" data-date="2021-08-17 15:22:51 &#43;0000 UTC">2021-08-17 15:22:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Do you zero pad them before handling them to the vectorized function, or do you run a second loop element by element on the remaining elements after the main one?<p>Typically the latter. That&#x27;s why I find SVEs so interesting. Should improve code density.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TonyTrapp" target="_blank">TonyTrapp</a>   <span class="timeago" data-date="2021-08-17 15:00:17 &#43;0000 UTC">2021-08-17 15:00:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Typically you have have the vectorized loop followed by a non-vectorized loop handling the remaining items, or even just explicit if-then-else statements for each possible number of remaining items.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aconz2" target="_blank">aconz2</a>   <span class="timeago" data-date="2021-08-17 16:16:04 &#43;0000 UTC">2021-08-17 16:16:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice writeup and interesting results. I hadn&#x27;t seen the use of perf_event_open(2) before directly in code which looks cool.<p>The baseline is at a huge disadvantage here because the call to atan2 in the loop never gets inlined and the loop doesn&#x27;t seem to get unrolled (which is surprising actually). Manually unrolling by 8 gives me an 8x speedup. Maybe I&#x27;m missing something with the `-static` link but unless they&#x27;re using musl I didn&#x27;t think -lm could get statically linked.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xxpor" target="_blank">xxpor</a>   <span class="timeago" data-date="2021-08-17 16:22:57 &#43;0000 UTC">2021-08-17 16:22:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could it be that calls to glibc never get inlined, since inlining is essentially static linking by another name? Or since they&#x27;re in separate compilation units, without LTO you&#x27;d never perform the analysis to figure out if it&#x27;s worth it. Would LTO inspect across a dynamic loading boundary? Just speculating, I really have no idea. Everything I work with is statically linked, so I&#x27;ve never really had to think about it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aconz2" target="_blank">aconz2</a>   <span class="timeago" data-date="2021-08-17 19:44:58 &#43;0000 UTC">2021-08-17 19:44:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;ve made a silly mistake and just did 1&#x2F;8th the work, so of course it was 8x speedup. I am still wondering how the numbers would look if you could inline atan2f from libc. Too bad that isn&#x27;t easier
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nice2meetu" target="_blank">nice2meetu</a>   <span class="timeago" data-date="2021-08-17 17:04:51 &#43;0000 UTC">2021-08-17 17:04:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did something similar for tanh once, though I found I could get to 1 ulp.<p>Part of the motivation was that I could get 10x faster than libc. However, I then tried on my FreeBSD and could only get 4x faster. After a lot of head scratching and puzzling it turned out there was a bug in the version of libc on my linux box that slowed things down. It kind of took the wind out of the achievement, but it was still a great learning experience.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=azhenley" target="_blank">azhenley</a>   <span class="timeago" data-date="2021-08-17 18:54:24 &#43;0000 UTC">2021-08-17 18:54:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is pretty similar to my quest to make my own cos() when my friend didn&#x27;t have access to libc. It was fun! Though I don&#x27;t have the math or low-level knowledge that this author does.<p><a href="https:&#x2F;&#x2F;web.eecs.utk.edu&#x2F;~azh&#x2F;blog&#x2F;cosine.html" rel="nofollow">https:&#x2F;&#x2F;web.eecs.utk.edu&#x2F;~azh&#x2F;blog&#x2F;cosine.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spaetzleesser" target="_blank">spaetzleesser</a>   <span class="timeago" data-date="2021-08-17 18:22:18 &#43;0000 UTC">2021-08-17 18:22:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am envious of people who can deal with such problems. The problem is defined clearly and can be measured easily.<p>This is so much more fun than figuring out why some SAAS service is misbehaving.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cogman10" target="_blank">cogman10</a>   <span class="timeago" data-date="2021-08-17 18:34:21 &#43;0000 UTC">2021-08-17 18:34:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m actually a bit surprised that the x86 SIMD instructions don&#x27;t support trig functions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 15:57:58 &#43;0000 UTC">2021-08-17 15:57:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=h0mie" target="_blank">h0mie</a>   <span class="timeago" data-date="2021-08-17 15:58:16 &#43;0000 UTC">2021-08-17 15:58:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Love posts like this!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=unemphysbro" target="_blank">unemphysbro</a>   <span class="timeago" data-date="2021-08-17 18:26:04 &#43;0000 UTC">2021-08-17 18:26:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            coolest blog post I&#x27;ve seen here in a while. :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

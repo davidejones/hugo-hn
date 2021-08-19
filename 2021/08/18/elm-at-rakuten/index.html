@@ -1,0 +1,2854 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/elm-at-rakuten/">
+
+
+    <title>Elm at Rakuten - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Elm at Rakuten - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/elm-at-rakuten/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/elm-at-rakuten/">
+<meta name="twitter:title" content="Elm at Rakuten - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Elm at Rakuten - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T15:04:45JST",
+    "dateModified": "2021-08-18T15:04:45JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://engineering.rakuten.today/post/elm-at-rakuten/">Elm at Rakuten</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-08-18 15:08:59 &#43;0000 UTC">2021-08-18 15:08:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting breakdown of some pros and cons of using Elm in production. However, it appears the JavaScript codebase they used for comparison was quite bad and maybe not representative of a good or even typical JavaScript app:<p>&gt; Our JavaScript application had global variables everywhere, and debugging was a nightmare<p>Point #3 in their list of cons is especially important for anyone considering Elm:<p>&gt; Because Elm is not a mainstream language, it is sometimes necessary to reinvent something that could otherwise have been acquired by adopting a different technology.<p>This is the biggest downfall of Elm projects that I’ve seen in the real world. Teams end up spending half of their time or more solving problems that could have been accomplished quickly with some off the shelf React libraries with numerous tutorials online.<p>This attracts a lot of developers who enjoy working on libraries and tooling, but it’s not ideal if you’re trying to run a lean team that ships products quickly.<p>Elm is fun, but I wouldn’t use it unless I could afford to hire a relatively huge team to absorb all of the additional complexity and detours that go into building an Elm app. There’s a constant promise of Elm being faster and easier to write for various reasons, but in practice it always seems to get bogged down in endless gotchas and framework shortcomings that need to be addressed before we can get down to getting real work done.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-18 18:37:42 &#43;0000 UTC">2021-08-18 18:37:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A seasoned small Elm team will probably scale to higher complexity heights than a small JS team in my experience. Same goes for Haskell and the like.<p>The freaking out about &quot;oh no I gotta write a small library myself&quot; is absurdly overblown here. Most of the time I see it, it&#x27;s people flipping out at the very sight of there not being something available off-the-shelf. The actual cost is much lower than the panic implies.<p>In general, people see ANY time spent in an FP language to solve FP problems as &quot;a waste of time&quot; but they&#x27;re blind to the wastes of time people treat as &quot;real code&quot; in mainstream languages.<p>But yeah if you&#x27;re a software efficiency bean counter, maybe you won&#x27;t like FP. Fair point.<p>My opinion is the long-term technical &amp; cultural benefits and opportunities pay off. And as a developer, I am happy to not optimize my development velocity to the utmost if it means I don&#x27;t have to waste my brainpower writing imperative code. My mind is in a much better state at the very least :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vlunkr" target="_blank">vlunkr</a>   <span class="timeago" data-date="2021-08-18 19:46:24 &#43;0000 UTC">2021-08-18 19:46:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The freaking out about &quot;oh no I gotta write a small library myself&quot; is absurdly overblown here<p>This isn&#x27;t a good representation of the argument. People don&#x27;t want to write libraries because it&#x27;s more valuable for everyone to spend time writing features using existing libraries, provided there are good libraries available. People aren&#x27;t &quot;freaking out&quot;, they just have deadlines, and you know, other things to do with their lives besides write code that has already been written.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mst" target="_blank">mst</a>   <span class="timeago" data-date="2021-08-18 21:10:47 &#43;0000 UTC">2021-08-18 21:10:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would imagine that it&#x27;s a good representation of their experience of such things, but a poor representation of the experience of such things of the person they&#x27;re replying to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-18 21:19:04 &#43;0000 UTC">2021-08-18 21:19:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nah it&#x27;s a pretty good representation. And acting like time should 100% be spent writing features is shortsighted - sometimes it&#x27;s worth it to pay fixed costs such as filling in a gap of the ecosystem of the language you chose for higher reasons than cranking out business code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adamwk" target="_blank">adamwk</a>   <span class="timeago" data-date="2021-08-18 23:16:58 &#43;0000 UTC">2021-08-18 23:16:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s this higher reason? Isn&#x27;t the point to crank out business code?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-19 03:50:22 &#43;0000 UTC">2021-08-19 03:50:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Crank out&quot; was supposed to imply optimizing the short-term. Ensuring your next sprint has the most output as possible.<p>If you choose an FP language like Haskell, you tend to value things beyond that. Stability, engineering culture, retention, big rate, the ability to extend things for cheap only because you did the hard part of using Haskell to begin with, etc<p>It&#x27;s just throughput vs latency
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kingaillas" target="_blank">kingaillas</a>   <span class="timeago" data-date="2021-08-18 20:11:24 &#43;0000 UTC">2021-08-18 20:11:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;The freaking out about &quot;oh no I gotta write a small library myself&quot; is absurdly overblown here<p>I don&#x27;t think it is.<p>At work, I&#x27;m adding some basic metrics&#x2F;logging functionality to an internal library, to see how it&#x27;s being used. The idea is to log a few parameters and the tech lead suggested using JSON format.<p>No problem right? Well my work environment is quirky and let&#x27;s just say it is hard to use outside libraries for various reasons. It can happen there is just a lengthy IT process to go through... eventually most reasonable requests will be filled (copied&#x2F;mirrored internally, or binaries imported). But there is a delay.<p>This is all besides the point other than to say: I either need to wait a few weeks, or write my own minimal JSON library.<p>How hard can that be? I mean, it&#x27;s just JSON. Well earlier today I was checking reddit and saw an announcement that &quot;JSON for Modern C++ was released&quot; (<a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;cpp&#x2F;comments&#x2F;p69plb&#x2F;json_for_modern_c_3100&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;cpp&#x2F;comments&#x2F;p69plb&#x2F;json_for_modern...</a>). Hey cool, I can see what the library looks like and maybe rip off some of their code while I&#x27;m waiting for a &quot;please mirror this internally&quot; request to finish.<p>This library is thousands of lines long... for JSON. I&#x27;m not disparaging the author or JSON, it looks like an awesome library with great diagnostics, I&#x27;m more trying to point out that even for the SIMPLE format of JSON, a serious library is 10K+ lines. That&#x27;s a hell of a lot of extra work to put on a team when writing a JSON (or whatever) library probably isn&#x27;t the actual work that needs to be done.<p>Elm likely has a JSON library ready to use, but having your seasoned team reinventing the wheel for so many other libraries isn&#x27;t a good use of dev time. I can&#x27;t think of simpler libraries to write than JSON and even that is 10K lines long. Other than the insanity of nodejs and leftpad and libraries like that. If the attitude for every single library needed is &quot;we can write that from scratch&quot; the team is never going to get anywhere.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-18 21:32:12 &#43;0000 UTC">2021-08-18 21:32:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A json serialization (no parsing) library is not going to be 10k+ lines, and it&#x27;s going to be extremely simple.<p>You can define a JSON AST type very simply, and then converting that to wire bytes is also quite trivial. Also simple to test via golden testing (you could even use property testing + shell out to jq to validate the json)<p><a href="https:&#x2F;&#x2F;github.com&#x2F;nikita-volkov&#x2F;jsonifier" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;nikita-volkov&#x2F;jsonifier</a> This one is nowhere near 10k lines - and it is heavily optimized and polished!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=panzagl" target="_blank">panzagl</a>   <span class="timeago" data-date="2021-08-18 21:17:39 &#43;0000 UTC">2021-08-18 21:17:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The answer is ditch JSON for something already supported (XML? CSV?) or homebrew a more minimal serialization format that you can implement in a couple of days.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-08-18 21:24:14 &#43;0000 UTC">2021-08-18 21:24:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But yeah if you&#x27;re a software efficiency bean counter, maybe you won&#x27;t like FP. Fair point.<p>&gt; My opinion is the long-term technical &amp; cultural benefits and opportunities pay off.<p>How, though? These two points contradict each other. Is using FP going to pay off with technical benefits? Or is it just going to reduce your software development efficiency?<p>I enjoy writing FP code and using niche frameworks like Elm for hobby projects, but I specifically avoid them for production work <i>because</i> I&#x27;m familiar with them.<p>I always hear claims that using Elm and niche languages is going to pay off in vague benefits somewhere down the road, but in practice the payoff never really arrives. I think a lot of developers pushing these niche frameworks tend to mentally dismiss the actual costs and overhead incurred by using something like Elm.<p>It&#x27;s tempting to categorize the struggles as &quot;learning&quot; and therefore try to pretend it doesn&#x27;t count as lost time, but at the end of the day if your team has to spend extra cycles doing extra things just to accomplish basic tasks, it&#x27;s a drag on productivity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-18 21:28:25 &#43;0000 UTC">2021-08-18 21:28:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Everything you say is optimizing for the short-term. When it comes to total cost of development, I think FP wins out even if you have to fill ecosystem gaps.<p>But if you can&#x27;t afford for ANY time to not be spent directly on the business, don&#x27;t do FP. Sounds like a pretty brutal way to work.<p>FP has _throughput_ benefits, but may come with _latency_ hiccups while your team climbs the learning curve (which may include writing libraries.)<p>If you have frequent deadlines (or treat 2 week sprints as deadlines), then FP won&#x27;t jive..and you probably have bigger pain points in your company than PL choice lol.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-08-18 21:37:01 &#43;0000 UTC">2021-08-18 21:37:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; When it comes to total cost of development, I think FP wins out even if you have to fill ecosystem gaps.<p>This is the core point I was disagreeing with:<p>In my experience (yes, I have used Elm and I enjoy various functional languages), this payoff never comes. There&#x27;s always something more that needs attention, needs another developer, needs to be refactored because we forgot a use case, and so on.<p>And also in my experience, by the time you&#x27;ve invested the years of effort required to fill in gaps in the public package ecosystem, it&#x27;s time to move on to the next niche language trend. I&#x27;d rather invest our time and energy in mainstream languages that have staying power, where we&#x27;re not obligated to carry large parts of the open-source ecosystem by ourselves.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-18 21:49:23 &#43;0000 UTC">2021-08-18 21:49:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Years, plural?? Maybe Elm is just way less mature, but I was on a team that shipped Haskell software with millions of users in about a year of dev time..and this included huge investments in many missing libraries..all on top of using GHCJS which required investments to the toolchain itself (Elm is definitely more mature now than GHCJS was at the time.)<p>But that was Haskell I guess. It&#x27;s obviously not a &quot;niche language trend&quot; by now, so it was pretty clear it had staying power.<p>Definitely has paid off for me personally. My side projects move a lot faster and more stably now that I cut my teeth in production Haskell. A real free 10xer to my skills personally. And I gained the skills by getting my employer to finance my learning lmao.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-18 22:22:47 &#43;0000 UTC">2021-08-18 22:22:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; And also in my experience, by the time you&#x27;ve invested the years of effort required to fill in gaps in the public package ecosystem, it&#x27;s time to move on to the next niche language trend.<p>This probably depends on the complexity of what you need to do, as well as how well you want to do it.<p>I&#x27;ve seen people writing their own packages and pieces of systems in months, to typically pretty underwhelming results. However when writing code with tests, proper documentation, getting started guides etc., then what you&#x27;re saying does sound way more plausible, especially if scope creep of any sorts is also present.<p>Would you care to comment on what sorts of systems take years to properly develop, though? Because in my experience that could be applicable to very few software projects out there.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=koonsolo" target="_blank">koonsolo</a>   <span class="timeago" data-date="2021-08-19 03:43:50 &#43;0000 UTC">2021-08-19 03:43:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Geniune question: Can you name any complex software that is written in pure functions?<p>This is not a &quot;discussion&quot; question, but a &quot;fill my blind spot&quot; question.<p>I always read how good FP is, and how much better it handles all the complexity. Yet I never see it win from software written with state.<p>Is there any big and&#x2F;or complex sofware written in FP that I am overlooking?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gen220" target="_blank">gen220</a>   <span class="timeago" data-date="2021-08-19 12:08:47 &#43;0000 UTC">2021-08-19 12:08:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Many banks and hedge funds are semi famously using FP (whether that’s OCaml, Haskell, or Scala). JP Morgan has a big Haskell corner. Jane St is the company I most associate with with OCaml. Jet.com is largely built with F#.<p>In business domains with strict audit requirements, it’s a peace of mind thing, to know that “side effects” (aka persistence and the mutation of persisted data) are constrained to a tiny and highly testable corner of your code base.<p>For OSS, the examples that spring to mind for me are RabbitMQ (Erlang) and Pandoc (Haskell).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-19 03:51:25 &#43;0000 UTC">2021-08-19 03:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Various classical optimization problems are just pure functions. The sorts of things used all over the place in industry (supply chain ops for instance)<p>If you want real production software, Starbucks Rewards is&#x2F;was powered entirely by pure Haskell code and made big bucks<p>Software having complex state actually makes Haskell even better than the competition. Because most state has nuanced rules about its state transitions.<p>Haskell definitely has more of a learning curve when it comes to dealing with state, but that curve will guide you towards a ceiling mainstream languages can&#x27;t even approximate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vlunkr" target="_blank">vlunkr</a>   <span class="timeago" data-date="2021-08-18 22:41:03 &#43;0000 UTC">2021-08-18 22:41:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I think FP wins out even if you have to fill ecosystem gaps.<p>What proof of this is there though? People have made the same claims about lots of things: FP, OOP, statically typed languages, dynamically typed languages, LISP variants, etc. The fact is, any of these solutions can work, and you can also write terrible code with any of them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adamwk" target="_blank">adamwk</a>   <span class="timeago" data-date="2021-08-18 23:20:07 &#43;0000 UTC">2021-08-18 23:20:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think it&#x27;s merely small librarys. Last I checked localization in Elm was a pain, and I&#x27;m sure there are numerous other features missing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=razze" target="_blank">razze</a>   <span class="timeago" data-date="2021-08-19 14:21:46 &#43;0000 UTC">2021-08-19 14:21:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check <a href="https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;ChristophP&#x2F;elm-i18next&#x2F;latest&#x2F;" rel="nofollow">https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;ChristophP&#x2F;elm-i18next...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whateveracct" target="_blank">whateveracct</a>   <span class="timeago" data-date="2021-08-19 04:02:32 &#43;0000 UTC">2021-08-19 04:02:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elm&#x27;s library ecosystem is a bit iffy in my experience compared to Haskell or Scala. Those two don&#x27;t really have huge gaps nowadays, and they&#x27;re buoyed by better FFI (Haskell w&#x2F;C, Scala w&#x2F;Java) than Elm&#x27;s draconian JS interop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-18 22:14:45 &#43;0000 UTC">2021-08-18 22:14:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The freaking out about &quot;oh no I gotta write a small library myself&quot; is absurdly overblown here.<p>Maybe in the context of the parent comment this holds true, but in my experience this is like walking on a knife&#x27;s edge.<p>There&#x27;s the very distinct possibility that you&#x27;ll end up with homebrew frameworks and libraries that are overcomplicated, buggy, not commented and exceedingly hard to work with. I&#x27;ve seen that happen many times and it makes me consider not just whether people want to do that, not whether people have the time to do that, but even whether it&#x27;s possible for them to do.<p>In one project people wanted all of their front end components to be custom and as a consequence spent 3x-5x longer building everything, none of their components were Googleable for someone who&#x27;s been onboarded and thus people forgot how they even work after 2 weeks of not editing them and had to rediscover that later. I tried adding a component sandbox&#x2F;playbook to help them provide examples, but no one was interested in doing that when they were already behind the expectations of the business. Picking an off-the-shelf framework would have saved them all of these troubles. Maybe there were actual reasons behind the choice of approaching the project this way, apart from padding their resumes, however after inquiring about those, i didn&#x27;t get a convincing response.<p>In another case, i had to work on a custom web back end framework, which had been developed by another company, in a country the language of which i don&#x27;t speak. Curiously enough, all of their code comments were in this language, there yet again was a lack of any sorts of documentation, the implementation was obtuse, slow and any simple changes to the forms took days to implement properly, even when it would take around 30 minutes in established technologies. Furthermore, the actual framework hadn&#x27;t received any updates in years and therefore i fear to think what sorts of security issues it had. An off-the-shelf framework would have at least been updated and probably would have more decent documentation.<p>In short:<p><pre><code>  - never underestimate the ability of people who lack oversight to make things worse
+  - frameworks and libraries that are used by thousands of people are probably at least decent
+  - there&#x27;s definitely also something to be said about how well tested they are and how known the bugs are
+  - because of the above, popular technologies seem like a pretty safe bet, as does off-the-shelf code appear to be
+  - of course, despite all of the above, it&#x27;s perfectly okay to explore new tech stacks and write your own code, just don&#x27;t half ass it</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aranchelk" target="_blank">aranchelk</a>   <span class="timeago" data-date="2021-08-18 16:26:52 &#43;0000 UTC">2021-08-18 16:26:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is the biggest downfall of Elm projects that I’ve seen in the real world. Teams end up spending half of their time or more solving problems that could have been accomplished quickly with some off the shelf React libraries with numerous tutorials online.<p>This is an important point; I think it applies to varying degrees to any less popular language or framework.  It’s a little worse with Elm because of the restrictions they’ve placed on JS interop. I&#x27;ll add that unless you&#x27;re very familiar with the framework&#x2F;language you&#x27;ll be using, it&#x27;s pretty hard to estimate scope of work; you&#x27;ll just encounter surprises during implementation along the lines of &quot;wow I can&#x27;t be believe they don&#x27;t have a library for x.&quot; On the plus side, since the work of implementing these libraries is very generic with regard to any specific application, it&#x27;s easy to delegate to other employees or contractors.<p>I’m currently working on a large PureScript project. At various times I’ve had to implement my own base libraries and components, but in many cases I’ve just been able to wrap existing JavaScript code. Some of the key libraries I use, which were developed by other community members are wrapped JavaScript libraries. This has been a pretty powerful mitigation strategy.<p>In the case of PureScript, I also have the benefit of reusing a substantial amount of front end code on the server. For me, on this particular project, the benefits of using a language with advanced features has far outweighed the above mentioned costs, but I think you&#x27;ve got to look at each situation differently and do that evaluation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=platz" target="_blank">platz</a>   <span class="timeago" data-date="2021-08-18 18:16:44 &#43;0000 UTC">2021-08-18 18:16:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            curious if you using halogen or react-basic?  I&#x27;ve gone with halogen for a small project and it&#x27;s been fine but sometimes i wonder if react-basic is a better choice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aranchelk" target="_blank">aranchelk</a>   <span class="timeago" data-date="2021-08-18 18:44:30 &#43;0000 UTC">2021-08-18 18:44:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an area where I ventured far from the ordinary and wrote my own application framework. I&#x27;ll eventually open source it and write an article about the process. In short:<p>I was completely sold on the Elm architecture, but I used Haskell too long to be comfortable working without typeclasses, so I went through a couple different elm-like frameworks written for PureScript. I settled on one only to later realize what (I think) people are talking about when they say &quot;Elm doesn&#x27;t compose&quot;, which is not well articulated in that statement. I take it to mean: you can never really deal with stateful components in isolation because they have to work off of a unified global data structure. I developed some new tech that makes different tradeoffs and it got me what I wanted.<p>I knew developing my own framework was going to add a lot of extra work:
+* Writing the framework (not too bad, actually)
+* Writing the reusable components and combinators (exactly what you&#x27;d expect)<p>By far he hardest part has been establishing patterns and best practices working with a new and different architecture, I struggled with that for a while.<p>I&#x27;m a strong believer in the points made in Graham&#x27;s Beating the Averages (actually what brought me to HN) and in my case I&#x27;m establishing a tech stack for my current and future projects, so I believe the framework was a worthwhile investment.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mst" target="_blank">mst</a>   <span class="timeago" data-date="2021-08-18 21:15:09 &#43;0000 UTC">2021-08-18 21:15:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought the idea was that you&#x27;d have layers of actions so you have a top level handler of some sort that would then dispatch a contained-within-the-primnary-action component-scoped action and then pull the new component data back into the global store.<p>(apologies for the lumpy phrasing, insomnia is a pain)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aranchelk" target="_blank">aranchelk</a>   <span class="timeago" data-date="2021-08-18 22:18:23 &#43;0000 UTC">2021-08-18 22:18:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That may be best practice, I&#x27;m not sure. Regardless, you can imagine as a result of that style of coding, any changes to the type of your components state will require at least some changes within the component, changes to one or more of those layers of action handlers, and a change to the initial&#x2F;default instance of your applications model.<p>I&#x27;m absolutely not an authority on Elm architecture, I just know that my experience doing stuff like forms with validation really sucked.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mst" target="_blank">mst</a>   <span class="timeago" data-date="2021-08-19 16:52:16 &#43;0000 UTC">2021-08-19 16:52:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure an optimal implementation of the pattern requires onerous changes but it seems like one of those things where even if I&#x27;m right about said optimal implementation, learning how to get all the details right such that you get to that state is exceedingly non-trivial and the world seems to be divided into people who&#x27;ve already had the relevant &quot;aha&quot; moments and for whom it&#x27;s now Just Obvious ... and people like us, who know just enough to blow both feet off ;)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Silhouette" target="_blank">Silhouette</a>   <span class="timeago" data-date="2021-08-18 18:15:15 &#43;0000 UTC">2021-08-18 18:15:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>I&#x27;ll add that unless you&#x27;re very familiar with the framework&#x2F;language you&#x27;ll be using, it&#x27;s pretty hard to estimate scope of work</i><p>I think you&#x27;ve just defined a pretty good benchmark for when it&#x27;s sensible to consider a less popular choice. Are you familiar enough with it to be confident of coming out ahead by using it? Perhaps you have a backup plan like the interop you mentioned if some functionality is missing. Perhaps the tool is so much more productive in general that you are reasonably confident any extra development work to fill in the gaps will be outweighed by the overall benefits. But there should be <i>some</i> clear reason you think the risk is justified.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dimitrios1" target="_blank">dimitrios1</a>   <span class="timeago" data-date="2021-08-18 15:56:53 &#43;0000 UTC">2021-08-18 15:56:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but it’s not ideal if you’re trying to run a lean team that ships products quickly.<p>Good. The longer I do this, the longer I realize that unless your in a race-to-the-bottom industry (something like vying for eye balls to increase ad spend), then this is categorically a bad thing. I would prefer the quality of engineering required in knowing how to do some of these things yourselves.<p>Take your time. Understand what you are doing. Some of the world class technologies we all know and use daily use minimal dependencies.<p>And with more malicious code entering more package repositories, it might be apt advice more than ever today.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjlegato" target="_blank">pjlegato</a>   <span class="timeago" data-date="2021-08-18 17:00:35 &#43;0000 UTC">2021-08-18 17:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quality engineering must always be balanced against the reality of finite budgets. Sure, lots of amazing engineering can be achieved in theory, _given infinite funding_.<p>That never happens in the real world. One always has limited time to produce a viable product. There is always some extrinsic constraint to how much time can be spent taking your time and understanding what you&#x27;re doing.<p>Moreover, if you are operating in any commercially viable product space, you&#x27;re always competing against other firms for finite market share. If it takes x years to ponder and understand how to build and ship a masterful feat of engineering, while some other company ships a &quot;sort-of-works&quot; product with bugs and engineering flaws in &lt;&lt;&lt; x years, the other company will usually win in the marketplace.<p>Your company usually goes bankrupt, and all the engineers will complain at their next jobs about what a wonderfully designed engineering system they were building, and how awful it is that nobody appreciates such things these days.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=0xFACEFEED" target="_blank">0xFACEFEED</a>   <span class="timeago" data-date="2021-08-18 18:09:17 &#43;0000 UTC">2021-08-18 18:09:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Quality engineering must always be balanced against the reality of finite budgets. Sure, lots of amazing engineering can be achieved in theory, _given infinite funding_.<p>While this is obviously true, I don&#x27;t think it depicts the actual decision making process that leads to messy codebases and crappy products. In my experience lack of experience and&#x2F;or laziness play a big part.<p>A competent tech lead that&#x27;s passionate about quality AND is willing to be annoying for the greater good makes an enormous difference. I&#x27;m talking multiple orders of magnitude difference.<p>It&#x27;s the difference between spinning up a k8s cluster + service mesh vs tiny single server vps with basic failover. The former is thousands of hours of dev time across multiple disciplines while the latter a seasoned engineer can handle by themselves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-08-18 18:14:24 &#43;0000 UTC">2021-08-18 18:14:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Your company usually goes bankrupt, and all the engineers will complain at their next jobs about what a wonderfully designed engineering system they were building, and how awful it is that nobody appreciates such things these days.<p>This is precisely why I try to interview tech leads about what they <i>shipped</i> rather than what they <i>built</i>. There are a lot of otherwise very talented developers out there who will spend years playing around in your codebase, writing beautiful code, but not actually shipping anything useful. Replacing them with shipping-focused engineers, even if they&#x27;re not as technically competent, usually results in big productivity boosts.<p>This isn&#x27;t a popular opinion among developer communities, but it&#x27;s a common theme in the management forums I&#x27;m part of. It&#x27;s important to have fun and budget some time for things like open-source contributions and library building, but the top priority must always be on shipping product.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Silhouette" target="_blank">Silhouette</a>   <span class="timeago" data-date="2021-08-18 17:59:11 &#43;0000 UTC">2021-08-18 17:59:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is the popular wisdom but I question how universally applicable it is. We all know that having the best technology doesn&#x27;t necessarily mean you win in a commercial market and we all know that being first mover can be an advantage, but those observations don&#x27;t tell us what will be successful in the long term.<p>How often does substandard technology and technical debt become a drag on a business not long after that first move, allowing someone else to overtake because the poorly built system couldn&#x27;t scale to production levels or wasn&#x27;t adaptable enough for changing requirements or failed so often that the early users drifted away? How often do we see developers advocating shortcuts and showing limited understanding of basic software development or computer science ideas, only to see the product they work on being rewritten within a year or two, or the whole team shut down?<p>You can try to be fastest always. You can often succeed, at first, if you take enough shortcuts. But you can&#x27;t sustain that pace without enough quality in your people and your code. Planning to throw each implementation away and rewrite with more resources every year or two is a very unicorn-like strategy. It reminds me of VCs whose strategy is to invest liberally, who are fully aware that most of those investments won&#x27;t work out but they&#x27;re hoping for one or two in each batch to become the next big hits.<p>Real engineering isn&#x27;t done in a vacuum and its goal isn&#x27;t perfection. Real engineering takes issues like costs and timescales and staffing into account and aims to find a solution that is good enough on all counts. But it still has to be good enough. Producing junk but quickly and cheaply is an effective strategy until it&#x27;s not and the success of any product using that strategy comes down to little more than the luck of the draw.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjlegato" target="_blank">pjlegato</a>   <span class="timeago" data-date="2021-08-18 18:11:52 &#43;0000 UTC">2021-08-18 18:11:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I totally agree. Engineering should be the best it can be, within the constraints of the resources available.<p>My post was addressing the common case where an engineer seems to ignore the &#x27;resource constraints&#x27; side of the equation altogether.<p>Balancing these factors is more art than science. No two projects have the same set of resource constraints, nor the same set of engineering challenges. Luck is a big factor. The solution depends heavily on the exact details of each particular case.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JamesSwift" target="_blank">JamesSwift</a>   <span class="timeago" data-date="2021-08-18 18:52:21 &#43;0000 UTC">2021-08-18 18:52:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            See also: engineers who think that engineering considerations trump all other business considerations. You need to know when it makes holistic sense to rewrite, or ship a hack. There are a lot more people at the decision-making table than just engineering.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Silhouette" target="_blank">Silhouette</a>   <span class="timeago" data-date="2021-08-18 19:09:26 &#43;0000 UTC">2021-08-18 19:09:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is certainly true but somehow I suspect under-engineering is a more frequent problem in our industry than over-engineering.<p>IME retrospectives rarely sound like &quot;We hired a team of strong developers, they did a solid job, but then the business failed as a result&quot;. The kind of developers who are strong enough to do a solid job are probably also experienced enough to recognise the other considerations in play and adapt if necessary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PragmaticPulp" target="_blank">PragmaticPulp</a>   <span class="timeago" data-date="2021-08-18 17:05:41 &#43;0000 UTC">2021-08-18 17:05:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I would prefer the quality of engineering required in knowing how to do some of these things yourselves.<p>Realistically, a couple of engineers writing a library from scratch isn’t going to be higher quality than adopting a mainstream, battle-tested library that accomplishes the same thing.<p>Writing your own implementations of everything can be fun, but it’s not possible to compete with all of the iterations and reviews that a mainstream library collects over time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aszen" target="_blank">aszen</a>   <span class="timeago" data-date="2021-08-18 18:35:15 &#43;0000 UTC">2021-08-18 18:35:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a common argument i have seen devs make when evaluating building from scratch vs adoption, here&#x27;s what building from scratch gives you, a leaner more understandable piece of code that does what you want and nothing more.<p>An open source library is necessarily generic and has to be battle tested to make sure it fulfills all use cases, while the library you write only has to cover your own needs that makes it easier to understand, extend and debug
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xupybd" target="_blank">xupybd</a>   <span class="timeago" data-date="2021-08-19 03:05:50 &#43;0000 UTC">2021-08-19 03:05:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not to mention when the language you are using updates and you have to update the code. If the 3rd party library is no longer maintained you have to upgrade the library yourself. 
+It&#x27;s much nicer if it&#x27;s a small bit of code you wrote with only the use cases you need.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pkolaczk" target="_blank">pkolaczk</a>   <span class="timeago" data-date="2021-08-18 19:31:00 &#43;0000 UTC">2021-08-18 19:31:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Often you don&#x27;t need to reimplement 100% of functionality of a library but just a 1% of it. Then, a talented team can usually make that 1% higher quality just because they are not limited by the complexity and tradeoffs added by the remaining 99%.<p>Also many &quot;battle-tested&quot; libraries are not really very high quality - they all have bugs, unnecessary complexity and technical debt. Higher degree of testing they get is often offset by the higher number of feature requests, and more features means more complexity and more bugs.<p>And in reality I saw it many times when a niche library written by a  solo developer is of a higher quality than a super popular behemoth written by hundreds of developers over 10 years.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dimitrios1" target="_blank">dimitrios1</a>   <span class="timeago" data-date="2021-08-18 18:07:58 &#43;0000 UTC">2021-08-18 18:07:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Once you detach from &quot;I must use a library for every thing&quot; land, you begin to realize you don&#x27;t need the overwhelming majority of them. Which results in writing cleaner, simpler, more focused code, with less of a surface area for bugs. It&#x27;s a whole mindset, tbh.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ModernMech" target="_blank">ModernMech</a>   <span class="timeago" data-date="2021-08-18 18:26:23 &#43;0000 UTC">2021-08-18 18:26:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I appreciate libraries for:<p>- ubiquitous things, like data structures<p>- hard to get right things, like time<p>- implementations of specs, like Unicode<p>- hardware interfaces, like CUDA<p>For everything else, I&#x27;ll take the above and roll my own solution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=alephu5" target="_blank">alephu5</a>   <span class="timeago" data-date="2021-08-18 22:54:47 &#43;0000 UTC">2021-08-18 22:54:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about something tedious and ubiquitous, such as swapping between camel and snake case?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PhineasRex" target="_blank">PhineasRex</a>   <span class="timeago" data-date="2021-08-18 23:40:23 &#43;0000 UTC">2021-08-18 23:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly the case where you <i>don&#x27;t</i> need a library. This is a single function (or two) and you can easily translate an existing code example into the language you&#x27;re using in a few minutes and be done with it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dimitrios1" target="_blank">dimitrios1</a>   <span class="timeago" data-date="2021-08-18 19:58:50 &#43;0000 UTC">2021-08-18 19:58:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            except for the last one, all of those should be part of the language you are using, and well thought out + researched. I guess I should have been more specific: third party dependencies.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scotttrinh" target="_blank">scotttrinh</a>   <span class="timeago" data-date="2021-08-18 20:17:44 &#43;0000 UTC">2021-08-18 20:17:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this specific case (Elm vs. JavaScript) We&#x27;re talking about JavaScript here, so:<p>&gt; - ubiquitous things, like data structures<p>There are a few basic data structures in JS, but almost everything else is in user-land.<p>&gt; - hard to get right things, like time<p>Date is a notoriously bad API in JavaScript.<p>- implementations of specs, like Unicode<p>We just get a String type in JavaScript which is UTF-16, so...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dimitrios1" target="_blank">dimitrios1</a>   <span class="timeago" data-date="2021-08-19 13:57:23 &#43;0000 UTC">2021-08-19 13:57:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We&#x27;re talking about JavaScript here, so:<p>Well, no, we aren&#x27;t. We are talking about the Elm language, which compiles to JavaScript.<p>There are also other excellent languages that target JavaScript that have these things.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-08-18 18:12:45 &#43;0000 UTC">2021-08-18 18:12:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But...!<p>I&#x27;ve also seen many developers for years adopting mainstream libraries and frameworks wrongly.<p>The atrocities I&#x27;ve seen built with Ember, Rails, Angular, and the like.<p>Often these people built their own (albeit less powerful) libraries and could work much better with them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-18 22:34:25 &#43;0000 UTC">2021-08-18 22:34:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Often these people built their own (albeit less powerful) libraries and could work much better with them.<p>In my experience, if someone fails at using mainstream libraries, they will also likely fail in creating their own, at least if it is to later be used and maintained by anyone else successfully.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-08-18 22:54:16 &#43;0000 UTC">2021-08-18 22:54:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know about that.<p>The problem with mainstream libraries is to grasp the mental model of their creators.<p>I met a bunch of developers who understood software design patterns as they are taught in the GoF book, but couldn&#x27;t see them when applied in a framework&#x2F;library. Often this was because the design patterns weren&#x27;t used 1:1 or framework creators simply used the wrong name for a pattern.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aszen" target="_blank">aszen</a>   <span class="timeago" data-date="2021-08-18 18:44:21 &#43;0000 UTC">2021-08-18 18:44:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            as an example i made a firebase auth client in elm using their api and json decoders in elm. honestly i feel it&#x27;s much better than the official js client for the app i was building because it&#x27;s so focused, minimal and exactly suited to my app&#x27;s architecture
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Silhouette" target="_blank">Silhouette</a>   <span class="timeago" data-date="2021-08-18 18:06:19 &#43;0000 UTC">2021-08-18 18:06:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Realistically, a couple of engineers writing a library from scratch isn’t going to be higher quality than adopting a mainstream, battle-tested library that accomplishes the same thing.</i><p>That&#x27;s true but the vast majority of what you find on NPM is not mainstream, battle-tested libraries.<p>Libraries that do clear that bar tend to be widely useful but that suggests generality you won&#x27;t necessarily need for any single use case. A couple of good engineers might struggle to beat a well-established open source library at everything it does, but that is rarely what they are trying to achieve. They just need something that is better for their own specific needs at that time, which might be a useful and realistic target.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mwcampbell" target="_blank">mwcampbell</a>   <span class="timeago" data-date="2021-08-18 18:18:36 &#43;0000 UTC">2021-08-18 18:18:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Good. The longer I do this, the longer I realize that unless your in a race-to-the-bottom industry  (something like vying for eye balls to increase ad spend), then this is categorically a bad thing.<p>It&#x27;s not that simple. I realize this may be uncommon, but it&#x27;s possible to work on a product that is truly worthwhile, that improves peoples&#x27; lives, and whose target users urgently need a solution to the problem you&#x27;re solving. I recently developed a product that I believe meets this description (I won&#x27;t plug it here). I chose Elixir for the web application. While I think that&#x27;s a defensible choice, given the real-time nature of the application, I sometimes wonder if I would have been better off choosing a more mainstream language -- one with an official Stripe client library, for one thing. Any day I spent unnecessarily reimplementing something because I chose Elixir is a day that the target users couldn&#x27;t benefit from my product. And, bearing that in mind, I should get back to work.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aszen" target="_blank">aszen</a>   <span class="timeago" data-date="2021-08-18 18:32:01 &#43;0000 UTC">2021-08-18 18:32:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a more mainstream language, while it may have a few Stripe client libraries but if your true use case of being real time isn&#x27;t full filled then it makes no sense to choose them. A working stripe client takes at most a day to write, compared to years that can go in changing the architecture of your application
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=WJW" target="_blank">WJW</a>   <span class="timeago" data-date="2021-08-18 20:44:57 &#43;0000 UTC">2021-08-18 20:44:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you have enough talent that a good quality Stripe integration takes only a day to write, bending Rails or Laravel to serve websockets is not going to take more than a few days to write either. The true pain of non-standard languages is not in having to implement any specific dependency yourself but in having to reimplement a few dozen trivial-but-not-easy things yourself. It&#x27;s a death by a hundred small cuts.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aszen" target="_blank">aszen</a>   <span class="timeago" data-date="2021-08-19 10:51:39 &#43;0000 UTC">2021-08-19 10:51:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On the one hand u r writing a wrapper over an already well specified rest api of stripe and on the other hand u need to modify a programming language runtime to be faster and reliable for real time operations. I&#x27;m not sure these tasks are really comparable in any way.<p>Choosing non-popular languages is a trade off yes but not as much as people think especially if you have a good team willing to learn them.<p>There are also benefits apart from technical ones like better job retention and attracting finer talent without having to filter hundreds of resumes. I will say if your business is made around hiring and making anyone work of the shelf then it&#x27;s a bad idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xupybd" target="_blank">xupybd</a>   <span class="timeago" data-date="2021-08-19 03:03:23 &#43;0000 UTC">2021-08-19 03:03:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve worked on, and am working on projects that are dying because the libraries that were added are now out of date.<p>It gets really hard to maintain after 10 - 15 years. I wish we had rolled our own libraries for some of the simpler functions. Even in PHP this would have made life so much better.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 16:01:41 &#43;0000 UTC">2021-08-18 16:01:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lhorie" target="_blank">lhorie</a>   <span class="timeago" data-date="2021-08-18 19:39:36 &#43;0000 UTC">2021-08-18 19:39:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Teams end up spending half of their time or more solving problems that could have been accomplished quickly with some off the shelf React libraries with numerous tutorials online.<p>I dunno, having seen both sides, there are pros and cons to each.<p>Teams that reach for libs quickly often think in terms of libraries instead of solutions (one recent example was some folks who were asking for my advice on some over-engineered client-side PDF generation thing, and me suggesting `window.print()` as a solution, considering this was for an internal tool and you effectively want print stylesheets anyways), and often use them as crutches due to a self-fulfilling cycle of &quot;I don&#x27;t know how to do X, let&#x27;s use a library so I never need to find out&quot; (and then pulling in a huge lib to do the job of a literal one-liner regex - `uuid.validate()`, looking at you). In my experience, they also often end up buried by their own complexity due to gluing too many things together. But at the same time, it&#x27;s hard to argue with the ease with which one can plop a modal dialog or a calendar or a collapsible table in a React app.<p>I find that teams working with more exotic technologies tend to be more creative with solutions (e.g. &quot;oh there&#x27;s no zoomable map UI lib bindings, so let&#x27;s ask ourselves, do we <i>really</i> need a map library for that contact us page or is a static jpg good enough?&quot;) and a have a deeper appreciation for how hard things are to implement. But conversely, UX can suffer from too much &quot;creativity&quot;. For example, if care is not taken w&#x2F; accessibility concerns for some UI element. Or, as you said, things just take longer to ship because people need to reinvent wheels.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theobeers" target="_blank">theobeers</a>   <span class="timeago" data-date="2021-08-18 16:17:44 &#43;0000 UTC">2021-08-18 16:17:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the opening section of the blog post, I wondered why an incremental move to TypeScript wouldn’t have worked for them. The rest seems to be all about Elm (I haven’t read it thoroughly), but I feel there’s a disconnect between the problem they started with and their choice to dive into a wholly new ecosystem.<p>edit: Ah, hold on; I just got to where they comment on this. “TypeScript, which adds optional static typing to JavaScript and is probably one of the best things to happen to JavaScript, can partially mitigate the issues with the JavaScript dynamic type system. But being a superset of JavaScript it needs to compromise on elegance and simplicity. It also has several ‘blind spots.’” etc. I don’t know that I’m 100% convinced.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wk_end" target="_blank">wk_end</a>   <span class="timeago" data-date="2021-08-18 20:34:59 &#43;0000 UTC">2021-08-18 20:34:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To play Devil&#x27;s (Elm&#x27;s?) Advocate here: sometimes I wonder if the TypeScript promise of incrementally adding types to an existing JS code base is wishful thinking.<p>I&#x27;m at a company that&#x27;s transitioning to TypeScript, and the reality is that you can&#x27;t just flip a switch and have a well-typed codebase: if we just turn `strict` on, `tsc` gives us thousands and thousands of errors. And as we&#x27;ve gone through trying to annotate things, it&#x27;s clear that in order to get various components to a state where they&#x27;re properly type-safe, we&#x27;ll need to almost completely rewrite them.<p>Compared to Rakuten, our codebase isn&#x27;t even that huge or legacy - it&#x27;s often very poorly written, but it&#x27;s less than 50K lines and less than a couple of years old. No doubt the situation for Rakuten would be even worse; I&#x27;m sure huge swaths of their code would need to be trashed anyway.<p>If TypeScript is ultimately going to force you to rewrite - and still leave you with a less-robust solution - I could see why starting with a clean-slate with Elm would be appealing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cardanome" target="_blank">cardanome</a>   <span class="timeago" data-date="2021-08-18 16:59:55 &#43;0000 UTC">2021-08-18 16:59:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            TypeScript has a slow compiler and horrendous error messages  (especially compared to the Elm). Plus it is far away from the no runtime exception guarantees that Elm offers by design.<p>Also TS is just part of a potential solution while Elm comes with all batteries included. You still have to set up your code formater, liner, decide on a framework, state management library and so on and so on. With Elm, you just use elm-format. No arguing about code style, not arguing about how structure your code. There is only way to do it. It is not only a language but a framework. You get everything you need out need out of the box.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leshow" target="_blank">leshow</a>   <span class="timeago" data-date="2021-08-19 14:25:11 &#43;0000 UTC">2021-08-19 14:25:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you use something like nextjs and strict compiler options for TS a lot of these concerns go away.<p>&gt; You get everything you need out need out of the box.<p>This is specious. There&#x27;s lots of comments about how you don&#x27;t get everything out of the box and for the parts that are missing it&#x27;s a pain. Perhaps your particular use cases are covered, that&#x27;s great.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toastal" target="_blank">toastal</a>   <span class="timeago" data-date="2021-08-18 17:19:25 &#43;0000 UTC">2021-08-18 17:19:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elm also has a sound type system and no side effects because it doesn&#x27;t need to be compatible with vanilla JavaScript
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mjaniczek" target="_blank">mjaniczek</a>   <span class="timeago" data-date="2021-08-18 20:05:22 &#43;0000 UTC">2021-08-18 20:05:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Elm is fun, but I wouldn’t use it unless I could afford to hire a relatively huge team to absorb all of the additional complexity and detours that go into building an Elm app. There’s a constant promise of Elm being faster and easier to write for various reasons, but in practice it always seems to get bogged down in endless gotchas and framework shortcomings that need to be addressed before we can get down to getting real work done.<p>Is this your experience writing Elm apps in production? I am writing large Elm apps in production and I&#x27;m having very different experience to what you just described.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aszen" target="_blank">aszen</a>   <span class="timeago" data-date="2021-08-18 18:42:31 &#43;0000 UTC">2021-08-18 18:42:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elm is build on top of solid foundations, and has a good standard library unlike js so it&#x27;s much easier to reinvent things as you say.
+One of the core ways to ship products quickly is to ensure you don&#x27;t break things often, and elm lets u do that provided one learns it well enough
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=folex" target="_blank">folex</a>   <span class="timeago" data-date="2021-08-18 15:37:00 &#43;0000 UTC">2021-08-18 15:37:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elm is awesome, its compiler is awesome, but its ecosystem is kinda stalling, isn&#x27;t it?<p>I mean, a lot of libraries aren&#x27;t updated to the last lang version, debugging JS-Elm interactions been a real challenge for years, yadda yadda. Overall I&#x27;d say Elm ecosystem doesn&#x27;t receive enough attention to survive.<p>I&#x27;m not complaining, I&#x27;m just sad about that and kinda surprised I didn&#x27;t found a mention of that in the OP article.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaeming" target="_blank">jaeming</a>   <span class="timeago" data-date="2021-08-18 15:59:32 &#43;0000 UTC">2021-08-18 15:59:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As I understand it, there was a rift in the community over the leadership&#x27;s tone in messaging and communication. Some Developers also felt like they could not contribute in a meaningful way or have constructive discussion with maintainers.<p>See posts like these for more details and comments:<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16510267" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16510267</a><p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22821447" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22821447</a><p>There are also several great alternatives now. F# with Fable and Elmish for example: <a href="https:&#x2F;&#x2F;zaid-ajaj.github.io&#x2F;the-elmish-book&#x2F;#&#x2F;" rel="nofollow">https:&#x2F;&#x2F;zaid-ajaj.github.io&#x2F;the-elmish-book&#x2F;#&#x2F;</a><p>And Bucklescript TEA with Ocaml or Reason: <a href="https:&#x2F;&#x2F;github.com&#x2F;OvermindDL1&#x2F;bucklescript-tea" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;OvermindDL1&#x2F;bucklescript-tea</a><p>Some others have also gone on to develop new languages taking inspiration from Elm: <a href="https:&#x2F;&#x2F;www.mint-lang.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.mint-lang.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 16:10:12 &#43;0000 UTC">2021-08-18 16:10:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Honestly I think the main reason for this perception is that people in the Elm community have gotten increasingly tired of correcting inaccuracies people like to post about Elm on Hacker News.<p>I spent a bunch of time doing that in the past, and eventually stopped because I felt like Sisyphus. The same people would crop up on the next thread repeating the same things anyway. Of course if the claims go unchallenged, it leads to the perception that they&#x27;re accurate...but that doesn&#x27;t make engaging with them  any more enjoyable a way to spend one&#x27;s free time.<p>If you want to check the health of the Elm community, visit Elm Slack and ask in the #beginners channel how people feel about it. It takes about the same amount of time as posting a HN comment, but it gives a very different perspective than the one you&#x27;d get if your main source of Elm information was Hacker News comments! :)<p><a href="http:&#x2F;&#x2F;elmlang.herokuapp.com&#x2F;" rel="nofollow">http:&#x2F;&#x2F;elmlang.herokuapp.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Latty" target="_blank">Latty</a>   <span class="timeago" data-date="2021-08-19 16:51:24 &#43;0000 UTC">2021-08-19 16:51:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m a fan of Elm, and I&#x27;m using it in production, but I think this is very much a case of using some flaws in the way people see Elm to ignore some correct criticism of it.<p>I&#x27;ve tried to push for fixing the use of CSS Custom Properties in Elm a couple of times (<a href="https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;t&#x2F;css-custom-properties&#x2F;5554" rel="nofollow">https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;t&#x2F;css-custom-properties&#x2F;5554</a>) and it really felt like talking to a wall.<p>The community absolutely suffers whenever anyone comes across one of these issues where there just isn&#x27;t a solution, and more than that, no communication at all. It implies the project is dead.<p>I accept that Elm is functionally just stalled and won&#x27;t see any changes until some arbitrary point in the future, I can live with that. I don&#x27;t think the project communicates it&#x27;s state and direction well though, and that leads people to disappointment and the posts you see.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=superdisk" target="_blank">superdisk</a>   <span class="timeago" data-date="2021-08-18 16:45:31 &#43;0000 UTC">2021-08-18 16:45:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Speaking as someone who liked Elm for a while, then abandoned it, I will say that the biggest problem with the language is absolutely its leadership. Development moves at an absolutely glacial pace and basically takes place with no transparency at all. I would argue that it&#x27;s more like a &quot;source available&quot; project than an &quot;open source&quot; one since the core dev team is so exclusionary. Most planning takes place inside Evan&#x27;s head, leaving others to just speculate as to what&#x27;s going to happen to the language.<p>On top of this, the community is run like a dictatorship. Dissent is silenced and banned, and faux positivity is spread far and wide. I got sick of it and was banned from the Elm subreddit after I expressed my frustration. That&#x27;s pretty much when I gave up on the language, years ago,  on version 0.18 (fwiw, they&#x27;re on version 0.19 now, that&#x27;s how slow updates are)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 17:02:41 &#43;0000 UTC">2021-08-18 17:02:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an example of  the type of post I was referring to being tired of correcting.<p>I don&#x27;t use Reddit anymore, but if memory serves there have been about 5 people total banned from the aforementioned Elm subreddit, which is fewer than 1 ban per year it&#x27;s existed.<p>I invite anyone to evalute the accuracy of &quot;Dissent is silenced and banned&quot; with that data point in mind, and to evaluate the accuracy of the other above claims accordingly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zoul" target="_blank">zoul</a>   <span class="timeago" data-date="2021-08-18 17:45:03 &#43;0000 UTC">2021-08-18 17:45:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FWIW, I have the same experience as the parent poster. I used to love Elm, evangelized the architecture, wanted to write Elm professionally. I was constantly bumping into things that were not finished or working, but didn’t really mind. But I also often encountered cases where the leadership team was saying “we don’t want this discussion here, thank you very much”, even if the discussion was perfectly legitimate, friendly, technical and related to some sorely needed feature or bugfix. I constantly felt unwelcome, like I was trespassing on someone’s lawn. I didn’t want to base my work on that. Eventually I just shrugged and left.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 17:57:43 &#43;0000 UTC">2021-08-18 17:57:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Totally fair! I&#x27;m sorry to hear you had that experience, although I hope maybe you&#x27;ll someday consider giving it another chance in the future. :)<p>My personal experience has been different, but I upvoted this because I really appreciated that you shared your own experience without overgeneralizing it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cultofmetatron" target="_blank">cultofmetatron</a>   <span class="timeago" data-date="2021-08-18 17:25:33 &#43;0000 UTC">2021-08-18 17:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting food for thought. I bought your book awhile back and was 2 chapters in before reading about the aforementioned &quot;Dissent is silenced and banned&quot; issues which led me to abandon continuing at the time. Maybe I&#x27;ll jump back into it.<p>I&#x27;ve not heard of such misinformation being spread about other languages. Id love to hear your side on why Elm itself seems to attract such ire if its inaccurate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 17:45:09 &#43;0000 UTC">2021-08-18 17:45:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a great question!<p>I think there&#x27;s more than one factor, but the biggest one comes down to setting expectations, especially in the early days.<p>Elm does a lot of things differently than other languages, and while I think that overall those differences have been instrumental to its success, especially early on it sometimes wasn&#x27;t clearly enough communicated when &quot;this is temporarily different because it&#x27;s a WIP; you can expect it to be more like what you&#x27;re used to in the future&quot; versus &quot;this is different by design, so expect it to stay different or even to become more different.&quot;<p>Examples of this include typeclasses (a lot of people coming to Elm from a Haskell background assumed Elm would add them as a matter of course), JS interop (by design, it&#x27;s not a traditional FFI, although there was an unintended backdoor that kind of worked like one; when that backdoor was finally removed, after much communication that in retrospect should have happened at the outset, some of those who had been relying on it were understandably upset), how the project is run (more like Clojure than like JavaScript), and what the release schedule looks like (batching large projects rather than more frequent smaller releases).<p>I think things are a lot clearer today, but for some it&#x27;s unfortunately too late to make a difference.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gaereth" target="_blank">gaereth</a>   <span class="timeago" data-date="2021-08-18 20:03:29 &#43;0000 UTC">2021-08-18 20:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing is that it wasn’t communicated that well, but other (and that’s what made me feel really uncomfortable) is that it felt like „This feature is not allowed anymore - except for some dudes, they’re cool enough and can use it” (e.g. native modules, operators). Either keep or drop feature
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=G4BB3R" target="_blank">G4BB3R</a>   <span class="timeago" data-date="2021-08-18 20:52:09 &#43;0000 UTC">2021-08-18 20:52:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Kernel code and custom operators are only allowed under elm&#x2F; and elm-explorations&#x2F;, so only 7 core packages can use them. The core developers cannot use those features in projects like everyone else.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hashbig" target="_blank">hashbig</a>   <span class="timeago" data-date="2021-08-18 22:41:57 &#43;0000 UTC">2021-08-18 22:41:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And who can contribute to `elm` and `elm-explorations`? The 7 cool dudes.<p>The Elm contributor circle is a clique that you literally have to be a strong contact with one of the contributors to get into it. It goes against everything open source stands for.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slgeorge" target="_blank">slgeorge</a>   <span class="timeago" data-date="2021-08-19 07:53:15 &#43;0000 UTC">2021-08-19 07:53:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It goes against everything open source stands for<p>Sorry, that&#x27;s not correct. It goes against your opinion of what open source should stands for, and many projects run in a way where everyone can contribute. But, it&#x27;s not the only way.<p>The license determines how the code comes, that&#x27;s the only rule. There&#x27;s no rules about how a community must run. It&#x27;s for the code creator (maintainer) to determine how or even IF they want a community of contributors. There&#x27;s lots of ways of doing open source!<p>And saying it&#x27;s not &quot;open source&#x27; if you don&#x27;t do X outside the license is just a No true Scotsman.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ghayes" target="_blank">ghayes</a>   <span class="timeago" data-date="2021-08-19 01:10:46 &#43;0000 UTC">2021-08-19 01:10:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem is there are some reasonable features that cannot be implemented with the current ports system that _should_ fit into the expected design. Specifically, I feel you should be able to replicate the `Http` module using ports or some other available system. However, you cannot properly dispatch a task and then tie together the result with a curried `Msg`, as you might expect or hope [unless you store a complex state object in your model]. These types of issues are the frustrations that, I believe, cause some discontent in the community. I feel more people understand why you should not, per se, make random FFI calls in the middle of pure code (e.g. since it would break dead code elimination and require evaluation order guarantees), but other restrictions seem arbitrary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gaereth" target="_blank">gaereth</a>   <span class="timeago" data-date="2021-08-19 08:45:53 &#43;0000 UTC">2021-08-19 08:45:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The thing I found unsettling wasn’t that something was disabled (fair design decission), but the mindset that considers some features harmful , but is happy enough to use it in its own „special case projects&#x2F;packages”. It doesn’t really matter for how many packages its available, since it can be changed on a whim. I can only speak for myself, but I found it unfair and patronizing
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=razze" target="_blank">razze</a>   <span class="timeago" data-date="2021-08-19 14:39:28 &#43;0000 UTC">2021-08-19 14:39:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think that&#x27;s fair. If elm ever wants to replace js it only needs to rewrite the kernel modules, they govern. Otherwise the whole ecosystem would break in that case and yes, that would be a harmful feature.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 01:28:31 &#43;0000 UTC">2021-08-19 01:28:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:36:36 &#43;0000 UTC">2021-08-18 18:36:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaeming" target="_blank">jaeming</a>   <span class="timeago" data-date="2021-08-18 18:58:19 &#43;0000 UTC">2021-08-18 18:58:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a good point and maybe I shouldn&#x27;t have re-posted these stories in my comment as I have not personally witnessed this behavior. I just know that when I started learning Elm initially (Nice Frontend master courses btw) I ran into this sentiment a good bit on reddit and hackernews so thought there was probably something to it if it was being echoed by so many.<p>I&#x27;ll add a reply to my comment to make it clear this is hearsay and doesn&#x27;t necessarily reflect the truth.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 19:00:55 &#43;0000 UTC">2021-08-18 19:00:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you, that&#x27;s very considerate of you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jaeming" target="_blank">jaeming</a>   <span class="timeago" data-date="2021-08-18 19:05:19 &#43;0000 UTC">2021-08-18 19:05:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            After considering the way I phrased this comment above, I want to clarify that I never personally observed or witnessed this kind of behavior myself. My own dealings in the Elm community have been almost entirely positive. I had heard a lot of these criticisms from comments on hacker news or reddit and realize now they mostly resemble hearsay or people like myself repeating what they heard from others resulting in a sort of echo chamber. I apologize for adding to that echo chamber.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xupybd" target="_blank">xupybd</a>   <span class="timeago" data-date="2021-08-19 03:11:25 &#43;0000 UTC">2021-08-19 03:11:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            F# solves many of these problems with it&#x27;s ability to pull in C# libraries. When looking for a functional language to learn I settled on F# and am loving it so far. I&#x27;m not sure if I&#x27;d ever use it in production as it is still very niche.<p>What Evan is doing with Elm is awesome, he has a small closed set of features to make a language that is aimed at doing one thing. He has very tight control to make sure there is zero cruft in the language. It&#x27;s an amazing project. The cost is that it&#x27;s very hard for outsiders to have any input into the language. So the ecosystem will never take off.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brainbag" target="_blank">brainbag</a>   <span class="timeago" data-date="2021-08-18 16:49:21 &#43;0000 UTC">2021-08-18 16:49:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also Mint at <a href="https:&#x2F;&#x2F;mint-lang.com" rel="nofollow">https:&#x2F;&#x2F;mint-lang.com</a>, which is heavily inspired by Elm (and better, IMO). The open source aspect is also the opposite of Elm - the community is very friendly, the developers are responsive and positive, and PRs are encouraged.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mechelephant" target="_blank">mechelephant</a>   <span class="timeago" data-date="2021-08-18 15:55:49 &#43;0000 UTC">2021-08-18 15:55:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would argue the opposite!  The elm slack is very active with people who frequently contribute to the ecosystem. I don&#x27;t think the &quot;a lot of libraries aren&#x27;t updated to the last lang version&quot; is true, the vast majority are.<p>Debugging elm-JS interactions is not really a problem when using the standard interop methods of ports and webcomponents.  It&#x27;s just not something that comes up often.<p>Source: have been writing elm professionally for the last 2 and a half years.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aeturnum" target="_blank">aeturnum</a>   <span class="timeago" data-date="2021-08-18 19:56:31 &#43;0000 UTC">2021-08-18 19:56:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not an Elm veteran like a lot of the folks here, but I think an aspect of Elm is that a lot of the traditional ways that people expand ecosystems are discouraged by Elm&#x27;s approach. For instance, components are hard to do in Elm and are discouraged in the documentation[1].<p>So my own personal Elm projects have involved a lot of reading other code and often copying and modifying open source code, but it&#x27;s hard to wholesale import components in the way that JavaScript and other languages do it. My experience with the language is that it is very easy to do what <i>I</i> want in it, but it seems  more difficult to share that as an open source contribution in Elm than in similar languages.<p>[1] <a href="https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;webapps&#x2F;structure.html" rel="nofollow">https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;webapps&#x2F;structure.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=agbell" target="_blank">agbell</a>   <span class="timeago" data-date="2021-08-18 17:58:14 &#43;0000 UTC">2021-08-18 17:58:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For those want to learn Elm, or to learn strongly typed functional programming in very well thought out order @rtfeldman&#x27;s book &quot;Elm In Action&quot; is super good.<p>His experience working at a teaching company made his book very well structured for new comers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=arcade79" target="_blank">arcade79</a>   <span class="timeago" data-date="2021-08-18 17:20:23 &#43;0000 UTC">2021-08-18 17:20:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if someone will create &#x27;pine&#x27; - &quot;pine is not elm&quot;.<p>(For younglings: elm was an email client.  pine was also an email client.  The latter was often thought to be short for &#x27;pine is not elm&#x27;).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fatnoah" target="_blank">fatnoah</a>   <span class="timeago" data-date="2021-08-18 19:35:28 &#43;0000 UTC">2021-08-18 19:35:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be honest, I read the article and was expecting this to be about ditching Outlook or Gmail in favor of Elm.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wing-_-nuts" target="_blank">wing-_-nuts</a>   <span class="timeago" data-date="2021-08-18 17:40:58 &#43;0000 UTC">2021-08-18 17:40:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have fond memories of using the pine email client.  It was so fast.  I know mutt is another one, supposedly, but by the time I was considering switching, I had exclusively moved to web mail.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmix" target="_blank">dmix</a>   <span class="timeago" data-date="2021-08-18 16:43:20 &#43;0000 UTC">2021-08-18 16:43:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We had global variables everywhere, and debugging was a nightmare.<p>ES6 module imports really helped solve this problem and is a giant step forward in the JS ecosystem. Despite being relatively straight forward they were (and are) a big deal.<p>Any JS project before that was a giant dance of complex window namespacing, closure wrappers, and hoping the 3rd party library you’re using doesn’t expect some weird custom thing to ‘import’ it.<p>The next step obviously is fixing bundling and replacing Webpack and Babel (the closest thing to a widespread standard today in JS) with something less magicy and more native. And these are a big reason newbies&#x2F;non JS devs freak out when they see a thousand packages in starter kits.<p>These two things (importing and bundling&#x2F;preprocessing) were a big reason why there always seemed to be a never ending output of new build tools. Just having those two to be predictable is a godsend in any JS developers but IRL even the best internal practices was never consistent across libraries, teams, and projects.<p>I’ve always wondered how much frameworks like Elm and similar are motivated simply but attempting to establish best practices and standards in JS projects vs the abstraction&#x2F;language innovations they provide (like pure FP and reactivity stuff). It’s at least 50% of the value proposition.<p>The big question is whether it will be for long enough to be worth the investment.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hashkb" target="_blank">hashkb</a>   <span class="timeago" data-date="2021-08-18 17:16:14 &#43;0000 UTC">2021-08-18 17:16:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            esbuild and TS are a good step you can take incrementally as you move away from webpack&#x2F;babel. Still the lesser of some evils, but less evil is better.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ferdowsi" target="_blank">ferdowsi</a>   <span class="timeago" data-date="2021-08-18 19:10:45 &#43;0000 UTC">2021-08-18 19:10:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            After the relevations about Elm&#x27;s dysfunctional leadership culture[1] I have seen vocal discouragement about investing in Elm, and reasonably so. This is a culture where Elm&#x27;s leaders actively attempt to shut down criticism as &quot;emotional violence&quot;[2], which is just incredibly immature hyperbole. I couldn&#x27;t imagine investing the future of my job and workplace on an operation like this.<p>[1]<a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22821447" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22821447</a>
+[2] <a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;elm&#x2F;comments&#x2F;7zk0dy&#x2F;is_evan_killing_elms_momentum&#x2F;dur9k1q&#x2F;#t1_dur9k1q" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;elm&#x2F;comments&#x2F;7zk0dy&#x2F;is_evan_killing...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=StefanWestfal" target="_blank">StefanWestfal</a>   <span class="timeago" data-date="2021-08-18 22:13:15 &#43;0000 UTC">2021-08-18 22:13:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had a similar line of thought in the beginning too. If you google Elm these issues pop up. However after some time posts about it lead back a very limited set of occasions and block posts. Which are either criticizing the leadership style or a few events. I view the leadership as a trade off which ensures a high level and guarantees for the core at the cost of a high barrier. For the fee events, I think we are all humans and make mistakes and usually it is a miss communication between two parts more then a real issue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=roebk" target="_blank">roebk</a>   <span class="timeago" data-date="2021-08-18 19:33:45 &#43;0000 UTC">2021-08-18 19:33:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The pros and cons listed hear mirror my own views of Elm. Although, we’ve only got a handful of small Elm apps in production it’s a joy to work on them. I can rip into them with a fairly big refactor, fix the compiler errors and be confident that it’s all going to work. I do which there were a larger selection of Elm packages to take advantage of, but integrating Web Components into Elm hasn’t been bothersome.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=StefanWestfal" target="_blank">StefanWestfal</a>   <span class="timeago" data-date="2021-08-18 17:47:21 &#43;0000 UTC">2021-08-18 17:47:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From a self taught view, the compiler helped me a lot and when it compiles it usually works and when not the community is very helpful. Over all I found libraries usually of good quality while also not needing a lot as Elm includes a lot out of the box (i.e. React, Redux, axios, type guards, etc.).<p>Elm-UI made working with styling much easier for me and was the main reason I gave Elm a try.<p>The Evan and the core team seem to have a clear vision of what they want and I can understand that but this is personal opinion. To make a system work well you have to be strict and including new features all the time might introduce complexity down the line. This might seem a bit closed in form the outside.<p>So far I am very happy with it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dsiegel2275" target="_blank">dsiegel2275</a>   <span class="timeago" data-date="2021-08-18 17:52:39 &#43;0000 UTC">2021-08-18 17:52:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is refreshing once again to see an Elm post that looks at the pros and cons of the language and ecosystem, instead of solely focusing on a perceived problem with the way that the community is run.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mchusma" target="_blank">mchusma</a>   <span class="timeago" data-date="2021-08-19 13:59:58 &#43;0000 UTC">2021-08-19 13:59:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rakuten is basically a scam on merchants right?<p>By that I means they use affiliate links to make money.<p>But most of their referred traffic comes from people checking out and saying &quot;I use rakuten to get a discount at the places I already shop&quot;.<p>The stores then don&#x27;t know how much business rakuten is really bringing them, so are scared to stop it.<p>Consumers keep checking rakuten to see if they get discounts on things they want, because why not?<p>Is this a good summary? Anyone have a more favorable impression of their work (from the store perspective)?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nopcode" target="_blank">nopcode</a>   <span class="timeago" data-date="2021-08-19 15:34:50 &#43;0000 UTC">2021-08-19 15:34:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rakuten is a billion dollar company often referred to as the Amazon of Japan.<p>They have a very different type of presence in different countries.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mouzogu" target="_blank">mouzogu</a>   <span class="timeago" data-date="2021-08-18 15:40:23 &#43;0000 UTC">2021-08-18 15:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn&#x27;t it be difficult to find other developers that are experienced using Elm? I don&#x27;t know much about it tbh.<p>Probably, one of my biggest career mistakes was opting for a little known PHP cms instead of WP as I thought it would be easier for the stakeholders to work with the limited options.<p>Since then, I&#x27;ve always avoided going away from the mainstream toolset.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=g_delgado14" target="_blank">g_delgado14</a>   <span class="timeago" data-date="2021-08-18 15:48:17 &#43;0000 UTC">2021-08-18 15:48:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Wouldn&#x27;t it be difficult to find other developers that are experienced using Elm?<p>Yes, however:<p>- Elm has a very small surface area (you can read through the guide [0] in a weekend)<p>- There are many folks who love functional programming &amp;&amp; are willing to learn Elm<p>So, given those two facts, the lack of Elm developers compared to other &quot;markets&quot; is not a big issue.<p>For me, personally, the only risk with Elm is its incredibly opaque development. It&#x27;s led by Elm&#x27;s BDFL and a few other folks and it&#x27;s almost as though they go out of their way to make Elm hard to adopt for outsiders.<p>For example, all you have to do is change elm&#x27;s version to 1.0.0 to signal to outsiders that, yes .. Elm is and has been production ready for quite a while now (years?). Instead &quot;insiders&quot; will reason and rant about how 0.19.1 is fine.<p>----<p>[0] - <a href="https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;guide.elm-lang.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=blowski" target="_blank">blowski</a>   <span class="timeago" data-date="2021-08-18 16:13:56 &#43;0000 UTC">2021-08-18 16:13:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I appreciate that I am biased because of my background, but I&#x27;ve met precisely one person who&#x27;s used Elm while just about every dev I know has worked with WordPress at some point. For most enterprises I work with, 10 years in production is about close as they&#x27;re willing to get to the bleeding edge. They don&#x27;t really care about code quality or features. They want to be safe, secure and future-proof for as low a price as possible.<p>That said, I know very little about Elm and would love to understand more about what it offers that&#x27;s so exciting. I skim-read the article, will read in more detail later.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=matsemann" target="_blank">matsemann</a>   <span class="timeago" data-date="2021-08-18 20:54:31 &#43;0000 UTC">2021-08-18 20:54:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My bias is the opposite, probably because I&#x27;ve worked at an Elm shop. But I know zero people with wordpress experience, in my circles I&#x27;m the only one I know of with professional php experience at all. But I need more than my hands to count all elm programmers I know.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MichaelGlass" target="_blank">MichaelGlass</a>   <span class="timeago" data-date="2021-08-18 21:32:58 &#43;0000 UTC">2021-08-18 21:32:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FWIW our experience has been:
+- finding devs with experience is hard
+- finding great devs who want to use interesting tooling is easy<p>In the end, we hire interesting, curious devs, and ask them to use tooling (elm) that has a pretty shallow learning curve.<p>I think bootstrapping a project in Elm without any experience on the team could be tough, but once you have some expertise, the seeds you plant in yield abundant fruit. At NoRedInk it&#x27;s been a great success -- especially with regards to &quot;finding other developers&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tmm84" target="_blank">tmm84</a>   <span class="timeago" data-date="2021-08-19 01:42:44 &#43;0000 UTC">2021-08-19 01:42:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The part of the article that I was waiting for was how they got it adopted in Japan. Having worked in Japan for almost a decade I can easily say it is not an easy feat to change Japanese corporate mindset when it comes to a programming language or environment. I wonder what the elevator sales pitch was. Other than that I think this was a great article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tempest_" target="_blank">tempest_</a>   <span class="timeago" data-date="2021-08-18 15:25:41 &#43;0000 UTC">2021-08-18 15:25:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elm looks interesting but when it pops up around here and other places it is usually about how the main dev does not work and play well with others.<p>It is a bit off putting.<p>It is nice to see a different perspective.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=z5h" target="_blank">z5h</a>   <span class="timeago" data-date="2021-08-18 16:28:46 &#43;0000 UTC">2021-08-18 16:28:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think when something is built by several people, catering to outside interests, you end up with more churn, bloat, inconsistency, instability, etc. But your specific need has a better chance if being addressed. When something (like Elm) is built in a silo, you end up with less churn, bloat, instability, inconsistency. We forget how we got these nice things, and when we want something NOW we get cranky about the development model. So, as a developer with 20+ years of experience I can say that EVERYTHING (tools, languages, paradigms) is shitty in some ways, and I vastly prefer the ways that Elm and ecosystem are shitty.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=razze" target="_blank">razze</a>   <span class="timeago" data-date="2021-08-19 14:55:49 &#43;0000 UTC">2021-08-19 14:55:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Having worked with &quot;the main dev&quot; I can&#x27;t say I share this view. It has been very nice to be able to pick his brain and hear his thoughts. It can be exhausting, when you want to improve things now, but come up with a better long term plan. I guess that&#x27;s a language designer thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Existenceblinks" target="_blank">Existenceblinks</a>   <span class="timeago" data-date="2021-08-18 16:53:04 &#43;0000 UTC">2021-08-18 16:53:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had a problem with perf optimization on Html.Lazy long time ago that I can&#x27;t solved before I moved on.<p>Since Elm is immutable and lazy render, most of the time, compare underline object reference (referential equality check), the reference (memory location) almost always changes on every update cycle because it needs to update model, thus, a new reference as a result. And that makes Html.Lazy worthless. I had some kind of 1000 html tree nodes, and it rendered every branch every time. I probably did something not right, but I already tried solving that for a few days, no success.<p>If you have the Elm in Action book, that memory location pitfall is explained on the very last page about when memory location of a object changes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dzonga" target="_blank">dzonga</a>   <span class="timeago" data-date="2021-08-19 00:49:43 &#43;0000 UTC">2021-08-19 00:49:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            little anecdote: I did a couple of personal projects in elm in 2017. one thing I&#x27;m thankful for it taught me functional programming. Elm was easy to start with for someone new to functional programming. it also taught me, one important lesson - the market doesn&#x27;t really care. a company when you&#x27;re looking for a gig doesn&#x27;t care if you know elm, it wants you to know the &#x27;framework&#x27;they&#x27;re using currently. so yeah, I see elm being a dead end. either people using it already solved product&#x2F;market fit. but for a startup getting off the ground - elm offers no benefits at all compared to js.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wolfadex" target="_blank">wolfadex</a>   <span class="timeago" data-date="2021-08-19 11:45:36 &#43;0000 UTC">2021-08-19 11:45:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had the opposite experience with my last job interview. I didn&#x27;t know any Ember but I did know Elm (and other languages and frameworks). My enthusiasm about Elm absolutely contributed to my being hired and my lack of Ember knowledge didn&#x27;t hurt me. This was what the hiring manager told me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GiorgioG" target="_blank">GiorgioG</a>   <span class="timeago" data-date="2021-08-18 17:51:00 &#43;0000 UTC">2021-08-18 17:51:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The bus factor of 1 makes it a non-starter for me for any serious project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=razze" target="_blank">razze</a>   <span class="timeago" data-date="2021-08-19 15:00:35 &#43;0000 UTC">2021-08-19 15:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a contingency plan for that. According to the core team.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=G4BB3R" target="_blank">G4BB3R</a>   <span class="timeago" data-date="2021-08-18 20:31:36 &#43;0000 UTC">2021-08-18 20:31:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I could use Elm as it is today for at least a decade without updates, since it&#x27;s very stable. Anyway, I am sure there are very competent people from the core devs or from the community that could make a new leadership if that happened.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GiorgioG" target="_blank">GiorgioG</a>   <span class="timeago" data-date="2021-08-18 21:01:45 &#43;0000 UTC">2021-08-18 21:01:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your assurances don&#x27;t particularly mean much - no offense. A decade from now I don&#x27;t want to have a codebase with a toolchain with no future.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adelarsq" target="_blank">adelarsq</a>   <span class="timeago" data-date="2021-08-18 18:02:46 &#43;0000 UTC">2021-08-18 18:02:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sad, but true.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=frozenlettuce" target="_blank">frozenlettuce</a>   <span class="timeago" data-date="2021-08-19 02:53:04 &#43;0000 UTC">2021-08-19 02:53:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            even the docs are written in first person
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 18:53:02 &#43;0000 UTC">2021-08-18 18:53:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=neals" target="_blank">neals</a>   <span class="timeago" data-date="2021-08-18 18:23:01 &#43;0000 UTC">2021-08-18 18:23:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is Rakuten? Why is it on all my Samsung TV&#x27;s? How come it works out of the box?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=deergomoo" target="_blank">deergomoo</a>   <span class="timeago" data-date="2021-08-18 20:46:35 &#43;0000 UTC">2021-08-18 20:46:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; What is Rakuten?<p>A Japanese tech conglomerate.<p>&gt; Why is it on all my Samsung TV&#x27;s?<p>Because Samsung have no shame and will gladly ruin their own products for a quick buck.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=b7bfcdeaab33" target="_blank">b7bfcdeaab33</a>   <span class="timeago" data-date="2021-08-19 01:51:54 &#43;0000 UTC">2021-08-19 01:51:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;the order in which we write the code doesn’t matter&quot;<p>What do you lose in this trade off?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agumonkey" target="_blank">agumonkey</a>   <span class="timeago" data-date="2021-08-18 17:24:40 &#43;0000 UTC">2021-08-18 17:24:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            anybody using purescript and its streamed ui lib ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=osener" target="_blank">osener</a>   <span class="timeago" data-date="2021-08-18 18:11:55 &#43;0000 UTC">2021-08-18 18:11:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have a link for this library?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agumonkey" target="_blank">agumonkey</a>   <span class="timeago" data-date="2021-08-18 18:34:27 &#43;0000 UTC">2021-08-18 18:34:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just spent 10 minutes digging google and I cannot find it again.<p>I didn&#x27;t even try to find about it last year, it seemed the only ui lib for purescript with a tiny docs website (beige &#x2F; pale themed)<p>Really surprised not being able to find it again.. I&#x27;ll reply again if I end up finding it
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dodecaphonic" target="_blank">dodecaphonic</a>   <span class="timeago" data-date="2021-08-18 21:52:03 &#43;0000 UTC">2021-08-18 21:52:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe you mean Concur? <a href="https:&#x2F;&#x2F;purescript-concur.github.io&#x2F;purescript-concur-react&#x2F;" rel="nofollow">https:&#x2F;&#x2F;purescript-concur.github.io&#x2F;purescript-concur-react&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-08-18 21:38:33 &#43;0000 UTC">2021-08-18 21:38:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What are Elm users using on the back end? FP or mainstream languages?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wolfadex" target="_blank">wolfadex</a>   <span class="timeago" data-date="2021-08-18 21:53:49 &#43;0000 UTC">2021-08-18 21:53:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have coworkers using Rails for the back end of their Elm app. I think NoRedInk is using some Rails and some Haskell. I&#x27;ve have a friend who uses Python for his back ends. Also heard that some people really like using F#, as well as Node.<p>Or if you want to do Elm full stack there&#x27;s <a href="https:&#x2F;&#x2F;lamdera.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;lamdera.com&#x2F;</a> or <a href="https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;choonkeat&#x2F;elm-fullstack&#x2F;latest&#x2F;" rel="nofollow">https:&#x2F;&#x2F;package.elm-lang.org&#x2F;packages&#x2F;choonkeat&#x2F;elm-fullstac...</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whichdan" target="_blank">whichdan</a>   <span class="timeago" data-date="2021-08-19 00:58:10 &#43;0000 UTC">2021-08-19 00:58:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We&#x27;re using Elixir on the backend at Corvus Insurance and it&#x27;s quite nice.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=girishso" target="_blank">girishso</a>   <span class="timeago" data-date="2021-08-19 02:17:27 &#43;0000 UTC">2021-08-19 02:17:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any back end stack that can provide APIs, we&#x27;re using .NET.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danbruder" target="_blank">danbruder</a>   <span class="timeago" data-date="2021-08-18 23:39:56 &#43;0000 UTC">2021-08-18 23:39:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            we are using rust on the backend
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=decafbad" target="_blank">decafbad</a>   <span class="timeago" data-date="2021-08-18 18:56:18 &#43;0000 UTC">2021-08-18 18:56:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>  mkose@casper:~&#x2F;Desktop$ .&#x2F;elm repl
+  ---- Elm 0.19.1 -----------------------------------------
+  &gt; Basics.modBy 0 3
+  Error: Cannot perform mod 0. Division by zero error.</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=earth_walker" target="_blank">earth_walker</a>   <span class="timeago" data-date="2021-08-18 20:06:30 &#43;0000 UTC">2021-08-18 20:06:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is correct behaviour, depending on the definition of mod. See, for example:<p><a href="https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;516251&#x2F;why-is-n-mod-0-undefined" rel="nofollow">https:&#x2F;&#x2F;math.stackexchange.com&#x2F;questions&#x2F;516251&#x2F;why-is-n-mod...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=decafbad" target="_blank">decafbad</a>   <span class="timeago" data-date="2021-08-18 21:14:08 &#43;0000 UTC">2021-08-18 21:14:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The promise was <i>no runtime errors</i>.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=girishso" target="_blank">girishso</a>   <span class="timeago" data-date="2021-08-19 02:31:40 &#43;0000 UTC">2021-08-19 02:31:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My team is working on a very large Elm codebase for over 3 years now, we got a runtime error in production <i>only once</i> (stack overflow when parsing an unusually large file, made it tail call optimized to get rid of it).<p>I will consider it sticking to it&#x27;s promise of no runtime errors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 15:03:12 &#43;0000 UTC">2021-08-19 15:03:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=1-more" target="_blank">1-more</a>   <span class="timeago" data-date="2021-08-19 01:01:20 &#43;0000 UTC">2021-08-19 01:01:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are two that I can think of: this, and the fact that there&#x27;s no equality class yet. In practice it just doesn&#x27;t come up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 21:24:00 &#43;0000 UTC">2021-08-18 21:24:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sergiotapia" target="_blank">sergiotapia</a>   <span class="timeago" data-date="2021-08-18 16:05:20 &#43;0000 UTC">2021-08-18 16:05:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll never even consider Elm after they added DRM to the compiler. <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27819874" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27819874</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeofken" target="_blank">jeofken</a>   <span class="timeago" data-date="2021-08-18 16:08:48 &#43;0000 UTC">2021-08-18 16:08:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would it not be to prevent supply chain attacks, and to guarantee the user that all code you run is pure and type safe?<p>They don’t hinder anyone from forking and removing this limitation, allowing any package author to run native code on your machine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-18 16:30:26 &#43;0000 UTC">2021-08-18 16:30:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; They don’t hinder anyone from forking and removing this limitation, allowing any package author to run native code on your machine.<p>That has arisen a few times here. Yes, they actually do actively discourage forking (to the point of threatening “excommunication” from the community).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 18:19:55 &#43;0000 UTC">2021-08-18 18:19:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just to correct this: for as long as I can remember, Evan&#x27;s stance has been &quot;feel free to fork Elm, just please don&#x27;t call your fork Elm, since that would confuse people.&quot;<p>There have been a couple of forks with different names, and nobody&#x27;s been &quot;excommunicated&quot; or whatever. The forks haven&#x27;t gotten much traction, but they&#x27;re probably still out there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-18 18:34:36 &#43;0000 UTC">2021-08-18 18:34:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have heard otherwise, both in comments here and via <a href="https:&#x2F;&#x2F;lukeplant.me.uk&#x2F;blog&#x2F;posts&#x2F;why-im-leaving-elm&#x2F;#forkability" rel="nofollow">https:&#x2F;&#x2F;lukeplant.me.uk&#x2F;blog&#x2F;posts&#x2F;why-im-leaving-elm&#x2F;#forka...</a>, but it’s entirely possible I’m wrong.<p>Added: This comment is also not terribly friendly.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;gdotdesign&#x2F;elm-github-install&#x2F;issues&#x2F;62#issuecomment-415860947" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;gdotdesign&#x2F;elm-github-install&#x2F;issues&#x2F;62#i...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-18 18:56:16 &#43;0000 UTC">2021-08-18 18:56:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My word choice certainly could have been better (I was upset, and it showed), but to quote what I said there anyway: &quot;If you understand the design goals, but don&#x27;t agree with them, why not channel that in a positive way - e.g. by building something that fits your vision instead of directly working against Elm&#x27;s design goals?&quot; - in substance, this is consistent with what I said above: it&#x27;s totally encouraged if anyone wants to go in a different direction from Elm&#x27;s design, just please don&#x27;t call it Elm.<p>As it turned out, this is exactly what the OP in that thread did - he created <a href="https:&#x2F;&#x2F;www.mint-lang.com" rel="nofollow">https:&#x2F;&#x2F;www.mint-lang.com</a> - which I think is a very positive development indeed!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-19 00:27:57 &#43;0000 UTC">2021-08-19 00:27:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m glad things turned out well. I definitely am hoping Elm can help me bootstrap into the more formal FP world.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=G4BB3R" target="_blank">G4BB3R</a>   <span class="timeago" data-date="2021-08-18 18:25:12 &#43;0000 UTC">2021-08-18 18:25:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not true, lamdera is a fork and has it&#x27;s own channel inside elm slack. Terezka (that is from core team) already said that if part of the community wants to fork Elm, that would be ok.<p><a href="https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;t&#x2F;clients-expressing-doubt-about-choosing-elm&#x2F;6835&#x2F;56?u=g4bb3r" rel="nofollow">https:&#x2F;&#x2F;discourse.elm-lang.org&#x2F;t&#x2F;clients-expressing-doubt-ab...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-18 18:47:15 &#43;0000 UTC">2021-08-18 18:47:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, I see, lamdera isn’t a “we’ll change Evan’s architectural decisions” kind of fork, which seems to be much of the source of contention.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-18 18:34:20 &#43;0000 UTC">2021-08-18 18:34:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have heard otherwise, both in comments here and via <a href="https:&#x2F;&#x2F;lukeplant.me.uk&#x2F;blog&#x2F;posts&#x2F;why-im-leaving-elm&#x2F;#forkability" rel="nofollow">https:&#x2F;&#x2F;lukeplant.me.uk&#x2F;blog&#x2F;posts&#x2F;why-im-leaving-elm&#x2F;#forka...</a>, but it’s entirely possible I’m wrong.<p>Added: This comment is also not terribly friendly.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;gdotdesign&#x2F;elm-github-install&#x2F;issues&#x2F;62#issuecomment-415860947" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;gdotdesign&#x2F;elm-github-install&#x2F;issues&#x2F;62#i...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeofken" target="_blank">jeofken</a>   <span class="timeago" data-date="2021-08-18 18:01:36 &#43;0000 UTC">2021-08-18 18:01:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Who cares? It’s a computer program, just have it do what purpose you require
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-18 18:06:11 &#43;0000 UTC">2021-08-18 18:06:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Forking has long-term maintenance costs, even without the hassle of trying to hide your efforts from the Elm maintainers.<p>I’d be fine forking it to pursue a personal project. I’d never do that for any critical business need.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeofken" target="_blank">jeofken</a>   <span class="timeago" data-date="2021-08-19 10:32:44 &#43;0000 UTC">2021-08-19 10:32:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            • Your company has a patch allowing installing binary code from other sources<p>• When you want to update to a new version of Elm, do git rebase and reapply the patch.<p>• Now your source tree and history is identical to upstream, plus one commit<p>Most likely the code restricting installing binaries from only one source isn’t changing a lot, so patch conflicts should not be too much of a hinderance
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vmchale" target="_blank">vmchale</a>   <span class="timeago" data-date="2021-08-18 17:35:39 &#43;0000 UTC">2021-08-18 17:35:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah if anything the need to constantly fork the compiler indicates a problem lol.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jeofken" target="_blank">jeofken</a>   <span class="timeago" data-date="2021-08-19 10:37:30 &#43;0000 UTC">2021-08-19 10:37:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It can be as simple as having a patch and just updating by reapplying the patch over the master branch. You’d have to build from source of course, rather than downloading someone else’s binaries.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aaronchall" target="_blank">aaronchall</a>   <span class="timeago" data-date="2021-08-18 15:41:19 &#43;0000 UTC">2021-08-18 15:41:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d like to recommend Elm at work but I can&#x27;t because it&#x27;s still below a major version of 1, which implies there may be a good deal of rework in the short term.<p>I did get an Elm app upgraded from 0.18 to 0.19 without too much extra work, but I&#x27;m concerned a major version release may bring much more changes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=moistoreos" target="_blank">moistoreos</a>   <span class="timeago" data-date="2021-08-18 16:19:36 &#43;0000 UTC">2021-08-18 16:19:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;elm&#x2F;compiler&#x2F;blob&#x2F;master&#x2F;roadmap.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;elm&#x2F;compiler&#x2F;blob&#x2F;master&#x2F;roadmap.md</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hitekker" target="_blank">hitekker</a>   <span class="timeago" data-date="2021-08-18 15:28:16 &#43;0000 UTC">2021-08-18 15:28:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;Elm at Microsoft&quot; link is broken and when I google for it, I can only find an archived package on Github.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pianoben" target="_blank">pianoben</a>   <span class="timeago" data-date="2021-08-18 15:43:37 &#43;0000 UTC">2021-08-18 15:43:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This link works for me: <a href="https:&#x2F;&#x2F;elmtown.simplecast.com&#x2F;episodes&#x2F;it-just-goes-on-and-on-x_tpWljQ" rel="nofollow">https:&#x2F;&#x2F;elmtown.simplecast.com&#x2F;episodes&#x2F;it-just-goes-on-and-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hitekker" target="_blank">hitekker</a>   <span class="timeago" data-date="2021-08-18 18:05:49 &#43;0000 UTC">2021-08-18 18:05:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmmm, I think it&#x27;s my VPN. My bad.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cfors" target="_blank">cfors</a>   <span class="timeago" data-date="2021-08-18 15:44:27 &#43;0000 UTC">2021-08-18 15:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its right here from the &quot;Other Testimonies&quot; section:<p><a href="https:&#x2F;&#x2F;elmtown.simplecast.com&#x2F;episodes&#x2F;it-just-goes-on-and-on-x_tpWljQ" rel="nofollow">https:&#x2F;&#x2F;elmtown.simplecast.com&#x2F;episodes&#x2F;it-just-goes-on-and-...</a><p>Obviously Microsoft is a huge company so they use all of the languages, but I find it surprising given the amount of investment they&#x27;ve made into Typescript.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-18 16:25:50 &#43;0000 UTC">2021-08-18 16:25:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not surprising for a large company. For example, Google uses C++, Rust and Go on Fuchsia. They have Angular with Typescript and Angular with Dart. Big companies are what they are, an association of a lot of people that are all different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

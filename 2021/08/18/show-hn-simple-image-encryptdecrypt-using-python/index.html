@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-simple-image-encryptdecrypt-using-python/">
+
+
+    <title>Show HN: Simple Image encrypt/decrypt using Python - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Show HN: Simple Image encrypt/decrypt using Python - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-simple-image-encryptdecrypt-using-python/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/show-hn-simple-image-encryptdecrypt-using-python/">
+<meta name="twitter:title" content="Show HN: Simple Image encrypt/decrypt using Python - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Show HN: Simple Image encrypt\/decrypt using Python - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T11:12:11JST",
+    "dateModified": "2021-08-18T11:12:11JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/s3nh/img-cryptor">Show HN: Simple Image encrypt/decrypt using Python</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BugsJustFindMe" target="_blank">BugsJustFindMe</a>   <span class="timeago" data-date="2021-08-18 14:46:55 &#43;0000 UTC">2021-08-18 14:46:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you should do this as a BytesIO wrapper with transparent encryption during read&#x2F;write operations, not an in-memory image encryptor.<p>And by &quot;I think you should do&quot; what I mean is &quot;IO encryption already exists so you shouldn&#x27;t need to do anything&quot; (see <a href="https:&#x2F;&#x2F;developers.google.com&#x2F;tink&#x2F;encrypt-large-files-or-data-streams" rel="nofollow">https:&#x2F;&#x2F;developers.google.com&#x2F;tink&#x2F;encrypt-large-files-or-da...</a> for one example). But if you really like making things yourself, it would be very easy to just not use PIL and numpy and read blocks from a stream into a small R&#x2F;W buffer.<p>1) Encryption has nothing to do with images. If you encrypt arbitrary data from the file system then you don&#x27;t need PIL or numpy.<p>2) Right now if your decompressed image doesn&#x27;t fit in RAM, then your code dies horribly.<p>Using the same system interfaces and same encryption without the reliance on numpy or PIL, you could accomplish the same feat but safer, faster, and more universally en&#x2F;decrypting raw data from a chunked IO stream instead of treating images as special somehow. It will work against all files and will never overflow available resources. PIL can&#x27;t even decode all image formats.<p>Leave the image decoding part to the code that actually does something with images.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dominik-2020" target="_blank">dominik-2020</a>   <span class="timeago" data-date="2021-08-18 14:52:52 &#43;0000 UTC">2021-08-18 14:52:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let&#x27;s hope his OS doesn&#x27;t do swapping either
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-18 12:37:25 &#43;0000 UTC">2021-08-18 12:37:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Neat.
+I&#x27;ve used nacl and its python bindings in the past, which were pretty easy to use for asymmetric scenarios [1].<p>Is there anything particularly special about this project?<p>[1] <a href="https:&#x2F;&#x2F;pynacl.readthedocs.io&#x2F;en&#x2F;latest&#x2F;public&#x2F;" rel="nofollow">https:&#x2F;&#x2F;pynacl.readthedocs.io&#x2F;en&#x2F;latest&#x2F;public&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pavlovskyi" target="_blank">pavlovskyi</a>   <span class="timeago" data-date="2021-08-18 12:52:51 &#43;0000 UTC">2021-08-18 12:52:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that there is not. It was created for specific purposes at one project when I have to be aware of store images in specific path because of security reasons. At this moment it was clearly one simple way to crypt dataset with without any information loss. (data was further used to feed neural network architecture).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ryan-duve" target="_blank">ryan-duve</a>   <span class="timeago" data-date="2021-08-18 11:27:39 &#43;0000 UTC">2021-08-18 11:27:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very cool.  It would be neat if you had a MWE included so we could see an actual image get encrypted and decrypted in the README.  I find sections like that, sometimes titled &quot;Quick Start&quot;, the most instructive way to learn about the functionality of a new library at a glance.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pavlovskyi" target="_blank">pavlovskyi</a>   <span class="timeago" data-date="2021-08-18 11:48:19 &#43;0000 UTC">2021-08-18 11:48:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that is true. The entry threshold to this kind of projects without well defined Readme section becomes really high.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-18 13:35:21 &#43;0000 UTC">2021-08-18 13:35:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there more context as to why something custom was desired here?  Gpg, for example, can do symmetric AES256 as a &quot;one liner&quot;.  Not criticizing, just curious.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pavlovskyi" target="_blank">pavlovskyi</a>   <span class="timeago" data-date="2021-08-18 13:54:57 &#43;0000 UTC">2021-08-18 13:54:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As I understand it properly, there was need to develop some solution with some limited technological stack.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=28194608" target="_blank">28194608</a>   <span class="timeago" data-date="2021-08-18 14:15:53 &#43;0000 UTC">2021-08-18 14:15:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be great if the secret_key goes through a time consuming hashing algorithm like bcrypt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AkshitGarg" target="_blank">AkshitGarg</a>   <span class="timeago" data-date="2021-08-18 14:25:43 &#43;0000 UTC">2021-08-18 14:25:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or maybe argon2 as it is &quot;memory hard&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=metalliqaz" target="_blank">metalliqaz</a>   <span class="timeago" data-date="2021-08-18 13:35:26 &#43;0000 UTC">2021-08-18 13:35:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there a use case that would make this preferable to storing images (and other data) on an encrypted disk?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LinuxBender" target="_blank">LinuxBender</a>   <span class="timeago" data-date="2021-08-19 14:11:31 &#43;0000 UTC">2021-08-19 14:11:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One use case would be if and end-user wanted the files encrypted in a way that the systems admin can&#x27;t see the content.  This is the model NextCloud uses.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pavlovskyi" target="_blank">pavlovskyi</a>   <span class="timeago" data-date="2021-08-18 13:56:34 &#43;0000 UTC">2021-08-18 13:56:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that it can be used in situation when you cannot reach an encrypted disk and have to move about in closed space.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=metalliqaz" target="_blank">metalliqaz</a>   <span class="timeago" data-date="2021-08-18 14:01:59 &#43;0000 UTC">2021-08-18 14:01:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Encrypted disk images?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

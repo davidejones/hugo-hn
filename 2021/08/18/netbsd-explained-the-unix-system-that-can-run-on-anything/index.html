@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/netbsd-explained-the-unix-system-that-can-run-on-anything/">
+
+
+    <title>NetBSD Explained: The Unix System That Can Run on Anything - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="NetBSD Explained: The Unix System That Can Run on Anything - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/netbsd-explained-the-unix-system-that-can-run-on-anything/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/netbsd-explained-the-unix-system-that-can-run-on-anything/">
+<meta name="twitter:title" content="NetBSD Explained: The Unix System That Can Run on Anything - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "NetBSD Explained: The Unix System That Can Run on Anything - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T07:45:43JST",
+    "dateModified": "2021-08-18T07:45:43JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.makeuseof.com/what-is-netbsd/">NetBSD Explained: The Unix System That Can Run on Anything</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=blippage" target="_blank">blippage</a>   <span class="timeago" data-date="2021-08-18 09:39:20 &#43;0000 UTC">2021-08-18 09:39:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Linux user here, not NetBSD. My exposure to NetBSD is infinitesimal. But ...<p>I saw a video on &quot;rump&quot; kernels awhile back. I also heard that Andrew Tanenbaum ported&#x2F;is porting Minix to NetBSD. NetBSD has an &quot;anykernel&quot; approach which separates the kernel for the drivers. So you can impose your own flavour of kernel on a bunch of pre-written drivers.<p>This struck me as a potentially mind-blowing win for NetBSD. Why isn&#x27;t every RTOS, embedded system OS, toy OS,experimental OS etc. based on NetBSD? I don&#x27;t know the reason for this. Maybe it&#x27;s part NIH, part open secret that nobody&#x27;s heard about, and a large part to do with getting over the hump of integration.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-08-19 01:43:35 &#43;0000 UTC">2021-08-19 01:43:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, rump kernel tech seems like it should be taking the world by storm - in particular, it looks to me like NetBSD should be a &quot;universal donor&quot; of drivers to other systems. So for instance, as I understand it, with minimal shims, you should be able to use NetBSD hardware drivers on Linux and Illumos and HURD and Redox and [your hobby project here]. It&#x27;d be worse than &quot;native&quot; drivers, but especially for smaller projects it&#x27;d save a ton of work.<p>&gt; I also heard that Andrew Tanenbaum ported&#x2F;is porting Minix to NetBSD<p>Kernel, or userspace? Last I paid attention, MINIX 3 used pkgsrc for packages and I <i>think</i> base&#x2F;coreutils in userspace, but I hadn&#x27;t heard anything about kernel space. Though, as I mentioned above, it does seem like the obvious way to get drivers for a lot of hardware cheaply, especially if you&#x27;re already a microkernel.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rekado" target="_blank">rekado</a>   <span class="timeago" data-date="2021-08-19 09:35:46 &#43;0000 UTC">2021-08-19 09:35:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; with minimal shims, you should be able to use NetBSD hardware drivers on [...] HURD<p>The Hurd is already using rumpkernel for some servers, e.g. for audio and work is underway for disks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the_only_law" target="_blank">the_only_law</a>   <span class="timeago" data-date="2021-08-19 08:19:23 &#43;0000 UTC">2021-08-19 08:19:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not NetBSD, but iirc a lot of the network drivers in Haiku were taken from FreeBSD.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=1vuio0pswjnm7" target="_blank">1vuio0pswjnm7</a>   <span class="timeago" data-date="2021-08-19 06:51:21 &#43;0000 UTC">2021-08-19 06:51:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Public release of RUMP predated Docker by at least two years, maybe it was more.  I just remember when all the Docker hype began I was thinking &quot;WTF, this is not even half as good.&quot;  But that&#x27;s what&#x27;s different about NetBSD.  No hype.  To answer the question of why it isn&#x27;t more widely used, IMO, besides absence of hype, it&#x27;s lack of hardware support, and comfort among those who use it with notions like DIY and minimalism.  Often you have to put in some effort to get some hardware feature to work.1  With Linux, chances are someone else has done that work for you.<p>1 First time I ever tried NetBSD, the audio did not work on the laptop I was using.  I added a couple of lines in a kernel header file, recompiled and voila, I had audio.  That simplicity made me want to keep using it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qwerty456127" target="_blank">qwerty456127</a>   <span class="timeago" data-date="2021-08-19 10:20:17 &#43;0000 UTC">2021-08-19 10:20:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I added a couple of lines in a kernel header file, recompiled and voila, I had audio<p>How did you figure out what to add?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=1vuio0pswjnm7" target="_blank">1vuio0pswjnm7</a>   <span class="timeago" data-date="2021-08-19 11:08:55 &#43;0000 UTC">2021-08-19 11:08:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC, dmesg.  It was probably pure luck that it worked.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 11:20:32 &#43;0000 UTC">2021-08-19 11:20:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Close to my change to the BTTV drivers for a Conceptronic TV card.<p>Most of hardware use common devices and chipsets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-08-19 01:40:54 &#43;0000 UTC">2021-08-19 01:40:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; NetBSD has an &quot;anykernel&quot; approach which separates the kernel for the drivers. So you can impose your own flavour of kernel on a bunch of pre-written drivers.<p>As a NetBSD developer, I don&#x27;t recognize what you mean by this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mapgrep" target="_blank">mapgrep</a>   <span class="timeago" data-date="2021-08-19 03:38:13 &#43;0000 UTC">2021-08-19 03:38:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe read this whitepaper:<p><a href="https:&#x2F;&#x2F;www.netbsd.org&#x2F;gallery&#x2F;presentations&#x2F;justin&#x2F;2015_AsiaBSDCon&#x2F;justincormack-abc2015.pdf" rel="nofollow">https:&#x2F;&#x2F;www.netbsd.org&#x2F;gallery&#x2F;presentations&#x2F;justin&#x2F;2015_Asi...</a><p>“ The rump kernel has been used as a way to supply device drivers in other new operating systems, which do not yet have a full set of device drivers. For example, Genode[4] is a framework for building microkernel operating sys- tems using the L4 family of microkernels. Genode uses the rump kernel to provide file system support, so that it does not have to develop its own file systems.”<p>Here’s a 362 page dissertation on rump kernels which has a netbsd focus:<p><a href="http:&#x2F;&#x2F;lib.tkk.fi&#x2F;Diss&#x2F;2012&#x2F;isbn9789526049175&#x2F;isbn9789526049175.pdf" rel="nofollow">http:&#x2F;&#x2F;lib.tkk.fi&#x2F;Diss&#x2F;2012&#x2F;isbn9789526049175&#x2F;isbn9789526049...</a><p>There’s also the Wikipedia entry.<p><a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Rump_kernel" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Rump_kernel</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-08-19 05:05:24 &#43;0000 UTC">2021-08-19 05:05:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That isn&#x27;t how device drivers are used <i>in</i> NetBSD though, it is a different way of compiling them for other targets.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mapgrep" target="_blank">mapgrep</a>   <span class="timeago" data-date="2021-08-19 05:31:52 &#43;0000 UTC">2021-08-19 05:31:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the white paper published on netbsd.org:<p>“ An implementation that does this ships with NetBSD, allowing the NetBSD drivers to be run in NetBSD userspace… The first major PCI driver developed was the In- tel Centrino 7260 driver developed for NetBSD and OpenBSD by Antti Kantee. The commit message said “This is probably the world’s first Canadian cross device driver: it was created for OpenBSD by writing and port- ing a NetBSD driver which was developed in a rump ker- nel in Linux userspace.”[13]<p>Further, just another example, from page 149 in the dissertation is an extended many page discussion of how the rump kernel was used to provide usb support in netbsd.<p><a href="http:&#x2F;&#x2F;lib.tkk.fi&#x2F;Diss&#x2F;2012&#x2F;isbn9789526049175&#x2F;isbn9789526049175.pdf" rel="nofollow">http:&#x2F;&#x2F;lib.tkk.fi&#x2F;Diss&#x2F;2012&#x2F;isbn9789526049175&#x2F;isbn9789526049...</a><p>“ We implemented a host controller called ugenhc. When the kernel’s device autocon- figuration subsystem calls the ugenhc driver to probe the device, the ugenhc driver tries to open &#x2F;dev&#x2F;ugen on the host. If the open is successful, the host kernel has attached a device to the respective ugen instance and ugenhc can return a successful match. Next, the ugenhc driver is attached in the rump kernel, along with a USB bus and a USB root hub. The root hub driver explores the bus to see which devices are connected to it, causing the probes to be delivered first to ugenhc and through &#x2F;dev&#x2F;ugen to the host kernel and finally to the actual hardware. Figure 3.24 con- tains a “dmesg” of a server with four ugenhc devices configured and one USB mass media attached.”<p>¯\_(ツ)_&#x2F;¯
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rjsw" target="_blank">rjsw</a>   <span class="timeago" data-date="2021-08-19 12:10:19 &#43;0000 UTC">2021-08-19 12:10:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; ¯\_(ツ)_&#x2F;¯<p>UTSL.<p>The author used rump to develop the drivers, it isn&#x27;t used to run them in a production NetBSD kernel.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=floatboth" target="_blank">floatboth</a>   <span class="timeago" data-date="2021-08-19 12:17:14 &#43;0000 UTC">2021-08-19 12:17:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But running on other targets <i>is</i> exactly what people are excited about?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jschwartzi" target="_blank">jschwartzi</a>   <span class="timeago" data-date="2021-08-19 03:27:50 &#43;0000 UTC">2021-08-19 03:27:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            QNX RTOS uses netbsd userspace applications, actually. And a lot of the drivers in QNX are from NetBSD. It’s more properly a “microkernel” which means the drivers run as userspace applications with a defined interface to the kernel for memory maps to underlying hardware.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unixhero" target="_blank">unixhero</a>   <span class="timeago" data-date="2021-08-19 09:41:26 &#43;0000 UTC">2021-08-19 09:41:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are new versions of QNX available on X86?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=detaro" target="_blank">detaro</a>   <span class="timeago" data-date="2021-08-19 09:43:59 &#43;0000 UTC">2021-08-19 09:43:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            yes. (newest one might just be x86_64, not 100% sure on that)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qwerty456127" target="_blank">qwerty456127</a>   <span class="timeago" data-date="2021-08-19 11:20:59 &#43;0000 UTC">2021-08-19 11:20:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; newest one might just be x86_64<p>This would be weird. I believe 32-bit x86 still is widely used by the target audience.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=detaro" target="_blank">detaro</a>   <span class="timeago" data-date="2021-08-19 12:51:24 &#43;0000 UTC">2021-08-19 12:51:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some subset, but even there it&#x27;s waning, especially for new designs. QNX is seems to be not mentioning it explicitly anymore, and I don&#x27;t remember seeing it in the options last time I looked, but it&#x27;s very possible that it is still available if necessary.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unixhero" target="_blank">unixhero</a>   <span class="timeago" data-date="2021-08-19 09:49:39 &#43;0000 UTC">2021-08-19 09:49:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s cool, I can emulate 32 if necessary :)<p>How might one obtain it?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-19 11:03:06 &#43;0000 UTC">2021-08-19 11:03:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m guessing, call blackberry and prepare to break your piggybank?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 12:53:08 &#43;0000 UTC">2021-08-19 12:53:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nix23" target="_blank">nix23</a>   <span class="timeago" data-date="2021-08-19 13:34:49 &#43;0000 UTC">2021-08-19 13:34:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go there:<p><a href="http:&#x2F;&#x2F;www.qnx.com&#x2F;download&#x2F;group.html?programid=29178" rel="nofollow">http:&#x2F;&#x2F;www.qnx.com&#x2F;download&#x2F;group.html?programid=29178</a><p>Download:<p>QNX Software Center<p>Register a free Non-Commercial&#x2F;Academic License:<p><a href="http:&#x2F;&#x2F;www.qnx.com&#x2F;download&#x2F;feature.html?programid=51624" rel="nofollow">http:&#x2F;&#x2F;www.qnx.com&#x2F;download&#x2F;feature.html?programid=51624</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tomxor" target="_blank">tomxor</a>   <span class="timeago" data-date="2021-08-19 01:35:50 &#43;0000 UTC">2021-08-19 01:35:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This struck me as a potentially mind-blowing win for NetBSD. Why isn&#x27;t every RTOS, embedded system OS, toy OS,experimental OS etc. based on NetBSD?<p>I think it is used a lot as a starting point for porting other OS, but it doesn&#x27;t necessarily persist.<p>Supposedly Apple started with NetBSD when porting OS X to x86, not that x86 is exactly esoteric, but NetBSD lends itself to being a starting point. From what I read nothing remains of NetBSD in OSX, the current BSD userland is from FreeBSD but is pretty old still.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wahern" target="_blank">wahern</a>   <span class="timeago" data-date="2021-08-19 03:05:42 &#43;0000 UTC">2021-08-19 03:05:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apple Base Station and related firmwares (e.g. Extreme) ran NetBSD.<p>BSD-based products are more common than believed, but because of the liberal licensing they seem to mostly fly under the radar, not unlike various proprietary options like VxWorks and TRON.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=snowwindwaves" target="_blank">snowwindwaves</a>   <span class="timeago" data-date="2021-08-19 05:54:48 &#43;0000 UTC">2021-08-19 05:54:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just to be clear vxworks is not bsd based that I could tell from Wikipedia. I work with Schneider electric plcs and sometimes vxworks errors bubble up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-19 11:53:11 &#43;0000 UTC">2021-08-19 11:53:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think they meant to say that BSD-based stuff is common but unknown to most, and that the same goes for VxWorks and TRON, in that both open source BSD and proprietary solutions have licenses that make their inclusion in other software products not noticed by many people.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tomxor" target="_blank">tomxor</a>   <span class="timeago" data-date="2021-08-19 12:59:28 &#43;0000 UTC">2021-08-19 12:59:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same for Minix3... until someone dug it out of IntelME no one knew it was one of the most ubiquitous deployed OS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mapgrep" target="_blank">mapgrep</a>   <span class="timeago" data-date="2021-08-19 01:21:05 &#43;0000 UTC">2021-08-19 01:21:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is super interesting. I will say the package manager (pkgsrc) seems to be very portable as well. It’s default on netbsd, smartos&#x2F;illumos, and minix, but also available for macOS, Linux, and other operating systems. I use it routinely on smartos and it’s a breeze.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=II2II" target="_blank">II2II</a>   <span class="timeago" data-date="2021-08-19 03:25:36 &#43;0000 UTC">2021-08-19 03:25:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There was a time when NetBSD&#x27;s portability was impressive.  A handful of open source operating systems supported a handful of architectures, then there was NetBSD (and OpenBSD). Then Linux started to look beyond the x86 and started gathering steam on other architectures. NetBSD couldn&#x27;t really compete for developers and it began stagnating. It probably didn&#x27;t help that a lot of the &quot;Unix&quot; userspace also became more tightly coupled to Linux.<p>Don&#x27;t get me wrong: I was enormously enthusiastic about NetBSD in the mid-1990&#x27;s and I still prefer the idea of a unified core OS. The thing is, it&#x27;s a lot easier to deal with one operating system than multiple. If you&#x27;re developing under Linux, it&#x27;s going to be easier to develop code for an Arm based system under Linux because it defines your expectations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danieldk" target="_blank">danieldk</a>   <span class="timeago" data-date="2021-08-19 07:48:20 &#43;0000 UTC">2021-08-19 07:48:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Linux probably supports more platforms these days. But it often requires vendor-specific kernel forks, specific distributions, etc. NetBSD is impressive because it can be (cross-)compiled for many systems using the stock distribution without much effort (<i>build.sh</i> script).<p>Disclaimer: I haven&#x27;t used or looked at NetBSD since 2006-2007 or so, but I think this is still accurate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 11:33:25 &#43;0000 UTC">2021-08-19 11:33:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This. Linux under ARM is a nightmare, NetBSD for ARM it&#x27;s just a single distribution per subarch.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 11:32:40 &#43;0000 UTC">2021-08-19 11:32:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Linux doesn&#x27;t even properly work on legacy non-x86 devices.
+NetBSD for m68k runs much better than GNU&#x2F;Linux.<p>EDIT: Downvote me if you want, but the reality is that hard.<p>You have to use specific distros and hard patches to get things running well. For example under PPC32 there&#x27;s no support for common distros.<p>Don&#x27;t let me start on Mips, Sparc or Alpha, where NetBSD runs on it just fine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nix23" target="_blank">nix23</a>   <span class="timeago" data-date="2021-08-19 08:30:21 &#43;0000 UTC">2021-08-19 08:30:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Linux is just a Kernel NetBSD is a System.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-19 10:57:29 &#43;0000 UTC">2021-08-19 10:57:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMO: NetBSD might be superior but the lack of GPL means less work on it is published. The net effect is that everyone puts up with Linux because it <i>actually</i> runs on everything.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 11:34:39 &#43;0000 UTC">2021-08-19 11:34:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;Linux because it actually runs on everything.<p>Good joke. Linux barely runs on some legacy arches, having to use really old kernels and making a lot of current software useless.<p>NetBSD just &#x2F;runs&#x2F; new releases on older hardware such as m68k machines with no crazy tweaks.<p>&gt;but the lack of GPL means less work on it is published.<p>You realize a lot of the components on the graphics substack on Linux are non-GPL, right? Not just X, but the backends on the kernel.<p>Also Linux is full of propietary drivers and blobs. Check Linux-Libre&#x27;s changelog if you don&#x27;t believe me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jayp1418" target="_blank">jayp1418</a>   <span class="timeago" data-date="2021-08-19 16:34:50 &#43;0000 UTC">2021-08-19 16:34:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also if anyone interested in testing out new GPU code check this : <a href="https:&#x2F;&#x2F;www.unitedbsd.com&#x2F;d&#x2F;563-56-gpu-drivers-update" rel="nofollow">https:&#x2F;&#x2F;www.unitedbsd.com&#x2F;d&#x2F;563-56-gpu-drivers-update</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=avmich" target="_blank">avmich</a>   <span class="timeago" data-date="2021-08-19 02:35:35 &#43;0000 UTC">2021-08-19 02:35:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are BSD clones for smallish (small memory or even no real memory management unit) systems - RetroBSD and LiteBSD: <a href="http:&#x2F;&#x2F;retrobsd.org&#x2F;wiki&#x2F;doku.php" rel="nofollow">http:&#x2F;&#x2F;retrobsd.org&#x2F;wiki&#x2F;doku.php</a> , <a href="https:&#x2F;&#x2F;github.com&#x2F;sergev&#x2F;LiteBSD&#x2F;wiki" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;sergev&#x2F;LiteBSD&#x2F;wiki</a> .
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=forty" target="_blank">forty</a>   <span class="timeago" data-date="2021-08-19 05:33:29 &#43;0000 UTC">2021-08-19 05:33:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I always read about NetBSD fantastic portability. I wonder though, in practice, is there any hardware that NetBSD supports that Linux doesn&#x27;t?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_only_law" target="_blank">the_only_law</a>   <span class="timeago" data-date="2021-08-19 08:20:43 &#43;0000 UTC">2021-08-19 08:20:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            VAX<p><a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;VAX" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;VAX</a><p>In fact I’m pretty certain NetBSD is the only modern OS that still has an active VaX port.  OpenBSD used to I believe, but no longer. Not even newer OpenVMS runs on the platform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=forty" target="_blank">forty</a>   <span class="timeago" data-date="2021-08-19 11:45:22 &#43;0000 UTC">2021-08-19 11:45:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed! Linux on VAX effort seems to only have traces on the internet until 2001 (which is apparently one year after VAX was discontinued by its maker).<p>I&#x27;m now curious to know where those 20+ year old computers can be found? I guess at least the NetBSD VAX port people must have some working hardware? Unless they work on emulators for hardware that doesn&#x27;t exist anymore, just for the beauty of it? Are there still productions systems running it? If there are, I&#x27;m assuming they are not the kind of production system where you would update de OS anyway ^^
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=liveoneggs" target="_blank">liveoneggs</a>   <span class="timeago" data-date="2021-08-19 12:37:48 &#43;0000 UTC">2021-08-19 12:37:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            they have real hardware and defend it
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robertlagrant" target="_blank">robertlagrant</a>   <span class="timeago" data-date="2021-08-19 04:10:45 &#43;0000 UTC">2021-08-19 04:10:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Literally got bored of scanning through the hundreds of cookies to find the ones that have &quot;legitimate interest&quot; to individually turn off.<p>Hope the article was good!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fogihujy" target="_blank">fogihujy</a>   <span class="timeago" data-date="2021-08-19 06:09:56 &#43;0000 UTC">2021-08-19 06:09:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Get an adblocker to block the consent modal. The Internet will be a much nicer place.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=afiori" target="_blank">afiori</a>   <span class="timeago" data-date="2021-08-19 06:40:40 &#43;0000 UTC">2021-08-19 06:40:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            consent modals are important, you should get an adblocker to block tracking where the choice is not given
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BoxOfRain" target="_blank">BoxOfRain</a>   <span class="timeago" data-date="2021-08-19 11:10:46 &#43;0000 UTC">2021-08-19 11:10:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I strongly disagree, they&#x27;re little more than pointless nagware designed as a fig leaf over the gaping privacy issues on the modern web. While I get the intention, it was clearly designed by people who didn&#x27;t grasp the concept of alarm fatigue and they&#x27;re usually full of truly obnoxious dark patterns which have nothing to do with informed consent.<p>I block them all and it massively improves the user experience of the web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nextaccountic" target="_blank">nextaccountic</a>   <span class="timeago" data-date="2021-08-19 15:19:51 &#43;0000 UTC">2021-08-19 15:19:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t consent to tracking, like, ever. So the proper way to deal with this is to auto-deny and not show up the popup.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fogihujy" target="_blank">fogihujy</a>   <span class="timeago" data-date="2021-08-19 07:38:54 &#43;0000 UTC">2021-08-19 07:38:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I block both.<p>Tracking isn&#x27;t really legal without consent, though. If a page tracks visitors without explicit consent the site owner is breaking the GDPR.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwawayswede" target="_blank">throwawayswede</a>   <span class="timeago" data-date="2021-08-19 10:46:59 &#43;0000 UTC">2021-08-19 10:46:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you use an extension that auto-approves, it&#x27;s on you. I&#x27;m not familiar with adblock that blocks consent dialog or auto uncheckes all possible and clicks &quot;ok&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rhn_mk1" target="_blank">rhn_mk1</a>   <span class="timeago" data-date="2021-08-19 11:00:57 &#43;0000 UTC">2021-08-19 11:00:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s not true. There are multiple bases for data processing in the GDPR that are not dependent on consent: <a href="https:&#x2F;&#x2F;ico.org.uk&#x2F;for-organisations&#x2F;guide-to-data-protection&#x2F;guide-to-the-general-data-protection-regulation-gdpr&#x2F;lawful-basis-for-processing&#x2F;#what" rel="nofollow">https:&#x2F;&#x2F;ico.org.uk&#x2F;for-organisations&#x2F;guide-to-data-protectio...</a><p>It&#x27;s not clear to me that tracking is unconditionally illegal in any of them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjerem" target="_blank">pjerem</a>   <span class="timeago" data-date="2021-08-19 06:46:01 &#43;0000 UTC">2021-08-19 06:46:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same. That was insulting.
+I managed to read it through Safari’ Reader mode.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=simonjgreen" target="_blank">simonjgreen</a>   <span class="timeago" data-date="2021-08-19 07:22:44 &#43;0000 UTC">2021-08-19 07:22:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have great memories sat in the labs at college with peculiar hardware just seeing what we could run netbsd on. Aside from education it had no practical utility to us at the time, but it was good fun :)<p>Brilliant project delivering some good free spirited light heartedness to the OS world.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-08-19 03:04:21 &#43;0000 UTC">2021-08-19 03:04:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It couldn&#x27;t run on my &quot;bring your own ISO&quot; VPS provider. which did manage to run OpenBSD and FreeBSD.<p>(Very possible I made some noob mistake)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 01:31:16 &#43;0000 UTC">2021-08-19 01:31:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenBSD and Void user here. NetBSD was good under the 5.x&#x2F;6.x era on the desktop, then the quality plummeted, a lot of ports segfaulted.<p>Now with 9.2 people is telling me is working really great as in the old days.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tomxor" target="_blank">tomxor</a>   <span class="timeago" data-date="2021-08-19 01:42:00 &#43;0000 UTC">2021-08-19 01:42:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have some not great memories of trying to use it through 5.x back when there was no binary package manager. A lot of stuff wouldn&#x27;t compile easily or segfaulted easily even on x86, but it was a long time ago and I was a noob at unix let alone fixing compilation issues, so I never really knew if it was my incompetence or NetBSD. Either way it was definitely harder back then without binary packages... I remember thinking at the time: what&#x27;s the point on being able to run on old hardware if it takes a month to compile the stuff you need.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mlyle" target="_blank">mlyle</a>   <span class="timeago" data-date="2021-08-19 05:03:37 &#43;0000 UTC">2021-08-19 05:03:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yah... I ran NetBSD-1.1 and then followed current for awhile from source on little machines-- first a 486, then a Pentium and a SPARC 1+.  It was clean and wonderful.<p>I just dug the Pentium of my late childhood out of the closet and figured I&#x27;d play DOS games and install recent NetBSD.  But GENERIC is too big even with the reasonable maximum 64MB of RAM (most Pentiums cannot cache more than 64MB) to do anything but crawl, and compiling a kernel takes about 15 hours on a Pentium 120... and sure, I could build on another machine, but is it even Unix anymore if it&#x27;s not self-hosting?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-19 11:38:54 &#43;0000 UTC">2021-08-19 11:38:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cross-compile the kernel, sets and pkgs on a newer machine. NetBSD makes it really easy to do so.<p><a href="https:&#x2F;&#x2F;www.netbsd.org&#x2F;docs&#x2F;guide&#x2F;en&#x2F;chap-build.html" rel="nofollow">https:&#x2F;&#x2F;www.netbsd.org&#x2F;docs&#x2F;guide&#x2F;en&#x2F;chap-build.html</a><p>EDIT: Slim down the kernel as much as you can.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bruce343434" target="_blank">bruce343434</a>   <span class="timeago" data-date="2021-08-19 08:02:04 &#43;0000 UTC">2021-08-19 08:02:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ...and has gaping flaws in its ipv6 implementation
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=greyface-" target="_blank">greyface-</a>   <span class="timeago" data-date="2021-08-19 08:08:29 &#43;0000 UTC">2021-08-19 08:08:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;www.netbsd.org&#x2F;support&#x2F;security&#x2F;advisory.html" rel="nofollow">https:&#x2F;&#x2F;www.netbsd.org&#x2F;support&#x2F;security&#x2F;advisory.html</a><p><pre><code>  NetBSD-SA2021-001 Predictable ID disclosures in IPv4 and IPv6
+  NetBSD-SA2020-002 Specific ICMPv6 error message packet can crash the system
+  NetBSD-SA2019-004 IPv6 neighbor cache leak on expiration
+  NetBSD-SA2018-004 Remote Memory Corruption in IPv6
+  NetBSD-SA2018-003 Remote DoS in IPsec (IPv6)
+  NetBSD-SA2008-015 ICMPv6 Packet Too Big messages
+  NetBSD-SA2008-013 IPv6 Neighbor Discovery Protocol
+  NetBSD-SA2008-011 ICMPv6 MLD query
+  NetBSD-SA2008-003 IPsec in IPv6 Denial of Service
+  NetBSD-SA2007-005 IPv6 Type 0 Routing Header
+  NetBSD-SA2006-016 IPv6 socket options can crash the system
+  NetBSD-SA2004-002 Inconsistent IPv6 path MTU discovery handling</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unixhero" target="_blank">unixhero</a>   <span class="timeago" data-date="2021-08-19 09:46:20 &#43;0000 UTC">2021-08-19 09:46:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s important point, yes. Are you one of the few ipv6 users?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ggm" target="_blank">ggm</a>   <span class="timeago" data-date="2021-08-19 10:35:02 &#43;0000 UTC">2021-08-19 10:35:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Few? World is on 27%. South Asia on 60%, North Americq is 47% , Europe on 43%<p>Check around. I don&#x27;t call a quarter of the world &quot;few&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hansel_der" target="_blank">hansel_der</a>   <span class="timeago" data-date="2021-08-19 10:51:12 &#43;0000 UTC">2021-08-19 10:51:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            mostly phones thou
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggm" target="_blank">ggm</a>   <span class="timeago" data-date="2021-08-19 11:08:38 &#43;0000 UTC">2021-08-19 11:08:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lotta phones. But a lotta fibre and hfc is dualstack. The aussie NBN, Vietnam FPT, Comcast, sky UK...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-19 11:17:49 &#43;0000 UTC">2021-08-19 11:17:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FIOS is one of the only decent ISPs in the US still on IPv4 only.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

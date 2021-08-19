@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/using-rust-with-elixir-for-code-reuse-and-performance/">
+
+
+    <title>Using Rust with Elixir for code reuse and performance - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Using Rust with Elixir for code reuse and performance - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/using-rust-with-elixir-for-code-reuse-and-performance/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/using-rust-with-elixir-for-code-reuse-and-performance/">
+<meta name="twitter:title" content="Using Rust with Elixir for code reuse and performance - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Using Rust with Elixir for code reuse and performance - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T12:27:23JST",
+    "dateModified": "2021-08-19T12:27:23JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.doctave.com/2021/08/19/using-rust-with-elixir-for-code-reuse-and-performance.html">Using Rust with Elixir for code reuse and performance</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 16:57:46 &#43;0000 UTC">2021-08-19 16:57:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Unsurprisingly, Rust outperforms Elixir by 2 orders of magnitude.<p>That seems very surprising to me. Is this a common result? I&#x27;ve heard that the BEAM is not the best for &quot;number crunching&quot; code, is this one of those scenarios? Is this really just the raw performance of the languages, or a difference in algorithms? There&#x27;s also no mention of the version of Elixir and the OTP. Did the JIT change anything?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bb1234" target="_blank">bb1234</a>   <span class="timeago" data-date="2021-08-19 16:55:07 &#43;0000 UTC">2021-08-19 16:55:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For someone who does not know much about NIFs, will it be a lot slower if the Rust service is coded as a command line application and then invoked using System.cmd? Is that a good alternative?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=latch" target="_blank">latch</a>   <span class="timeago" data-date="2021-08-19 16:36:47 &#43;0000 UTC">2021-08-19 16:36:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One thing to keep in mind is that even the simplest Rust NIF will significantly slow your builds and increase your repo&#x2F;artifact sizes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nickjj" target="_blank">nickjj</a>   <span class="timeago" data-date="2021-08-19 14:12:29 &#43;0000 UTC">2021-08-19 14:12:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if they looked into using <a href="https:&#x2F;&#x2F;github.com&#x2F;asaaki&#x2F;cmark.ex" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;asaaki&#x2F;cmark.ex</a> which is an already made Markdown Elixir NIF written in C. No glue code needed since the package already exists.<p>Back when I was writing Elixir, it&#x27;s what I used to process Markdown and it was also substantially faster than the native Elixir Markdown library (Earmark).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NiklasBegley" target="_blank">NiklasBegley</a>   <span class="timeago" data-date="2021-08-19 15:38:03 &#43;0000 UTC">2021-08-19 15:38:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author here. I actually was not aware of cmark.ex - thanks for pointing it out.<p>In this case the code reuse was more important than pure native speed. We already had a Rust library that used pulldown-cmark [1] with some custom tweaks that we wanted to duplicate. Maybe this behavior could have been copied using cmark.ex too (we thought about doing this in pure Elixir, as mentioned in the post), but given how straightforward Rustler made integrating our existing code, this seems like the better choice.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;raphlinus&#x2F;pulldown-cmark" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;raphlinus&#x2F;pulldown-cmark</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brightball" target="_blank">brightball</a>   <span class="timeago" data-date="2021-08-19 14:59:13 &#43;0000 UTC">2021-08-19 14:59:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve seen a major preference toward Rust for NIFs in Elixir land because of the guarantees. People like their BEAM guarantees and exiting the BEAM without strong guarantees feels risky.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zaphar" target="_blank">zaphar</a>   <span class="timeago" data-date="2021-08-19 14:24:12 &#43;0000 UTC">2021-08-19 14:24:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even if they did they may have preferred Rust because parsing arbitrary user provided input is one of the more risky things you can do in C. This is a perfect use case for Rust&#x27;s memory safety model.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=queuebert" target="_blank">queuebert</a>   <span class="timeago" data-date="2021-08-19 14:28:01 &#43;0000 UTC">2021-08-19 14:28:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Before Rust, it seemed there was a law that every sufficiently critical code path would eventually be rewritten in C or C++.<p>After Rust, giving up a bit of performance to not have to maintain the C code underneath seems preferred. And often you don&#x27;t even sacrifice performance.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nickjj" target="_blank">nickjj</a>   <span class="timeago" data-date="2021-08-19 14:39:56 &#43;0000 UTC">2021-08-19 14:39:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; After Rust, giving up a bit of performance to not have to maintain the C code underneath seems preferred<p>Yeah no doubt about it, although in this case the C implementation has been a long running project that&#x27;s under the official commonmark GitHub repo at <a href="https:&#x2F;&#x2F;github.com&#x2F;commonmark&#x2F;cmark" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;commonmark&#x2F;cmark</a>.<p>But I think the most important thing here is an Elixir NIF already exists to use it. The blog post as is leaves readers having to implement ~100 lines of Elixir code to use the Rust version because the author of the blog post didn&#x27;t include that code in the article, or open source it as a library for others to use.<p>From a reader&#x27;s POV if your goal is to get a highly stable, fast and safe Markdown parser running in Elixir, the Elixir cmark library I linked in a parent comment solves that problem out of the box.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ihumanable" target="_blank">ihumanable</a>   <span class="timeago" data-date="2021-08-19 16:45:22 &#43;0000 UTC">2021-08-19 16:45:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yea, I&#x27;d probably of ended up using cmark too.<p>It is nice though to learn about NIFs and rustler, there are a lot of high quality crates out there that you can wrap and take advantage of from elixir code once you get comfortable with doing it.<p>So possibly a sub-optimal approach, but the author indicates in another comment they had customized the rust version and wanted to be able to share code, which seems legit.  Always good to stock up that toolbox though with more neat stuff, and rustler NIFs are seriously neat.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lostcolony" target="_blank">lostcolony</a>   <span class="timeago" data-date="2021-08-19 15:22:50 &#43;0000 UTC">2021-08-19 15:22:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah; I think people responding are taking your response as &quot;they did the wrong thing&quot;. It sounds more like &quot;Hey, here&#x27;s another option that I&#x27;ve used in the past to solve that problem&quot;, leaving the evaluation of the relevant tradeoffs as an exercise to the reader (where it should be since you&#x27;d wait them differently for different projects)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

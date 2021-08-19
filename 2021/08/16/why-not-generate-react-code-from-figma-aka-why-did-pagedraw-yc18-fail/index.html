@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/why-not-generate-react-code-from-figma-aka-why-did-pagedraw-yc18-fail/">
+
+
+    <title>Why not generate React code from Figma? (a.k.a. why did PageDraw YC18 fail?) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Why not generate React code from Figma? (a.k.a. why did PageDraw YC18 fail?) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/why-not-generate-react-code-from-figma-aka-why-did-pagedraw-yc18-fail/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/why-not-generate-react-code-from-figma-aka-why-did-pagedraw-yc18-fail/">
+<meta name="twitter:title" content="Why not generate React code from Figma? (a.k.a. why did PageDraw YC18 fail?) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Why not generate React code from Figma? (a.k.a. why did PageDraw YC18 fail?) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T18:38:42JST",
+    "dateModified": "2021-08-16T18:38:42JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="">Why not generate React code from Figma? (a.k.a. why did PageDraw YC18 fail?)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jefro118" target="_blank">Jefro118</a>   <span class="timeago" data-date="2021-08-17 18:41:33 &#43;0000 UTC">2021-08-17 18:41:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m working on this with <a href="https:&#x2F;&#x2F;pygma.app" rel="nofollow">https:&#x2F;&#x2F;pygma.app</a>. I was too quite surprised that no one has done a better job of this yet. One obvious issue is that Figma works in absolute positions and this is generally a bad way of writing CSS, but this is mostly overcome with some simple heuristics. At the moment my product is more like Overlay, which produces code that is visually consistent but often not semantic or what the designer would have intended. I think this can largely be solved with machine learning, computer vision in particular. Uizard seems like the most impressive product in this regard but their use case is slightly different.<p>Another problem is that most product teams don&#x27;t just need to generate code once but also keep it in sync with Figma. As far as I can tell, no one has solved the syncing problem in either direction particularly well. I actually think syncing from React -&gt; Figma is not fundamentally difficult but you need to build a big hairy compiler to deal with any React + styling code which would be a PITA. Going in the other direction is more fundamentally difficult I think, probably needs very good machine learning as well.<p>Also, always love to hear more details about precisely what&#x27;s so painful and boring about the way you deal with it now?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=robertnowell" target="_blank">robertnowell</a>   <span class="timeago" data-date="2021-08-17 23:20:34 &#43;0000 UTC">2021-08-17 23:20:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool to hear about this
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-08-17 15:38:20 &#43;0000 UTC">2021-08-17 15:38:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is painfully visible in big web agencies with tons of clients.<p>The flow of designs to be turned into code is relentless, it&#x27;s almost like a factory.<p>The reason this doesn&#x27;t get solved is that you&#x27;ll always need a developer to smooth the edges, making it responsive, check things work properly everywhere.<p>There is just too much cruft in the web for full proper automation and there are plenty of frontend developers who barely know how to code but knows how to write React component at a relatively low price.<p>For individual product companies the effort to create something like this would be too big. Adopting an emergent third party solution instead of throwing frontenders at the problem would be a risky proposition.<p>Agencies would be the perfect candidate for buying something like this but the cost of developers can easily be passed down to the customer - and if they&#x27;re big enough to have a lot of clients, they make money because of their brand, not because they&#x27;re particularly cheap.<p>I don&#x27;t think we&#x27;ll see a solution to this before General Artificial Intelligence; the incentives for building a custom solution for this problem are low and the cost is relatively high.<p>Maybe if the web as we know were to become simpler &#x2F; standardised (imagine having native views with native components configured by web services, instead of the wild west of an html page) this could become doable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robertnowell" target="_blank">robertnowell</a>   <span class="timeago" data-date="2021-08-17 23:25:51 &#43;0000 UTC">2021-08-17 23:25:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, do you have experience with web agency work? I&#x27;ve never thought about the challenges they face, but they must face this challenge all the time
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokethrowaway" target="_blank">jokethrowaway</a>   <span class="timeago" data-date="2021-08-18 13:59:08 &#43;0000 UTC">2021-08-18 13:59:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I worked with some of them and I have close friends running them.<p>They definitely have this problem all the time.<p>Imagine having n PM from big brands who need to build some websites &#x2F; landing pages and don&#x27;t want to commit their own development resources (either they don&#x27;t have them, or they do).<p>Agencies generally have internal project managers to match the clients and extract requirements.<p>A common pattern is to have some developers and designers on the payroll (but the pay is not great, it&#x27;s hard to get good talent) and a few contractors you worked with on the side for more exotic projects (eg. if a client wants a 3d website).<p>The designers come up with the designs. Sometimes the client will have their own design.<p>Often times the design + some notes on the side can replace a standard requirements documents.<p>After that the designs are sent to the developers who convert it into code and deploy, usually with some sort of CMS (WordPress is still pretty popular, Django as well).<p>The project gets demoed and adjustments &#x2F; bugfixing starts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Etheryte" target="_blank">Etheryte</a>   <span class="timeago" data-date="2021-08-16 19:21:28 &#43;0000 UTC">2021-08-16 19:21:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There have been attempts at tools like this more or less as long as I can remember. The earliest one I recall seeing was Adobe Photoshop exporting sliced designs, but I&#x27;m sure there were similar takes earlier too. There are two main issues that are more or less universal: generating reasonable code, and drawing the rest of the owl. The first part does not need much explanation, teaching a machine to generate reasonable code that&#x27;s understandably structured is akin to teaching a machine to program in general. Context is hard and the output of such programs is generally a big mess. The second problem is drawing the rest of the owl [0]. Wiring up a frontend to a backend is not a trivial task, and one that I would argue to date does not have solid universal solutions. There are many companies and libraries trying to address this in different ways, but they all come with their own pains. Asking a tool to nail down both of the above issues is a very, very tall order and I don&#x27;t expect anyone to succeed for the general case anytime soon. I do think great progress can be made in narrower scopes though.<p>[0] <a href="https:&#x2F;&#x2F;knowyourmeme.com&#x2F;memes&#x2F;how-to-draw-an-owl" rel="nofollow">https:&#x2F;&#x2F;knowyourmeme.com&#x2F;memes&#x2F;how-to-draw-an-owl</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robertnowell" target="_blank">robertnowell</a>   <span class="timeago" data-date="2021-08-16 23:13:59 &#43;0000 UTC">2021-08-16 23:13:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I appreciate the thoughtful response.<p>Wiring up a frontend to a backend isn&#x27;t a trivial task, but is pretty typical software engineering. If part of the work (the ui) could be done for you, wouldn&#x27;t that be a clear value-add?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Etheryte" target="_blank">Etheryte</a>   <span class="timeago" data-date="2021-08-17 16:22:29 &#43;0000 UTC">2021-08-17 16:22:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes and no. For the literal first prototype you get out of the door, yes, having some baseline UI work done for you would be nice. For the sake of the argument, let&#x27;s assume that the code generated by said tool is at least somewhat reasonably structured so refactoring the code isn&#x27;t a nightmare either. You wire the UI up to some data and get it out of the door to get some feedback. The problem comes after that initial step — you show the first prototype to some test users or stake holders and figure out what needs to change. Integrating the now changed output of the updated UI with the code you already have will no longer be trivial. So long as the prototype is lean, this will be manageable for some time, but sooner or later it will not. The problem is that for most projects, the initial prototype stage is a very miniscule part of the whole product lifetime. Getting one prototype for cheap can be good, but there are UI prototyping tools that can do this. Using those tools instead of trying to reapply the updated output to your now-existing code base will most likely be less work.<p>In general I do think that tools in this niche will mature over time, but in my very subjective opinion, they won&#x27;t be the holy grail of cutting down development time. Most of the time, the hard part of software development is the long haul, not the initial kickoff.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=robertnowell" target="_blank">robertnowell</a>   <span class="timeago" data-date="2021-08-17 23:24:03 &#43;0000 UTC">2021-08-17 23:24:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, so what you&#x27;re saying is that a big problem that dev+design teams will encounter is that they need to be able to iterate on designs together, so a real solution here would need to be able to integrate updates to the design into the codebase (and possibly vice versa). Am I understanding your point correctly?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Etheryte" target="_blank">Etheryte</a>   <span class="timeago" data-date="2021-08-18 08:55:59 &#43;0000 UTC">2021-08-18 08:55:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, exactly. This is a problem that many teams already struggle with when doing this manually, e.g. which design constraints are shared and which are unique. Context is hard to put into machine language and I see the above issue as one of the main hurdles in this space.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sdrinf" target="_blank">sdrinf</a>   <span class="timeago" data-date="2021-08-17 01:40:23 &#43;0000 UTC">2021-08-17 01:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What I find particularly funny, looking at the big-picture capability of &quot;designer tool generating extendable code&quot;, this was basically available since... visual studio 2005? Yet, no one have found a business model for interfacing figma-react reliably at scale.<p>OTOH, for the capability itself, you might want to look at <a href="https:&#x2F;&#x2F;reactstudio.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;reactstudio.com&#x2F;</a>   .
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quickthrower2" target="_blank">quickthrower2</a>   <span class="timeago" data-date="2021-08-17 08:41:03 &#43;0000 UTC">2021-08-17 08:41:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The original ASP.NET of 2002ish had drag and drop interface design like VB6! Although the rails MVC model won out, for simple apps it wasn’t a bad way to develop. It had some pains though, by trying to follow desktop so closely it required a large amount of state data flowing up and down from the page.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=plasmic" target="_blank">plasmic</a>   <span class="timeago" data-date="2021-08-16 18:52:47 &#43;0000 UTC">2021-08-16 18:52:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, we&#x27;re working on this at Plasmic:<p><a href="https:&#x2F;&#x2F;www.plasmic.app&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.plasmic.app&#x2F;</a><p>(Our users include ex-PageDraw&#x2F;Anima users.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hcho" target="_blank">hcho</a>   <span class="timeago" data-date="2021-08-16 21:14:57 &#43;0000 UTC">2021-08-16 21:14:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suspect, genarating components from designs is a pain point for narrow subsection of companies which use React. I also suspect those which have this problem are not in a place to pay. Startups with limited runways, agencies with shoestring budgets are not the most lucrative.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jtchang" target="_blank">jtchang</a>   <span class="timeago" data-date="2021-08-16 21:22:33 &#43;0000 UTC">2021-08-16 21:22:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because the issue is the interactions between the components and not the components themselves.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mpbeauj" target="_blank">mpbeauj</a>   <span class="timeago" data-date="2021-08-17 15:26:12 &#43;0000 UTC">2021-08-17 15:26:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>Ding ding</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

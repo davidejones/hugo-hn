@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/objectoriented-entitycomponentsystem-design/">
+
+
+    <title>Object-Oriented Entity-Component-System Design - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Object-Oriented Entity-Component-System Design - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/objectoriented-entitycomponentsystem-design/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/objectoriented-entitycomponentsystem-design/">
+<meta name="twitter:title" content="Object-Oriented Entity-Component-System Design - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Object-Oriented Entity-Component-System Design - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T15:09:47JST",
+    "dateModified": "2021-08-16T15:09:47JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://voxely.net/blog/object-oriented-entity-component-system-design/">Object-Oriented Entity-Component-System Design</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeremycw" target="_blank">jeremycw</a>   <span class="timeago" data-date="2021-08-16 17:07:57 &#43;0000 UTC">2021-08-16 17:07:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the focus on ECS when talking about data-oriented design largely misses the point of what data-oriented design is all about. Focusing on a _code_ design pattern is the antithesis of _data_-oriented design. Data-oriented is about breaking away from the obsession with taxonomy, abstraction and world-modeling and moving towards the understanding that all software problems are data transformation problems.<p>It&#x27;s that all games essentially (and most software in general) boil down to:
+transform(input, current_state) -&gt; output, new_state<p>Then, for some finite set of platforms and hardware there will be an optimal transform to accomplish this and it is our job as engineers to make &quot;the code&quot; approach this optimal transform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bob1029" target="_blank">bob1029</a>   <span class="timeago" data-date="2021-08-16 19:25:18 &#43;0000 UTC">2021-08-16 19:25:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Data-oriented is about breaking away from the obsession with taxonomy, abstraction and world-modeling<p>Something about this does not sit well with me.<p>Data is absolutely worthless if it generated on top of a garbage schema. Having poor modeling is catastrophic to any complex software project, and will be the root of all evil downstream.<p>In my view, the <i>principal</i> reason people hate SQL is because no one took the time to &quot;build the world&quot; and consult with the business experts to verify if their model was well-aligned with reality (i.e. the schema is a dumpster fire). As a consequence, recursive queries and other abominations are required to obtain meaningful business insights. If you took the time to listen to the business explain the complex journey that - for instance - user email addresses went down, you may have decided to model them in their own table rather than as a dumb string fact on the Customers table with zero historization potential.<p>Imagine if you could go back in time and undo all those little fuck ups in your schemas. With the power of experience and planning ahead, you can do the 2nd best thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeremycw" target="_blank">jeremycw</a>   <span class="timeago" data-date="2021-08-16 19:46:15 &#43;0000 UTC">2021-08-16 19:46:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re right, when I mentioned &quot;taxonomy, abstraction and world-modeling&quot; I meant as it pertains to code organization in the tradition OOP&#x2F;OOD sense where it&#x27;s generally about naming classes, creating inheritance hierarchies, etc. Data-oriented design is _absolutely_ concerned with the data schema. I would, however, disagree that the focus should be on &quot;building the world&quot; with your schema. To me this means creating the schema based off of some gut&#x2F;fuzzy feeling you get when the names of things all end up being real world nouns. To me creating a good schema is less about world building than it is about having the exact data that you need, well normalized and in a format that works well with the algorithm you want to apply to it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikki93" target="_blank">nikki93</a>   <span class="timeago" data-date="2021-08-17 00:05:41 &#43;0000 UTC">2021-08-17 00:05:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think ECS necessarily means a &quot;build the world&quot; approach. I think it&#x27;s best kept at the level of a data structure with some given set of operations: create entity, destroy entity, add component to entity, remove component from entity, get component on entity, and the big one -- query &#x2F; iterate through component combinations on all entities that have them.<p>Just like arrays and structs, it&#x27;s yet another data structure to be used in the general data-oriented approach, one that becomes useful because those creation &#x2F; destruction patterns come up in games and adding and removing components is a great way to express runtime behavior as well as explore gameplay.<p>The &quot;focus&quot; on ECS may just come from it being an interesting space as of late vs. arrays, structs and for loops that have been around for ever, but it&#x27;s mostly just an acknowledgement of common array, struct and for loop patterns that arise. There&#x27;s also a lot out there about the systems part and scheduling and event handling but I think it&#x27;s almost best to start out with simple procedural code (that then has access to the aforementioned data structure) and let patterns collect pertinent to the game in question.<p>One big aspect I personally dig is if you establish an entity &#x2F; data schema you get scene saving, undo &#x2F; redo, blueprint &#x2F; prefab systems that are all quite useful and basically necessary if you want to collaborate with artists and game designers on a content-based game, and empowers them to express large spaces of possibilities without editing the code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zarkov99" target="_blank">zarkov99</a>   <span class="timeago" data-date="2021-08-17 00:37:17 &#43;0000 UTC">2021-08-17 00:37:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People love SQL because it is truly an incredibly bad language. Poor to no ability to abstract, no composability, a grammar so convoluted it makes C++ look logical, and so on. The relational model is a beautiful thing but its power is obscured by how awful the main gateway to it is.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=typon" target="_blank">typon</a>   <span class="timeago" data-date="2021-08-16 19:44:27 &#43;0000 UTC">2021-08-16 19:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Schema design is THE problem data oriented programming is focused on. It&#x27;s saying, let&#x27;s design our data structures in memory and on disk such that they exist to solve the problem at hand. I think youre talking about the same thing
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Keyframe" target="_blank">Keyframe</a>   <span class="timeago" data-date="2021-08-16 21:28:51 &#43;0000 UTC">2021-08-16 21:28:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or to circle.back again to Fred Brooks, time and time again:<p>&quot;Show me your flowcharts and conceal your tables, and I shall continue to be mystified. Show me your tables, and I won&#x27;t usually need your flowcharts; they&#x27;ll be obvious.&quot;<p>- Fred Brooks
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragonwriter" target="_blank">dragonwriter</a>   <span class="timeago" data-date="2021-08-17 07:25:58 &#43;0000 UTC">2021-08-17 07:25:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; moving towards the understanding that all software problems are data transformation problems.<p>But this understanding is fundamentally, deeply wrong, in the same way that civil engineering based approaches to software engineering are wrong for most software applications.<p>That is: yes, all software <i>systems</i> are data transformation <i>systems</i>, but most software problems are not “how do I produce the system most narrowly tailored to the present requirements” but more often “how to engineer a system for success with the pace and kind of change that we can expect over time in this space”.<p>(Now, games, particularly, are both pushing the limits of hardware and fairly static, so making them narrowly-tailored, poorly adaptable static works is often <i>not</i> wrong. But that doesn&#x27;t generalize to all, or even most, software.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sitkack" target="_blank">sitkack</a>   <span class="timeago" data-date="2021-08-17 15:43:04 &#43;0000 UTC">2021-08-17 15:43:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is how you think about the software you write. System evolution is only one aspect. Most patterned OO codebases I have come across were *not* engineered for evolution. Sure there were some classes you could implement or replace, but the complexity was not paid back later.<p>Design principles can be applied to all implementation mechanisms.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=WorldMaker" target="_blank">WorldMaker</a>   <span class="timeago" data-date="2021-08-16 19:24:14 &#43;0000 UTC">2021-08-16 19:24:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This fits my gut feeling every time I see an ECS system that videogame design has gotten stuck in a local maxima abstraction&#x2F;pattern. Often what they really want is a Monadic abstraction of a data&#x2F;state transformation process, but they are often stuck in languages (&quot;for performance reasons&quot;) that make it hard to impossible to get good Monadic abstractions.      So instead they use the hammers that to make nails of the abstractions that they can get. ECS feels to me like a strange attempt to build Self-like OO dynamic prototypes in a class-based OO language, and that&#x27;s almost exactly what you would expect for an industry only just now taking baby steps outside of C&#x2F;C++.<p>C# has some good tools to head towards that direction (async&#x2F;await is a powerful Monadic transformer, for instance; it&#x27;s not a generic enough transformer on its own of course, but an interesting start), but as this article points out most videogames work in C# today still has to keep the back foot in C&#x2F;C++ land at all times and C&#x2F;C++ mentalities are still going to clip the wings of abstraction work.<p>(ETA: Local maxima are still useful of course! Just that I&#x27;d like to point out that they can also be a trap.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-16 20:51:55 &#43;0000 UTC">2021-08-16 20:51:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&quot;for performance reasons&quot;<p>The quotes imply that this is a bad reason, but in soft realtime systems you often want complete control of memory allocation.<p>Even in the case of something like Unity--in order to give developers the performance they want--they&#x27;ve designed subset of C# they call high performance C# where memory is manually allocated.<p>In most cases if you&#x27;re using an ECS, it&#x27;s because you care so much about performance that you want to organize most of your data around cache locality. If you don&#x27;t care about performance, something like the classic Unity Game Object component architecture is a lot easier to work with.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=unknownOrigin" target="_blank">unknownOrigin</a>   <span class="timeago" data-date="2021-08-16 22:12:53 &#43;0000 UTC">2021-08-16 22:12:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yea, you&#x27;re right, I think the previous poster seriouspy underestimates videogames as performance critical (and performance consistent!) apps. In the modern days of desktop Java and C# (and even more in web dev) the vast majority of coders just don&#x27;t come across the need to &quot;do everything you need to do&quot; in 33ms <i>or less</i>, <i>consistently</i>.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=waste_monk" target="_blank">waste_monk</a>   <span class="timeago" data-date="2021-08-17 04:49:49 &#43;0000 UTC">2021-08-17 04:49:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s 16.66ms, if you want to hit 60FPS. Or 11.11ms if you&#x27;re targeting 90FPS for VR applications.<p>Big respect to the work (and the people behind that work) that goes into getting modern AAA games to hit these targets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=WorldMaker" target="_blank">WorldMaker</a>   <span class="timeago" data-date="2021-08-16 22:28:05 &#43;0000 UTC">2021-08-16 22:28:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not implying it is a bad reason with the quotes, I&#x27;m trying to imply that it is a misguided reason (even if it has good intentions).<p>The &quot;rule&quot; that C&#x2F;C++ is always &quot;more performant&quot; is just <i>wrong</i>. It&#x27;s a bit of a sunk cost fallacy that because the games industry has a lot of (constantly reinvented) experience in performance optimizing C&#x2F;C++ that they can&#x27;t get the same or better benefits if they used better languages and higher abstractions. (It&#x27;s the exact same sunk cost fallacy that a previous games industry generation said C&#x2F;C++ would never beat hand-tuned Assembly and it wasn&#x27;t worth trying.)<p>In Enterprise day jobs I&#x27;ve seen a ton of &quot;high performance&quot; C# with regular garbage collection. Performance optimizing C# and garbage collection is a different art than performance optimizing manually allocated memory code, but it is an art&#x2F;science that exists. I&#x27;ve even seen some very high performance games written entirely in C# and not &quot;high performance C#&quot; but the real thing with honest garbage collection.<p>(It&#x27;s a different art to performance optimize C# code but it isn&#x27;t even that different, at a high level a lot of the techniques are very similar like knowing when to use shared pools or deciding when you can entirely stack allocate a structure instead of pushing it elsewhere in memory, etc.)<p>The implication in the discussion above is that a possible huge sweet spot for a lot of game development would actually be a language a lot more like Haskell, if not just Haskell. A lot of the &quot;ECS&quot; abstraction boils away into the ether if you have proper Monads and a nice do-notation for working with them. You&#x27;d get something of the best of both worlds that you could write what looks like the usual imperative code games have &quot;always&quot; been written in, but with the additional power of a higher abstraction and more complex combinators than what are often written by hand (many, many times over) in ECS systems.<p>So far I&#x27;ve not seen any production videogame even flirt with a language like Haskell. It clearly doesn&#x27;t look anything like C&#x2F;C++ so there&#x27;s no imagination for how performant it might actually be to write a game in it (outside of hobbyist toys). But there are High Frequency Trading companies out there using Haskell in production. It can clearly hit some strong performant numbers. The art to doing so is even more different from C&#x2F;C++ than C#&#x27;s is, but it exists and there are experts out there doing it.<p>Performance <i>is</i> a good reason to do things, but I think the videogames industry tends to especially lean on &quot;performance&quot; as a crutch to avoid learning new things. I think as an industry there&#x27;s a lot of reason to avoid engaging more experts and expertise in programming languages and their performance optimization methodologies when it is far easier to train &quot;passionate&quot; teens extremely over-simplified (and generally wrong) maxims like &quot;C++ will always be more performant than C#&quot; than to keep up with the <i>actual</i> state of the art. I think the games industry is happiest, for a number of reasons, not exploring better options outside of local maxima and &quot;performance&quot; is an easily available excuse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vvanders" target="_blank">vvanders</a>   <span class="timeago" data-date="2021-08-16 23:43:35 &#43;0000 UTC">2021-08-16 23:43:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you may be indexing a bit into your exposure and painting the industry in a broad brush.<p>I&#x27;ve seen impressive things done with Lua, from literate AI programming with coroutines to building compostable component based language constructs instead of standard OOP. You have things like GOAL[1] which ran on crazy small systems (the Lua I saw ran in a 400kb block as well).<p>On performance, data oriented design and efficient use of caches <i>is</i> the way you get faster. I&#x27;ve done it in Java, I&#x27;ve done it in C#, I&#x27;ve done it in Rust and C++. Certain languages have better primitives for data layout and so you see gamedev index into them. We used to do things like &quot;in-place seek-free&quot; loading where an object was directly serialized to disk and pointers were written as offsets that were fixed up post load. Techniques like this easily net 10-30x performance benefits. It&#x27;s the same reason database engines run circles around standard language constructs.<p>[1] <a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Game_Oriented_Assembly_Lisp" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Game_Oriented_Assembly_Lisp</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=WorldMaker" target="_blank">WorldMaker</a>   <span class="timeago" data-date="2021-08-17 00:16:23 &#43;0000 UTC">2021-08-17 00:16:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You are correct that I am using a broad brush, but so far it is a broad brush sort of conversation. I realize I&#x27;m a (bitter?) cynic at this point and don&#x27;t have a lot of respect for the videogames industry as a whole from a technical perspective, because it is an industry that prides itself on reinventing wheels, not sharing a lot of efforts between projects, and not trusting nor retaining expertise in the long run. I realize there are a lot of great and novel approaches such as the ones you mention (I appreciate that), but so much of the novelty is siloed and a lot of what I see as a certain kind of outsider is the tiniest slices of things that escaped the siloes such as Unity and Unreal. I realize they aren&#x27;t accurate to the state of the technical art <i>in some siloes</i>, but these days given the number of games using one or the other of those two common engines today it certainly reflects the &quot;state of the technical median&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ehaliewicz2" target="_blank">ehaliewicz2</a>   <span class="timeago" data-date="2021-08-16 23:55:22 &#43;0000 UTC">2021-08-16 23:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which companies use Haskell for HFT?  
+I know someone who works at a HFT company that switched away from Haskell specifically for performance reasons.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-17 10:35:29 &#43;0000 UTC">2021-08-17 10:35:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It&#x27;s the exact same sunk cost fallacy that a previous games industry generation said C&#x2F;C++ would never beat hand-tuned Assembly and it wasn&#x27;t worth trying.<p>C&#x2F;C++ hasn&#x27;t beat the performance of hand-tuned assembly - it has simply gotten close enough that the cost of hand-tuned assembly is not worth it in most cases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjlegato" target="_blank">pjlegato</a>   <span class="timeago" data-date="2021-08-17 00:19:56 &#43;0000 UTC">2021-08-17 00:19:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seconding this - some esoteric JVM garbage collector tuning is required to build a high performance Java (or Clojure, etc.) system, but it can be done.<p>It&#x27;s arguably significantly less work to learn how to tune the GC and then optimizing it for your situation than it is to deal with manual memory allocation and all of its fallout.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=renox" target="_blank">renox</a>   <span class="timeago" data-date="2021-08-17 06:20:22 &#43;0000 UTC">2021-08-17 06:20:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If memory serves, you (only) need two or three times the memory for GC which work well(low pause) than for manual allocation --&gt; I&#x27;m surprised that developers of PC games didn&#x27;t switch to GCs &#x27;en masse&#x27;..<p>And no, I&#x27;m not joking: I work in C++ and I know exactly how annoying memory errors can be.. Thanks a lot valgrind|ASAN developers!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjlegato" target="_blank">pjlegato</a>   <span class="timeago" data-date="2021-08-18 17:56:46 &#43;0000 UTC">2021-08-18 17:56:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your optimization goal is &quot;use the least memory possible,&quot; then sure, manual memory allocation is the way to go. I was addressing a different optimization goal: the &quot;high performance&quot; case, meaning approximately &quot;high throughput, low latency operation.&quot;<p>There is a common misconception that GC invariably precludes the construction of a &quot;high performance&quot; system, which is not true. If your use case allows you to not care as much about larger memory consumption -- 2x to 3x does seem like a reasonable first approximation of &quot;larger&quot; -- then GC is indeed a viable option for building &quot;high performance&quot; systems.<p>This case is not uncommon. Not everyone is targeting a memory constrained console or embedded system.<p>In many (though of course not all) cases, the tradeoff is well worth it -- consume more memory at runtime, spend some time tuning the GC, and in exchange developers can ship a product faster, by having to spend significantly less time dealing with manual memory allocation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-19 01:24:40 &#43;0000 UTC">2021-08-19 01:24:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;If your optimization goal is &quot;use the least memory possible,&quot; then sure, manual memory allocation is the way to go. I was addressing a different optimization goal: the &quot;high performance&quot; case, meaning approximately &quot;high throughput, low latency operation.&quot;<p>Ignoring the amount of memory used, GC tuning a managed language doesn&#x27;t give you the flexibility to control memory layout needed for maximum cache locality.<p>&gt;If your use case allows you to not care as much about larger memory consumption -- 2x to 3x does seem like a reasonable first approximation of &quot;larger&quot; -- then GC is indeed a viable option for building &quot;high performance&quot; systems.<p>Not ignoring amount of memory used. In the context of this thread--video games specifically &quot;high performance&quot; video games--2x to 3x is almost never going to be acceptable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-17 22:40:25 &#43;0000 UTC">2021-08-17 22:40:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can tell you why this switch didn&#x27;t happen: 2x to 3x the memory usage is just absolutely abysmal for a process that is barely fitting into memory as it is. Most of the games that run up against these constraints are multiplatform titles targeting  consoles that are notoriously stingy with main memory to reduce cost.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-17 15:18:26 &#43;0000 UTC">2021-08-17 15:18:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;The &quot;rule&quot; that C&#x2F;C++ is always &quot;more performant&quot; is just wrong.<p>Who said it&#x27;s a rule? What C&#x2F;C++ gets you is the ability to manually allocate memory <i>without jumping through hoops</i>.<p>&gt; Performance optimizing C# and garbage collection is a different art than performance optimizing manually allocated memory code, but it is an art&#x2F;science that exists. I&#x27;ve even seen some very high performance games written entirely in C# and not &quot;high performance C#&quot; but the real thing with honest garbage collection.<p>Performance optimizing C# with garbage collection for high performance soft realtime systems (I&#x27;ve done it) relies on tricks like object pooling to avoid triggering GC along with avoiding many of the more advanced language features. Even then you don&#x27;t get the same level of control. I&#x27;m also almost completely certain that the high performance C# games you&#x27;re talking about aren&#x27;t using C# for the engine, but feel free to provide examples so I can take a look.<p>If your game (or parts of your game) doesn&#x27;t need the performance that comes with a higher degree of memory layout control, then by all means use whatever tools you want to.<p>I&#x27;ve written game logic in C#, F#, Ruby, Haxe, Python, Lua, Java, JavaScript and Elixir.<p>&gt;The implication in the discussion above is that a possible huge sweet spot for a lot of game development would actually be a language a lot more like Haskell, if not just Haskell.<p>There almost certainly is for game logic. Many modern game engines provide higher level scripting languages.<p>However, if what you are working on is in that sweet spot, you likely didn&#x27;t need an ECS to begin with and a classic component architecture would have probably been a lot easier to deal with.<p>&gt;But there are High Frequency Trading companies out there using Haskell in production.<p>HFT is not game dev. &quot;Performance&quot; in HFT doesn&#x27;t mean the same thing as performance in games.<p>I haven&#x27;t used Haskell specifically, but I&#x27;ve toyed with using Elixir for gamedev. It&#x27;s reliance on linked lists makes it extremely difficult to iterate quickly enough. There are work arounds of course, but the work arounds remove most of what is nice about Elixir in the first place.<p>&gt;Performance is a good reason to do things, but I think the videogames industry tends to especially lean on &quot;performance&quot; as a crutch to avoid learning new things. I think as an industry there&#x27;s a lot of reason to avoid engaging more experts and expertise in programming languages and their performance optimization methodologies when it is far easier to train &quot;passionate&quot; teens extremely over-simplified (and generally wrong) maxims like &quot;C++ will always be more performant than C#&quot; than to keep up with the actual state of the art. I think the games industry is happiest, for a number of reasons, not exploring better options outside of local maxima and &quot;performance&quot; is an easily available excuse.<p>The average engine coder writing high performance code in C++ isn&#x27;t a &quot;passionate teen&quot;. They are experienced software engineers who want to stick as close to the metal as they feasibly can.<p>The games industry (outside of AAA games) also has an extremely low barrier to entry, and it&#x27;s something that nearly every programmer has thought about doing at some point--if Haskell turns out to be a fantastic language for making games, it will almost certainly happen sooner or later.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=WorldMaker" target="_blank">WorldMaker</a>   <span class="timeago" data-date="2021-08-17 22:29:34 &#43;0000 UTC">2021-08-17 22:29:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The average engine coder writing high performance code in C++ isn&#x27;t a &quot;passionate teen&quot;. They are experienced software engineers who want to stick as close to the metal as they feasibly can.<p>Statistically the median age in the games industry is 25 <i>and always has been</i>. It&#x27;s a perpetually young industry not known for retaining experienced talent. I know that statistically the median doesn&#x27;t tell you a lot about how long of a tail there is of senior talent, you need the standard deviation for that, but given what I&#x27;ve seen as mostly an outside observer with a strong interest the burn out rate in the industry remains as high as ever and senior developers with decades of experience are most likely to be an anomaly and an exception that proves the rule than a reality. In terms of anecdata all of the senior software developers I&#x27;ve ever followed the careers of on blogs and&#x2F;or LinkedIn are all in management positions or entirely different industries after 30. I realize my sample size is biased by the people I chose to follow (for whichever reason) and anecdata is not data, but statistically it&#x27;s really hard for me to square &quot;experienced software engineers&quot; with &quot;in practice, it looks like no one over 30&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-19 01:33:44 &#43;0000 UTC">2021-08-19 01:33:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;Statistically the median age in the games industry is 25 and always has been.<p>Where are you getting this information from? The only hard data I can find is from self selected survey responses, but this survey from IGDA shows only 10% of employed game developers are under 25 [1]. My guess is that (as you&#x27;ve acknowledged is possible) there&#x27;s some serious selection bias going on. You said you have an interest in burn out rate, so I&#x27;m guessing you&#x27;re more likely to follow&#x2F;notice game devs who discuss this topic. This group is more likely to be suffering from burn out I&#x27;d wager.<p>Another poster already mentioned that engine devs (the one&#x27;s writing most of the C++) tend to be older than the industry average.<p>1. <a href="https:&#x2F;&#x2F;s3-us-east-2.amazonaws.com&#x2F;igda-website&#x2F;wp-content&#x2F;uploads&#x2F;2020&#x2F;01&#x2F;29093706&#x2F;IGDA-DSS-2019_Summary-Report_Nov-20-2019.pdf" rel="nofollow">https:&#x2F;&#x2F;s3-us-east-2.amazonaws.com&#x2F;igda-website&#x2F;wp-content&#x2F;u...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-17 22:47:59 &#43;0000 UTC">2021-08-17 22:47:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In game dev, there has been a really serious split between engine development and game (logic and content) development. Most of the talented and experienced programmers seem to drift towards engine development. That&#x27;s where the hard problems are and where these guys can have the most impact. As a bonus, engine development cycles are not so closely coupled to game release dates anymore, so crunch is less of an issue in engine teams.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BobbyJo" target="_blank">BobbyJo</a>   <span class="timeago" data-date="2021-08-16 18:50:10 &#43;0000 UTC">2021-08-16 18:50:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Focusing on a _code_ design pattern is the antithesis of _data_-oriented design<p>Doesn&#x27;t the former enable the latter? Ideally, language (both human and machine) would have the semantics needed to represent all transforms, but that&#x27;s not the case. Code you rely on, since none of it is written in isolation, needs to enable you to implement data-oriented design should you so choose.<p>Also, I don&#x27;t think pointing out that &#x27;all games are essentially...&#x27; is particularly useful. It&#x27;s true, no question, but that doesn&#x27;t mean it&#x27;s the most useful mental model for people to use when developing software. Our job as engineers is to make software that functions according to some set of desires, and those desires may directly conflict with approaching an optimal transform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeremycw" target="_blank">jeremycw</a>   <span class="timeago" data-date="2021-08-16 19:30:52 &#43;0000 UTC">2021-08-16 19:30:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Doesn&#x27;t the former enable the latter?<p>Not necessarily. ECS is a local maxima when developing a general purpose game engine. Since it&#x27;s general purpose it can do nothing more than provide a lowest common denominator interface that can be used to make any game. If you are building a game from scratch why would you limit yourself to a lowest common denominator interface when there&#x27;s no need? Just write the exact concrete code that needs to be there to solve the problem.<p>&gt; Our job as engineers is to make software that functions according to some set of desires, and those desires may directly conflict with approaching an optimal transform.<p>All runtime desires of the software must be encoded in the transform. So no software functionality should get in the way of approaching the optimal transform. What does get in the way of approaching the optimal transform is code organization, architecture and abstraction that is non-essential to performing the transform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BrS96bVxXBLzf5B" target="_blank">BrS96bVxXBLzf5B</a>   <span class="timeago" data-date="2021-08-16 20:00:54 &#43;0000 UTC">2021-08-16 20:00:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Just write the exact concrete code that needs to be there to solve the problem.<p>Good luck with that when the exact code to solve the problem is not the exact code the next week, because the problem has changed or evolved.<p>Not to suggest an ECS is <i>the answer</i>, but this line of thinking is reductive to the realities of creating a piece of art. It&#x27;s not a spec you can draw a diagram for and trust will be basically the same. It&#x27;s a creature you discover, revealing more of itself over time. The popularity of the ECS is because it provides accessible composition. It&#x27;s not the <i>only</i> way of composing data but being able to say &quot;AddX&quot;, &quot;RemoveX&quot; without the implementation details of what struct holds what data and what groupings might matter is what makes it appealing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 08:04:43 &#43;0000 UTC">2021-08-17 08:04:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think there’s two orthogonal things being conflated by you. Flexibility of a solution and how general the solution is.<p>What you’re basically saying is a solution should be flexible to change because making a game requires trial and error. I totally agree with that.<p>Using a general solution is one path to flexibility but it does come with a cost associated. It’s flexibility built on a tower of complexity and if you look at a modern ECS implementation that is performant it’s actually quite a lot of complexity. You’re also reducing flexibility in the sense that these sort of solutions generally have preferred patterns you need to fit your game design into. So you end up introducing a learning, maintainance and conceptual burden into the project you might not need.<p>OTOH if you have a specific problem you can write a specific solution for you will end up with less code, hopefully in a conceptually coherent form. That in itself offers flexibility. Simple code you can easily replace is often more flexible than complex code you need to coax into a new form.<p>The key is to recognise whether your problem is specific or general you need flexibility.<p>These architectural patterns are fun to argue over and obsessed over by armchair game developers but are a trap if you’re trying to make a game rather than a general purpose game engine.<p>Which isn’t to say you don’t want some framework underlying things for all sorts of mundane reasons. But most games could get away with that being an entity type that gets specialised rather than anything more complex.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BrS96bVxXBLzf5B" target="_blank">BrS96bVxXBLzf5B</a>   <span class="timeago" data-date="2021-08-17 08:35:14 &#43;0000 UTC">2021-08-17 08:35:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I think there’s two orthogonal things being conflated by you.
+&gt; It’s flexibility built on a tower of complexity<p>Agreed with the &#x27;flexibility on a tower of complexity&#x27;, 100%! :) was trying to not appear too dogmatic by describing is as &#x27;accessible composition&#x27;; generally any solution that is &#x27;accessible&#x27; is also broad enough that it has as many flaws as benefits, and an ECS definitely isn&#x27;t an exception.<p>&gt; These architectural patterns are fun to argue over and obsessed over by armchair game developers but are a trap if you’re trying to make a game rather than a general purpose game engine.<p>Again, agreed. Speaking from experience as an iterator and rapid prototyper who has used an ECS for years, and has been bitten by the complexity but hasn&#x27;t been able to beat the flexibility of being able to just write something like `entity-&gt;Add&lt;ScaleAnimation&gt;(...)`, `entity-&gt;Add&lt;DestroyAfter&gt;(...)`, `entity-&gt;Add&lt;Autotranslate&gt;(...)`, `entity-&gt;Add&lt;Sprite&gt;(...)` to be quickly and easily create a thing that looks nice, pops in smoothly, moves effortlessly, destroys itself thoughlessly. It lets you move between ideas quickly and then you can pivot to addressing concerns <i>if</i> any show up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 10:06:27 &#43;0000 UTC">2021-08-17 10:06:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah for sure, I love a good composable approach to entity creation as well particularly when it’s specified in data rather than code. The basic framework for getting that going is extremely lightweight which is fantastic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BobbyJo" target="_blank">BobbyJo</a>   <span class="timeago" data-date="2021-08-16 22:07:30 &#43;0000 UTC">2021-08-16 22:07:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you are building a game from scratch why would you limit yourself to a lowest common denominator interface when there&#x27;s no need?<p>There is a need: the limits of the human mind. Nobody can model an entire (worthwhile) game in their head, so unless you plan on recursively rewriting the entire program as each new new oversight pops up, you aren&#x27;t going to get anywhere near optimal anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debaserab2" target="_blank">debaserab2</a>   <span class="timeago" data-date="2021-08-16 21:25:44 &#43;0000 UTC">2021-08-16 21:25:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you are building a game from scratch why would you limit yourself to a lowest common denominator interface when there&#x27;s no need? Just write the exact concrete code that needs to be there to solve the problem.<p>Coming from the realm of someone who has mostly swam in the OO pool their career, I struggle understanding how a concrete implementation of something like a video game wouldn&#x27;t spiral out of control quickly without significant organization and some amount of abstraction overhead. That said, I have found ECS type systems be so general purpose that you end up doing a lot of things to please the ECS design itself than you do focusing on the implementation.<p>Do you have any examples of games and&#x2F;or code that are written in more of a data oriented way? I&#x27;d really love to learn more about this approach.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeremycw" target="_blank">jeremycw</a>   <span class="timeago" data-date="2021-08-16 22:01:34 &#43;0000 UTC">2021-08-16 22:01:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While stylistically I don&#x27;t necessarily agree with him all the time, Casey Muratori&#x27;s Handmade Hero (<a href="https:&#x2F;&#x2F;handmadehero.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;handmadehero.org&#x2F;</a>) is probably the most complete resource in terms of videos and access to source code as far as an &#x27;example&#x27; goes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debaserab2" target="_blank">debaserab2</a>   <span class="timeago" data-date="2021-08-16 22:19:34 &#43;0000 UTC">2021-08-16 22:19:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thank you!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway17_17" target="_blank">throwaway17_17</a>   <span class="timeago" data-date="2021-08-16 22:07:32 &#43;0000 UTC">2021-08-16 22:07:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The archetypal ’talk’ on Data Oriented Design (in the way GP is talking about it) is Mike Acton’s 2014 CPPCon keynote.<p>[1] <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rX0ItVEVjHc" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=rX0ItVEVjHc</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debaserab2" target="_blank">debaserab2</a>   <span class="timeago" data-date="2021-08-16 22:20:06 &#43;0000 UTC">2021-08-16 22:20:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=typon" target="_blank">typon</a>   <span class="timeago" data-date="2021-08-16 19:49:51 &#43;0000 UTC">2021-08-16 19:49:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s really annoying how many people misunderstand the term &#x27;data oriented design&#x27;. Usually to mean something like &#x27;not object oriented programming&#x27;. If your data was inherently hierarchical and talking about animals that meow or moo, go ahead and implement the textbook OO modeling.<p>This Mike Acton post describes it accurately: <a href="http:&#x2F;&#x2F;www.macton.ninja&#x2F;home&#x2F;onwhydodisntamodellingapproachatall" rel="nofollow">http:&#x2F;&#x2F;www.macton.ninja&#x2F;home&#x2F;onwhydodisntamodellingapproacha...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nikki93" target="_blank">nikki93</a>   <span class="timeago" data-date="2021-08-17 00:12:38 &#43;0000 UTC">2021-08-17 00:12:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I do think that in practice a hierarchical ontology like that is still best not modeled as a language-level hierarchy because the language inheritance &#x2F; hierarchy concepts are often not the exact semantic you want, IME. Esp. if it then ties to static types, since you then can&#x27;t change the hierarchy at runtime. I think even with a data-oriented approach to a hierarchy -- your code isn&#x27;t necessarily hierarchically organized, it just handles data that happens to express a hierarchy. And you want to be in control of the semantics of said hierarchy with more freedom (and explicitness) than the language-level hierarchy gives you -- so you want your own code that interprets the hierarchy expressed in the data and performs your desired semantics. This also allows artists and narrative or gameplay &#x2F; level designers to go see and edit the hierarchy and add elements to it.<p>An example is the prefab hierarchy you get in Unity, which is expressed through the data (prefabs and their relationships). (Note: I mean specifically the prefab inheritance hierarchy, not the transform spatial hierarchy -- the former has more overlap with the &quot;is a&quot; relationships). The code processing this hierarchy could&#x27;ve just been plain C code that parses the files and maintains an in-memory set of structures about them, even. You then get to define how properties inherit, what overriding means, etc. yourself.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=typon" target="_blank">typon</a>   <span class="timeago" data-date="2021-08-17 05:14:13 &#43;0000 UTC">2021-08-17 05:14:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Totally agreed. The fact that some of these concepts are embedded into the language design (say for C++) are minor conveniences at best - when they almost perfectly line up with the data you have - but just get in the way most of the time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=de_keyboard" target="_blank">de_keyboard</a>   <span class="timeago" data-date="2021-08-16 16:31:49 &#43;0000 UTC">2021-08-16 16:31:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where ECS gets muddy for me is when you have systems working on entities with multiple types of components at once.<p>* physics - position component + physics component<p>* rendering - position component + animation component<p>* etc..<p>How do we now store these components? How do we create &#x2F; access aggregates efficiently?<p>If we have two arrays then there is lots of hopping around:<p><pre><code>    PositionComponent[] 
+    PhysicsComponent[]
+</code></pre>
+Maybe we need some kind of grouping class?<p><pre><code>    struct EntityData {
+      PositionComponent position; &#x2F;&#x2F; Null if not a position entity
+      PhysicsComponent physics; &#x2F;&#x2F; Null if not a physics entity
+    }
+</code></pre>
+Interfaces have their issues too, but at least it&#x27;s fairly clear what to do:<p><pre><code>    class BouncyBall : IHasPosition, IHasPhysics {
+      IPosition getPosition() {
+        &#x2F;&#x2F; ...
+      }
+
+      IPhysics getPhysics() {
+        &#x2F;&#x2F; ...
+      }
+    }
+</code></pre>
+Anyone solved this before?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=royjacobs" target="_blank">royjacobs</a>   <span class="timeago" data-date="2021-08-16 16:36:32 &#43;0000 UTC">2021-08-16 16:36:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s wrong with iterating across multiple components? You seem to imply that this is &quot;hopping around&quot; and therefore bad, but it&#x27;s perfectly acceptable to do so.<p>Of course, if your system needs to iterate across 20 components to do its job then maybe you need to check if you&#x27;ve factored your components correctly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 17:45:40 &#43;0000 UTC">2021-08-16 17:45:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; What&#x27;s wrong with iterating across multiple components?</i><p>It&#x27;s bad for spatial locality. You end up with many more CPU cache misses, which significantly slows down execution. Using the CPU cache effectively is one of the primary reasons to use ECS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Twisol" target="_blank">Twisol</a>   <span class="timeago" data-date="2021-08-16 18:05:06 &#43;0000 UTC">2021-08-16 18:05:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Recognizing your username, I&#x27;d probably best not argue, but wouldn&#x27;t iterating across (say) two component arrays only cost you two pages in the cache at any given time, since you&#x27;re doing a sequential scan? You should have the same number of cache misses overall, unless you&#x27;re doing something very complicated for each entity to cause the cache to vacate one of the pages.<p>Of course, if you access N components you need N pages in the cache concurrently, which is going to fall over for a not-too-large N. But N=2 or N=3 seems unlikely to kill spatial locality.<p>I can imagine it gets a little more complicated with prefetch, but you&#x27;re still using the prefetched pages -- you just need to prefetch pages for two separate arrays (potentially at different rates based on component size) rather than one. Do these details end up snowballing in a way I&#x27;m not seeing, or are there details I&#x27;m just missing outright?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 18:43:47 &#43;0000 UTC">2021-08-16 18:43:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; two component arrays only cost you two pages in the cache at any given time</i><p>It sounds like you&#x27;re thinking of virtual memory (i.e. pages of memory either being in RAM or on disk). But CPU caching is about the much smaller L1, L2, and L3 caches directly on the chip itself.<p>Let&#x27;s say you have two kinds of components, A and B. You have those stored in two contiguous arrays:<p><pre><code>    AAAAAAAAAAAAAAAAAAA...
+
+    BBBBBBBBBBBBBBBBBBB...
+</code></pre>
+Each entity has an A and B and your system needs to access both of those to do its work. The code will look like:<p><pre><code>    for each entity:
+      access some data component A
+      access some data component B
+      do some computation
+</code></pre>
+On the first access of A, the A component for that entity and a bunch of subsequent As for other entities get loaded into the cache line. On the next access of B, the B for that entity along with a bunch of subsequent Bs gets loaded into a cache line. If you are lucky the A and B arrays will be at addresses such that the chip is able to put them in <i>different</i> cache lines. At that point, I think you&#x27;ll mostly be OK.<p>But if you&#x27;re unlucky and they are fighting for the same cache line, then each access can end up evicting the previous one and forcing a main memory look up for every single component.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Twisol" target="_blank">Twisol</a>   <span class="timeago" data-date="2021-08-16 23:16:50 &#43;0000 UTC">2021-08-16 23:16:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It sounds like you&#x27;re thinking of virtual memory (i.e. pages of memory either being in RAM or on disk).<p>I think I mostly just used the wrong term (page instead of line) -- I&#x27;m on board with the distinction you&#x27;re drawing.<p>&gt; But if you&#x27;re unlucky and they are fighting for the same cache line, then each access can end up evicting the previous one and forcing a main memory look up for every single component.<p>Yeah, I think this specifically is what I&#x27;m having a hard time imagining. I guess it depends on how which memory regions get mapped into which cache lines, and I think I&#x27;m assuming something closer to fully-associative, while you&#x27;re allowing for something closer to direct-mapped.<p>I can see the trouble -- you don&#x27;t really have much control over the mapping, unless you make some <i>really</i> deep assumptions about the CPU architecture and go to great lengths to position your arrays appropriately in memory. That would certainly be in the original spirit of data-oriented design, but it&#x27;s perhaps a bit beyond reasonable for most systems.<p>Thanks for working through this with me!<p>(P.S. For others, I found this illustration that helped load a bit of CPU cache architecture back into my brain: <a href="http:&#x2F;&#x2F;csillustrated.berkeley.edu&#x2F;PDFs&#x2F;handouts&#x2F;cache-3-associativity-handout.pdf" rel="nofollow">http:&#x2F;&#x2F;csillustrated.berkeley.edu&#x2F;PDFs&#x2F;handouts&#x2F;cache-3-asso...</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=quotemstr" target="_blank">quotemstr</a>   <span class="timeago" data-date="2021-08-16 18:49:12 &#43;0000 UTC">2021-08-16 18:49:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You should be able to use some kind of coloring approach to avoid that kind of false sharing, right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 21:12:40 &#43;0000 UTC">2021-08-16 21:12:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not an expert at the details of hardware architecture, but my understanding is that you&#x27;re basically stuck with whatever associativity and cache policy the chip supports. That, and the addresses that your components happen to be at, will determine whether they end up fighting over cache lines or not.<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cache_placement_policies" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cache_placement_policies</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=renox" target="_blank">renox</a>   <span class="timeago" data-date="2021-08-17 06:33:25 &#43;0000 UTC">2021-08-17 06:33:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &#x27;false sharing&#x27; == two items next to another in memory are accessed by different thread, as they are closed in memory they are then in the same cache line which is &#x27;shared&#x27; between two CPUs: read only is okay but read&amp;write is a performance killer<p>Here it&#x27;s a cache (associativity) conflict, as gugagore said it can impacts performance even in read only situation.. And yes, you&#x27;re describing a way to avoid the conflicts.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gugagore" target="_blank">gugagore</a>   <span class="timeago" data-date="2021-08-16 20:03:13 &#43;0000 UTC">2021-08-16 20:03:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think this is false sharing since the issue can occur without any writes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikki93" target="_blank">nikki93</a>   <span class="timeago" data-date="2021-08-16 18:36:59 &#43;0000 UTC">2021-08-16 18:36:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It depends on the storage pattern: archetype storages may actually keep those components together &#x2F; interspersed anyway, or hybrid things like the &quot;groups&quot; in entt. It does, generally speaking, just seem to give you an opportunity to see this issue re: cache misses arise in practice and rearrange your storage accordingly, by decoupling your processing logic (body of a query) from the actual layout. Esp. if the ECS provides a switch like &quot;store A and B interspersed in a single array&quot; that you can enable or disable at any point and profile both ways (part of the data-oriented design idea: orient your data for how it&#x27;s used in practice).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=royjacobs" target="_blank">royjacobs</a>   <span class="timeago" data-date="2021-08-16 19:25:27 &#43;0000 UTC">2021-08-16 19:25:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, that was the point I was trying to make (also in my other comment). It&#x27;s certainly bad, but if you iterate across, say, two components it shouldn&#x27;t be too bad?<p>It&#x27;s also an option to have your component data interleaved, if you know the iteration usage upfront, I suppose.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jayd16" target="_blank">jayd16</a>   <span class="timeago" data-date="2021-08-16 20:33:23 &#43;0000 UTC">2021-08-16 20:33:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s bad compared to what?  If you have one system that needs to iterate through A and B and another that need to iterate through B and C, what is a more ideal system?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BulgarianIdiot" target="_blank">BulgarianIdiot</a>   <span class="timeago" data-date="2021-08-16 17:09:58 &#43;0000 UTC">2021-08-16 17:09:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is not specific to ECS, but comes down to the &quot;single controller&quot; (or single writer, single owner etc. many names) problem.<p>Ideally you want to have one modifier&#x2F;controller, but you can have as many readers as you want.<p>When you can&#x27;t have a single controller, you have several options:<p>1. Pass ownership. Animated components control position only by animation. Physics components control position only by physics. You can pass this control in time from physics to animation and back.<p>2. Express one through the other. In this case, express animation as acting on physics constraints, and let the physics engine compute the final position. This way animation becomes just another &quot;physical force&quot; in your game. It can be hard to do sophisticated animation this way though.<p>3. Have physics-specific position and animation-specific position and have the final position be computed as a formula of both. Maybe you sum them. So either one that moves from a base offset, impacts the position. This depends on what the position is of.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jayd16" target="_blank">jayd16</a>   <span class="timeago" data-date="2021-08-16 16:46:53 &#43;0000 UTC">2021-08-16 16:46:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unity seems to store things by unique combination of components.  In your case they would have an arrays for entities with a position component and a physics component, and then an array of entities with a position component and an animation component, and possibly an array for entities with components that have all three.<p>Unity then schedules work for your system by passing all the relevant arrays.<p>Described in detail here: <a href="https:&#x2F;&#x2F;docs.unity3d.com&#x2F;Packages&#x2F;com.unity.entities@0.17&#x2F;manual&#x2F;ecs_core.html" rel="nofollow">https:&#x2F;&#x2F;docs.unity3d.com&#x2F;Packages&#x2F;com.unity.entities@0.17&#x2F;ma...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=danbolt" target="_blank">danbolt</a>   <span class="timeago" data-date="2021-08-16 18:20:15 &#43;0000 UTC">2021-08-16 18:20:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            EnTT&#x27;s registry might be an interesting read if you haven&#x27;t read it before. [1] The specs crate also provides a variety of storage implementations for varying types of components. [2]<p>I didn&#x27;t work on the game, but I spoke with some of the developers of <i>Homeworld: Deserts of Kharak</i>. Since there was a straightforward quantity of entities and components (a bunch of vehicles in a closed desert space), the space for all data was preallocated at initialization time. I can&#x27;t speak further on the specifics though.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;blob&#x2F;master&#x2F;docs&#x2F;md&#x2F;entity.md#the-registry-the-entity-and-the-component" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;blob&#x2F;master&#x2F;docs&#x2F;md&#x2F;entity....</a><p>[2] <a href="https:&#x2F;&#x2F;docs.rs&#x2F;specs&#x2F;0.17.0&#x2F;specs&#x2F;struct.VecStorage.html" rel="nofollow">https:&#x2F;&#x2F;docs.rs&#x2F;specs&#x2F;0.17.0&#x2F;specs&#x2F;struct.VecStorage.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sparkie" target="_blank">sparkie</a>   <span class="timeago" data-date="2021-08-16 16:42:33 &#43;0000 UTC">2021-08-16 16:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s a fairly recent work called SHAPES[1] which attempts to address this kind of customized memory layout without having to give up the OOP abstraction. You can try out different memory layouts without having to modify the types themselves.<p>[1]:<a href="https:&#x2F;&#x2F;www.doc.ic.ac.uk&#x2F;%7Escd&#x2F;ShapesOnwards.pdf;" rel="nofollow">https:&#x2F;&#x2F;www.doc.ic.ac.uk&#x2F;%7Escd&#x2F;ShapesOnwards.pdf;</a> A more recent revision of the work here:  <a href="https:&#x2F;&#x2F;www.researchgate.net&#x2F;publication&#x2F;341693673_Reshape_your_layouts_not_your_programs_A_safe_language_extension_for_better_cache_locality" rel="nofollow">https:&#x2F;&#x2F;www.researchgate.net&#x2F;publication&#x2F;341693673_Reshape_y...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=quotemstr" target="_blank">quotemstr</a>   <span class="timeago" data-date="2021-08-16 18:45:25 &#43;0000 UTC">2021-08-16 18:45:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Flexibility with object layout is one of the big potential unexploited advantages of managed code systems. Automatically &quot;column-izing&quot; large collections of objects ought to be in the wheelhouse of sufficiently clever JVM and CLR implementations, but this is a very under-explored line of research.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dkersten" target="_blank">dkersten</a>   <span class="timeago" data-date="2021-08-16 20:49:06 &#43;0000 UTC">2021-08-16 20:49:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Anyone solved this before?<p>Sure. Take a look at EnTT[1], a popular C++ ECS library. It comes with two main tools to deal with this: Sorting[2] and groups[3]. EnTT gives you a large spectrum of tools with different trade-offs so that you can tune your code based on usage patterns. Obviously different bits of code will have conflicting access patterns, so there&#x27;s no one-size-fits-all solution, but EnTT lets you optimise the patterns that are most important to you (based on profiling, hopefully).<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt</a><p>[2] Sort one component to be in the same order as another component, so that they can be efficiently accessed together: <a href="https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;wiki&#x2F;Crash-Course:-entity-component-system#sorting-is-it-possible" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;wiki&#x2F;Crash-Course:-entity-c...</a><p>[3] <a href="https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;wiki&#x2F;Crash-Course:-entity-component-system#groups" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt&#x2F;wiki&#x2F;Crash-Course:-entity-c...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throw149102" target="_blank">throw149102</a>   <span class="timeago" data-date="2021-08-16 18:01:23 &#43;0000 UTC">2021-08-16 18:01:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What you&#x27;re looking for is &quot;Arrays of Structs of Arrays&quot;.<p>See: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;AoS_and_SoA" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;AoS_and_SoA</a><p>Jonathan Blow has a good talk about it here: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YGTZr6bmNmk" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YGTZr6bmNmk</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beiller" target="_blank">beiller</a>   <span class="timeago" data-date="2021-08-16 18:47:43 &#43;0000 UTC">2021-08-16 18:47:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I solved it by duplicating the data. Because a physics object when created needs a starting position. And sometimes you need to &#x27;reset&#x27; the position and just having one position variable won&#x27;t allow that. The rendering logic checks if it has a physics state and if not use the other position etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 16:38:29 &#43;0000 UTC">2021-08-16 16:38:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 16:41:23 &#43;0000 UTC">2021-08-16 16:41:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is why the ECS pattern isn’t actually as performant as people make out. At least by default. I wrote this explanation of the archetype approach to making an ECS fast a while ago:<p>This is partly why a lot of ECS demos have a lot of homogeneous elements (they share all components in common). For example particle systems have long been written in a data oriented manner when running on the CPU. So if you implement it in the ECS style you can just run through the arrays in order and its all good. Or Unity&#x27;s city sim example. But games tend to have much more heterogeneous entities (they share less or few components in common).<p>The most obvious example I can think of to dispel the myth of ECS&#x27;s inherent DoDness is an ECS wherein each component storage is a linked list with each element individually allocated. Even iterating through the homogeneous entity example is likely to be extremely slow in comparison to flat arrays. So there is nothing about the pattern that demands it be implemented in a data-oriented manner.<p>But back to a more heterogeneous example. I&#x27;m going to try to explain it generally because I think a worked version would be enormous and maybe cloud things more? Typically component storage is indexed by the entity ID. You want to look up the component in the storage associated with a particular ID. If all your storages are flat arrays where the entity ID is just an index into the array the more heterogeneous your entities the more gaps you will have to iterate over and correspondingly more memory your game will take up. This isn&#x27;t great for cache locality or memory usage and we have to iterate over every entity for all systems to find the valid ones.<p>So the next step uses a dense array and a secondary backing array that is indexed by the entity id. So we can keep our components packed nicely but still look them up easily.<p>Instead of iterating over all the entities for every system we can find the shortest component storage for the set of components the system uses and iterate directly over that and lookup the other components in their storages by the current entity ID. Now we iterate over potentially many fewer entities but essentially do a random lookup into the other component storages for each one. So we&#x27;re introducing cache misses for the benefit of less things to iterate over.<p>So what we want is the benefits of blazing through arrays without the downsides of them being pretty sparse and ideally minimizing cache misses. Which is why the concept of an Archetype was invented. If we keep our components in flat arrays but crucially change our storage so we&#x27;re not keeping flat arrays of every component but keeping separate component storages for each archetype of entity we have right now.<p>Going from:<p>AAAAAAAAAA<p>BBBBBBBBBB<p>CCCCCCCCCC<p>To:<p>(ABC) A B C<p>(AB) AAA BBB<p>(AC) AAAAA CCCCC<p>(C) CCCCC<p>If we have a system that just iterates C&#x27;s it can find all the archetype storages and iterate straight through the C array for them one by one. So ideally we only pay a cache miss when we change archetype, have good cache locality and are iterating the minimum set. Similarly a system that uses components A and C will only iterate the archetype storage of ABC and AC and blaze straight through the A and C arrays of each. Same deal.<p>This comes at a cost of making adding and removing components from an entity more expensive.<p>We&#x27;re also ignoring interacting with other components or the world and how that might work. For example we might want to do damage to another entity entirely. Or we might want to look up the properties of the piece of ground we&#x27;re stood on. So there is a whole other layer of places we can ruin all this good work by wanting to access stuff pretty randomly. Relationships in games tend to be spatial and stuff tends to move around so it&#x27;s hard to see a general case solution to the problem.<p>Then there is other axis to think on like ease of creating the game, how flexible it is to change the game, iteration speed, designer friendliness and so on. Rarely IME has the gameplay code itself been the bottleneck outside of stupid mistakes.<p>In games this level of optimization is really great when you do have a big mostly homogenous set of things. Then it&#x27;s well worth the time to structure your data for efficient memory access. City Sims, games like Factorio and so on are classic examples.”
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hypertele-Xii" target="_blank">hypertele-Xii</a>   <span class="timeago" data-date="2021-08-16 17:15:03 &#43;0000 UTC">2021-08-16 17:15:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can modern cache hierarchies not maintain two parallel linear array iterations on the same core?<p>Or is CPU cache really so slow it can literally only look at one stride of memory at a time?<p>I&#x27;m skeptical this kind of optimization is necessary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 17:22:15 &#43;0000 UTC">2021-08-16 17:22:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you skimmed part of the original post because I mention using sparse arrays (linear arrays with ‘empty’ slots) and the benefits&#x2F;trade offs.<p>This archetype based approach is used in quite a few big ECS projects. Unity’s ECS and Bevy amongst them.<p>As with anything performance related though, particularly when considering the underlying principles of data oriented design you should be analysing the performance of your approach on the target hardware.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=de_keyboard" target="_blank">de_keyboard</a>   <span class="timeago" data-date="2021-08-16 16:52:15 &#43;0000 UTC">2021-08-16 16:52:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great explanation, thank you.<p>&gt; This comes at a cost of making adding and removing components from an entity more expensive.<p>I think you could write a design-time tool that takes a simple description file (with hints) and outputs code that stores your entities and components efficiently.<p>Description file:<p><pre><code>    {
+      &quot;archetypes&quot;: [
+        {
+          &quot;components&quot;: [ &quot;A&quot;, &quot;B&quot;, &quot;C&quot; ]
+        },
+        {
+          &quot;components&quot;: [ &quot;B&quot; ]
+        },
+        {
+          &quot;components&quot;: [ &quot;B&quot;, &quot;C&quot; ]
+        }
+      ]
+    }
+</code></pre>
+Output:<p><pre><code>    class ArchetypeABC {
+      A a;
+      B b;
+      C c;
+    }
+
+    class ArchetypeB {
+      B b;
+    }
+
+    class ArchetypeBC {
+      B b;
+      C c;
+    }
+
+    class EntityStore {
+      ArchetypeABC[] entitiesABC;
+      ArchetypeB[] entitiesB;
+      ArchetypeBC[] entitiesB;
+    }</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-16 17:10:22 &#43;0000 UTC">2021-08-16 17:10:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the way that the parent commenter illustrated the memory layout I thought they were talking about SoA style but your comment is using AoS style.<p>So I would expect the code corresponding to their comment to look like this instead of what you wrote:<p><pre><code>    class ArchetypeABC {
+      A[] as;
+      B[] bs;
+      C[] cs;
+    }
+
+    class ArchetypeB {
+      B[] bs;
+    }
+
+    class ArchetypeBC {
+      B[] bs;
+      C[] cs;
+    }
+</code></pre>
+But maybe I misunderstood?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 17:15:03 &#43;0000 UTC">2021-08-16 17:15:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You’re correct.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 17:02:11 &#43;0000 UTC">2021-08-16 17:02:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This static analysis might not be sufficient as most of these designs allow runtime manipulation of the components on an Entity. Usually the implementation of the component storage does much the same at runtime though so archetype storages are created and removed as needed. The static analysis could be used to pre-warm that if it was particularly slow.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway13337" target="_blank">throwaway13337</a>   <span class="timeago" data-date="2021-08-16 16:39:08 &#43;0000 UTC">2021-08-16 16:39:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Position is usually an entity level property.<p>But, assuming it isn&#x27;t, you would make that portion of things it&#x27;s own component&#x2F;trait of the entity. Components that rely on it could be declared to require it (in Unity, there is a RequireComponent annotation). So you can be sure if that component exists, that its required component also exists on the entity. I think this is a reasonably satisfying solution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-16 17:38:33 &#43;0000 UTC">2021-08-16 17:38:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ECS in this case isn&#x27;t referring to the general method of using entities that have much of their logic defined in components. As you&#x27;d have in classic unity with RequireComponent.<p>ECS is a specific software architecture where (among other things) there is no entity level property because an entity is just an identifier--all properties are stored in logicless, data only components. Unity DOTS has an implementation of this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-16 16:41:00 &#43;0000 UTC">2021-08-16 16:41:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Position is usually an entity level property.<p>that&#x27;s a very very video game centric point of view. If a pattern only works in a couple fields of application, it&#x27;s not a very good pattern..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 16:56:11 &#43;0000 UTC">2021-08-16 16:56:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; that&#x27;s a very very video game centric point of view.</i><p>ECS was invented for and is primarily used by videogames.<p><i>&gt; If a pattern only works in a couple fields of application, it&#x27;s not a very good pattern.</i><p>I completely and totally disagree. How would you even <i>define</i> a &quot;field of application&quot; without there being patterns and practices that are unique to it? If every domain uses the same techniques, what is the difference?<p>Off the top of my head, here are some patterns that I rarely see outside of their primary domain:<p>Programming languages and compilers:<p>* Recursive descent<p>* Top-down operator parsing<p>* The visitor pattern<p>* Mark-sweep garbage collection and the tri-color abstraction<p>Game and simulation programming:<p>* ECS<p>* Per-frame arena allocators<p>* Game loops<p>* Double buffering<p>* Spatial partitioning
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-16 22:23:03 &#43;0000 UTC">2021-08-16 22:23:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except the visitor, which can be useful in pretty much any system with polymorphism, and maybe &quot;game loops&quot; I definitely would not call any of those patterns ; methods and techniques maybe. These words don&#x27;t mean the same thing, a pattern is much more general than a technique !
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 23:51:09 &#43;0000 UTC">2021-08-16 23:51:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; Except the visitor, which can be useful in pretty much any system with polymorphism</i><p>In principle, yes. In practice, I&#x27;ve almost never seen the visitor pattern used outside of programming languages. Maybe once or twice in UI frameworks.<p><i>&gt; methods and techniques maybe. These words don&#x27;t mean the same thing, a pattern is much more general than a technique !</i><p>What&#x27;s your definition of a &quot;pattern&quot; and why wouldn&#x27;t the things I list fit in it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ehaliewicz2" target="_blank">ehaliewicz2</a>   <span class="timeago" data-date="2021-08-17 00:02:07 &#43;0000 UTC">2021-08-17 00:02:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If it&#x27;s extremely useful in a particular situation, why does it matter if it&#x27;s not useful outside of that situation?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=void_mint" target="_blank">void_mint</a>   <span class="timeago" data-date="2021-08-16 16:55:34 &#43;0000 UTC">2021-08-16 16:55:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is a dogmatic take. From wikipedia<p>&gt; Entity–component–system (ECS) is a software architectural pattern that is mostly used in video game development.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adamrezich" target="_blank">adamrezich</a>   <span class="timeago" data-date="2021-08-16 16:55:21 &#43;0000 UTC">2021-08-16 16:55:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ...for anything other than the field where the pattern makes sense, of course
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=viktorcode" target="_blank">viktorcode</a>   <span class="timeago" data-date="2021-08-16 17:12:26 &#43;0000 UTC">2021-08-16 17:12:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t find a perfect solution, but it goes like this:
+it doesn&#x27;t matter how many components an entity has, as long as all components are stored in corresponding arrays. So, you have positions array, velocity array, etc. Those arrays contain the data ideal for consumption by corresponding systems.<p>The problem here lies in linking those separate components (i.e. indices in arrays) to entities.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=michannne" target="_blank">michannne</a>   <span class="timeago" data-date="2021-08-16 16:59:39 &#43;0000 UTC">2021-08-16 16:59:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Typically, component is just some POCO class and systems iterate over combinations of these components.<p>&gt; if we have two arrays then there is lots of hopping around<p>Why? You can just create a custom allocation scheme assigning one giant chunk of memory to all components and give each system a custom iterator that iterates accordingly for the alignment of components it cares about
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=resonantjacket5" target="_blank">resonantjacket5</a>   <span class="timeago" data-date="2021-08-16 18:06:38 &#43;0000 UTC">2021-08-16 18:06:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually you&#x27;d have the &quot;physics&quot; system hold onto the array while the EntityData would hold a pointer to the PhysicsComponent for that Entity.<p>That way each entity can access it&#x27;s data quickly, and if there is some heavy physics computation it can easily iterate it in a list (aka checking for collisions).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gh123man" target="_blank">gh123man</a>   <span class="timeago" data-date="2021-08-16 17:17:50 &#43;0000 UTC">2021-08-16 17:17:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Possibly related - this is the same person who is working on a very impressive voxel game&#x2F;engine. I didn&#x27;t see an explicit mention of it in the blog, but the Youtube videos speak for themselves:<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCM2RhfMLoLqG24e_DYgTQeA" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;channel&#x2F;UCM2RhfMLoLqG24e_DYgTQeA</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=echohack5" target="_blank">echohack5</a>   <span class="timeago" data-date="2021-08-16 17:25:16 &#43;0000 UTC">2021-08-16 17:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personal anecdote: Habitat was developed as a sort of application deployment &#x2F; configuration management tool in Rust, and the architecture there is roughly equivalent to an ECS. I found it a joy to work with and work on. Not sure if it&#x27;s fundamentally a better software pattern, but it at least meshes with my brain better than how most OO-style software is laid out.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;habitat-sh&#x2F;habitat" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;habitat-sh&#x2F;habitat</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wlamartin" target="_blank">wlamartin</a>   <span class="timeago" data-date="2021-08-17 09:25:33 &#43;0000 UTC">2021-08-17 09:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We also use an ECS in Rust (shipyard) to power a bunch of the editing experience in Story.ai<p>After some serious initial difficulty getting my head away from &quot;this is a block&quot; to &quot;this entity has a block&quot; I think it&#x27;s turned out to make a lot of sense.<p>For example, checking whether a value shared by a &quot;when there is a new tweet&quot; is in scope when someone wants to use it (i.e. in nested block) is as simple as having a few components to represent a pointer from value to the ID of the block that shares it, and a list of blocks that share scope for this location and then compare the two.<p><a href="https:&#x2F;&#x2F;story.ai" rel="nofollow">https:&#x2F;&#x2F;story.ai</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kvark" target="_blank">kvark</a>   <span class="timeago" data-date="2021-08-16 18:52:39 &#43;0000 UTC">2021-08-16 18:52:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What I found in practice is that many people start using the ECS for speed, and then draw themselves into a corner of the design space. Now they have to weight every step on &quot;how would it work in ECS?&quot;, and dedicate effort to fight the ECS paradigm.<p>For example, a mesh may contain multiple materials. Is each material chunk a separate entity? Or maybe each bone in a skeleton is a separate entity with its own &quot;parent&quot; and &quot;transform&quot; plus other component.<p>One of the different approaches is component graph systems [1]. It lacks the ability to mix and match components, but provides a more natural (and simpler) model to program for.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;kvark&#x2F;froggy&#x2F;wiki&#x2F;Component-Graph-System" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;kvark&#x2F;froggy&#x2F;wiki&#x2F;Component-Graph-System</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=runald" target="_blank">runald</a>   <span class="timeago" data-date="2021-08-17 06:30:56 &#43;0000 UTC">2021-08-17 06:30:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems to be good in theory, but I&#x27;m not really buying into any of the implementations of ECS, CGS or whatnot until they have a working, non-trivial example. If they have really thought it far enough, then they should have at least have a complex game as a solution to a general problem they are addressing. The demo in that repo you linked can be trivially implemented, CGS or no. Someone could rebut with: it&#x27;s only a demonstration, but it&#x27;s easy to scale any game of any size. In theory yes, but theory and practice aren&#x27;t always friends. The actual complex game could serve as a proof, and the author can enumerate the pain points and limitations of the framework.<p>Wouldn&#x27;t that take too long? Not really, just copy an actual released game, but using shitty (I mean, free) assets and make up some random content. It should cut the total development time from a week to a month at most. By copying, I mean everything, from the main menu, to in game-menu, to the little bits of logic that makes a game fun and engaging.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 20:33:25 &#43;0000 UTC">2021-08-16 20:33:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Kinrany" target="_blank">Kinrany</a>   <span class="timeago" data-date="2021-08-17 09:03:46 &#43;0000 UTC">2021-08-17 09:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since it generalizes ECS, I believe it should be possible to keep any ECS optimizations by having special empty components, in cases where those optimizations still apply.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=serverholic" target="_blank">serverholic</a>   <span class="timeago" data-date="2021-08-16 21:20:12 &#43;0000 UTC">2021-08-16 21:20:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I saw this project awhile ago and think its really interesting. I hope people explore this more in the future.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 19:01:16 &#43;0000 UTC">2021-08-16 19:01:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, this is the same approach as Godot (a tree of nodes) by the looks of things?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ksaho" target="_blank">ksaho</a>   <span class="timeago" data-date="2021-08-17 03:54:26 &#43;0000 UTC">2021-08-17 03:54:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This reminds me on scene-graphs back in the day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikki93" target="_blank">nikki93</a>   <span class="timeago" data-date="2021-08-16 18:33:35 &#43;0000 UTC">2021-08-16 18:33:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The performance &#x2F; cache-orientation point gets talked about a lot re: ECS, but IME there are also (and maybe moreso) other important benefits:<p>- Combined with an inspector UI, you can explore gameplay by adding and removing components from entities and arrive at design emergently. One way to look at this is also that you write components and systems to handle the main gameplay path you start out thinking about, but your queries encode many other codepaths than just that (a combinatorial explosion of component membership in entity is possible). This lets you get a kind of &quot;knob crawl&quot; that you see in eg. sound design when tweaking parameters live with synths too. It lets artists and designers using the editor explore many gameplay possibilities.<p>- The way I see the component data is it&#x27;s kind of an interface &#x2F; source of truth, but some subsystems may end up storing transient data elsewhere at runtime (eg. a spatial octree or contact graph for physics). However as components are added or removed or component properties updated, the caches should be updated accordingly. You get a single focal point for scene state. Once some state is expressed as a component you get undo and redo, saving to scene files, saving an invidual (or group of) entity as a blueprint to reuse, ...<p>The cache thing feels like a minor point to me, inside a larger category of allowing you to massage your data based on access patterns by decoupling the logic acting on it. With performance being one of the goals of said massaging along with many others.<p>I also find myself not really focusing on the &quot;system&quot; aspect as much as the entity &#x2F; component; esp. re: embedding constructs for that into a library. I&#x27;ve found you can get far just having one large &quot;updateGame()&quot; function that does queries and then performs the relevant mutations in the query bodies, and you can then separate code into more functions (usually just simple free functions without parameters) from there that become your systems. There&#x27;s a bit of a rabbit hole designing reusable scheduling and event systems and whatnot but I feel like just simple calls to top level &#x2F; free functions like this on a per-game basis seems a lot clearer and ultimately more flexible (it&#x27;s just regular procedural code and you&#x27;re in control of what happens when). I like seeing the backtrace &#x2F; callstack and being the owner of things and then being explicit all the way up vs. entering from some emergently scheduled event dispatch system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=peterthehacker" target="_blank">peterthehacker</a>   <span class="timeago" data-date="2021-08-16 15:23:26 &#43;0000 UTC">2021-08-16 15:23:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That chart with “Weak Foundation” vs “Solid Foundation” reminds me of Martin Fowler’s chart in his Refactoring book that compares “good design” vs “no design”[0].<p>[0] <a href="https:&#x2F;&#x2F;martinfowler.com&#x2F;bliki&#x2F;DesignStaminaHypothesis.html" rel="nofollow">https:&#x2F;&#x2F;martinfowler.com&#x2F;bliki&#x2F;DesignStaminaHypothesis.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nodivbyzero" target="_blank">nodivbyzero</a>   <span class="timeago" data-date="2021-08-16 16:57:21 &#43;0000 UTC">2021-08-16 16:57:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Check this out.
+<a href="https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;skypjack&#x2F;entt</a><p>EnTT is a header-only, tiny and easy to use library for game programming and much more written in modern C++.
+Among others, it&#x27;s used in Minecraft by Mojang, the ArcGIS Runtime SDKs by Esri and the amazing Ragdoll.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=elteto" target="_blank">elteto</a>   <span class="timeago" data-date="2021-08-16 18:09:22 &#43;0000 UTC">2021-08-16 18:09:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tiny? In what world is this tiny?<p>entt.hpp:<p>#include &quot;config&#x2F;version.h&quot;
+#include &quot;core&#x2F;algorithm.hpp&quot;
+#include &quot;core&#x2F;any.hpp&quot;
+#include &quot;core&#x2F;attribute.h&quot;
+#include &quot;core&#x2F;family.hpp&quot;
+#include &quot;core&#x2F;hashed_string.hpp&quot;
+#include &quot;core&#x2F;ident.hpp&quot;
+#include &quot;core&#x2F;monostate.hpp&quot;
+#include &quot;core&#x2F;type_info.hpp&quot;
+#include &quot;core&#x2F;type_traits.hpp&quot;
+#include &quot;core&#x2F;utility.hpp&quot;
+#include &quot;entity&#x2F;component.hpp&quot;
+#include &quot;entity&#x2F;entity.hpp&quot;
+#include &quot;entity&#x2F;group.hpp&quot;
+#include &quot;entity&#x2F;handle.hpp&quot;
+#include &quot;entity&#x2F;helper.hpp&quot;
+#include &quot;entity&#x2F;observer.hpp&quot;
+#include &quot;entity&#x2F;organizer.hpp&quot;
+#include &quot;entity&#x2F;poly_storage.hpp&quot;
+#include &quot;entity&#x2F;registry.hpp&quot;
+#include &quot;entity&#x2F;runtime_view.hpp&quot;
+#include &quot;entity&#x2F;snapshot.hpp&quot;
+#include &quot;entity&#x2F;sparse_set.hpp&quot;
+#include &quot;entity&#x2F;storage.hpp&quot;
+#include &quot;entity&#x2F;utility.hpp&quot;
+#include &quot;entity&#x2F;view.hpp&quot;
+#include &quot;locator&#x2F;locator.hpp&quot;
+#include &quot;meta&#x2F;adl_pointer.hpp&quot;
+#include &quot;meta&#x2F;container.hpp&quot;
+#include &quot;meta&#x2F;ctx.hpp&quot;
+#include &quot;meta&#x2F;factory.hpp&quot;
+#include &quot;meta&#x2F;meta.hpp&quot;
+#include &quot;meta&#x2F;node.hpp&quot;
+#include &quot;meta&#x2F;pointer.hpp&quot;
+#include &quot;meta&#x2F;policy.hpp&quot;
+#include &quot;meta&#x2F;range.hpp&quot;
+#include &quot;meta&#x2F;resolve.hpp&quot;
+#include &quot;meta&#x2F;template.hpp&quot;
+#include &quot;meta&#x2F;type_traits.hpp&quot;
+#include &quot;meta&#x2F;utility.hpp&quot;
+#include &quot;platform&#x2F;android-ndk-r17.hpp&quot;
+#include &quot;poly&#x2F;poly.hpp&quot;
+#include &quot;process&#x2F;process.hpp&quot;
+#include &quot;process&#x2F;scheduler.hpp&quot;
+#include &quot;resource&#x2F;cache.hpp&quot;
+#include &quot;resource&#x2F;handle.hpp&quot;
+#include &quot;resource&#x2F;loader.hpp&quot;
+#include &quot;signal&#x2F;delegate.hpp&quot;
+#include &quot;signal&#x2F;dispatcher.hpp&quot;
+#include &quot;signal&#x2F;emitter.hpp&quot;
+#include &quot;signal&#x2F;sigh.hpp&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=linkdd" target="_blank">linkdd</a>   <span class="timeago" data-date="2021-08-16 21:03:50 &#43;0000 UTC">2021-08-16 21:03:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since it&#x27;s a header-only library, with a lot of templates, only the used code will be compiled.<p>So yes, this is tiny. Tinier than Unity, CryEngine, Unreal Engine, or other huge frameworks of that kind.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-16 22:40:09 &#43;0000 UTC">2021-08-16 22:40:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A comparison to those engines is a bit much isn’t it? It’s not like it provides comparable features.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=linkdd" target="_blank">linkdd</a>   <span class="timeago" data-date="2021-08-16 23:07:08 &#43;0000 UTC">2021-08-16 23:07:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC, all those engines provide an ECS that could be compared to entt.<p>Also, there is Hazel[0] which is based on entt and is the subject of an amazing youtube series[1].<p>IMHO, tinier means less features, at that point what could be considered comparable?<p><pre><code>  [0] - https:&#x2F;&#x2F;github.com&#x2F;TheCherno&#x2F;Hazel
+  [1] - https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list=PLlrATfBNZ98dC-V-N3m0Go4deliWHPFwT</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 07:04:22 &#43;0000 UTC">2021-08-17 07:04:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be comparable in size we should look at what they do. The three game engines originally mentioned have everything from physics to an entire visual IDE. A comparable smaller project is Godot not entt.<p>A comparable ECS implementation is what you’re after. Is entt tiny in comparison to similar projects.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reidjs" target="_blank">reidjs</a>   <span class="timeago" data-date="2021-08-16 16:23:35 &#43;0000 UTC">2021-08-16 16:23:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m curious if anyone has used ECS in a business application? 
+Our application has a lot of business rules between our different entities. Currently we use something like MVC and the rules mainly live in the models themselves. This can be a messy when describing rules between objects.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=codr7" target="_blank">codr7</a>   <span class="timeago" data-date="2021-08-16 17:34:04 &#43;0000 UTC">2021-08-16 17:34:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is pretty much a solved problem in languages with multiple dispatch (Common Lisp, Julia, Raku etc), the behavior lives in the methods which don&#x27;t belong to a specific class.<p>You can sort of, kind of get there with free functions and overloading as long as you&#x27;re not doing anything fancy with the methods.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NovaX" target="_blank">NovaX</a>   <span class="timeago" data-date="2021-08-16 19:19:08 &#43;0000 UTC">2021-08-16 19:19:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            entity = instance id<p>component = metadata + data<p>system = metadata processors<p>This way you can decouple business rules from the model by using metadata to instruct how the entity should be processed. At work we use json schema as our type system to describe our entities, where every instance includes the schemas that it implements. The metadata allows us to render an entity, process it via server-side triggers, store and search, use generic crud routes, etc. In a language like Java, this is the same as using reflection to inspect interfaces and annotations for processing an object.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reidjs" target="_blank">reidjs</a>   <span class="timeago" data-date="2021-08-16 20:17:56 &#43;0000 UTC">2021-08-16 20:17:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have any resources (books, websites, etc) that discuss this pattern in depth?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NovaX" target="_blank">NovaX</a>   <span class="timeago" data-date="2021-08-16 20:26:54 &#43;0000 UTC">2021-08-16 20:26:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunately not. I simply realized later that my application design was conceptually similar to ECS. I could walk you through it over a Zoom, though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=royjacobs" target="_blank">royjacobs</a>   <span class="timeago" data-date="2021-08-16 16:34:26 &#43;0000 UTC">2021-08-16 16:34:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, I don&#x27;t get it. Isn&#x27;t one of the major reasons to use ECS to exploit mechanical sympathy, i.e. you make sure that cache lines are always full, you can use SIMD for calculations, etc.<p>All of this is pretty much out of the window for this design, so what is the benefit of the ECS here?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ScoobleDoodle" target="_blank">ScoobleDoodle</a>   <span class="timeago" data-date="2021-08-16 16:44:35 &#43;0000 UTC">2021-08-16 16:44:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the component instances per type are in the cache coherent memory location. So all physics components are cache coherent with each other.  And the rendering instances with each other.<p>At the individual object level the different components are not cache coherent. So the rendering and physics instances of one object are not in any memory coherent location.<p>Because the physics will do it’s SIMD to resolve the mutual state. And then rendering will do the SIMD for their aggregate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=royjacobs" target="_blank">royjacobs</a>   <span class="timeago" data-date="2021-08-16 19:27:23 &#43;0000 UTC">2021-08-16 19:27:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But in the system proposed in the article there are virtual function calls everywhere, which will surely trash any cache? Not to mention these function calls cannot even be inlined.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Narishma" target="_blank">Narishma</a>   <span class="timeago" data-date="2021-08-16 21:14:11 &#43;0000 UTC">2021-08-16 21:14:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What do you mean by cache coherent?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jayd16" target="_blank">jayd16</a>   <span class="timeago" data-date="2021-08-16 16:07:51 &#43;0000 UTC">2021-08-16 16:07:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure ok.  Callbacks violate what makes ECS performant but they like the pattern anyway, so why not.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=insaneisnotfree" target="_blank">insaneisnotfree</a>   <span class="timeago" data-date="2021-08-17 04:39:04 &#43;0000 UTC">2021-08-17 04:39:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t get it. What&#x27;s the motive to create another layered file structure project organization?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TinkersW" target="_blank">TinkersW</a>   <span class="timeago" data-date="2021-08-17 02:42:28 &#43;0000 UTC">2021-08-17 02:42:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>C# and C&#x2F;C++ Interop where either can be used or combined for nearly everything</i><p>Just no! Pick one and stick with it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adamnemecek" target="_blank">adamnemecek</a>   <span class="timeago" data-date="2021-08-16 17:53:59 &#43;0000 UTC">2021-08-16 17:53:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was really into ECS a while back and tried to implement a GUI framework in it. It was not a good match since your single widgets contain wildly different types of data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

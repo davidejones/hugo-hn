@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/how-drawpile-works/">
+
+
+    <title>How Drawpile works - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="How Drawpile works - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/how-drawpile-works/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/how-drawpile-works/">
+<meta name="twitter:title" content="How Drawpile works - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "How Drawpile works - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T16:41:56JST",
+    "dateModified": "2021-08-17T16:41:56JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/drawpile/Drawpile/wiki/How-Drawpile-works">How Drawpile works</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=colesantiago" target="_blank">colesantiago</a>   <span class="timeago" data-date="2021-08-17 19:42:06 &#43;0000 UTC">2021-08-17 19:42:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting that there isn&#x27;t any mention or use of CRDTs, that would have been the first thing to see from this document.<p>Nevertheless, it is still refreshing to see a different way of doing things like collaborative drawing without them.<p>Curious to know of this design decision.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zffr" target="_blank">zffr</a>   <span class="timeago" data-date="2021-08-17 21:06:27 &#43;0000 UTC">2021-08-17 21:06:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Drawpile solves the second problem in the most simple way possible: all edits go through a central server, which distributes them to all connected clients (including the originator) in the same order. So, when a client receives commands from the server, it knows all the other clients also received, or will receive, them in the same order.<p>You don&#x27;t need CRDTs if you have a centralized server and require clients to be connected to make edits. CRDTs are useful when you want to enable collaboration in a decentralized way.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=colesantiago" target="_blank">colesantiago</a>   <span class="timeago" data-date="2021-08-17 21:38:34 &#43;0000 UTC">2021-08-17 21:38:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So does this mean Figma is decentralized since they are also using CRDTs?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nh2" target="_blank">nh2</a>   <span class="timeago" data-date="2021-08-17 22:02:18 &#43;0000 UTC">2021-08-17 22:02:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;You don&#x27;t need X for centralised&quot; does not imply &quot;if you have X then you&#x27;re decentralised&quot;.<p>Beyond that simple logic: <a href="https:&#x2F;&#x2F;www.figma.com&#x2F;blog&#x2F;how-figmas-multiplayer-technology-works&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.figma.com&#x2F;blog&#x2F;how-figmas-multiplayer-technology...</a><p>&gt; Figma isn&#x27;t using true CRDTs though. CRDTs are designed for decentralized systems where there is no single central authority to decide what the final state should be. There is some unavoidable performance and memory overhead with doing this. Since Figma is centralized (our server is the central authority), we can simplify our system
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=colesantiago" target="_blank">colesantiago</a>   <span class="timeago" data-date="2021-08-17 22:52:18 &#43;0000 UTC">2021-08-17 22:52:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, so this must mean that Figma must be using CRDTs wrong then, but it works for them anyway since they aren&#x27;t using &quot;true CRDTs&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pc86" target="_blank">pc86</a>   <span class="timeago" data-date="2021-08-17 23:57:30 &#43;0000 UTC">2021-08-17 23:57:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe CRDTs (or more precisely, their implementation of them) give them some other benefit beyond the disregarded ability to be decentralized. It doesn&#x27;t necessarily mean they&#x27;re using them incorrectly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sambroner" target="_blank">sambroner</a>   <span class="timeago" data-date="2021-08-17 19:36:26 &#43;0000 UTC">2021-08-17 19:36:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would be really neat to put Drawpile on the Fluid Framework. You could easily map Drawpile&#x27;s ordered operations into distributed data structures. I did a similar thing a few months ago with QuillJS&#x27;s operations and it worked great!<p>The main advantage of that integration would be a ready made Azure service + future integration with Microsoft Office.<p>(I used to work on the Fluid Framework)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-17 20:30:56 &#43;0000 UTC">2021-08-17 20:30:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Only one small past related thread:<p><i>Drawpile is a free software collaborative drawing program</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17141368" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=17141368</a> - May 2018 (4 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 22:36:05 &#43;0000 UTC">2021-08-17 22:36:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

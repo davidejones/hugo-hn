@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/building-planetscale-with-planetscale/">
+
+
+    <title>Building PlanetScale with PlanetScale - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Building PlanetScale with PlanetScale - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/building-planetscale-with-planetscale/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/building-planetscale-with-planetscale/">
+<meta name="twitter:title" content="Building PlanetScale with PlanetScale - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Building PlanetScale with PlanetScale - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T16:32:14JST",
+    "dateModified": "2021-08-18T16:32:14JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://planetscale.com/blog/building-planetscale-with-planetscale">Building PlanetScale with PlanetScale</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leerob" target="_blank">leerob</a>   <span class="timeago" data-date="2021-08-18 19:24:42 &#43;0000 UTC">2021-08-18 19:24:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been a fan of PlanetScale and recently was able to chat[1] with their Head of Eng. Great team, better product execution. Also moved my personal site from using Firebase&#x2F;Redis to just MySQL with PlanetScale[2] and the results have been solid. Averaging 128ms on function response times with a p95 of 250ms.<p>[1]: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YqBG5rFP4Ic" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=YqBG5rFP4Ic</a><p>[2]: <a href="https:&#x2F;&#x2F;github.com&#x2F;leerob&#x2F;leerob.io&#x2F;pull&#x2F;326" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;leerob&#x2F;leerob.io&#x2F;pull&#x2F;326</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chris_st" target="_blank">chris_st</a>   <span class="timeago" data-date="2021-08-18 16:43:02 &#43;0000 UTC">2021-08-18 16:43:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been building a small personal app with PlanetScale and I like it a lot. Their way of doing schema branching works well, and is easy to use (though slightly tedious), and makes a lot of sense.  Not affiliated with them in any way, just a pleased customer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ublaze" target="_blank">ublaze</a>   <span class="timeago" data-date="2021-08-18 16:47:15 &#43;0000 UTC">2021-08-18 16:47:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been following PlanetScale for a few years and interviewed their CTO Sugu last week: <a href="https:&#x2F;&#x2F;www.softwareatscale.dev&#x2F;p&#x2F;software-at-scale-29-sugu-sougoumarane" rel="nofollow">https:&#x2F;&#x2F;www.softwareatscale.dev&#x2F;p&#x2F;software-at-scale-29-sugu-...</a>, if anyone&#x27;s interested to hear their story of building Vitess for YouTube and some details on PlanetScale behind the scenes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sorenbs" target="_blank">sorenbs</a>   <span class="timeago" data-date="2021-08-18 20:35:13 &#43;0000 UTC">2021-08-18 20:35:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            PlanetScale is the serverless relational database we have been waiting for all this time. It&#x27;s truly excellent, and being based on the same tech that runs youtube, we know it will scale well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=js4ever" target="_blank">js4ever</a>   <span class="timeago" data-date="2021-08-18 18:31:09 &#43;0000 UTC">2021-08-18 18:31:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I noticed they just launched in aws eu-west-1 (Dublin, Ireland). There is now a new option to select the location when you create a new db. Yay it&#x27;s now usable in Europe!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dyeje" target="_blank">dyeje</a>   <span class="timeago" data-date="2021-08-18 17:20:30 &#43;0000 UTC">2021-08-18 17:20:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Personally, migrations have never been painful enough to warrant this sort of product. The idea of branching databases on the other hand is really cool. Is each branch a full copy? Seems like that would lead to huge storage needs for larger databases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-08-18 17:22:33 &#43;0000 UTC">2021-08-18 17:22:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had the impression they PS was interesting because they offer serverless SQL.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aseipp" target="_blank">aseipp</a>   <span class="timeago" data-date="2021-08-18 17:50:57 &#43;0000 UTC">2021-08-18 17:50:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been PlanetScale for a test drive recently, and it&#x27;s a bit of both. I also think they kind of go hand-in-hand: if you have &quot;serverless&quot; things (or just Docker), they can come and go with connections very quickly, so picking the correct &quot;pause time&quot; to take the DB down for an ALTER TABLE is possible but a tiny bit awkward. Online migrations mean you never take it down and it&#x27;s always available so that&#x27;s kind of moot.<p>But now you do have some other considerations (see below.) I don&#x27;t think it&#x27;s an absolute pancea, but it&#x27;s certainly a very interesting and very useful secondary point in the design space. I like PlanetScale a lot. The free tier is also actually useful I think.<p>To be clear even if it&#x27;s is &quot;serverless SQL&quot; you still have to design with the fact you&#x27;re using Vitess in mind. So you have no foreign keys, scalability is done by keyspace sharding (not currently available in PlanetScale), apps deal with online migration where the schema evolves as they access it, etc. You have to keep these things in mind but you get some benefits in return, like most things.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pier25" target="_blank">pier25</a>   <span class="timeago" data-date="2021-08-18 21:14:55 &#43;0000 UTC">2021-08-18 21:14:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>So you have no foreign keys</i><p>What other differences are there vs MySQL in terms of data modeling?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tenaciousDaniel" target="_blank">tenaciousDaniel</a>   <span class="timeago" data-date="2021-08-18 17:42:31 &#43;0000 UTC">2021-08-18 17:42:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, I&#x27;d be fascinated to hear what tech you use, because I&#x27;ve always had a really hard time with migrations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dyeje" target="_blank">dyeje</a>   <span class="timeago" data-date="2021-08-18 18:00:22 &#43;0000 UTC">2021-08-18 18:00:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any migration scheme with a timestamp based approach is going to work well (e.g. ActiveRecord, TypeORM).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=joshmarlow" target="_blank">joshmarlow</a>   <span class="timeago" data-date="2021-08-18 17:50:59 &#43;0000 UTC">2021-08-18 17:50:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The database branching idea seems to be popping up more and more. IIRC, TermniusDB supports it too - <a href="https:&#x2F;&#x2F;terminusdb.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;terminusdb.com&#x2F;</a><p>I&#x27;ve not played with PlanetScale yet, but I am planning on playing with TerminusDB in the near future.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MapleWalnut" target="_blank">MapleWalnut</a>   <span class="timeago" data-date="2021-08-18 17:51:51 &#43;0000 UTC">2021-08-18 17:51:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From what I understand, they only branch the schema. They don&#x27;t copy the data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rmah" target="_blank">rmah</a>   <span class="timeago" data-date="2021-08-18 20:11:08 &#43;0000 UTC">2021-08-18 20:11:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks quite compelling, but what about use cases where &quot;serverless&quot; is simply not viable.  In some industries, you must control access to the server in order to stay compliant with regulations.  At least for some of the data.  Is there a plan to have a software-only release?  Or did I just miss it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samlambert" target="_blank">samlambert</a>   <span class="timeago" data-date="2021-08-18 23:19:43 &#43;0000 UTC">2021-08-18 23:19:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We won&#x27;t be doing software only releases or on prem software for PlanetScale. We do have an option to provision into your own cloud account so that the data lives inside your environment and you get all the PlanetScale magic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-18 19:57:05 &#43;0000 UTC">2021-08-18 19:57:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Previous related thread:<p><i>PlanetScale – Database for Developers</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27197873" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27197873</a> - May 2021 (128 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TeeWEE" target="_blank">TeeWEE</a>   <span class="timeago" data-date="2021-08-18 17:17:28 &#43;0000 UTC">2021-08-18 17:17:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At Tiqets we have a different repo with SQL migrations using Flyway... ITs as simply as branching that repo, creating your migration. Getting the pipeline green and merging it back.<p>All migrations are automatically executed on production, pre-tested. Reviewed. No DB Administrator, No deployment together with the app.<p>It works quite well..<p>However, personally I really like not having to deal with schema changes. For example Firebase or Cloud DataStore is really nice... Its the best for developers, but not for data integrity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-19 02:08:56 &#43;0000 UTC">2021-08-19 02:08:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This works fine for a lot of cases, but you can run into issues on larger databases. Things like default or calculated columns and indexes can seem like innocuous SQL but end up being incredibly expensive and even acquire locks that block other transactions on bigger databases.<p>We have some &quot;medium sized&quot; Postgres databases around 1-10TB and something like adding an index to a big table (100s millions of rows) can be quite expensive resource wise<p>(I&#x27;d say &quot;big&quot; is something like 20-50TB+ and small &lt;1TB)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wizwit999" target="_blank">wizwit999</a>   <span class="timeago" data-date="2021-08-19 00:14:41 &#43;0000 UTC">2021-08-19 00:14:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So is this product about the actual DB or the devex&#x2F; interface. Seems the real insight is in the latter. But the implementation is likely tied to MySQL. Would be cool to use with database of your choice, including existing managed dbs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zinclozenge" target="_blank">zinclozenge</a>   <span class="timeago" data-date="2021-08-18 20:35:20 &#43;0000 UTC">2021-08-18 20:35:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So you create a TCP connection to your database over the public internet? Does it have an http api like aurora serverless&#x2F;fauna&#x2F;datastax astra?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

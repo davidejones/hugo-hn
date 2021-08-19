@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/modern-lz-compression-2019/">
+
+
+    <title>Modern LZ Compression (2019) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Modern LZ Compression (2019) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/modern-lz-compression-2019/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/modern-lz-compression-2019/">
+<meta name="twitter:title" content="Modern LZ Compression (2019) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Modern LZ Compression (2019) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T23:22:56JST",
+    "dateModified": "2021-08-17T23:22:56JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://glinscott.github.io/lz/index.html">Modern LZ Compression (2019)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=retrac" target="_blank">retrac</a>   <span class="timeago" data-date="2021-08-18 06:48:38 &#43;0000 UTC">2021-08-18 06:48:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s quite a lot of retro modern LZ activity too!  LZ turns out to be amazing on old machines, often only a couple times slower than a block copy.  Optimal compressors and control over the algorithm have led to some very tight demos.<p><a href="https:&#x2F;&#x2F;www.brutaldeluxe.fr&#x2F;products&#x2F;crossdevtools&#x2F;lz4&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;www.brutaldeluxe.fr&#x2F;products&#x2F;crossdevtools&#x2F;lz4&#x2F;index...</a> LZ4 Data Compression - a rather long and in-depth article looking at LZ4 on the 65816 for the Apple IIgs with a decompressor that exploits that processor&#x27;s block copy.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;emmanuel-marty&#x2F;lzsa" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;emmanuel-marty&#x2F;lzsa</a> - LZSA - a LZ4-like modern LZ that&#x27;s more efficient both in speed and compression to LZ4 (at least on the 8 bitters it targets) - includes a neat chart of speed&#x2F;compression trade-offs on a ZX Spectrum with a variety of algorithms
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-18 00:18:19 &#43;0000 UTC">2021-08-18 00:18:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discussed at the time:<p><i>Modern LZ Compression</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19064791" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19064791</a> - Feb 2019 (4 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathell" target="_blank">nathell</a>   <span class="timeago" data-date="2021-08-18 07:45:51 &#43;0000 UTC">2021-08-18 07:45:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Managing Gigabytes&quot; by Witten et al is _the_ book that got me into the field of compression back in the day. Granted, it’s a bit dated now as there’s been a lot of progress in the field, but I’d still heartily recommend it to newcomers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nayuki" target="_blank">nayuki</a>   <span class="timeago" data-date="2021-08-18 17:19:19 &#43;0000 UTC">2021-08-18 17:19:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; First, we just shorten any symbols that are longer than our maximum code length — 11 — to that value. This means that our tree will no longer be a Huffman tree, so we need to do a fixup pass to redistribute the error we&#x27;ve introduced.<p>This can in fact be solved directly and optimally: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Package-merge_algorithm" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Package-merge_algorithm</a> ; <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Huffman_coding#Length-limited_Huffman_coding" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Huffman_coding#Length-limited_...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nickdothutton" target="_blank">nickdothutton</a>   <span class="timeago" data-date="2021-08-18 10:45:42 &#43;0000 UTC">2021-08-18 10:45:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Only partly related, since it deals with a specific type of data (English language Wikipedia), some of you might enjoy reading about the Hutter Prize: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Hutter_Prize" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Hutter_Prize</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akkartik" target="_blank">akkartik</a>   <span class="timeago" data-date="2021-08-18 01:44:35 &#43;0000 UTC">2021-08-18 01:44:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does anyone have recommendations for learning the xz format? Particularly as used by the ZIM archival format: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ZIM_(file_format)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;ZIM_(file_format)</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adzm" target="_blank">adzm</a>   <span class="timeago" data-date="2021-08-18 07:39:33 &#43;0000 UTC">2021-08-18 07:39:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            lzmautils &#x2F; xz utils is probably your best bet. They have some documentation for sure but it&#x27;s a complicated format so the source is invaluable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pwrrr" target="_blank">pwrrr</a>   <span class="timeago" data-date="2021-08-18 20:13:54 &#43;0000 UTC">2021-08-18 20:13:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just made a huffman encoder on the c64, for fun. I need understand how you go from the variable length codes of huffman, to suddenly fixed lenght codes, because you don&#x27;t want the codes to be above a certain length. hmm...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meiji163" target="_blank">meiji163</a>   <span class="timeago" data-date="2021-08-18 02:15:37 &#43;0000 UTC">2021-08-18 02:15:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wonder if LZ would still be standard, if not for the inertia of gzip&#x2F;zip? There are surely better and comparably fast algorithms (paq, ppm, etc.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hakmad" target="_blank">hakmad</a>   <span class="timeago" data-date="2021-08-18 12:01:37 &#43;0000 UTC">2021-08-18 12:01:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This might not apply to all LZ based programs&#x2F;algorithms but compress (an old Unix utility based on the Lempel-Ziv-Welch algorithm) fell out of favour after it ran afoul of patent issues (you can read more about it on the compress Wikipedia page [0] and a section of the GIF Wikipedia page [1] which covers more about the enforcement of the patent). From what I can gather though, it enjoyed considerable success and was pretty much the standard utility for compressing data on Unix. I think eventually though it would have been replaced because other algorithms (bzip2, gzip, etc.) have slightly better compression ratios (even if they are more computationally expensive).<p>[0] - <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Compress" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Compress</a>
+[1] - <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;GIF#Unisys_and_LZW_patent_enforcement" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;GIF#Unisys_and_LZW_patent_enfo...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jltsiren" target="_blank">jltsiren</a>   <span class="timeago" data-date="2021-08-18 03:42:36 &#43;0000 UTC">2021-08-18 03:42:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LZ is popular because it&#x27;s computationally efficient. When random memory access is slow but sequential access is fast, you want to encode substrings instead of individual symbols. Explicit higher-order probabilistic models require a lot of memory and generate too many cache misses. Implicit models based on the Burrows-Wheeler transform also have poor memory access patterns.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zinekeller" target="_blank">zinekeller</a>   <span class="timeago" data-date="2021-08-18 06:19:14 &#43;0000 UTC">2021-08-18 06:19:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; if not for the inertia of gzip&#x2F;zip<p>I think that&#x27;s misidentifying where&#x27;s credit is due: LZ might not be <i>the</i> most efficient compression format when it comes to size, but it&#x27;s very efficient computation-wise when compressing and decompressing, and this still holds true today even when you consider newer algorthms like Zstandard (which uses a derivative of LZ). Sure, if you need to archive data into its compactest representation at any cost, LZ and derivatives won&#x27;t deliver it, but unless there&#x27;s a significant change to how computing works it&#x27;s still in LZ&#x27;s favour. At the time DEFLATE was designed, LZ just beat out every competition since realistically you can&#x27;t run decompression at real-time using minimal memory.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wolf550e" target="_blank">wolf550e</a>   <span class="timeago" data-date="2021-08-18 03:52:47 &#43;0000 UTC">2021-08-18 03:52:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ppm and paq are a LOT slower than LZ77.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 03:47:21 &#43;0000 UTC">2021-08-18 03:47:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            PAQ and PPM are not fast, certainly not in the same category as LZ codecs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 03:10:28 &#43;0000 UTC">2021-08-18 03:10:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            zip&#x2F;gzip are LZ algorithms, as mentioned near the top of the article.  Based on LZ77 to be exact.<p>Did you perhaps mean LZW (gif &amp; compress), which was based on LZ78?<p>zlib isn&#x27;t really dominant, today.  lzma seems to have overtaken it for anything destined for public distribution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wolf550e" target="_blank">wolf550e</a>   <span class="timeago" data-date="2021-08-18 03:37:06 &#43;0000 UTC">2021-08-18 03:37:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            lzma is slow to decompress. Unless the bandwidth &#x2F; storage costs are the primary concern, zstd has good enough compression ratio and the very fast decompression makes everything much nicer. Built-in threaded compression, long range compression, binary diff, dictionary compression, etc. are a bonus.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 04:21:48 &#43;0000 UTC">2021-08-18 04:21:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; zstd has good enough compression ratio<p>I never understood zstd.  It&#x27;s basically lzma+gzip+lz4 packed together.  Show me any zstd level that has significantly different speed and data size than one of the levels of those three can&#x27;t match.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lifthrasiir" target="_blank">lifthrasiir</a>   <span class="timeago" data-date="2021-08-18 07:27:53 &#43;0000 UTC">2021-08-18 07:27:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Show me any zstd level that has significantly different speed and data size than one of the levels of those three can&#x27;t match.<p>In case you are not just trolling, I had some very large JSON file with a large amount of text in my SSD around and the compression time was as follows [1]:<p><pre><code>    8,826,654,133       original
+    4,763,212,322  0:29 lz4 -1
+    3,815,508,500  0:52 brotli -1
+    3,715,002,172  2:09 lz4 -3
+    3,668,204,232  2:27 gzip -1
+    3,159,659,113  1:59 brotli -2
+    3,118,316,529 10:55 lzma -0 -T4
+    3,025,746,073  1:21 zstd -3 -T1 (default)
+</code></pre>
+Zstandard is not just lzma+gzip+lz4. It is better than everything you&#x27;ve mentioned at least for my test case. In fact I first compressed with zstd and tried to match the compression time for others, because zstd is <i>very</i> fast and using anything else as a reference point would have taken me much more time. It does have enough reason to claim itself to be &quot;standard&quot;.<p>[1] Tested with i7-7700 3.60GHz and 48 GiB of RAM (but no algorithm tested use more than several MBs of memory anyway). I&#x27;m using a pretty fast SSD here so I&#x2F;O speed is not much of concern. Also note that every algorithm except for lzma is single-threaded.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 07:53:10 &#43;0000 UTC">2021-08-18 07:53:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like you&#x27;re comparing multi-threaded zstd to other utilities that are single-threaded (e.g. gzip instead of pigz).<p>I duped &#x2F;usr&#x2F;share&#x2F;dict&#x2F;words into an 8GB file and did a couple tests on the old system I&#x27;m on:<p><pre><code>  8589934592  original
+  3075315128  pigz -1       1m0.44s
+  2926825272  zstdmt -3     2m37.52s
+  2877549999  pigz -3       1m28.94s</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lifthrasiir" target="_blank">lifthrasiir</a>   <span class="timeago" data-date="2021-08-18 07:56:55 &#43;0000 UTC">2021-08-18 07:56:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zstd by default is single-threaded. Just in case though...<p><pre><code>    8,826,654,133       original
+    3,033,695,892  0:22 zstd 1.3.3 -3 -T4
+    3,025,746,073  1:21 zstd 1.3.3 -3 -T1 (default)
+    3,017,972,162  1:05 zstd 1.5.0 -3 -T1 (default)
+    3,013,860,663  1:23 zstd 1.5.0 -3 --single-thread
+</code></pre>
+It is just no match.<p>EDIT: axiolite wanted to see --single-thread and while my Linux box only has an older zstd (1.3.3) without that option I realized I do have a Windows executable for recent zstd (1.5.0). Both executables have run in the same machine but I can&#x27;t guarantee anything about the 1.5.0 binary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 07:59:18 &#43;0000 UTC">2021-08-18 07:59:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            zstd is NOT single-threaded by default.  It&#x27;s dual threaded.  You have to pass the --single-thread option to make it single threaded.<p>I think you need to try pigz...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lifthrasiir" target="_blank">lifthrasiir</a>   <span class="timeago" data-date="2021-08-18 08:10:54 &#43;0000 UTC">2021-08-18 08:10:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            --single-thread probably doesn&#x27;t do what you think, it forces zstd to serialize I&#x2F;O with the compression job and it doesn&#x27;t mean compression itself is multi-threaded with -T1 [EDIT]. I can&#x27;t try that anyway because my zstd version is slightly lower (1.3.3), but I can try pigz:<p><pre><code>    3,664,854,169  0:42 pigz -1 -p4
+    3,664,854,169  0:28 pigz -1 -p8 (default, also probably the max possible with my box)
+</code></pre>
+Now I&#x27;m very curious where you got your copy of zstdmt. (I&#x27;m using stock Ubuntu packages for all of them.)<p>[EDIT] Was &quot;it doesn&#x27;t make compression itself multi-threaded&quot;, which can falsely imply that --single-thread seemingly enables multi-threaded compression but it doesn&#x27;t ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 08:21:17 &#43;0000 UTC">2021-08-18 08:21:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Using stock RHEL7&#x2F;EPEL packages: zstd-1.5.0-1.el7.x86_64
+On an old Athlon II X4 615e right now.<p>The difference in our results certainly is curious.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lifthrasiir" target="_blank">lifthrasiir</a>   <span class="timeago" data-date="2021-08-18 08:31:05 &#43;0000 UTC">2021-08-18 08:31:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very interesting. It might be the case that zstd optimizes more for recent machines; zstd famously uses four different compression streams to maximize instruction-level parallelism and that might not work well in older machines. I haven&#x27;t seen any machine where zstd is significantly slower than it should, but those machines I could test came from 2013 or later. Or either the RHEL package might have been optimized for recent machines. It would be interesting to test a binary optimized for the current machine (-march=native -mtune=native).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 15:58:50 &#43;0000 UTC">2021-08-18 15:58:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            pigz is no match for zstd...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dnr" target="_blank">dnr</a>   <span class="timeago" data-date="2021-08-18 05:54:07 &#43;0000 UTC">2021-08-18 05:54:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t that exactly the point, and why it&#x27;s so great? It&#x27;s a single algorithm that&#x27;s tune-able across that wide range of speed&#x2F;ratio trade-offs using a single parameter. So you can just use one thing for almost every application instead of picking between three different things.<p>(Yes, I know that one parameter controls multiple different settings internally, so there are multiple dimensions if you&#x27;re willing to dig that deep.)<p>Anyway, my recollection from looking at benchmarks a while ago: zstd used at similar ratios to lzma compresses in similar time but decompresses much faster, and it&#x27;s also faster than gzip when set to comparable ratios to that. lz4 is still faster than the fastest zstd modes, and lzma at the most extreme settings still gets better ratios that the best zstd can do. But there&#x27;s a huge wide swath in the middle where zstd beats them all, and that&#x27;s quite valuable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=axiolite" target="_blank">axiolite</a>   <span class="timeago" data-date="2021-08-18 08:08:38 &#43;0000 UTC">2021-08-18 08:08:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  So you can just use one thing for almost every application instead of picking between three different things.<p>I honestly can&#x27;t see how remembering several ranges of zstd levels and their time&#x2F;speed trade-off is any easier than remembering lz4, pigz, xz, which all happen to have good default setting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ahofmann" target="_blank">ahofmann</a>   <span class="timeago" data-date="2021-08-18 08:33:36 &#43;0000 UTC">2021-08-18 08:33:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use zstd once a year, and it is very easy:
+1. the default (3 on my machine) is fast and compresses well.
+2. if you need to get the best compression level for your use case, use the benchmark &quot;zstd -b1 -e15 yourfile&quot; and after a few minutes you have your answer.<p>I can&#x27;t see why I should ever in my life use another program for compressing things than zstd.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Jasper_" target="_blank">Jasper_</a>   <span class="timeago" data-date="2021-08-18 06:06:08 &#43;0000 UTC">2021-08-18 06:06:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s really not lzma+gzip+lz4, except by if you mean &quot;it&#x27;s an LZ-alike&quot;. It&#x27;s a modern LZ with repcodes (kinda LZMA-ish, but more like LZX honestly), and it uses a novel arith coder system (Huffman&#x2F;ANS) instead of a range&#x2F;arith coder (LZMA) or none (LZ4)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wolf550e" target="_blank">wolf550e</a>   <span class="timeago" data-date="2021-08-18 11:45:39 &#43;0000 UTC">2021-08-18 11:45:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here are some DB dump compression tests done years ago, look at the pareto frontier and see that zstd wins between LZ4 and LZMA (xz): <a href="https:&#x2F;&#x2F;zeevt.github.io&#x2F;compress_pareto.html" rel="nofollow">https:&#x2F;&#x2F;zeevt.github.io&#x2F;compress_pareto.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rurban" target="_blank">rurban</a>   <span class="timeago" data-date="2021-08-18 03:31:17 &#43;0000 UTC">2021-08-18 03:31:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had to implement recently an oldstyle lz77 en&#x2F;decoder to handle an old fileformat, and it was surprisingly simple. Even the encoder
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 00:23:55 &#43;0000 UTC">2021-08-18 00:23:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Modern&quot;, but uses <i>Huffman coding</i>? No LZ implementation aiming for high compression in the last decade has used Huffman.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 01:39:02 &#43;0000 UTC">2021-08-18 01:39:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You mean like zstd and brotli ?
+Is there any new LZ codec not using Huffman ?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=retrac" target="_blank">retrac</a>   <span class="timeago" data-date="2021-08-18 02:11:46 &#43;0000 UTC">2021-08-18 02:11:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was my understanding Zstd used neither Huffman or AC but something else: <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Asymmetric_numeral_systems" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Asymmetric_numeral_systems</a><p>Edit: It uses a variety of entropy encodings for different data structures, Huffman is one of them.  My apologies for the confusing initial comment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chriswarbo" target="_blank">chriswarbo</a>   <span class="timeago" data-date="2021-08-18 00:51:13 &#43;0000 UTC">2021-08-18 00:51:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For our goal of a high compression LZ variant, we will want to Huffman code our symbols (zstd actually uses FSE, a variant of arithmetic coding to do this, but we will cover that in a future post).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 00:57:48 &#43;0000 UTC">2021-08-18 00:57:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But why? Why spend that much effort introducing a method that is basically entirely outdated at this point, and is also fairly complicated?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 01:43:17 &#43;0000 UTC">2021-08-18 01:43:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Huffmann is rather simple and hard to beat in decompression speed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vardump" target="_blank">vardump</a>   <span class="timeago" data-date="2021-08-18 09:24:58 &#43;0000 UTC">2021-08-18 09:24:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For high entropy data (=somewhat random data), FSE is quite comparable to Huffman in compression speed.<p>For low entropy (lots of high probability symbols, like zeroes), Huffman is about 2-3x faster. But on the flipside, FSE achieves markedly higher compression ratio.<p>I think FSE is worth the speed tradeoff vs Huffman in most cases.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 15:49:39 &#43;0000 UTC">2021-08-18 15:49:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;FSE achieves markedly higher compression ratio&quot;. I do not thin it is true, FSE&#x2F;ANS achieves slightly better ratios in general.
+Zstd uses both Huffman (for large alphabets) and FSE (for small alphabets).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 10:15:25 &#43;0000 UTC">2021-08-18 10:15:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Arithmetic coding is much, much simpler. And decompression speed is not a limiting factor in most applications of data compression like this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-18 15:56:41 &#43;0000 UTC">2021-08-18 15:56:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Arithmetic coding is much, much simpler.&quot; Let us agree to disagree. 
+&quot;And decompression speed is not a limiting factor in most applications of data compression like this&quot;. It depends on the application. Zstd and Brotli are certainly aiming at the fastest decompression speed possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user-the-name" target="_blank">user-the-name</a>   <span class="timeago" data-date="2021-08-18 18:07:12 &#43;0000 UTC">2021-08-18 18:07:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Arithmetic coding can be implemented in as little as maybe ten lines of code. It is far simpler than Huffman coding.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hexxagone" target="_blank">hexxagone</a>   <span class="timeago" data-date="2021-08-19 00:27:13 &#43;0000 UTC">2021-08-19 00:27:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Huffman encoding loop is 2 lines and decoding loop is 4 lines of branchless code. 
+Do you have an example of branchless arithmetic encoder or decoder ?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

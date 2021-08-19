@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/lets-write-a-compiler-part-5-a-code-generator/">
+
+
+    <title>Let&#39;s write a compiler, part 5: A code generator - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Let&#39;s write a compiler, part 5: A code generator - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/lets-write-a-compiler-part-5-a-code-generator/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/lets-write-a-compiler-part-5-a-code-generator/">
+<meta name="twitter:title" content="Let&#39;s write a compiler, part 5: A code generator - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Let\u0027s write a compiler, part 5: A code generator - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T07:09:33JST",
+    "dateModified": "2021-08-19T07:09:33JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://briancallahan.net/blog/20210818.html">Let&#39;s write a compiler, part 5: A code generator</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ofiryanai" target="_blank">ofiryanai</a>   <span class="timeago" data-date="2021-08-19 10:23:14 &#43;0000 UTC">2021-08-19 10:23:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi all, I have a bit off topic question but seems related.<p>I&#x27;m trying to write sort of a SQL compiler. The current goal is to analyze queries and find similarities, later maybe to translate between sql dialects.
+I found Uber&#x27;s QueryParser[1] but it&#x27;s in haskell, so I started wrapping the python sqlparse[2] library and implement a Visitor to traverse their weird AST.
+1. How close is it to implementing a compiler? 
+2. Is there theory you can suggest further reading for that matter?
+3. Would you use a different language&#x2F;library then I picked?<p>Thanks :)<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;queryparser" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;queryparser</a>
+[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;andialbrecht&#x2F;sqlparse" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;andialbrecht&#x2F;sqlparse</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=refneb" target="_blank">refneb</a>   <span class="timeago" data-date="2021-08-19 12:28:10 &#43;0000 UTC">2021-08-19 12:28:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve been playing with ANTLR[1] and pretty happy with the generated parser. You can find sql grammar on GitHub[2]<p>[1] <a href="https:&#x2F;&#x2F;www.antlr.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.antlr.org&#x2F;</a><p>[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;antlr&#x2F;grammars-v4" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;antlr&#x2F;grammars-v4</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codr7" target="_blank">codr7</a>   <span class="timeago" data-date="2021-08-19 11:23:27 &#43;0000 UTC">2021-08-19 11:23:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends on the complexity of your queries, but if you have a narrow subset that you&#x27;re interested in, implementing a recursive descent parser for just those parts of the syntax that fits your problem like a glove could be a better solution.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;codr7&#x2F;swifties" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;codr7&#x2F;swifties</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ofiryanai" target="_blank">ofiryanai</a>   <span class="timeago" data-date="2021-08-19 12:39:44 &#43;0000 UTC">2021-08-19 12:39:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m aiming to analyze all the BI queries in my organization, some of them are quite complicated and most of them are hundreds lines of sql.
+Thanks for the direction, I&#x27;ll dive into it
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Joker_vD" target="_blank">Joker_vD</a>   <span class="timeago" data-date="2021-08-19 15:08:41 &#43;0000 UTC">2021-08-19 15:08:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Alright, let&#x27;s write a comment about the actual implementation described in the post. So: why make the symbol table a linked list that has its head fixed at &quot;main&quot; and grows and shrinks at its tail? It is used in a stack-like fashion, so why not reverse the order: put &quot;main&quot; at its tail and grow and shrink it at its head?<p>That simplifies adding symbols: you keep checking for duplicates until the depth of the symbols you see drops below your depth, and actual insertion doesn&#x27;t need the pointer to the list&#x27;s last element, you insert at the head.<p>That simplifies destroying symbols: you keep popping the head until you meet a TOK_PROCEDURE at which point you stop.<p>That simplifies looking symbols up: you search until the first name match and return it immediately, instead of remembering the last seen matching symbol while traversing the full list.<p>I am not even talking about efficiency (although of course this implementation is also more efficient in all 3 use cases), it&#x27;s about code simplicity: the less context you need to maintain during a list traversal, the easier it is to understand what this traversal looks for.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 09:04:34 &#43;0000 UTC">2021-08-19 09:04:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This series of blogposts is amusing but it is kind of frustrating too: the end result is merely a compiler. It is a source to source translator from a source language which is very very similar to a subset of the target language. Well I guess you can call that a compiler, but it really doesn&#x27;t teach the readers what an actual compiler looks like. Exaggerating a little, I would say that it feels like a few calls to sed could do the same thing using regexp.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-19 10:36:10 &#43;0000 UTC">2021-08-19 10:36:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lots of compiler tutorials are like this - there&#x27;s very little out there to explain how compilers <i>really</i> work.<p>This is my effort - trying to show genuine data structures and processes.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;chrisseaton&#x2F;rhizome" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;chrisseaton&#x2F;rhizome</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=junon" target="_blank">junon</a>   <span class="timeago" data-date="2021-08-19 09:12:11 &#43;0000 UTC">2021-08-19 09:12:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It could not. Unless your language is regular class, then regular expressions cannot parse the language accurately.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-19 13:14:36 &#43;0000 UTC">2021-08-19 13:14:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can build a parser <i>around</i> regexes though, where most of the code is regexes and then you have a little bit of code to deal with the irregularity. For instance consider arithmethic expressions consisting of constants, -, +, *, &#x2F;, and parentheses. You could evaluate that using something like (expression to parse a numeral is left as exercise to reader).<p><pre><code>   while expression is not a numeral
+       replace all &quot;\((NUMERAL)\)&quot; with first group
+       if find first &quot;(NUMERAL)([*&#x2F;])(NUMERAL)&quot;
+         replace with result
+       else if find first &quot;(NUMERAL)([+-])(NUMERAL)&quot;
+         replace with result</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ashton314" target="_blank">ashton314</a>   <span class="timeago" data-date="2021-08-19 15:06:21 &#43;0000 UTC">2021-08-19 15:06:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What you are doing there is conflating the lexing phase and the parsing phase. Regexes are perfect for recognizing tokens, but for a language with nested parentheses, you <i>must</i> have a push-down  automaton to process it. Otherwise, you will not be able to verify that your delimiters are matched.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=im3w1l" target="_blank">im3w1l</a>   <span class="timeago" data-date="2021-08-19 16:51:05 &#43;0000 UTC">2021-08-19 16:51:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s one way of looking at it I suppose. But it does require stretching the definition of token a little bit if you are eg using regexes to identify arbitrarily long multiplications. I think my prefered perspective is that you are using regexes to parse regular <i>sublanguages</i> and then something more powerful (e.g. a push down automaton, but there are even more powerful parsers than that) to bind those sub-parsers together.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 09:37:04 &#43;0000 UTC">2021-08-19 09:37:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s why I said &quot;if <i>feels like</i>&quot;.<p>But nonetheless even if regexps would not be able to validate syntax, it does not mean that the source-to-source transformation could not be (mostly) achieved using them, because the source and target language are quite similar.<p>Imagine a new language exactly like C but every semicolon is replaced by a duck &quot;\_o&lt;&quot;. You could not parse it using regexps, but regexp could mostly &quot;compile&quot; it to C as it only requires to look for all &quot;\_o&lt;&quot; to replace them with &quot;;&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=beecafe" target="_blank">beecafe</a>   <span class="timeago" data-date="2021-08-19 10:07:48 &#43;0000 UTC">2021-08-19 10:07:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This wouldn&#x27;t work as you could have a semicolon in a string, to handle that you would need to know when you&#x27;re in a string, and due to the existence of backslash escapable quotes in strings, you can&#x27;t do that with a regex*<p>*A real Regular Expression. The extended versions with e.g backrefs can. But they&#x27;re also Turing complete anyway
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-19 10:13:48 &#43;0000 UTC">2021-08-19 10:13:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know that. But admit that it is nitpicking and completely besides the point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fjfaase" target="_blank">fjfaase</a>   <span class="timeago" data-date="2021-08-19 11:00:35 &#43;0000 UTC">2021-08-19 11:00:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually, I think that the grammar for a C string with escapes characters is regular. The only bit I am worried about are the back-slash octal and back-slash hexadecimal notations. But they are not relevant if you want to detect escaped quotes in strings.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=peepholeoptim" target="_blank">peepholeoptim</a>   <span class="timeago" data-date="2021-08-19 09:24:17 &#43;0000 UTC">2021-08-19 09:24:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C is his hammer, but tenure is tenure.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ModernMech" target="_blank">ModernMech</a>   <span class="timeago" data-date="2021-08-19 12:18:49 &#43;0000 UTC">2021-08-19 12:18:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The ontology of compilation seems to be the only thing people are engaging with regarding this blog post series here on HN, so I don&#x27;t see why this series is on the front page every day when the discussion is so stale. If you want to talk about how compiling to C is or isn&#x27;t compiling, save yourself the trouble, everything has been said already in the past week (including this thread):<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28184187" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28184187</a><p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28199971" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28199971</a><p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28209950" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28209950</a><p>Alternatively, congrats to the author, for managing to get his blog on the front page 4 out of the last 5 days in a row. Has that ever been done before on HN, I wonder? It&#x27;s gotta be some sort of record.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ingve" target="_blank">ingve</a>   <span class="timeago" data-date="2021-08-19 12:48:49 &#43;0000 UTC">2021-08-19 12:48:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Crafting Interpreters [0] just came out in print and was widely discussed here [1], there&#x27;s a Lang Jam [2] event happening this weekend which also spawned a useful HN discussion [3], so I just think a lot of readers here are interested in simple and fun language development tutorials and inspiration. But it is curious, part 2 of Brian Callahan&#x27;s series [4] failed to get any traction here, maybe people aren&#x27;t that into lexing?<p>[0] <a href="https:&#x2F;&#x2F;craftinginterpreters.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;craftinginterpreters.com&#x2F;</a><p>[1] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27997167" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27997167</a><p>[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;langjam&#x2F;langjam" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;langjam&#x2F;langjam</a><p>[3] <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28021161" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28021161</a><p>[4] <a href="https:&#x2F;&#x2F;briancallahan.net&#x2F;blog&#x2F;20210815.html" rel="nofollow">https:&#x2F;&#x2F;briancallahan.net&#x2F;blog&#x2F;20210815.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-19 12:45:34 &#43;0000 UTC">2021-08-19 12:45:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; so I don&#x27;t see why this series is on the front page every day when the discussion is so stale<p>People submit it and upvote it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=imvetri" target="_blank">imvetri</a>   <span class="timeago" data-date="2021-08-19 12:23:38 &#43;0000 UTC">2021-08-19 12:23:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Code generators are fun !
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

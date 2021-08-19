@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/harbormaster-the-antikubernetes-for-your-personal-server/">
+
+
+    <title>Harbormaster: The anti-Kubernetes for your personal server - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Harbormaster: The anti-Kubernetes for your personal server - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/harbormaster-the-antikubernetes-for-your-personal-server/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/harbormaster-the-antikubernetes-for-your-personal-server/">
+<meta name="twitter:title" content="Harbormaster: The anti-Kubernetes for your personal server - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Harbormaster: The anti-Kubernetes for your personal server - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T08:59:31JST",
+    "dateModified": "2021-08-19T08:59:31JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://gitlab.com/stavros/harbormaster">Harbormaster: The anti-Kubernetes for your personal server</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 10:48:25 &#43;0000 UTC">2021-08-19 10:48:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hey everyone! I have a home server that runs some apps, and I&#x27;ve been installing them directly, but they kept breaking on every update. I wanted to Dockerize them, but I needed something that would manage all the containers without me having to ever log into the machine.<p>This also worked very well for work, where we have some simple services and scripts that run constantly on a micro AWS server. It&#x27;s made deployments completely automated and works really well, and now people can deploy their own services just by adding a line to a config instead of having to learn a whole complicated system or SSH in and make changes manually.<p>I thought I&#x27;d share this with you, in case it was useful to you too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fenollp" target="_blank">fenollp</a>   <span class="timeago" data-date="2021-08-19 13:37:47 &#43;0000 UTC">2021-08-19 13:37:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I needed something that would manage all the containers without me having to ever log into the machine.<p>Not saying this would at all replace Harbormaster, but with DOCKER_HOST or `docker context` one can easily run docker and docker-compose commands without &quot;ever logging in to the machine&quot;. Well, it does use SSH under the hood but this here seems more of a UX issue so there you go.<p>Discovering the DOCKER_HOST env var (changes the daemon socket) has made my usage of docker stuff much more powerful. Think &quot;spawn a container on the machine with bad data&quot; à la Bryan Cantrill at Joyent.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 13:40:25 &#43;0000 UTC">2021-08-19 13:40:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, doesn&#x27;t that connect your local Docker client to the remote Docker daemon? My goal isn&#x27;t &quot;don&#x27;t SSH to the machine&quot; specifically, but &quot;don&#x27;t have state on the machine that isn&#x27;t tracked in a repo somewhere&quot;, and this seems like it would fail that requirement.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nanis" target="_blank">nanis</a>   <span class="timeago" data-date="2021-08-19 16:01:20 &#43;0000 UTC">2021-08-19 16:01:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; &quot;don&#x27;t have state on the machine that isn&#x27;t tracked in a repo somewhere&quot;<p><a href="https:&#x2F;&#x2F;docs.chef.io&#x2F;chef_solo&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.chef.io&#x2F;chef_solo&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=revscat" target="_blank">revscat</a>   <span class="timeago" data-date="2021-08-19 17:01:36 &#43;0000 UTC">2021-08-19 17:01:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; chef-solo is a command that executes Chef Infra Client in a way that does not require the Chef Infra Server in order to converge cookbooks.<p>I have never used Chef. This is babble to me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inetknght" target="_blank">inetknght</a>   <span class="timeago" data-date="2021-08-19 14:35:23 &#43;0000 UTC">2021-08-19 14:35:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What do you think isn&#x27;t getting tracked?<p>You could put your SSH server configuration in a repo. You could put your SSH authorization key in a repo. You could even put your private key in a repo if you really wanted.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 14:40:17 &#43;0000 UTC">2021-08-19 14:40:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you track what&#x27;s supposed to run and what&#x27;s not, for example? Or the environment variables, or anything else you can set through the cli.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inetknght" target="_blank">inetknght</a>   <span class="timeago" data-date="2021-08-19 17:00:37 &#43;0000 UTC">2021-08-19 17:00:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What do you mean?<p>You run what&#x27;s supposed to run the same way you would anything else. It&#x27;s the same for the environment variables.<p>How would you track what&#x27;s supposed to run and what&#x27;s not for Docker? Using the `DOCKER_HOST` environment variable to connect over SSH is the exact same way.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 17:01:39 &#43;0000 UTC">2021-08-19 17:01:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wouldn&#x27;t. That&#x27;s why I wrote Harbormaster, so I can track what&#x27;s running and what isn&#x27;t.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gibs0ns" target="_blank">gibs0ns</a>   <span class="timeago" data-date="2021-08-19 15:36:30 &#43;0000 UTC">2021-08-19 15:36:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me, I don&#x27;t define any variables via the cli, i put them all in the docker-compose.yml or accompanying .env file, that way it&#x27;s a simple `docker-compose up` to deploy.
+Then I can track these files via git, and deploy to remote docker hosts using docker-machine, which effectively sets the DOCKER_HOST env var.<p>While I haven&#x27;t used it personally, there is [0] Watchtower which aims to automate updating docker containers.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;containrrr&#x2F;watchtower" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;containrrr&#x2F;watchtower</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=electroly" target="_blank">electroly</a>   <span class="timeago" data-date="2021-08-19 15:08:46 &#43;0000 UTC">2021-08-19 15:08:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Docker Compose is designed for this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 15:55:34 &#43;0000 UTC">2021-08-19 15:55:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, that&#x27;s why Harbormaster uses it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mixedCase" target="_blank">mixedCase</a>   <span class="timeago" data-date="2021-08-19 14:25:00 &#43;0000 UTC">2021-08-19 14:25:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you tried NixOS?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 14:41:52 &#43;0000 UTC">2021-08-19 14:41:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have, and it&#x27;s really good, but it needs some investment in creating packages (if they don&#x27;t exist) and has some annoyances (eg you can&#x27;t talk to the network to preserve determinism). It felt a bit too heavy-handed for a few processes. We also used to use it at work extensively for all our production but migrated off it after various difficulties (not bugs, just things like having its own language).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mixedCase" target="_blank">mixedCase</a>   <span class="timeago" data-date="2021-08-19 15:02:49 &#43;0000 UTC">2021-08-19 15:02:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can talk to the network, either through the escape hatch or provided fetch utilities, which tend to require checksums. But you do have to keep the result deterministic.<p>Agreed on it being a bit too heavy-handed, and the tooling isn&#x27;t very helpful for dealing with it unless you&#x27;re neck-deep into the ecosystem already.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thor_molecules" target="_blank">thor_molecules</a>   <span class="timeago" data-date="2021-08-19 14:50:06 &#43;0000 UTC">2021-08-19 14:50:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is the &quot;Bryan Cantrill at Joyent&quot; you&#x27;re referring to?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=e12e" target="_blank">e12e</a>   <span class="timeago" data-date="2021-08-19 16:25:14 &#43;0000 UTC">2021-08-19 16:25:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not (I think) the exacttalk&#x2F;blog post gp was thinking of - but worth watching IMNHO:<p>&quot;Debugging Under Fire: Keep your Head when Systems have Lost their Mind • Bryan Cantrill • GOTO 2017&quot;
+<a href="https:&#x2F;&#x2F;youtu.be&#x2F;30jNsCVLpAE" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;30jNsCVLpAE</a><p>Ed: oh, here we go I think?<p>&gt; Running Aground: Debugging Docker in Production
+Bryan Cantrill19,102 views16 Jan 2018
+Talk originally given at DockerCon &#x27;15, which (despite being a popular presentation and still broadly current) Docker Inc. has elected to delist.<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=AdMqCUhvRz8" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=AdMqCUhvRz8</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zdragnar" target="_blank">zdragnar</a>   <span class="timeago" data-date="2021-08-19 16:11:48 &#43;0000 UTC">2021-08-19 16:11:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The technology analogy is Manta, which Bryan covers in at least one if not several popular talks on YouTube, in particular about contanerization.<p>He has a lot to say about zones and jails and chroot predating docker, and why docker and co. &quot;won&quot; so to speak.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dutchmartin" target="_blank">dutchmartin</a>   <span class="timeago" data-date="2021-08-19 14:29:28 &#43;0000 UTC">2021-08-19 14:29:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting case. But did you look at other systems before this?
+I myself use caprover[1] for a small server deployment.
+1: <a href="https:&#x2F;&#x2F;caprover.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;caprover.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=c17r" target="_blank">c17r</a>   <span class="timeago" data-date="2021-08-19 16:08:21 &#43;0000 UTC">2021-08-19 16:08:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use caprover on my DO instance and it works great. Web apps, twitter&#x2F;reddit bots, even ZNC.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 14:45:38 &#43;0000 UTC">2021-08-19 14:45:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have used Dokku, Kubernetes, a bit of Nomad, some Dokku-alikes, etc, but none of them did things exactly like I wanted (the single configuration file per server was a big requirement, as I want to know exactly what&#x27;s running on a server).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 11:36:05 &#43;0000 UTC">2021-08-19 11:36:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been knee deep in deployment space for post 4 years. It is pretty hard problem to solve to the n-th level. Here&#x27;s my 2 cents.<p>Single machine deployments are generally easy, you can do it DIY. The complexity arises the moment you have another machine in the setup, scheduling workloading, networking, setup to name a few, starts becoming complicated.<p>From my perspective, kubernetes was designed for multiple team, working on multiple services and jobs, making operation kind of self serviced. So I can understand the anti-kubernetes sentiment.<p>There is gap in the market between VM oriented simple deployments and kubernetes based setup.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SOLAR_FIELDS" target="_blank">SOLAR_FIELDS</a>   <span class="timeago" data-date="2021-08-19 12:35:53 &#43;0000 UTC">2021-08-19 12:35:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMO the big draw of running K8S on my home server is the unified API. I can take my Helm chart and move it to whatever cloud super easily and tweak it for scaling in seconds. This solution from the post is yet another config system to learn, which is fine, but is sort of the antithesis of why I like K8S. I could see it being theoretically useful for someone who will never use K8S (eg not a software engineer by trade, so will never work a job that uses K8s), but IMO those people are probably running VM’s on their home servers instead since how may non software engineers are going to learn and use docker-compose but not K8S?<p>Anecdotal, but anyone I know running home lab setups that aren’t software guys are doing vSphere or Proxmox or whatever equivalent for their home usecases. But I know a lot of old school sysadmin guys, so YMMV.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thefunnyman" target="_blank">thefunnyman</a>   <span class="timeago" data-date="2021-08-19 15:52:48 &#43;0000 UTC">2021-08-19 15:52:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve been working on using k3s for my home cluster for this exact reason. I run it in a vm on top of proxmox, using packer, terraform, and ansible to deploy. My thought process here is that if I ever want to introduce more nodes or switch to a public cloud I could do so somewhat easily (either with a managed k8s offer, or just by migrating my VMs). I’ve also toyed with the idea of running some services on public cloud and some more sensitive services on my own infra.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 13:01:24 &#43;0000 UTC">2021-08-19 13:01:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree with you. It is an anti-thesis that is why it is marketed as anti-kubernetes toolset.<p>You cannot avoid learning k8s, you will end up encountering it everywhere, whether you like it or not. It is the tech-buzz word for past few years followed by cloud native and devops.<p>I really thinking if you wish to be great engineer and truly respect new general tools in generally, you have to go through the route setting up proxmox cluster, loading images, building those VM templates etc. Jumping directly on containers and cloud you kind of skip steps. It is not bad, you do miss our on few foundational concepts, around networking, operating systems etc.<p>The way I would put it is - A chef who is also farming their own vegetables a.k.a setting up your own clusters and deploying your apps VS a chef who goes to high-end wholeseller to buy premium vegetables does not care how it is grown aka. developers using kubernetes and container orchestration, PaaS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:44:14 &#43;0000 UTC">2021-08-19 11:44:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed, but I made this because I couldn&#x27;t find a simple orchestrator that used some best practices even for a single machine. I agree the problem is not hard (Harbormaster is around 550 lines), but Harbormaster&#x27;s value is more in the opinions&#x2F;decisions than the code.<p>The single-file YAML config (so it&#x27;s easy to discover exactly what&#x27;s running on the server), the separated data&#x2F;cache&#x2F;archive directories, the easy updates, the fact that it doesn&#x27;t need built images but builds them on-the-fly, those are the big advantages, rather than the actual `docker-compose up`.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 12:06:16 &#43;0000 UTC">2021-08-19 12:06:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is your perspective on multiple docker compose files, and you can do docker-compose up -f &lt;file name&gt;. You could organise in a day that all the files are in the same directory. Just wondering.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 12:08:06 &#43;0000 UTC">2021-08-19 12:08:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s good too, but I really like having the separate data&#x2F;cache directories. Another issue I had with the multiple Compose files is that I never knew which ones I had running and which ones I decided against running (because I shut services down but never removed the files). With the single YAML file, there&#x27;s an explicit `enabled: false` line with a commit message explaining why I stopped running that service.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GordonS" target="_blank">GordonS</a>   <span class="timeago" data-date="2021-08-19 13:09:03 &#43;0000 UTC">2021-08-19 13:09:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Might be I&#x27;m missing something, but I often go the route of using multiple Compose files, and haven&#x27;t had any issue with using different data directories; I just mount the directory I want for each service, e.g. `&#x2F;opt&#x2F;acme&#x2F;widget-builder&#x2F;var&#x2F;data`
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 13:10:33 &#43;0000 UTC">2021-08-19 13:10:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Harbormaster doesn&#x27;t do anything you can&#x27;t otherwise do, it just makes stuff easy for you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 12:11:18 &#43;0000 UTC">2021-08-19 12:11:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand your problem. I have seen solve that with docker_compose_$ENV.yaml. You could set ENV variable and then the appropriate file would be called.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 12:13:02 &#43;0000 UTC">2021-08-19 12:13:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, what did you set the variable to? Prod&#x2F;staging&#x2F;etc? I&#x27;m not sure how that documents whether you want to keep running the service or not.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-19 15:34:52 &#43;0000 UTC">2021-08-19 15:34:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There is gap in the market between VM oriented simple deployments and kubernetes based setup.<p>In my experience, there are actually two platforms that do this pretty well.<p>First, there&#x27;s Docker Swarm ( <a href="https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;swarm&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.docker.com&#x2F;engine&#x2F;swarm&#x2F;</a> ) - it comes preinstalled with Docker, can handle either single machine deployments or clusters, even multi-master deployments. Furthermore, it just adds a few values to Docker Compose YAML format ( <a href="https:&#x2F;&#x2F;docs.docker.com&#x2F;compose&#x2F;compose-file&#x2F;compose-file-v3&#x2F;" rel="nofollow">https:&#x2F;&#x2F;docs.docker.com&#x2F;compose&#x2F;compose-file&#x2F;compose-file-v3...</a> ) , so it&#x27;s incredibly easy to launch containers with it. And there are lovely web interfaces, such as Portainer ( <a href="https:&#x2F;&#x2F;www.portainer.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.portainer.io&#x2F;</a> ) or Swarmpit ( <a href="https:&#x2F;&#x2F;swarmpit.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;swarmpit.io&#x2F;</a> ) for simpler management.<p>Secondly, there&#x27;s also Hashicorp Nomad ( <a href="https:&#x2F;&#x2F;www.nomadproject.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.nomadproject.io&#x2F;</a> ) - it&#x27;s a single executable package, which allows similar setups to Docker Swarm, integrates nicely with service meshes like Consul ( <a href="https:&#x2F;&#x2F;www.consul.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.consul.io&#x2F;</a> ), and also allows non-containerized deployments to be managed, such as Java applications and others ( <a href="https:&#x2F;&#x2F;www.nomadproject.io&#x2F;docs&#x2F;drivers" rel="nofollow">https:&#x2F;&#x2F;www.nomadproject.io&#x2F;docs&#x2F;drivers</a> ). The only serious downsides is having to use the HCL DSL ( <a href="https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;hcl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;hcl</a> ) and their web UI being read only in the last versions that i checked.<p>There are also some other tools, like CapRover ( <a href="https:&#x2F;&#x2F;caprover.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;caprover.com&#x2F;</a> ) available, but many of those use Docker Swarm under the hood and i personally haven&#x27;t used them. Of course, if you still want Kubernetes but implemented in a slightly simpler way, then there&#x27;s also the Rancher K3s project ( <a href="https:&#x2F;&#x2F;k3s.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;k3s.io&#x2F;</a> ) which packages the core of Kubernetes into a smaller executable and uses SQLite by default for storage, if i recall correctly. I&#x27;ve used it briefly and the resource usage was indeed far more reasonable than that of full Kubernetes clusters (like RKE).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hamiltont" target="_blank">hamiltont</a>   <span class="timeago" data-date="2021-08-19 16:55:01 &#43;0000 UTC">2021-08-19 16:55:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wanted to second that Docker Swarm has been an excellent &quot;middle step&quot; for two different teams I&#x27;ve worked on. IMO too many people disregard it right away, not realizing that it is a significant effort for the average dev to learn containerization+k8s at the same time, and it&#x27;s impossible to do that on a large dev team without drastically slowing your dev cycles for a period.<p>When migrating from a non-containerized deployment process to a containerized one, there are a lot of new skills the employees have to learn. We&#x27;ve had 40+ employees, all who are basically full of work, and the mandate comes down to containerize, and all of these old school RPM&#x2F;DEB folks suddenly need to start doing docker. No big deal, right? Except...half the stuff does not dockerize easily requires some slightly-more-than-beginner docker skills. People will struggle and be frustrated. Folks start with running one container manually, and quickly outgrow that to use compose. They almost always eventually use compose to run stuff in prod at some point, which works but eventually that one server is full. <i>This</i> the is the value of swarm - letting people expand to multi-server and get a taste of orchestration, without needing them to install new tools or learn new languages. Swarm adds just one or two small new concepts (stack and service) on top of everything they have already learned. It&#x27;s a god send to tell a team they can just run swarm init, use their existing yaml files, and add a worker to the cluster. Most folks start to learn about placement constraints, deployment strategies, dynamic infrastructure like reverse proxy or service mesh, etc. After a bit of comfort and growth, a switch to k8s is manageable and the team is excited about learning it instead of overwhelmed. A lot (?all?) of the concepts in swarm are readily present in k8s, so the transition is much simpler
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=proxysna" target="_blank">proxysna</a>   <span class="timeago" data-date="2021-08-19 16:18:57 &#43;0000 UTC">2021-08-19 16:18:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nomad also scales really well. In my experience swarm had a lot of issues with going above 10 machines in a cluster. Stuck containers, containers that are there but swarm can&#x27;t see them and more. But still i loved using swarm with my 5 node arm cluster, it is a good place to start when you hit the limit of a single node.<p>&gt; The only serious downsides is having to use the HCL DSL ( <a href="https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;hcl" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;hashicorp&#x2F;hcl</a> ) and their web UI being read only in the last versions that i checked.<p>1. IIRC you can run jobs directly from UI now, but IMO this is kinda useless. Running a job is simple as &#x27;nomad run jobspec.nomad&#x27;. You can also run a great alternative UI  ( <a href="https:&#x2F;&#x2F;github.com&#x2F;jippi&#x2F;hashi-ui" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;jippi&#x2F;hashi-ui</a> ).<p>2. IMO HCL &gt; YAML for job definitions. I&#x27;ve used both extensively and HCL always felt much more human friendly. The way K8s uses YAML looks to me like stretching it to it&#x27;s limits and barely readable at times with templates.<p>One thing that makes nomad a go-to for me is that it is able to run workloads pretty much anywhere. Linux, Windows, FreeBSD, OpenBSD, Illumos and ofc Mac.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rcarmo" target="_blank">rcarmo</a>   <span class="timeago" data-date="2021-08-19 14:22:29 &#43;0000 UTC">2021-08-19 14:22:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been toying with the notion of extending Piku (<a href="https:&#x2F;&#x2F;github.com&#x2F;piku" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;piku</a>) to support multiple (i.e., a reasonable number) of machines behind the initial deploy target.<p>Right now I have a deployment hook that can propagate an app to more machines also running Piku after the deployment finishes correctly on the first one, but stuff like green&#x2F;blue and database migrations is a major pain and requires more logic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=imachine1980_" target="_blank">imachine1980_</a>   <span class="timeago" data-date="2021-08-19 11:42:50 &#43;0000 UTC">2021-08-19 11:42:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i ask if you know nomad (i didn&#x27;t use it) but co-workers say was easier to deploy
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 12:04:38 &#43;0000 UTC">2021-08-19 12:04:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I did look into Nomad. Again, specification of application to deploy is much simpler than kubernetes. But I think operational point of view you still have the complexity. It has similar concepts and abstractions like kubernetes when you operate a nomad cluster.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zie" target="_blank">zie</a>   <span class="timeago" data-date="2021-08-19 14:28:23 &#43;0000 UTC">2021-08-19 14:28:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For a single machine, you don&#x27;t need to operate a nomad cluster: `nomad agent -dev` instantly gives you a 1-node cluster ready to go.<p>if you decide to grow past 1 node, it&#x27;s a little more complex, but not by a lot, like k8s.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=globular-toast" target="_blank">globular-toast</a>   <span class="timeago" data-date="2021-08-19 14:18:23 &#43;0000 UTC">2021-08-19 14:18:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There is gap in the market between VM oriented simple deployments and kubernetes based setup.<p>What&#x27;s wrong with Ansible? You can deploy docker containers using a very similar configuration to docker-compose.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=willvarfar" target="_blank">willvarfar</a>   <span class="timeago" data-date="2021-08-19 11:42:59 &#43;0000 UTC">2021-08-19 11:42:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Juju perhaps?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FunnyLookinHat" target="_blank">FunnyLookinHat</a>   <span class="timeago" data-date="2021-08-19 13:06:40 &#43;0000 UTC">2021-08-19 13:06:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think Juju (and Charms) really shine more with bare-metal or VM management.  We looked into trying to use this for multi-tenant deployment scenarios a while ago (when it was still quite popular in the Ubuntu ecosystem) and found it lacking.<p>At this point, I think Juju is most likely used in place of other metal or VM provisioning tools (like chef or Ansible) so that you can automatically provision and scale a system as you bring new machines online.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=werewolf" target="_blank">werewolf</a>   <span class="timeago" data-date="2021-08-19 15:10:44 &#43;0000 UTC">2021-08-19 15:10:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sadly there is very little activity aiming at bare metal and VMs nowadays. If you look at features presented during couple of past months, you will find mainly kubernetes. Switching from charms to operators. But kudos to openstack charmers holding on and doing great work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 12:08:23 &#43;0000 UTC">2021-08-19 12:08:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you talking about this[1]?<p>[1] <a href="https:&#x2F;&#x2F;juju.is&#x2F;" rel="nofollow">https:&#x2F;&#x2F;juju.is&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mradmin" target="_blank">mradmin</a>   <span class="timeago" data-date="2021-08-19 11:20:27 &#43;0000 UTC">2021-08-19 11:20:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My anti-kubernetes setup for small single servers is docker swarm, portainer &amp; traefik. It&#x27;s a setup that works well on low powered machines, gives you TLS (letsencrypt) and traefik takes care of the complicated network routing.<p>I created a shell script to easily set this up: <a href="https:&#x2F;&#x2F;github.com&#x2F;badsyntax&#x2F;docker-box" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;badsyntax&#x2F;docker-box</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GordonS" target="_blank">GordonS</a>   <span class="timeago" data-date="2021-08-19 13:12:34 &#43;0000 UTC">2021-08-19 13:12:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly how I deployed my last few projects, and it works great!<p>The only things I&#x27;d change are switching to Caddy instead of Traefik (because Traefik 2.x config is just so bewilderingly complex!), and I&#x27;m not convinced Portainer is really adding any value.<p>Appreciate you sharing your setup script too.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mradmin" target="_blank">mradmin</a>   <span class="timeago" data-date="2021-08-19 14:00:33 &#43;0000 UTC">2021-08-19 14:00:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree the traefik config is a little complex but otherwise it works great for me. About using portainer, it&#x27;s useful for showing a holistic view of your containers and stacks, but I also use it for remote deployment of services (Eg as part of CI&#x2F;CD). I&#x27;ll push a new docker image version then I&#x27;ll use the portainer webhooks to redeploy the service, then docker swarm takes over.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GordonS" target="_blank">GordonS</a>   <span class="timeago" data-date="2021-08-19 15:07:55 &#43;0000 UTC">2021-08-19 15:07:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, I wasn&#x27;t aware of the web hooks, that sounds useful :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mradmin" target="_blank">mradmin</a>   <span class="timeago" data-date="2021-08-19 16:40:36 &#43;0000 UTC">2021-08-19 16:40:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Here&#x27;s an example using GitHub Actions: <a href="https:&#x2F;&#x2F;github.com&#x2F;badsyntax&#x2F;docker-box&#x2F;tree&#x2F;master&#x2F;examples&#x2F;nginx-app#continuous-deployment-with-github-actions" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;badsyntax&#x2F;docker-box&#x2F;tree&#x2F;master&#x2F;examples...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dneri" target="_blank">dneri</a>   <span class="timeago" data-date="2021-08-19 13:42:44 &#43;0000 UTC">2021-08-19 13:42:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Absolutely agree, I switched to Caddy recently and the configuration is considerably easier than Traefik. Very simple TLS setup (including self signed certificates).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kawsper" target="_blank">kawsper</a>   <span class="timeago" data-date="2021-08-19 11:23:06 &#43;0000 UTC">2021-08-19 11:23:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a similar setup, but with Nomad (in single server mode) instead of docker swarm and portainer. It works great.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:36:08 &#43;0000 UTC">2021-08-19 11:36:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does Nomad do for you, exactly? I&#x27;ve always wanted to try it out, but I never really got how it works. It runs containers, right? Does it also do networking, volumes, and the other things Compose does?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heipei" target="_blank">heipei</a>   <span class="timeago" data-date="2021-08-19 11:43:31 &#43;0000 UTC">2021-08-19 11:43:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What I like about Nomad is that it allows scheduling non-containerized workloads too. What it &quot;does&quot; for me is that it gives me a declarative language to specify the workloads, has a nice web UI to keep track of the workloads and allows such handy features as looking at the logs or exec&#x27;ing into the container from the web UI, amongst other things. Haven&#x27;t used advanced networking or volumes yet though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:47:55 &#43;0000 UTC">2021-08-19 11:47:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So do you use it just for scheduling commands to run? I.e. do you use `docker-compose up` as the &quot;payload&quot;?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kawsper" target="_blank">kawsper</a>   <span class="timeago" data-date="2021-08-19 12:30:36 &#43;0000 UTC">2021-08-19 12:30:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You send a job-specification to the Nomad API.<p>There&#x27;s different kind of workloads, I use Docker containers the most, but jobs can also run on a system-level, there&#x27;s also different types of operating modes, some jobs can be scheduled like cron, where other jobs just exposes a port and wants to be registered in Consuls service-mesh.<p>A job can also consist of multiple subtasks, an example could be nginx + django&#x2F;rails subtasks that will be deployed together.<p>You can see an example of a Docker job here: <a href="https:&#x2F;&#x2F;www.nomadproject.io&#x2F;docs&#x2F;job-specification#example" rel="nofollow">https:&#x2F;&#x2F;www.nomadproject.io&#x2F;docs&#x2F;job-specification#example</a><p>With a few modifications you can easily allow for blue&#x2F;green-deployments.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 12:32:02 &#43;0000 UTC">2021-08-19 12:32:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is very interesting, thanks! I&#x27;ll give it a go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GordonS" target="_blank">GordonS</a>   <span class="timeago" data-date="2021-08-19 13:23:05 &#43;0000 UTC">2021-08-19 13:23:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t suppose you&#x27;re able to point to a simple Nomad config for a dockerised web app, with a proxy and Let&#x27;s Encrypt?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kawsper" target="_blank">kawsper</a>   <span class="timeago" data-date="2021-08-19 14:34:07 &#43;0000 UTC">2021-08-19 14:34:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I will see if I can write up a simple example, do you have anywhere I can ping you?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GordonS" target="_blank">GordonS</a>   <span class="timeago" data-date="2021-08-19 15:09:19 &#43;0000 UTC">2021-08-19 15:09:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That would be great, thanks!<p>I&#x27;m at: gordon dot stewart 333 at gmail dot com
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrweasel" target="_blank">mrweasel</a>   <span class="timeago" data-date="2021-08-19 14:02:35 &#43;0000 UTC">2021-08-19 14:02:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s still a bit more than I feel is required.<p>My problem is in the two to eight server space, but networking is already externally managed and I have a loadbalancer. It’s in this space I feel that we’re lacking good solution. The size is to small to justify taking out nodes for a control plane, but big enough that Ansible feels weird.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rcarmo" target="_blank">rcarmo</a>   <span class="timeago" data-date="2021-08-19 10:57:55 &#43;0000 UTC">2021-08-19 10:57:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks great. But if you don’t need containers or are using tiny hardware, consider trying out Piku:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;piku" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;piku</a><p>(You can use docker-compose with it as well, but as a deployment step — I might bake in something nicer if there is enough interest)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 11:03:52 &#43;0000 UTC">2021-08-19 11:03:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1 for pikku which is one of my favorite examples of &quot;right abstraction, simple, just works, doesn&#x27;t re-invent the architecture every 6 months&quot;.<p>Thanks for that, Rui!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rcarmo" target="_blank">rcarmo</a>   <span class="timeago" data-date="2021-08-19 14:17:48 &#43;0000 UTC">2021-08-19 14:17:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, I am thinking of reinveinting around 12 lines of it to add explicit Docker&#x2F;Compose support, but it’s been a year or so since any major changes other than minor tweaks :)<p>It has also been deployed on all top 5 cloud providers via could-init (and I’m going back to AWS plain non-Ubuntu AMIs whenever I can figure out the right packages).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:13:12 &#43;0000 UTC">2021-08-19 11:13:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That looks nice, isn&#x27;t it kind of like Dokku? It&#x27;s a nice option but not a very good fit if you don&#x27;t need ingress&#x2F;aren&#x27;t running web services (most of my services were daemons that connect to MQTT).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rcarmo" target="_blank">rcarmo</a>   <span class="timeago" data-date="2021-08-19 14:16:37 &#43;0000 UTC">2021-08-19 14:16:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can have services without any kind of ingress. It’s completely optional to use nginx, it just gets set up automatically if you want to expose a website.<p>My original use case was _exactly_ that (MQTT services).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nijave" target="_blank">nijave</a>   <span class="timeago" data-date="2021-08-19 16:38:01 &#43;0000 UTC">2021-08-19 16:38:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At a previous place I worked, someone setup something similar with `git pull &amp;&amp; ansible-playbook` on a cron<p>It was using GitHub so just needed a read-only key and could be bootstrapped by connecting to the server directly and running the playbook once<p>In addition, it didn&#x27;t need any special privileges or permissions. The playbook setup remote logging (shipping to CloudWatch Logs since we used AWS heavily) along with some basic metrics so the whole thing could be monitored. Plus, you can get a cron email as basic monitoring to know if it failed<p>Imo it was a pretty clever way to do continuous deploy&#x2F;updates without complicated orchestrators, management servers, etc
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mafro" target="_blank">mafro</a>   <span class="timeago" data-date="2021-08-19 11:08:56 &#43;0000 UTC">2021-08-19 11:08:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So far I&#x27;ve found that &quot;restart: always&quot; in the compose.yml is enough for my home server apps. In the rare case that one of the services is down, I can SSH in and have a quick look - after all it&#x27;s one of my home servers, not a production pod on GKE :p<p>That said, the project looks pretty good! I&#x27;ll have a tinker and maybe I&#x27;ll be converted
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:10:59 &#43;0000 UTC">2021-08-19 11:10:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed about restarting, but I hated two things: Having to SSH in to make changes, and having a bunch of state in unknowable places that made it extremely hard to change anything or migrate to another machine if something happened.<p>With Harbormaster, I just copy one YAML file and the `data&#x2F;` directory and I&#x27;m done. It&#x27;s extremely convenient.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 11:18:56 &#43;0000 UTC">2021-08-19 11:18:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just to add: It&#x27;s definitely a bad practice to never update your images, because the docker images <i>and their base images</i> will accumulate security holes. There aren&#x27;t many solutions around for automatically pulling and running new images.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scandinavian" target="_blank">scandinavian</a>   <span class="timeago" data-date="2021-08-19 11:43:26 &#43;0000 UTC">2021-08-19 11:43:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;There aren&#x27;t many solutions around for automatically pulling and running new images.<p>Isn&#x27;t that exactly what watchtower does?<p><a href="https:&#x2F;&#x2F;github.com&#x2F;containrrr&#x2F;watchtower" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;containrrr&#x2F;watchtower</a><p>It works great on my mediacenter server running deluge, plex, sonarr, radarr, jackett and OpenVPN in docker.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 12:50:41 &#43;0000 UTC">2021-08-19 12:50:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, yes. Curiously enough, (IIRC) watchtower started out automatically pulling new images when available. Then the maintainers found that approach to be worse than proper orchestration and disabled the pulling. Perhaps it&#x27;s different now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Aeolun" target="_blank">Aeolun</a>   <span class="timeago" data-date="2021-08-19 12:55:40 &#43;0000 UTC">2021-08-19 12:55:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My experience with watchtower is that it kept breaking stuff (or maybe just pulling broken images?)<p>My server was much more stable after it didn’t try to update all the time any more.<p>I wonder if I can set a minimum timeout.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:52:10 &#43;0000 UTC">2021-08-19 11:52:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Watchtower runs the images if they update, but AFAIK it doesn&#x27;t pull if the base image changes.<p>Then again, Harbormaster doesn&#x27;t do that either unless the upstream git repo changes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NortySpock" target="_blank">NortySpock</a>   <span class="timeago" data-date="2021-08-19 13:56:43 &#43;0000 UTC">2021-08-19 13:56:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve heard about Watchtower (auto update) and DUIN (docker image update notifier), but I haven&#x27;t quite found something that will &quot;just tell me what updates are available, on a static site&quot;.<p>I want to &quot;read all available updates&quot; at my convenience, not get alerts reminding me to update my server.<p>Maybe I need to write some sort of plugin to DUIN that appends to a text file or web page or SQLite db... Hm.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=andrewkdinh" target="_blank">andrewkdinh</a>   <span class="timeago" data-date="2021-08-19 15:17:22 &#43;0000 UTC">2021-08-19 15:17:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like <a href="https:&#x2F;&#x2F;crazymax.dev&#x2F;diun&#x2F;notif&#x2F;script&#x2F;" rel="nofollow">https:&#x2F;&#x2F;crazymax.dev&#x2F;diun&#x2F;notif&#x2F;script&#x2F;</a> would be useful for that.<p>Personally, since I’m a big fan of RSS, I’d set up email in Diun and send it to an email generated by <a href="https:&#x2F;&#x2F;kill-the-newsletter.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;kill-the-newsletter.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaresofton" target="_blank">hardwaresofton</a>   <span class="timeago" data-date="2021-08-19 11:17:24 &#43;0000 UTC">2021-08-19 11:17:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Other uncomplicated pieces of software that manage dockerized workloads:<p>- <a href="https:&#x2F;&#x2F;dokku.com" rel="nofollow">https:&#x2F;&#x2F;dokku.com</a><p>- <a href="https:&#x2F;&#x2F;caprover.com" rel="nofollow">https:&#x2F;&#x2F;caprover.com</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wilsonfiifi" target="_blank">wilsonfiifi</a>   <span class="timeago" data-date="2021-08-19 12:20:22 &#43;0000 UTC">2021-08-19 12:20:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really wish Dokku would embrace docker swarm like caprover. Currently they have a scheduler for kubernetes but the docker swarm scheduler is indefinitely delayed [0]. It’s like the missing piece to making Dokku a real power tool for small teams.<p>Currently, if you want to scale Dokku horizontally and aren’t ready to take the kubernetes plunge, you have to put a load balancer in front of your multiple VMs running Dokku and that comes with it’s own headaches.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;dokku&#x2F;dokku&#x2F;projects&#x2F;1#card-59170273" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dokku&#x2F;dokku&#x2F;projects&#x2F;1#card-59170273</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=proxysna" target="_blank">proxysna</a>   <span class="timeago" data-date="2021-08-19 13:54:29 &#43;0000 UTC">2021-08-19 13:54:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            you should give nomad a try. Dokku has a nomad backend. <a href="https:&#x2F;&#x2F;github.com&#x2F;dokku&#x2F;dokku-scheduler-nomad" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dokku&#x2F;dokku-scheduler-nomad</a>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:21:51 &#43;0000 UTC">2021-08-19 11:21:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use Dokku and love it! The use case is a bit different, as it&#x27;s mostly about running web apps (it does ingress as well and is rather opinionated about the setup of its containers), but Harbormaster is just a thin management layer over Compose.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=conradfr" target="_blank">conradfr</a>   <span class="timeago" data-date="2021-08-19 13:15:33 &#43;0000 UTC">2021-08-19 13:15:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use CapRover and it mostly works.<p>My biggest complaint would be the downtime when the docker script runs after each deployment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=corndoge" target="_blank">corndoge</a>   <span class="timeago" data-date="2021-08-19 15:27:00 &#43;0000 UTC">2021-08-19 15:27:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there software like Compose in terms of simplicity, that supports multiple nodes? I use k8s for an application that really needs to use multiple physical nodes to run containerized jobs but k8s feels like overkill for the task and I spend more time fixing k8s fuckups than working on the application. Is there anything in between compose and k8s?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maltalex" target="_blank">maltalex</a>   <span class="timeago" data-date="2021-08-19 15:29:40 &#43;0000 UTC">2021-08-19 15:29:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Docker Swarm?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 15:57:15 &#43;0000 UTC">2021-08-19 15:57:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hear Nomad mentioned a lot for this, yeah.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=heipei" target="_blank">heipei</a>   <span class="timeago" data-date="2021-08-19 15:31:09 &#43;0000 UTC">2021-08-19 15:31:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hashicorp Nomad
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-19 11:11:29 &#43;0000 UTC">2021-08-19 11:11:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Beware that harbormaster is also the name of a program for adding RBAC to docker: <a href="https:&#x2F;&#x2F;github.com&#x2F;kassisol&#x2F;hbm" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;kassisol&#x2F;hbm</a><p>It&#x27;s kind of abandonware because it was the developer&#x27;s PhD project and he graduated, but it is rather unfortunately widely used in one of the largest GEOINT programs in the US government right now because it was the only thing that offered this capability 5 years ago. Raytheon developers have been begging to fork it for a long time so they can update and make bug fixes, but Raytheon legal won&#x27;t let them fork a GPL-licensed project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aidenn0" target="_blank">aidenn0</a>   <span class="timeago" data-date="2021-08-19 16:37:28 &#43;0000 UTC">2021-08-19 16:37:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s also the CI component of (the now unmaintained) Phabricator
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ThaJay" target="_blank">ThaJay</a>   <span class="timeago" data-date="2021-08-19 12:28:00 &#43;0000 UTC">2021-08-19 12:28:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of them should fork it on their personal account and work on it during bussiness hours. No liability and all the benefits. Don&#x27;t tell legal obviously.<p>&quot;Someone forked it so now our fixes can get merged! :D&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-19 12:37:07 &#43;0000 UTC">2021-08-19 12:37:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve honestly considered this since leaving. Why not do my old coworkers a solid and fix something for them, but then I consider I&#x27;d be doing free labor for a company not willing to let its own workers contribute to a project if they can&#x27;t monopolize the returns from it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vonmoltke" target="_blank">vonmoltke</a>   <span class="timeago" data-date="2021-08-19 13:26:10 &#43;0000 UTC">2021-08-19 13:26:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I consider I&#x27;d be doing free labor for a company not willing to let its own workers contribute to a project if they can&#x27;t monopolize the returns from it<p>I don&#x27;t think that is the reason.  When Raytheon or other contractors perform software work under a DOD contract (i.e., they charge the labor to a contract) the government generally gets certain exclusive rights to the software created.  Raytheon is technically still the copyright holder, but effectively is required to grant the US government an irrevocable license to do whatever they want with the source in support of government missions if the code is delivered to the government.  Depending on the contract, such code may also fall under blanket non-disclosure agreements.  I believe both of these are incompatible with the GPL, and the latter with having a public fork at all.<p>The company could work this out with the government, but it would be an expensive and time-consuming process because government program offices are slow, bureaucratic, and hate dealing with small exceptions on large contracts.  They might even still refuse to make the contract mods required at the end simply because they don&#x27;t understand it or they are too risk averse.  Legal is likely of the opinion that it isn&#x27;t worth trying, and the Raytheon program office likely won&#x27;t push them unless they can show a significant benefit for the company.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:47:10 &#43;0000 UTC">2021-08-19 11:47:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, there were a few projects named that :&#x2F; I figured none of them were too popular, so I just went ahead with the name.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adamddev1" target="_blank">adamddev1</a>   <span class="timeago" data-date="2021-08-19 11:07:04 &#43;0000 UTC">2021-08-19 11:07:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I guess I&#x27;m one of those people mentioned on the rationle who keeps little servers ($5-10 Droplets) and runs a few apps on them. (Like a couple of Node&#x2F;Go apps, a CouchDB, a Verdaccio server). I also haven&#x27;t had issues with things breaking as I do OS updates. Seems like it would be nice though just to have a collection of dockerfiles that could be used to deploy a new server automatically. My current &quot;old fashioned&quot; way has been very doable to me but my big question before jumping to some Docker-based setup is, does running everything on Docker take a huge hit on the performance&#x2F;memory&#x2F;capabilities of the machine? Like could I still comfortably run 4-5 apps on a $5 Droplet? Assuming I would have seperate containers for each app? I&#x27;m having trouble finding info about this.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jrockway" target="_blank">jrockway</a>   <span class="timeago" data-date="2021-08-19 16:46:21 &#43;0000 UTC">2021-08-19 16:46:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Docker containers&quot; are Linux processes with maybe a filesystem, cpu&#x2F;memory limits, and a special network; applied through cgroups.  You can do all of those things without Docker, and there is really not much overhead.<p>systemd has &quot;slice units&quot; that are implemented very similarly to Docker containers, and it&#x27;s basically the default on every Linux system from the last few years.  It&#x27;s underdocumented but you can read a little about it here:
+<a href="https:&#x2F;&#x2F;opensource.com&#x2F;article&#x2F;20&#x2F;10&#x2F;cgroups" rel="nofollow">https:&#x2F;&#x2F;opensource.com&#x2F;article&#x2F;20&#x2F;10&#x2F;cgroups</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:10:06 &#43;0000 UTC">2021-08-19 11:10:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t noticed any performance degradation (though granted, these are small apps), and my home server is 10 years old (and was slow even then).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reddec" target="_blank">reddec</a>   <span class="timeago" data-date="2021-08-19 10:54:05 &#43;0000 UTC">2021-08-19 10:54:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks nice. I did something similar not so much time ago <a href="https:&#x2F;&#x2F;github.com&#x2F;reddec&#x2F;git-pipe" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;reddec&#x2F;git-pipe</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 11:06:46 &#43;0000 UTC">2021-08-19 11:06:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow this has a lot of great features baked in.<p>Especially the backup and Let&#x27;s encrypt elements are great. And it handles docker networks, which makes it very flexible.<p>Will definitely check it out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mnahkies" target="_blank">mnahkies</a>   <span class="timeago" data-date="2021-08-19 13:40:51 &#43;0000 UTC">2021-08-19 13:40:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interestingly this seems like a pretty popular problem to solve.<p>I made a similar thing recently as well, although with the goal to handle ingress and monitoring out the box as well, whilst still able to run comfortably on a small box.<p>I took a fairly similar approach, leveraging docker-compose files, and using a single data directory for ease of backup (although it&#x27;s on my to-do list to split out conf&#x2F;data).<p>If there was a way to get a truly slim and easy to setup k8s compatible environment I&#x27;d probably prefer that, but I couldn&#x27;t find anything that wouldn&#x27;t eat most of my small servers ram<p><a href="https:&#x2F;&#x2F;github.com&#x2F;mnahkies&#x2F;shoe-string-server" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mnahkies&#x2F;shoe-string-server</a> if you&#x27;re interested
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 13:45:53 &#43;0000 UTC">2021-08-19 13:45:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Huh, nice! I think the main problem yours and my project have is that they&#x27;re difficult to explain, because it&#x27;s more about the opinions they have rather than about what they do.<p>I&#x27;ll try to rework the README to hopefully make it more understandable, but looking at your project&#x27;s README I get as overwhelmed as I imagine you get looking at mine. It&#x27;s a lot of stuff to explain in a short page.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 13:43:53 &#43;0000 UTC">2021-08-19 13:43:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is quite slim and easy to setup k8s environment, thanks to microk8s and k3s. Microk8s comes with newer version of ubuntu. k3s is a single binary installation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mnahkies" target="_blank">mnahkies</a>   <span class="timeago" data-date="2021-08-19 14:16:22 &#43;0000 UTC">2021-08-19 14:16:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Last I checked k3s required a min of 512mb of ram, 1gb recommended. Is this not the case?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 14:24:20 &#43;0000 UTC">2021-08-19 14:24:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes it is. Docker&#x27;s minimum requirement is 512mb with 2gb recommended. Containerd + k8s is almost the same requirements.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sgentle" target="_blank">sgentle</a>   <span class="timeago" data-date="2021-08-19 15:11:10 &#43;0000 UTC">2021-08-19 15:11:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I unironically solved this problem by running docker-compose in Docker. You can build an image that&#x27;s just the official docker&#x2F;compose image with your docker-compose.yml on top, mount &#x2F;var&#x2F;run&#x2F;docker.sock into it, and then when you start the docker-compose container, it starts all your dependencies. If you run Watchtower as well, everything auto-updates.<p>Instead of deploying changes as git commits, you deploy them as container image updates. I&#x27;m not going to call it a good solution, exactly, but it meant I could just use one kind of thing to solve my problem, which is a real treat if you&#x27;ve spent much time in the dockerverse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 15:56:33 &#43;0000 UTC">2021-08-19 15:56:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmm, that&#x27;s interesting, do you run Docker in Docker, or do you expose the control socket?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=devmor" target="_blank">devmor</a>   <span class="timeago" data-date="2021-08-19 16:14:09 &#43;0000 UTC">2021-08-19 16:14:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If this ever gets expanded to handle clustering, it&#x27;d be perfect for me. I use k8s on my homelab across multiple raspberry pis.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 11:01:15 &#43;0000 UTC">2021-08-19 11:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks awesome!<p>What I couldn&#x27;t immediately see from skimming the repo is:<p>How hard would it be to use a docker-based automatic https proxy such as this [1] with all projects?<p>I&#x27;ve had a handfull of docker-based services running for many years and love the convenience. What I&#x27;m doing now is simply wrap the images in a bash script that stops the containers, snapshots the ZFS volume, pulls newer versions and re-launches everything. That&#x27;s then run via cron once a day. Zero issues across at least five years.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;SteveLTN&#x2F;https-portal" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;SteveLTN&#x2F;https-portal</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:12:22 &#43;0000 UTC">2021-08-19 11:12:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Under the hood, all Harbormaster does is run `docker-compose up` on a bunch of directories. I&#x27;m not familiar with the HTTPS proxy, but it looks like you could just add it to the config and it&#x27;d auto-deploy and run.<p>Sounds like a very good ingress solution, I&#x27;ll try it for myself too, thanks! I use Caddy now but configuration is a bit too manual.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uniqueuid" target="_blank">uniqueuid</a>   <span class="timeago" data-date="2021-08-19 11:16:06 &#43;0000 UTC">2021-08-19 11:16:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!<p>One thing to note is that you&#x27;ll need to make sure that all the compose bundles are on the same network.<p>I.e. add this to all of them:<p><pre><code>  networks:
+    default:
+      external:
+        name: nginx-proxy</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:24:12 &#43;0000 UTC">2021-08-19 11:24:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah yep, thanks! One thing that&#x27;s possible (and I&#x27;d like to do) with Harbormaster is add configuration to the upstream apps themselves, so to deploy, say, Plex, all you need to do is add the Plex repo URL to your config (and add a few env vars) and that&#x27;s it!<p>I already added a config for Plex in the Harbormaster repo, but obviously it&#x27;s better if the upstream app itself has it:<p><a href="https:&#x2F;&#x2F;gitlab.com&#x2F;stavros&#x2F;harbormaster&#x2F;-&#x2F;blob&#x2F;master&#x2F;apps&#x2F;plex-bridge.yml" rel="nofollow">https:&#x2F;&#x2F;gitlab.com&#x2F;stavros&#x2F;harbormaster&#x2F;-&#x2F;blob&#x2F;master&#x2F;apps&#x2F;p...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=3np" target="_blank">3np</a>   <span class="timeago" data-date="2021-08-19 12:59:57 &#43;0000 UTC">2021-08-19 12:59:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            FWIW Traefik is pretty easy to get running and configured based on container tags, which you cam set in compose files.<p>Traefik can be a bit hairy in some ways, but for anything you&#x27;d run Harbormaster for it should be a good fit.<p>Right now I have some Frankenstein situation with all of Traefik, Nginx, HAProxy, Envoy (though this is inherited from Consul Connect) at different points... I keep thinking about replacing Traefik with Envoy, but the docs and complexity are a bit daunting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GekkePrutser" target="_blank">GekkePrutser</a>   <span class="timeago" data-date="2021-08-19 13:51:25 &#43;0000 UTC">2021-08-19 13:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool name. Reminds me of dockmaster which was some ancient NSA system (It was mentioned in Clifford Stoll&#x27;s excellent book &quot;The Cuckoo&#x27;s Egg&quot;). It was the one the German KGB hacker he caught was trying to get into.<p>It sounds like a good option too, I don&#x27;t want all the complexity of Kubernetes at home. If I worked for the cloud team in work I might use it at home but I don&#x27;t.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=3np" target="_blank">3np</a>   <span class="timeago" data-date="2021-08-19 12:53:52 &#43;0000 UTC">2021-08-19 12:53:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For users who are fine with the single-host scope, this looks great. Definitely easier than working with systemd+$CI, if you don&#x27;t need it (and for all the flame it gets, systemd is very powerful if you just spend the time to get into it, but then again if you don&#x27;t need it you don&#x27;t)<p>I could also see this being great for a personal lab&#x2F;playground server. Or for learning&#x2F;workshops&#x2F;hackathons. Super easy to get people running from 0.<p>If I ever run a class or workshop that has some server-side aspect to it, I&#x27;ll keep this in mind for sure.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nixgeek" target="_blank">nixgeek</a>   <span class="timeago" data-date="2021-08-19 14:19:45 &#43;0000 UTC">2021-08-19 14:19:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any chance this will get packaged up as a container instead of “pipx install”, then all the timers can just be in the container, and it can control via Docker socket exposed to the container?<p>Simple one-time setup and then everything is a container?<p>If that interesting to OP then I might look into that one weekend soon.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 14:43:30 &#43;0000 UTC">2021-08-19 14:43:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh yeah, that&#x27;s very interesting! That would be great, I forgot that you can expose the socket to the container. I&#x27;d definitely be interested in that, thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dneri" target="_blank">dneri</a>   <span class="timeago" data-date="2021-08-19 13:46:54 &#43;0000 UTC">2021-08-19 13:46:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This seems like a neat project! I run a homelab and my container host runs Portainer &amp; Caddy which is a really clean and simple docker-compose deployment stack. This tools seems like it does less than Portainer, so I am not clear on why it would be preferable - just because it is even simpler?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=selfhoster11" target="_blank">selfhoster11</a>   <span class="timeago" data-date="2021-08-19 11:23:54 &#43;0000 UTC">2021-08-19 11:23:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a similar DIY solution with an Ansible playbook that automatically installs or restarts docker-compose files. I am considering switching to Harbormaster, since it&#x27;s much closer to what I wanted from the start.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aae42" target="_blank">aae42</a>   <span class="timeago" data-date="2021-08-19 12:00:02 &#43;0000 UTC">2021-08-19 12:00:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            this is nice, this should help a lot of people in that in-between space<p>i just recently decided to graduate from just `docker-compose up` running inside tmux to a more fully fledged system myself...<p>since i know Chef quite well i just decided to use Chef in local mode with the docker community cookbook<p>i also get the nice tooling around testing changes to the infrastructure in test kitchen<p>if this would have existed before i made that switch, i may have considered it, nice work!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tkubacki" target="_blank">tkubacki</a>   <span class="timeago" data-date="2021-08-19 12:24:22 &#43;0000 UTC">2021-08-19 12:24:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My simple solution for smaller projects is to ssh with port forward to docker registry - here I wrote blog post on that topic:<p><a href="https:&#x2F;&#x2F;wickedmoocode.blogspot.com&#x2F;2020&#x2F;09&#x2F;simple-way-to-deploy-docker-app-on.html" rel="nofollow">https:&#x2F;&#x2F;wickedmoocode.blogspot.com&#x2F;2020&#x2F;09&#x2F;simple-way-to-dep...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gentleman11" target="_blank">gentleman11</a>   <span class="timeago" data-date="2021-08-19 13:37:03 &#43;0000 UTC">2021-08-19 13:37:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How am I supposed to know whether to jump on the kubernetes bandwagon when all these alternatives keep popping up? Kidding&#x2F;not kidding
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-19 13:41:44 &#43;0000 UTC">2021-08-19 13:41:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends upon which job interview you are going to.<p>If is a startup, use some buzzwords like cloud native, devops etc. Check their sentiments towards kubernetes.<p>On a serious note, You might have to jump on the kubernetes bandwagon whether you like it or not as many of the companies are serious investing their resources. Having spoken to various companies from series A to Enterprise. I do see the kubernetes adoption is actually not as much as I would have imagined based on the hype.<p>P.S discussion of kubernetes or not kubernetes was recently accelerated by a post from Ably [1]<p>[1] <a href="https:&#x2F;&#x2F;ably.com&#x2F;blog&#x2F;no-we-dont-use-kubernetes" rel="nofollow">https:&#x2F;&#x2F;ably.com&#x2F;blog&#x2F;no-we-dont-use-kubernetes</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p_l" target="_blank">p_l</a>   <span class="timeago" data-date="2021-08-19 14:16:59 &#43;0000 UTC">2021-08-19 14:16:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s missing km the conversation is that said blog post can be summarised as &quot;we have money to burn&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=proxysna" target="_blank">proxysna</a>   <span class="timeago" data-date="2021-08-19 13:43:33 &#43;0000 UTC">2021-08-19 13:43:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is not an alternative, just a small personal project. Learn docker, basics of kubernetes and maybe nomad.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pdimitar" target="_blank">pdimitar</a>   <span class="timeago" data-date="2021-08-19 11:04:42 &#43;0000 UTC">2021-08-19 11:04:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks super, I&#x27;ll try it on my NAS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zeckalpha" target="_blank">zeckalpha</a>   <span class="timeago" data-date="2021-08-19 11:44:27 &#43;0000 UTC">2021-08-19 11:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If it can pull from git, why not have the YAML in a git repo, too?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 11:46:24 &#43;0000 UTC">2021-08-19 11:46:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is, in fact, the recommended way to deploy it! If you look at the systemd service&#x2F;timer files, that&#x27;s what it does, except Harbormaster itself isn&#x27;t aware of the repo.<p>I kind of punted on the decision of how to run the top layer (ie have Harbormaster be a daemon that auto-pulls its config), but it&#x27;s very simple to add a cronjob to `git pull; harbormaster` (and is more composable) so I didn&#x27;t do any more work in that direction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sandGorgon" target="_blank">sandGorgon</a>   <span class="timeago" data-date="2021-08-19 13:32:12 &#43;0000 UTC">2021-08-19 13:32:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            you should check k3s or k0s - single machine kubernetes
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 13:34:06 &#43;0000 UTC">2021-08-19 13:34:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did, but even that was a bit too much when I don&#x27;t really need to be K8s-compatible. Harbormaster doesn&#x27;t run any extra daemons at all, so that was a better fit for what I wanted to do (I also want to run stuff on Raspberry Pis and other computers with low resources).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sandGorgon" target="_blank">sandGorgon</a>   <span class="timeago" data-date="2021-08-19 14:35:53 &#43;0000 UTC">2021-08-19 14:35:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            fair point. I have generally had a very cool experience running these single daemon kubernetes distros.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stavros" target="_blank">stavros</a>   <span class="timeago" data-date="2021-08-19 14:46:49 &#43;0000 UTC">2021-08-19 14:46:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They look very very interesting for development and things like that, and I&#x27;m going to set one up locally to play with, they just seemed like overkill for running a bunch of Python scripts, Plex, etc.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

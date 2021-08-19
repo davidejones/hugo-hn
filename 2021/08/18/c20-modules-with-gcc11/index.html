@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/c20-modules-with-gcc11/">
+
+
+    <title>C&#43;&#43;20 Modules with GCC11 - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="C&#43;&#43;20 Modules with GCC11 - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/c20-modules-with-gcc11/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/c20-modules-with-gcc11/">
+<meta name="twitter:title" content="C&#43;&#43;20 Modules with GCC11 - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "C\u002b\u002b20 Modules with GCC11 - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T08:26:22JST",
+    "dateModified": "2021-08-18T08:26:22JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.feabhas.com/2021/08/c20-modules-with-gcc11/">C&#43;&#43;20 Modules with GCC11</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dleslie" target="_blank">dleslie</a>   <span class="timeago" data-date="2021-08-19 00:23:20 &#43;0000 UTC">2021-08-19 00:23:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Modules promise to significantly change the structure of C++ codebases and possibly signal headers’ ultimate demise (but probably not in my lifetime). It also opens the door to potentially have a unified build system and package manager, similar to Rust’s Cargo package manager; though I imaging standardising a unified build system would be one bloody battle.<p>I wonder how many folks, like me, have stopped using C++ because it&#x27;s too much effort to manage the build system and the overhead of headers adds too much to compile time?<p>An enormous draw for alternatives, like Rust, Zig, Nim et al is that they simply don&#x27;t have these problems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tempest_" target="_blank">tempest_</a>   <span class="timeago" data-date="2021-08-19 01:25:34 &#43;0000 UTC">2021-08-19 01:25:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Honestly the modern build system is my favourite feature of rust.<p>No messing with autoconfs, and make files that spit out some random gcc error I have to debug.<p>To be fair however I am also not too interested in c++ and its 30 years of foot guns either so take it for what its worth.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=saagarjha" target="_blank">saagarjha</a>   <span class="timeago" data-date="2021-08-19 03:32:42 &#43;0000 UTC">2021-08-19 03:32:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my experience Rust’s ability to rid itself from autoconf comes not because of any inherent benefits but because Rust code typically does not support systems where autoconf would really be required. For the mostly sane platform differences, the popular ones are probably hardcoded in some dependency crate with “-std” in its name so you don’t have to see it, unless of course it turns out to not support your less common platform or the check is broken, in which case you lob a GitHub issue at them and they deal with it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 06:32:08 &#43;0000 UTC">2021-08-19 06:32:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, cargo is perfect if you are willing to always compile from source, everything is Rust and one is willing to deal with everything else themselves in build.rs scripts.<p>Google and Microsoft aren&#x27;t using cargo on their projects, rather had to come up with their own build tool.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zeusk" target="_blank">zeusk</a>   <span class="timeago" data-date="2021-08-19 07:30:47 &#43;0000 UTC">2021-08-19 07:30:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At Microsoft, we do use cargo internally but we make use of an internal crate registry.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-19 07:20:39 &#43;0000 UTC">2021-08-19 07:20:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google&#x27;s bazel&#x2F;blaze predates rust. It has the advantage of supporting multiple languages
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-19 09:34:53 &#43;0000 UTC">2021-08-19 09:34:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            and is pretty much unuseable in the traditional unix setting where you are supposed to vendor nothing and use all the libraries of the OS however broken they may be
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mtzet" target="_blank">mtzet</a>   <span class="timeago" data-date="2021-08-19 11:24:29 &#43;0000 UTC">2021-08-19 11:24:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s a feature, no?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-08-19 03:46:30 &#43;0000 UTC">2021-08-19 03:46:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust does support a surprisingly deep set of platforms, but it achieves this by baking platform-specific knowledge into Rust itself. See for example how it finds errno, it&#x27;s just a big list of special cases. It is pleasant to not need the configure scripts, but a downside is that no new platform can participate without first patching Rust.<p><a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;src&#x2F;std&#x2F;sys&#x2F;unix&#x2F;os.rs.html#38" rel="nofollow">https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;src&#x2F;std&#x2F;sys&#x2F;unix&#x2F;os.rs.html#38</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=steveklabnik" target="_blank">steveklabnik</a>   <span class="timeago" data-date="2021-08-19 04:20:32 &#43;0000 UTC">2021-08-19 04:20:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Into the standard library, not into Rust itself. Anyone can write this, you don&#x27;t need to patch Rust first just to call some functions.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nicoburns" target="_blank">nicoburns</a>   <span class="timeago" data-date="2021-08-19 09:54:01 &#43;0000 UTC">2021-08-19 09:54:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe you can write your own completely separate standard library if you want to (much like each platform typically has it&#x27;s own libc). It&#x27;s just that it&#x27;s easier to manage the first-party supported platforms as one codebase.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saghm" target="_blank">saghm</a>   <span class="timeago" data-date="2021-08-19 04:10:23 &#43;0000 UTC">2021-08-19 04:10:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think there&#x27;s an argument to be made that some developers might be willing to sacrifice portability to some lesser-used platforms in order to make the ecosystem a bit cleaner for the platforms it does support. This is definitely a tradeoff though, so it make sense and is good that different ecosystems make difference choices here, as it allows people to choose whichever suits them best.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 06:27:20 &#43;0000 UTC">2021-08-19 06:27:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now try to integrate it on mixed codebase like Android or Fuchsia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-08-19 03:29:37 &#43;0000 UTC">2021-08-19 03:29:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does Rust handle problems like &quot;call this function if it exists?&quot; Is there support in build scripts?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=comex" target="_blank">comex</a>   <span class="timeago" data-date="2021-08-19 03:43:27 &#43;0000 UTC">2021-08-19 03:43:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It doesn&#x27;t.  Indeed, when it comes to libc and other system libraries (or really most C libraries in general), the Rust ecosystem relies on hardcoding the ABI of every supported platform.  It&#x27;s theoretically possible to use bindgen (which parses C headers) as a build step, but this is rarely done.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skywal_l" target="_blank">skywal_l</a>   <span class="timeago" data-date="2021-08-19 05:35:03 &#43;0000 UTC">2021-08-19 05:35:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zig doesn&#x27;t have a package manager like rust does. They are competing &quot;non-official&quot; implementations that are not compatible with each other. Zig is in the same state as C++ right now with vcpkg, build 2, conan, etc...<p>But there is an effort[0] from the &quot;core team&quot; (meaning Andrew Kelley the author or Zig) to push for an &quot;official solution&quot;.<p>Maybe, the same way Zig makes cross-compiling C&#x2F;C++ easier we might see a Zig package manager making C&#x2F;C++ packaging easier too.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;ziglang&#x2F;zig&#x2F;issues&#x2F;943" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ziglang&#x2F;zig&#x2F;issues&#x2F;943</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AndyKelley" target="_blank">AndyKelley</a>   <span class="timeago" data-date="2021-08-19 05:45:40 &#43;0000 UTC">2021-08-19 05:45:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To provide some more context, here is a snippet from the latest release notes[0]:<p>&gt; Having a package manager built into the Zig compiler is a long-anticipated feature. Zig 0.8.0 does not have this feature.<p>&gt; If the package manager works well, people will use it, which means building Zig projects will involve compiling more lines of Zig code, which means the Zig compiler must get faster, better at incremental compilation, and better at resource management.<p>&gt; Therefore, the package manager depends on finishing the Self-Hosted Compiler, since it is planned to have these improved performance characteristics, while the Bootstrap Compiler is not planned to have them.<p>I can&#x27;t help but mention, I am incredibly excited about how well the self-hosted compiler is coming along. Progress is swift, and all the ambitious design decisions (fully incremental compilation[1], extremely fast debug builds[2], low memory usage, multi-threaded) are intact. I anticipate it to make quite a splash once it becomes generally usable.<p>I don&#x27;t expect the package manager to take nearly as long to develop.<p>[0]: <a href="https:&#x2F;&#x2F;ziglang.org&#x2F;download&#x2F;0.8.0&#x2F;release-notes.html#Package-Manager-Status" rel="nofollow">https:&#x2F;&#x2F;ziglang.org&#x2F;download&#x2F;0.8.0&#x2F;release-notes.html#Packag...</a><p>[1]: <a href="https:&#x2F;&#x2F;vimeo.com&#x2F;491488902" rel="nofollow">https:&#x2F;&#x2F;vimeo.com&#x2F;491488902</a><p>[2]: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;andy_kelley&#x2F;status&#x2F;1416485475125141504" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;andy_kelley&#x2F;status&#x2F;1416485475125141504</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=makapuf" target="_blank">makapuf</a>   <span class="timeago" data-date="2021-08-19 07:59:06 &#43;0000 UTC">2021-08-19 07:59:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I long for the times where there were less package managers, not more. Maybe two at most (one for distros and one for developers maybe) but isn&#x27;t it time for some kind of standardisation? One per language is not justified.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dureuill" target="_blank">dureuill</a>   <span class="timeago" data-date="2021-08-19 08:53:49 &#43;0000 UTC">2021-08-19 08:53:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, a dedicated package manager such as cargo sure is convenient. Maybe what we currently need is rather a &quot;meta package manager&quot; that knows of many package managers and can orchestrate them?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 06:26:35 &#43;0000 UTC">2021-08-19 06:26:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Neither does C++ when using IDE build tools.<p>It is just many anti-IDE folks never get to adopt them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 12:15:07 &#43;0000 UTC">2021-08-19 12:15:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The only problem woth this approach is that C++ IDEs are silos of their own: Visual Studio on Windows, XCode on MacOS, whatever the heck you want to use on Linux... you quickly end up maintaining a lot of project files if you have a cross platform project. Damned if you do, damned if you don&#x27;t...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:30:49 &#43;0000 UTC">2021-08-19 12:30:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not every project needs to be cross platform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 16:00:52 &#43;0000 UTC">2021-08-19 16:00:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Correct. And e.g. Visual Studio is kind of nice if you only need to develop for Windows. It&#x27;s just that in my experience the pain with build systems invariably starts to increase when you actually have to go cross platform.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scrubs" target="_blank">scrubs</a>   <span class="timeago" data-date="2021-08-19 04:46:42 &#43;0000 UTC">2021-08-19 04:46:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At the office c++ fans are using modules to fight back against the vast simplifications go, rust come with wrt to builds, dependency management. Alas modules are a step forward for c++ ... But ...<p>* It&#x27;ll be decades before our existing c++ code base is converted to modules meaning same cmake, dpkg, and all manner of nonsense ...<p>* clibs used by c++ are not impacted<p>* Modules are unlikely to help for os headers<p>I&#x27;m trying to move to go when I can and pure rust otherwise. After many years of c++ build hell on top of legion internal c++ code ..  building has become a cosmic pain in the butt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-19 07:19:50 &#43;0000 UTC">2021-08-19 07:19:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; It&#x27;ll be decades before our existing c++ code base is converted to modules<p>&gt; I&#x27;m trying to move to go when I can and pure rust otherwise.<p>I don&#x27;t understand in which universe replacing includes by imports takes more time than a full rewrite in a different language
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=speters" target="_blank">speters</a>   <span class="timeago" data-date="2021-08-19 09:08:00 &#43;0000 UTC">2021-08-19 09:08:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is not as if the same effort will be dedicated to switching to modules than a rewrite (which probably won&#x27;t happen for the OP)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 06:29:33 &#43;0000 UTC">2021-08-19 06:29:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And 40 years of mature libraries.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mtzet" target="_blank">mtzet</a>   <span class="timeago" data-date="2021-08-19 06:53:12 &#43;0000 UTC">2021-08-19 06:53:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my experience the important libraries I need to interact with are C libraries, not C++ libraries. Of course certain niches have very important C++ libraries, but I don&#x27;t think the C++ library story in general is that great. Care to expand?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fsloth" target="_blank">fsloth</a>   <span class="timeago" data-date="2021-08-19 07:05:56 &#43;0000 UTC">2021-08-19 07:05:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not OP, but several domains have large non-trivial C++ codebases. For example, numerics, computational geometry and computer graphics have large mature libraries that would need to be rewritten by subject experts. The number of subject experts in these fields is not that large to start with, and the algorithms are complex and non-trivial, so &quot;exothermic&quot; explosion to new languages like Rust is unlikely to happen very fast.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:02:55 &#43;0000 UTC">2021-08-19 10:02:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            CUDA, SYSCL, DP++, Qt, MFC and WinUI, Metal Shading Language, DirectX, most COM APIs in Windows, WinRT infrastructure, macOS IO&#x2F;Driver Kit, ARM Mbed, Arduino, the native implementation of most well known ML libraries, all major game engines middleware, LLVM and GCC, just from the top of my head.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ziotom78" target="_blank">ziotom78</a>   <span class="timeago" data-date="2021-08-19 07:06:31 &#43;0000 UTC">2021-08-19 07:06:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not the OP, but the first libraries that come to my mind are Qt and wxWidgets (for GUI programming).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 11:57:55 &#43;0000 UTC">2021-08-19 11:57:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mmm. 40 years ago is 1981. So, if you do have a 1981 API it&#x27;s completely incompatible with how you&#x27;d actually write C++ in 2021 and will need a wrapper, putting it squarely in the same situation as Rust where you would also want to wrap this 1981 API.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-19 12:12:50 &#43;0000 UTC">2021-08-19 12:12:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So, if you do have a 1981 API it&#x27;s completely incompatible with how you&#x27;d actually write C++ in 2021<p>is it though. I have plenty of .h in my &#x2F;usr&#x2F;include with copyrights between 1980 and 1985. Sure, it&#x27;s not modern best practices, but at least it&#x27;s possible... and for a one-off task there&#x27;s definitely not much point in doing a wrapper.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 16:47:34 &#43;0000 UTC">2021-08-19 16:47:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. So, modern C++ says you want a unique_ptr to any owned resource you&#x27;re not sharing, and otherwise a shared_ptr (or some equivalent smart pointer). Your 1981 API doesn&#x27;t do that because those don&#x27;t exist in 1981.<p>Maybe it gives you a raw pointer to new resources. In 2021 those are just loose references which don&#x27;t signify ownership, you need the wrapper to avoid this confusion leaking into your program.<p>Maybe it gives you an integer handle which needs to be passed to some other API call to &quot;release&quot; the handle when you&#x27;re done with it. Again you&#x27;ll want a wrapper to handle this properly in your code or you may leak resources. You&#x27;ll also want a wrapper because one integer is the same as another, but you probably shouldn&#x27;t finished_with_cow(dog_number) or clean_up_dog(cow_number) even though those compile.<p>Being forty years old it invariably won&#x27;t be thread safe, so you&#x27;d also want to wrap it for that reason unless (as is often the case in C++) your code isn&#x27;t thread safe anyway.<p>&quot;at least it&#x27;s possible&quot; isn&#x27;t a differentiator. As I said you could also access this 40 year old API from Rust, but you&#x27;d want to build a wrapper for it because it the behaviour is so violently different from what&#x27;s expected in the modern ecosystem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:30:05 &#43;0000 UTC">2021-08-19 12:30:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ever heard of UNIX?<p>Naturally you are being pedantic by focusing on exactly 40 years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 17:02:45 &#43;0000 UTC">2021-08-19 17:02:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which parts of the UNIX APIs feel like <i>good</i> fits for modern C++ to you?<p>This reminds me of BeOS which claimed to be a C++ operating system and had abstract classes like &quot;BStatable&quot; representing things that can be &quot;stat&#x27;d&quot; and which comes with a bunch of methods that use out-pointers for integers that can in turn be bit-compared to constants like S_IWUSR. Very C++. Much object orientation. Wow.<p>[ Behind the scenes of course it&#x27;s  the stat() system call you remember from Unix and C. ]<p>It&#x27;s true that there are really significant libraries people care about for C++ and some of those libraries existed five, ten, in a few cases even twenty-five years ago, but the older they are the uglier they get and more likely they are to drive people <i>away</i> from C++ rather than toward it. If your argument becomes something like &quot;Why use Rust when C++ has COM?&quot; you might as well reveal your membership of the Rust Evangelism Strike Force.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 06:55:43 &#43;0000 UTC">2021-08-19 06:55:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice post!<p>When playing with modules, I noticed a major caveat that makes me dislike them very much: the standard says that modules must form acyclic graphs. This means you <i>still</i> cannot get rid of forward declarations and you must put interfaces and implementations into different files for any realistically sized code base. So, in terms of effort, you still have to maintain the equivalemt of headers, just with a different name and less preprocessor macro interference.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hoseja" target="_blank">hoseja</a>   <span class="timeago" data-date="2021-08-19 07:12:37 &#43;0000 UTC">2021-08-19 07:12:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh that&#x27;s unfortunate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 08:12:17 &#43;0000 UTC">2021-08-19 08:12:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunate, yes. But it keeps with the spirit of a language that is designed for both single pass compilation and separate compilation. A module system that mimics other languages like D or Python (I don&#x27;t know enough about rust) would require a major change to how C++ compilations works. The compilers are by now complex enough that I&#x27;m pretty sure that compiler developers aren&#x27;t keen on rewriting their frontends for multi-pass compilation.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=creata" target="_blank">creata</a>   <span class="timeago" data-date="2021-08-19 08:32:13 &#43;0000 UTC">2021-08-19 08:32:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I don&#x27;t know enough about rust<p>Rust allows cyclic dependencies between modules within a single crate, but not between crates.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:12:12 &#43;0000 UTC">2021-08-19 10:12:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is true of most module systems anyway, and it was already an huge battle to get them adopted at all.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 10:22:04 &#43;0000 UTC">2021-08-19 10:22:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which module systems are you thinking of? The only ones that I  think come close are the ones in Pascal and its successors.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:26:53 &#43;0000 UTC">2021-08-19 10:26:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mesa, Mesa&#x2F;Cedar, Modula-2, Modula-3, CLU, Eiffel, Ada, Oberon, Oberon-2, Oberon-07, Component Pascal, Active Oberon, COM&#x2F;WinRT, .NET.<p>Probably there are others as well.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-19 10:32:12 &#43;0000 UTC">2021-08-19 10:32:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What makes you include .NET? C# and VB.net handle cyclical dependencies between classes &#x2F; source files just fine. Partial classes are the most extreme example of that. Assemblies are different, but so are static&#x2F;dynamic libraries.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 11:38:57 &#43;0000 UTC">2021-08-19 11:38:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Assemblies are what maps to modules in concept, specially given polyglot projects.<p>If you want to stay in one language, then F# imposes compilation order, even Visual Studio has support to rearrange file order on the project file.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-19 00:26:33 &#43;0000 UTC">2021-08-19 00:26:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know this has to integrate with existing C++.<p>But wow is that a multiple degrees more complex then in most other languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=otabdeveloper4" target="_blank">otabdeveloper4</a>   <span class="timeago" data-date="2021-08-19 08:59:00 &#43;0000 UTC">2021-08-19 08:59:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C++ supports platforms multiple degrees more complex than other languages.<p>You&#x27;re not gonna use Rust or Zig to write code for some obscure DSP CPU with a ridiculous architecture and no OS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 12:16:12 &#43;0000 UTC">2021-08-19 12:16:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Actually, maybe you <i>would</i> choose Rust. The core consideration is going to be whether somebody is going to target LLVM on that CPU. If the CPU has a perfectly nice GCC backend then maybe Rust is a bad choice, but if it&#x27;s LLVM anyway, or if &quot;land an actual high level language on this hardware so that I don&#x27;t need to write machine code by hand&quot; is part of the goal of your work anyway, then Rust looks reasonable.<p>Of course with no OS you can&#x27;t run Rust&#x27;s standard library as this expects OS services to underpin it. But you can have core features, and if you&#x27;ve got &quot;no OS&quot; you presumably were expecting to write anything you needed anyway.<p>The reality for modern C++ is that you&#x27;re on a Microsoft platform, or you&#x27;re on GCC, or you&#x27;re on Clang, there is no fourth vendor - you are screwed and nothing works. The era of $$$ proprietary compilers for weird targets on C++ <i>ended</i> and isn&#x27;t coming back, C++ got too complicated for them and they gradually stopped implementing new features. But if you&#x27;re on Clang you already <i>have</i> LLVM, which is a long way toward having Rust. If you&#x27;re on a Microsoft platform that is the OS, I know, seems like they could do more but they didn&#x27;t.<p>When you say &quot;ridiculous architecture&quot; if you got too far off piste you can&#x27;t have modern C++ either. Even as you stray into the black zone stuff gets very fragile and I wouldn&#x27;t risk it. Your CPU integer arithmetic isn&#x27;t technically <i>required</i> to be two&#x27;s complement for example, but good luck fixing all the weird things that break if it isn&#x27;t.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jokoon" target="_blank">jokoon</a>   <span class="timeago" data-date="2021-08-19 11:14:55 &#43;0000 UTC">2021-08-19 11:14:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also what I thought...<p>Although, this is for people who make modules, not for module users.<p>As long as modules are written and compiled, they&#x27;re both faster and easier to use and re-use than headers+libraries, although I&#x27;m curious to see if this covers both multithreaded libs and not, debug&#x2F;release symbols, 32 or 64 bits and so on. So far all those options means there are 8 versions for each lib.<p>I&#x27;ve heard that now, libraries built with a version of MSVC are compatible with future version of MSVC, which means I don&#x27;t need to build libraries each time I use a new version of MSVC.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=asddubs" target="_blank">asddubs</a>   <span class="timeago" data-date="2021-08-19 01:44:02 &#43;0000 UTC">2021-08-19 01:44:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            it&#x27;s the C++ way
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tdiff" target="_blank">tdiff</a>   <span class="timeago" data-date="2021-08-19 08:43:06 &#43;0000 UTC">2021-08-19 08:43:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunately modules support in major build systems (e.g. cmake) is falling behind, and without it modules are somewhat useless for general c++ projects. I&#x27;ve only heard of build2 having some support for modules.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:14:10 &#43;0000 UTC">2021-08-19 10:14:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Visual Studio&#x27;s MSBuild is doing quite alright,<p><a href="https:&#x2F;&#x2F;devblogs.microsoft.com&#x2F;cppblog&#x2F;moving-a-project-to-cpp-named-modules&#x2F;" rel="nofollow">https:&#x2F;&#x2F;devblogs.microsoft.com&#x2F;cppblog&#x2F;moving-a-project-to-c...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=glouwbug" target="_blank">glouwbug</a>   <span class="timeago" data-date="2021-08-19 00:13:03 &#43;0000 UTC">2021-08-19 00:13:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve been waiting half a decade for modules
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bmurphy1976" target="_blank">bmurphy1976</a>   <span class="timeago" data-date="2021-08-19 02:42:59 &#43;0000 UTC">2021-08-19 02:42:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Half a decade?  Man, I was hoping for something better than header files in the 90s!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 09:02:34 &#43;0000 UTC">2021-08-19 09:02:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  Half a decade? Man, I was hoping for something better than header files in the 90s!<p>It&#x27;s hard to get something better than header files; modules don&#x27;t provide the same functionality, as far as I can see.<p>I think headers will remain purely for practical purposes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:16:25 &#43;0000 UTC">2021-08-19 10:16:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since Mesa languages with modules also support conditional compilation and file inclusion.<p>Check Modula-2 documentation, or Turbo Pascal for MS-DOS or Apple&#x27;s Object Pascal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 11:47:08 &#43;0000 UTC">2021-08-19 11:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well I did say &quot;for practical purposes&quot; :-)<p>Header files serve as a library interface for almost all languages out there, and are so simple that for the most part they can <i>automatically</i> be used from other languages to access the library.<p>C++ Modules, as far as I can tell anyway, are for C++ programs to use only, to access C++-only libraries.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:28:22 &#43;0000 UTC">2021-08-19 12:28:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since when do other languages compile C header files?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 12:29:54 &#43;0000 UTC">2021-08-19 12:29:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  Since when do other languages compile C header files?<p>I dunno, I never claimed that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:51:38 &#43;0000 UTC">2021-08-19 12:51:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Header files serve as a library interface for almost all languages out there, and are so simple that for the most part they can automatically be used from other languages to access the library
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 13:28:04 &#43;0000 UTC">2021-08-19 13:28:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Header files serve as a library interface for almost all languages out there, and are so simple that for the most part they can automatically be used from other languages to access the library<p>What does that have to do with compilation? I use C headers all the time from Java projects and I&#x27;ve never had to compile them. Not manually anyway.<p>Headers are usable from Python, Tcl, Lua, Java, C# and a whole lot of other languages that similarly don&#x27;t require compilation and don&#x27;t require much effort further than issuing a single command.<p>The modules being proposed as a replacement for headers cannot, and will never, provide this functionality.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 15:20:02 &#43;0000 UTC">2021-08-19 15:20:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you make javac or csc read stdio.h?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zigzag312" target="_blank">zigzag312</a>   <span class="timeago" data-date="2021-08-19 08:32:31 &#43;0000 UTC">2021-08-19 08:32:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So, for nearly one third of a century :P
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mhh__" target="_blank">mhh__</a>   <span class="timeago" data-date="2021-08-19 00:53:53 &#43;0000 UTC">2021-08-19 00:53:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m pretty sure modules and concepts have basically taken my entire life to happen.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phibz" target="_blank">phibz</a>   <span class="timeago" data-date="2021-08-19 00:57:59 &#43;0000 UTC">2021-08-19 00:57:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This seems like it tries to be all things to all people. I wonder if it will succeed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=copperx" target="_blank">copperx</a>   <span class="timeago" data-date="2021-08-19 04:40:23 &#43;0000 UTC">2021-08-19 04:40:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure if you&#x27;re talking about modules or C++ itself.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=qweqwweqwe-90i" target="_blank">qweqwweqwe-90i</a>   <span class="timeago" data-date="2021-08-19 00:47:05 &#43;0000 UTC">2021-08-19 00:47:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So will clang, gcc, and msvc all have different implementations modules?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=steveklabnik" target="_blank">steveklabnik</a>   <span class="timeago" data-date="2021-08-19 00:49:35 &#43;0000 UTC">2021-08-19 00:49:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They&#x27;re different codebases, so as far as I know, they&#x27;ll have different implementations, sure.<p>But modules themselves are standardized, and so you should expect that after some time, you&#x27;ll have stuff that works on all implementations. I don&#x27;t believe that any of them are complete yet, which is why you see these differences currently.<p>(Caveats: I have followed the development of modules <i>semi</i> closely but am by no means an expert.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=not2b" target="_blank">not2b</a>   <span class="timeago" data-date="2021-08-19 01:07:21 &#43;0000 UTC">2021-08-19 01:07:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s been a strong effort to have binary compatibility between compilers.  The initial effort was funded by Intel when they launched Itanium and the resulting C++ ABI is used for other processor targets as well.  So gcc, clang, and Intel&#x27;s proprietary compiler are binary compatible modulo bugs.<p>But modules are very new and I doubt if enough corner cases are nailed down yet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gumby" target="_blank">gumby</a>   <span class="timeago" data-date="2021-08-19 01:52:51 &#43;0000 UTC">2021-08-19 01:52:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So gcc, clang, and Intel&#x27;s proprietary compiler are binary compatible modulo bugs.<p>For generated code, definitely.  But for example their standard libraries are different so you still can&#x27;t, say, compile something in gcc that uses std::string and expect to be able to link it to something compiled with clang that uses std::string unless you are careful to use the headers (and .a files) of the same libc++ or libstdc++<p>I consider this a feature, not a bug -- diversity in implementation is a plus.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=summerlight" target="_blank">summerlight</a>   <span class="timeago" data-date="2021-08-19 01:13:09 &#43;0000 UTC">2021-08-19 01:13:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, all the compilers will have different implementations and ABI and it&#x27;d be unrealistic expectation for them to be completely compatible. Instead, IIRC the current approach is to have a compatible format for specific common tasks. There has been some effort in SG15 to ensure consistency&#x2F;interoperability across module implementations which led to <a href="https:&#x2F;&#x2F;wg21.link&#x2F;P1688R0" rel="nofollow">https:&#x2F;&#x2F;wg21.link&#x2F;P1688R0</a>. This was mainly due to difficulty of scanning dependencies for build systems so there needs to be a standardized format to consume module information. One caveat: this group has been inactive for a while due to the pandemic, unfortunately.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bigcheesegs" target="_blank">bigcheesegs</a>   <span class="timeago" data-date="2021-08-19 03:21:16 &#43;0000 UTC">2021-08-19 03:21:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. There are no plans for binary module compat between compilers, or different versions of the same compiler for gcc and Clang.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=schaefer" target="_blank">schaefer</a>   <span class="timeago" data-date="2021-08-19 00:58:45 &#43;0000 UTC">2021-08-19 00:58:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            so excited!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=baybal2" target="_blank">baybal2</a>   <span class="timeago" data-date="2021-08-19 01:01:30 &#43;0000 UTC">2021-08-19 01:01:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the C world, we have pkgconf.<p>There is no real chance to see it becoming a part of the C standard, because C is just that compact, and simple.<p>Yet, pkgconf will be a perfect base for pan-C package metadata standard outside of the standard.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bregma" target="_blank">bregma</a>   <span class="timeago" data-date="2021-08-19 11:14:46 &#43;0000 UTC">2021-08-19 11:14:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think you mean &quot;in the Linux world&quot; because pkgconf is not exclusive to C and doesn&#x27;t work at all in many domains where C is in widespread use.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=baybal2" target="_blank">baybal2</a>   <span class="timeago" data-date="2021-08-19 15:14:08 &#43;0000 UTC">2021-08-19 15:14:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, you will never manage to run it everywhere where C runs.<p>But as a part of a wider C world, it&#x27;s probably the most portable semblance of standardised package metadata system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-19 07:24:13 &#43;0000 UTC">2021-08-19 07:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            pkgconf already sucks on Linux when your packages are configurable, and sucks even more on Windows
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 09:05:01 &#43;0000 UTC">2021-08-19 09:05:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  pkgconf already sucks on Linux when your packages are configurable, and sucks even more on Windows<p>Yes, but to be fair most things suck on Windows because that userbase only recently decided that portability is a good thing.<p>As we move forward and Microsoft products stop being the odd one out, the suckage will get lower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:19:10 &#43;0000 UTC">2021-08-19 10:19:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah pkgconf now works on IBM, ARM, Sony, Nintendo, Unisys, Cisco, Green Hills, Apple, Google&#x27;s platforms?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 11:48:53 &#43;0000 UTC">2021-08-19 11:48:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            None of those systems you mention particularly care about portability, right? That means your pkgconf support on those platforms are going to be as broken as on Windows, if not more.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:25:09 &#43;0000 UTC">2021-08-19 12:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What portability? Pkgconf is GNU&#x2F;Linux only anyway.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lelanthran" target="_blank">lelanthran</a>   <span class="timeago" data-date="2021-08-19 12:29:24 &#43;0000 UTC">2021-08-19 12:29:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, Mea Cupla - I kept reading it as &#x27;pkg-config&#x27;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 10:17:48 &#43;0000 UTC">2021-08-19 10:17:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Compact and simple?<p>I guess someone is still using K&amp;R C book as reference instead of ISO C18.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jstimpfle" target="_blank">jstimpfle</a>   <span class="timeago" data-date="2021-08-19 11:23:45 &#43;0000 UTC">2021-08-19 11:23:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How is it less compact and simple than it was 10 or 20 years ago? It&#x27;s still the same language, in spirit and in practice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 11:38:04 &#43;0000 UTC">2021-08-19 11:38:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except K&amp;R C will stop compiling in C23, and is so simple that most people that think they know C, will fail in all glory a pub Quizz that contains all ISO C versions and major language extensions.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 14:03:37 &#43;0000 UTC">2021-08-19 14:03:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean, that&#x27;s nice and everything, but you&#x27;re the one who brought up pre-standard (K&amp;R) C.<p>I have a copy of the 2nd edition &quot;The C Programming Language&quot; by K&amp;R from 1988 which discusses what is in effect the standard C89 language. Appendix C calls out the substantive changes compared to their earlier book, it is three pages long.<p>It&#x27;s true that these changes are significant, C would be a very different language without enum for example, or with &quot;old-style&quot; (already deprecated by the time the book was written in 1988) function declarations. But the language is still very compact.<p>The book explains and describes essentially the entire language, and outlines the standard library, in under 300 pages. Only a few years later, the 2nd edition of Stroustrup&#x27;s book &quot;The C++ Programming Language&quot; is more than twice the length, and introduces numerous already anachronistic features in notional support of C, which had meanwhile deprecated them. This takes up about 700 pages.<p>Stroustrup not only grandfathers in features C had by then cast off (such as weird function definitions) but also introduces crazy nonsense that I hope nobody ever used in the name of &quot;backward compatibility&quot; e.g. hey why not overload both of the increment operators (themselves bad ideas C++ inherited from C) with the <i>same</i> function? Imagine trying to pretend to yourself that you believe this is a reasonable thing to do, while also pretending to believe operator overloading delivers &quot;unsurprising&quot; semantics.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 15:18:27 &#43;0000 UTC">2021-08-19 15:18:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To properly compare the C standard with C++ in page count, you need to include POSIX as well.<p>Also you should be comparing ISO standard documents editions, not books.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-19 16:33:11 &#43;0000 UTC">2021-08-19 16:33:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The argument was that C is &quot;compact and simple&quot;. The modestly size book is both an excellent introduction and a good manual for the complete language (for C89 anyway). That&#x27;s not <i>why</i> the language is compact and simple, it&#x27;s <i>because</i> the language is compact and simple.<p>In contrast Stroustrup&#x27;s work is much bigger, and yet things that would later be claimed to be very important don&#x27;t warrant a mention. Even assuming we accept that Bjarne is simply retrospectively imagining a motivation he never had at the time, and so these were indeed tiny inconsequential features when the book was written, somehow the &quot;survey&quot; of the C++ language in the much longer book is inadequate while K&amp;R cover their entire language very well in fewer pages. Simply this is because in fact C is a &quot;compact and simple&quot; language.<p>People make a lot of claims about C that I disagree with, but it certainly is <i>simple</i>. If I could make modest adjustments in the light of what we know now, to what was standardised in ANSI C in 1989 - a few of them would perhaps simplify it further (don&#x27;t do implicit narrowing just emit a diagnostic and give up; don&#x27;t try to make volatile a type qualifier) but many would make it more complicated instead (more type safety, sum-types, and of course an actual length+pointer string type) just arguably to our considerable benefit.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jstimpfle" target="_blank">jstimpfle</a>   <span class="timeago" data-date="2021-08-19 11:51:32 &#43;0000 UTC">2021-08-19 11:51:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            K&amp;R C is <i>not</i> 10 years ago. It&#x27;s 30-50 years ago and (AFAIK) wasn&#x27;t even properly standardized and (AFAIK) still mostly works with recent compilers.<p>Everybody thinks they know shit and yet they don&#x27;t know all the details even after 5 years of practice (and let&#x27;s not even look at C++!). Welcome to reality.<p>However, a programmer&#x27;s goal is not to know all the (often irrelevant) details. And it&#x27;s not to win a pub quiz.<p>The goal is to know enough to be able to communicate ideas in a clear and straightforward way, and to be productive.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:27:40 &#43;0000 UTC">2021-08-19 12:27:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah it isn&#x27;t so simple after all.<p>Than lets limit the questions to what is UB, which is needed for daily programming activities, specially when one cares about security assessments, I am betting on the same outcome.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jstimpfle" target="_blank">jstimpfle</a>   <span class="timeago" data-date="2021-08-19 12:57:36 &#43;0000 UTC">2021-08-19 12:57:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This has nothing to do with K&amp;R or whatever new C standard there is. You&#x27;re talking trash.<p>The rules around UB can be annoying, but I don&#x27;t think this is a recent development, either. Probably compiler optimizations are to blame for some of this. For actual practice and pedestrian code, obscure UB bugs have little relevance.<p>Food for thought: C compilers are free to insert runtime checks to abort when UB occurs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vlovich123" target="_blank">vlovich123</a>   <span class="timeago" data-date="2021-08-19 14:11:41 &#43;0000 UTC">2021-08-19 14:11:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            UB was standardized in C99 and optimizers started really going after it maybe 5-10 years after that. There was a wide spread push to make the issue more widely known 8 years ago-ish if I recall correctly and most people still don’t fully understand it. I wouldn’t say it’s “new information”, but it’s certainly relatively new in the overall lifetime of the language (ie even a lot of C99 code from that era is malformed on today’s compilers).<p>I understand the basic concept of UB but some of the rules can have nuance and be easy to run afoul of. If you’re not running UBSAN on non-trivial codebases (lots of LOC and&#x2F;or multiple devs), you are likely to have UB. Same goes for ASAN and TSAN issues. I always have humility around this topic as I’m not a compiler author. Heck, the compiler authors I’ve worked with themselves know the knives are sharp and work with humility.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jstimpfle" target="_blank">jstimpfle</a>   <span class="timeago" data-date="2021-08-19 15:02:02 &#43;0000 UTC">2021-08-19 15:02:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Totally agree with your post. I don&#x27;t know what your conclusion is, though.<p>My conclusion is that C lets me do what I want straightforwardly, I still haven&#x27;t found this quality in a different language (there is inertia, I&#x27;ve only tried Zig for an hour for example and gave up in frustration). Also, to some degree I understand where most UB definitions are coming from and even agree with some of them.<p>The basic idea behind UB is to give the compiler a free pass (optimization, and not having to detect corruption) if the program has a bug anyway.<p>In some cases there can be legitimate surprises, when the programmer made some assumptions about guarantees that C can&#x27;t give and that a newer language (without the historical baggage of supporting some architecture) can give, which might result in the compiler transforming a little bug into something bigger (more dangerous?). An example that I&#x27;ve personally learned at some point is integer shifting and masking in conjunction with implicit type promotion to int (which is signed).<p>All in all though, while I&#x27;m not be the most sophisticated programmer and most of my programms are never exposed to hacking attempts, just anecdotally I&#x27;ve had very, very little headaches from UB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 15:15:43 &#43;0000 UTC">2021-08-19 15:15:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Trying to attack me won&#x27;t do a thing, remember comp.lang.c? Plenty of Usenet experience over here.<p>If you don&#x27;t like it to be pointed out C&#x27;s weaknesses, don&#x27;t engage.<p>I can play language lawyer quite well, including security standards.<p>Yes compilers are free to do many things to fix C, except that many don&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jstimpfle" target="_blank">jstimpfle</a>   <span class="timeago" data-date="2021-08-19 15:52:35 &#43;0000 UTC">2021-08-19 15:52:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yes compilers are free to do many things to fix C, except that many don&#x27;t.<p>But this is the point. The language <i>is</i> quite compact and simple and if you think like a computer, it just &quot;makes sense&quot;. Counting pages of the standards is not an accurate measure of language complexity.<p>Certain subtleties are not even forced by the language, rather they arise from natural requirements (such as performance, implementation simplicity, modularity, compatibility, etc).<p>By and large, it&#x27;s not the language, but rather what people do with it. The language gets out of the way.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 10:21:42 &#43;0000 UTC">2021-08-19 10:21:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pkrumins" target="_blank">pkrumins</a>   <span class="timeago" data-date="2021-08-19 01:24:35 &#43;0000 UTC">2021-08-19 01:24:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now make a left-pad.cpp module and unpublish it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

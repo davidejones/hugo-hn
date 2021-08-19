@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/kubelet-spends-20-time-in-gc-in-most-environments-where-it-runs/">
+
+
+    <title>Kubelet spends 20% time in GC in most environments where it runs - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Kubelet spends 20% time in GC in most environments where it runs - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/kubelet-spends-20-time-in-gc-in-most-environments-where-it-runs/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/kubelet-spends-20-time-in-gc-in-most-environments-where-it-runs/">
+<meta name="twitter:title" content="Kubelet spends 20% time in GC in most environments where it runs - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Kubelet spends 20% time in GC in most environments where it runs - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T17:03:32JST",
+    "dateModified": "2021-08-17T17:03:32JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://twitter.com/halvarflake/status/1427662489496526852">Kubelet spends 20% time in GC in most environments where it runs</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-17 17:57:50 &#43;0000 UTC">2021-08-17 17:57:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This doesn&#x27;t seem corroborated just from that chart. runtime.systemstack() is one of the calls that allows code to switch from the user stack to the system stack, so that non-preemptible (by the goroutine scheduler) code can run, but this doesn&#x27;t only include garbage collection. It includes all system calls. The kubelet works by synchronizing node state with the definition retrieved from the apiserver across the network, so I would expect it spends a lot of time making system calls just to read from and write to whatever port and&#x2F;or socket it uses to do that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=klysm" target="_blank">klysm</a>   <span class="timeago" data-date="2021-08-17 17:39:00 &#43;0000 UTC">2021-08-17 17:39:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m still convinced GC is not a good idea as the single memory model for a language. It is possible to know about memory behavior at compile time and not pay at runtime for it in latency.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jayd16" target="_blank">jayd16</a>   <span class="timeago" data-date="2021-08-17 17:57:23 &#43;0000 UTC">2021-08-17 17:57:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You need to lean into a fully managed model if you want to support things like compaction, no? (Speaking generally.  I don&#x27;t think Go supports compaction.)<p>You can still squeeze out some tricks though.  Span&lt;T&gt; in C# seems to be pretty successful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uluyol" target="_blank">uluyol</a>   <span class="timeago" data-date="2021-08-17 17:57:11 &#43;0000 UTC">2021-08-17 17:57:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go will allocate some things on the stack by performing escape analysis. That can be improved, but it&#x27;s incorrect to say that GC is the only way to manage memory in Go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=felipellrocha" target="_blank">felipellrocha</a>   <span class="timeago" data-date="2021-08-17 23:03:01 &#43;0000 UTC">2021-08-17 23:03:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re right, and I think Rust proved that. I do wonder if we could turn that on and off during compilation time, though, to simplify most use cases until one needs to have a more manual approach (using the borrow checker or the whatnot)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PedroBatista" target="_blank">PedroBatista</a>   <span class="timeago" data-date="2021-08-17 17:54:49 &#43;0000 UTC">2021-08-17 17:54:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I kinda see your point, but before we talk about the GC, can we address kubelet and the absolute mindless frenzy, resume-driven technological orgy that Kubernetes and &quot;DevOps&quot; has turned into?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=outworlder" target="_blank">outworlder</a>   <span class="timeago" data-date="2021-08-17 17:59:33 &#43;0000 UTC">2021-08-17 17:59:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. Kubernetes actually solves problems. You&#x27;ll know that&#x27;s the case for you when people starts <i>preferring</i> to deploy their stuff in K8s.<p>It&#x27;s just that people have been using it where it doesn&#x27;t belong. If you don&#x27;t need it, you don&#x27;t need it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wcarss" target="_blank">wcarss</a>   <span class="timeago" data-date="2021-08-17 18:19:14 &#43;0000 UTC">2021-08-17 18:19:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be fair, it also <i>can</i> get overwrought: it&#x27;s far from impossible to end up using a programming language to emit a templating language that emits a configuration language that itself describes configuration files.<p>Sometimes, for simple things, those could have written by hand at the bottom without the extra tools. But even when writing them by hand would have been very hard or not the right choice, the devops stack is a daunting thing to reckon with!<p>A developer coming from &quot;jenkins invokes a script that runs npm install &amp;&amp; npm start&quot;, or even the mildly more modern &quot;jenkins invokes docker-compose on a file&quot; has a <i>lot</i> of <i>very abstract</i> and difficult-to-play-around-with context to pick up.<p>It&#x27;s hard to learn fully even if you&#x27;re at a shop with an established approach where <i>someone</i> knows what they&#x27;re doing, but imagine moving yourself from Rackspace or Heroku onto AWS or GCP, and having to figure out IAM permissions and private VPC networking ingress configurations while <i>also</i> deciding if you really <i>need</i> to use helm. Especially if you&#x27;re doing this because the team &quot;doesn&#x27;t have time to spend on ops&quot;.<p>At the end of the day I of course agree that using k8s to manage moderately complex things can melt a lot of toil right off. In the right scenarios, more abstraction can help for more complex stuff too. But there&#x27;s also a lot of marketing out there for tools-on-tools, and businesses that would love for folks to adopt solutions to problems which few people have, let alone really deeply understand.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=outworlder" target="_blank">outworlder</a>   <span class="timeago" data-date="2021-08-17 19:12:28 &#43;0000 UTC">2021-08-17 19:12:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; A developer coming from &quot;jenkins invokes a script that runs npm install &amp;&amp; npm start&quot;, or even the mildly more modern &quot;jenkins invokes docker-compose on a file&quot; has a lot of very abstract and difficult-to-play-around-with context to pick up.<p>Let&#x27;s see.<p>If you are deploying this on a physical machine: you have to connect to the machine somehow. You have to setup the correct permissions. You need auditing. You need to configure logging (and log rotation). You need to ensure your npm start script will be able to be restarted if needed. You may need cronjobs for various housekeeping chores. And then suddenly you need to run more instances of your app. What to do? Are you going to setup a proxy now and a bunch of different ports? Is your script picking them up or are they hard-coded? Are you instead doing network namespaces and iptables trickery? How do you upgrade your service without downtime? Are you going to write scripts to do that? What if your app need storage.<p>And what if you now need more machines. How are you going to spread the workloads around?<p>And how do you automate the above? One team prefers Ansible, the other goes with Chef, a third one likes to embed shell scripts inside a Terraform provisioner.<p>These things are _hard_. There is a whole lot of context. It&#x27;s just that we have got used to the way things have always been done. It does not help that K8s development is very fast and there are far too many people and companies jumping on the bandwagon, each with their own unique spin. The ecosystem is becoming big enough to the point of being unmanageable.<p>Also, Kubernetes joins some of the work that was done by the development team or release teams with work that was traditionally done by the operations teams, and makes it all visible. Suddenly you have to _know_ what the heck a liveness probe is. You could get by with not knowing this in a standard deployment, your app would simply lack the check(and cause issues in production). You need to know what exactly your app needs to persist. Previously it would just dump data in whatever directory it had permissions to, and this became tribal knowledge.<p>But K8s by itself? My heuristic is: am I running containers? Do I need to spread said containers across machines? Just use K8s. Trying to replicate this with homegrown scripts will be very painful. It may not seem like it&#x27;s painful now, but trust me, it will be.<p>Will K8s exist in 15 years? Hard to say. Probably but, for the reasons you describe, it&#x27;s likely that there will be, at least, a high level abstraction to hide decisions most people don&#x27;t need to make.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wcarss" target="_blank">wcarss</a>   <span class="timeago" data-date="2021-08-17 21:40:57 &#43;0000 UTC">2021-08-17 21:40:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll clarify that I&#x27;m on board with what you&#x27;re saying. Definitely if you need N machines to split the traffic load, or an application that will auto-restart under certain conditions, you ought to just use kubernetes. It&#x27;s a <i>lot</i> easier than rolling it all yourself.<p>What I was trying to target above was more tooling built atop the tooling -- complex instances &quot;the devops stack&quot;, rather than _just_ kubernetes. Take for instance, Dhall[1] -- just look at the kind of places that goes[2]!<p>A person coming from a &quot;run docker-compose&quot; world maybe wasn&#x27;t ever thinking about log rotation, let alone audits, and maybe they should have been. But after they read a marketing blogpost somewhere that&#x27;s convinced them it is &quot;modern best practices&quot; to use something like Dhall, as the saying goes... now they have two problems.<p>When the person up above mentioned the devops resume madness, that&#x27;s what I was thinking of and felt it&#x27;s worth noting <i>does</i> exist, while agreeing that vanilla k8s can be great.<p>1 - <a href="https:&#x2F;&#x2F;dhall-lang.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;dhall-lang.org&#x2F;</a><p>2 - (shudder) <a href="https:&#x2F;&#x2F;docs.dhall-lang.org&#x2F;howtos&#x2F;How-to-translate-recursive-code-to-Dhall.html" rel="nofollow">https:&#x2F;&#x2F;docs.dhall-lang.org&#x2F;howtos&#x2F;How-to-translate-recursiv...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=blacktriangle" target="_blank">blacktriangle</a>   <span class="timeago" data-date="2021-08-17 18:23:36 &#43;0000 UTC">2021-08-17 18:23:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not that Kube doesn&#x27;t solve problems.<p>It&#x27;s that Kube solves problems 99% of projects using it do not and never will have.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ltbarcly3" target="_blank">ltbarcly3</a>   <span class="timeago" data-date="2021-08-17 18:09:00 &#43;0000 UTC">2021-08-17 18:09:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree, people are spending weeks of effort to figure out how to deploy their app which has 3 webservers and one RDS database via kubernetes because &#x27;thats the right way to do it&#x27;.<p>Kubernetes is a solution to a problem hardly anyone has, and it is maddingly complex, and large parts of it are poorly designed.  If you have a large team deploying many services and can afford full time devops staff, it is a good solution to many problems, but probably 90% of the people using it would find things to be simpler and more reliable without it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scottlamb" target="_blank">scottlamb</a>   <span class="timeago" data-date="2021-08-17 18:05:28 &#43;0000 UTC">2021-08-17 18:05:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is amusing next to &quot;Go code that uses 20% of CPU time in GC is usually bad Go code,&quot; but how much does it matter? Kubelet runs on every machine in the cluster, but I&#x27;d expect few of each machine&#x27;s cycles to be spent on it. I wouldn&#x27;t be surprised if relatively little attention has been paid to optimizing its GC and&#x2F;or if someone has deliberately tuned it to reduce RAM at the expense of GC CPU.<p>Put another way: this percentage uses the wrong denominator for ranking optimization targets. Don&#x27;t rank by percentage of the binary&#x27;s cycles but instead by percentage of overall cluster cycles.<p>This is particularly true for Kubernetes itself. It affects the efficiency of the cluster as a whole via its bin-packing decisions. Eg the whole cluster becomes more efficient when Kubernetes minimizes stranded capacity and also when it isolates workloads that heavily thrash the CPU cache to separate NUMA nodes or machines. Thus if I were to dive into Kubernetes optimization, I&#x27;d focus on bin-packing much more than its own GC cycles.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ltbarcly3" target="_blank">ltbarcly3</a>   <span class="timeago" data-date="2021-08-17 18:11:17 &#43;0000 UTC">2021-08-17 18:11:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think the point is that this is causing wasted CPU cycles, it&#x27;s that if something shows symptoms of being written by incompetent programmers, it&#x27;s likely they were incompetent in many other ways.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scottlamb" target="_blank">scottlamb</a>   <span class="timeago" data-date="2021-08-17 18:18:44 &#43;0000 UTC">2021-08-17 18:18:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what makes it amusing, but I don&#x27;t necessarily agree with &quot;Go code that uses 20% of CPU time in GC is usually bad Go code&quot;, and I certainly would disagree if you omitted the word &quot;usually&quot;.<p>Quality code is optimized based on what really matters, and I&#x27;m skeptical GC cycles really matter here.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smarterclayton" target="_blank">smarterclayton</a>   <span class="timeago" data-date="2021-08-17 22:06:46 &#43;0000 UTC">2021-08-17 22:06:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right now it’s mostly the CRI&#x2F;kubelet interaction (which polls the container runtime for containers) and metrics scraping generating the garbage.<p>Having an incremental CRI watch (vs poll) has been on the backlog for years, but correctness and features have been more important for most people.<p>Several people were looking at this recently as we were squeezing management pods + system processes onto two dedicated cores for telco&#x2F;edge real-time use cases (the other tens of cores being reserved for workloads).  It’s not that hard to fix, it’s just never been the top priority.<p>Real software has curves.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

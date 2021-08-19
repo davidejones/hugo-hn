@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/how-did-so-many-dungeon-crawl-stone-soup-players-miss-such-an-obvious-bug/">
+
+
+    <title>How did so many Dungeon Crawl: Stone Soup players miss such an obvious bug? - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="How did so many Dungeon Crawl: Stone Soup players miss such an obvious bug? - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/how-did-so-many-dungeon-crawl-stone-soup-players-miss-such-an-obvious-bug/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/how-did-so-many-dungeon-crawl-stone-soup-players-miss-such-an-obvious-bug/">
+<meta name="twitter:title" content="How did so many Dungeon Crawl: Stone Soup players miss such an obvious bug? - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "How did so many Dungeon Crawl: Stone Soup players miss such an obvious bug? - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T01:08:49JST",
+    "dateModified": "2021-08-17T01:08:49JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://desystemize.substack.com/p/desystemize-7">How did so many Dungeon Crawl: Stone Soup players miss such an obvious bug?</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dota_fanatic" target="_blank">dota_fanatic</a>   <span class="timeago" data-date="2021-08-17 03:46:34 &#43;0000 UTC">2021-08-17 03:46:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big fan of DCSS, but this doesn&#x27;t surprise me. After getting a few all rune wins I stopped playing largely because it is so opaque. Even after spending a LOT of quality time with the (sometimes incorrect) wiki and in-game lookup system, I realized I would never have an intuitive sense of the effects of my choices wrt stats, skilling, weapon and armor choices, and so on. I watched some of the best crawl players in the world play to see how they approached these very common situations and even there I didn&#x27;t see as much consensus as I hoped to find given common scenarios.<p>Part of the joy of being human is understanding systems and working with them efficiently to achieve goals. Good luck doing that with crawl. You can sort of achieve this by dumping a lot of time and building up intuition via experience, but you still won&#x27;t be able to say why you chose this over that for all your choices.<p>I found myself getting into scenarios, wondering, which choice is better along one particular dimension? STR vs DEX? This armor vs that? What are the trade-offs? The only real way to find that out would be to dump the game at its current state and then simulate both choices against a suite of enemies to see how it plays out at least in 1v1 situations, never mind when handling many enemies. It&#x27;s frustrating playing a game with so many numbers yet the output of the systems they feed into are so opaque.<p>It&#x27;s really unfortunate because although it already feels like a gem of a game, it could be soo much better if the interplay of the various combat &#x2F; character systems wasn&#x27;t so ridiculously complected. I would <i>love</i> to see some of the sensibilities of the Factorio team applied to crawl&#x27;s UI and underlying combat&#x2F;character systems.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eeegnu" target="_blank">eeegnu</a>   <span class="timeago" data-date="2021-08-17 04:48:26 &#43;0000 UTC">2021-08-17 04:48:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s worth noting that at least in recent versions, the in game formulas have been getting simplified. For instance armor used to give you both AC and GDR (guaranteed damage resistance), whereas now GDR is a direct function of AC regardless of its source. Similarly DEX now more directly influences Evasion, whereas before it was artificially capped to give very diminishing returns past ~25 DEX, and now allows you to get very high Evasion.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dota_fanatic" target="_blank">dota_fanatic</a>   <span class="timeago" data-date="2021-08-17 13:43:55 &#43;0000 UTC">2021-08-17 13:43:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s good to hear. I hope they keep going down that path. To refer to another game, in any of the Soulsborne games (Dark Souls, Bloodborne, ...) by From Software, as you level up you get to contribute points towards stats which affects your ability to wield weapons and how much damage they do. You don&#x27;t even have to equip them, the game gives you a diff of what your new damage will be along various dimensions (physical, magic, etc) as well as how your &quot;equip load&quot; is affected just by inspecting it. Although this doesn&#x27;t necessarily mean you can understand the difference between a really heavy, highly damaging weapon vs a fast weapon, by reading a wiki or by playing through once or twice you&#x27;ll have a very good base understanding of what different weapons bring to the table and how your character drives those strengths&#x2F;weaknesses.<p>With DCSS? Well... how much damage you do is going to depend on whether or not you&#x27;re wearing a shield (what size?), what kind of armor you&#x27;re wearing if any, how much you&#x27;ve trained for that weapon class, how much STR you have, what bonuses it has, and what bonuses you have from gear. Then RNG will play a significant role on top of that. Maybe RNG applies twice, once for your swing, once for their defense? It&#x27;s been too long, I can&#x27;t say confidently.<p>I realize it&#x27;s challenging for the interface design because everything is already tight but I&#x27;m sure there&#x27;s a solution. If I equip this armor&#x2F;weapon&#x2F;jewelry, how fast will I be attacking compared to now? What will my damage distribution look like before enemy resistances? Same with allocating stats, please give feedback in the form of derived data that is closer to the thing I care about (surviving).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=harpiaharpyja" target="_blank">harpiaharpyja</a>   <span class="timeago" data-date="2021-08-17 14:51:24 &#43;0000 UTC">2021-08-17 14:51:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think the problem is complexity as much as it is opaqueness. I have played other games that are also very complex but yet still very enjoyable because the complexity is open to be examined.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kibwen" target="_blank">kibwen</a>   <span class="timeago" data-date="2021-08-17 17:10:24 &#43;0000 UTC">2021-08-17 17:10:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The opacity is a remnant from the game as it was designed twenty years ago, which took cues from roguelikes of the day such as NetHack (which is famous for its opacity). The developers of Stone Soup have spent a few decades improving the interface with the goal that you shouldn&#x27;t <i>need</i> any external wikis or resources to win: all info should be in the game itself. For example, a relatively recent-ish change is that you can inspect enemies and see a list of all possible spells that they can cast, along with estimates of the damage that each spell will do. A much older feature is the in-game help menu, which is impressively thorough and will give you a high-level overview of every monster, spell, stat, ability, item, god, level, status effect, and so on (although it&#x27;s not necessarily super-detailed when it comes to obscure things like calculating damage; simplifying these calculations is the only way to go).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tsywke44" target="_blank">tsywke44</a>   <span class="timeago" data-date="2021-08-17 08:37:26 &#43;0000 UTC">2021-08-17 08:37:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That actually sounds nice. Compared to most other &quot;competitive” games, where there is an optimal meta way of playing it, and doing anything else is basically trolling and instant loss
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dota_fanatic" target="_blank">dota_fanatic</a>   <span class="timeago" data-date="2021-08-17 14:00:14 &#43;0000 UTC">2021-08-17 14:00:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In some sense, yes, but in another, not so much. Crawl is quite difficult and you&#x27;re always a few steps away from death if you don&#x27;t react to different situations appropriately. It can take players months to years to get their first win. Some people are never able to beat it before giving up on it. There&#x27;s still an optimal way to play in most situations, but many couldn&#x27;t tell you what that optimum is beyond some rules of thumb which aren&#x27;t always right.<p>Don&#x27;t get me wrong, there&#x27;s a lot of gold in those hills and I had a lot of fun getting better and getting my first win. But after that I was very frustrated with how hard it was to just stop at a fork in the road and try to answer, which choice is objectively better? I like difficult games that are fair and require skill growth to succeed in, but I want to be able to understand them so I can make informed choices as I get better as well. Too much: because that&#x27;s what the black box determined. sorry, you died. should have been more cautious.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gambiting" target="_blank">gambiting</a>   <span class="timeago" data-date="2021-08-17 12:28:51 &#43;0000 UTC">2021-08-17 12:28:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t this what this is though? There are certain builds where if you follow them to a T, then the game is &quot;easy&quot; and you win almost always. If you just experiment then yeah you can win by some crazy stroke of luck, but most likely you will just have a bad time.<p>I had the same experience in Caves of Qud(which is great btw) - there are some builds that really really really work, and others which are unwinnable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spywaregorilla" target="_blank">spywaregorilla</a>   <span class="timeago" data-date="2021-08-17 15:27:03 &#43;0000 UTC">2021-08-17 15:27:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No not really. Very few builds will let you win the game easily. Situational awareness is required. Relatively few enemies in the game are just melee brutes. Most of them occupy some niche that requires you to think. They can confuse your character, or lock all the doors, or summon, or irresistibly cut your health in half, etc. An exceptionally fortunate character, say, a kung fu octopode transmutated into statue form and wearing 8 magical rings of power can probably karate chop their way through 99.9% of the game without much of a worry, but may still lose in a 1:1 slug fest with certain lords of hell.<p>There are easier builds and there are harder builds, but if you aren&#x27;t good, you will lose. Case in point, the bug described here effectively doubled damage output and win rates were still pretty low.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kibwen" target="_blank">kibwen</a>   <span class="timeago" data-date="2021-08-17 17:18:49 &#43;0000 UTC">2021-08-17 17:18:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Although it&#x27;s worth noting that there are different degrees of &quot;winning the game&quot;. Only three runes are required to win, but maximizing your score and prestige will require you to get all fifteen runes. If you&#x27;re just going for a three-rune victory, then there are more-or-less &quot;safe&quot; builds. For example, a Minotaur of any melee class, or a Berserker of any species that isn&#x27;t completely inept at melee can reliably win a three-rune (not a guaranteed victory obviously, you still need to know what you&#x27;re doing, and most importantly when to run away), although these characters are going to have a very hard time in the extended endgame without some sort of pivot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lmohseni" target="_blank">lmohseni</a>   <span class="timeago" data-date="2021-08-17 13:16:40 &#43;0000 UTC">2021-08-17 13:16:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s a great YouTuber named Ultraviolent4 who plays lots of “unwinnable” or maybe just really odd combinations, and watching his games really improved my own.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slingnow" target="_blank">slingnow</a>   <span class="timeago" data-date="2021-08-17 15:58:46 &#43;0000 UTC">2021-08-17 15:58:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like the game isn&#x27;t made for you then.<p>This would be like attempting to play Go, and complaining that it&#x27;s nothing like Chess because the optimal move generally isn&#x27;t obvious even after 10,000 hours of play. And then loosely tying it into &quot;part of the joy of being human&quot; instead of simply stating that &quot;this is my preference&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dota_fanatic" target="_blank">dota_fanatic</a>   <span class="timeago" data-date="2021-08-17 19:19:21 &#43;0000 UTC">2021-08-17 19:19:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Re your first paragraph, sure, and I&#x27;m fine with that. But the following analogy is quite off.<p>Go read their manifesto: <a href="https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;crawl&#x2F;blob&#x2F;master&#x2F;crawl-ref&#x2F;docs&#x2F;crawl_manual.rst#n-philosophy-pas-de-faq" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;crawl&#x2F;blob&#x2F;master&#x2F;crawl-ref&#x2F;docs&#x2F;cr...</a><p>Specifically the section titled &quot;Clarity&quot;.<p><i>&gt; Things ought to work in an intuitive way.</i><p>Spoiler alert, they most certainly do not. There&#x27;s nothing intuitive about being completely unable of knowing the practical effects of something as simple as equipping a piece of armor or a shield or allocating a point to STR vs DEX. I gave an example in another comment of how other games do provide information when comparing between options so you can intuit their effects. I have faith they&#x27;ll get there, though. I believe they&#x27;ll gain many more players if they can, too. :) I&#x27;m sure I&#x27;ll be back in a year or two after they improve the gameplay more.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gnramires" target="_blank">gnramires</a>   <span class="timeago" data-date="2021-08-17 16:27:48 &#43;0000 UTC">2021-08-17 16:27:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, there&#x27;s an interesting distinction here. Although I&#x27;d say it&#x27;s more like Chess than Go, in the sense the mechanics are really simple in Go, while Chess has specific rules for each piece and you should memorize openings and quirks to get an edge (Go is much more about generalization).<p>In reality, both Chess and Go and all board games are fairly simple, you can learn all the rules in a few sittings and then just focus on strategy.<p>In roguelikes, often <i>learning the system</i> is the point (or a point) of the game. The fun, at least to me, is in dealing with the unknown and discovering how it works and what works.<p>Nethack (a classic roguelike) takes it to the extreme -- a bit too much in fact, because an essential game mechanic is an obscure passage you&#x27;d have to deduct (Elbereth). But the fun is there: you grab a potion and have <i>no idea</i> what happens if you drink it -- maybe you will be killed instantly, maybe it will make you into a god -- it&#x27;s not just &quot;which of those effects am I going to get?&quot;. You have to rely on previous knowledge, as well as expectations from similar games and what you know about the game.<p>But isn&#x27;t that quite common IRL? Like, okay figuring out what you should be eating has a science to back it (albeit quite extensive): you read the most effective diets, what risks it reduces, you health, your weight and need to make a decision. Already not very simple strategic decision. And then you need to take into account satisfying your tastes, how often diet fads reverse (is eating butter healthy? go figure), how to do it when sharing a meal with other people, and so on. The unknowns are as significant as skillful strategic planning. The same could be said to running a company: you need to manage uncertainties in a vast decision space, with opportunities like calling for partnerships, merging, buying other companies, spending on uncertain research, and much more. You slowly acquire domain-specific knowledge (with help from the vast literature, plus a few insights of yours) and use that to in turn reduce and manage uncertainties and plan ahead (here your model of other players and capability to find the &#x27;best move&#x27; -- least risky, greatest payoff, more robust -- will shine).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-08-17 19:27:47 &#43;0000 UTC">2021-08-17 19:27:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The term common in MMOs is theorycrafting, and it gained particular momentum in an era where some common games allowed for addons that could export telemetry data. Contrived or common scenarios could be mined (Monte Carlo simulations if you will) to determine how patterns lined up with theories.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 09:07:22 &#43;0000 UTC">2021-08-17 09:07:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Gunax" target="_blank">Gunax</a>   <span class="timeago" data-date="2021-08-17 08:06:48 &#43;0000 UTC">2021-08-17 08:06:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think this is player stupidity at all. Actually, I suspect it&#x27;s perfectly rational.<p>The game is so noisy that no one can really predict what will happen. If I hit the grue with my sword--it could reasonably do 10% of damage or 40%--and both seem plausible.<p>In a statistical sense, the greater the <i>standard deviation</i> is, the more difficult it is to detect a sample population that differs from the <i>established distribution</i>.<p>In a bayesian sense, the players may have been perfectly rational--the likelihood of doubling or tripling your winrate is just not very unlikely when you&#x27;re playing a game which is very random. Perhaps players can rationally conclude they were in the top 1% of luck at the moment, and that the chance of a major bug is less than that.<p>As evidenced by the referenced posts, it only becomes obvious when the sample size is huge (eg. the sample of all players reading the subreddit).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ajuc" target="_blank">ajuc</a>   <span class="timeago" data-date="2021-08-17 09:51:40 &#43;0000 UTC">2021-08-17 09:51:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes. It&#x27;s very similar to when you encounter compiler or operating system or hardware bug as a programmer.<p>You are trained for years to NEVER BLAME THE LOWER LAYERS because that makes you a worse programmer. So when it is actually their fault - you might look stupid for exhausting every other possibility before checking these basic assumptions.<p>But this is still a good rule, because it breaks very rarely.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Retric" target="_blank">Retric</a>   <span class="timeago" data-date="2021-08-17 10:33:56 &#43;0000 UTC">2021-08-17 10:33:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me of the utter hell it was to discover the test machine had bad RAM.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ajuc" target="_blank">ajuc</a>   <span class="timeago" data-date="2021-08-17 10:43:21 &#43;0000 UTC">2021-08-17 10:43:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve had a bug in linux driver for a very shitty touchscreen we used in our embedded devices. It needed manual calibration  and you had to save the calibration matrix in a config file read on system startup. They used locale-aware input function in a driver so when the locale was German (or other with &quot;,&quot; as a decimal separator) it broke and users got kernel panic at startup :)<p>It bricked all our devices in Germany.<p>We worked around it, notified the device driver developers and forgot about it.<p>A year later we shipped with new version of kernel and it broke again - because the bug was fixed in kernel and our workaround was now causing the bug :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-08-17 19:34:43 &#43;0000 UTC">2021-08-17 19:34:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is part of what drove people to CI&#x2F;CD. 
+If your code is broken in the morning and the build is green, it’s probably you. If it’s red, maybe you should check other things sooner?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jerf" target="_blank">jerf</a>   <span class="timeago" data-date="2021-08-17 13:33:58 &#43;0000 UTC">2021-08-17 13:33:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the most interesting insights I retained from my machine learning course from a couple of decades ago is that you can put a mathematical bound on how quickly you can learn from a given set of data, and how much you can learn. In the situations presented by the real world this is often not very interesting because we can only process such a vanishing fraction of the data available that we&#x27;re so far below this theoretical optimum that it&#x27;s uninteresting, but in more constrained situations it can be relevant.<p>In this case, while I agree that there was enough data to have a good guess that something had gone wrong after a certain period of time, it definitely is the sort of noisy data that would take some non-trivial aggregation to be <i>sure</i>, and even in hindsight I&#x27;m not so sure the signal was so strong that it&#x27;s worth metaphorically beating anyone up about.<p>Moreover, only in hindsight is it obvious that the culprit was a doubling of melee damage. Prior to knowing that, the learning rate was constrained by the multiplicity of possible theories that could have explained this. It&#x27;s not like it was simply a matter of &quot;Either 1. the game is unchanged and people have just Got Gud or 2. the melee damage rate has been doubled&quot;, the span of possibilities was <i>much</i> larger than that. Had an oracle come down from whereever and offered that choice to the devs, sure, gathering enough data to resolve that one bit&#x27;s worth of information would have been easy. But presented with the full, massive array of possibilities, it&#x27;s a much harder task to even determine that there <i>is</i> a problem, let alone what it is.<p>Upshot, don&#x27;t beat yourselves up <i>too</i> much. It may be obvious in hindsight but these are really quite hard problems to solve in the deliberate absence of information.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eutectic" target="_blank">eutectic</a>   <span class="timeago" data-date="2021-08-17 11:22:57 &#43;0000 UTC">2021-08-17 11:22:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Assuming your win rate goes from 2% -&gt; 4%, you need around 200 samples to be 90% confident that something is up, 270 to be 95% confident, and 450 to be 99% confident, if you start with a Beta(2, 98) prior. Obviously results will change somewhat depending on the model.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gnramires" target="_blank">gnramires</a>   <span class="timeago" data-date="2021-08-17 12:28:21 &#43;0000 UTC">2021-08-17 12:28:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From the article:<p>&gt; Parthenocarpy:<p>&gt; Well that explains me going from a 2% winrate to 17.95% in the span of two weeks<p>In that case, as soon as you got more than 1 win you should notice an abnormality (according to back-of-the napkin 8 trials to perceive the difference, using frequentist stat).<p>Also, that assumes you only get information from win&#x2F;loss. In reality, every interaction (monster damage) should provide information (too easy kills, abnormal damage).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eutectic" target="_blank">eutectic</a>   <span class="timeago" data-date="2021-08-17 15:11:05 &#43;0000 UTC">2021-08-17 15:11:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For that drastic a difference you need to play about 30 games on average to be 99% sure that p_win&gt;0.02 in the Bayesian model.<p>Agreed that win rates are not the only data available, and that players probably should have noticed the difference.  Attributing it to a bug is arguably a harder problem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cridenour" target="_blank">cridenour</a>   <span class="timeago" data-date="2021-08-17 03:19:14 &#43;0000 UTC">2021-08-17 03:19:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Computers are warm rocks we tricked into doing math and it’s a miracle they do anything.<p>This might be my favorite way to describe programming.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kibwen" target="_blank">kibwen</a>   <span class="timeago" data-date="2021-08-17 05:26:13 &#43;0000 UTC">2021-08-17 05:26:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Computers are literally (literally) magic. Take a rock, use light to inscribe it with arcane runes, then infuse it with lightning and recite the proper incantation to complete the spell.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notanzaiiswear" target="_blank">notanzaiiswear</a>   <span class="timeago" data-date="2021-08-17 09:14:18 &#43;0000 UTC">2021-08-17 09:14:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I often wonder about a fantasy world where magic works like technology in the real world (like there is long arduous research to create new spells, not simply &quot;being born with magical talent&quot;). Would it become a popular fantasy setting?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 10:06:51 &#43;0000 UTC">2021-08-17 10:06:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The Obsidian Trilogy (Mercedes Lackey and James Mallory) is set in such a world, though it also features &quot;wild magic&quot; (you petition the wild gods for an effect, and you probably get it, but you take on an open-ended obligation to do something for them at a later point) and demonic magic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tom4hawk" target="_blank">Tom4hawk</a>   <span class="timeago" data-date="2021-08-17 11:31:00 &#43;0000 UTC">2021-08-17 11:31:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; you petition the wild gods for an effect, and you probably get it, but you take on an open-ended obligation to do something for them at a later point) and demonic magic<p>So.. technical debt and &quot;hacks&quot; ?:D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tygrak" target="_blank">tygrak</a>   <span class="timeago" data-date="2021-08-17 10:05:55 &#43;0000 UTC">2021-08-17 10:05:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pretty much what you are describing about is Ra by qntm [1]. I would definitely recommend it!<p>[1] <a href="https:&#x2F;&#x2F;qntm.org&#x2F;ra" rel="nofollow">https:&#x2F;&#x2F;qntm.org&#x2F;ra</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TremendousJudge" target="_blank">TremendousJudge</a>   <span class="timeago" data-date="2021-08-17 15:56:27 &#43;0000 UTC">2021-08-17 15:56:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was going to recommend this
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gerdesj" target="_blank">gerdesj</a>   <span class="timeago" data-date="2021-08-17 09:33:56 &#43;0000 UTC">2021-08-17 09:33:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sir Terry Pratchett often explored something similar to that in his Discworld novels but perhaps in reverse - who knows!<p>&quot;Anthill Inside&quot; 8)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=solarmist" target="_blank">solarmist</a>   <span class="timeago" data-date="2021-08-17 21:11:55 &#43;0000 UTC">2021-08-17 21:11:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A comedy series takes this literally.  Magic 2.0 by Scott Meyer.<p>On some computers there&#x27;s a mysterious file that has all of the (world&#x2F;universe&#x27;s)? object variables, such as a person&#x2F;object&#x27;s location or height, age, etc, and magic is performed by manipulating those via verbal macros.<p>New spells are researched by literally programming and debugging.<p>It&#x27;s a fun series, but it feels the author&#x27;s done about as much as he can with it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wccrawford" target="_blank">wccrawford</a>   <span class="timeago" data-date="2021-08-17 15:53:41 &#43;0000 UTC">2021-08-17 15:53:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I read a litrpg book that the main character got a power that was basically programming.  He could modify objects to do certain things based on triggers.<p>It was quite entertaining.  But most of what he did was either off-the-cuff, or the book hid the hours and hours of testing and research so that it wouldn&#x27;t bore the reader.<p>Unfortunately, I couldn&#x27;t find the name of the book in my reading history.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notanzaiiswear" target="_blank">notanzaiiswear</a>   <span class="timeago" data-date="2021-08-18 09:43:28 &#43;0000 UTC">2021-08-18 09:43:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now that you mention it I seem to remember a book where a programmer beams himself into a world where he can then live like a wizard because he can affect it with his programming. Also can&#x27;t remember the title, but it was a fun read.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wccrawford" target="_blank">wccrawford</a>   <span class="timeago" data-date="2021-08-18 12:02:37 &#43;0000 UTC">2021-08-18 12:02:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I found it!<p>Apocalypse: Generic System (Systems of the Apocalypse Book 1)<p>I haven&#x27;t read the sequel yet, though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whatshisface" target="_blank">whatshisface</a>   <span class="timeago" data-date="2021-08-17 15:09:11 &#43;0000 UTC">2021-08-17 15:09:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s basically how it works in Harry Potter. That&#x27;s why you have to go to school for magic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=notanzaiiswear" target="_blank">notanzaiiswear</a>   <span class="timeago" data-date="2021-08-17 16:52:52 &#43;0000 UTC">2021-08-17 16:52:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is not a lot about discovering new spells, though? Possible exception Snape&#x27;s remarks in his notebook on potion brewing.<p>And in HP people have the innate talent for magic.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=whatshisface" target="_blank">whatshisface</a>   <span class="timeago" data-date="2021-08-17 19:56:57 &#43;0000 UTC">2021-08-17 19:56:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People can have more or less talent at technology, although it&#x27;s usually called &quot;intelligence.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vidarh" target="_blank">vidarh</a>   <span class="timeago" data-date="2021-08-17 11:42:34 &#43;0000 UTC">2021-08-17 11:42:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Recent Dr Strange has him learn how to forge magic items in a somewhat structured way after running into an alien who approaches magic pretty much like technology.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eggsome" target="_blank">eggsome</a>   <span class="timeago" data-date="2021-08-17 09:18:56 &#43;0000 UTC">2021-08-17 09:18:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wizard&#x27;s Bane (1989) is a fun take on that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=canadianfella" target="_blank">canadianfella</a>   <span class="timeago" data-date="2021-08-17 05:59:59 &#43;0000 UTC">2021-08-17 05:59:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not literally
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jholman" target="_blank">jholman</a>   <span class="timeago" data-date="2021-08-17 06:45:48 &#43;0000 UTC">2021-08-17 06:45:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The traditional extension of this joke is:<p>&quot;Hey.  Don&#x27;t oversimplify.  First you gotta hammer them flat and trap lightning inside them.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meowster" target="_blank">meowster</a>   <span class="timeago" data-date="2021-08-17 04:16:58 &#43;0000 UTC">2021-08-17 04:16:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The energy that made those rocks warm, came from spinning other rocks really fast.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=teruakohatu" target="_blank">teruakohatu</a>   <span class="timeago" data-date="2021-08-17 04:50:23 &#43;0000 UTC">2021-08-17 04:50:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I might be missing the joke, but it mostly comes from burning rocks (coal), shining sunlight on rocks, water flowing downhill or wind&#x2F;gas&#x2F;steam spinning metal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tsimionescu" target="_blank">tsimionescu</a>   <span class="timeago" data-date="2021-08-17 09:39:05 &#43;0000 UTC">2021-08-17 09:39:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With the exception of photovoltaic cells, all the other ways we generate electricity ultimately generate the electricity by spinning a dynamo - directly for hydro and wind, and through boiling water to steam for fossil, most solar plants (which use mirrors to heat water in pipes), nuclear, geothermal. Not sure if fusion would generate the electricity directly or also heat up water to spin up some magnets.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaibee" target="_blank">kaibee</a>   <span class="timeago" data-date="2021-08-17 14:05:09 &#43;0000 UTC">2021-08-17 14:05:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fusion uses the extreme heat generated by the fusion reaction to... boil some water and run it through a turbine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=p1necone" target="_blank">p1necone</a>   <span class="timeago" data-date="2021-08-17 06:05:27 &#43;0000 UTC">2021-08-17 06:05:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All of those energy sources are then somehow converted into spinning rocks (magnets) really fast to convert them into electricity though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ben_w" target="_blank">ben_w</a>   <span class="timeago" data-date="2021-08-17 07:35:53 &#43;0000 UTC">2021-08-17 07:35:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All but one of them, though PV is <i>quantum</i> magic and rather more mind-bending for most people than non-euclidian geometry was for Lovecraft.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meowster" target="_blank">meowster</a>   <span class="timeago" data-date="2021-08-17 05:00:50 &#43;0000 UTC">2021-08-17 05:00:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Electricity comes from spinning loadstones (magnets).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrob" target="_blank">mrob</a>   <span class="timeago" data-date="2021-08-17 10:51:06 &#43;0000 UTC">2021-08-17 10:51:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big generators in power stations typically use field coils (electromagnets), not permanent magnets.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fishtoaster" target="_blank">fishtoaster</a>   <span class="timeago" data-date="2021-08-17 06:27:21 &#43;0000 UTC">2021-08-17 06:27:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m not 100% sure, but I think the origin of that is <a href="https:&#x2F;&#x2F;twitter.com&#x2F;daisyowl&#x2F;status&#x2F;841802094361235456?s=21" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;daisyowl&#x2F;status&#x2F;841802094361235456?s=21</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hermitdev" target="_blank">hermitdev</a>   <span class="timeago" data-date="2021-08-17 04:51:49 &#43;0000 UTC">2021-08-17 04:51:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Love this gem, too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kleinsch" target="_blank">kleinsch</a>   <span class="timeago" data-date="2021-08-17 03:26:39 &#43;0000 UTC">2021-08-17 03:26:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I play online games that have variable winrates bc you’re playing with a match made team. If I go on a 5 game win streak, did I improve? Is the game bugged? Nah, I probably got lucky and got good teammates. If I go on a 5 game loss streak, that’s definitely what I’m telling myself.<p>There’s an element of luck in roguelikes too. It’s part of what makes both types of games compelling. The outcome is uncertain when you sit down to play.<p>So are there psychological traits that make players likely to mistake this bug? Maybe. But on an individual basis, without aggregated winrate data, how would I know it’s not just a lucky winstreak? Especially when I’m playing a style of game where that’s the point?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 03:53:18 &#43;0000 UTC">2021-08-17 03:53:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Since time travel is impossible even for Apple, the past should remain constant no matter how far ahead in time you’re looking at it. For example, you look the same in your 2010 yearbook whether you’re reading it in 2011 or 2021. The time you’re reading the book doesn’t have any bearing on what the book says.<p>A lot of historians and archaeologists would be ecstatic if this were actually true.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rozab" target="_blank">rozab</a>   <span class="timeago" data-date="2021-08-17 11:42:55 &#43;0000 UTC">2021-08-17 11:42:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Am I missing something or has this comment slipped in from another thread?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 12:40:48 &#43;0000 UTC">2021-08-17 12:40:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, you&#x27;re right - it&#x27;s from the essay previous to this one, <a href="https:&#x2F;&#x2F;desystemize.substack.com&#x2F;p&#x2F;desystemize-6" rel="nofollow">https:&#x2F;&#x2F;desystemize.substack.com&#x2F;p&#x2F;desystemize-6</a> .
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Jarwain" target="_blank">Jarwain</a>   <span class="timeago" data-date="2021-08-17 05:27:01 &#43;0000 UTC">2021-08-17 05:27:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Technically wouldn&#x27;t the main impact of time be not what the book says, but how it&#x27;s interpreted? Barring issues from degradation ofc
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slim" target="_blank">slim</a>   <span class="timeago" data-date="2021-08-17 05:45:17 &#43;0000 UTC">2021-08-17 05:45:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Communication = context + information. There&#x27;s no communication without context. So there&#x27;s no reading without interpretation directly tied to the context of the reader. You can&#x27;t read the same book twice without it being different.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=goodcanadian" target="_blank">goodcanadian</a>   <span class="timeago" data-date="2021-08-17 08:37:47 &#43;0000 UTC">2021-08-17 08:37:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, over time, the book wears out, so someone makes a copy. Mistakes and misunderstandings creep in. Or, even, the copyist changes a few things to better fit his world view. It is possible that the book isn&#x27;t as static as you think.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tsimionescu" target="_blank">tsimionescu</a>   <span class="timeago" data-date="2021-08-17 09:49:47 &#43;0000 UTC">2021-08-17 09:49:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As others have pointed out, degradation and imperfect copying are serious issues, they can&#x27;t really be ignored. Also, language itself changes over time, adding significant difficulty to understanding what the book was supposed to have said. And of course, metaphor and references to then-well-known people or events become unrecognizable very quickly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 09:34:58 &#43;0000 UTC">2021-08-17 09:34:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Degradation is a very serious, and inherently time-based, phenomenon.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soared" target="_blank">soared</a>   <span class="timeago" data-date="2021-08-17 03:55:44 &#43;0000 UTC">2021-08-17 03:55:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my day job I manage ~8 deep learning models that make decisions automatically. I adjust 3 inputs, and the models output a lot of data that I use to make adjustments the next day. The issue is.. its incredibly muddy. Making the same change across models, according to documentation, will produce similar results.<p>Having only had this job for a couple months I honestly cannot tell if the input -&gt; output is just very very muddy, or if the documentation is wrong and the models all behave differently. Similar to Crawl I can&#x27;t see behind the curtain.. my inputs are generic &quot;factor 1&quot;, &quot;factor 2&quot; and my outputs have more meaning but are subject to unknowable fluctuations from outside sources.<p>&gt; holding the system constant enough that you can evaluate your changes over time<p>I do not know if I can learn from the system because I&#x27;m not sure if its trustworthy. Good thing there are directions on how to test it included in the post :)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eeegnu" target="_blank">eeegnu</a>   <span class="timeago" data-date="2021-08-17 05:07:20 &#43;0000 UTC">2021-08-17 05:07:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To give another example of a bug in DCSS that went unnoticed for a while: there&#x27;s a spell called Ozocubu&#x27;s Refrigeration that for 6 months [1] dealt 1&#x2F;3 the damage that it should have. It was considered very weak with a steep drawback before this (for a short duration after casting, you couldn&#x27;t drink any potions), so it was ignored, and no one really questioned why it was useless.<p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;crawl&#x2F;commit&#x2F;ab847a317b82e2fb0316bf19c0c5e8f66163f2a7" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;crawl&#x2F;commit&#x2F;ab847a317b82e2fb0316bf...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ballenf" target="_blank">ballenf</a>   <span class="timeago" data-date="2021-08-17 09:54:58 &#43;0000 UTC">2021-08-17 09:54:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; ... remember that the Systemic Stability Principle is completely false, and just happens to be a false belief that it’s often useful to hold. A system being stable in the past doesn’t mean it’s stable now, and evidence that the Systemic Stability Principle works is not the same thing as evidence that it’s right.<p>That is, the only way you can get better at a game like this is to assume that the system is stable (otherwise you&#x27;ll attribute failure to bad luck instead of bad strategy).<p>&gt; It’s also important to avoid refuting observations by appealing to system definitions. If someone says “This feels like it’s doing more damage than it says”, resist the impulse to say “Nope, it does exactly this value; it’s written right here.” Instead, try to design an experiment that would prove whether the value written in the system is correct. If designing the experiment is very hard, that should be interpreted as a risk factor - if no one can check that the system is doing what it ought to, then maybe it really is wrong! Play yes-and with systems skeptics, letting them invest their time into correspondence work if they think something is wrong. Or be the system skeptic yourself, if a certain observation sits wrong with you.<p>That skill is a superpower in software development when dealing with complex systems that behave unexpectedly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwawaygal7" target="_blank">throwawaygal7</a>   <span class="timeago" data-date="2021-08-17 15:38:53 &#43;0000 UTC">2021-08-17 15:38:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m a former DCSS player. I actually love the opacity and lack of documentation in the game. One of the truly enchanting elements of older rogue likes was the randomness, undocumented features, and various other things along those lines. It has been very sad to see crawl lose a lot of these elements as the pave of development has increased... The new player base wants everything to be optimal and so has gradually militated for the removal of the more unique and strange elements of the game play.<p>Simplified combat and magic, removal of extraneous skills, crippled food system... soon no doubt they&#x27;ll try to &#x27;balance&#x27; the mutation system which is the last of these old school rogue like features to still maintain a large presence.<p>I think the dispute is generational... I love crawl and had some modest victories but never defined myself around it.  to me it was a distraction and just a fun game to sink time into in undergrad - not something to be relentlessly optimized.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kibwen" target="_blank">kibwen</a>   <span class="timeago" data-date="2021-08-17 17:25:33 &#43;0000 UTC">2021-08-17 17:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Try any of Crawl&#x27;s zillion forks that add all sorts of weird things. Or you can just play old versions; even the official servers still host versions from over a decade ago.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zijoud" target="_blank">zijoud</a>   <span class="timeago" data-date="2021-08-17 05:03:19 &#43;0000 UTC">2021-08-17 05:03:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Pretty funny.. I happened to have picked up DCSS during this bug and I&#x27;m just now learning about it. <a href="http:&#x2F;&#x2F;crawl.akrasiac.org&#x2F;scoring&#x2F;players&#x2F;zijoud.html" rel="nofollow">http:&#x2F;&#x2F;crawl.akrasiac.org&#x2F;scoring&#x2F;players&#x2F;zijoud.html</a><p>I was only playing the game for a week before I had a &quot;streak&quot; of wins, which is something you shoot for. And it was all during a tournament. I felt cool then, but not now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=personjerry" target="_blank">personjerry</a>   <span class="timeago" data-date="2021-08-17 02:23:31 &#43;0000 UTC">2021-08-17 02:23:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems like having tests would&#x27;ve easily solved this issue.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Supermancho" target="_blank">Supermancho</a>   <span class="timeago" data-date="2021-08-17 02:29:05 &#43;0000 UTC">2021-08-17 02:29:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The question is &quot;why didn&#x27;t the players notice&quot; not why the developers didn&#x27;t notice.<p>The article leads with a clickbait question.<p>The reason they didn&#x27;t notice is because the stats aren&#x27;t readily available and public to everyone, to see the sharp uptick in wins paired with the game being filled with opaque systems. No player playing for the first time would notice or have a chance to notice.<p>To put it another way, this is an article about a (secret and mistaken) massive change to a very difficult game that made it slightly less difficult. Same article turns around and asks why nobody noticed, like that&#x27;s an interesting question.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kibwen" target="_blank">kibwen</a>   <span class="timeago" data-date="2021-08-17 05:44:21 &#43;0000 UTC">2021-08-17 05:44:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; the stats aren&#x27;t readily available and public to everyone</i><p>The stats have always been public and instantly available, impressively so. Here&#x27;s the bot command to query the stats in question:<p><pre><code>    !lg * start&gt;&quot;2015-03-06 00:00:00&quot; start&lt;&quot;2015-03-21 00:00:00&quot; cv=0.16 &#x2F; won
+</code></pre>
+Output:<p><pre><code>    1180&#x2F;39437 games for * (start&gt;&#x27;2015-03-06 00:00:00&#x27; start&lt;&#x27;2015-03-21 00:00:00&#x27; cv=0.16): N=1180&#x2F;39437 (2.99%)
+</code></pre>
+So that&#x27;s a 3% winrate for the major version in question during the dates the bug existed.<p>Using another query to determine the all-time winrate across all versions:<p><pre><code>    !lg * &#x2F; won
+</code></pre>
+We see the historic winrate to be about 1%.<p>The listgame interface is documented at <a href="https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;sequell&#x2F;blob&#x2F;master&#x2F;docs&#x2F;listgame.md" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;crawl&#x2F;sequell&#x2F;blob&#x2F;master&#x2F;docs&#x2F;listgame.m...</a> , and the bots can be found on IRC and Discord.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 03:41:59 &#43;0000 UTC">2021-08-17 03:41:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The question is &quot;why didn&#x27;t the players notice&quot; not why the developers didn&#x27;t notice.<p>No, lots of players noticed. The question is <i>phrased</i> as &quot;how did the players miss this?&quot;, but that&#x27;s not what the author means - what he <i>means</i> is &quot;why didn&#x27;t the community come to a consensus on what had happened within two weeks of the introduction of the change?&quot;<p>Which is a much stupider question.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mandmandam" target="_blank">mandmandam</a>   <span class="timeago" data-date="2021-08-17 07:54:55 &#43;0000 UTC">2021-08-17 07:54:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Which is a much stupider question.<p>I don&#x27;t think it&#x27;s a stupid question at all; not when the effect is so large. It was literally double what it should be, leading to a 3x overall win rate.<p>Coming from Dota 2, if there was a bug like this it would be caught within <i>minutes</i>, if not seconds, and patched within an hour or two.<p>- Yes, the Dota player base is orders of magnitude larger, and the damage numbers are easily available. Also I have never played Crawl.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tsimionescu" target="_blank">tsimionescu</a>   <span class="timeago" data-date="2021-08-17 10:00:41 &#43;0000 UTC">2021-08-17 10:00:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not a stupid question at all, it&#x27;s actually a good pretext to discuss the difficulties inherent in reasoning about an opaque system you are interacting with.<p>The article also brings evidence that many players didn&#x27;t notice or believe that anything changed, they specifically believed that nothing did change, which is a surprising belief for such a huge change - but understandable in the context of of such an opaque system. I also believe that other players noticed something had made the game easier, but no one realized what specifically had changed, or most likely suspected how big of a change it was.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-17 10:11:39 &#43;0000 UTC">2021-08-17 10:11:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The article also brings evidence that many players didn&#x27;t notice or believe that anything changed, they specifically believed that nothing did change, which is a surprising belief for such a huge change<p>Not really. The article cites responses in online discussion to that effect. But there is no evidence that those responses came from someone <i>who had ever played the altered version of the game</i>. With certainty, many of them didn&#x27;t. You don&#x27;t have to do a playthrough on the latest version before leaving a new comment in a forum thread.<p>It&#x27;s a safe bet that the majority of the player base never encountered the bug at all, since it was only available if you downloaded the game within a two-week window.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=djmips" target="_blank">djmips</a>   <span class="timeago" data-date="2021-08-17 02:56:22 &#43;0000 UTC">2021-08-17 02:56:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought it was an interesting question followed by an interesting take. There was a bit of ego salve in the conclusion but it seemed plausible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hnxs" target="_blank">hnxs</a>   <span class="timeago" data-date="2021-08-17 02:33:57 &#43;0000 UTC">2021-08-17 02:33:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            “Slightly less difficult” is a huge understatement. I don’t know specific stats, but I’d say the average player had their winrates at least double (eg 2% to 4%)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cortesoft" target="_blank">cortesoft</a>   <span class="timeago" data-date="2021-08-17 03:12:28 &#43;0000 UTC">2021-08-17 03:12:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is not easy to notice a change of 2% success to 4% success without a lot of samples.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=muzani" target="_blank">muzani</a>   <span class="timeago" data-date="2021-08-17 04:14:13 &#43;0000 UTC">2021-08-17 04:14:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an interesting idea. Let&#x27;s say there&#x27;s a new feature where electric damage and cold damage ignores metal armor. But suddenly there&#x27;s a bug where if the weapon does both electric <i>and</i> cold damage, the physical damage also ignores armor.<p>How would someone design tests that work well for roguelikes? It&#x27;s not simply Human strikes Orc for 10 damage. Damage range may be a bell curve of 5-15. There&#x27;s misses and hits. There&#x27;s little bonuses that increase the miss probability, probably to ridiculous levels. There&#x27;s armor, calculated from things like race, constitution, magic, divine bonuses, class mastery bonus.<p>And then you have procedurally generated... stuff. Equipment are the easiest to control. Some games have procedurally generated monsters, some have procedurally generated deities. To be able to reduce this stuff to tests kind of defeats the purpose of doing it, which is to be unpredictable.<p>Sometimes you have a combo of things that add up to 40% damage resistance. Is 40% too much or too little?<p>After all this, how do you detect that the bugged spear is doing an unreasonable amount of damage?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=personjerry" target="_blank">personjerry</a>   <span class="timeago" data-date="2021-08-17 04:28:55 &#43;0000 UTC">2021-08-17 04:28:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In cases like this we use mock functions to replace the rng dependent functions during testing.<p><a href="https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Mock_object" rel="nofollow">https:&#x2F;&#x2F;en.m.wikipedia.org&#x2F;wiki&#x2F;Mock_object</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=muzani" target="_blank">muzani</a>   <span class="timeago" data-date="2021-08-18 07:30:21 &#43;0000 UTC">2021-08-18 07:30:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This won&#x27;t catch the procedurally generated edge case though unless it mocks every possible combination. It could well run into millions of scenarios just to test damage.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 16:00:25 &#43;0000 UTC">2021-08-17 16:00:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=camtarn" target="_blank">camtarn</a>   <span class="timeago" data-date="2021-08-17 13:39:06 &#43;0000 UTC">2021-08-17 13:39:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Monte Carlo simulation? Have your CI server run millions of games in fast forward, and collect as many statistics as you can. When you make a change, check that the stats that you expected to change did change, and that others stayed the same.<p>Wouldn&#x27;t detect extremely improbable things, though, like having a spear with a super-rare effect + having armour with another super-rare effect, since those would show up so infrequently that they wouldn&#x27;t skew the overall stats much.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=a_e_k" target="_blank">a_e_k</a>   <span class="timeago" data-date="2021-08-17 08:00:04 &#43;0000 UTC">2021-08-17 08:00:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (a) Set a deterministic RNG seed before each test.<p>and&#x2F;or<p>(b) Have each test loop enough to get a good estimate of the probability distribution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=muzani" target="_blank">muzani</a>   <span class="timeago" data-date="2021-08-18 07:33:49 &#43;0000 UTC">2021-08-18 07:33:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            B seems fine. But wouldn&#x27;t a RNG seed give different results as you add more randomly generated features?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nimih" target="_blank">nimih</a>   <span class="timeago" data-date="2021-08-17 04:56:01 &#43;0000 UTC">2021-08-17 04:56:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It sure would be inconvenient for your hypothesis if the crawl project had a `test` directory which predates the bug in question...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soared" target="_blank">soared</a>   <span class="timeago" data-date="2021-08-17 04:22:23 &#43;0000 UTC">2021-08-17 04:22:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; try to design an experiment that would prove whether the value written in the system is correct. If designing the experiment is very hard, that should be interpreted as a risk factor - if no one can check that the system is doing what it ought to, then maybe it really is wrong!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

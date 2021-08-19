@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/automating-a-software-company-with-github-actions/">
+
+
+    <title>Automating a Software Company with GitHub Actions - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Automating a Software Company with GitHub Actions - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/automating-a-software-company-with-github-actions/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/automating-a-software-company-with-github-actions/">
+<meta name="twitter:title" content="Automating a Software Company with GitHub Actions - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Automating a Software Company with GitHub Actions - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T14:12:39JST",
+    "dateModified": "2021-08-19T14:12:39JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://posthog.com/blog/automating-a-software-company-with-github-actions/">Automating a Software Company with GitHub Actions</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=danpalmer" target="_blank">danpalmer</a>   <span class="timeago" data-date="2021-08-19 14:50:25 &#43;0000 UTC">2021-08-19 14:50:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the things I like about Actions is how much it&#x27;s focused on automation rather than CI. The pain points I&#x27;ve had with Circle&#x2F;GitLab&#x2F;Travis have often boiled down to the fact that they are often very specifically about _testing software_, not _automating processes_, and not even _deploying software_.<p>On that last one, there&#x27;s a potential bug in the deployment pipeline here – deploys could run simultaneously or some bad luck on runner speed could even see an older version of the code go out after a newer version. Combined with the automated database migrations this could be quite a big problem!<p>Actions thankfully solved this recently with the `concurrency` key that lets you form a serial queue by a given key such as the branch name.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sytse" target="_blank">sytse</a>   <span class="timeago" data-date="2021-08-19 15:50:19 &#43;0000 UTC">2021-08-19 15:50:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In GitLab you can limit concurrency by using a resource group <a href="https:&#x2F;&#x2F;about.gitlab.com&#x2F;blog&#x2F;2020&#x2F;01&#x2F;21&#x2F;introducing-resource-groups&#x2F;" rel="nofollow">https:&#x2F;&#x2F;about.gitlab.com&#x2F;blog&#x2F;2020&#x2F;01&#x2F;21&#x2F;introducing-resourc...</a><p>Does that address your need?<p>Edit with more context: We use CI for deploying to GitLab.com and use resource_group to prevent multiple jobs from running concurrently.  What we lack is the ability to prevent multiple pipelines from running concurrently (resource_group is at the job level). It looks like concurrency for actions <a href="https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;actions&#x2F;reference&#x2F;workflow-syntax-for-github-actions#concurrency" rel="nofollow">https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;actions&#x2F;reference&#x2F;workflow-syntax...</a> can work on groups which is a bit nicer. There is some discussion about making this better for GitLab in <a href="https:&#x2F;&#x2F;gitlab.com&#x2F;gitlab-org&#x2F;gitlab&#x2F;-&#x2F;issues&#x2F;217522" rel="nofollow">https:&#x2F;&#x2F;gitlab.com&#x2F;gitlab-org&#x2F;gitlab&#x2F;-&#x2F;issues&#x2F;217522</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Philip-J-Fry" target="_blank">Philip-J-Fry</a>   <span class="timeago" data-date="2021-08-19 17:00:33 &#43;0000 UTC">2021-08-19 17:00:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve never felt like GitLab CI is more about testing software than anything else...<p>It&#x27;s super flexible and you can do literally anything.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=verdverm" target="_blank">verdverm</a>   <span class="timeago" data-date="2021-08-19 15:13:39 &#43;0000 UTC">2021-08-19 15:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure the concurrency key can solve the issue of old code after new code, in the general case.<p>What happens if there are conflicting migrations on two &quot;parallel&quot; branches?<p>What happens in you bad luck situation when commits are pushed in rapid succession on the same branch?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=duped" target="_blank">duped</a>   <span class="timeago" data-date="2021-08-19 15:53:54 &#43;0000 UTC">2021-08-19 15:53:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just want to be able to write all my workflow code as typescript (including the config - no YAML, for the love of god, no more YAML!) and run it locally with a debugger attached.<p>It&#x27;s cost me hundreds to thousands of dollars to implement nontrivial workflows because of how the YAML is parsed (for example, empty strings when using a secret that has been renamed or removed) and the lack of introspection or debuggability when something goes wrong.<p>It&#x27;s gotten to the point where new any new workflows I write are thin wrappers around a single script and I don&#x27;t import any actions besides actions&#x2F;checkout (even that has been bug prone, historically).<p>All that said, it&#x27;s not like other platforms are better. But they certainly are cheaper and don&#x27;t have dumb breakages when you need cross platform builds (has upload-artifact been fixed for executables on MacOS yet?)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wbond" target="_blank">wbond</a>   <span class="timeago" data-date="2021-08-19 16:32:29 &#43;0000 UTC">2021-08-19 16:32:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Having dealt with a fair bit of CI on a decent number of services (AppVeyor, Travis, CircleCI and GitHub Actions), I’ve come to the exact same conclusion.<p>CI is a script, and the YAML configs for those various services configure the machine type, OS and toolchain. Everything else is contained within the script. Sometimes even toolchain setup is handled by the script.<p>Not following this model has wasted so much time when migrating services or trying to tweak what CI does.<p>With a script you can run it locally to ensure it performs the steps desired, leaving the CI “setup” to minimal environment&#x2F;toolchain debugging.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=i_s" target="_blank">i_s</a>   <span class="timeago" data-date="2021-08-19 16:07:57 &#43;0000 UTC">2021-08-19 16:07:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yea, making it so statements are composing via YAML was a very poor choice. One case I had was needing to change my actions so that steps D, E, and F could be retried together. What is the github YAML specification for decrementing a &#x27;tries_remaining&#x27; variable, then going back to a previous step? I couldn&#x27;t find it, so ended up just having to rewrite the action so that most of the steps are now in one bash script.<p>Not being able to execute it locally has also wasted a lot of time, and people needing to make 50+ changes to the master branch until they get it right.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-08-19 16:46:44 &#43;0000 UTC">2021-08-19 16:46:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep. I am currently needing to try and set up code coverage reporting in GitHub (can&#x27;t use Codecov as the company does not want to pay for anything) and it would be so much more trivial if we could just write regular code rather than futzing around with Bash and yaml.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=minxomat" target="_blank">minxomat</a>   <span class="timeago" data-date="2021-08-19 17:01:25 &#43;0000 UTC">2021-08-19 17:01:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can write custom actions in JavaScript, using the toolkit: <a href="https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;actions&#x2F;creating-actions&#x2F;creating-a-javascript-action" rel="nofollow">https:&#x2F;&#x2F;docs.github.com&#x2F;en&#x2F;actions&#x2F;creating-actions&#x2F;creating...</a><p>However, the workflow referencing the custom action would still be the Actions YAML syntax.<p>(disclaimer: I work at GH, but not on Actions)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrkurt" target="_blank">mrkurt</a>   <span class="timeago" data-date="2021-08-19 16:40:46 &#43;0000 UTC">2021-08-19 16:40:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have a picture of what typescript code for workflow would look like? Are you thinking of something that calls APIs directly or runs and spits out some kind of JSON instructions in place of yaml?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mirekrusin" target="_blank">mirekrusin</a>   <span class="timeago" data-date="2021-08-19 16:48:26 &#43;0000 UTC">2021-08-19 16:48:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Did anybody experiment with cuelang as source for GitHub actions yaml?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=BugsJustFindMe" target="_blank">BugsJustFindMe</a>   <span class="timeago" data-date="2021-08-19 15:25:16 &#43;0000 UTC">2021-08-19 15:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I love GH actions, but they&#x27;re still a bit too sharp-edged for my taste.<p>Like...the last time I checked, workflows had no runtime macro for limiting execution to the default branch except explicitly by a specific name, and the closest you could get to generically checking &quot;whatever the default branch is called right now&quot; was either a template workflow that would set some static text for the name at creation that breaks if the default branch name is subsequently changed or a song and dance querying the API and setting an environment variable inside one of the workflow steps and then gating all subsequent steps on the result. This was a long time after they introduced editable default branch names and seems like such an obvious oversight.<p>Then there are weird quirks like the subshell file system permissions block that requires using sudo if you want to move files around within your repo clone from inside an invoked shell script.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mtalantikite" target="_blank">mtalantikite</a>   <span class="timeago" data-date="2021-08-19 15:50:36 &#43;0000 UTC">2021-08-19 15:50:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One relatively simple thing I&#x27;d love is the ability to re-run a job where it fails, which is something other CI systems have. On a current project we have some flaky Cypress tests and it sucks to have to re-run the entire workflow from the start when one of the last steps of the job fails. I&#x27;m definitely not the only one wanting this [1].<p>They also offer triggering workflows with &#x27;workflow_run&#x27; based on other workflows, but that only happens on the default main branch. We auto build testing environments on each PR and I&#x27;d love to be able to have better workflow management based on branches.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;actions&#x2F;runner&#x2F;issues&#x2F;432" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;actions&#x2F;runner&#x2F;issues&#x2F;432</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=c17r" target="_blank">c17r</a>   <span class="timeago" data-date="2021-08-19 16:31:39 &#43;0000 UTC">2021-08-19 16:31:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I did a triple-take &quot;...at PostHog we&#x27;ve been avid users of GitHub since its early ARPANET days.&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bklyn11201" target="_blank">bklyn11201</a>   <span class="timeago" data-date="2021-08-19 15:55:07 &#43;0000 UTC">2021-08-19 15:55:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can anyone point me to an example of a Github action resulting in standing up a fully working backend with a resolvable DNS entry for manual pull request testing?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reidjs" target="_blank">reidjs</a>   <span class="timeago" data-date="2021-08-19 15:14:37 &#43;0000 UTC">2021-08-19 15:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            GitHub Actions are such a great tool, I use them to schedule tweets for me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=steeleduncan" target="_blank">steeleduncan</a>   <span class="timeago" data-date="2021-08-19 15:16:48 &#43;0000 UTC">2021-08-19 15:16:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting, do you have a link to an example action for this?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reidjs" target="_blank">reidjs</a>   <span class="timeago" data-date="2021-08-19 15:20:02 &#43;0000 UTC">2021-08-19 15:20:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This should get you started :D let me know if you need help setting it up
+<a href="https:&#x2F;&#x2F;github.com&#x2F;reidjs&#x2F;markdown-tweet-scheduler" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;reidjs&#x2F;markdown-tweet-scheduler</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=steeleduncan" target="_blank">steeleduncan</a>   <span class="timeago" data-date="2021-08-19 16:20:47 &#43;0000 UTC">2021-08-19 16:20:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for that, that looks great.<p>I&#x27;ve been looking for a way to post regularly without actually having to do it. tweetdeck is nice, but its still more hassle than filling a folder with markdowns.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 15:27:12 &#43;0000 UTC">2021-08-19 15:27:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ryanmarsh" target="_blank">ryanmarsh</a>   <span class="timeago" data-date="2021-08-19 14:41:43 &#43;0000 UTC">2021-08-19 14:41:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            LOL a software company is more, so much more, than CI. I thought I was going to read something novel about using GitHub actions for tracking sales leads or customer success or something.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spzb" target="_blank">spzb</a>   <span class="timeago" data-date="2021-08-19 15:01:19 &#43;0000 UTC">2021-08-19 15:01:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This does seem to be a pretty bog-standard usage of a CI&#x2F;CD tool. I must be missing something.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=k__" target="_blank">k__</a>   <span class="timeago" data-date="2021-08-19 15:16:16 &#43;0000 UTC">2021-08-19 15:16:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems like the article and also comments here imply just that.<p>GitHub Actions aren&#x27;t focused on CI, so they are much more useful.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

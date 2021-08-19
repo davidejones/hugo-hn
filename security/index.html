@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/security/">
+
+
+    <title>Hugo Hacker News</title>
+    
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="page">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+    <h2 id="hacker-news-security">Hacker News Security</h2>
+<p>If you find a security hole, please let us know at <a href="mailto:security@ycombinator.com">security@ycombinator.com</a>. We try to respond (with fixes!) as soon as possible, and really appreciate the help.</p>
+<p>Thanks to the following people who have discovered and responsibly disclosed security holes in Hacker News:</p>
+<h3 id="20170430-michael-flaxman">20170430: Michael Flaxman</h3>
+<pre><code>The minor version of bcrypt used for passwords was susceptible to a collision in some cases.
+</code></pre>
+<h3 id="20170414-blake-rand">20170414: Blake Rand</h3>
+<pre><code>Links in comments were vulnerable to an IDN homograph attack.
+</code></pre>
+<h3 id="20170315-blake-rand">20170315: Blake Rand</h3>
+<pre><code>The right-to-left override character could be used to obscure link text in comments.
+</code></pre>
+<h3 id="20170301-jaikishan-tulswani">20170301: Jaikishan Tulswani</h3>
+<pre><code>Logged-in users could bypass 'old password' form field.
+</code></pre>
+<h3 id="20160217-eric-tjossem">20160217: Eric Tjossem</h3>
+<pre><code>Logout and login were vulnerable to CSRF.
+</code></pre>
+<h3 id="20160113-mert-taşçi">20160113: Mert Taşçi</h3>
+<pre><code>The 'forgot password' link was vulnerable to reflected XSS.
+</code></pre>
+<h3 id="20150907-sandeep-singh">20150907: Sandeep Singh</h3>
+<pre><code>An open redirect was possible by passing a URL with a mixed-case protocol as the goto parameter.
+</code></pre>
+<h3 id="20150904-manish-bhattacharya">20150904: Manish Bhattacharya</h3>
+<pre><code>The site name display for stories was vulnerable to an IDN homograph attack.
+</code></pre>
+<h3 id="20150827-chris-marlow">20150827: Chris Marlow</h3>
+<pre><code>Revisions to HN's markup caused an HTML injection regression.
+</code></pre>
+<h3 id="20150624-stephen-sclafani">20150624: Stephen Sclafani</h3>
+<pre><code>A form handling bug led to a XSS vulnerability using HTTP parameter polution.
+</code></pre>
+<h3 id="20150302-max-bond">20150302: Max Bond</h3>
+<pre><code>Information leaked during /r processing allowed an attacker to discover valid profile edit links and the user for which they were valid.
+goto parameters functioned as open redirects.
+</code></pre>
+<h3 id="20141101-ovidiu-toader">20141101: Ovidiu Toader</h3>
+<pre><code>In rare cases some users' profiles (including email addresses and password hashes) were mistakenly published to the Firebase API.
+</code></pre>
+<p>See <a href="https://news.ycombinator.com/item?id=8604586">https://news.ycombinator.com/item?id=8604586</a> for details.</p>
+<h3 id="20141027-san-tran">20141027: San Tran</h3>
+<pre><code>Some pages displaying forms were vulnerable to reflected XSS when provided malformed query string arguments.
+</code></pre>
+<h3 id="20140501-jonathan-rudenberg">20140501: Jonathan Rudenberg</h3>
+<pre><code>Some YC internal pages were vulnerable to persistent XSS.
+</code></pre>
+<h3 id="20120801-louis-lang">20120801: Louis Lang</h3>
+<pre><code>Redirects were vulnerable to HTTP response splitting via the whence argument.
+Persistent XSS could be achieved via the X-Forwarded-For header.
+</code></pre>
+<h3 id="20120720-michael-borohovski">20120720: Michael Borohovski</h3>
+<pre><code>Incorrect handling of unauthenticated requests meant anyone could change rsvp status for Demo Day.
+</code></pre>
+<h3 id="20090603-daniel-fox-franke">20090603: Daniel Fox Franke</h3>
+<pre><code>The state of the PRNG used to generate cookies could be determined from observed outputs. This allowed an attacker to fairly easily determine valid user cookies and compromise accounts.
+</code></pre>
+<p>See <a href="https://news.ycombinator.com/item?id=639976">https://news.ycombinator.com/item?id=639976</a> for details.</p>
+<p><strong>Missing From This List?</strong> If you reported a vulnerability to us and don&rsquo;t see your name, please shoot us an email and we&rsquo;ll happily add you. We crawled through tons of emails trying to find all reports but inevitably missed some.</p>
+
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

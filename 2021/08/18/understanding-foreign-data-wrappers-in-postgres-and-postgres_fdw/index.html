@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/understanding-foreign-data-wrappers-in-postgres-and-postgres_fdw/">
+
+
+    <title>Understanding Foreign Data Wrappers in Postgres and Postgres_fdw - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Understanding Foreign Data Wrappers in Postgres and Postgres_fdw - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/understanding-foreign-data-wrappers-in-postgres-and-postgres_fdw/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/understanding-foreign-data-wrappers-in-postgres-and-postgres_fdw/">
+<meta name="twitter:title" content="Understanding Foreign Data Wrappers in Postgres and Postgres_fdw - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Understanding Foreign Data Wrappers in Postgres and Postgres_fdw - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T22:23:22JST",
+    "dateModified": "2021-08-18T22:23:22JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://blog.crunchydata.com/blog/understanding-postgres_fdw">Understanding Foreign Data Wrappers in Postgres and Postgres_fdw</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-18 23:16:59 &#43;0000 UTC">2021-08-18 23:16:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you are interested in Postgres FDWs, please check out Steampipe (<a href="https:&#x2F;&#x2F;steampipe.io" rel="nofollow">https:&#x2F;&#x2F;steampipe.io</a>). It&#x27;s an open source project with a Go-based plugin model (similar to Terraform) to instantly query cloud services (AWS, GCP, GitHub, Slack, etc) using SQL. TBH, we&#x27;ve been completely shocked how far we can push this model querying real-time against APIs.<p>We&#x27;re bullish on the ELT use case and think of virtual tables as &quot;Data Rainbows&quot; - structured, ephemeral access to cloud data. I spoke about this concept for YOW Data (<a href="https:&#x2F;&#x2F;youtu.be&#x2F;2BNzIU5SFaw?t=183" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;2BNzIU5SFaw?t=183</a>). Still structuring our thoughts here, so feedback and ideas would be greatly appreciated.<p>Disclaimers: Steampipe is open source. I&#x27;m a lead on the project. I can&#x27;t stand listening to my own talk.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kfdm" target="_blank">kfdm</a>   <span class="timeago" data-date="2021-08-19 04:19:56 &#43;0000 UTC">2021-08-19 04:19:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very neat! Though I notice a particular pet peeve of mine . . .<p>Under <a href="https:&#x2F;&#x2F;steampipe.io&#x2F;docs&#x2F;reference&#x2F;config-files" rel="nofollow">https:&#x2F;&#x2F;steampipe.io&#x2F;docs&#x2F;reference&#x2F;config-files</a> you put everything into ~&#x2F;.steampipe 
+I&#x27;m not a fan of <i>random</i> apps putting a random directory there. I prefer things to use the correct directory for the platform. Example
+<a href="https:&#x2F;&#x2F;specifications.freedesktop.org&#x2F;basedir-spec&#x2F;basedir-spec-latest.html" rel="nofollow">https:&#x2F;&#x2F;specifications.freedesktop.org&#x2F;basedir-spec&#x2F;basedir-...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 04:30:55 &#43;0000 UTC">2021-08-19 04:30:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A completely fair point ... and one we debated at length.<p>Ultimately we decided that the convenience for users and documentation of a single location outweighed the benefits of following the basedir spec, particularly when deployed across operating systems. We looked at other tools, including terraform [1], in reaching a final decision. FWIW, we do let you customize the location of the &quot;install dir&quot; [2].<p>Hopefully the benefits of Steampipe outweigh the &quot;peeve&quot; factor in this case &lt;grin&gt;<p>1 - <a href="https:&#x2F;&#x2F;www.terraform.io&#x2F;docs&#x2F;cli&#x2F;config&#x2F;config-file.html" rel="nofollow">https:&#x2F;&#x2F;www.terraform.io&#x2F;docs&#x2F;cli&#x2F;config&#x2F;config-file.html</a>
+2 - <a href="https:&#x2F;&#x2F;steampipe.io&#x2F;docs&#x2F;reference&#x2F;env-vars#steampipe_install_dir" rel="nofollow">https:&#x2F;&#x2F;steampipe.io&#x2F;docs&#x2F;reference&#x2F;env-vars#steampipe_insta...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kfdm" target="_blank">kfdm</a>   <span class="timeago" data-date="2021-08-19 04:35:19 &#43;0000 UTC">2021-08-19 04:35:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sadly I read that as &quot;Other tools do their own thing so we decided to do our own thing too&quot; :(<p>Though admittedly, &quot;convenience for users&quot; is a rather tricky thing to define, as you really need to define &quot;which users&quot;. I imagine ~&#x2F;.projectname is easier getting started out, but the long term management is why we (try) to have standard locations for things.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 04:44:45 &#43;0000 UTC">2021-08-19 04:44:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed. Unfortunately requirements for long term management &#x2F; large scale deployment aren&#x27;t a priority until a tool is widely adopted, which is best achieved by keeping it simple. An interesting trade off...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kfdm" target="_blank">kfdm</a>   <span class="timeago" data-date="2021-08-19 04:47:58 &#43;0000 UTC">2021-08-19 04:47:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All the more reason to handle it sooner when its less painful to do the right thing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tomnipotent" target="_blank">tomnipotent</a>   <span class="timeago" data-date="2021-08-19 06:42:47 &#43;0000 UTC">2021-08-19 06:42:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We&#x27;re bullish on the ELT<p>I can really see how Steampipe rounds out a great DIY data pipeline. I&#x27;ve used Segment, Fivetran, Stitch Data, and Airbyte to shovel data into local storage, from RDBMS to Kafka, but this is definitely the most developer-friendly experience I&#x27;ve seen so far.<p>Already exploring using plugin metadata to do useful things in dbt data pipelines.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 11:48:27 &#43;0000 UTC">2021-08-19 11:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really appreciate that, we&#x27;re working hard to make it as developer friendly as possible. If you (or anyone else here) can spare a few mins to discuss use cases for Steampipe in data pipelines please drop me a note (email in bio)!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agent327" target="_blank">agent327</a>   <span class="timeago" data-date="2021-08-19 09:46:58 &#43;0000 UTC">2021-08-19 09:46:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks neat! Is there a list of those 200+ data sources somewhere? Is there one for the Steam database?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vforvendettador" target="_blank">vforvendettador</a>   <span class="timeago" data-date="2021-08-19 10:51:26 &#43;0000 UTC">2021-08-19 10:51:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is this concept of &quot;Plugins&quot; that will tell you where you can pull the data from: <a href="https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins" rel="nofollow">https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins</a><p>And no, there isn&#x27;t one for Steam.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agent327" target="_blank">agent327</a>   <span class="timeago" data-date="2021-08-19 13:09:17 &#43;0000 UTC">2021-08-19 13:09:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I noticed that, but it lists only 37 plugins, not 200+, as advertized here: <a href="https:&#x2F;&#x2F;steampipe.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;steampipe.io&#x2F;</a> I figured the remaining 163+ might be built in, instead of being supplied as plugins.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 14:48:29 &#43;0000 UTC">2021-08-19 14:48:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a pure plugin model, none built in. On the home page we considered data source ~= API ~= table, sorry if that was not clear.<p>I expanded more on this at <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28229700" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28229700</a>.<p>Having said that, we find plugins are quick and fun to write so we&#x27;d love contributions or suggestions for any that would bring you value!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Dowwie" target="_blank">Dowwie</a>   <span class="timeago" data-date="2021-08-19 09:27:45 &#43;0000 UTC">2021-08-19 09:27:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What backend has had the most surprising benefits by adding a SQL frontend to it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ccleve" target="_blank">ccleve</a>   <span class="timeago" data-date="2021-08-19 02:13:18 &#43;0000 UTC">2021-08-19 02:13:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your website says 200+ data sources. How the heck did you generate so many? This project does not look very old.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 02:33:24 &#43;0000 UTC">2021-08-19 02:33:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We currently have 37 open source plugins [1] like AWS, GCP, GitHub, Kubernetes, Hacker News, etc. More are in development by Turbot and community members [2]. Each plugin has many tables, e.g. 223 for AWS [3], 23 for GitHub [4].<p>The 200+ on the home page is referring to tables. Most tables have a single API source behind them, but others like aws_s3_bucket [5] have ~10 API calls for each row to collect related data like tags, versioning, etc.<p>(We&#x27;re excited about the rapid growth of our plugins &#x2F; tables, but can see that if you read it as plugin == data source then the 200+ would be wildly impressive.)<p>1 - <a href="https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins" rel="nofollow">https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins</a>
+2 - <a href="https:&#x2F;&#x2F;github.com&#x2F;topics&#x2F;steampipe" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;topics&#x2F;steampipe</a>
+3 - <a href="https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;github&#x2F;aws" rel="nofollow">https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;github&#x2F;aws</a>
+4 - <a href="https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;github&#x2F;tables" rel="nofollow">https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;github&#x2F;tables</a>
+5 - <a href="https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;aws&#x2F;tables&#x2F;aws_s3_bucket" rel="nofollow">https:&#x2F;&#x2F;hub.steampipe.io&#x2F;plugins&#x2F;turbot&#x2F;aws&#x2F;tables&#x2F;aws_s3_bu...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ccleve" target="_blank">ccleve</a>   <span class="timeago" data-date="2021-08-19 02:29:28 &#43;0000 UTC">2021-08-19 02:29:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, I see. The parent company, Turbot, has 100+ employees and has been at this for a while.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 02:37:34 &#43;0000 UTC">2021-08-19 02:37:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Steampipe is a new project we launched in Jan 2021. Turbot is leading the build, and has been working with cloud APIs since 2014. We&#x27;re bootstrapped, and have a lot less than 100 people, but are hiring (engineering, marketing, tech writing) if anyone would like to get involved :-)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ccleve" target="_blank">ccleve</a>   <span class="timeago" data-date="2021-08-19 02:52:14 &#43;0000 UTC">2021-08-19 02:52:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Crunchbase says 101-250 employees, so they must have guessed wrong. <a href="https:&#x2F;&#x2F;www.crunchbase.com&#x2F;organization&#x2F;turbot" rel="nofollow">https:&#x2F;&#x2F;www.crunchbase.com&#x2F;organization&#x2F;turbot</a> Hope you get to that level soon, looks like a great product.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eitland" target="_blank">eitland</a>   <span class="timeago" data-date="2021-08-19 07:55:56 &#43;0000 UTC">2021-08-19 07:55:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It will actually be better for everyone the smaller the number of employees is as long as all positions are covered and the bus factor is acceptable.<p>Remember: WhatsApp used to be 50 people.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mulmen" target="_blank">mulmen</a>   <span class="timeago" data-date="2021-08-18 23:54:14 &#43;0000 UTC">2021-08-18 23:54:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What’s YOW data?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathanwallace" target="_blank">nathanwallace</a>   <span class="timeago" data-date="2021-08-19 00:01:03 &#43;0000 UTC">2021-08-19 00:01:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            YOW! Data 2021 (<a href="https:&#x2F;&#x2F;yowconference.com&#x2F;data&#x2F;" rel="nofollow">https:&#x2F;&#x2F;yowconference.com&#x2F;data&#x2F;</a>) was an online conference held in May. Talks are all now available on YouTube (<a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list=PLIpl4GKFQR6e2iVY2DZbp6ZUZNlB4-u43" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list=PLIpl4GKFQR6e2iVY2DZbp...</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slt2021" target="_blank">slt2021</a>   <span class="timeago" data-date="2021-08-19 00:43:01 &#43;0000 UTC">2021-08-19 00:43:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            great idea, great product, great job!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

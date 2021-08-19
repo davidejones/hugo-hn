@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/endianness-a-constant-source-of-conflict-for-decades/">
+
+
+    <title>Endianness, a constant source of conflict for decades - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Endianness, a constant source of conflict for decades - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/endianness-a-constant-source-of-conflict-for-decades/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/endianness-a-constant-source-of-conflict-for-decades/">
+<meta name="twitter:title" content="Endianness, a constant source of conflict for decades - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Endianness, a constant source of conflict for decades - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T08:12:38JST",
+    "dateModified": "2021-08-17T08:12:38JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://technicalsourcery.net/posts/on-endianness/">Endianness, a constant source of conflict for decades</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rkangel" target="_blank">rkangel</a>   <span class="timeago" data-date="2021-08-18 09:57:36 &#43;0000 UTC">2021-08-18 09:57:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Most network protocols and formats until recently have been big endian (Network Byte Order).<p>This misses the point of the original reason for this - big endian is more convenient if you&#x27;re reading the value into a shift register. You don&#x27;t need to know in advance how big the value is because you just shift the contents left each time you get a new byte and you end up with the appropriate 0 padded value.<p>Basically for a period of history, big endian was easier to implement for comms and little endian for processors. The big endian comms reasons have generally died out while the processor ones remain.<p>Network byte order (big endian in communication) is a very strong convention though. If you define a network protocol and use little endian then I will be very sad.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=AnIdiotOnTheNet" target="_blank">AnIdiotOnTheNet</a>   <span class="timeago" data-date="2021-08-18 13:58:11 &#43;0000 UTC">2021-08-18 13:58:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why? If I&#x27;m designing my own protocol I could use middle-endian EBCDIC encoded octal and it shouldn&#x27;t make any difference to anything else.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rkangel" target="_blank">rkangel</a>   <span class="timeago" data-date="2021-08-18 14:13:50 &#43;0000 UTC">2021-08-18 14:13:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you building every implementation of the protocol? Or are you publishing a communications standard for people to implement?<p>If I&#x27;m building a network stack and at every layer I&#x27;m pulling values out of the header in network byte order, except in one special case where I have to pull them the other way (for no good reason) then that&#x27;s the protocol author&#x27;s fault.<p>If there is a good reason for using middle-Endian EBCDIC (compatibility or technical) then fine. If not, then please use the thing that&#x27;s the strong convention and therefore simplest to work with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dahfizz" target="_blank">dahfizz</a>   <span class="timeago" data-date="2021-08-18 17:55:58 &#43;0000 UTC">2021-08-18 17:55:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As long as you don&#x27;t want anyone to adopt the protocol, then go ahead.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghusbands" target="_blank">ghusbands</a>   <span class="timeago" data-date="2021-08-18 10:50:39 &#43;0000 UTC">2021-08-18 10:50:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big-endian is how we write each byte in a hex editor, and so big-endian should be more intuitive. If we have the number 0xDEADBEEF and view it in a memory dump, a big-endian system gives:<p><pre><code>  DEADBEEF
+</code></pre>
+And a little-endian system gives:<p><pre><code>  FEBEADDE
+</code></pre>
+Only one of those reads naturally. As long as your increasing memory order goes from left to right, as is the norm.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zepearl" target="_blank">zepearl</a>   <span class="timeago" data-date="2021-08-18 20:09:52 &#43;0000 UTC">2021-08-18 20:09:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This might be the most stupid question of 2021, anyway, here it is:<p>but in little-endian systems the order of the individual bits in a byte is still (kind of) big-endian, with the most meaningful bit on the left, right?<p>Personally I always think first about how the single bits are stored in a byte, which is as far as I know, with the most important bit on the left, independently if the system is big- or little-endian, for example:<p>===<p>0:     0000 0000<p>1:     0000 0001<p>2:     0000 0010<p>...<p>255:   1111 1111<p>===<p>Therefore if the number&#x2F;value gets bigger than a byte for me it&#x27;s just more natural to keep adding bits to the left of the sequence of bits (therefore big-endian style), for example:<p>===<p>256: 1 0000 0000<p>257: 1 0000 0001<p>...<p>===
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghusbands" target="_blank">ghusbands</a>   <span class="timeago" data-date="2021-08-18 21:21:41 &#43;0000 UTC">2021-08-18 21:21:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That amounts to the same question - the way we write binary numbers is the same way we write hexadecimal numbers, decimal numbers or numbers in any base; we start with the most significant. This makes the natural form for LTR languages big-endian.<p>It has no bearing on the layout of bits in the RAM chips, caches, register files or data&#x2F;address lines in a computer. Endianness pretty much only affects the operation of transferring values from&#x2F;to memory.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zepearl" target="_blank">zepearl</a>   <span class="timeago" data-date="2021-08-18 21:55:29 &#43;0000 UTC">2021-08-18 21:55:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, I can change the way I think&#x2F;do stuff (I can write &quot;1234&quot; or &quot;4321&quot;, no problem) but what I meant was basically &quot;for me to make sense, byte-endianness should be aligned to bit-endianness&quot;... .<p>To me it would make sense to use little-endian if the same would be applied as well on the level of &quot;bits&quot; within a byte... . Using little-endian on a byte-level but big-endian on a bit-level (within a byte) is quite confusing for me. Just my subjective opinion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-18 23:39:21 &#43;0000 UTC">2021-08-18 23:39:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; but in little-endian systems the order of the individual bits in a byte is still (kind of) big-endian, with the most meaningful bit on the left, right?</i><p>Single bits are not addressable, so from the point of view of a programmer &quot;order of bits&quot; isn&#x27;t well-defined. There isn&#x27;t a way to distinguish endianness of bits for a programmer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=AnIdiotOnTheNet" target="_blank">AnIdiotOnTheNet</a>   <span class="timeago" data-date="2021-08-18 13:54:37 &#43;0000 UTC">2021-08-18 13:54:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; FEBEADDE<p>0xDEADBEFE?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=api" target="_blank">api</a>   <span class="timeago" data-date="2021-08-18 16:26:49 &#43;0000 UTC">2021-08-18 16:26:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Little-endian is superior at the system level largely because casts between integer sizes are free. Casting a 32-bit LE value to an 8-bit value is just reinterpreting what the pointer means. This is a fairly common operation.<p>Big-endian is pretty much dead. I am not aware of any BE systems on sale right now outside small MIPS routers and embedded. If the Internet were designed today network byte order would probably be little-endian. New cryptographic algorithms are being designed little-endian-first.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=classichasclass" target="_blank">classichasclass</a>   <span class="timeago" data-date="2021-08-18 23:35:17 &#43;0000 UTC">2021-08-18 23:35:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OpenPOWER systems (POWER8 and up) swing both ways. That said, my POWER9 Raptor Talos II runs little endian, though it is completely capable of running big (and at the low OPAL level in fact does), and some operating systems on it support that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-18 16:47:25 &#43;0000 UTC">2021-08-18 16:47:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It also hides errors that come from casting between different pointers types.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=api" target="_blank">api</a>   <span class="timeago" data-date="2021-08-18 17:15:50 &#43;0000 UTC">2021-08-18 17:15:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the job of the language&#x2F;compiler. Rust does a fine job of this.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=recursive" target="_blank">recursive</a>   <span class="timeago" data-date="2021-08-18 16:21:16 &#43;0000 UTC">2021-08-18 16:21:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any significance to `BE`? It&#x27;s the only byte that remains untouched.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PennRobotics" target="_blank">PennRobotics</a>   <span class="timeago" data-date="2021-08-18 09:00:46 &#43;0000 UTC">2021-08-18 09:00:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For those unfamiliar with German, they read numbers aloud in a unique way. 65536 is &quot;sixty five thousand five hundred six <i>and thirty</i>&quot; (Edit: this is inaccurate). I present German-endian as a common enemy!<p>-----<p>At least for me, reading 16- and&#x2F;or 32-bit multi-channel sensor data and then transceiving via 8-bit radio (atmega32u4) is at least a little easier when all the endians align. No byte swapping. No jumping a pointer ahead for each byte in a packet. Most importantly, no calling swapbytes (and its relevant data casts) in Matlab reading the serial data directly off the microcontroller.<p>While this is all relatively straightforward to code, each extra line is another tiny chance of error, and the failure modes in streaming data are not always obvious e.g. FIFO size is a power of two but channel data is an odd number of bytes&#x2F;words. Do you drop data or pause until FIFO empties? Do circular buffers increment or decrement?<p>Luckily, modern sensors (e.g. IMUs) I&#x27;ve used usually have registers to byte swap, drop LSBs when not needed, choose right or left zero bit padding, change channel order, alter FIFO behavior, interrupt at a FIFO threshold, and so on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JoachimS" target="_blank">JoachimS</a>   <span class="timeago" data-date="2021-08-18 09:17:03 &#43;0000 UTC">2021-08-18 09:17:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Getting a bit off topic I guess, but in Danish you do the same AND also have base 20 for numbers over 40 and less than 100. So for example (roughly translated) is 65 &quot;five and half of thirty&quot;. And even harder, for odd tens you get them by taking half of the base 20 number. So 55 is &quot;five and half of thirty&quot;.<p><a href="https:&#x2F;&#x2F;www.babbel.com&#x2F;en&#x2F;magazine&#x2F;counting-in-danish" rel="nofollow">https:&#x2F;&#x2F;www.babbel.com&#x2F;en&#x2F;magazine&#x2F;counting-in-danish</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kzrdude" target="_blank">kzrdude</a>   <span class="timeago" data-date="2021-08-18 10:04:58 &#43;0000 UTC">2021-08-18 10:04:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe 65 should be explained as said like &quot;five and threesh&quot; where &quot;threesh&quot; is implicitly&#x2F;shortened for &quot;three times 20&quot;. So we say: 5 + 3 x 20, but in a terse encoding.<p>Yes, 55 is &quot;half threesh&quot; in the same way, that is we say 5 + half 3 x 20, but half 3 == 2.5, of course!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoachimS" target="_blank">JoachimS</a>   <span class="timeago" data-date="2021-08-18 11:48:16 &#43;0000 UTC">2021-08-18 11:48:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Much better explanation, thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dandellion" target="_blank">dandellion</a>   <span class="timeago" data-date="2021-08-18 09:56:08 &#43;0000 UTC">2021-08-18 09:56:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; is 65 &quot;five and half of thirty&quot;. And even harder (...) 55 is &quot;five and half of thirty&quot;.<p>So you call any number &quot;five and half of thirty&quot;? That sounds pretty easy to be honest.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=JoachimS" target="_blank">JoachimS</a>   <span class="timeago" data-date="2021-08-18 11:49:17 &#43;0000 UTC">2021-08-18 11:49:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oops. I meant &quot;five and thirty&quot; for 65. and &quot;five and half thirty&quot; for 55.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agent327" target="_blank">agent327</a>   <span class="timeago" data-date="2021-08-18 10:21:20 &#43;0000 UTC">2021-08-18 10:21:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t it &quot;five and sixty thousand five hunderd six and thirty&quot;? At least that&#x27;s how it is said in Dutch, and I believe German works the same way...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PennRobotics" target="_blank">PennRobotics</a>   <span class="timeago" data-date="2021-08-18 10:25:24 &#43;0000 UTC">2021-08-18 10:25:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is, and what a wonderful example of how endianness can cause mistakes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalMalice" target="_blank">TacticalMalice</a>   <span class="timeago" data-date="2021-08-18 09:08:56 &#43;0000 UTC">2021-08-18 09:08:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;five and sixty thousand five hundred six and thirty&quot;, right?<p>Dutch is similar and this is a source of mistakes when writing down (phone) numbers. I&#x27;ve resorted to calling out the digits in LTR order.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PaulIH" target="_blank">PaulIH</a>   <span class="timeago" data-date="2021-08-18 10:47:35 &#43;0000 UTC">2021-08-18 10:47:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Norway used that as the standard order until 1951, when an official reform changed the language to LTR. This was due the older way of stating numbers causing confusion when reading phone numbers and similar. It&#x27;s still not universal, but younger generations generally now state numbers universally left to right.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BoxOfRain" target="_blank">BoxOfRain</a>   <span class="timeago" data-date="2021-08-18 09:16:33 &#43;0000 UTC">2021-08-18 09:16:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s examples of it in English too, although it’s very old-fashioned. An example would be the rhyme with “four and twenty blackbirds baked in a pie”.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=junon" target="_blank">junon</a>   <span class="timeago" data-date="2021-08-18 09:14:41 &#43;0000 UTC">2021-08-18 09:14:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Correct. The grouping matters, and double-digits in groupings are also reversed - &quot;fünf und sechzig tausend fünf hundert sechs und dreißig&quot;.<p>Another thing, years in German aren&#x27;t spoken as &quot;twenty twenty-one&quot; as we commonly do in English, but instead the number is spoken out fully - &quot;two-thousand one and twenty&quot; (&quot;zwei tausend eins und zwanzig&quot;).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-08-18 09:53:28 &#43;0000 UTC">2021-08-18 09:53:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In England, the little voice in Google Maps told me to take the &quot;B one thousand, one hundred and thirteen&quot;, when every human i know would call that road the &quot;B one one one three&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=darrenf" target="_blank">darrenf</a>   <span class="timeago" data-date="2021-08-18 16:58:10 &#43;0000 UTC">2021-08-18 16:58:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would honestly most likely say &quot;triple-one three&quot;!<p>IME road number† pronunciation in England goes out of its way to avoid &quot;thousand&quot; and &quot;hundred&quot; – with exceptions, of course. Off the top of my head, I reckon I say them like this:<p>* one or two digits = spoken as the number rather than the digits: <i>A three, M twenty five</i>, etc.<p>* three digits = sometimes spoken as digits: <i>A two-one-seven</i> - but sometimes broken into two numbers: <i>B one-eleven</i><p>* four digits = sometimes the number <i>A thirty-one-hundred</i> (never  three-thousand-one-hundred!), sometimes digits <i>B triple-one three</i>, sometimes year-style <i>B thirteen eighteen</i><p>There are probably more variations that I can&#x27;t think of right now too. It&#x27;s a mess :D<p>† and bus route numbers, for that matter
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skydhash" target="_blank">skydhash</a>   <span class="timeago" data-date="2021-08-18 11:45:45 &#43;0000 UTC">2021-08-18 11:45:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In French, it’s faster to say « Cent treize » than « Un, Un, Trois ». Phone numbers in my country are grouped by two.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=PennRobotics" target="_blank">PennRobotics</a>   <span class="timeago" data-date="2021-08-18 10:33:31 &#43;0000 UTC">2021-08-18 10:33:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is now totally off-topic, but I&#x27;d like to know if there is any Googler at all working on adding location tags to their text-to-speech model.<p>Hearing Google Assistant&#x2F;Maps mispronounce German street or city names in an American accent is very grating to the ears. The pronunciation of a location name should ignore the language spoken, right? (Ignore for a moment the edge cases, like München vs Munich... although the voice says, &quot;Munchin&#x27;,&quot; which is wrong in both languages!) And it can&#x27;t be too complicated to borrow phonemes from another language where they don&#x27;t exist... Right? Your American text-to-speech algorithm encounters an umlaut, then generate the correct waveforms from a language with umlauts.<p>(I&#x27;m sure someone reading this is jumping up and down, yelling about the &quot;photo of a bird&quot; xkcd.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Akronymus" target="_blank">Akronymus</a>   <span class="timeago" data-date="2021-08-18 10:53:30 &#43;0000 UTC">2021-08-18 10:53:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not really comparable to photo of a bird, because using the geographic bounds for what language spoken there should work in 99.99% of the cases.<p>(I have my phone set to english, because I prefer it like that, despite living in austria, europe. Street names are one of the reasons I rarely ever use google maps for navigation)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=simtel20" target="_blank">simtel20</a>   <span class="timeago" data-date="2021-08-18 10:56:22 &#43;0000 UTC">2021-08-18 10:56:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a hard problem in a way. If my language is localized to English, am I more likely to understand the native pronunciation of a street, or the English mispronunciation?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PennRobotics" target="_blank">PennRobotics</a>   <span class="timeago" data-date="2021-08-18 16:19:09 &#43;0000 UTC">2021-08-18 16:19:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s true. To extend this idea, should you pronounce someone&#x27;s name as they pronounce it? Even if you&#x27;ve only known it one way?<p>(The German Michael is kinda... Michh-aye-ehl&#x27;.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maxerickson" target="_blank">maxerickson</a>   <span class="timeago" data-date="2021-08-18 11:04:56 &#43;0000 UTC">2021-08-18 11:04:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For map information, the map app might better tag the language of the word being sent to the TTS engine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=PennRobotics" target="_blank">PennRobotics</a>   <span class="timeago" data-date="2021-08-18 10:24:37 &#43;0000 UTC">2021-08-18 10:24:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah right. My mistake. It would be five and sixty thousand ... Yuck!<p>I guess this is exactly what we&#x27;re talking about---mistakes because you are not natively familiar with a particular system, and then you miss the non-base case. For me, I got the tens digit right but not the ten thousands digit.<p>In the memory case, it&#x27;s knowing to change a pointer location because an address to a 32-bit value will start or end at a different address than a 64-bit value.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agent327" target="_blank">agent327</a>   <span class="timeago" data-date="2021-08-18 10:22:24 &#43;0000 UTC">2021-08-18 10:22:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I totally hate people who repeat a phone number back to you, but with different digit grouping. How the hell am I supposed to know if that&#x27;s the same number!? Just repeat it as I said it already...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=__del__" target="_blank">__del__</a>   <span class="timeago" data-date="2021-08-18 16:12:57 &#43;0000 UTC">2021-08-18 16:12:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            numbers grouped in twos are great for mnemonic memorization. you&#x27;ll easily come up with an association for many two digit numbers.<p>ex. 415-222-9670 becomes:
+sub universal (one less than the answer to life, the universe and everything)
+deck (52 cards)
+swift (she&#x27;s feeling 22)
+resolution (old dpi on wandows)
+top speed (California speed limit)<p>now isn&#x27;t &quot;sub universal deck swift resolution top speed&quot; easier than googling twitter hq? ;] granted, the associations have to make sense to <i>you</i>. for me, 96 was a toss up between nashville (code name of windows 96) and the resolution i had to train myself to remember after moving from the mac&#x27;s 72.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skerit" target="_blank">skerit</a>   <span class="timeago" data-date="2021-08-18 16:10:38 &#43;0000 UTC">2021-08-18 16:10:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just can&#x27;t write down phone numbers when people pronounce them that way. &quot;Nul vier­honderd­vijf­en­zeventig twee­ën­tachtig zes­en­dertig een­en­negentig&quot;? You lost me at nul.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-18 16:04:34 &#43;0000 UTC">2021-08-18 16:04:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For those unfamiliar with German, they read numbers aloud in a unique way. 65536 is &quot;sixty five thousand five hundred six <i>and thirty</i>&quot; (Edit: this is inaccurate). I present German-endian as a common enemy!<p>What&#x27;s unique about that?<p><i>Sing a song of sixpence, a pocket full of rye</i><p><i>Four and twenty blackbirds baked in a pie</i><p><i>When the pie was opened, the birds began to sing</i><p><i>Wasn&#x27;t that a dainty dish to set before the king?</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=8ytecoder" target="_blank">8ytecoder</a>   <span class="timeago" data-date="2021-08-18 16:32:10 &#43;0000 UTC">2021-08-18 16:32:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Based on what I have read in English novels of the 19th century (like Sherlock Holmes), I&#x27;d assume &quot;six and thirty&quot; was common in English as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-18 11:39:10 &#43;0000 UTC">2021-08-18 11:39:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Binary dumps look more in line with how humans with left-to-right scripts expect to read numbers.<p>I remember VMS EXAMINE command but also printed DEC manuals showing hex dumps where the columns where numbered RTL. The ascii view on the right half of the hex dump was following the LTR order, so basically the two views were mirrored. (see example at <a href="http:&#x2F;&#x2F;www0.mi.infn.it&#x2F;~calcolo&#x2F;OpenVMS&#x2F;ssb71&#x2F;4556&#x2F;4556p004.htm" rel="nofollow">http:&#x2F;&#x2F;www0.mi.infn.it&#x2F;~calcolo&#x2F;OpenVMS&#x2F;ssb71&#x2F;4556&#x2F;4556p004....</a>)<p>With such a rendering, little endian does indeed natural.<p>We&#x27;re doing it all the time when rendering bit positions:<p>bit pos: 3210<p>bit val: 1100<p>extending this layout for byte indices is quite natural indeed.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Miiko" target="_blank">Miiko</a>   <span class="timeago" data-date="2021-08-18 07:31:40 &#43;0000 UTC">2021-08-18 07:31:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably because English is not my native language, but it always looked to me that the names are backward:<p>* &quot;big-endian&quot; should have &quot;big&quot; (most significant) part on the end<p>* and &quot;little-endian&quot; should have &quot;little&quot; (least significant) bits at the end<p>Is there different mnemonics to remember what is what?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yetihehe" target="_blank">yetihehe</a>   <span class="timeago" data-date="2021-08-18 07:35:14 &#43;0000 UTC">2021-08-18 07:35:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Try with original source [0]. Big-endian, because some Lilliputians eat eggs starting from big end, little-endian, because some start from little end. Works for me.<p>[0] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Endianness#Etymology" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Endianness#Etymology</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Miiko" target="_blank">Miiko</a>   <span class="timeago" data-date="2021-08-18 07:45:14 &#43;0000 UTC">2021-08-18 07:45:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! now that makes sense - indeed, &quot;endian&quot; refer not to what&#x27;s on the end, but from which end we start writing the number.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-08-18 08:28:05 &#43;0000 UTC">2021-08-18 08:28:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The little end is at the lower address for LE.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yetihehe" target="_blank">yetihehe</a>   <span class="timeago" data-date="2021-08-18 09:55:16 &#43;0000 UTC">2021-08-18 09:55:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless you show your memory layout on picture, where adress 0 is on top.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-08-18 15:20:55 &#43;0000 UTC">2021-08-18 15:20:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Still numerically lower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 16:43:53 &#43;0000 UTC">2021-08-18 16:43:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not, a 16bit LE value at address 0 will have the low byte at address 0 and the high byte at 1. Unless I misunderstood what you meant with &quot;little end&quot;? (But then there is still room for confusion in that term, apparently.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevin_thibedeau" target="_blank">kevin_thibedeau</a>   <span class="timeago" data-date="2021-08-18 17:26:27 &#43;0000 UTC">2021-08-18 17:26:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The little end is always at a lower address. It doesn&#x27;t matter which way you draw the number line.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anyfoo" target="_blank">anyfoo</a>   <span class="timeago" data-date="2021-08-18 17:37:44 &#43;0000 UTC">2021-08-18 17:37:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, I see what you mean now. We are in agreement after all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kazinator" target="_blank">kazinator</a>   <span class="timeago" data-date="2021-08-18 08:03:01 &#43;0000 UTC">2021-08-18 08:03:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Under little endian, the same power digits of differently sized operands are at the same offsets. For instance, whether we have a 16 bit operand or 128 bit operand, the least signficant 8 bits of either one are at the lowest address and so on. This is important if we want to, say, add them together.<p>However, this effect can hide bugs under little endian, which will instantly reproduce on big endian.<p>Suppose that, say, a function expects a 32 bit parameter, but the caller thinks it is passing a byte, whose value is XX. Suppose that by fluke the memory is all zeros. Under little endian, the caller puts XX at the right memory location in the stack, resulting in XX 00 00 00. And, by golly, the callee gets the corect 32 bit value XX.<p>Under big endian, even if by fluke the memory is all zeros, the caller will put the XX byte resulting in the same XX 00 00 00. But this now looks like a huge 32 bit value to the callee, hopefully caught in testing.<p>The apparently correct value will not be caught in testing.<p>Little endian would need nonzero values in the extra bytes instead of the fluky zeros in order to see a bad value.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rwmj" target="_blank">rwmj</a>   <span class="timeago" data-date="2021-08-18 11:57:40 &#43;0000 UTC">2021-08-18 11:57:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When POWER 7 moved to LE, little endian essentially won [edit: for CPUs, not for network protocols].  The only CPU architecture we support that is still big endian is s&#x2F;390.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=classichasclass" target="_blank">classichasclass</a>   <span class="timeago" data-date="2021-08-18 23:37:15 &#43;0000 UTC">2021-08-18 23:37:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The little endian mode in POWER7 was not frequently used and I believe has limitations. It&#x27;s officially a thing for POWER8 and up.<p>That said, my POWER9 runs little, though it&#x27;s perfectly capable of running big.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scratcheee" target="_blank">scratcheee</a>   <span class="timeago" data-date="2021-08-18 09:25:03 &#43;0000 UTC">2021-08-18 09:25:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;[big endian] Binary dumps look more in line with how humans with left-to-right scripts expect to read numbers.<p>Maybe I&#x27;m just dumb, but surely the actual language order is entirely irrelevant?
+If hypothetically we wrote in English right-to-left instead, then we&#x27;d write our numbers right-to-left, and our memory dumps right-to-left, so then we&#x27;d find that little-endian caused the data to start with the smallest byte first (on the right).<p>Mirroring the language doesn&#x27;t undo a mirroring within the language, and that&#x27;s what little-endian is, so a more accurate statement would be:<p>&gt;Binary dumps look more in line with how humans with single-direction scripts expect to read numbers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cies" target="_blank">cies</a>   <span class="timeago" data-date="2021-08-18 09:45:46 &#43;0000 UTC">2021-08-18 09:45:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If hypothetically we wrote in English right-to-left instead, then we&#x27;d write our numbers right-to-left<p>If you read the article the author shows you that in RTL langs (where our current number system originated from) the numbers were also RTL. We just stuck to the convention.<p>Interesting how this little bit of RTL snuck into Europes otherwise LTR languages to the extend that when i type a number in a spreadsheet it changes the allignment to with this... Interesting&#x2F;insightful article!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thaumasiotes" target="_blank">thaumasiotes</a>   <span class="timeago" data-date="2021-08-18 16:20:16 &#43;0000 UTC">2021-08-18 16:20:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you read the article the author shows you that in RTL langs (where our current number system originated from) the numbers were also RTL. We just stuck to the convention.<p>Well, no, the author says this:<p>&gt; Our modern numbering system has its roots in the Hindu numbering system, which was invented somewhere between the 1st and 4th century. Like the dominant writing system of the time, numbers were written right-to-left<p>This is not obvious - it appears that there was a right-to-left Indic script centered around Pakistan ( <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Kharosthi" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Kharosthi</a> ) and a left-to-right one ( <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Brahmi_script" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Brahmi_script</a> ) farther south &#x2F; east.<p>Before that, Sanskrit was written from left to right. It seems far more likely to me in any event that the order in which numbers are written, when the system is innovated, will reflect the order in which they are spoken in whatever language, not directly the order in which the language is written down.<p>Over time they will always develop a big-endian order, because that allows sorting them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=renox" target="_blank">renox</a>   <span class="timeago" data-date="2021-08-18 13:46:38 &#43;0000 UTC">2021-08-18 13:46:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The thing to remember is that things starts by &#x27;oral&#x2F;spoken&#x27; numbers then by written numbers.<p>When we speak we don&#x27;t really use big endian nor little endian, we say &#x27;six thousand one hundred&#x27; not &#x27;six one zero zero&#x27; and obviously we prefer to start with the &#x27;big&#x27; part because it&#x27;s the most important for the listener:
+I don&#x27;t really care if your price is &#x27;6 thousand and one&#x27; or &#x27;6 thousand and two&#x27;, the listener hear &#x27;6 thousand&#x27; and then switch off..<p>And then written language followed oral language of course..
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-18 08:24:35 &#43;0000 UTC">2021-08-18 08:24:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, we should have stuck with Big-endian.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-18 08:31:11 &#43;0000 UTC">2021-08-18 08:31:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hexadecimal data looks very confusing with big endian. 01234567 somehow becomes equal to 4567 0123 and 67 45 23 01... pretty darn out-of-order and unnatural.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Lvl999Noob" target="_blank">Lvl999Noob</a>   <span class="timeago" data-date="2021-08-18 08:46:44 &#43;0000 UTC">2021-08-18 08:46:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t that the little endian representation? I thought big endian starts with the most significant bit.<p>Here, I think 0 would be the most significant nibble and would be written at the left most point.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-18 09:00:58 &#43;0000 UTC">2021-08-18 09:00:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, I should clarify. I meant what you would see in a hex editor would turn out like that. i.e. if you had the byte sequence 67 45 23 01, and decided to display it in 2-byte words, LE could just display 6745 2301; you&#x27;d know the first byte is still the least significant regardless of the grouping, and you can just regard the spacing as a visual grouping aid (pretty natural). If you tried e.g. &quot;Go To -&gt; Offset 3&quot;, you&#x27;d still land on the 01, just as if you went right by 3 positions visually... pretty intuitive. Compare that with BE, where it&#x27;d have to show you 4567 0123, and suddenly if you Go To -&gt; Offset 3 (&#x27;01&#x27;), you&#x27;d land to the <i>left</i> of offset 2 (&#x27;23&#x27;), which to me seems super confusing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vardump" target="_blank">vardump</a>   <span class="timeago" data-date="2021-08-18 09:09:07 &#43;0000 UTC">2021-08-18 09:09:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re getting your endians confused.<p>Bytes 67 45 23 01 interpreted as 16-bit words in:<p>Little endian, LE, or what x86 uses: 4567 0123<p>Big endian, BE, or what 68k uses: 6745 2301
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-18 09:55:52 &#43;0000 UTC">2021-08-18 09:55:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not saying the same thing you think I&#x27;m saying, but I do realize I&#x27;m definitely explaining what I mean poorly... likely because hex editors themselves have multiple behaviors in this regard. Some merely use spaces to separate bytes visually, others actually group the bytes and parse them as integers, swapping them as needed to read like human writing.<p>Let me try illustrating a different situation, hopefully without that confusion.<p>Let&#x27;s say your data starts with the byte sequence 67 45 23 01...<p>If you assume these represents some LE numbers, and want to multiply by 256 (decimal), you end up with 00 67 45 23 01... it really doesn&#x27;t matter (and you don&#x27;t need to know) what the word sizes were. That&#x27;s the only sane result, and the byte at offset 2 would end up being 45h... end of story. Even if your number was only supposed to be N bytes and now it&#x27;s N+1 bytes, you can just chop it back to N bytes and your result will still be correct (modulo 256^N) and as intuitive as it could be.<p>But if you start working in BE, suddenly things get confusing fast. Imagine what this operation would be for 2-byte BE words. The first word in BE is 6745 and now becomes 674500, and you overflowed by 1 byte. So which part do you keep and which part do you overflow to the next word? If you keep the 6745, then the 00 ends up affecting the <i>second</i> word rather than the first one, which is just completely nonsensical. The other option is to keep 4500 and and shove the 67 into the next word, turning it from 2301 into 230167. Now you have to repeat the same procedure with the 23, etc. until you reach the end of the data.<p>Now look at what just happened in the BE case. You have the bizarre situation where your words are internally BE (i.e. &quot;go to offset 0&quot; would now land on the 00 byte, which are <i>not</i> the first 2 characters in the editor!). And <i>across</i> words, they&#x27;re <i>still</i> treated like LE—the inter-word overflows are <i>still</i> moving bytes to higher-order words on the right, not the left! There&#x27;s just no sane way to do math with N-byte words and avoid LE entirely; even if you treat each word as BE, you&#x27;re absolutely <i>forced</i> to treat the word sequence as LE. The only way to actually avoid all LE is to interpret the whole thing as 1 gigantic bignum, where &quot;multiply by 256&quot; ends up being translated into &quot;append 00 to the end of the stream&quot;. That&#x27;s great if your data really <i>was</i> 1 gigantic bignum, but not so much if your data was just typical ints or longs.<p>If this is still confusing (I realize it might be) then I&#x27;m not sure how else to put my thoughts into words unfortunately (no pun intended). Hopefully you can kind of see what I&#x27;m getting at though, even if I&#x27;m explaining some portions of it poorly (sorry).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nybble41" target="_blank">nybble41</a>   <span class="timeago" data-date="2021-08-18 19:29:13 &#43;0000 UTC">2021-08-18 19:29:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Some merely use spaces to separate bytes visually, others actually group the bytes and parse them as integers, swapping them as needed to read like human writing.<p>In other words, your problem is that your hex editor is incorrectly assuming that the numbers are little-endian. If it interpreted them as big-endian then nothing would be swapped since the order of the bytes matches the standard conventions for numbers in most European writing systems. This is not a big-endian problem, it&#x27;s a little-endian problem. A decent hex editor will allow you to set the byte order to match your file. (And as the article points out, the issue would be reversed if the bytes were displayed right-to-left following the same conventions that we use for numbers… but then all your strings would be reversed.)<p>Both representations have strengths and weaknesses depending on what you want to do. Most arbitrary-precision math works better with LE. On the other hand, hexadecimal string formatting works better with the BE encoding, where LE would require either the input or output to be reversed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-18 20:12:12 &#43;0000 UTC">2021-08-18 20:12:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, this has nothing to do with the editor or bignums. I&#x27;m just using those to illustrate the underlying inconsistency.<p>The most natural order&#x2F;sequence out there is that of natural numbers with zero (aka whole numbers), i.e. N0 = 0, 1, 2, 3, ...<p>So I&#x27;m basically arguing that means the most digit places are in the same order, i.e. the coefficients would be ordered as 256^N i.e. 256^0, 256^1, 256^2, 256^3, ...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nybble41" target="_blank">nybble41</a>   <span class="timeago" data-date="2021-08-18 23:53:46 &#43;0000 UTC">2021-08-18 23:53:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I was addressing your first point about how the data is displayed in hex editors. But the rest IMHO is just fixating on one particular operation (&quot;multiplying by 256&quot; by prepending bytes without regard for the data format) which does not seem particularly useful or prudent. Sure, in LE you can prepend a 00 byte to multiply by 256. In BE you do the same by appending a 00 byte at the end, and a 00 at the beginning would just be extra padding, exactly like adding a 0 at the start or end of a decimal number (which are also typically written in big-endian notation). In either case you need to allow for the change in the overall length or risk losing data and probably corrupting the rest of the data file in the process. If your data is actually groups of 16-bit or 32-bit elements rather than bytes then you need to add a whole number of elements for this to make any sense at all, regardless of byte order. You can&#x27;t have an arbitrary-precision integer consisting of 5½ elements. Removing a byte from the end to preserve the length corresponds to reducing module 256^N in LE notation or dividing by 256 in BE; which is &quot;more natural&quot; would depend on the context.<p>For most arbitrary-precision math operations LE <i>is</i> easier to work with. The only thing making BE more &quot;natural&quot; in some situations (in particular, reading numbers out of a byte-oriented hex listing) is the historical accident that we borrowed our number system from right-to-left languages, where they were written little-endian with the one&#x27;s place on the right, without reversing the order to match the surrounding text. Which leads to the alignment issues highlighted in the article.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dandanua" target="_blank">dandanua</a>   <span class="timeago" data-date="2021-08-18 08:41:53 &#43;0000 UTC">2021-08-18 08:41:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nice explanation and examples. I also wrote about this problem in a more broader context of mathematics and quantum computing [1] (it&#x27;s not displayed nicely in Firefox for some reason).<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;dandanua&#x2F;little-endian-vs-big-endian-in-quantum-computing&#x2F;blob&#x2F;master&#x2F;txt.pdf" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dandanua&#x2F;little-endian-vs-big-endian-in-q...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=baybal2" target="_blank">baybal2</a>   <span class="timeago" data-date="2021-08-18 09:19:37 &#43;0000 UTC">2021-08-18 09:19:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Big endian, little endian, all pale in comparison to the horror of mixed endian people have in embedded.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bitwize" target="_blank">bitwize</a>   <span class="timeago" data-date="2021-08-18 07:24:59 &#43;0000 UTC">2021-08-18 07:24:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Little endian won. You almost don&#x27;t have to worry about a new piece of software running on a big-endian machine.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=iainmerrick" target="_blank">iainmerrick</a>   <span class="timeago" data-date="2021-08-18 08:38:15 &#43;0000 UTC">2021-08-18 08:38:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apart from most file formats and internet standards being big-endian, you mean?<p>Although to borrow from minusf’s point, it’s <i>good</i> for software robustness that file formats and hardware use different endianness, as it forces you to read things byte-by-byte rather than lazily assuming you can just read 4 bytes and cast them directly to an int32.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=walki" target="_blank">walki</a>   <span class="timeago" data-date="2021-08-18 08:48:48 &#43;0000 UTC">2021-08-18 08:48:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; it’s good for software robustness that file formats and hardware use different endianness, as it forces you to read things byte-by-byte rather than lazily assuming you can just read 4 bytes and cast them directly to an int32.<p>Except that it is very bad for performance. As far as CPUs are concerned little-endian has definitely won, most CPU architectures that have been big endian in the past (e.g. PowerPC) are now little endian by default.<p>If all new CPU architectures are little endian this means that within a decade or two there won&#x27;t be any operating systems that support big endian anymore.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=classichasclass" target="_blank">classichasclass</a>   <span class="timeago" data-date="2021-08-18 23:39:48 &#43;0000 UTC">2021-08-18 23:39:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Power ISA is actually still big by default, and even on little-endian capable systems starts big endian until changed by the OS. Low-level OPAL calls on OpenPOWER systems are made big endian, even if the OS is little (the OS has to switch the processor mode).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=iainmerrick" target="_blank">iainmerrick</a>   <span class="timeago" data-date="2021-08-18 09:11:43 &#43;0000 UTC">2021-08-18 09:11:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For performance, can’t you “just” have a swap-endianness instruction in your CPU, and have the compiler use it when it detects byte-shuffling code?<p>(That may even happen already on some architectures for all I know)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=walki" target="_blank">walki</a>   <span class="timeago" data-date="2021-08-18 09:26:58 &#43;0000 UTC">2021-08-18 09:26:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; For performance, can’t you “just” have a swap-endianness instruction in your CPU<p>Yes, most CPUs have special instructions for swapping between little and big endian byte arrangement. The GCC compiler has the __builtin_bswap64(x) for accessing this instruction. However this is an additional instruction that needs to be executed for each read of a 64-bit word that needs to be converted, in some workloads this can double the number of executed instructions and hence add significant overhead.<p>Supporting big endian CPUs in systems programming sucks beyond imagination. There are virtually no big endian users anymore and making sure your software works fine on big endian requires testing it on a big endian CPU. However it is not possible to buy a big endian CPU anymore as there exist no more consumer big endian CPUs. For this reason I still have a Mac PowerPC from 2003 at home running an ancient version of Mac OS X. But over the last 2 years I have stopped testing my software on big endian, I just don&#x27;t care about big endian anymore...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=foxfluff" target="_blank">foxfluff</a>   <span class="timeago" data-date="2021-08-18 12:34:44 &#43;0000 UTC">2021-08-18 12:34:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; it forces you to read things byte-by-byte rather than lazily assuming you can just read 4 bytes and cast them directly to an int32<p>Why is this good?  How does the extra work make software more robust?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-18 08:51:41 &#43;0000 UTC">2021-08-18 08:51:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; as it forces you to read things byte-by-byte<p>Indeed, reading file headers byte by byte also avoids alignment issues on some CPUs. At least older ARM CPUs trapped misaligned reads (not sure if this is still the case though).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=walki" target="_blank">walki</a>   <span class="timeago" data-date="2021-08-18 09:09:59 &#43;0000 UTC">2021-08-18 09:09:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; not sure if this is still the case though<p>No this is not the case anymore. Nowadays support for unaligned memory accesses is very good on ARM and most other CPU architectures. On x86 aligned memory used to be very important for SIMD but now there are even special SIMD instructions for unaligned data and the performance overhead of unaligned memory accesses is generally very small in my experience.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=minusf" target="_blank">minusf</a>   <span class="timeago" data-date="2021-08-18 07:34:48 &#43;0000 UTC">2021-08-18 07:34:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            which is a loss, as according to openbsd developers developing for both caught a lot of bugs otherwise not found easily..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iainmerrick" target="_blank">iainmerrick</a>   <span class="timeago" data-date="2021-08-18 08:34:37 &#43;0000 UTC">2021-08-18 08:34:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Couldn’t you keep that benefit by testing on emulated big-endian hardware, though?<p><i>(edit to fix</i> interesting autocorrect glitch... “bug-endian” indeed!)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=edflsafoiewq" target="_blank">edflsafoiewq</a>   <span class="timeago" data-date="2021-08-18 07:42:57 &#43;0000 UTC">2021-08-18 07:42:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Give us an example.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=saurik" target="_blank">saurik</a>   <span class="timeago" data-date="2021-08-18 08:06:24 &#43;0000 UTC">2021-08-18 08:06:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (I mean it just seems obvious you would catch more bugs given the format of big-endian, right?... it comes directly from the dual of one of the not-really-a-benefits of little-endian: how you can cast between pointers of different integer types without moving the pointer.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=agent327" target="_blank">agent327</a>   <span class="timeago" data-date="2021-08-18 20:10:19 &#43;0000 UTC">2021-08-18 20:10:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m totally onboard with casting integers, and I can understand casting between pointers-to-char and pointers-to-other, but why on earth would you want to cast between pointers to (different) integers? That seems like asking for trouble, for no benefit I can discern...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-18 08:17:29 &#43;0000 UTC">2021-08-18 08:17:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28218704" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28218704</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KingOfCoders" target="_blank">KingOfCoders</a>   <span class="timeago" data-date="2021-08-18 08:29:31 &#43;0000 UTC">2021-08-18 08:29:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;there is a distinct advantage to writing numbers in little endian order.&quot;<p>Only if you write left to right, and not right to left.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 08:41:03 &#43;0000 UTC">2021-08-18 08:41:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nybble41" target="_blank">nybble41</a>   <span class="timeago" data-date="2021-08-18 19:37:33 &#43;0000 UTC">2021-08-18 19:37:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you write right-to-left and use little-endian writing order then you still write the least significant digit first, so the one&#x27;s places line up along the right edge. The advantage is the same.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nly" target="_blank">nly</a>   <span class="timeago" data-date="2021-08-18 08:54:59 &#43;0000 UTC">2021-08-18 08:54:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does it matter? Most good static languages have a type system strong enough to express endianness as part of the data type, making conversion transparent
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=a_t48" target="_blank">a_t48</a>   <span class="timeago" data-date="2021-08-18 09:01:21 &#43;0000 UTC">2021-08-18 09:01:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Putting aside “good” vs “popular”, static typing doesn’t save you from accidentally tagging the wrong endianness for your external data sources. And it matters if you’re doing math with your CPUs native type.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BiteCode_dev" target="_blank">BiteCode_dev</a>   <span class="timeago" data-date="2021-08-18 08:57:55 &#43;0000 UTC">2021-08-18 08:57:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It matters for protocols and data formats.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

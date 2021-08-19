@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/improved-c-syntax-highlighting-for-vim/">
+
+
+    <title>Improved C syntax highlighting for Vim - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Improved C syntax highlighting for Vim - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/improved-c-syntax-highlighting-for-vim/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/improved-c-syntax-highlighting-for-vim/">
+<meta name="twitter:title" content="Improved C syntax highlighting for Vim - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Improved C syntax highlighting for Vim - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T19:09:39JST",
+    "dateModified": "2021-08-16T19:09:39JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/pulkomandy/c.vim">Improved C syntax highlighting for Vim</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bern4444" target="_blank">bern4444</a>   <span class="timeago" data-date="2021-08-17 02:00:38 &#43;0000 UTC">2021-08-17 02:00:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I highly recommend looking into Treesitter for anyone who wants to improve syntax highlighting.<p>I know its supported today natively in neovim. Not sure about regular vim or other editors&#x2F;ides.<p>But its a massive improvement on the otherwise regex approach to syntax highlighting every editor takes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jpe90" target="_blank">jpe90</a>   <span class="timeago" data-date="2021-08-17 09:35:12 &#43;0000 UTC">2021-08-17 09:35:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m on neovim nightly and recently turned off treesitter. The highlighting is nice but it consistently was giving me segfaults while autocompleting, adds substantially to my startup time, and renders the editor completely unresponsive when opening large files. I think it&#x27;s worth mentioning it&#x27;s still early in development before highly recommending it, but it&#x27;s cool to tinker with if you&#x27;re in the mood for it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phreeza" target="_blank">phreeza</a>   <span class="timeago" data-date="2021-08-17 09:57:58 &#43;0000 UTC">2021-08-17 09:57:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; renders the editor completely unresponsive<p>I thought one of the points of neovim was to support true async stuff. So in theory, it should be possible to just open the file without syntax highlights but still be able to edit?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-08-17 10:34:08 &#43;0000 UTC">2021-08-17 10:34:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not disagreeing with you (because I don&#x27;t know the original &#x27;points&#x27; of neovim and I&#x27;ve never used it) but plain vim now (as of v8 I think) supports &#x27;async stuff&#x27;. I&#x27;m sure neovim has other benefits to some, but that alone at least I think is no longer one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bern4444" target="_blank">bern4444</a>   <span class="timeago" data-date="2021-08-17 15:04:12 &#43;0000 UTC">2021-08-17 15:04:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Vim only supports async stuff because vim had to keep up with neovim which first introduced async support.<p>I think vim&#x27;s time is nearly over. Just as it replaced vi, neovim will replace vim.<p>It may not get to the ubiquity of being installed everywhere by default, but certainly as the go to cli editor on devs&#x27; work and personal machines
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=divbzero" target="_blank">divbzero</a>   <span class="timeago" data-date="2021-08-17 08:00:51 &#43;0000 UTC">2021-08-17 08:00:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This might be the push I need to finally make the switch to Neovim.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-08-17 10:38:15 &#43;0000 UTC">2021-08-17 10:38:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &#x27;All&#x27; of the (three or so?) neovim plugins I&#x27;ve come across wanting to use, and found Ah damn, &#x27;neovim&#x27; in the name, work just fine in vanilla vim, FYI.<p>I don&#x27;t know how much (or if anything) a plugin has to do to support it, but there&#x27;s some kind of python RPC thing that allows it. IME it&#x27;s been install that once, and neovim plugins &#x27;just work&#x27;. (But I have only found&#x2F;tried ones that explicitly mention it.)<p>(Edit, this: <a href="https:&#x2F;&#x2F;github.com&#x2F;roxma&#x2F;vim-hug-neovim-rpc" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;roxma&#x2F;vim-hug-neovim-rpc</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathias" target="_blank">nathias</a>   <span class="timeago" data-date="2021-08-17 09:13:57 &#43;0000 UTC">2021-08-17 09:13:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            make sure you use versions above 0.5
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bArray" target="_blank">bArray</a>   <span class="timeago" data-date="2021-08-17 01:42:33 &#43;0000 UTC">2021-08-17 01:42:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unfortunately doesn&#x27;t work for me, it complains about not having definitions for cppType and cppStatement. Looking in the file it undefined them [1] [2], putting them back just messes with the formatting (as the code comments suggest). It looks like this was something that was changed from the original code [3].<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;blob&#x2F;main&#x2F;cpp.vim#L2" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;blob&#x2F;main&#x2F;cpp.vim#L2</a><p>[2] <a href="https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;blob&#x2F;main&#x2F;cpp.vim#L6" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;blob&#x2F;main&#x2F;cpp.vim#L6</a><p>[3] <a href="https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;commit&#x2F;4159fe507815f897f088253645fa3501876519b0" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;commit&#x2F;4159fe507815f897f...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=app4soft" target="_blank">app4soft</a>   <span class="timeago" data-date="2021-08-17 06:27:58 &#43;0000 UTC">2021-08-17 06:27:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please, report issue.[0,1]<p>[0] <a href="https:&#x2F;&#x2F;twitter.com&#x2F;pulkomandy&#x2F;status&#x2F;1426547182228971521" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;pulkomandy&#x2F;status&#x2F;1426547182228971521</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;issues" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;issues</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shakna" target="_blank">shakna</a>   <span class="timeago" data-date="2021-08-17 09:25:31 &#43;0000 UTC">2021-08-17 09:25:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;issues&#x2F;1" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;pulkomandy&#x2F;c.vim&#x2F;issues&#x2F;1</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=david2ndaccount" target="_blank">david2ndaccount</a>   <span class="timeago" data-date="2021-08-17 02:46:57 &#43;0000 UTC">2021-08-17 02:46:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s kind of janky, but my current strategy is to parse my code base with libclang and dump a vim script file that adds all of the types, enums, function declarations etc. as literal syntax keywords. I also generate a tag file at the same time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=antoinealb" target="_blank">antoinealb</a>   <span class="timeago" data-date="2021-08-17 08:37:01 &#43;0000 UTC">2021-08-17 08:37:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have the code for this or a writeup somewhere? I&#x27;d be interested in trying out this approach.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=david2ndaccount" target="_blank">david2ndaccount</a>   <span class="timeago" data-date="2021-08-17 16:49:15 &#43;0000 UTC">2021-08-17 16:49:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I extracted it out of one of my projects and put it into its own git repo here: <a href="https:&#x2F;&#x2F;github.com&#x2F;DaveP1776&#x2F;clangtags" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;DaveP1776&#x2F;clangtags</a><p>There’s still some project-specific stuff baked in, but that’ll show the idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway47292" target="_blank">throwaway47292</a>   <span class="timeago" data-date="2021-08-17 12:29:13 &#43;0000 UTC">2021-08-17 12:29:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I havent used syntax highlighting in 8 years or so (global-font-lock-mode 0)<p>highly recommend it, if you could try.<p>for example this code[1]:<p><pre><code>    &#x2F;&#x2F; the code will run twice
+    bool panic  = true
+    while (true) {
+        panic = !panic;
+        if (panic) break;
+    }
+</code></pre>
+I can argue is easier to read without highlighting.<p>I think colors break the flow of code in unintended ways, and mistreat comments (either overvalue with some pink color or undervalue with some toned down gray), and almost all themes make keywords extremely important.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;jackdoe&#x2F;programming-for-kids&#x2F;issues&#x2F;3#issuecomment-886025230" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;jackdoe&#x2F;programming-for-kids&#x2F;issues&#x2F;3#iss...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maccard" target="_blank">maccard</a>   <span class="timeago" data-date="2021-08-17 13:09:54 &#43;0000 UTC">2021-08-17 13:09:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That code is even easier to read with semantic highlighting than &quot;basic&quot; syntax highlighting. That said, syntax highlighting definitely helps when handling embedded strings, differentiating between value types, figuring out if something is a macro, function or global variable (which is important, as in a language like C++, the behaviour of `foo(x++)` depends on which of the above it is)<p>Highlighting doesn&#x27;t tell you what&#x27;s important, it tells you what&#x27;s different. You should find a scheme that roughly weighs what&#x27;s important to you;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=packetlost" target="_blank">packetlost</a>   <span class="timeago" data-date="2021-08-17 13:14:07 &#43;0000 UTC">2021-08-17 13:14:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve tried the no highlighting approach. It doesn&#x27;t work for me. Glad it works for you, but I&#x27;ll take my candy colors over nothing any day.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LAC-Tech" target="_blank">LAC-Tech</a>   <span class="timeago" data-date="2021-08-17 08:49:18 &#43;0000 UTC">2021-08-17 08:49:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The default syntax highlighting for most of the languages I&#x27;ve used in vim is pretty bad. Usually people will download plugins to resolve it. The syntax highlighter for HTML also loads in the syntax highlighter for visual basic for reasons I don&#x27;t really understand.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tfigment" target="_blank">tfigment</a>   <span class="timeago" data-date="2021-08-17 09:15:46 &#43;0000 UTC">2021-08-17 09:15:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Probably legacy that 20 years ago VBscript could be used instead of JavaScript in IE.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dspillett" target="_blank">dspillett</a>   <span class="timeago" data-date="2021-08-17 09:29:05 &#43;0000 UTC">2021-08-17 09:29:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            More likely due to ASP, VBScript mixed into HTML server-side much like PHP.<p>VBScript could, and occasionally was, used client-side, but it was very rare in my experience. Outside of articles pushed by MS the “same language on server and client” angle didn&#x27;t hold enough water to override the “only supported by IE” issue even when IE had ~90% market share in the early 2000s.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-08-16 20:26:07 &#43;0000 UTC">2021-08-16 20:26:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This looks very good. Does it work with neovim?<p>Maybe in ~&#x2F;.config&#x2F;nvim&#x2F;after&#x2F;syntax&#x2F;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_bohm" target="_blank">_bohm</a>   <span class="timeago" data-date="2021-08-16 20:41:25 &#43;0000 UTC">2021-08-16 20:41:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AFAIK vimscript after&#x2F;syntax&#x2F; files still work fine with neovim. But if you&#x27;re on neovim 0.5+ I would recommend using the tree-sitter highlighting integration instead :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CalChris" target="_blank">CalChris</a>   <span class="timeago" data-date="2021-08-16 20:45:22 &#43;0000 UTC">2021-08-16 20:45:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is tree-sitter highlighting enabled by default?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_bohm" target="_blank">_bohm</a>   <span class="timeago" data-date="2021-08-16 21:14:11 &#43;0000 UTC">2021-08-16 21:14:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is not, but there&#x27;s an installation and configuration guide here [0] that I found pretty easy to follow<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;nvim-treesitter&#x2F;nvim-treesitter" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;nvim-treesitter&#x2F;nvim-treesitter</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nathias" target="_blank">nathias</a>   <span class="timeago" data-date="2021-08-17 09:13:11 &#43;0000 UTC">2021-08-17 09:13:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            use neovim above 0.5 that has native LSP support and use treesitter
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Shadonototro" target="_blank">Shadonototro</a>   <span class="timeago" data-date="2021-08-16 21:42:50 &#43;0000 UTC">2021-08-16 21:42:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the blue parenthesis are very hard to read in his screenshot<p>other than that, looks very nice, good job!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pulkomandy" target="_blank">pulkomandy</a>   <span class="timeago" data-date="2021-08-17 10:20:41 &#43;0000 UTC">2021-08-17 10:20:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The parentheses color are not caused by this script, but by my usage of rainbow parentheses (some variant of <a href="https:&#x2F;&#x2F;github.com&#x2F;luochen1990&#x2F;rainbow" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;luochen1990&#x2F;rainbow</a>) which I have configured for my usual light background vim theme.<p>I did not spend time to set up a more empty vim configuration to take the screenshots.<p>The script does not introduce any new colors, it just changes what is highlighted as cType.<p>It does change the color of parentheses for &quot;if&quot; statements to be the same color as the keyword. I am undecided if I should keep that or not. Opinions from people not using rainbow or similar plugins are welcome.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anthk" target="_blank">anthk</a>   <span class="timeago" data-date="2021-08-17 15:01:37 &#43;0000 UTC">2021-08-17 15:01:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ok, but GL acceleration for HaikuOS when?<p>JK, good luck for the author.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aaccount" target="_blank">aaccount</a>   <span class="timeago" data-date="2021-08-18 05:16:04 &#43;0000 UTC">2021-08-18 05:16:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool, thanks
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sramsay" target="_blank">sramsay</a>   <span class="timeago" data-date="2021-08-17 00:22:55 &#43;0000 UTC">2021-08-17 00:22:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really, really cool!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

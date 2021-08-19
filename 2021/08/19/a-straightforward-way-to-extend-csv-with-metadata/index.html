@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/a-straightforward-way-to-extend-csv-with-metadata/">
+
+
+    <title>A Straightforward Way to Extend CSV with Metadata - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="A Straightforward Way to Extend CSV with Metadata - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/a-straightforward-way-to-extend-csv-with-metadata/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/a-straightforward-way-to-extend-csv-with-metadata/">
+<meta name="twitter:title" content="A Straightforward Way to Extend CSV with Metadata - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "A Straightforward Way to Extend CSV with Metadata - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T16:02:03JST",
+    "dateModified": "2021-08-19T16:02:03JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://gist.github.com/seece/97d02d6518db8b9e4c5b81fc686553e2">A Straightforward Way to Extend CSV with Metadata</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dec0dedab0de" target="_blank">dec0dedab0de</a>   <span class="timeago" data-date="2021-08-19 17:02:38 &#43;0000 UTC">2021-08-19 17:02:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If we&#x27;re going to change the format, why not just use the record separator, and field separator characters.  They&#x27;ve been around since ascii.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dreyfan" target="_blank">dreyfan</a>   <span class="timeago" data-date="2021-08-19 17:07:53 &#43;0000 UTC">2021-08-19 17:07:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not changing the format, that&#x27;s the entire point. It&#x27;s including a separate, optional, metadata file. Systems that implement the metadata can take advantage; everything else is exactly the same as it always has been.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bitwize" target="_blank">bitwize</a>   <span class="timeago" data-date="2021-08-19 17:07:30 &#43;0000 UTC">2021-08-19 17:07:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Single file with an open standard binary format based on Protobuf or CapnProto. This idea of using text files by default is ancient Unix cruft. Use binary formats unless you have a damn good reason not to, always, and release open-source tools for reading and processing files in your format. Then you can do some semblance of enforcing structure and types on your data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iask" target="_blank">iask</a>   <span class="timeago" data-date="2021-08-19 16:52:36 &#43;0000 UTC">2021-08-19 16:52:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This just make it more complex…and then what? We end up with multiple specifications like an x12 document? No, it’s not time to retire it. It’s just another option. Just like any other delimited file format. Remember.INI files? They’re still being used when there is need for simplicity.<p>If you think CSV is complicated for your app requirement choose a different delimiter like pipe, else look at other alternatives. Simple as that.<p>I’ve spent years building parsers for different document in the retail juggernaut businesses.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=karmakaze" target="_blank">karmakaze</a>   <span class="timeago" data-date="2021-08-19 16:24:00 &#43;0000 UTC">2021-08-19 16:24:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anything that requires multiple files to be passed around together is a non-starter. Even with just one file it&#x27;s so hard for people to keep track of the &#x27;current&#x27; one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-08-19 16:51:03 &#43;0000 UTC">2021-08-19 16:51:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think that&#x27;s why the archive is part of the format. But then you have a process change where you expect people to work with the <i>archive</i> and not the contents. That can be done but it requires some institutional will.<p>For instance in a code signing situation it was socialized that only the archive was &#x27;safe&#x27; and you used one of several tools to build them or crack them open. However that company was already used to thinking about physical shipping manifests and so learning by analogy worked, after a fashion.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swader999" target="_blank">swader999</a>   <span class="timeago" data-date="2021-08-19 16:47:08 &#43;0000 UTC">2021-08-19 16:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agree but there are whole industries that&#x27;s work this way. Looking at you banking and finance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 16:26:48 &#43;0000 UTC">2021-08-19 16:26:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=41209" target="_blank">41209</a>   <span class="timeago" data-date="2021-08-19 16:14:51 &#43;0000 UTC">2021-08-19 16:14:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Am I insane here, or does Excel generally do a very good job of handling almost all CSV files.<p>I don&#x27;t really see a need for a metadata file, nor would I ever see Excel or other tools accepting it. The main problem is adoption, CSV isn&#x27;t perfect but it&#x27;s what we have. Now if you wrote this as a member of the Excel team at Microsoft, and then Excel had the option of exporting CSV files with a metadata file, then I&#x27;d be a bit more excited.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=VenTatsu" target="_blank">VenTatsu</a>   <span class="timeago" data-date="2021-08-19 17:06:05 &#43;0000 UTC">2021-08-19 17:06:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Excel does a fairly bad job when moving data between two computers that aren&#x27;t configured the same way, which kind of defeats the purpose of using a data interchange format.<p>Where I work we have offices in the US, and in Europe where installing a localized version of windows will swap &#x27;,&#x27; and &#x27;.&#x27; when used as the group and decimal separator.  Excel when loading a value 100,002 in the US will see one hundred thousand and two, in some parts of Europe it will see one hundred and 2 thousandths.<p>Character set handing can be just as bad, there is no good way to get Excel to auto open a CSV file as UTF-8 that won&#x27;t break every other CSV parser in existence. The only cross platform option is ASCII. Excel will happily load your local OS encoding, likely some variant of ISO-8859, but any other encoding requires jumping through hoops.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IanCal" target="_blank">IanCal</a>   <span class="timeago" data-date="2021-08-19 16:29:17 &#43;0000 UTC">2021-08-19 16:29:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Excel does an atrocious job of handling CSV files. It regularly alters data, messes up encodings and either can&#x27;t or couldn&#x27;t (I haven&#x27;t checked in a few years) open CSV files that start with a capital letter I.<p>Source: dealing with CSV files people exported from Excel and the horrors that flowed from there.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bitwize" target="_blank">bitwize</a>   <span class="timeago" data-date="2021-08-19 17:09:18 &#43;0000 UTC">2021-08-19 17:09:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; either can&#x27;t or couldn&#x27;t (I haven&#x27;t checked in a few years) open CSV files that start with a capital letter I.<p>It can&#x27;t do this because it confuses such files with files in SYLK format, which was YET ANOTHER attempt to standardize spreadsheet data interchange, dating from the 80s.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swader999" target="_blank">swader999</a>   <span class="timeago" data-date="2021-08-19 16:45:59 &#43;0000 UTC">2021-08-19 16:45:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve donated hours of my life to resolving excel corrupted csv files. They haven&#x27;t been satisfying hours.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tagbert" target="_blank">Tagbert</a>   <span class="timeago" data-date="2021-08-19 16:27:49 &#43;0000 UTC">2021-08-19 16:27:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Excel has some major problems with CSV ingestion though I don’t think that this proposal will address those problems.<p>Here are a couple of cases that I run into frequently:<p>* Excel is very aggressive about forcing type conversion based on its own assumptions. It will convert strings to dates or numbers, even if data is lost in the process. It will ignore quotes to convert long numeric IDs into scientific notation which truncates the ID unrecoverable.<p>* Excel cannot deal with quoted strings containing line breaks. It treats them as separate records and you get truncated records and partial records on separate rows.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=isoprophlex" target="_blank">isoprophlex</a>   <span class="timeago" data-date="2021-08-19 16:39:34 &#43;0000 UTC">2021-08-19 16:39:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, excel does about the worst possible job of handling CSVs.<p>You can&#x27;t even hope to keep a file intact upon opening...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Hackbraten" target="_blank">Hackbraten</a>   <span class="timeago" data-date="2021-08-19 16:28:52 &#43;0000 UTC">2021-08-19 16:28:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can we please have a third file in the zip?<p>* format.txt<p>* mydata.csv<p>* .DS_Store<p>It will be there if the zip was created on a Mac so might as well include it in the standard.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kaeruct" target="_blank">kaeruct</a>   <span class="timeago" data-date="2021-08-19 16:40:33 &#43;0000 UTC">2021-08-19 16:40:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I cannot tell if this is a joke or not.<p>If you are serious, then what about just ignoring any files in the zip that are not specified in the standard?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swader999" target="_blank">swader999</a>   <span class="timeago" data-date="2021-08-19 16:49:20 &#43;0000 UTC">2021-08-19 16:49:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some notion of control data should be added to this spec. Total lines to parse and so on could be included. Perhaps a hash...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=delusional" target="_blank">delusional</a>   <span class="timeago" data-date="2021-08-19 16:43:40 &#43;0000 UTC">2021-08-19 16:43:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Amazing, a standard to define the characters we couldn&#x27;t standardize on.<p>If you can decide this file format, couldn&#x27;t you just normalize the CSV file instead?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=barbazoo" target="_blank">barbazoo</a>   <span class="timeago" data-date="2021-08-19 16:48:54 &#43;0000 UTC">2021-08-19 16:48:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think they&#x27;re simply acknowledging the fact that there are many permutations of formats out there and what they propose is a way to communicate what your particular format is without abandoning CSV completely.<p>I&#x27;m assuming it&#x27;s in response to the post yesterday that outlined all the things that are wrong with CSV and how other formats like Parquet are better.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-08-19 16:57:06 &#43;0000 UTC">2021-08-19 16:57:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The chaos of CSV files is older than XML. And while many of the same issues have played out in HTML, I have a strong suspicion that the particular levels of hell familiar to anyone using CSV files professionally informed some of the opinionated nature of XML. Especially since XML delves into data transport instead of just typesetting of text meant for human consumption.<p>I know I had specific conversations about CSV versus XML and those referred to a substantial body of literature on the topic.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 16:41:01 &#43;0000 UTC">2021-08-19 16:41:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=prpl" target="_blank">prpl</a>   <span class="timeago" data-date="2021-08-19 16:21:48 &#43;0000 UTC">2021-08-19 16:21:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is CSVW
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

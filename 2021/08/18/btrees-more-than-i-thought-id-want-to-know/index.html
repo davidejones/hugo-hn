@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/btrees-more-than-i-thought-id-want-to-know/">
+
+
+    <title>B-Trees: More Than I Thought I&#39;d Want to Know - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="B-Trees: More Than I Thought I&#39;d Want to Know - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/btrees-more-than-i-thought-id-want-to-know/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/btrees-more-than-i-thought-id-want-to-know/">
+<meta name="twitter:title" content="B-Trees: More Than I Thought I&#39;d Want to Know - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "B-Trees: More Than I Thought I\u0027d Want to Know - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T14:42:12JST",
+    "dateModified": "2021-08-18T14:42:12JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://benjamincongdon.me/blog/2021/08/17/B-Trees-More-Than-I-Thought-Id-Want-to-Know/">B-Trees: More Than I Thought I&#39;d Want to Know</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-18 21:17:42 &#43;0000 UTC">2021-08-18 21:17:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I feel like FAT and FAT32 back in the DOS days were so simple and easy to explain, that my generation of programmers have the &quot;sweet point&quot; in terms of learning technology.<p>FAT &#x2F; FAT32 wasn&#x27;t about B-trees or balancing or anything. It was a simple linked list, that got severely tangled up during use and required an hour of &quot;defragmenting&quot; to make your hard drive go back at high speed.<p>As a computer user of the time, I was too young &#x2F; ignorant to know why it happened like that, but that experience stuck with me until college. In college, I learned about how FAT32 filesystem worked fundamentally (though obsolete, its so simple its a great introduction).<p>From there, I learned why we have moved onto more advanced data-structures like B-Trees. Why things like B-trees are less prone to fragmentation. Etc. etc.<p>----------<p>A big part of my learning process was the hours of waiting I&#x27;d put in to defrag my hard drive back in the day. Those memories stuck with me, I know what the &quot;downsides&quot; are if I don&#x27;t use a self-balancing B-Tree to store data on a hard drive.<p>Perhaps today, we&#x27;re no longer at a point where we can just convince legions of new computer-users (or programmers) to use inferior file systems like FAT32 in their daily lives. But we can at least tell stories about those times, so that they can understand why we put so much complexity into our modern filesystem data-structures.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=wirthjason" target="_blank">wirthjason</a>   <span class="timeago" data-date="2021-08-18 23:56:20 &#43;0000 UTC">2021-08-18 23:56:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Gone are the days of selling software to magically to make you computer faster. Half of them just ran defrag under the hood.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nanidin" target="_blank">nanidin</a>   <span class="timeago" data-date="2021-08-18 22:07:27 &#43;0000 UTC">2021-08-18 22:07:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wasn’t defragmentation more important in general on spinning media to reduce random seeks? And now most performance oriented things are happening on SSD?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NikolaNovak" target="_blank">NikolaNovak</a>   <span class="timeago" data-date="2021-08-19 01:27:15 &#43;0000 UTC">2021-08-19 01:27:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Defragmentation was indeed more important on spinning disks; I think your &quot;to reduce random seeks&quot; is largely correct: another way to think about it is that it was ensuring sequential reads (&quot;read in this 10MB file&quot;) did not become random seeks (&quot;Sure, but that 10MB file is in these 5,381 chunks all over the place&quot;)<p>You are correct that SSDs do not require defragmentation, and to a certain degree defragmentation is somewhat harmful in the sense that it forces unnecessary read&#x2F;write cycles.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nayuki" target="_blank">nayuki</a>   <span class="timeago" data-date="2021-08-19 06:09:00 &#43;0000 UTC">2021-08-19 06:09:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I understand correctly, NTFS describes a file as a sequence of cluster ranges, e.g. [7,12), [0,4), [20,25). So the more fragments a file or folder has, the more space is required to describe how it&#x27;s stored. This applies to the file system and is independent of HDD&#x2F;SSD technology.<p>As for SSDs, they need some degree of garbage collection - it&#x27;s considered bad for an erasable block (e.g. 1 MiB) to contain a mix of live pages and deleted pages (4 KiB each).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-18 22:18:44 &#43;0000 UTC">2021-08-18 22:18:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m very confused by your question. I don&#x27;t think FAT or FAT32 was ever a performance-oriented filesystem.<p>Back then, we were just happy having a personal computer. I&#x27;m sure there was better tech being used somewhere. But MS-DOS &#x2F; Windows was just your cheap $99 OS in an age when other compilers and OSes cost you something like $1000 to $10,000.<p>You formatted your hard-drive in FAT because MS-DOS used FAT. You used MS-DOS because that&#x27;s what PCs and PC-clones came with. There was no alternative, and PCs were already considered a pretty luxury &#x2F; nerd item. (I know people brag about their DEC Alphas, Unix copies or OS&#x2F;2... but you got enough &quot;nerd cred&quot; back then if you simply had a PC at all)<p>Its just how computers worked back then. Every PC was using FAT, and every few months of regular use the disk reads&#x2F;writes would get so slow that performance was unbearable.<p>At that point, you spent an hour defragmenting the hard drive, and everything worked great again.<p>-------<p>Eventually 4GB hard drives were made, and you upgraded your computer to FAT32. Soon after that, Windows promised an end to defragmenting with its next-generation NTFS filesystem (based off of the B-trees discussed in this article) and we never looked back.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=NikolaNovak" target="_blank">NikolaNovak</a>   <span class="timeago" data-date="2021-08-19 01:28:18 &#43;0000 UTC">2021-08-19 01:28:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;&gt;&quot;Windows promised an end to defragmenting with its next-generation NTFS filesystem&quot;<p>I thought this mostly reduced fragmentation of the filesystem metadata; but not the fragmentation of actual datafiles themselves?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rasz" target="_blank">rasz</a>   <span class="timeago" data-date="2021-08-19 05:29:24 &#43;0000 UTC">2021-08-19 05:29:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How would btrees on their own solve fragmentation problem? The source of slowdown was random seek speed, not data structure used. You can optimize FAT32 driver to always fit files into sequential gaps, early Windows implementations didnt.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-19 05:48:24 &#43;0000 UTC">2021-08-19 05:48:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Files grow and shrink. Think about even the simplest &quot;log&quot; file (ex: Apache logs) appending constantly to the end of the file. First you have an access.log (+1 line to the end). Then Apache opens the error.log and adds some info to the end. Then PHP has something logged somewhere, again opening and closing a new set of files.<p>Even if these files were all perfectly allocated in sequential order at the beginning, a few operations like this quickly fragments the files.<p>--------------<p>I don&#x27;t recall all the files MS-DOS or Win95 opened &#x2F; closed on a regular basis, but play a video game (save file changed), open a word document, edit a photo, and come back to the video game... and the save file will now start getting fragmented as the size of the save files change and new allocated blocks need to be figured out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rasz" target="_blank">rasz</a>   <span class="timeago" data-date="2021-08-19 07:11:25 &#43;0000 UTC">2021-08-19 07:11:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            - How would btrees help with that?<p>- can you name couple of games saving state by appending&#x2F;modifying files in place on disk?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bern4444" target="_blank">bern4444</a>   <span class="timeago" data-date="2021-08-18 17:55:19 &#43;0000 UTC">2021-08-18 17:55:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had to implement a simple B+ tree for a databases class in college (since they&#x27;re often used when implementing databases).<p>It was one of those assignments few people fully completed. Most completed parts of it to varying degrees. I got more than halfway through but wasn&#x27;t able to complete it.<p>It was an extremely difficult assignment and stands out in my mind.<p>They&#x27;re very interesting and very complex. Nice article!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lmkg" target="_blank">lmkg</a>   <span class="timeago" data-date="2021-08-18 19:17:14 &#43;0000 UTC">2021-08-18 19:17:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Implementing a B+ tree was the final assignment in a grad-level Algorithms &amp; Data Structures call that I took. I thought it was a reasonable assignment in that context. It felt like a good capstone to the class, building on what we had learned and finally crossing the line from toy examples to something that approached real-world usefulness.<p>It seems very out-of-place for a databases course. Yes, B-Trees are important for a database, but I don&#x27;t see how <i>implementing</i> one teaches you about how a database <i>uses</i> one or why it&#x27;s important.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jaytaylor" target="_blank">jaytaylor</a>   <span class="timeago" data-date="2021-08-19 00:05:58 &#43;0000 UTC">2021-08-19 00:05:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As another data point, I implemented a B+ tree with rebalancing deletion functionality back in CS3090 at UVU circa 2008 from Dr. Curtis Wellborn.<p>It was an undergraduate course, but the professor emphasized that everywhere else it would be a graduate-level of course.<p>My B+ tree implementation served as the foundation for my own (shitty) DBMS ;D<p>As a funny sidenote, the professor claimed that even Stanford DB courses had a buggy &#x2F; broken algorithm for balanced deletes.  While preparing the course, he&#x27;d spent a chunk of the summer doing researching it, and had developed his alogrithm in Prolog.  He shared the concepts and our implementations worked fine.  However, it was ultimately mostly an academic exercise, as balanced deletions come with significant tradeoffs which make it not as useful as I initially thought.<p>Even full-fledged database systems don&#x27;t typically implement B+ tree indexes with deletion+rebalancing support (the usual technique is marking nodes deleted and cleaning them up when the index is rebuilt).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=psykotic" target="_blank">psykotic</a>   <span class="timeago" data-date="2021-08-19 05:48:34 &#43;0000 UTC">2021-08-19 05:48:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Even full-fledged database systems don&#x27;t typically implement B+ tree indexes with deletion+rebalancing support (the usual technique is marking nodes deleted and cleaning them up when the index is rebuilt).<p>Yes, and it took a surprisingly long time before anyone bothered to do the theoretical analysis. Some good papers to check out if anyone is interested are Deletion Without Rebalancing in Multiway Search Trees (<a href="http:&#x2F;&#x2F;sidsen.azurewebsites.net&#x2F;papers&#x2F;relaxed-b-tree-tods.pdf" rel="nofollow">http:&#x2F;&#x2F;sidsen.azurewebsites.net&#x2F;papers&#x2F;relaxed-b-tree-tods.p...</a>) and Deletion Without Rebalancing in Binary Search Trees (<a href="http:&#x2F;&#x2F;sidsen.azurewebsites.net&#x2F;&#x2F;papers&#x2F;ravl-trees-journal.pdf" rel="nofollow">http:&#x2F;&#x2F;sidsen.azurewebsites.net&#x2F;&#x2F;papers&#x2F;ravl-trees-journal.p...</a>). Jeff Erickson also has some good notes on using local and global rebuilds for search trees: <a href="https:&#x2F;&#x2F;jeffe.cs.illinois.edu&#x2F;teaching&#x2F;algorithms&#x2F;notes&#x2F;10-scapegoat-splay.pdf" rel="nofollow">https:&#x2F;&#x2F;jeffe.cs.illinois.edu&#x2F;teaching&#x2F;algorithms&#x2F;notes&#x2F;10-s...</a><p>It&#x27;s intuitively clear that worst-case performance [1] can degrade to a function of the number of insertions since a rebuild (as opposed to the number of currently live items) when you use relaxed deletion. If you can afford to globally rebuild the tree you get to play the usual amortization tricks, but global rebuilds can be problematic in a large-scale live database; one solution is to rebuild from a snapshot in the background (on another thread or machine) and then replay late arriving operations before switching over to the rebuilt tree. But if someone is okay with the amortization spikes from rehashing a hash table, they should be okay with non-incremental global rebuilds for search trees; a hash table where deletions leave behind tombstones and the table is rehashed when the ratio of tombstones gets too high is basically the same idea.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Tostino" target="_blank">Tostino</a>   <span class="timeago" data-date="2021-08-18 20:43:11 &#43;0000 UTC">2021-08-18 20:43:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are actually some pretty good database courses at CMU for example, that go into what is required to build databases from the ground up.<p>So don&#x27;t think all DB classes are the same, there are some vast differences in that type of class compared to a class teaching you how to use SQL.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ddlutz" target="_blank">ddlutz</a>   <span class="timeago" data-date="2021-08-18 20:15:32 &#43;0000 UTC">2021-08-18 20:15:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve seen quite a few database courses have you implement them, as they are the backbone for many database systems.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cogman10" target="_blank">cogman10</a>   <span class="timeago" data-date="2021-08-18 17:59:40 &#43;0000 UTC">2021-08-18 17:59:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps it was just my professor, but what really helped was we first did red-black trees and after doing that our teacher explained to us that red black trees were just a type of B-Tree.  Once you have that, it&#x27;s pretty easy to go from one to the other.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-08-19 05:15:01 &#43;0000 UTC">2021-08-19 05:15:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the approach Sedeewick of the (in?)famous textbook takes. He also has one neat tweak that simplifies rebalancing: when traversing a B-tree for insertion, preemptively split any full nodes as you visit them. This ensures there will always been room in a parent node if child nodes force keys up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nicolaslem" target="_blank">nicolaslem</a>   <span class="timeago" data-date="2021-08-18 19:32:05 &#43;0000 UTC">2021-08-18 19:32:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I got interested in the topic a few years ago and wrote an implementation in Python[0] for myself. It&#x27;s just a toy but the funny thing is that I regularly get waves of students staring the repository, probably when a teacher gives a similar assignment.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;NicolasLM&#x2F;bplustree" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;NicolasLM&#x2F;bplustree</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=samsquire" target="_blank">samsquire</a>   <span class="timeago" data-date="2021-08-19 09:22:01 &#43;0000 UTC">2021-08-19 09:22:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Btrees can be really simple, I&#x27;ve written a super simple understandable readable btree here in python.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;samsquire&#x2F;btree" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;samsquire&#x2F;btree</a><p>It doesn&#x27;t balance between neighbours on the left and right like some btrees do but it handles splits in a really simple way and balances otherwise.<p>I would recommend everybody write the core algorithm in a simple language like Python first to get the core algorithm understood before trying to implement in a low level language like C or Rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pkaye" target="_blank">pkaye</a>   <span class="timeago" data-date="2021-08-19 00:29:18 &#43;0000 UTC">2021-08-19 00:29:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I still remember my B-tree implementation in college. The professor wanted us to run it against his data. I quickly commented up my debug prints which introduced a bug with an &quot;if&quot; statement and failed for some of his test cases but I got most of the credit. Later I found the cause of the bug and got pissed off for such a silly mistake.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-19 00:30:57 &#43;0000 UTC">2021-08-19 00:30:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discovering that your debugging code introduced a new bug is intensely frustrating. It&#x27;s not nearly as rare an occasion for me as I would prefer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=efficax" target="_blank">efficax</a>   <span class="timeago" data-date="2021-08-18 20:59:23 &#43;0000 UTC">2021-08-18 20:59:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            An in-memory b-tree or one stored on disk? The first one should not be a huge amount of work over implementing, say, a red-black tree. But sorting out the disk storage is hard (and in the end, you&#x27;ve just written a database!)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mad_vill" target="_blank">mad_vill</a>   <span class="timeago" data-date="2021-08-18 17:58:40 &#43;0000 UTC">2021-08-18 17:58:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            uw madison?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jwitthuhn" target="_blank">jwitthuhn</a>   <span class="timeago" data-date="2021-08-18 21:52:59 &#43;0000 UTC">2021-08-18 21:52:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not the original commenter, but I sure did implement a B-tree for my databases course at UW Madison.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cryptonector" target="_blank">cryptonector</a>   <span class="timeago" data-date="2021-08-18 18:53:12 &#43;0000 UTC">2021-08-18 18:53:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The best B-tree resource is SQLite3&#x27;s documentation of its B-tree on-disk format.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=emptybits" target="_blank">emptybits</a>   <span class="timeago" data-date="2021-08-18 20:19:17 &#43;0000 UTC">2021-08-18 20:19:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fantastic. Also a great, related, listen is the recent Corecursive Podcast with Richard Hipp as guest. He’s the man who created SQLite, with good technical stories to share.<p>“The Untold Story of SQLite” <a href="https:&#x2F;&#x2F;corecursive.com&#x2F;066-sqlite-with-richard-hipp&#x2F;" rel="nofollow">https:&#x2F;&#x2F;corecursive.com&#x2F;066-sqlite-with-richard-hipp&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=craigching" target="_blank">craigching</a>   <span class="timeago" data-date="2021-08-19 02:07:33 &#43;0000 UTC">2021-08-19 02:07:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Postgres has great documentation for their concurrent btree algorithm based on the Lehman Yao paper: <a href="https:&#x2F;&#x2F;github.com&#x2F;postgres&#x2F;postgres&#x2F;blob&#x2F;master&#x2F;src&#x2F;backend&#x2F;access&#x2F;nbtree&#x2F;README" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;postgres&#x2F;postgres&#x2F;blob&#x2F;master&#x2F;src&#x2F;backend...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jgwil2" target="_blank">jgwil2</a>   <span class="timeago" data-date="2021-08-18 19:05:24 &#43;0000 UTC">2021-08-18 19:05:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This one? <a href="https:&#x2F;&#x2F;www.sqlite.org&#x2F;fileformat2.html#btree" rel="nofollow">https:&#x2F;&#x2F;www.sqlite.org&#x2F;fileformat2.html#btree</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cryptonector" target="_blank">cryptonector</a>   <span class="timeago" data-date="2021-08-19 01:04:52 &#43;0000 UTC">2021-08-19 01:04:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Almost.  This one: <a href="https:&#x2F;&#x2F;www.sqlite.org&#x2F;fileformat2.html" rel="nofollow">https:&#x2F;&#x2F;www.sqlite.org&#x2F;fileformat2.html</a> :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 02:30:07 &#43;0000 UTC">2021-08-19 02:30:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jgwil2" target="_blank">jgwil2</a>   <span class="timeago" data-date="2021-08-18 21:58:17 &#43;0000 UTC">2021-08-18 21:58:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Instead of downvoting could someone just provide the correct link?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=macintux" target="_blank">macintux</a>   <span class="timeago" data-date="2021-08-19 00:34:38 &#43;0000 UTC">2021-08-19 00:34:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve upvoted your question, and keep hoping someone will chime in. That certainly looks like the closest match.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spanspan" target="_blank">spanspan</a>   <span class="timeago" data-date="2021-08-18 20:38:54 &#43;0000 UTC">2021-08-18 20:38:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is really cool. I recently attempted to build a toy database, and subsequently implemented my own b-tree (
+<a href="https:&#x2F;&#x2F;github.com&#x2F;spandanb&#x2F;learndb-py" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;spandanb&#x2F;learndb-py</a>). I ended up running into a lot of these issues.<p>I also did a write-up on why everyone should engage in similar projects: <a href="https:&#x2F;&#x2F;www.spandanbemby.com&#x2F;joys-of-database.html" rel="nofollow">https:&#x2F;&#x2F;www.spandanbemby.com&#x2F;joys-of-database.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-18 18:19:49 &#43;0000 UTC">2021-08-18 18:19:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It would be great to see a walkthrough writing a minimal btree from scratch with reading&#x2F;writing from disk.<p>If you&#x27;ve got one (walkthrough with code, not just an existing implementation), link it please!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spanspan" target="_blank">spanspan</a>   <span class="timeago" data-date="2021-08-18 20:40:49 &#43;0000 UTC">2021-08-18 20:40:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This incomplete tutorial is about how to write a sqlite clone, with particular emphasis on how to implement the underlying b-tree: <a href="https:&#x2F;&#x2F;cstack.github.io&#x2F;db_tutorial&#x2F;" rel="nofollow">https:&#x2F;&#x2F;cstack.github.io&#x2F;db_tutorial&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ddlutz" target="_blank">ddlutz</a>   <span class="timeago" data-date="2021-08-18 22:10:39 &#43;0000 UTC">2021-08-18 22:10:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            for YEARS that tutorial has been stuck on &quot;Alright. One more step toward a fully-operational btree implementation. The next step should be splitting internal nodes. Until then!&quot;. Must not be worth the time to finish writing the tutorial.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=craigching" target="_blank">craigching</a>   <span class="timeago" data-date="2021-08-19 02:11:55 &#43;0000 UTC">2021-08-19 02:11:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I just implemented one in go, working on the repl now. I plan to eventually write it in C++ for a real database, but I’m doing this for my team to teach them the difference between LSM trees and Btrees. I’m hoping to show that a specialized concurrent btree, though harder to write, performs better than LSM trees for the same data. Maybe I’ll make a blog post about it.<p>EDIT: For more context, this is for time series metrics, so super specialized data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-08-19 05:18:14 &#43;0000 UTC">2021-08-19 05:18:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d be interested in that blog post for sure.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=CodeWriter23" target="_blank">CodeWriter23</a>   <span class="timeago" data-date="2021-08-18 20:31:24 &#43;0000 UTC">2021-08-18 20:31:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMO unlike the opening drawing, in a disk-based B-Tree index, Leaf nodes should not have &quot;next&quot; pointers, one should instead go back up the Tree node(s) (iterating upward when necessary) to find the next Leaf node. Next pointers are a duplication of information violating referential integrity within the index, and will be invalidated when an index update causes a split or merge rebalancing operation, creating concurrency issues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SamReidHughes" target="_blank">SamReidHughes</a>   <span class="timeago" data-date="2021-08-18 22:48:48 &#43;0000 UTC">2021-08-18 22:48:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When you split a node, you&#x27;re probably [1] already modifying the node you&#x27;re splitting, so there&#x27;s no problem updating unidirectional sibling pointers.  If duplication of information is a problem, well, you have a bug in your storage engine somewhere.<p>[1] It occurs to me that you don&#x27;t necessarily need to modify the node you&#x27;re splitting, if the key you&#x27;re writing is on the new node&#x27;s half of the split.<p>However, sibling pointers would be the <i>dumbest</i> way to traverse the data, even on a read-only tree, because it has serial round-trip latency to disk for every block.  You would never use them for traversal.<p>They <i>can be</i> useful, for a fancy concurrency hack, if you use them to split the node without updating the parent, and then update the parent in a separate operation after the fact.  This lets write operations release their lock on the parent <i>before</i> accessing the child.  In that case any code traversing to a child makes note of the child&#x27;s right sibling stored in the parent and uses the child&#x27;s sibling pointer only if it&#x27;s different from the right sibling as stored in the parent (which means the parent hasn&#x27;t been updated yet).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hashmash" target="_blank">hashmash</a>   <span class="timeago" data-date="2021-08-18 23:21:53 &#43;0000 UTC">2021-08-18 23:21:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Concurrency issues are a challenge, but a bigger problem is when designing a copy-on-write B-Tree, which is what I did. With such a design, any change to a node causes a replacement to be allocated, and then the pointer into it must be changed too. This means that the referencing node must be copied, and so on.<p>If only the parent pointer needs to be changed (and up to the root), this isn&#x27;t a big deal considering that B-Trees aren&#x27;t very deep, and a good implementation will cache modifications anyhow.<p>When sibling pointers are introduced, a copy-on-write B-Tree will on average need to read and rewrite half of the B-Tree on every modification. For this reason, I don&#x27;t use sibling pointers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=a1369209993" target="_blank">a1369209993</a>   <span class="timeago" data-date="2021-08-19 06:23:47 &#43;0000 UTC">2021-08-19 06:23:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; one should instead go back up the [parent] node(s) (iterating upward when necessary) to find the next Leaf node.<p>Nitpick: rather, you should not <i>go</i> anywhere, but refer back to the parent nodes that you already have in memory, because how else did you <i>find</i> the current leaf node in the first place? (This also allows you to avoid round-trip latency by fetching sibling-after-next before you actually get the data in the sibling node.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tomnipotent" target="_blank">tomnipotent</a>   <span class="timeago" data-date="2021-08-19 01:53:42 &#43;0000 UTC">2021-08-19 01:53:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Leaf nodes should not have &quot;next&quot; pointers<p>In a standard B-tree, yes.<p>PostgreSQL and MySQL, for example, use B-tree variants that have pointers between leaf nodes. Postgres is based on Lehman &amp; Yao (itself a B+(*?) Tree variant), and InnoDB uses a B+ Tree with a next pointer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-18 18:22:14 &#43;0000 UTC">2021-08-18 18:22:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In my college Data Structures and Algorithms course, we covered B-Trees, but I didn’t grok why I’d choose to use one. As presented, B-Trees were essentially “better” Binary Search Trees, with some hand-waving done that they had improved performance when used in database applications.<p>With modern memory hierarchies that also tends to be the case in-memory (with lower node densities more suited to caches and cache lines).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pkaye" target="_blank">pkaye</a>   <span class="timeago" data-date="2021-08-18 19:09:54 &#43;0000 UTC">2021-08-18 19:09:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This articles talks about some of the reasons in the section &quot;Disk-Induced Constraints&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-18 19:45:53 &#43;0000 UTC">2021-08-18 19:45:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, except for #2 those reasons apply essentially as-is to in-memory b-trees if you replace “memory” with “cache” and “disk” with “memory”.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dragontamer" target="_blank">dragontamer</a>   <span class="timeago" data-date="2021-08-18 21:27:34 &#43;0000 UTC">2021-08-18 21:27:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DDR4 has a burst-length of 8, meaning the smallest you can write is a block of 64 bytes (corresponding to a modern cache-line).<p>It also should be noted that DDR4 has &quot;rows&quot; roughly in the 1024 byte size. A RAS command opens up a &quot;row&quot; (aka 1024 bytes), while a CAS command reads from a column (aka: 64-bytes).<p>DDR4 cells can only be read once (!!!), and afterwards, the data gets mangled. To prevent the loss of data, all &quot;reads&quot; are first into sense-amplifiers... and these sense-amplifiers can be read infinitely.<p>This &quot;read into sense-amplifiers&quot; is called a RAS command, and it transfers the entire 1024-byte row into sense amplifiers. A CAS can then read 64-byte chunks from the page at high speeds and randomly.<p>--------<p>Before a new RAS command can be issued, there needs to be a few steps.<p>1. The &quot;current row&quot; of data needs to be written back to DRAM (remember, the data in the DRAM was lost when you read the data in the first place).<p>2. After writing the data, the sense-amplifiers must be emptied (aka: precharged), so that they&#x27;re ready to receive the new data.<p>3. After #1 and #2, it is finally legal to issue a RAS<p>--------<p>So in fact, DDR4 RAM is also a block device. Sure, RAS is much faster than a hard-drive seek, but given how much slower RAS (row address strobe) is than a CAS (column address strobe)... a lot of these disk-based discussions (such as B-trees) end up applying to DDR4 in practice.<p>--------<p>The only thing that really works like classic RAM is L3 &#x2F; L2 &#x2F; L1 caches. Everything else in the modern world is basically a block device.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toolslive" target="_blank">toolslive</a>   <span class="timeago" data-date="2021-08-18 18:09:04 &#43;0000 UTC">2021-08-18 18:09:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            B+Trees minimize the maximum depth of the lookup. All the values have exactly the same cost. In all honesty, I don&#x27;t care about the lookup cost of the values I never need.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bob1029" target="_blank">bob1029</a>   <span class="timeago" data-date="2021-08-18 18:36:46 &#43;0000 UTC">2021-08-18 18:36:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like you are looking for a Splay Tree implementation. Their dynamic optimality properties ensure your most popular data lives right at the root.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toolslive" target="_blank">toolslive</a>   <span class="timeago" data-date="2021-08-18 18:59:34 &#43;0000 UTC">2021-08-18 18:59:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For example. In essence any tree that allows you to &quot;rotate&quot; based on some statistics about subtree popularity. This becomes more and more interesting in combination with copy-on-write strategies because there you have to rewrite the top of the tree anyway. So why not aggregate some statistics while you&#x27;re at it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jlokier" target="_blank">jlokier</a>   <span class="timeago" data-date="2021-08-19 01:53:21 &#43;0000 UTC">2021-08-19 01:53:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The &quot;hot items&quot; optimisation you&#x27;re thinking of have less of an effect on trees with wide fanout, such as B-trees with a substantial block size.<p>This is because the ratio of number of &quot;hot&quot; items you can store at a reduced depth to total number of item is a much smaller ratio with a high fanout tree than a low fanout tree; and at the same time, the depths are lower with a high fanout tree, reducing the benefit of reduced depth anyway.<p>In other words, you can only give the benefit to a smaller number of hot items, and the benefit you can give is smaller.<p>On top of that, the added complications of rotations and statistics mean fewer items can be stored in interior nodes (which I&#x27;d call index nodes) for a given node size. This reduces the fanout and increases the full depth.<p>And the rotations and access statistics cause more writing.<p>There are tradeoffs and perhaps it is worth it for some tree parameters.  Perhaps for exceptionally large trees with particular access patterns.  It would be interesting to see how it&#x27;s implemented.<p>But generally for a high-fanout B-tree, you might as well just store frequently accessed items in a separate small tree as a cache, and keep that cached in memory.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

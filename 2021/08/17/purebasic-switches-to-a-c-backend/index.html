@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/purebasic-switches-to-a-c-backend/">
+
+
+    <title>PureBasic switches to a C backend - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="PureBasic switches to a C backend - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/purebasic-switches-to-a-c-backend/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/purebasic-switches-to-a-c-backend/">
+<meta name="twitter:title" content="PureBasic switches to a C backend - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "PureBasic switches to a C backend - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T10:33:52JST",
+    "dateModified": "2021-08-17T10:33:52JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.purebasic.fr/blog/?p=486">PureBasic switches to a C backend</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codr7" target="_blank">codr7</a>   <span class="timeago" data-date="2021-08-17 23:12:14 &#43;0000 UTC">2021-08-17 23:12:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn&#x27;t Lazarus be a better option in most cases? No silly 800 line limitation, more powerful language, at least as portable etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlawer" target="_blank">jlawer</a>   <span class="timeago" data-date="2021-08-18 01:53:09 &#43;0000 UTC">2021-08-18 01:53:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ahh the VB vs Delphi War..... That brings back memories.<p>I agree that Lazarus looks more mature, however shifting to a pure C backend would actually allow them to be more portable as I believe Lazarus uses FPC which can use a LLVM backend. While LLVM supports most modern platforms, there are lots of less popular architectures that lack LLVM support.<p>Personally I never liked using any basic derived language for &quot;Real work&quot;, but not sure if that was because I was a Delphi guy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coder543" target="_blank">coder543</a>   <span class="timeago" data-date="2021-08-18 06:18:13 &#43;0000 UTC">2021-08-18 06:18:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The list of supported platforms for FPC is pretty impressive[0], whereas LLVM support in FPC appears to be very new, and FPC has very limited platform support using LLVM anyways[1]. LLVM really means nothing for FPC&#x27;s portability story at this point, as far as I can tell.<p>I&#x27;m skeptical that targeting C opens up any <i>meaningful</i> additional platform support beyond what FPC natively supports. Even relatively new and&#x2F;or niche architectures like RISC-V and Xtensa appear to be supported by FPC.<p>(C code also isn&#x27;t perfectly portable by any stretch of the imagination, so just having some random C compiler for your platform of choice and some emitted C code doesn&#x27;t really guarantee that you&#x27;ll end up with a compatible, working solution.)<p>I&#x27;ve never used Lazarus or FPC beyond just opening it up and playing with it in years past, but it is interesting how much that ecosystem seems to offer.<p>[0]: discussed in the first paragraph here: <a href="https:&#x2F;&#x2F;www.freepascal.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.freepascal.org&#x2F;</a><p>[1]: <a href="https:&#x2F;&#x2F;wiki.freepascal.org&#x2F;LLVM#Progress" rel="nofollow">https:&#x2F;&#x2F;wiki.freepascal.org&#x2F;LLVM#Progress</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=as1mov" target="_blank">as1mov</a>   <span class="timeago" data-date="2021-08-18 11:37:38 &#43;0000 UTC">2021-08-18 11:37:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does FPC&#x2F;Lazarus have any kind of commercial backing by companies? Honestly the amount of platforms they support is pretty impressive, yet it remains pretty obscure.<p>The only other project I can think of which remains relatively unknown but still manages to chug along is Tcl (supported by Flightaware and a bunch of other companies iirc).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=coder543" target="_blank">coder543</a>   <span class="timeago" data-date="2021-08-18 17:05:41 &#43;0000 UTC">2021-08-18 17:05:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure what kind of commercial backing FPC or Lazarus have, if any. As I mentioned, I&#x27;ve never actually used it for anything serious, so I can&#x27;t really speak to how good it is.<p>Yeah, there are a lot of relatively unknown projects that keep going. Pharo (a smalltalk inspired language) is another example of such a thing that I&#x27;ve also never used.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mercurialuser" target="_blank">mercurialuser</a>   <span class="timeago" data-date="2021-08-18 07:17:00 &#43;0000 UTC">2021-08-18 07:17:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            harbour, a open source clone of xbase&#x2F;clipper language, targets vanilla C and can run on very different platforms, from msdos to android.
+on windows, several c compilers are supported, from pelles to bcc to gcc to intel...<p>it works.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coder543" target="_blank">coder543</a>   <span class="timeago" data-date="2021-08-18 07:26:24 &#43;0000 UTC">2021-08-18 07:26:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; several c compilers are supported<p>Which is completely different from assuming that emitted C automatically compiles and runs fine under any C compiler under the sun on any target platform, which seemed to be the implied assumption made by the person I was replying to. I definitely could have misinterpreted.<p>Regardless, my main point is that FPC already seems to support… pretty much everything, which is impressive. They’ve clearly done a lot of work on portability over the years.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=blizdiddy" target="_blank">blizdiddy</a>   <span class="timeago" data-date="2021-08-18 11:29:03 &#43;0000 UTC">2021-08-18 11:29:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C is an ISO standard. That&#x27;s how it works when you code to the standard.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=coder543" target="_blank">coder543</a>   <span class="timeago" data-date="2021-08-18 16:37:37 &#43;0000 UTC">2021-08-18 16:37:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wish C were that simple and well defined.<p>The C standard leaves a lot of UB&#x2F;implementation specific behavior. Fully “standards-compliant” code that works on one compiler may behave in unexpected ways under another compiler, just due to differences in UB handling. And no, it is not trivial to write UB-free C code. Let’s say you are generating C code from your own programming language. Did you know that an infinite loop that doesn’t do anything might be ignored?[0] This materially changes the behavior of the input program in ways that most people wouldn’t expect. C can quickly go from “infinitely portable assembler for my cool new language” to “major source of confusion.”<p>That’s before even discussing compiler bugs, which will unintentionally break all assumptions of well-behaved code. Rust has run into (and submitted fixes for) so many LLVM bugs over the years that caused silent miscompilation. Complex software tends to have bugs somewhere, and a lot of compilers are complex.<p>The less trivial the C code, the more likely you are to run into compatibility problems between compilers. “Hello world” should reliably work everywhere, so that’s something… I guess.<p>But that’s just like… my opinion. If generating arbitrary C code and shoving it through arbitrary C compilers works reliably for you, then that’s cool?<p>I personally would want to see a large battery of tests that ensures the program code is likely to be working under each new compiler.<p>[0]: <a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;59925618&#x2F;how-do-i-make-an-infinite-empty-loop-that-wont-be-optimized-away" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;59925618&#x2F;how-do-i-make-a...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mercurialuser" target="_blank">mercurialuser</a>   <span class="timeago" data-date="2021-08-18 19:47:48 &#43;0000 UTC">2021-08-18 19:47:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I understand what you say but FPC and Harbour just show that writing portable c code is actually possible...<p><a href="https:&#x2F;&#x2F;github.com&#x2F;harbour&#x2F;core#supported-platforms-and-c-compilers" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;harbour&#x2F;core#supported-platforms-and-c-co...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sigzero" target="_blank">sigzero</a>   <span class="timeago" data-date="2021-08-17 23:13:30 &#43;0000 UTC">2021-08-17 23:13:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a lot of nostalgia with BASIC I suspect but I agree.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdp2021" target="_blank">mdp2021</a>   <span class="timeago" data-date="2021-08-18 08:37:06 &#43;0000 UTC">2021-08-18 08:37:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have never met a &quot;line limitation&quot;. I would have noticed: I have been using PureBasic for 20 years.<p>You must be speaking of the demo version.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=conz" target="_blank">conz</a>   <span class="timeago" data-date="2021-08-18 01:21:56 &#43;0000 UTC">2021-08-18 01:21:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For anyone still interested in &#x27;Visual Basic&#x27; style application development, or for RAD development in general, take a look at Gambas: <a href="http:&#x2F;&#x2F;gambas.sourceforge.net&#x2F;en&#x2F;main.html" rel="nofollow">http:&#x2F;&#x2F;gambas.sourceforge.net&#x2F;en&#x2F;main.html</a><p>Gambas is a mature, current-generation OO BASIC, has a vast array of libraries, a JIT and is completely open source software.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sigzero" target="_blank">sigzero</a>   <span class="timeago" data-date="2021-08-18 01:24:36 &#43;0000 UTC">2021-08-18 01:24:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And only available on Linux right?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=conz" target="_blank">conz</a>   <span class="timeago" data-date="2021-08-18 01:48:57 &#43;0000 UTC">2021-08-18 01:48:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can run Gambas and Gambas apps on Windows:<p><a href="https:&#x2F;&#x2F;forum.gambas.one&#x2F;viewtopic.php?t=812" rel="nofollow">https:&#x2F;&#x2F;forum.gambas.one&#x2F;viewtopic.php?t=812</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nix23" target="_blank">nix23</a>   <span class="timeago" data-date="2021-08-18 09:25:09 &#43;0000 UTC">2021-08-18 09:25:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, work&#x27;s on all the BSD&#x27;s too.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=classichasclass" target="_blank">classichasclass</a>   <span class="timeago" data-date="2021-08-17 23:07:52 &#43;0000 UTC">2021-08-17 23:07:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a &quot;big flat file&quot; -- does that mean things like PB_MessageRequester(), SYS_InitString(), etc., are also in the source code, or in a source library? If the source for those aren&#x27;t included, then it&#x27;s not really portable beyond the platforms it already supports.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sedatk" target="_blank">sedatk</a>   <span class="timeago" data-date="2021-08-17 23:37:16 &#43;0000 UTC">2021-08-17 23:37:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They could still have cross-platform versions of the same library and choose which to use at the linking phase.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=classichasclass" target="_blank">classichasclass</a>   <span class="timeago" data-date="2021-08-18 00:06:08 &#43;0000 UTC">2021-08-18 00:06:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m sure they do, for the platforms they already support. But the blog post talks about using the C code to run on other platforms. I don&#x27;t think there&#x27;s a library for my ppc64le workstation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mdp2021" target="_blank">mdp2021</a>   <span class="timeago" data-date="2021-08-17 11:51:58 &#43;0000 UTC">2021-08-17 11:51:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            PureBasic is <i>one of the best things in life</i> (if I may express my view).<p>--<p>The switch from FSAM to GCC slows down the compilation time. What about the compiled software speed?<p>Edit: the linked post is a few months old. In a later post, Fred (Laboureur) mentions an example of a +50% speed increase.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=howerj" target="_blank">howerj</a>   <span class="timeago" data-date="2021-08-17 22:18:59 &#43;0000 UTC">2021-08-17 22:18:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They could use the Tiny C Compiler if compile speeds become a concern, although it supports far few platforms and generates much slower code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ghostly_s" target="_blank">ghostly_s</a>   <span class="timeago" data-date="2021-08-17 21:30:03 &#43;0000 UTC">2021-08-17 21:30:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What is your use case for BASIC?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Koshkin" target="_blank">Koshkin</a>   <span class="timeago" data-date="2021-08-17 21:50:24 &#43;0000 UTC">2021-08-17 21:50:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I fondly remember Visual Basic 6 as one of the best <i>general purpose</i> development tools for Windows I have ever seen.<p>As to the “use case”, it still seems like a nice interpreted language for tiny computers based on microcontrollers and for embedded platforms in general.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jamesdwilson" target="_blank">jamesdwilson</a>   <span class="timeago" data-date="2021-08-18 00:18:18 &#43;0000 UTC">2021-08-18 00:18:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            20 year developer here who&#x27;s touched many many different software stacks.<p>Still to this day, nothing has lived up to the hype that was actually delivered by VB5 and VB6. Insane productivity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-08-18 01:46:29 &#43;0000 UTC">2021-08-18 01:46:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is sad to think we gave all that up for HTML&#x2F;CSS&#x2F;JS. Now, with &quot;modern&quot; tools, it takes a whole village to build and submit a simple form.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=littlecranky67" target="_blank">littlecranky67</a>   <span class="timeago" data-date="2021-08-18 09:27:28 &#43;0000 UTC">2021-08-18 09:27:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its not HTML&#x2F;CSS&#x2F;JS that killed the RAD tools from the 90s&#x2F;00s - it is security, multi-user and networking.<p>I remember how quickly you can put together apps and forms using VB6 + visual designer. But security&#x2F;permissions were mostly based on your Windows account user. I remember an ERP software that hardcoded the MySQL connection string with a god-mode user+password in a config file and relied on Windows permissions that only the ERP software itself (written in Delphi) could open it. User permissions were then encoded in that DB. Basically, one disassembly of the machine and extracting the config file from the harddrive would have allowed you full access to the db.<p>Today, we use service layers (REST &amp; Co.) to ensure permissions and access - something that would be equally complex when using VB&#x2F;Lazarus today.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=icedchai" target="_blank">icedchai</a>   <span class="timeago" data-date="2021-08-18 16:11:51 &#43;0000 UTC">2021-08-18 16:11:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not convinced RAD tools couldn&#x27;t have been made to work with REST services or something else, like SOAP. SOAP probably would&#x27;ve been better for this. As much as I hated the complexity of SOAP, being able to generate clients from a WSDL was pretty cool.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-18 06:57:33 &#43;0000 UTC">2021-08-18 06:57:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            More insane are the younger generations that grew up with the Web, have no idea how productive native tooling can be and then give us Electron based crap.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=resoluteteeth" target="_blank">resoluteteeth</a>   <span class="timeago" data-date="2021-08-18 00:48:01 &#43;0000 UTC">2021-08-18 00:48:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Still to this day, nothing has lived up to the hype that was actually delivered by VB5 and VB6. Insane productivity.<p>People seem to say this a lot but I don&#x27;t really understand it, because if you use c# with winforms in visual studio it&#x27;s basically the same thing but better.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=laumars" target="_blank">laumars</a>   <span class="timeago" data-date="2021-08-18 07:36:22 &#43;0000 UTC">2021-08-18 07:36:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends on the domain. C# is undoubtedly a lot more powerful and C# runs faster,  but your average C# program requires writing a hell of a lot more boilerplate code than your average VB6 program.<p>Visual Basic had its warts. C# is a better language from an academic perspective. But VB filled a niche that nothing else has come close to: it made desktop application software writing ridiculously quick and easy. While still being maintainable, readable, and fun.<p>Electron is probably the closest thing we have to that in the desktop world these days but somehow that performs even worse than VB6 did. Python or Go is probably the most analogous, if you think about command line programs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=teh_klev" target="_blank">teh_klev</a>   <span class="timeago" data-date="2021-08-18 11:17:55 &#43;0000 UTC">2021-08-18 11:17:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but your average C# program requires writing a hell of a lot more boilerplate code than your average VB6 program<p>Not actually true. I just created a new C# Windows Forms application in VS, dragged a button onto a form, double clicked and it took me right to the event handler ready for me to do something. There&#x27;s no additional boilerplate or ceremony required.<p>Now sure there may be a whole bunch of code sitting in the <i>&quot;Form1.Designer.cs&quot;</i> partial class, but that&#x27;s for the designer to manage, not you. And VB had this as well but the VB environment hid this until you went looking for it.<p>Writing Windows Forms apps in C#&#x2F;VS2019 is as easy as it was back in the VB5&#x2F;6 days. I say this as a former VB4&#x2F;5&#x2F;6 (and, cough, ahem, MS Access) user knocking out all sorts of stuff back in the 90&#x27;s.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=laumars" target="_blank">laumars</a>   <span class="timeago" data-date="2021-08-19 06:36:39 &#43;0000 UTC">2021-08-19 06:36:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s more to writing software than just dragging a button onto a form ;) at some point you’re going to want to write your own classes, or manage the existing automatically generated ones.<p>I’ve written sizeable software in both VB6 and C# (both professionally too) and yes, what I said is true about C# being a more verbose language. This isn’t intended as a criticism of C# either. It’s just a natural side effect of C# giving the developers more control.<p>Plus there’s also a C vs ALGOL type argument with regards to which is easier for a newbie to read and write. C# might produce highly readable code to those already familiar with C-syntax but VB6 is ostensibly executable pseudocode. That alone counts for a lot when talking about the accessibility of programming languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=teh_klev" target="_blank">teh_klev</a>   <span class="timeago" data-date="2021-08-19 10:19:36 &#43;0000 UTC">2021-08-19 10:19:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; There’s more to writing software than just dragging a button onto a form<p>Clearly, but that wasn&#x27;t my point. C# isn&#x27;t a more verbose language, if anything it&#x27;s more concise. My point was to refute your assertion that <i>&quot;your average C# program requires writing a hell of a lot more boilerplate code than your average VB6 program&quot;</i>...which isn&#x27;t true.<p>The C vs ALGOL type argument doesn&#x27;t really stand up for me. I have junior devs on my team who&#x27;ve arrived straight out of bootcamps, college, self-taught etc with a broad spectrum of shallow language skills (PHP, VB, VBA&#x2F;Script, Java, Javascript), and none of them have trouble dropping into C# world when they&#x27;ve never used it before. C# isn&#x27;t any more difficult to learn than VB or PHP. Getting up to speed with the .NET framework is a much larger challenge for them than picking up C#.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=laumars" target="_blank">laumars</a>   <span class="timeago" data-date="2021-08-19 14:56:54 &#43;0000 UTC">2021-08-19 14:56:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think we are going to have to agree to disagree on this.<p>But FYI, VB6 isn’t .NET. You might be thinking of VB.NET. And if you were, your arguments would be correct. VB.NET is an utterly pointless language. But VB6 is a different beast entirely (and predates .NET by several years)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spullara" target="_blank">spullara</a>   <span class="timeago" data-date="2021-08-18 04:08:16 &#43;0000 UTC">2021-08-18 04:08:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Using Microsoft&#x27;s Jview JVM COM-Java integration (this is like &#x27;98 time frame) you could more easily run VB 6 apps against Java application servers because you only needed to distribute the client jar to the VB app. Since there was no early binding you didn&#x27;t need the code you were going to call remotely on the client, it could just download the classes at runtime and use reflection to make the required calls. Drastically reduced any sort of jar&#x2F;dll hell.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdp2021" target="_blank">mdp2021</a>   <span class="timeago" data-date="2021-08-18 09:00:00 &#43;0000 UTC">2021-08-18 09:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; your use case for BASIC<p>Answering not really about &#x27;BASIC&#x27;, but &quot;PureBasic&quot; (it is not the abstract language but the product).<p>Personally:<p>Whenever I want to do some fast coding.<p>And then, in my case, basically all of my personal desktop applications and compiled shell commands. Because really, it is so pleasant to code on it.<p>In general:<p>When you want a lightweight, efficient, specialized environment to quickly get things done, in a framework that is close to low-level (memory structures etc.) and want a compiled result.<p>And about the &quot;BASIC&quot; part: the BASIC implementation of PureBasic is practically not that different from &quot;reasoning in C&quot; (and you can use the C libraries upon need), but the PB libraries and the IDE makes writing comfortable.<p>I basically never found a better alternative around this concept: <i>light, powerful, fast, low-level, comfortable</i>.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Koshkin" target="_blank">Koshkin</a>   <span class="timeago" data-date="2021-08-17 22:01:59 &#43;0000 UTC">2021-08-17 22:01:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Shouldn’t the backend compiler be a configurable option?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-17 22:55:16 &#43;0000 UTC">2021-08-17 22:55:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maintaining multiple backends isn&#x27;t fun.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=codr7" target="_blank">codr7</a>   <span class="timeago" data-date="2021-08-17 23:01:47 &#43;0000 UTC">2021-08-17 23:01:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Running the same C code through different compilers is totally doable though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tored" target="_blank">tored</a>   <span class="timeago" data-date="2021-08-17 21:36:44 &#43;0000 UTC">2021-08-17 21:36:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting project.<p>What do you use it for?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mdp2021" target="_blank">mdp2021</a>   <span class="timeago" data-date="2021-08-18 09:32:56 &#43;0000 UTC">2021-08-18 09:32:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On the desktop OS, almost everything (but it must be me). Data manipulation, programming &quot;calculator&quot; (suppose you need to compute something, but with loops conditionals and functions), &quot;&#x2F;usr&#x2F;bin&quot; commands, desktop widgets (say, the interface to granularly set the brightness on my laptop), desktop applications (really all sort of things here - anything with a GUI).<p>An example comes to mind of something pending: there is a recorded debate I should listen to, but of the three participants one is a screamer-in-the-mike and another a low-bass-baritone-in-the-distance. Loop through the audio data compressing the &quot;hypnotist&quot; and the &quot;maniac&quot; at similar amplitude levels, using different wave transformations at different times and with continuity, then compile a command for future cases: a task for your swiss-army-knife PureBasic.<p>In a way, there is a specific spirit behind it: you are given a computer: the most basic, natural thing you want to do it is code on it. PB represents for me &quot;the default coding system that should have come with the OS&quot; - as some computers had decades ago.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DaiPlusPlus" target="_blank">DaiPlusPlus</a>   <span class="timeago" data-date="2021-08-17 21:34:11 &#43;0000 UTC">2021-08-17 21:34:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Off-topic, but if anyone from PureBasic.fr&#x27;s web team is here, please please <i>please</i> don&#x27;t use country&#x27;s flags to represent languages, just put the language name instead - if you want a visually distinctive but recognizable icon then use a wireframe globe icon)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jeroenhd" target="_blank">jeroenhd</a>   <span class="timeago" data-date="2021-08-17 22:03:28 &#43;0000 UTC">2021-08-17 22:03:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t really see the problem for this website, the languages supported are all European, named after the country they&#x27;re originally from, (with perhaps US English as the odd one out).<p>Things might start getting confusing in countries like India, of course, but I don&#x27;t see the problem in this specific case.<p>I do have a problem with their homepage related to languages though: you can&#x27;t get from English to Spanish or Italian on mobile without going through some weird state machine of what language makes sense to list next. There&#x27;s always the option to switch to English, but I can&#x27;t see Italian or Spanish from every other page.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-18 00:25:16 &#43;0000 UTC">2021-08-18 00:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I don&#x27;t really see the problem for this website, the languages supported are all European, named after the country they&#x27;re originally from, (with perhaps US English as the odd one out).<p>As a non-American native speaker of English (Australian), I always feel a little bit excluded when I see an American flag used to represent my native language.<p>I&#x27;m not bothered by the UK flag to quite the same extent – can&#x27;t deny the language originated in England (although maybe one should really use the English flag not the UK one)<p>But I think the ideal is to drop the flags and just call them by their native names – English, Français, Deutsch, etc. Or use ISO 639 codes – EN(G), FR(A), DE(U), etc. (Non-technical audiences might find the codes unfamiliar, but for a programming language website that shouldn&#x27;t be a concern.) Nobody is going to feel excluded, even in the slightest, by either of those approaches.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=JimDabell" target="_blank">JimDabell</a>   <span class="timeago" data-date="2021-08-18 01:26:27 &#43;0000 UTC">2021-08-18 01:26:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I&#x27;m not bothered by the UK flag to quite the same extent – can&#x27;t deny the language originated in England (although maybe one should really use the English flag not the UK one)<p>Consider how that comes across for many people in Northern Ireland, among other places. Just because they speak English, it doesn’t mean they want anything to do with the English (or British) flag.<p>There’s some more discussion on this here:<p>Flag as a symbol of language - stupidity or insult?<p>— <a href="https:&#x2F;&#x2F;www.irt.org&#x2F;articles&#x2F;js173&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.irt.org&#x2F;articles&#x2F;js173&#x2F;</a><p>Don&#x27;t use flags to indicate languages!<p>— <a href="https:&#x2F;&#x2F;www.w3.org&#x2F;International&#x2F;questions&#x2F;qa-link-lang#flags" rel="nofollow">https:&#x2F;&#x2F;www.w3.org&#x2F;International&#x2F;questions&#x2F;qa-link-lang#flag...</a><p>Flag Problems<p>— <a href="https:&#x2F;&#x2F;www.nngroup.com&#x2F;articles&#x2F;flag-problems&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.nngroup.com&#x2F;articles&#x2F;flag-problems&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=teh_klev" target="_blank">teh_klev</a>   <span class="timeago" data-date="2021-08-18 11:24:31 &#43;0000 UTC">2021-08-18 11:24:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Consider how that comes across for many people in Northern Ireland, among other places<p>You&#x27;d probably find half of the population (loyalists&#x2F;unionists) would be fine with the butchers apron, whereas the other half (republicans) would find it an annoyance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=spullara" target="_blank">spullara</a>   <span class="timeago" data-date="2021-08-18 04:11:00 &#43;0000 UTC">2021-08-18 04:11:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            USA English and British English are normally distinct in sites that support lots of languages. I think that Australia inherited things like British spelling and is the same? Or are there differences? (Color vs Colour, etc)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-18 04:44:06 &#43;0000 UTC">2021-08-18 04:44:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No Australian English and British English are different.<p>For example, British say <i>lorry</i> but Australians say <i>truck</i>. Although on the whole Australian English is closer to British than American, that&#x27;s one case where the opposite is true. (But the word <i>truck</i> doesn&#x27;t mean quite the same thing in American English and Australian English – in American English it has a broader sense, in Australian English its sense is somewhat more narrow – Australians and Americans would both call a semi-trailer truck a <i>truck</i>, but what Americans call <i>pickup trucks</i> Australians generally don&#x27;t call <i>trucks</i>, we call them <i>utes</i> instead – that term is pretty much unique to Australian and New Zealand English)<p>And in some cases Australian English matches neither American English or British English. For example, Americans say <i>bell peppers</i> and British say <i>sweet peppers</i>, but Australians say <i>capsicums</i>. (Along with New Zealand English, Malaysian English, Indian English, Pakistani English, Bangladeshi English, and Sri Lankan English.)<p>People need to get away from the idea that there are only two varieties of English, American and British. There are as many varieties of English as there are countries in which English is a major spoken language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scoopertrooper" target="_blank">scoopertrooper</a>   <span class="timeago" data-date="2021-08-18 07:31:05 &#43;0000 UTC">2021-08-18 07:31:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d wager there is greater linguistic diversity between English spoken in Paddington and Merrylands than that of Paddington and the City of London.<p>I know when folks address a group of people as &#x27;yous&#x27; they mean &#x27;you&#x27;, but as a plural pronoun. When an American chef says bell peppers, they mean capsicums. I&#x27;d argue the former is a bigger step than the latter, given that &#x27;you&#x27; is a far more common word.<p>&#x27;Australian English&#x27; is at best a dialect of British English, though I don&#x27;t think the differences even amount to that.<p>Also, I&#x27;d be very impressed if a website substituted lorry for truck when I clicked an Australian flag.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-19 00:04:07 &#43;0000 UTC">2021-08-19 00:04:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I know when folks address a group of people as &#x27;yous&#x27; they mean &#x27;you&#x27;, but as a plural pronoun. When an American chef says bell peppers, they mean capsicums. I&#x27;d argue the former is a bigger step than the latter, given that &#x27;you&#x27; is a far more common word.<p>The plural form <i>yous</i> or <i>youse</i> is very common across many dialects of English – it is found in Ireland, Scotland, England (in particular in Geordie and Scouse), Australia, New Zealand, and some regional dialects of American English (especially Philadelphia)<p>&gt; &#x27;Australian English&#x27; is at best a dialect of British English, though I don&#x27;t think the differences even amount to that.<p>Linguists don&#x27;t agree. Australian and British English are independent dialects. Even the UK contains multiple dialects of English – &quot;British English&quot; generally means just the way Oxbridge graduates, BBC staff, Whitehall mandarins, etc, speak and write. In fact, the UK arguably has more internal diversity in English than most other English-speaking countries – Geordie is a dialect of English, yet at times is barely intelligible to other native English speakers. Languages are usually the most diverse in their country of origin, since the processes of emigration&#x2F;colonisation&#x2F;etc tend to greatly reduce that original diversity.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scoopertrooper" target="_blank">scoopertrooper</a>   <span class="timeago" data-date="2021-08-19 03:00:57 &#43;0000 UTC">2021-08-19 03:00:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think my basic point here is that the words dialect and language are too coarse to describe two English variants with identical spelling and grammatical systems, but with some minor differences in pronunciation and word usage. Especially, given that they both have a high degree of internal variance (as you quite rightly said).<p>If you compare the differences between English as spoken in Australia, England, and (even) America to the various dialects spoken in China, you can see how little descriptive value there is in referring to minor English variants as dialects or even independent languages.<p>Ultimately, the decision to declare a cluster of variations a dialect or separate language, or even admit it exits is a political choice, closely tied to national identity. For instance, there is technically a New Zealand English, but it&#x27;s essentially identical to Australian English aside from some minor differences in pronunciation.<p>So, I don&#x27;t see why people should really care if they see the Australian flag appears in the language menu.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-19 04:08:03 &#43;0000 UTC">2021-08-19 04:08:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; If you compare the differences between English as spoken in Australia, England, and (even) America to the various dialects spoken in China, you can see how little descriptive value there is in referring to minor English variants as dialects or even independent languages.<p>Well, many linguists consider the different &quot;dialects&quot; of Chinese to be distinct languages, since in their spoken forms they are not mutually intelligible. What makes it more complex is that (a) their written forms <i>can be</i> mutually intelligible even when their spoken forms are not – in this regard the Chinese languages are quite unlike those of Europe or other parts of Asia, where spoken and written mutual intelligibility align much more closely; (b) the Chinese government, for political reasons, wants to promote the viewpoint of &quot;multiple dialects of one language&quot; over the (arguably linguistically more accurate) viewpoint of &quot;a family of distinct but related languages sharing a common writing system&quot;, since it fears the later idea may eventually result in the breakup of China into multiple countries along linguistic lines, and thus that viewpoint is seen as a threat to Beijing&#x27;s rule.<p>&gt; Ultimately, the decision to declare a cluster of variations a dialect or separate language, or even admit it exits is a political choice, closely tied to national identity<p>It is true that <i>sometimes</i> questions about what is a language and what is a dialect can be deeply political. Whether Mandarin and Cantonese are separate dialects of one Chinese language, or two distinct languages within the Chinese language family, is a highly political question. Similarly, whether Macedonian and Bulgarian are two different languages, or two different dialects of one language, is a very political question (Bulgarian nationalists say Macedonian is a dialect of Bulgarian, Macedonian nationalists say it is a separate language). The same is true of the relationship between Hindi and Urdu, Serbian and Croatian, Romanian and Moldovan.<p>But that isn&#x27;t always true. The question of whether Australian English and New Zealand English are two different dialects or one single dialect is not a subject of passionate political dispute in the way that (e.g) the difference between Bulgarian and Macedonian is. Neither the Australian nor New Zealand government cares much about the question – by contrast, the Chinese government has strong views about the language-vs-dialect question for Chinese.<p>&gt; For instance, there is technically a New Zealand English, but it&#x27;s essentially identical to Australian English aside from some minor differences in pronunciation.<p>It isn&#x27;t just differences in pronunciation, there are also differences in vocabulary. For example, a portable ice cooler is called an <i>esky</i> by Australians but a <i>chilly bin</i> by New Zealanders. There are occasional spelling differences – Australians (like most other English dialects) usually write <i>fjord</i>, but New Zealanders more commonly write <i>fiord</i>. Another big difference is the widespread use of Māori words and phrases in New Zealand English, even by non-Māori New Zealanders (<i>kia ora</i>, <i>pākehā</i>, <i>whānau</i>, etc). There is even, in a sense, a difference in the alphabet – writing Māori loanwords with macrons (<i>ā</i>, <i>ē</i>, <i>ī</i>, <i>ō</i>, <i>ū</i> – used in Māori to mark long vowels and distinguish them from short ones) is common and accepted in New Zealand English, and in some contexts (such as government documents) is even preferred, whereas doing so in Australian English is rare.<p>Given all these differences in pronunciation, vocabulary, and occasionally even spelling, most professional linguists consider Australian English and New Zealand English to be two distinct (albeit closely related) dialects. I don&#x27;t see any evidence that viewpoint is influenced by any political bias. Linguistics can at times be a politically fraught subject, but this particular linguistic question is not a significant political issue in either country.<p>&gt; So, I don&#x27;t see why people should really care if they see the Australian flag appears in the language menu.<p>I have <i>never</i> seen an Australian flag in a language menu. I have seen the US flag, UK flag, even occasionally some hybrid flag which merges the two (like [0]). Nobody creates multiple versions of a website in different <i>dialects</i> of English.<p>One does sometimes see country flags used to represent different <i>national versions</i> of a website, which will differ in more than just language&#x2F;dialect, but also stuff like pricing, product range availability, marketing campaigns, etc. I don&#x27;t think anybody ever objects to that. In this case, the flag is used to represent the country, not the language or dialect, and few object to using flags as representations of countries.<p>[0] <a href="https:&#x2F;&#x2F;commons.wikimedia.org&#x2F;wiki&#x2F;File:English_language.svg" rel="nofollow">https:&#x2F;&#x2F;commons.wikimedia.org&#x2F;wiki&#x2F;File:English_language.svg</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Rygian" target="_blank">Rygian</a>   <span class="timeago" data-date="2021-08-17 22:35:06 &#43;0000 UTC">2021-08-17 22:35:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are countries within Europe where many different languages are spoken.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-18 00:26:06 &#43;0000 UTC">2021-08-18 00:26:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t agree completely.<p>If the site is localized into de_DE and fr_FR then it makes perfect sense to use the country flags. In more general terms: When the site is localized into the locale of specific country&#x2F;nation and that country&#x2F;nation has that language as its only official language.<p>The official language of Great Britain is English. The various other languages spoken in the countries that are part of UK are regional&#x2F;local. So using GB flag for locale en_GB is appropriate.<p>US flag for en_US.<p>Brazilian flag for pt_BR.<p>Portuguese flag for pt_PT.<p>Whereas for example Canada has both French and English as official languages right. So if you are writing for fr_CA or en_CA locales then it would be inappropriate indeed to use Canadian flag (since in that case it doesn’t say which language), and equally wrong to use French or USA flag because those flags imply fr_FR and en_US. So if either fr_CA or en_CA is among your target locales, either use text for everything instead of flags, or use flags for the locales that have them and text for fr_CA and en_CA. Likewise for other countries with multiple official languages.<p>Australia apparently has no official language at the federal level. So the Australian flag should not be used for en_AU locale. Instead text should be used for en_AU locale.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-18 00:42:09 &#43;0000 UTC">2021-08-18 00:42:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Likewise, use GB flag for en_GB locale is cool too, and US flag for en_US. Though with English I suspect many sites may actually not be written in British English and yet they might use GB flag. In that case they are using the wrong flag.<p>A lot of English text isn&#x27;t clearly identifiable as belonging to a certain dialect. A single text can be a collaborative work between people using different dialects of English and so different parts of the document can end up being spelled in different ways. Spelling differences aren&#x27;t always as simple as American vs British – -ize spellings are preferred over -ise in American English, yet -ize spelling is also permitted (if less common) in British English (so-called Oxford spelling). I myself speak Australian English, but in certain contexts (especially talking about computers, or at work – I work for a US-based company) I tend to Americanise my English a little bit. Australian English is neither American nor British – it tends to be closer to British mostly (e.g. <i>petrol</i> not <i>gasoline</i>), but sometimes is closer to American instead (e.g. <i>truck</i> not <i>lorry</i>), and sometimes does its own thing–e.g. Americans say <i>bell peppers</i> and the British say <i>sweet peppers</i> but Australians for some reason use the Latin name <i>capsicum</i> (for the mild ones, not the spicy ones) – which is not unique to Australia, New Zealand and Indian English do that too.<p>Anyway, we don&#x27;t need to tag documents with the precise dialect of English. We all understand each other pretty well anyway.<p>Also, locale != language. Locale is about stuff like date formats, number formats, etc. It is rare for a non-interactive website – as opposed to an interactive webapp - to support multiple locales.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=codetrotter" target="_blank">codetrotter</a>   <span class="timeago" data-date="2021-08-18 00:54:14 &#43;0000 UTC">2021-08-18 00:54:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Also, locale != language. Locale is about stuff like date formats, number formats, etc. It is rare for a non-interactive website – as opposed to an interactive webapp - to support multiple locales.<p>I know. But ideally you’d still be conforming to some sort of locale for each of your chosen languages.<p>Even static text can refer to dates. And while ISO 8601 really is the proper unambiguous way to refer to all-numeric dates we still have the British and most of rest of the world preferred way of day-month-year, whereas with American English the preferred way is month-day-year.<p>And likewise, if you are writing for an Australian audience then the assumed currency when you say naked “dollars” will be AUD. Whereas text for Canadian audiences will have CAD being the assumed meaning of naked “dollars”.<p>And that’s why I mean that there often is a locale tied even to text. But you are absolutely right that it is complicated, and that often smaller sites will be written with a global audience in mind and no clear locale. But then the rule still applies. And since you are then not using en_US nor en_GB etc, but just plain en, there is no flag for that and you’d represent it with text saying just “English”.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-18 01:18:13 &#43;0000 UTC">2021-08-18 01:18:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Even static text can refer to dates. And while ISO 8601 really is the proper unambiguous way to refer to all-numeric dates we still have the British and most of rest of the world preferred way of day-month-year, whereas with American English the preferred way is month-day-year.<p>It is really only an issue for all numeric dates. If you put the month in words, everyone gets it regardless of the order. Everyone understands that &#x27;&#x27;4 July&#x27;&#x27; and &#x27;&#x27;July 4&#x27;&#x27; (or &#x27;&#x27;July 4th&#x27;&#x27;) are the same thing. In fact, in British (and Australian) English, at least, both ways are strictly speaking correct. Month-first is viewed as somewhat old-fashioned but still encountered especially in some very formal contexts. (Actually, a lot of American-British differences are due to American English being more conservative, and failing to adopt changes in the language which later occurred in England, and the differences in date order are an example of that)<p>&gt; And likewise, if you are writing for an Australian audience then the assumed currency when you say naked “dollars” will be AUD. Whereas text for Canadian audiences will have CAD being the assumed meaning of naked “dollars”.<p>As an Australian I have no trouble working out what &quot;dollars&quot; means based on context. I will assume it means US dollars unless I am reading an Australian website (or Canadian or New Zealand or so on). Formally tagging the website with a locale is pointless for this. Anyway, one can always be explicit (USD vs AUD or US$ vs AU$), and in my experience a lot of texts are. Explicitness is always the best when dealing with international audiences. And, commonly, Australian news sources will, when reporting international news, give the foreign amount first (USD or EUR or GBP or JPY or whatever) and then an Australian dollar conversion in brackets. (I expect Canadian and New Zealand news sources would do the same thing.)<p>&gt; And that’s why I mean that there often is a locale tied even to text.<p>Often, when talking about texts, house style is a more important concept than locale. For example, the United Nations (and its agencies) has its own rules about spelling English words, they mostly follow American conventions (e.g &#x27;&#x27;World Health Organization&#x27;&#x27; not &#x27;&#x27;World Health Organisation&#x27;&#x27;) but sometimes use British spellings instead (e.g &#x27;&#x27;United Nations Environment Programme&#x27;&#x27; not &#x27;&#x27;United Nations Environment Program&#x27;&#x27;). I don&#x27;t know if you can easily map an organisation&#x27;s house styles to locales.<p>The other problem is what is in a locale is often disputed. For example, what is the first day of the week in Australian locale, Sunday or Monday? There is actually no consensus on this question in Australian culture. My wife and I can&#x27;t agree on it, and even Australian media reflects the lack of consensus [0]. However, interestingly, while the ABC (our national public broadcaster) says the official answer is Monday, Unicode CLDR says Sunday, and most software vendors have followed Unicode. But, Unicode CLDR actually used to say Monday, and someone talked Unicode into changing it. Maybe I should try to talk them into changing it back :)<p>[0] <a href="https:&#x2F;&#x2F;www.abc.net.au&#x2F;news&#x2F;2019-08-18&#x2F;which-day-do-you-consider-the-start-of-the-week&#x2F;11346348" rel="nofollow">https:&#x2F;&#x2F;www.abc.net.au&#x2F;news&#x2F;2019-08-18&#x2F;which-day-do-you-cons...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=girvo" target="_blank">girvo</a>   <span class="timeago" data-date="2021-08-18 02:54:32 &#43;0000 UTC">2021-08-18 02:54:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Maybe I should try to talk them into changing it back :)</i><p>As an Aussie, I&#x27;d love to help you with that haha. Unicode is wrong ;)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skissane" target="_blank">skissane</a>   <span class="timeago" data-date="2021-08-18 02:58:48 &#43;0000 UTC">2021-08-18 02:58:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;unicode-org.atlassian.net&#x2F;browse&#x2F;CLDR-14795" rel="nofollow">https:&#x2F;&#x2F;unicode-org.atlassian.net&#x2F;browse&#x2F;CLDR-14795</a> is the issue.<p>Maybe it would help convince them if more Australians endorsed the &quot;Monday is first day of week in Australia&quot; position.<p>On the other hand, I don&#x27;t want to overwhelm the poor Unicode CLDR developers with too many &quot;me too&quot; comments.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=girvo" target="_blank">girvo</a>   <span class="timeago" data-date="2021-08-19 00:51:06 &#43;0000 UTC">2021-08-19 00:51:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m super impressed by the progress so far! I didn&#x27;t end up writing my comment of support as it seems like they&#x27;re amenable to the change based on the work you put in: well done!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-08-18 07:41:13 &#43;0000 UTC">2021-08-18 07:41:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why not? It seems perfectly intelligible to me which flag means what language.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DaiPlusPlus" target="_blank">DaiPlusPlus</a>   <span class="timeago" data-date="2021-08-18 08:42:04 &#43;0000 UTC">2021-08-18 08:42:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To <i>you</i>, yes - but how would a Taiwanese or PRC person feel if their opposing flags were used to represent their language? (Or me, as a Brit, seeing the US Flag to represent English...)<p>Yes, it&#x27;s true that languages tend to be country-specific (e.g. en-US: USA, en-GB: UK, pt-BR for Brazilian Portuguese, etc), but while that&#x27;s technically true, the majority of Indo-European languages that have spread widely across many nations, don&#x27;t have enough differences between them to justify using a single specific country flag to represent <i>all</i> of them (namely, en-GB, en-CA, en-AU, and en-US, they&#x27;re hardly even separate dialects).<p>In short: Flags identify countries, not languages.<p>By analogy, it&#x27;s like using the Java language logo to represent all Java-derived languages (C#, Swift, Golang, Kotlin) because they&#x27;re mutually-intelligible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=0xjnml" target="_blank">0xjnml</a>   <span class="timeago" data-date="2021-08-18 09:22:20 &#43;0000 UTC">2021-08-18 09:22:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; ... Java-derived languages (C#, Swift, Golang, Kotlin) ...<p>Swift and Go do not belong to that list.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dng88" target="_blank">dng88</a>   <span class="timeago" data-date="2021-08-17 21:34:50 &#43;0000 UTC">2021-08-17 21:34:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The home page is a very good read : <a href="https:&#x2F;&#x2F;www.purebasic.fr&#x2F;blog&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.purebasic.fr&#x2F;blog&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

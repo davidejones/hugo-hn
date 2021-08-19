@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/18/gokart-a-static-analysis-tool-for-securing-go-code/">
+
+
+    <title>GoKart: A static analysis tool for securing Go code - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="GoKart: A static analysis tool for securing Go code - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/gokart-a-static-analysis-tool-for-securing-go-code/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/18/gokart-a-static-analysis-tool-for-securing-go-code/">
+<meta name="twitter:title" content="GoKart: A static analysis tool for securing Go code - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "GoKart: A static analysis tool for securing Go code - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-18T21:36:06JST",
+    "dateModified": "2021-08-18T21:36:06JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://github.com/praetorian-inc/gokart">GoKart: A static analysis tool for securing Go code</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the-smug-one" target="_blank">the-smug-one</a>   <span class="timeago" data-date="2021-08-18 22:09:12 &#43;0000 UTC">2021-08-18 22:09:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go has some nice tooling which is quite easy to use w.r.t. static analysis. I started writing a nil pointer analysis tool which was going to take advantage of and provide some more advanced information*. I &quot;unfortunately&quot; had a lot more fun stuff to do during my vacation, but it was very easy to get started with! So kudos to the Go team for making this kind of stuff possible for a 1-man team.<p>* Just a forward-style abstract interpretation living on-top of Go&#x27;s type system as an additional layer so you get explanations for why the tool believes that a nil-pointer dereference may occur, etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 22:55:41 &#43;0000 UTC">2021-08-18 22:55:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I started writing a nil pointer<p>It still boggles my mind that Go decided to force programmers to worry about nil pointers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tptacek" target="_blank">tptacek</a>   <span class="timeago" data-date="2021-08-19 03:53:09 &#43;0000 UTC">2021-08-19 03:53:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then it boggles your mind that Go functions the way most popular languages work. You don&#x27;t see so much dunking on Python, Java, Clojure, Ruby, &amp;c, over this, even though these languages dominate the leaderboards.<p>Which is fine, except that this is probably the second-most boring critique of Go, one virtually everyone has heard before, and it has little if anything to do with the story we&#x27;re actually commenting on, despite having spawned a huge thread about option types.<p>If GoKart had been my project, I&#x27;d be annoyed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-08-19 04:57:34 &#43;0000 UTC">2021-08-19 04:57:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            - MyPy doesn&#x27;t have pervasive nullability, but distinguishes nullable and non-nullable types in the type system. A function declared to return int but randomly returns None has a bug in its type hints.<p>- I dunk on Java for pervasive nullability too (though there are tools that add @Nullable xor @NonNull annotations used for analysis, possibly sound). But Go has over a decade more hindsight and should&#x27;ve known better.<p>I haven&#x27;t used the other languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-08-19 10:28:15 &#43;0000 UTC">2021-08-19 10:28:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>[Python] distinguishes nullable and non-nullable types in the type system. A function declared to return int but randomly returns None has a bug in its type hints.</i><p>Go distinguishes between the two too. You cannot pass nil as a value to int. In fact in Go you&#x27;d get a compiler warning[0] so you don&#x27;t even need to rely on type hints and a properly set up CI&#x2F;CD pipeline to catch said faults:<p>The problem with Go is that pointers can be nullable[1] as well as interfaces[2] (interfaces, crudely speaking, being Go&#x27;s solution to generics and inheritance. Crudely speaking. So interfaces get used <i>a lot</i>).<p>There is some logic to them being nullable if you think about the code from a hardware perspective but given how opinionated the compiler and language is, I feel they could have done more to catch accidental nils to save the developer from having to consciously consider them each time.<p>[0] <a href="https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;BADNnw08hoo" rel="nofollow">https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;BADNnw08hoo</a><p>[1] <a href="https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;b39tY1SDQtZ" rel="nofollow">https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;b39tY1SDQtZ</a><p>[2] <a href="https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;Fsjsa_-o7Qb" rel="nofollow">https:&#x2F;&#x2F;play.golang.org&#x2F;p&#x2F;Fsjsa_-o7Qb</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=maleldil" target="_blank">maleldil</a>   <span class="timeago" data-date="2021-08-19 13:08:14 &#43;0000 UTC">2021-08-19 13:08:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The int example was a bit misguided, seeing as int is a primitive type in Go, different from pointer types. In Python, both are references.<p>Basically, it&#x27;s the difference between returning None from a function `def f() -&gt; MyClass` in Python (which is type error) versus returning nil from `func f() &amp;MyClass`, which is completely normal in Go.<p>Having `Optional` in the function signature makes it explicit that one has to check for Nones. Go lacks that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hnlmorg" target="_blank">hnlmorg</a>   <span class="timeago" data-date="2021-08-19 14:35:43 &#43;0000 UTC">2021-08-19 14:35:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Optional parameters are a different thing. Yeah one workaround with the lack of optional parameters are to send nil values, but that&#x27;s only going to work if the type you want optional is a nil&#x27;able type. Plus there&#x27;s nothing stopping null values from being passed in Python code outside of optional parameters. My point is optional parameters are one reason why null values might creep in but not <i>the</i> cause nor reason for null values.<p>Plus I personally think if you need an optional parameter then 99% of the time the API is likely designed wrong from the outset (eg maybe you should instead be passing a class). The reason being is that optional parameters aren&#x27;t always predictable (eg why is this value optional? When do I need to include a value for it?)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 05:20:37 &#43;0000 UTC">2021-08-19 05:20:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-19 11:58:13 &#43;0000 UTC">2021-08-19 11:58:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Golang wasn&#x27;t designed in the 1990s.<p>I&#x27;m sorry you&#x27;re bored and also annoyed in the possible universe where GoKart is your project. But it seems like this is a thing people want to talk about in a post about Go static analysis tooling.<p>I don&#x27;t see why you&#x27;re trying to police HN conversations.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:12:35 &#43;0000 UTC">2021-08-19 12:12:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ML was designed in 1976.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=logicchains" target="_blank">logicchains</a>   <span class="timeago" data-date="2021-08-19 07:16:41 &#43;0000 UTC">2021-08-19 07:16:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;You don&#x27;t see so much dunking on Python, Java, Clojure, Ruby, &amp;c,<p>One of the common arguments now for why C# is superior to Java is that it supports non-nullable references. As does C++, which for large latency-sensitive projects is generally picked over C.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:14:21 &#43;0000 UTC">2021-08-19 12:14:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which almost no one uses, because it is more trouble than it is worth on existing code bases, and requires everything to be on latest versions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scns" target="_blank">scns</a>   <span class="timeago" data-date="2021-08-19 09:58:18 &#43;0000 UTC">2021-08-19 09:58:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d say it has been a better designed language for sure, which wasn&#x27;t that hard since they just needed to take a look where Java messed up. So many things are obvious in hindsight  so it&#x27;s not a fair comparison. Regarding platform and reach, Java still wins i guess.<p>Disclaimer: Using neither.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=radicalbyte" target="_blank">radicalbyte</a>   <span class="timeago" data-date="2021-08-19 10:41:20 &#43;0000 UTC">2021-08-19 10:41:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C# has a higher rate of change than Java and a very strong ecosystem - albeit not quite as strong as Java. The tooling - if you pay for it - is in my opinion much better.<p>The thing is, the Java ecosystem is insane. What else comes close to it in breadth and quality? Python, Go, Ruby etc certainly don&#x27;t. C++?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:18:38 &#43;0000 UTC">2021-08-19 12:18:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            C++ yes. That is why despite its flaws and complexity, it will be around for decades to come.<p>Even on the places where Java and .NET languages took over C++ hegemony, it is still there on the implementation of native&#x2F;extern methods and COM&#x2F;UWP libraries.<p>Also don&#x27;t forget if your favourite compiler is a LLVM&#x2F;GCC frontend, many of its improvements require a bit of C++ code changes as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Nullabillity" target="_blank">Nullabillity</a>   <span class="timeago" data-date="2021-08-19 09:52:44 &#43;0000 UTC">2021-08-19 09:52:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, but if they can&#x27;t even get the boring stuff right then why bother moving on to a deeper evaluation?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=drvd" target="_blank">drvd</a>   <span class="timeago" data-date="2021-08-19 13:37:21 &#43;0000 UTC">2021-08-19 13:37:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Programming in Go since 10 years and I do not have to worry about nil pointers. You seem to assume that the possibility of a pointer being nil is something that is complicated, a burden to the programmer and a source of runtime bugs. It&#x27;s not. At least not in Go. At least not something you have to worry about in practice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-19 14:04:21 &#43;0000 UTC">2021-08-19 14:04:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m glad you&#x27;ve had a good experience, but yes it is a source of runtime bugs.<p>One piece of code from a well established tech company would just crashloop if authentication failed. I&#x27;ve seen others just die if the RPC service couldn&#x27;t make a connection.<p>So in practice, yes I do have to spend my time tracking down nil pointer runtime bugs both from colleagues and also from other organizations.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SPBS" target="_blank">SPBS</a>   <span class="timeago" data-date="2021-08-19 00:49:09 &#43;0000 UTC">2021-08-19 00:49:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s not as bad as Java’s NullPointerException because primitive types and compound primitive types are much more prevalent (which are guaranteed to never be nil).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dabfiend19" target="_blank">dabfiend19</a>   <span class="timeago" data-date="2021-08-18 23:09:35 &#43;0000 UTC">2021-08-18 23:09:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            as opposed to?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=streblo" target="_blank">streblo</a>   <span class="timeago" data-date="2021-08-18 23:13:40 &#43;0000 UTC">2021-08-18 23:13:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Optionals would have been a way to solve this problem
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magicalhippo" target="_blank">magicalhippo</a>   <span class="timeago" data-date="2021-08-19 10:45:37 &#43;0000 UTC">2021-08-19 10:45:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So you get an Optional which haven&#x27;t been set instead of a nil pointer. What&#x27;s better about that?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-19 11:59:14 &#43;0000 UTC">2021-08-19 11:59:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The type system knows about it and you&#x27;re forced to check it
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=magicalhippo" target="_blank">magicalhippo</a>   <span class="timeago" data-date="2021-08-19 12:11:53 &#43;0000 UTC">2021-08-19 12:11:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Right, but my point is, the code which would raise an error because the pointer is nil now raises an error because the Optional is not set.<p>Is there really that much of a difference between those cases?<p>I agree though that in an interface, Optional conveys a more explicit meaning than something pointer-like, which is always a good thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-19 13:38:11 &#43;0000 UTC">2021-08-19 13:38:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In practice it does make a big difference because if the type system knows about it then it can enforce handling of the exception. (Or more generally, it can just force you to pattern match on the optional time and make sure you handle the empty case.)<p>Go programs crash at runtime. In general, program failures and bugs should surface as soon as possible. Ideally no later than compile time. Instead, Go makes you wait until the app is running.<p>For an app that has a lot of configuration options, for example, there can be a latent bug that crashes the binary for some options. And that bug may not be detected for months because nobody was using that combination of config options.<p>The only real defense of this is to pepper your code with a bunch of nil checks. But these nil checks are also hard to test, so Go devs just learn to ignore missing code coverage. In fact, your code coverage metrics look better if you don&#x27;t check for nil.<p>I&#x27;m sure at some point Go or a library will offer a version of optional types that is well-adopted. But my point is that by the time Go was designed, null references were already widely considered a bad idea and the source of a huge class of computer bugs. Go still deliberately designed them into the type system.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drvd" target="_blank">drvd</a>   <span class="timeago" data-date="2021-08-19 13:43:00 &#43;0000 UTC">2021-08-19 13:43:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some people think Optional&#x2F;Either&#x2F;etc are the absolute cure to a certain sort of problems and -- I speak from experience -- it is impossible to convince them that it&#x27;s not.<p>Well, of course, if your end users, the business users, are okay if you present them an &quot;optional result&quot; which might or might not be a result, then Optionals&#x2F;Either _are_ the cure. Unfortunately most end users are pissed if you tell them that you optionally shipped their purchase or that the refund will either be credited to their CC or not.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=logical42" target="_blank">logical42</a>   <span class="timeago" data-date="2021-08-18 23:39:59 &#43;0000 UTC">2021-08-18 23:39:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You know what&#x27;s fun?<p>Getting a nil where you are supposed to have an Optional.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mattnewton" target="_blank">mattnewton</a>   <span class="timeago" data-date="2021-08-19 00:42:55 &#43;0000 UTC">2021-08-19 00:42:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Afaik this is impossible in swift and kotlin, only optional values can contain nill.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tbarbugli" target="_blank">tbarbugli</a>   <span class="timeago" data-date="2021-08-19 02:16:56 &#43;0000 UTC">2021-08-19 02:16:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Try Core Data with Swift and you will see that happening. Lazy objects (vaults) are mapped from objc into Swift and will happily crash on something like a = b where both are not optional.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattnewton" target="_blank">mattnewton</a>   <span class="timeago" data-date="2021-08-19 15:45:51 &#43;0000 UTC">2021-08-19 15:45:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is happening in objc code or in the swift part? 
+I&#x27;m not terribly surprised though, my one experience with core data was miserable once we strayed even a little from the happy path and I ended up rolling my own since we didn&#x27;t need full functionality anyways. And this was for an internal app, at Apple ┐( ∵ )┌
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=joshdev" target="_blank">joshdev</a>   <span class="timeago" data-date="2021-08-18 23:45:35 &#43;0000 UTC">2021-08-18 23:45:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Somebody has used Scala
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=still_grokking" target="_blank">still_grokking</a>   <span class="timeago" data-date="2021-08-19 00:51:05 &#43;0000 UTC">2021-08-19 00:51:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            More likely a Java lib form Scala than Scala as such.<p>In &quot;pure&quot; Scala (not in the FP sense, but just without mixing with Java) something like that is almost impossible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=marwis" target="_blank">marwis</a>   <span class="timeago" data-date="2021-08-19 01:55:21 &#43;0000 UTC">2021-08-19 01:55:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless something drastically changed in Scala 3, there is nothing to protect you from null in Scala.
+In fact even Java is effectively safer thanks to all the null checking done by IntelliJ
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=still_grokking" target="_blank">still_grokking</a>   <span class="timeago" data-date="2021-08-19 02:11:47 &#43;0000 UTC">2021-08-19 02:11:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Null is basically non-existent in idiomatic Scala. So technically you&#x27;re right but besides calling Java libs there is only an infinitesimal small chance to get NPEs form Scala code. (Scala&#x27;s NPE is the MatchException ;-)).<p>For Scala 3 there are improvements. It&#x27;s &quot;null safe&quot; as long as you opt-in (modulo Java libs, and of course doing stupid things like casting a null to some other type).<p><a href="https:&#x2F;&#x2F;docs.scala-lang.org&#x2F;scala3&#x2F;reference&#x2F;other-new-features&#x2F;explicit-nulls.html" rel="nofollow">https:&#x2F;&#x2F;docs.scala-lang.org&#x2F;scala3&#x2F;reference&#x2F;other-new-featu...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rowanG077" target="_blank">rowanG077</a>   <span class="timeago" data-date="2021-08-19 01:04:37 &#43;0000 UTC">2021-08-19 01:04:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            so... Just make that impossible. It&#x27;s not like this is unprecedented at this point. It&#x27;s a standard feature even C++ of all languages supports.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=still_grokking" target="_blank">still_grokking</a>   <span class="timeago" data-date="2021-08-19 00:54:02 &#43;0000 UTC">2021-08-19 00:54:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As opposed to some modern type system feature that would catch such bugs at compile time rather than let them happen at runtime.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-18 23:39:30 &#43;0000 UTC">2021-08-18 23:39:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most modern languages have solved the problem. There are a variety of ways to do it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pkaye" target="_blank">pkaye</a>   <span class="timeago" data-date="2021-08-19 00:04:21 &#43;0000 UTC">2021-08-19 00:04:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you list the variety of ways?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SquishyPanda23" target="_blank">SquishyPanda23</a>   <span class="timeago" data-date="2021-08-19 00:44:20 &#43;0000 UTC">2021-08-19 00:44:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Basically if you need to manipulate pointers, use safe pointers and keep track of pointer ownership. This is how modern C++ and Rust work.<p>If you don&#x27;t need to manipulate pointers then nil really just represents a degenerate or optional value. For optional values these can be encoded any number of ways depending on the type system. One common pattern is an optional type. Another is to annotate the type to indicate that it might be null.<p>The idea is that if a programmer doesn&#x27;t check that an nullable or optional type is missing then the program should fail at compile time instead of crashing at runtime. Golang chose to crash programs at runtime.<p>So for whatever reason, Go has decided that null pointer dereferences are not a big deal. But God help you if you try to comment out a variable use without assigning it to &quot;_&quot;. Then the program fails to compile.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 10:01:13 &#43;0000 UTC">2021-08-19 10:01:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; So for whatever reason, Go has decided that null pointer dereferences are not a big deal. But God help you if you try to comment out a variable use without assigning it to &quot;_&quot;. Then the program fails to compile.<p>I think that&#x27;s a good explanation of why people are so frustrated with this. There are lots of features like go fmt, go vet, the compiler checking that you use all variables and all imports that can feel a bit restrictive. But for something like null pointers, there is nothing. It&#x27;s incoherent.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 06:49:52 &#43;0000 UTC">2021-08-19 06:49:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know about &quot;variety of ways&quot;. You just make it so pointers can&#x27;t be null, then provide a mechanism for <i>opt-in</i> nullability, requiring an explicit check &#x2F; conversion to get a non-nullable pointer (which you can dereference) and allowing free &#x2F; cheap &#x2F; implicit conversion from non-nullable to nullable. This can be:<p>* separate pointer types (e.g. C++ pointers v references)<p>* a built-in sigil &#x2F; wrapper &#x2F; suffix e.g. C#&#x27;s Nullable &#x2F; `?` types<p>* a bog-standard userland sum type e.g. Maybe&#x2F;Option&#x2F;Optional<p>In modern more procedural languages the third option often will have language-level (non-userland) facilities tackled on for better usability but that&#x27;s not a requirement.<p>For cases (2) and (3) it can (depending on language and implementation) also provides a mechanism for making other value types optional without necessarily having to heap-allocate them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mattnewton" target="_blank">mattnewton</a>   <span class="timeago" data-date="2021-08-19 00:33:51 &#43;0000 UTC">2021-08-19 00:33:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually it&#x27;s forcing the programmer to handle the null case statically, by wrapping the underlying value in something like an optional type and defining the operations that access the underlying value. Think of swift&#x27;s optional unwrapping in &quot;if let&quot; statements
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=izgzhen" target="_blank">izgzhen</a>   <span class="timeago" data-date="2021-08-19 01:49:46 &#43;0000 UTC">2021-08-19 01:49:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Golang doesn’t have a proper generics support at its beginning. It is too late now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-19 06:52:47 &#43;0000 UTC">2021-08-19 06:52:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You don&#x27;t even need generics to avoid nullable pointers, you can special-case it as they special-cased slices, maps, channels, etc… e.g. `*int` -&gt; non-nullable pointer to int; `?int` -&gt; nullable pointer to int, and a tiny bit of flow analysis in nil checks so e.g. `if foo != nil` implicitly creates a new non-nullable version of `foo` inside the block body.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-08-19 00:16:07 &#43;0000 UTC">2021-08-19 00:16:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve wondered what it would be like to write a thin language that compiles to Go and mainly serves to introduce a reasonable type system on top, while benefitting from its performance and garbage-collection. Could prevent null dereferencing, among other things
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=HALtheWise" target="_blank">HALtheWise</a>   <span class="timeago" data-date="2021-08-19 06:51:20 &#43;0000 UTC">2021-08-19 06:51:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Long ago I hacked together a weekend project with a friend of &quot;JSX for go&quot; that allowed embedding html tags into Go source like people do for react. We were pleasantly surprised how readable and flexible the Go parser source code was, even for the pretty dramatically different syntax we were trying to support.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;8byt&#x2F;gox" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;8byt&#x2F;gox</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nemo1618" target="_blank">nemo1618</a>   <span class="timeago" data-date="2021-08-19 02:31:20 &#43;0000 UTC">2021-08-19 02:31:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is super weird to me that no big compile-to-Go languages have emerged. It doesn&#x27;t seem like anyone is even trying! Why not?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jmnicolas" target="_blank">jmnicolas</a>   <span class="timeago" data-date="2021-08-19 08:38:28 &#43;0000 UTC">2021-08-19 08:38:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why not?<p>Why? What would be the point except as a personal challenge?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 10:11:45 &#43;0000 UTC">2021-08-19 10:11:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most criticisms of Go could be adressed by a language with a Hindley-Milner type system: <a href="https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;survey2020&#x2F;missing_features.svg" rel="nofollow">https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;survey2020&#x2F;missing_features.svg</a> from <a href="https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;survey2020-results" rel="nofollow">https:&#x2F;&#x2F;go.dev&#x2F;blog&#x2F;survey2020-results</a>. Having a ML-like that compiles to Go could solve all those issues, while still keeping the great ecosystem that Go managed to build. Just like with Scala, this new language could allow people to see if that&#x27;s what they really want, and offers to the Go team possibilities of evolution without the need to commit completly to them.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:20:43 &#43;0000 UTC">2021-08-19 12:20:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For that I already have OCaml, Haskell and F#, so why bother?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 12:32:41 &#43;0000 UTC">2021-08-19 12:32:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OCaml and Haskell don&#x27;t have Go&#x27;s ecosystem in terms of quantity. For F#, can it be compile to a binary like Go? I searched for a bit and couldn&#x27;t find a good answer. Another thing is that people like to stay in their ecosystems. If you already have a large codebase in Go, internal libraries, etc, switching could be difficult.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:50:43 &#43;0000 UTC">2021-08-19 12:50:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Quantity isn&#x27;t a synonym for quality.<p>There are a couple of ways to compile .NET code into native code. Since version 1.0 NGEN was part of the SDK, although its main purpose was faster startup with dynamic linking.<p>On Microsoft side there has been CoreRT, NativeAOT, .NET Native.<p>Mono has had AOT support since ages and it is anyway required for iOS deployments.<p>Other than that several community efforts have taken place as well, for example WebAssembly.<p><a href="https:&#x2F;&#x2F;fsbolero.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;fsbolero.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 13:04:36 &#43;0000 UTC">2021-08-19 13:04:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re right about quantity and quality, that&#x27;s why I mentionned quantity precisely. Quantity usually means that most of the stuff has already been made by someone, and people seem to value that a lot. I&#x27;ll add that the documentation of your average OCaml or Haskell library is not the best, while from experience Go is a bit better (usually there are a few basic examples).<p>Thank you for the information on .NET AOT.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=noisy_boy" target="_blank">noisy_boy</a>   <span class="timeago" data-date="2021-08-19 01:37:05 &#43;0000 UTC">2021-08-19 01:37:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wrote one component in go - it does everything that is expected from it with good performance without having to deal with virtualenv&#x2F;jvm dependencies. However I don&#x27;t want to write that much code again. Only of there was a language with ecosystem&#x2F;brevity&#x2F;garbage collection of Java, strong type system&#x2F;pattern matching of Rust, excellent multi-threading of go and produced a dependency free binary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=still_grokking" target="_blank">still_grokking</a>   <span class="timeago" data-date="2021-08-19 02:02:22 &#43;0000 UTC">2021-08-19 02:02:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Scala Native probably.<p>But I&#x27;ve never used it so not sure how mature it is.<p><a href="https:&#x2F;&#x2F;scala-native.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;scala-native.org&#x2F;</a><p>The other Go alternative I see is D.<p>Close to the metal but with high level features. Runs in a managed runtime. Creates native code.<p><a href="https:&#x2F;&#x2F;dlang.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;dlang.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=noisy_boy" target="_blank">noisy_boy</a>   <span class="timeago" data-date="2021-08-19 07:29:01 &#43;0000 UTC">2021-08-19 07:29:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for reminding me about D - I&#x27;ve always heard about it but never checked it out. Will try it out to see how it feels.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:23:45 &#43;0000 UTC">2021-08-19 12:23:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Be prepared that D kind of struggles with having a small community, other than that, it is a very nice C# like language with systems programming capabilities and AOT compilation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-19 12:22:11 &#43;0000 UTC">2021-08-19 12:22:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            D is more than that, think of C# as version 1.0 should have been all along.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-19 04:50:27 &#43;0000 UTC">2021-08-19 04:50:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suspect in part it&#x27;s a combination of 1) Go is good enough as is (and some people don&#x27;t mind Go&#x27;s simple type system or the boilerplate-y but explicit error handling), and 2) the Go tooling is really good -- &quot;go build&quot;, &quot;go test&quot;, etc, would all have to be wrapped or rewritten with slower, buggier versions.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dzonga" target="_blank">dzonga</a>   <span class="timeago" data-date="2021-08-19 03:55:45 &#43;0000 UTC">2021-08-19 03:55:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            v-lang ? 
+<a href="https:&#x2F;&#x2F;vlang.io&#x2F;" rel="nofollow">https:&#x2F;&#x2F;vlang.io&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hardwaregeek" target="_blank">hardwaregeek</a>   <span class="timeago" data-date="2021-08-19 00:39:40 &#43;0000 UTC">2021-08-19 00:39:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Like a TypeScript for Go? We could call it Tolang.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-08-19 00:43:20 &#43;0000 UTC">2021-08-19 00:43:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the idea!<p>I use Rust for a lot of personal projects mainly because of the type system, not because it doesn&#x27;t have GC. I think GC&#x27;s totally livable for a great many things, and it would help iteration speed a lot to not have to deal with the borrow-checker, but I just can&#x27;t stand working in a language with a shaky type system these days. So Go-with-good-types sounds fantastic to me.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=smabie" target="_blank">smabie</a>   <span class="timeago" data-date="2021-08-19 02:05:42 &#43;0000 UTC">2021-08-19 02:05:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How about OCaml?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scns" target="_blank">scns</a>   <span class="timeago" data-date="2021-08-19 10:07:40 &#43;0000 UTC">2021-08-19 10:07:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OCaml will be a viable alternative when multithreading works, hopefully soon.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-08-19 02:21:19 &#43;0000 UTC">2021-08-19 02:21:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve heard the tooling and general ecosystem are not great (similar to Haskell), though I don&#x27;t know firsthand
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=smabie" target="_blank">smabie</a>   <span class="timeago" data-date="2021-08-19 03:57:38 &#43;0000 UTC">2021-08-19 03:57:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve personally found it really good, probably better than Haskell. Not Go level though I imagine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-19 06:43:41 &#43;0000 UTC">2021-08-19 06:43:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The tooling is good, the ecosystem is where it&#x27;s lacking.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggu" target="_blank">ggu</a>   <span class="timeago" data-date="2021-08-19 03:53:06 &#43;0000 UTC">2021-08-19 03:53:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            +1
+After learning OCaml &amp; experiencing algebraic data types and pattern matching, writing in other languages just makes me want to switch to OCaml
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=scns" target="_blank">scns</a>   <span class="timeago" data-date="2021-08-19 10:10:06 &#43;0000 UTC">2021-08-19 10:10:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or Kotlin, KOlang.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jacques_chester" target="_blank">jacques_chester</a>   <span class="timeago" data-date="2021-08-19 01:18:30 &#43;0000 UTC">2021-08-19 01:18:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think your difficulty would be in finding interested users. People who like Go, like Go, warts and all. Everyone else has heaved a sigh of relief and decamped to other languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brundolf" target="_blank">brundolf</a>   <span class="timeago" data-date="2021-08-19 01:27:16 &#43;0000 UTC">2021-08-19 01:27:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be clear, I&#x27;m not suggesting that I personally would be able to bootstrap this (and the tooling, and the declarations for existing libraries, etc) and have it take off<p>But if I saw it pop up on HN I&#x27;d jump on board in a heartbeat<p>Go has a lot of compelling benefits around compiling, performance, concurrency, etc that I think would translate. It just made a couple of really unfortunate decisions around null pointers and default values that turn a lot of people off. I think salvaging it from those unfortunate decisions would be worth doing for the right party with the resources to do so, and I think it would appeal to a lot of people<p>I&#x27;m not even sure I would want generics to be added, since that&#x27;s an elephant in this particular room. I just want to be able to have a mote of confidence in the values I&#x27;m working with.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=shp0ngle" target="_blank">shp0ngle</a>   <span class="timeago" data-date="2021-08-19 02:00:47 &#43;0000 UTC">2021-08-19 02:00:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That seems nice. I stopped using gosec (or whatever was the name) because of all that noise
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggu" target="_blank">ggu</a>   <span class="timeago" data-date="2021-08-19 03:45:06 &#43;0000 UTC">2021-08-19 03:45:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I was on the team that came up with GoKart and one of the main motivating factors was that gosec is just waay too noisy to be useful
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jannetalex" target="_blank">jannetalex</a>   <span class="timeago" data-date="2021-08-19 10:56:52 &#43;0000 UTC">2021-08-19 10:56:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            . I&#x27;ve suffered with HIV&#x2F;AIDS ever since I was a child but it&#x27;s only been the last few years I discovered that I also have herpes virus . So I started looking for a way to get cure permanently from this deadly virus I visited so many hospitals in search for a solution.Few month ago I came across a site where a lady was sharing a testimony about Dr Godwin and how he cured HIV&#x2F;AIDS virus and all kinds of diseases with natural herbs so I decided to give it a try and i messaged Doctor Godwin he told me how I was going to get the herbs so I did as he instructed few days later I received the herbs and I started taking the herbs as instructed by the Dr.I was shocked two weeks later my doctor told me that I was free from HIV&#x2F;AIDS so I decided to let the world know how I was cured from HIV&#x2F;AIDS by Dr godwin. you can reach him through his drgodwinharbs@gmail.com Or WhatsApp&#x2F;call +234 8089906968.If you also want cure for your herpes or any of the disease listed below Dr godwin also cure the listed diseases below
+1,Weight loss
+2,cancer
+3,herpes virus
+4,high blood presure
+5,diabetes
+6,Skin rashes
+7,Swollen lymph glands
+8,Pneumonia  Memory loss
+9,Sores of the mouth, anus, or genitals
+10,HIV&#x2F;AIDS
+11,Penis enlargement etc
+Goodluck call or wattsapp [+2348089906968 ]  dr godwin website link --- [ <a href="https:&#x2F;&#x2F;drgodwinharbalhomecure22.simdif.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;drgodwinharbalhomecure22.simdif.com&#x2F;</a> ]  God bless you dr Godwin for what you did for me and my family he is so real and reliable
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

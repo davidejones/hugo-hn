@@ -1,0 +1,4501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/ask-hn-why-does-zoom-desktop-examine-all-processes-and-arguments/">
+
+
+    <title>Ask HN: Why does Zoom Desktop examine all processes and arguments? - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Ask HN: Why does Zoom Desktop examine all processes and arguments? - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/ask-hn-why-does-zoom-desktop-examine-all-processes-and-arguments/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/ask-hn-why-does-zoom-desktop-examine-all-processes-and-arguments/">
+<meta name="twitter:title" content="Ask HN: Why does Zoom Desktop examine all processes and arguments? - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Ask HN: Why does Zoom Desktop examine all processes and arguments? - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T18:38:53JST",
+    "dateModified": "2021-08-17T18:38:53JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="">Ask HN: Why does Zoom Desktop examine all processes and arguments?</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reilly3000" target="_blank">reilly3000</a>   <span class="timeago" data-date="2021-08-17 21:25:45 &#43;0000 UTC">2021-08-17 21:25:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom has a popular feature which allows for screen sharing a single application window instead of the entire desktop. I assume this is how its discovering running applications with GUI windows open in a cross-platform manner. Perhaps there is a better API for this? Its not a common use-case that an app would need to know all of the other open windows, but it seems like a perfectly valid use case, and frankly handy for sharing a PPT without fear of an embarrassing email showing up in during a meeting.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cranekam" target="_blank">cranekam</a>   <span class="timeago" data-date="2021-08-17 21:41:49 &#43;0000 UTC">2021-08-17 21:41:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s nothing in &#x2F;proc&#x2F;PID&#x2F;cmdline etc that would definitely confirm an app has a GUI. The two concepts are at very different layers of the stack — to the OS the GUI is just another app on top of the kernel. Mayyyyyybe Zoom could be doing some crude pattern matching on process name or environment variables of a given process (though it’d only be able to read data of processes running as the same user) but it’s a long shot.<p>Personally I’d guess it is either some other library Zoom uses or some kind of debug info capturing system. But I don’t know work at Zoom so who knows.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 21:48:41 &#43;0000 UTC">2021-08-17 21:48:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an unlikely stretch, but it looks like they&#x27;re also attempting to read `&#x2F;proc&#x2F;PID&#x2F;exe` -- they could be doing something (extremely) cursed like attempting to parse the program linkages and filtering by programs that link to `libX11`. But that&#x27;s me straining to explain this in the context of the GP&#x27;s hypothesis.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:04:14 &#43;0000 UTC">2021-08-18 01:04:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why would you implement such a overly complex and unreliable thing when:<p>1. The windows manager can provide you with a list of open windows.<p>2. Screensharing including only sharing specific windows is a feature provided by the windows manager over standardized protocols.<p>3. Even knowing the processes which do have a GUI doesn&#x27;t allow you to share that GUI, at least not without going through roughly the same mechanisms as mentioned in 2nd.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stinos" target="_blank">stinos</a>   <span class="timeago" data-date="2021-08-18 08:41:14 &#43;0000 UTC">2021-08-18 08:41:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>The windows manager can provide you with a list of open windows.</i><p>But that needs a unified way for this across window managers, does that exist?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-19 08:01:00 &#43;0000 UTC">2021-08-19 08:01:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes for X11: _NET_CLIENT_LIST [0]<p>[0] <a href="https:&#x2F;&#x2F;specifications.freedesktop.org&#x2F;wm-spec&#x2F;wm-spec-1.3.html#idm45643494167264" rel="nofollow">https:&#x2F;&#x2F;specifications.freedesktop.org&#x2F;wm-spec&#x2F;wm-spec-1.3.h...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 09:32:38 &#43;0000 UTC">2021-08-18 09:32:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=numpad0" target="_blank">numpad0</a>   <span class="timeago" data-date="2021-08-18 09:14:03 &#43;0000 UTC">2021-08-18 09:14:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t know but xkill works across WM
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 15:26:52 &#43;0000 UTC">2021-08-18 15:26:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 02:09:41 &#43;0000 UTC">2021-08-18 02:09:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hence “unlikely stretch.”
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inter_netuser" target="_blank">inter_netuser</a>   <span class="timeago" data-date="2021-08-18 06:39:39 &#43;0000 UTC">2021-08-18 06:39:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let&#x27;s just say the quiet part outloud: they sell that data.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 15:46:11 &#43;0000 UTC">2021-08-18 15:46:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They probably don&#x27;t. The list of programs running on a random Linux box probably isn&#x27;t especially valuable.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=failuser" target="_blank">failuser</a>   <span class="timeago" data-date="2021-08-18 18:59:38 &#43;0000 UTC">2021-08-18 18:59:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That machine can be in a Russian or Iranian nuclear physics or bioweapon lab and run very specific software. E.g. you can be looking for some project code names.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 21:30:37 &#43;0000 UTC">2021-08-18 21:30:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure. But that&#x27;s a <i>very</i> distinct task vs. the implication that Zoom is somehow making ad revenue off of Linux process names. The latter strikes me as not very likely because there&#x27;s no money in it; the former is well outside of anything I feel qualified to opine on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=inter_netuser" target="_blank">inter_netuser</a>   <span class="timeago" data-date="2021-08-18 23:42:23 &#43;0000 UTC">2021-08-18 23:42:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;d be surprised about how weird things can get sometimes.<p>Here is a company that does censorship-resistant P2P networking...and also....Nuclear Material Detection?<p>Obviously very closely related things?<p><a href="https:&#x2F;&#x2F;www.clostra.com&#x2F;newnode-mesh-network" rel="nofollow">https:&#x2F;&#x2F;www.clostra.com&#x2F;newnode-mesh-network</a>
+<a href="https:&#x2F;&#x2F;www.clostra.com&#x2F;nuclear-detection-snm" rel="nofollow">https:&#x2F;&#x2F;www.clostra.com&#x2F;nuclear-detection-snm</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-19 01:25:33 &#43;0000 UTC">2021-08-19 01:25:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like a defense contractor to me. If you pulled two random things out of my company&#x27;s roster, you could probably spin an equally suspicious narrative.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cranekam" target="_blank">cranekam</a>   <span class="timeago" data-date="2021-08-18 11:18:53 &#43;0000 UTC">2021-08-18 11:18:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Haha. What possible market is there for knowing which other binaries Zoom (desktop) users run? OMG Zoom users also run Chrome, cat, and init! That&#x27;ll be $10k please.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-17 22:16:42 &#43;0000 UTC">2021-08-17 22:16:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nah, the readlink on exe looks like it&#x27;s simply to query the real name of the executable, so that&#x27;s pretty benign.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-17 23:19:12 &#43;0000 UTC">2021-08-17 23:19:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe they mean grab the absolute path to the real executable, run ldd against it, and parse that output to see if it links against libX11. That doesn&#x27;t tell you a program is really using X11, though, as plenty have some sort of no-gui option to launch without a window. You can always cat &#x2F;proc&#x2F;{PID}&#x2F;maps to see if libx11 is actually loaded into the process&#x27; address space, and just use readlink on exe to figure out the application name.<p>That&#x27;s a really stupid way to figure out if a program has a window, though, compared to just using the X11 API directly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gmueckl" target="_blank">gmueckl</a>   <span class="timeago" data-date="2021-08-18 00:18:23 &#43;0000 UTC">2021-08-18 00:18:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have evidence of old being executed or similar? The posted strace log section is fairly benign and shows no hints of what you insinuate.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-18 12:27:06 &#43;0000 UTC">2021-08-18 12:27:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Nope, and I&#x27;m not going to run zoom to find out. To be perfectly clear, I&#x27;m not at all trying to say I have evidence that this is what zoom is actually doing. I&#x27;m trying to say I believe this is what the upper-level post was suggesting zoom is doing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 02:17:43 &#43;0000 UTC">2021-08-18 02:17:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You wouldn’t actually need to execute `ldd` to get this information: you could parse the ELF entirely in user space. That, in turn, wouldn’t show up in the `strace` logs, since there would be no syscalls. I think that’s extremely unlikely, but it’s certainly possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IgorPartola" target="_blank">IgorPartola</a>   <span class="timeago" data-date="2021-08-18 04:38:27 &#43;0000 UTC">2021-08-18 04:38:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reading the file would show up as syscalls.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-18 15:20:34 &#43;0000 UTC">2021-08-18 15:20:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sure, but you could minimize it to just two: the `open` that we already see here, and an `mmap` that maps the entire thing in. The rest could be in userspace (at least in terms of effects). We only have an excerpt of the syscall trace, so it&#x27;s possible that happens.<p>But again: <i>extraordinarily</i> unlikely.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thrower123" target="_blank">thrower123</a>   <span class="timeago" data-date="2021-08-17 22:01:25 &#43;0000 UTC">2021-08-17 22:01:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Never attribute to malice what is adequately explained by laziness.<p>I can easily believe  somebody just wrote a chunk of naive code that grabbed all the running processes, and it worked, and they moved on.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=MereInterest" target="_blank">MereInterest</a>   <span class="timeago" data-date="2021-08-17 23:18:20 &#43;0000 UTC">2021-08-17 23:18:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can easily believe either.  However, while the default assumption of laziness&#x2F;incompetence works well for good faith discussions, it also provides cover for malicious actors.  At some point, even though any given actor is likely to be non-malicious, there is no way to distinguish them from the malicious actors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-17 23:36:50 &#43;0000 UTC">2021-08-17 23:36:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hanlon&#x27;s razor is a great principle to apply to personal relationships, but it falls apart in these situations.<p>You can explain away any deliberate malice or negligence using it, even when there are clear incentives to enage is such behavior, unless there&#x27;s absolute evidence of malice. By then it&#x27;s too late because you&#x27;ve already been swindled, and the principle ignores the lengths organizations will go to cover that evidence up.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TeMPOraL" target="_blank">TeMPOraL</a>   <span class="timeago" data-date="2021-08-18 09:30:37 &#43;0000 UTC">2021-08-18 09:30:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you&#x27;re dealing with bigger threats, you need a more powerful weapon. Sheathe the Hanlon&#x27;s razor, and unholster the Hanlon&#x27;s handgun:  &quot;Never attribute to stupidity that which can be adequately explained by systemic incentives promoting malice.&quot;<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21691282" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=21691282</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=addicted" target="_blank">addicted</a>   <span class="timeago" data-date="2021-08-18 06:26:11 &#43;0000 UTC">2021-08-18 06:26:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’d argue that laziness is worse in security&#x2F;privacy situations than malicious intent. At least malicious intent only exposes me to Zoom and whoever they answer to. Their laziness, however, which would probably also reflect itself in other security situations, exposes me to them as well as basically the entire world of black hat hackers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=propogandist" target="_blank">propogandist</a>   <span class="timeago" data-date="2021-08-17 22:30:27 &#43;0000 UTC">2021-08-17 22:30:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            or it’s spyware, maybe not as bad as a keylogger, but it can be mining your active usage behavior
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=reilly3000" target="_blank">reilly3000</a>   <span class="timeago" data-date="2021-08-17 22:51:25 &#43;0000 UTC">2021-08-17 22:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This could be verified by inspecting their analytics requests. If I have time I may take a peek at those later.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=reilly3000" target="_blank">reilly3000</a>   <span class="timeago" data-date="2021-08-18 09:46:42 &#43;0000 UTC">2021-08-18 09:46:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I wasn&#x27;t able to find much of interest from their desktop client, as all of the data is encrypted and I&#x27;m not sure how to grab an SSL key from a desktop app for use in Wireshark decryption. If somebody clever wants to help, please let me know.<p>I did take at their privacy policy and didn&#x27;t see anything that explicitly states they are <i>collecting</i> info about running applications. &quot;and other&quot; leaves room for interpretation... Regardless, my main concern after viewing this isn&#x27;t that they are snooping my running processes and sending that back to home base. Its that they are openly keylogging and tracking everything under the sun, and can view every aspect of the meeting&#x27;s content (audio, video, text, etc) and share it with 3rd parties like law enforcement and others.<p>Source: <a href="https:&#x2F;&#x2F;zoom.us&#x2F;privacy#_qhklx843v2zq" rel="nofollow">https:&#x2F;&#x2F;zoom.us&#x2F;privacy#_qhklx843v2zq</a><p>&gt; Device Information: Information about the computers, phones, and other devices people use when interacting with Zoom Products, which may include information about the speakers, microphone, camera, OS version, hard disk ID, PC name, MAC address, IP address (which may be used to infer general location at a city or country level), device attributes (like operating system version and battery level), WiFi information, and other device information (like Bluetooth signals).<p>&gt; Meeting, Webinar, and Messaging Content and Context: Content generated in meetings, webinars, or messages that are hosted on Zoom Products, which may include audio, video, in-meeting messages, chat messaging content, transcriptions, written feedback, responses to polls and Q&amp;A, and files, as well as related context, such as invitation details, meeting or chat name, or meeting agenda. Content may contain your voice and image, depending on the account owner’s settings, what you choose to share, your settings, and what you do on Zoom Products.<p>&gt; Product and Website Usage: Information about how people and their devices interact with Zoom Products, such as: when participants join and leave a meeting; whether participants sent messages and who they message with; performance data; mouse movements, clicks, keystrokes or actions (such as mute&#x2F;unmute or video on&#x2F;off), and other user inputs that help Zoom to understand feature usage, improve product design, and suggest features; which third-party apps users add to a meeting or other Product and what information and actions the app is authorized to access and perform; features used (such as screen sharing, emojis, or filters); and other usage information and metrics. This also includes information about when and how people visit and interact with Zoom’s websites, including what pages they accessed, their interaction with the website features, and whether or not they signed up for a Zoom Product.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=propogandist" target="_blank">propogandist</a>   <span class="timeago" data-date="2021-08-17 22:55:15 &#43;0000 UTC">2021-08-17 22:55:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            whoever does the analysis may also become a whistleblower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dylan604" target="_blank">dylan604</a>   <span class="timeago" data-date="2021-08-17 23:28:33 &#43;0000 UTC">2021-08-17 23:28:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does &quot;whistleblower&quot; apply to people not working directly for the company being reported? I&#x27;ve always understood it to be employee reporting against the employer. I could totally be limiting it from what other people use it though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=stjohnswarts" target="_blank">stjohnswarts</a>   <span class="timeago" data-date="2021-08-18 00:24:13 &#43;0000 UTC">2021-08-18 00:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it&#x27;s a generic definition for someone closely associated with the company to out them out something that they would like to keep secret because it would embarrass them or lead to legal redress.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-08-17 22:12:29 &#43;0000 UTC">2021-08-17 22:12:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I run Zoom from flatpak, which runs it in a container, and sandboxes it to some extent [1]<p>This probably explains why, when i try to screenshare a single application window, not every application shows up! I can share my browser, file manager, and various other things, but not windows for games started by Steam.<p>[1] I followed these instructions <a href="https:&#x2F;&#x2F;www.mayrhofer.eu.org&#x2F;post&#x2F;zoom-flatpak-sandboxing&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.mayrhofer.eu.org&#x2F;post&#x2F;zoom-flatpak-sandboxing&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=heavyset_go" target="_blank">heavyset_go</a>   <span class="timeago" data-date="2021-08-17 23:14:28 &#43;0000 UTC">2021-08-17 23:14:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you using Wayland? That might be an artifact of Steam and games running via XWayland.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=twic" target="_blank">twic</a>   <span class="timeago" data-date="2021-08-18 09:26:42 &#43;0000 UTC">2021-08-18 09:26:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As far as i know, no, it&#x27;s all still pure X11. I would like to try Wayland, but i&#x27;m using Cinnamon as a desktop, and i&#x27;m not sure they work together.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-08-18 01:09:45 &#43;0000 UTC">2021-08-18 01:09:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Games always seem impacted in odd ways by remote desktop protocols. One game might run fine, while another is just a black screen, or an uncontrollable mouse.<p>It makes me wonder how Things like Steam streaming and Paperspace get around the issue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 21:42:01 &#43;0000 UTC">2021-08-17 21:42:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Based on OP&#x27;s snippet they&#x27;re probably doing this on Linux. Assuming the presence of X11 and an EWMH-compatible window manager, they could query X11 directly and ask the root window for its `_NET_CLIENT_LIST` attribute. That, in turn, would list every &quot;semantic&quot; (i.e., non-decorative) window currently open on the current display.<p>But that doesn&#x27;t work for non-X11 or if the WM is non-EWMH compliant. Presumably Wayland has a similar API, and non-EWMH is probably a minuscule group that considers this a desirable feature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sp1rit" target="_blank">sp1rit</a>   <span class="timeago" data-date="2021-08-17 22:47:47 &#43;0000 UTC">2021-08-17 22:47:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One of the selling points of Wayland is, that they have no such API. An Application is supposed to be unable to access windows (and their corresponding keyboard&#x2F;mouse input).<p>One of the downsides this has is the described issue of &quot;screensharing beeing impossible on wayland&quot;. This is solved by the XDG Desktop Portal, which provides a unified dbus interface across the different compositor implementations for requesting a pipewire file descriptor (which can be used with gstreamer to get a live video stream of the deskop, in a way far superior to x11 framegrab). 
+However the implementation differs for each compositor, GNOME for example asks you if you what to share the whole screen or just a specific application but wlroots (swaywm, wayfire, etc.) AFAIK automatically accepts and shares the whole screen. I don&#x27;t know what KDE Plasma does.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-19 09:01:22 &#43;0000 UTC">2021-08-19 09:01:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; which can be used with gstreamer to get a live video stream of the deskop, in a way far superior to x11 framegrab<p>I don&#x27;t think I&#x27;d agree that having to go through dbus <i>and</i> pipewire just to get the contents of the screen or a window is far superior to requesting that data from the display server. It certainly adds a lot of complexity with subpar documentation spread across multiple projects. Does this provide you a compressed stream or can you get the raw pixels that are displayed?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:33:09 &#43;0000 UTC">2021-08-18 01:33:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I initially miss read you post, you formulations can be a bit misleading.<p>E.g. &quot;Wayland is, that they have no such API.&quot;, it has screen sharing APIs but they are different and require you do go through other programs like XDG Desktop Portal and Pipewire to allow the user to control such access. Similar this also means Wayland supports screen sharing just in different ways.<p>Anyway the important parts are:<p>- the implementation might differ, but the API doesn&#x27;t (or at least not by a relevant degree)<p>- wayland requires you to go through specific APIs for screen sharing, scanning processes has little to do with screen sharing on either wayland or X.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:12:07 &#43;0000 UTC">2021-08-18 01:12:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Presumably Wayland ...<p>Yes there is a wayland extension for screen sharing and also support for sharing just one application.<p>It provides screen sharing on KDE, Gnome and most wlroots based WMs.<p>Through wlroots doesn&#x27;t yet (or maybe does by now) support sharing a specific window I think, but this mean it <i>doesn&#x27;t support sharing a specific window</i> and knowing which process belongs to a window doesn&#x27;t really help you there either...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kelnos" target="_blank">kelnos</a>   <span class="timeago" data-date="2021-08-17 22:23:37 &#43;0000 UTC">2021-08-17 22:23:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>I assume this is how its discovering running applications with GUI windows open in a cross-platform manner.</i><p>That&#x27;s definitely not a cross-platform way of doing it (and I doubt there is one, even).<p>On Linux you&#x27;d use libX11 and just enumerate all windows (using XQueryTree()).  Walking the contents of &#x2F;proc is not only unnecessary, but is more difficult to do, as looking at executable names won&#x27;t tell you if a program has a GUI, or if it has any open windows.  It won&#x27;t give you window titles, or how many windows are open, or how to grab their contents.<p>Pretty sure Zoom is snooping on us and is gathering telemetry.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=user5994461" target="_blank">user5994461</a>   <span class="timeago" data-date="2021-08-18 01:24:10 &#43;0000 UTC">2021-08-18 01:24:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Windows has a function EnumWindows() to do just that.<p>If you say that there&#x27;s an similar API on Linux for X11, then that&#x27;s the same methodology across platforms.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:34:54 &#43;0000 UTC">2021-08-18 01:34:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure there is such a API on wayland,<p>BUT there are standardized protocols&#x2F;APIs for screen sharing including screen sharing of just a window. And you won&#x27;t get far without using them so also no reason to scan processes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mwcampbell" target="_blank">mwcampbell</a>   <span class="timeago" data-date="2021-08-17 22:33:19 &#43;0000 UTC">2021-08-17 22:33:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Pretty sure Zoom is snooping on us and is gathering telemetry.<p>Don&#x27;t forget Hanlon&#x27;s razor, as someone else in the thread pointed out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:36:48 &#43;0000 UTC">2021-08-18 01:36:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But I can&#x27;t come up with a &quot;stupidity&quot; which would explain this behaviour...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-17 22:36:29 &#43;0000 UTC">2021-08-17 22:36:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; handy for sharing a PPT without fear of an embarrassing email showing up in during a meeting.</i><p>When you share a single window in Zoom, notifications are still visible to others in the meeting when they overlap with the window you&#x27;re sharing. That&#x27;s the case for e.g. Slack notifications.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aetherspawn" target="_blank">aetherspawn</a>   <span class="timeago" data-date="2021-08-17 22:41:48 &#43;0000 UTC">2021-08-17 22:41:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are grayed out for everyone else, so they can’t actually read the contents.<p>Caveat being if you move the window around really fast sometimes it’s possible to catch a glimpse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-17 23:03:11 &#43;0000 UTC">2021-08-17 23:03:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe that&#x27;s changed, but a couple months ago we tested it on vanilla Ubuntu in the team at $dayjob and we could see everything. Nothing was grayed out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aetherspawn" target="_blank">aetherspawn</a>   <span class="timeago" data-date="2021-08-18 04:08:59 &#43;0000 UTC">2021-08-18 04:08:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sounds like it works a little differently on Linux.<p>To be honest, I&#x27;m actually surprised and impressed that they support screen share in the Linux version because of how many different flavors of i.e. WM there are in the wild.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eadmund" target="_blank">eadmund</a>   <span class="timeago" data-date="2021-08-18 13:55:39 &#43;0000 UTC">2021-08-18 13:55:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t believe that the WM would enter into it — as long as folks are using X11 the code should be, I think, the same for any WM or DE.<p>Now, using Wayland it may or may not be possible, depending on which WM&#x2F;compositor&#x2F;whatever you are running.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kiwijamo" target="_blank">kiwijamo</a>   <span class="timeago" data-date="2021-08-18 03:42:11 &#43;0000 UTC">2021-08-18 03:42:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom on Mac and&#x2F;or windows seems to black out other windows if they appear on top of the target window. I&#x27;ve seen that happen a few times so definitely does happen, just perhaps not on Linux.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=123jay7" target="_blank">123jay7</a>   <span class="timeago" data-date="2021-08-18 00:41:58 &#43;0000 UTC">2021-08-18 00:41:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            $dayJob
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TameAntelope" target="_blank">TameAntelope</a>   <span class="timeago" data-date="2021-08-17 22:37:51 &#43;0000 UTC">2021-08-17 22:37:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I literally quit all messaging apps when presenting to people for any period of time more than ~10s.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dylan604" target="_blank">dylan604</a>   <span class="timeago" data-date="2021-08-17 23:30:48 &#43;0000 UTC">2021-08-17 23:30:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could also disable notifications if your OS has that kind of feature. Mine does, so I took advantage of that after the first incident of being interrupted. It&#x27;s a nice feature.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cygned" target="_blank">cygned</a>   <span class="timeago" data-date="2021-08-18 11:28:45 &#43;0000 UTC">2021-08-18 11:28:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let me introduce you to Microsoft Teams which comes with custom notifications ignoring do-not-disturb settings.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:39:13 &#43;0000 UTC">2021-08-18 01:39:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            On windows?<p>Hm, I don&#x27;t think that is the case for Gnome&#x2F;GTK as pipe wire should grab the image before it&#x27;s composed as far as I know.<p>But I can&#x27;t check as I&#x27;m running sway which (I think, haven&#x27;t checked for a while) doesn&#x27;t yet support single window screen sharing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 00:57:39 &#43;0000 UTC">2021-08-18 00:57:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I assume this is how its discovering running applications with GUI windows open in a cross-platform manner.<p>The screen sharing functionality is handled by a mix of protocols of the windows manger and service 
+providers announced over dbus.<p>Even if you want to map GUI windows to processes you would do so by getting a list of windows from the window manager and getting the pid property of the windows, but if you have a list of windows you don&#x27;t need to scan processes anymore...<p>There might (I&#x27;m not sure) be valid use-cases for this behaviour but I&#x27;m pretty confident screen sharing of specific windows isn&#x27;t part of it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sails" target="_blank">sails</a>   <span class="timeago" data-date="2021-08-17 21:32:18 &#43;0000 UTC">2021-08-17 21:32:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does Teams do this in the same way? They offer the same feature
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sniperjzp" target="_blank">sniperjzp</a>   <span class="timeago" data-date="2021-08-17 21:38:12 &#43;0000 UTC">2021-08-17 21:38:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not sure about Teams, but Google Meet allow you to share a specific browser tab, I don&#x27;t know how to implement it without reading all the opened tabs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meibo" target="_blank">meibo</a>   <span class="timeago" data-date="2021-08-17 22:32:01 &#43;0000 UTC">2021-08-17 22:32:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is a JavaScript API that abstracts this, so Google Meet&#x2F;whatever asked can only read the &quot;final&quot; video stream of what you selected and not everything that&#x27;s going on, which stays in your local browser.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Flame" target="_blank">Flame</a>   <span class="timeago" data-date="2021-08-18 06:22:43 &#43;0000 UTC">2021-08-18 06:22:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Teams lets you share an application window or your display(s).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ineedasername" target="_blank">ineedasername</a>   <span class="timeago" data-date="2021-08-18 01:06:03 &#43;0000 UTC">2021-08-18 01:06:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Reminds me a bit of how platforms like Citrix will publish single applications. Considering you can give control to another user with Zoom I suppose it&#x27;s a lot like that, although I know the underlying tech is very different.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=birksherty" target="_blank">birksherty</a>   <span class="timeago" data-date="2021-08-18 01:10:09 &#43;0000 UTC">2021-08-18 01:10:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Google meet running in a browser can share any application specific windows. Not sure if it also does the same thing though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barbs" target="_blank">barbs</a>   <span class="timeago" data-date="2021-08-18 12:37:39 &#43;0000 UTC">2021-08-18 12:37:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m pretty sure Jitsi allows for screen-sharing a particular application so I&#x27;m curious to know how that works. Might check the source later.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-17 22:45:07 &#43;0000 UTC">2021-08-17 22:45:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Why would it do that?<p>We can answer part of that with just a little more reading.  What&#x27;s pid 3844872?<p>For me, the series of queries against &#x2F;proc happen from a process that, just a bit earlier, called exec.  So it&#x27;s not really zoom reading &quot;all processes and arguments&quot; but ... `pidof gnome-session`, so I guess zoom is looking for the pid of gnome-session.<p>To what nefarious purpose zoom intends to put this knowledge of gnome-session&#x27;s pid, I can&#x27;t say - I am not running gnome-session so my trail goes cold; but at least for me, for that particular run, zoom itself doesn&#x27;t actually see the contents of all of those files.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thxg" target="_blank">thxg</a>   <span class="timeago" data-date="2021-08-18 00:35:52 &#43;0000 UTC">2021-08-18 00:35:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ^ This is the correct answer.<p>I installed the Zoom client just to have a look for myself. The syscalls in question emanate from freshly forked processes that immediately execvp() the command `pidof` (on my system it finds it under &#x2F;usr&#x2F;bin, so it&#x27;s the system command, not anything fishy shipped by Zoom). Actually, the command-line argument to the command is, in succession:<p>gnome-session<p>gnome-panel<p>gnome-shell<p>gnome-session-binary<p>ksmserver<p>cinnamon<p>cinnamon-session<p>mate-panel<p>mate-session<p>xfce-mcs-manage<p>xfce4-panel<p>xfce4-session<p>I suppose Zoom goes through the whole list on my system because it finds none of them. The fact that it stops on parent&#x27;s system suggests that Zoom stops when it finds one. This hints at a very crude way to determine the desktop environment!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thxg" target="_blank">thxg</a>   <span class="timeago" data-date="2021-08-18 00:43:06 &#43;0000 UTC">2021-08-18 00:43:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hmmm... maybe Zoom devs too use Stack Overflow?<p><a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;3376679&#x2F;qt-how-to-detect-whether-the-application-is-running-on-gnome-or-kde" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;3376679&#x2F;qt-how-to-detect...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kamray23" target="_blank">kamray23</a>   <span class="timeago" data-date="2021-08-18 07:33:02 &#43;0000 UTC">2021-08-18 07:33:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            God damn it, why do terrible SO suggestions find themselves in every application?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=trymas" target="_blank">trymas</a>   <span class="timeago" data-date="2021-08-18 08:15:07 &#43;0000 UTC">2021-08-18 08:15:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because there are no &quot;good&quot; suggestions? (or they are harder to find, lack documentation, etc.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:47:08 &#43;0000 UTC">2021-08-18 01:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This hints at a very crude way to determine the desktop environment!<p>That is a good discovery.<p>It&#x27;s probably one of the better ways to detect the running desktop environment as the user might have multiple environments installed and just uses one of them currently, as such looking for installed things doesn&#x27;t work reliable.<p>And looking for env variables can be unreliable.<p>And scanning the dbug might not be that use-full either.<p>But I&#x27;m not sure what they use that for. (Notification daemon selection? But that wouldn&#x27;t be that reliable either, theaming? I dubt it.)<p>But I guess even if it&#x27;s just for telemetry it would be a reasonable thing to do.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-18 02:41:24 &#43;0000 UTC">2021-08-18 02:41:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean, in principle the user might be running multiple X servers with different WMs, but that&#x27;s probably rare enough.  I&#x27;m also a bit curious what it&#x27;s actually used for (but not quite curious enough to dig out ghidra, given the other constraints on my time at the moment...)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-18 07:40:07 &#43;0000 UTC">2021-08-18 07:40:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I mean, in principle the user might be running multiple X servers with different WMs, but that&#x27;s probably rare enough<p>I actually do that all the time.
+My main &quot;work environment&quot; is TTY0 with i3wm, but when I make nice videos&#x2F;screencasts, or use Zoom for presentations I often switch to a clean and neat KDE Plasma session on TTY1.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-19 00:31:38 &#43;0000 UTC">2021-08-19 00:31:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There was a time when I was playing around with programming&#x2F;changing small WMs, while following Java based university stuff.<p>During that time I often had a &quot;IntelliJ&quot; only instance of X running in some TTY1, some other WM or just a raw TTY on TTY2 and a maybe crashing WM I was playing around with on TTY0 ;-)<p>Fun times.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 09:38:35 &#43;0000 UTC">2021-08-18 09:38:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xfitm3" target="_blank">xfitm3</a>   <span class="timeago" data-date="2021-08-17 23:38:06 &#43;0000 UTC">2021-08-17 23:38:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It not only examines all processes and arguments - it leverages the microphone to act on ultrasonic cues for &quot;integrations&quot;. Zoom is a privacy dumpster fire.<p><a href="https:&#x2F;&#x2F;devforum.zoom.us&#x2F;t&#x2F;ultrasonic-connection&#x2F;3318" rel="nofollow">https:&#x2F;&#x2F;devforum.zoom.us&#x2F;t&#x2F;ultrasonic-connection&#x2F;3318</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acatton" target="_blank">acatton</a>   <span class="timeago" data-date="2021-08-18 00:29:22 &#43;0000 UTC">2021-08-18 00:29:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It also plays your user-name (when configured by the meeting owner) in the background at a non-audible frequency, so that companies can find out who leaked their meetings by analysing the audio from the leak.<p><a href="https:&#x2F;&#x2F;theintercept.com&#x2F;2021&#x2F;01&#x2F;18&#x2F;leak-zoom-meeting&#x2F;" rel="nofollow">https:&#x2F;&#x2F;theintercept.com&#x2F;2021&#x2F;01&#x2F;18&#x2F;leak-zoom-meeting&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=IG_Semmelweiss" target="_blank">IG_Semmelweiss</a>   <span class="timeago" data-date="2021-08-18 01:04:16 &#43;0000 UTC">2021-08-18 01:04:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought this thread was full of sarcasm and then I see the links.<p>I should have known better.<p>I am glad this is getting posted because we need reminders of the reality we live in
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dathinab" target="_blank">dathinab</a>   <span class="timeago" data-date="2021-08-18 01:50:13 &#43;0000 UTC">2021-08-18 01:50:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes there are reasons besides conflicts with US law and they not having German Servers which makes it completely GDPR in-compliant and de-facto legal unusable in the EU.<p>(Not that anyone seem to care.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 07:50:43 &#43;0000 UTC">2021-08-18 07:50:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kamray23" target="_blank">kamray23</a>   <span class="timeago" data-date="2021-08-18 07:33:55 &#43;0000 UTC">2021-08-18 07:33:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well that&#x27;s easy enough to defeat if oyu know of it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=agumonkey" target="_blank">agumonkey</a>   <span class="timeago" data-date="2021-08-18 11:12:31 &#43;0000 UTC">2021-08-18 11:12:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks a lot, its now fully trollable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xenonite" target="_blank">xenonite</a>   <span class="timeago" data-date="2021-08-18 05:36:19 &#43;0000 UTC">2021-08-18 05:36:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ultrasonic sound transmission is what Cisco WebEx also claims to do. So it not something unheard of (although it is not hearable).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=est" target="_blank">est</a>   <span class="timeago" data-date="2021-08-18 06:27:09 &#43;0000 UTC">2021-08-18 06:27:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Any application allows remote screen recording is basically a trojan horse.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=neurostimulant" target="_blank">neurostimulant</a>   <span class="timeago" data-date="2021-08-18 06:54:57 &#43;0000 UTC">2021-08-18 06:54:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            By that definition all major browsers are trojan too because they can capture screens and windows via screen capture api.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=est" target="_blank">est</a>   <span class="timeago" data-date="2021-08-18 13:10:35 &#43;0000 UTC">2021-08-18 13:10:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Therefore I always manually modify browser binary and rename screen capture api to something else.<p>I also disable WebRTC.<p>It&#x27;s a shame Google&#x27;s Blink don&#x27;t offer an option to turn off features.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wonnage" target="_blank">wonnage</a>   <span class="timeago" data-date="2021-08-18 07:49:47 &#43;0000 UTC">2021-08-18 07:49:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Calm your tinfoil hat, this is a common feature in meeting software, has been around forever in Webex <a href="https:&#x2F;&#x2F;help.webex.com&#x2F;en-us&#x2F;WBX000028256&#x2F;Troubleshooting-Webex-Proximity-Pairing-Problems" rel="nofollow">https:&#x2F;&#x2F;help.webex.com&#x2F;en-us&#x2F;WBX000028256&#x2F;Troubleshooting-We...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aero-glide2" target="_blank">aero-glide2</a>   <span class="timeago" data-date="2021-08-18 08:32:04 &#43;0000 UTC">2021-08-18 08:32:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its okay to do this as long as webex&#x2F;zoom explicitly mentions it when you join a meeting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vishho" target="_blank">vishho</a>   <span class="timeago" data-date="2021-08-18 00:52:27 &#43;0000 UTC">2021-08-18 00:52:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom has attention tracking, which when enabled silently, shows an admin if the screen is maximized or if the user is focused on other applications. They don&#x27;t yet tell admins what other apps the user is active in, just whether the user is active.<p>Another angle for Zoom to do that, is that it is a massive Chinese spyware application, which can target users by meta data or IP, like it did by messing with the calls of activists. A bit like how anti-virus companies are sometimes charged with exfiltrating secret documents.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bowmessage" target="_blank">bowmessage</a>   <span class="timeago" data-date="2021-08-18 01:02:37 &#43;0000 UTC">2021-08-18 01:02:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, yuck, I didn&#x27;t know this was a thing but it looks like it has since been removed:<p><a href="https:&#x2F;&#x2F;support.zoom.us&#x2F;hc&#x2F;en-us&#x2F;articles&#x2F;115000538083-Attendee-attention-tracking" rel="nofollow">https:&#x2F;&#x2F;support.zoom.us&#x2F;hc&#x2F;en-us&#x2F;articles&#x2F;115000538083-Atten...</a><p>&gt; As of April 2, 2020, we have removed the attendee attention tracker feature as part of our commitment to the security and privacy of our customers. For more background on this change and how we are pivoting during these unprecedented times, please see a note from our CEO, Eric S. Yuan.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hashhar" target="_blank">hashhar</a>   <span class="timeago" data-date="2021-08-18 10:40:27 &#43;0000 UTC">2021-08-18 10:40:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That feature got pulled last year and hasn&#x27;t existed for over a year and a half now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dmart" target="_blank">dmart</a>   <span class="timeago" data-date="2021-08-17 23:28:32 &#43;0000 UTC">2021-08-17 23:28:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Perhaps a better question to ask would be &quot;why is any process allowed to do this by default in 2021?&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acatton" target="_blank">acatton</a>   <span class="timeago" data-date="2021-08-18 00:18:41 &#43;0000 UTC">2021-08-18 00:18:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because it&#x27;s a legitimate behaviour. htop needs to do this, it&#x27;s literally its main feature.<p>You can use hidepid=2 to prevent users from seeing other user&#x27;s processes list.[1]<p>But I don&#x27;t want my OS to ask me &quot;do you want to allow htop to access the list of your processes&quot; — à la Windows Vista — every time I want to run htop to see my user processes.<p>The issue here is closed source software with no way to inspect what they do.<p>If one really want to run closed source programs which were not vetted by their distro&#x27;s maintainers, they should use firejail.[2]<p>[1] <a href="https:&#x2F;&#x2F;www.cyberciti.biz&#x2F;faq&#x2F;linux-hide-processes-from-other-users&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.cyberciti.biz&#x2F;faq&#x2F;linux-hide-processes-from-othe...</a><p>[2] <a href="https:&#x2F;&#x2F;firejail.wordpress.com&#x2F;" rel="nofollow">https:&#x2F;&#x2F;firejail.wordpress.com&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-08-18 07:40:40 &#43;0000 UTC">2021-08-18 07:40:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But I don&#x27;t want my OS to ask me &quot;do you want to allow htop to access the list of your processes&quot; — à la Windows Vista — every time I want to run htop to see my user processes.<p>Why would it be every time? Say yes once to htop, no to Zoom. Sort of like Android&#x2F;iOS permissions.<p>Or just require root. No way I&#x27;d give it to Zoom, htop maybe.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acatton" target="_blank">acatton</a>   <span class="timeago" data-date="2021-08-18 08:05:52 &#43;0000 UTC">2021-08-18 08:05:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The issue is that the model on Linux is different. As opposed to walled gardens, the assumption is that applications are cooperative, therefore there is no need for such &quot;authorization systems&quot;.<p>The security model on Linux is based on blacklist, with solutions like firejail.<p>Also, what&#x27;s the points of these nags? Most people will just say &quot;OK&quot; anyway because they want to access the features they were promised.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=forgotpwd16" target="_blank">forgotpwd16</a>   <span class="timeago" data-date="2021-08-18 08:14:11 &#43;0000 UTC">2021-08-18 08:14:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The issue is that this model heralds from the 60s when such problems weren&#x27;t even considered.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acatton" target="_blank">acatton</a>   <span class="timeago" data-date="2021-08-18 08:29:51 &#43;0000 UTC">2021-08-18 08:29:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is a way to see it.<p>I see it differently, for me the main issue is the fact that people run random software that were not even vetted.<p>If you dnf&#x2F;apt install everything from the official repos of your distro, you wont have any misbehaving apps. And that model still holds.<p>And as I explained, other security models don&#x27;t work either. People will just whitelist the app, or click &quot;Accept&quot; anyway, because they want the feature now! What&#x27;s the point of nagging with a modal window &quot;your random app, that you installed from a random website on the internet, which means you really want to use this specific app, is behaving in a shady manner, are you okay with this?&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bamboozled" target="_blank">bamboozled</a>   <span class="timeago" data-date="2021-08-18 10:00:13 &#43;0000 UTC">2021-08-18 10:00:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>If you dnf&#x2F;apt install everything from the official repos of your distro, you wont have any misbehaving apps. And that model still holds.</i><p>How do you know this?<p>I hear this a lot, I&#x27;ve built packages myself, only because I needed them in a hurry. I never really went through the source code to make sure it&#x27;s safe. Maybe others did, but I didn&#x27;t, people installed the package, maybe they were hacked, who knows?<p>Just saying...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=acatton" target="_blank">acatton</a>   <span class="timeago" data-date="2021-08-18 12:34:53 &#43;0000 UTC">2021-08-18 12:34:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When a package lands in Debian Sid or in Fedora Rawhide, there is a group&#x2F;subculture of nerds who like to inspect it and report any misbehaviour. [1] [2]<p>I usually do this directly on the source project, but some people in this subculture do it in their distro.<p>Also I&#x27;m surprised your packages landed in Debian&#x2F;Fedora, because there is a review process… I&#x27;m not talking about a ppa repo or a copr repo, anybody can run that. I&#x27;m talking about packages in the official repositories. Installing software from a random ppa or copr repo is the same as curl | sudo sh, nobody vetted this.<p>[1] Type of bugs they report: <a href="https:&#x2F;&#x2F;bugs.debian.org&#x2F;cgi-bin&#x2F;bugreport.cgi?bug=792580" rel="nofollow">https:&#x2F;&#x2F;bugs.debian.org&#x2F;cgi-bin&#x2F;bugreport.cgi?bug=792580</a><p>[2] <a href="https:&#x2F;&#x2F;www.fsf.org&#x2F;blogs&#x2F;community&#x2F;who-actually-reads-the-code" rel="nofollow">https:&#x2F;&#x2F;www.fsf.org&#x2F;blogs&#x2F;community&#x2F;who-actually-reads-the-c...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bamboozled" target="_blank">bamboozled</a>   <span class="timeago" data-date="2021-08-18 14:15:18 &#43;0000 UTC">2021-08-18 14:15:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you think of the millions of lines of code these people are just looking at, you&#x27;d have to be pretty damn good to pickup everything?<p>Thanks for sharing
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=OJFord" target="_blank">OJFord</a>   <span class="timeago" data-date="2021-08-18 10:57:58 &#43;0000 UTC">2021-08-18 10:57:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; And as I explained, other security models don&#x27;t work either. People will just whitelist the app, or click &quot;Accept&quot; anyway, because they want the feature now! What&#x27;s the point of nagging with a modal window &quot;your random app, that you installed from a random website on the internet, which means you really want to use this specific app, is behaving in a shady manner, are you okay with this?&quot;<p>At least they get the choice? If they need something so badly they&#x27;re happy to give it whatever permissions, fine, but at least they&#x27;re aware and consented.<p>I don&#x27;t know why you think nobody ever would decline, I and I assume many people do on mobile devices. Especially now that more recent (Android anyway) versions allow&#x2F;require a sort of &#x27;progressive&#x27; acquiring of permissions, prompt when it&#x27;s needed and not before.<p>Apple &amp; Google clearly think some people want to decline some of the time (and enough that it should be an option), or at least that it&#x27;s a good way to deliver awareness.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mixmastamyk" target="_blank">mixmastamyk</a>   <span class="timeago" data-date="2021-08-18 01:51:21 &#43;0000 UTC">2021-08-18 01:51:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Whitelisting htop would be a simple matter.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gwbas1c" target="_blank">gwbas1c</a>   <span class="timeago" data-date="2021-08-18 05:29:31 &#43;0000 UTC">2021-08-18 05:29:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think the nags discourage sketchy behavior. It makes some of the lackluster product managers think twice about unreasonable program behavior.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fsflover" target="_blank">fsflover</a>   <span class="timeago" data-date="2021-08-19 10:04:35 &#43;0000 UTC">2021-08-19 10:04:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is not the case on Qubes OS, which I use. If you care about security, can&#x27;t recommend it enough.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-18 08:19:12 &#43;0000 UTC">2021-08-18 08:19:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because you&#x27;re not supposed to be downloading random binaries from the internet and running them like some toddler on Windows or OSX would.<p>STOP DOING THAT.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rocho" target="_blank">rocho</a>   <span class="timeago" data-date="2021-08-18 14:47:19 &#43;0000 UTC">2021-08-18 14:47:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you know that a program does this, without running the binary? I&#x27;d say that requires expert knowledge not available to most people.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-18 16:52:14 &#43;0000 UTC">2021-08-18 16:52:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The bar is way lower when the source is available. That they won&#x27;t share the source code for a free program is also a very big red flag.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jlgaddis" target="_blank">jlgaddis</a>   <span class="timeago" data-date="2021-08-17 21:36:06 &#43;0000 UTC">2021-08-17 21:36:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Mounting &#x2F;proc with &quot;<i>hidepid=2</i>&quot; should prevent it from seeing processes owned by other users, although it would still be able to see your processes.<p>Alternatively, it shouldn&#x27;t be too hard to create an AppArmor profile that blocks access to &#x2F;proc.<p>Other options might include things like SELinux, seccomp-bpf, namespaces, cgroups, etc., depending on what&#x27;s available on your host.<p>Or you could just, you know, obliterate it from your system altogether. That&#x27;s almost certainly the best option.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-17 23:25:21 &#43;0000 UTC">2021-08-17 23:25:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can edit &#x2F;usr&#x2F;share&#x2F;applications&#x2F;Zoom.desktop to run inside of bubblewrap, similar to how the Arch Wiki suggests doing this for Skype: <a href="https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;title&#x2F;Bubblewrap#Skype_for_Linux" rel="nofollow">https:&#x2F;&#x2F;wiki.archlinux.org&#x2F;title&#x2F;Bubblewrap#Skype_for_Linux</a><p>Since this puts it in its own PID and mount namespace, it won&#x27;t see any processes except itself and its children. You can even try not mounting &#x2F;proc in the container this makes at all and see what happens.<p>This is effectively what flatpak does, but doing it yourself doesn&#x27;t require installing flatpak.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ghostpepper" target="_blank">ghostpepper</a>   <span class="timeago" data-date="2021-08-17 23:38:13 &#43;0000 UTC">2021-08-17 23:38:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is very cool. I was going to suggest running it inside a container&#x2F;namespaces but I didn&#x27;t know about bubble wrap.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=neurostimulant" target="_blank">neurostimulant</a>   <span class="timeago" data-date="2021-08-18 06:57:22 &#43;0000 UTC">2021-08-18 06:57:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does screen sharing still works with this method?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hdjjhhvvhga" target="_blank">hdjjhhvvhga</a>   <span class="timeago" data-date="2021-08-17 21:41:08 &#43;0000 UTC">2021-08-17 21:41:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t understand why anyone who is forced to use it doesn&#x27;t use it in a browser (I have a separate Firefox container for that, same for Teams).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zippergz" target="_blank">zippergz</a>   <span class="timeago" data-date="2021-08-17 22:35:55 &#43;0000 UTC">2021-08-17 22:35:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The people here who are saying &quot;Teams and Meet are just as good&quot; are the people who use Zoom in a browser. The audio and video quality, and resilience to poor connections, is much better in the desktop app.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eertami" target="_blank">eertami</a>   <span class="timeago" data-date="2021-08-17 23:12:30 &#43;0000 UTC">2021-08-17 23:12:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;The audio and video quality, ... is much better in the desktop app<p>But is the quality actually better, or is it post-processing tricks to make it seem better on commodity hardware&#x2F;audio setups? If it is actually better, surely this should be measurable and there should exist evidence to support such a claim.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=scubbo" target="_blank">scubbo</a>   <span class="timeago" data-date="2021-08-17 23:33:55 &#43;0000 UTC">2021-08-17 23:33:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; is the quality actually better, or is it post-processing tricks to make it seem better<p>Serious question - if the experience is the same, why does this distinction matter?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hdjjhhvvhga" target="_blank">hdjjhhvvhga</a>   <span class="timeago" data-date="2021-08-18 09:29:16 &#43;0000 UTC">2021-08-18 09:29:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually postprocessing requires significant computing power. This is something that might matter for people maximizing battery usage. But another person in the same thread says in the case of Zoom it&#x27;s the opposite - the web app seems more CPU-intensive.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eertami" target="_blank">eertami</a>   <span class="timeago" data-date="2021-08-18 12:22:26 &#43;0000 UTC">2021-08-18 12:22:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because if I have good hardware the post-processing isn&#x27;t going to make it sound any better, I&#x27;m better off with the source.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=neurostimulant" target="_blank">neurostimulant</a>   <span class="timeago" data-date="2021-08-18 07:01:42 &#43;0000 UTC">2021-08-18 07:01:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can test it by throttling your network speed down from your router and compare the desktop and web version performance. The desktop version will sacrifice video quality (to the point of stuttering on very low bandwidth) in order to maintain audio quality, which massively increase usability on poor network condition.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=forgotpwd16" target="_blank">forgotpwd16</a>   <span class="timeago" data-date="2021-08-18 07:56:27 &#43;0000 UTC">2021-08-18 07:56:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            All the times I&#x27;ve used Zoom on browser the recent year didn&#x27;t have any problem.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vbernat" target="_blank">vbernat</a>   <span class="timeago" data-date="2021-08-17 21:45:11 &#43;0000 UTC">2021-08-17 21:45:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me: more CPU usage (and more battery usage), not able to see other participants when sharing screen.<p>But I am running Zoom in a Flatpak to avoid the kind of issues reported here. BTW, the same happens with Discord and it&#x27;s not possible to disable it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rocqua" target="_blank">rocqua</a>   <span class="timeago" data-date="2021-08-18 07:02:21 &#43;0000 UTC">2021-08-18 07:02:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discord does it to detect which game you are running, so it can display &quot;user is playing X&quot; to your friends.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=avel" target="_blank">avel</a>   <span class="timeago" data-date="2021-08-17 21:58:17 &#43;0000 UTC">2021-08-17 21:58:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The browser edition of zoom lacks a <i>lot</i> of features and also lacks in performance.<p>It&#x27;s not like BlueJeans which has a web version pretty much aligned with the desktop client.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=christophilus" target="_blank">christophilus</a>   <span class="timeago" data-date="2021-08-17 22:06:43 &#43;0000 UTC">2021-08-17 22:06:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless you’re using Zoom all day, the browser version is just fine. Folks can see and hear me; I can see and hear them; I can share my screen. It’s good enough.<p>Also, we’re trialing big blue button (self hosted) as an alternative, and it’s honestly pretty decent from what I can tell.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maxk42" target="_blank">maxk42</a>   <span class="timeago" data-date="2021-08-17 22:04:51 &#43;0000 UTC">2021-08-17 22:04:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what they&#x27;re counting on.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=GekkePrutser" target="_blank">GekkePrutser</a>   <span class="timeago" data-date="2021-08-17 22:00:13 &#43;0000 UTC">2021-08-17 22:00:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does teams work for your in a FF container? For me it always ends up in a redirect loop :( but my work uses MCAS for external computers so that may have to do with it. It&#x27;s a proxy service from MS that adds some supposed security to their services and makes them even slower.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nsomaru" target="_blank">nsomaru</a>   <span class="timeago" data-date="2021-08-17 22:18:32 &#43;0000 UTC">2021-08-17 22:18:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With containers, subdomains and redirects I’ve found switching off network and forcing each subdomain to open in a particular container 1-by-1 to work well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=minitech" target="_blank">minitech</a>   <span class="timeago" data-date="2021-08-17 22:06:36 &#43;0000 UTC">2021-08-17 22:06:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Mounting &#x2F;proc with &quot;hidepid=2&quot; should prevent it from seeing processes owned by other users<p>Note that this isn’t a supported configuration for systemd and will totally break it. (Which is too bad, because it’s a sensible default.)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_Algernon_" target="_blank">_Algernon_</a>   <span class="timeago" data-date="2021-08-17 22:07:14 &#43;0000 UTC">2021-08-17 22:07:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn&#x27;t using it through the browser prevent this?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 23:45:26 &#43;0000 UTC">2021-08-17 23:45:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=noobermin" target="_blank">noobermin</a>   <span class="timeago" data-date="2021-08-18 05:36:58 &#43;0000 UTC">2021-08-18 05:36:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll be annoying and say if people used the FOSS alternatives we wouldn&#x27;t have to be so paranoid about a tool we all use.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wins32767" target="_blank">wins32767</a>   <span class="timeago" data-date="2021-08-17 20:45:27 &#43;0000 UTC">2021-08-17 20:45:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If I had to guess it&#x27;s for screen sharing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_sgianelli" target="_blank">_sgianelli</a>   <span class="timeago" data-date="2021-08-17 20:49:33 &#43;0000 UTC">2021-08-17 20:49:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If so that seems like a great place for someone like Apple or Microsoft to offer an API to bolster security and privacy
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thephyber" target="_blank">thephyber</a>   <span class="timeago" data-date="2021-08-17 20:55:52 &#43;0000 UTC">2021-08-17 20:55:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            OS X already requires that the user open Settings and give the app elevated permissions to be able to share the screen.<p>One can argue about the granularity, but you can’t argue that Apple hasn’t already done something.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_sgianelli" target="_blank">_sgianelli</a>   <span class="timeago" data-date="2021-08-18 03:49:42 &#43;0000 UTC">2021-08-18 03:49:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh I don&#x27;t mean to say they haven&#x27;t done anything, they certainly have. I&#x27;m more wondering if there is a system-level privacy feature that they could provide (enforce?) where the system provides a screen share stream handle to only a selected window, similar to the Selected Photos functionality in iOS today.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=uoaei" target="_blank">uoaei</a>   <span class="timeago" data-date="2021-08-17 20:59:14 &#43;0000 UTC">2021-08-17 20:59:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Doing something&quot; seems like a really low bar when that &quot;something&quot; is basically useless for the intended use case.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thephyber" target="_blank">thephyber</a>   <span class="timeago" data-date="2021-08-17 22:54:32 &#43;0000 UTC">2021-08-17 22:54:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t understand your threat model.<p>The user chose to install an application, then had to use admin permissions to choose to give that application more access after installation.<p>How much additional nanny protection should a user get?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=olyjohn" target="_blank">olyjohn</a>   <span class="timeago" data-date="2021-08-17 22:46:13 &#43;0000 UTC">2021-08-17 22:46:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Honestly, I kind of agree with this downvoted post. The MacOS permissions prompts are starting to drive me apeshit. Average user is going to start ignoring them and just click yes to everything anyways. Just like everybody already does on their phones. Reminds me of when Windows Vista came out and they started prompting for permissions like crazy. Everybody hated it. Maybe it was just ahead of its time.<p>I already granted this permission to Teams on my Mac. It&#x27;s not malicious now, but when an update comes out in the future, it could be, and I&#x27;ve already allowed it. So this whole thing feels  kinda dumb. Nobody wants to manage all this shit, and nobody understands it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-17 22:51:30 &#43;0000 UTC">2021-08-17 22:51:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They drove me so insane that I abandoned modern macOS entirely.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=NoPicklez" target="_blank">NoPicklez</a>   <span class="timeago" data-date="2021-08-18 02:15:26 &#43;0000 UTC">2021-08-18 02:15:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s the solution then? MacOS is exposing how often these programs are requiring privileged access.<p>The solution is partly for applications to limit their use of elevated privileges which we can&#x27;t always rely on. Therefore MacOS is exposing and providing users with visibility and choice.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-18 02:21:39 &#43;0000 UTC">2021-08-18 02:21:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Let me turn these prompts off globally. Maybe log the requests somewhere for me to review later if I so choose. I&#x27;m just going to hit &quot;Allow&quot; anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tyingq" target="_blank">tyingq</a>   <span class="timeago" data-date="2021-08-17 20:53:45 &#43;0000 UTC">2021-08-17 20:53:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Enumerating window handles and titles would be more suited to that.  It will need that anyway to share the window. On a multi-user system, it could see processes attached to displays it has no access to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sithadmin" target="_blank">sithadmin</a>   <span class="timeago" data-date="2021-08-17 20:47:51 &#43;0000 UTC">2021-08-17 20:47:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This. It enables single-app share, instead of just capturing entire displays.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akira2501" target="_blank">akira2501</a>   <span class="timeago" data-date="2021-08-17 20:50:31 &#43;0000 UTC">2021-08-17 20:50:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unless I&#x27;m missing something..  all of the required information is available through the X11 protocol.  Reading the command lines of the processes is unnecessary and provides data that isn&#x27;t useful in the window sharing context.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jraph" target="_blank">jraph</a>   <span class="timeago" data-date="2021-08-17 21:15:38 &#43;0000 UTC">2021-08-17 21:15:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This would not work on Wayland, though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bonzini" target="_blank">bonzini</a>   <span class="timeago" data-date="2021-08-17 21:58:16 &#43;0000 UTC">2021-08-17 21:58:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wayland is even more strict, you ask it for screen sharing and it gives you the stream. If the compositor doesn&#x27;t support screen sharing you&#x27;re out of luck, there&#x27;s just no way to read the contents of a window.<p>With X11 if the window manager doesn&#x27;t have the relevant support you can always ask the server.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mnd999" target="_blank">mnd999</a>   <span class="timeago" data-date="2021-08-18 06:17:09 &#43;0000 UTC">2021-08-18 06:17:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom doesn’t support screen sharing on Wayland, except through some propriety Gnome API. 
+It also doesn’t run at all for me on sway, just crashes at startup.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-08-17 20:50:33 &#43;0000 UTC">2021-08-17 20:50:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How would that work? I would expect it to enumerate X clients, not PIDs
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 21:23:03 &#43;0000 UTC">2021-08-17 21:23:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=puttycat" target="_blank">puttycat</a>   <span class="timeago" data-date="2021-08-17 21:16:49 &#43;0000 UTC">2021-08-17 21:16:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How come the OS doesn&#x27;t provide the list instead of each app enumerating all the proecesses itself?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-17 21:21:15 &#43;0000 UTC">2021-08-17 21:21:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re looking at the API.<p>Also, screen-sharing can&#x27;t be the reason, because X windows don&#x27;t have anything to do with processes on the machine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=laurensr" target="_blank">laurensr</a>   <span class="timeago" data-date="2021-08-17 20:46:00 &#43;0000 UTC">2021-08-17 20:46:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also note the news and discussion at <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 05:34:47 &#43;0000 UTC">2021-08-18 05:34:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How else would they backup your command-line passed passwords and private keys for you?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cranekam" target="_blank">cranekam</a>   <span class="timeago" data-date="2021-08-18 07:01:15 &#43;0000 UTC">2021-08-18 07:01:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I assume this is a joke comment because I have never heard of passing a private key (the contents of one, not the file name) as a command line argument. It’d be ten times worse than asking what someone’s wifi password was and being told some 40-digit hex string.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 15:52:30 &#43;0000 UTC">2021-08-18 15:52:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            People pass private keys on command-lines, particularly with ecc crypto (because the keys are short).  It&#x27;s a really bad idea, but that doesn&#x27;t mean it isn&#x27;t sometimes done.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ben_bai" target="_blank">ben_bai</a>   <span class="timeago" data-date="2021-08-18 07:34:46 &#43;0000 UTC">2021-08-18 07:34:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i.e. with 7z (7zip) you have to specify the encode password as a command line argument. <i>jikes</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=luke2m" target="_blank">luke2m</a>   <span class="timeago" data-date="2021-08-17 20:49:48 &#43;0000 UTC">2021-08-17 20:49:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Use a flatpak
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jagged-chisel" target="_blank">jagged-chisel</a>   <span class="timeago" data-date="2021-08-17 21:08:37 &#43;0000 UTC">2021-08-17 21:08:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Hook the stat, openat, readlink functions within the zoom process, experiment with blocking (returning failure) based on arguments.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 21:31:18 &#43;0000 UTC">2021-08-17 21:31:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-17 23:05:11 &#43;0000 UTC">2021-08-17 23:05:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or just don&#x27;t let it run pidof.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=akira2501" target="_blank">akira2501</a>   <span class="timeago" data-date="2021-08-17 20:48:46 &#43;0000 UTC">2021-08-17 20:48:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Put it into it&#x27;s own namespace,  and only allow it to connect to your X11 session over TCP.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zzo38computer" target="_blank">zzo38computer</a>   <span class="timeago" data-date="2021-08-17 21:09:52 &#43;0000 UTC">2021-08-17 21:09:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you want to prevent programs from accessing other windows, then (in addition to using its own namespace and file access) you would also need to proxy the X server, or run it in a nested X server (which does not have access to the one outside).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yjftsjthsd-h" target="_blank">yjftsjthsd-h</a>   <span class="timeago" data-date="2021-08-17 21:52:16 &#43;0000 UTC">2021-08-17 21:52:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Specifically, Xephyr is generally the go-to option, although there are others.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mishafb" target="_blank">mishafb</a>   <span class="timeago" data-date="2021-08-17 20:50:18 &#43;0000 UTC">2021-08-17 20:50:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think only Wayland has real security, X11 lets you do anything
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kamray23" target="_blank">kamray23</a>   <span class="timeago" data-date="2021-08-18 07:36:44 &#43;0000 UTC">2021-08-18 07:36:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For a more general solution, firejail.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=phendrenad2" target="_blank">phendrenad2</a>   <span class="timeago" data-date="2021-08-17 20:52:25 &#43;0000 UTC">2021-08-17 20:52:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does that prevent it from reading from `&#x2F;proc`?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jraph" target="_blank">jraph</a>   <span class="timeago" data-date="2021-08-17 21:06:50 &#43;0000 UTC">2021-08-17 21:06:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In a PID namespace [1], it will be able to read &#x2F;proc, but will see nothing interesting other than a strangely empty system. The process is isolated from the rest of the system as far as processes and PIDs are concerned.<p>[1] <a href="https:&#x2F;&#x2F;www.redhat.com&#x2F;sysadmin&#x2F;pid-namespace" rel="nofollow">https:&#x2F;&#x2F;www.redhat.com&#x2F;sysadmin&#x2F;pid-namespace</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the8472" target="_blank">the8472</a>   <span class="timeago" data-date="2021-08-17 21:53:44 &#43;0000 UTC">2021-08-17 21:53:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Firejail[0] allows cobbling together various linux sandboxing features, including namespaces which should result in an isolated proc filesystem which doesn&#x27;t see the other processes. But I don&#x27;t know if the default profile for zoom does that, you have to test it or write your own.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;netblue30&#x2F;firejail" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;netblue30&#x2F;firejail</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kamray23" target="_blank">kamray23</a>   <span class="timeago" data-date="2021-08-18 07:37:55 &#43;0000 UTC">2021-08-18 07:37:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            AUR has a package for &quot;zoom-firejail&quot; which ships zoom binaries with a ready-made configuration and .desktop for launching it in firejail.<p>Goes to show how little people trust Zoom.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=als0" target="_blank">als0</a>   <span class="timeago" data-date="2021-08-17 22:01:10 &#43;0000 UTC">2021-08-17 22:01:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just checked the default profile and it looks sufficiently isolated
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=guerrilla" target="_blank">guerrilla</a>   <span class="timeago" data-date="2021-08-17 22:01:13 &#43;0000 UTC">2021-08-17 22:01:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            SELinux being another. Smack too, if people still use that.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tryauuum" target="_blank">tryauuum</a>   <span class="timeago" data-date="2021-08-17 20:46:36 &#43;0000 UTC">2021-08-17 20:46:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (incompetence here) Maybe it&#x27;s like discord, it does the same to display messages like &quot;$username is playing terraria right now&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=wwweston" target="_blank">wwweston</a>   <span class="timeago" data-date="2021-08-17 20:53:14 &#43;0000 UTC">2021-08-17 20:53:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discord leaks which apps you&#x27;re using to other people?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nrabulinski" target="_blank">nrabulinski</a>   <span class="timeago" data-date="2021-08-17 21:14:14 &#43;0000 UTC">2021-08-17 21:14:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It “leaks” which apps you’re using if the developer explicitly talks to the discord client. Discord provides an SDK for game developers etc which can talk to discord client and show the game you’re playing and optionally let you invite people to your lobby straight from the discord chat. It doesn’t scan anything or open any processes, it just opens an IPC socket.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=voxic11" target="_blank">voxic11</a>   <span class="timeago" data-date="2021-08-17 22:46:21 &#43;0000 UTC">2021-08-17 22:46:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think it does scan your processes. If I go to &quot;User Settings &quot; =&gt; &quot;Activity Status&quot; =&gt; &quot;Not seeing your game? Add it!&quot; =&gt; &quot;Select&quot; then I see many processes that almost certainly have no explicit discord integration. I believe they do this to allow the user to opt into showing their status based on running processes so that any application can be supported.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-19 09:26:00 &#43;0000 UTC">2021-08-19 09:26:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, it scans processes but seems to limit sharing what you are running to what it thinks are games unless you explicitly add the application. Still, anyone concerned about privacy should really sandbox these proprietary applications or just use the web version.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=908B64B197" target="_blank">908B64B197</a>   <span class="timeago" data-date="2021-08-17 21:21:03 &#43;0000 UTC">2021-08-17 21:21:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s even an Emacs mode for that!<p><a href="https:&#x2F;&#x2F;github.com&#x2F;simmsb&#x2F;discord-emacs.el" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;simmsb&#x2F;discord-emacs.el</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vbernat" target="_blank">vbernat</a>   <span class="timeago" data-date="2021-08-17 21:47:08 &#43;0000 UTC">2021-08-17 21:47:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It also scans processes. Easy to check: run opensnoop.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=egypturnash" target="_blank">egypturnash</a>   <span class="timeago" data-date="2021-08-17 20:55:22 &#43;0000 UTC">2021-08-17 20:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So does Steam. It’s... a little creepier when it’s taken beyond “advertise which games you’re playing so your friends can potentially join you”, though.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spockz" target="_blank">spockz</a>   <span class="timeago" data-date="2021-08-17 21:07:11 &#43;0000 UTC">2021-08-17 21:07:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Steam only does this when you launch an app through steam and only when it is enabled though.<p>That is quite a difference from broadcasting the name of any binary it recognises.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=delusional" target="_blank">delusional</a>   <span class="timeago" data-date="2021-08-17 21:04:40 &#43;0000 UTC">2021-08-17 21:04:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you sure? I think steam only does it for programs launched through it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Osiris" target="_blank">Osiris</a>   <span class="timeago" data-date="2021-08-17 20:54:20 &#43;0000 UTC">2021-08-17 20:54:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a feature.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=npteljes" target="_blank">npteljes</a>   <span class="timeago" data-date="2021-08-17 23:10:08 &#43;0000 UTC">2021-08-17 23:10:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not leaks, proudly announces!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=LegitShady" target="_blank">LegitShady</a>   <span class="timeago" data-date="2021-08-17 20:55:42 &#43;0000 UTC">2021-08-17 20:55:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            by default, even.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=humaniania" target="_blank">humaniania</a>   <span class="timeago" data-date="2021-08-17 21:41:36 &#43;0000 UTC">2021-08-17 21:41:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That was the part that bothered me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dcdc123" target="_blank">dcdc123</a>   <span class="timeago" data-date="2021-08-17 20:54:31 &#43;0000 UTC">2021-08-17 20:54:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, I highly recommend disabling it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gwbas1c" target="_blank">gwbas1c</a>   <span class="timeago" data-date="2021-08-18 02:23:11 &#43;0000 UTC">2021-08-18 02:23:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m going to assume this happens when you <i>aren&#x27;t trying to share your screen</i>.<p>I once worked on a file synchronization application that would scan processes when files were locked. I don&#x27;t remember if we put the process name in the UI, but we logged detailed information about the other process in case someone contacted support. (Sometimes users ran weird applications that kept files locked.) I believe we had to scan through all processes and inspect their open file handles.<p>I would assume some things like: Maybe there are applications that are known to cause problems for Zoom? Maybe some applications lock the camera or microphone? Maybe some applications hog the CPU and cause encoder problems?<p>If you really want to know more, consider decompiling zoom and&#x2F;or looking at strings compiled into the binary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-18 02:36:57 &#43;0000 UTC">2021-08-18 02:36:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It happens right at startup, and is a result of some calls (via the usual fork&#x2F;exec dance) to `pidof ...` seemingly trying to identify the window manager being used, possibly for telemetry or possibly to change behavior.  Decompiling would be more certain (I don&#x27;t have ghidra on this computer and it&#x27;s a little more effort than I want to go to) but the pattern is pretty visible in the strace dump.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gwbas1c" target="_blank">gwbas1c</a>   <span class="timeago" data-date="2021-08-18 03:18:11 &#43;0000 UTC">2021-08-18 03:18:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maybe it has to alter behavior based on your distro?<p>IMO, if you can&#x27;t&#x2F;won&#x27;t reverse engineer, maybe see if you can contact Zoom support and see what they say? Obviously the support people won&#x27;t know, but if you can ask the right way they might pass your question on to the developers.<p>For the file sync client, we got all kinds of oddball questions passed along from support to developers; and we&#x27;d make an honest effort to answer reasonable ones.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-18 03:29:51 &#43;0000 UTC">2021-08-18 03:29:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not a bad thought, though ghidra would be more fun.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MichaelGroves" target="_blank">MichaelGroves</a>   <span class="timeago" data-date="2021-08-17 21:34:20 &#43;0000 UTC">2021-08-17 21:34:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Is there any way to prevent it?</i><p>Do what I do: Run it on a burner computer connected to your guest network.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gwbas1c" target="_blank">gwbas1c</a>   <span class="timeago" data-date="2021-08-18 05:33:38 &#43;0000 UTC">2021-08-18 05:33:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Jokes aside, you can probably get close to that by running Zoom in a VM with NAT.<p>Unfortunately, sound and camera tend to be sketchy in a VM.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fsflover" target="_blank">fsflover</a>   <span class="timeago" data-date="2021-08-18 07:41:17 &#43;0000 UTC">2021-08-18 07:41:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Works fine for me on Qubes OS.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=0xbadcafebee" target="_blank">0xbadcafebee</a>   <span class="timeago" data-date="2021-08-17 23:59:00 &#43;0000 UTC">2021-08-17 23:59:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hah! Only a fool would run it outside of a completely sound-isolated windowless underground faraday cage. Otherwise The Men In Black will find out about your blockers in your stand-up meeting!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-18 00:10:30 &#43;0000 UTC">2021-08-18 00:10:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m more worried about our jokes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=swiley" target="_blank">swiley</a>   <span class="timeago" data-date="2021-08-18 08:16:00 &#43;0000 UTC">2021-08-18 08:16:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your crap is being exfiltrated.<p>Stop using non-free software if you&#x27;re doing anything important on that machine.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=egberts" target="_blank">egberts</a>   <span class="timeago" data-date="2021-08-18 11:39:17 &#43;0000 UTC">2021-08-18 11:39:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Polling for all processes is the technique used by some educators’ quiz&#x2F;test&#x2F;exam program.<p>Zoom is probably footholding their place as to be able to inform its educator whether their students’ behavior are acceptable or are cheating.<p>Most probably.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mcrmonkey" target="_blank">mcrmonkey</a>   <span class="timeago" data-date="2021-08-17 23:51:56 &#43;0000 UTC">2021-08-17 23:51:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can only think the most direct usage for this info is to feed the performance screen&#x2F;tab that lives in settings showing CPU and memory usage<p>But some of the info its reading seems a little bit too much<p><i>cough</i> &#x27;telemetry&#x27; <i>cough</i>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ayush--s" target="_blank">ayush--s</a>   <span class="timeago" data-date="2021-08-18 14:28:23 &#43;0000 UTC">2021-08-18 14:28:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So should I move it to docker? Since X11 socket will be shared, I&#x27;m assuming screen sharing might work
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amelius" target="_blank">amelius</a>   <span class="timeago" data-date="2021-08-17 22:27:58 &#43;0000 UTC">2021-08-17 22:27:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve used the method of scanning the environment variables of other processes to find the PID of certain applications which advertised themselves using their environment variables. This could be similar?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 19:08:29 &#43;0000 UTC">2021-08-17 19:08:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsflover" target="_blank">fsflover</a>   <span class="timeago" data-date="2021-08-17 21:30:10 &#43;0000 UTC">2021-08-17 21:30:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>I prevent it by running Zoom in a VM on Qubes OS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ezekg" target="_blank">ezekg</a>   <span class="timeago" data-date="2021-08-17 22:00:37 &#43;0000 UTC">2021-08-17 22:00:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Or just run it in a browser...
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsflover" target="_blank">fsflover</a>   <span class="timeago" data-date="2021-08-18 07:27:29 &#43;0000 UTC">2021-08-18 07:27:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you run it in a browser without an account?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=forgotpwd16" target="_blank">forgotpwd16</a>   <span class="timeago" data-date="2021-08-18 08:12:21 &#43;0000 UTC">2021-08-18 08:12:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If the meeting is open (join by invite link), yes. It&#x27;s basically how Zoombombing happens.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-08-17 21:10:09 &#43;0000 UTC">2021-08-17 21:10:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And for people giving ways to prevent it, can you please provide some context for those of us who aren&#x27;t OS experts?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jraph" target="_blank">jraph</a>   <span class="timeago" data-date="2021-08-17 21:14:27 &#43;0000 UTC">2021-08-17 21:14:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Zoom does not work on my computer*, can we try X instead?&quot;<p>With X = something the other end does not need to install, like Jitsi Meet for instance<p>*no need to explain that&#x27;s because you uninstalled it and blocked its domain on your computer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slownews45" target="_blank">slownews45</a>   <span class="timeago" data-date="2021-08-17 21:56:52 &#43;0000 UTC">2021-08-17 21:56:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Be careful with this. In some orgs you can get a bit of a bad reputation for being technically incompetent if you can&#x27;t get zoom to run.<p>Zoom is very invasive &#x2F; flexible - so it&#x27;s actually somewhat hard to have it NOT work. People will suggest you try connecting on your phone or dialing in if you really can&#x27;t figure it out (note that it has a fallback to browser option if you get stuck trying to start meeting as well).<p>I know of at least one job interview where they claimed they couldn&#x27;t get zoom to run &#x2F; couldn&#x27;t connect - and that was basically decisive.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=gwbas1c" target="_blank">gwbas1c</a>   <span class="timeago" data-date="2021-08-18 05:47:02 &#43;0000 UTC">2021-08-18 05:47:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I know of at least one job interview where they claimed they couldn&#x27;t get zoom to run &#x2F; couldn&#x27;t connect - and that was basically decisive.<p>I used to interview candidates via Zoom. There were quite a few who couldn&#x27;t figure it out. I gave 2nd chances interviews, mostly for optics for upper management. (And because sometimes hardware breaks at the last minute.) The candidates always failed the retry interview.<p>At least for software development, troubleshooting a camera and mic is a pretty similar skill to what our job is on a day-to-day basis. It&#x27;s also very disrespectful to make someone wait at the beginning of a meeting while you troubleshoot, especially when I&#x27;m waving my phone and sending IMs that ask the candidate to just use their phone.<p>But, if a candidate fell back to their phone, I appreciated that they respected my time.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=travoc" target="_blank">travoc</a>   <span class="timeago" data-date="2021-08-17 22:38:04 &#43;0000 UTC">2021-08-17 22:38:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can avoid this reputation by saying “our security analysts block Zoom because they think it might be untrustworthy spyware.”
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slownews45" target="_blank">slownews45</a>   <span class="timeago" data-date="2021-08-17 22:53:46 &#43;0000 UTC">2021-08-17 22:53:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s def a better response then I can&#x27;t figure out how to call into the zoom call!<p>That said, a fair number of folks don&#x27;t credibly have &quot;security analysts&quot;. Unless you are interviewing &#x2F; working for some sort of high security &#x2F; security analyst type job the world may move on pretty quickly without you.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=travoc" target="_blank">travoc</a>   <span class="timeago" data-date="2021-08-17 23:34:07 &#43;0000 UTC">2021-08-17 23:34:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, this excuse doesn’t work for personal calls and interviews, but most of my vendors seem to understand.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=q-rews" target="_blank">q-rews</a>   <span class="timeago" data-date="2021-08-18 07:32:57 &#43;0000 UTC">2021-08-18 07:32:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I resorted to using all modern video call software on my iPhone for that reason. I also get better camera quality so there&#x27;s that. Apple Handshake also makes it relatively easy to share links.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fsflover" target="_blank">fsflover</a>   <span class="timeago" data-date="2021-08-18 07:45:25 &#43;0000 UTC">2021-08-18 07:45:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            After Pegasus, I&#x27;m not sure it&#x27;s a secure solution.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=q-rews" target="_blank">q-rews</a>   <span class="timeago" data-date="2021-08-19 05:22:47 &#43;0000 UTC">2021-08-19 05:22:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apples to oranges. Public companies aren’t going to use exploits to break the sandbox. Zoom on desktop installs all sorts of daemons that I don’t want; on iOS it can’t.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-08-17 21:17:21 &#43;0000 UTC">2021-08-17 21:17:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A bit difficult when your org has decided to use Zoom for large meetings.<p>Although I nearly universally would be happy to skip those meetings, so…
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjc50" target="_blank">pjc50</a>   <span class="timeago" data-date="2021-08-17 22:03:29 &#43;0000 UTC">2021-08-17 22:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Use the work laptop. Its security is then their problem, not yours. Do I care if the Chinese government know that I&#x27;ve got Visual Studio open?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jazzyjackson" target="_blank">jazzyjackson</a>   <span class="timeago" data-date="2021-08-17 21:21:57 &#43;0000 UTC">2021-08-17 21:21:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can call in by phone
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-08-17 21:25:00 &#43;0000 UTC">2021-08-17 21:25:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They are picky about making sure everyone uses a camera.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jraph" target="_blank">jraph</a>   <span class="timeago" data-date="2021-08-17 21:34:02 &#43;0000 UTC">2021-08-17 21:34:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Then I guess your IT department or your management is happy to share your work computer&#x27;s content with Zoom. I see three paths:<p>- Resort to use Zoom in a browser, maybe from a separate profile<p>- If this does not work for you, use Zoom from a virtual machine (it should be possible by exporting the camera likely connected by USB to the VM)<p>- If you&#x27;d like to avoid a VM because it&#x27;s heavy &#x2F; annoying, I&#x27;m not sure there&#x27;s an easy solution without learning how to use namespaces and unshare.<p>Additionally, and optionally:<p>- Gently campaign against Zoom or for a better solution internally.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dsr_" target="_blank">dsr_</a>   <span class="timeago" data-date="2021-08-17 21:11:39 &#43;0000 UTC">2021-08-17 21:11:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you must use zoom, use it in a browser; uninstall their app.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=elliekelly" target="_blank">elliekelly</a>   <span class="timeago" data-date="2021-08-17 21:20:22 &#43;0000 UTC">2021-08-17 21:20:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I must have uninstalled their app on my Macbook ten times now but somehow it keeps coming back. I’ll click a link to join a meeting and the app launches.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=agustif" target="_blank">agustif</a>   <span class="timeago" data-date="2021-08-17 21:31:58 &#43;0000 UTC">2021-08-17 21:31:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076</a><p>They recover the app from your backups if available when launching. Try appCleaner or something like that, and you might need to delete it from any TimeMachine backups too, lol
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GekkePrutser" target="_blank">GekkePrutser</a>   <span class="timeago" data-date="2021-08-17 23:52:43 &#43;0000 UTC">2021-08-17 23:52:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is exactly the kind of dickery I hate zoom for. The same thing with installing a backdoor and then blatantly refusing to remove it when found out. Luckily Apple did the job for them :P<p>Their attitude is so wrong. I don&#x27;t understand how people still use it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-18 00:55:33 &#43;0000 UTC">2021-08-18 00:55:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But it doesn&#x27;t work particularly well that way! It&#x27;s workable, but calls seem to have worse quality and more latency.<p>By all means, use it if you feel it&#x27;s necessary, but you&#x27;re giving up a lot!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dsr_" target="_blank">dsr_</a>   <span class="timeago" data-date="2021-08-18 12:46:22 &#43;0000 UTC">2021-08-18 12:46:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes! It&#x27;s a literal tradeoff between security and functionality, the same tradeoff that people make every day.<p>Figure out which one you want; Zoom is unwilling to give you both, even when you&#x27;re paying them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MattGaiser" target="_blank">MattGaiser</a>   <span class="timeago" data-date="2021-08-17 21:26:14 &#43;0000 UTC">2021-08-17 21:26:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t know that Zoom allowed that. Thank you.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dheera" target="_blank">dheera</a>   <span class="timeago" data-date="2021-08-18 00:49:13 &#43;0000 UTC">2021-08-18 00:49:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You have to pretend that Zoom doesn&#x27;t work and then it eventually gives you the &quot;join from browser&quot; link.<p>When you click on a Zoom meeting, it will prompt you to launch xdg-open -- cancel it. Then hit launch again -- cancel the xdg-open again -- and then the &quot;Join from browser&quot; link should pop up after a few times.<p>Sometimes it tries to capture you, I had to click on trucks and trains for 15 minutes before it let me in, and then had to apologize for being 15 minutes late to the meeting.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=908B64B197" target="_blank">908B64B197</a>   <span class="timeago" data-date="2021-08-17 21:19:02 &#43;0000 UTC">2021-08-17 21:19:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you care about protecting your IP or your company from state sponsored actors it&#x27;s better to avoid Zoom due to it&#x27;s ties with the CCP [0]<p>[0] <a href="https:&#x2F;&#x2F;techcrunch.com&#x2F;2020&#x2F;06&#x2F;11&#x2F;zoom-admits-to-shutting-down-activist-accounts-at-the-request-of-the-chinese-government&#x2F;" rel="nofollow">https:&#x2F;&#x2F;techcrunch.com&#x2F;2020&#x2F;06&#x2F;11&#x2F;zoom-admits-to-shutting-do...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phendrenad2" target="_blank">phendrenad2</a>   <span class="timeago" data-date="2021-08-17 20:57:37 &#43;0000 UTC">2021-08-17 20:57:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Is there any way to prevent it?<p>Maybe run it in a chroot?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=andrewlevi" target="_blank">andrewlevi</a>   <span class="timeago" data-date="2021-08-17 21:57:06 &#43;0000 UTC">2021-08-17 21:57:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does Teams or Discord do anything similar?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=P9TXJYG0TENG" target="_blank">P9TXJYG0TENG</a>   <span class="timeago" data-date="2021-08-17 22:12:06 &#43;0000 UTC">2021-08-17 22:12:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discord does. It makes some sense, since Discord has a feature to broadcast what game you&#x27;re currently playing (or anything you want), but I found it was scanning &#x2F;proc even when I turned this off.<p>I didn&#x27;t like that, and I spent a lot of time and effort working out various ways to keep it out of &#x2F;proc (or anywhere else while I was at it- mostly with AppArmor) and ultimately ended up running it in a container with systemd-nspawn. This is still a little bit fiddly, but seems to work reliably and without any issues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=orangea" target="_blank">orangea</a>   <span class="timeago" data-date="2021-08-18 01:15:10 &#43;0000 UTC">2021-08-18 01:15:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wouldn&#x27;t it be easier to just run it in a browser?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=P9TXJYG0TENG" target="_blank">P9TXJYG0TENG</a>   <span class="timeago" data-date="2021-08-18 01:29:24 &#43;0000 UTC">2021-08-18 01:29:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s probably the better answer, yeah. I think there&#x27;s a couple of features that don&#x27;t work very well in the browser (push to talk?), but the actual answer is that it probably simply didn&#x27;t occur to me at the time.<p>I use both these days.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lathiat" target="_blank">lathiat</a>   <span class="timeago" data-date="2021-08-17 22:22:10 &#43;0000 UTC">2021-08-17 22:22:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The discord snap blocks this with apparmor by default unless you connect process-control. But it also fills your kernel log with audit denials.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=P9TXJYG0TENG" target="_blank">P9TXJYG0TENG</a>   <span class="timeago" data-date="2021-08-17 22:45:29 &#43;0000 UTC">2021-08-17 22:45:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think I tried one of those alternative app distribute-y things at the time, but I don&#x27;t remember which, and I came away disappointed. If memory serves, I couldn&#x27;t establish whether it actually did any sandboxing, or what it did by default (like intentionally opening up this exact hole), and certainly not how to configure it, and gave up shortly in favor of something I&#x27;d at least seen before.<p>It <i>might</i> have been Snap. I don&#x27;t like Snap.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sneak" target="_blank">sneak</a>   <span class="timeago" data-date="2021-08-17 23:58:53 &#43;0000 UTC">2021-08-17 23:58:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The way to prevent it is to not install their poorly engineered spyware and only use the sandboxed web app.<p>You&#x27;d have to be crazy to install Zoom given their history.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevmo" target="_blank">kevmo</a>   <span class="timeago" data-date="2021-08-17 22:06:26 &#43;0000 UTC">2021-08-17 22:06:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom is pursuing surveillance profits.<p>Shoshanna Zuboff has an excellent book on &quot;surveillance capitalism&quot;, if you want to read more on the trend.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dllthomas" target="_blank">dllthomas</a>   <span class="timeago" data-date="2021-08-18 00:09:41 &#43;0000 UTC">2021-08-18 00:09:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They may be, but this case is not related unless someone is paying big bucks to know the pid of gnome-session.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=3r8Oltr0ziouVDM" target="_blank">3r8Oltr0ziouVDM</a>   <span class="timeago" data-date="2021-08-17 21:48:31 &#43;0000 UTC">2021-08-17 21:48:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When you run proprietary software, you basically give full control over your computer to a third party. For the best security use a separate physical machine for stuff like this. Or a separate operating system (in such case your primary system should be encrypted and have a protected boot loader). Or at least a VM.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ianlevesque" target="_blank">ianlevesque</a>   <span class="timeago" data-date="2021-08-17 20:43:40 &#43;0000 UTC">2021-08-17 20:43:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom is basically malware with video chat.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-17 23:32:02 &#43;0000 UTC">2021-08-17 23:32:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ok, but please don&#x27;t post unsubstantive comments and&#x2F;or shallow dismissals to Hacker News. It degrades discussion noticeably, and we&#x27;re trying for better here.<p>(Of course, the greater part of this damage is done by upvoters, but they can&#x27;t upvote nothing.)<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;newsguidelines.html" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;newsguidelines.html</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ianlevesque" target="_blank">ianlevesque</a>   <span class="timeago" data-date="2021-08-18 00:33:34 &#43;0000 UTC">2021-08-18 00:33:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah I probably should’ve looked up the citations myself. People quickly swooped in with them at least.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=barbazoo" target="_blank">barbazoo</a>   <span class="timeago" data-date="2021-08-17 20:53:49 &#43;0000 UTC">2021-08-17 20:53:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Elaborate please
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=humaniania" target="_blank">humaniania</a>   <span class="timeago" data-date="2021-08-17 21:40:16 &#43;0000 UTC">2021-08-17 21:40:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;citizenlab.ca&#x2F;2020&#x2F;04&#x2F;move-fast-roll-your-own-crypto-a-quick-look-at-the-confidentiality-of-zoom-meetings&#x2F;" rel="nofollow">https:&#x2F;&#x2F;citizenlab.ca&#x2F;2020&#x2F;04&#x2F;move-fast-roll-your-own-crypto...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=miles" target="_blank">miles</a>   <span class="timeago" data-date="2021-08-17 21:04:02 &#43;0000 UTC">2021-08-17 21:04:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ‘Zoom is malware’: why experts worry about the video conferencing platform
+<a href="https:&#x2F;&#x2F;www.theguardian.com&#x2F;technology&#x2F;2020&#x2F;apr&#x2F;02&#x2F;zoom-technology-security-coronavirus-video-conferencing" rel="nofollow">https:&#x2F;&#x2F;www.theguardian.com&#x2F;technology&#x2F;2020&#x2F;apr&#x2F;02&#x2F;zoom-tech...</a><p>Zoom banned from New York City schools due to privacy and security flaws
+<a href="https:&#x2F;&#x2F;www.fastcompany.com&#x2F;90486586&#x2F;zoom-banned-from-new-york-city-schools-due-to-privacy-and-security-flaws" rel="nofollow">https:&#x2F;&#x2F;www.fastcompany.com&#x2F;90486586&#x2F;zoom-banned-from-new-yo...</a><p>Google Told Its Workers That They Can’t Use Zoom On Their Laptops Anymore
+<a href="https:&#x2F;&#x2F;www.buzzfeednews.com&#x2F;article&#x2F;pranavdixit&#x2F;google-bans-zoom" rel="nofollow">https:&#x2F;&#x2F;www.buzzfeednews.com&#x2F;article&#x2F;pranavdixit&#x2F;google-bans...</a><p>Elon Musk&#x27;s SpaceX bans Zoom over privacy concerns
+<a href="https:&#x2F;&#x2F;www.reuters.com&#x2F;article&#x2F;us-spacex-zoom-video-commn&#x2F;elon-musks-spacex-bans-zoom-over-privacy-concerns-memo-idUSKBN21J71H" rel="nofollow">https:&#x2F;&#x2F;www.reuters.com&#x2F;article&#x2F;us-spacex-zoom-video-commn&#x2F;e...</a><p>Zoom lied to users about end-to-end encryption for years, FTC says
+<a href="https:&#x2F;&#x2F;arstechnica.com&#x2F;tech-policy&#x2F;2020&#x2F;11&#x2F;zoom-lied-to-users-about-end-to-end-encryption-for-years-ftc-says&#x2F;" rel="nofollow">https:&#x2F;&#x2F;arstechnica.com&#x2F;tech-policy&#x2F;2020&#x2F;11&#x2F;zoom-lied-to-use...</a><p>Zoom security issues: Here&#x27;s everything that&#x27;s gone wrong (so far)
+<a href="https:&#x2F;&#x2F;www.tomsguide.com&#x2F;news&#x2F;zoom-security-privacy-woes" rel="nofollow">https:&#x2F;&#x2F;www.tomsguide.com&#x2F;news&#x2F;zoom-security-privacy-woes</a><p>Maybe we shouldn’t use Zoom after all
+<a href="https:&#x2F;&#x2F;techcrunch.com&#x2F;2020&#x2F;03&#x2F;31&#x2F;zoom-at-your-own-risk&#x2F;" rel="nofollow">https:&#x2F;&#x2F;techcrunch.com&#x2F;2020&#x2F;03&#x2F;31&#x2F;zoom-at-your-own-risk&#x2F;</a><p>Attackers can use Zoom to steal users’ Windows credentials with no warning
+<a href="https:&#x2F;&#x2F;arstechnica.com&#x2F;information-technology&#x2F;2020&#x2F;04&#x2F;unpatched-zoom-bug-lets-attackers-steal-windows-credentials-with-no-warning&#x2F;" rel="nofollow">https:&#x2F;&#x2F;arstechnica.com&#x2F;information-technology&#x2F;2020&#x2F;04&#x2F;unpat...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-08-17 21:37:14 &#43;0000 UTC">2021-08-17 21:37:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I can&#x27;t believe I&#x27;m saying this, but I&#x27;m not sure that last one is zoom&#x27;s fault.  It sounds like Zoom is just calling ShellExecute(&quot;open&quot;, link), and is getting blamed for the fact that Windows will then connect to random server on public internet and can be convinced to send a hash of the password that can be used to forge a different connection from a different host&#x2F;client pair with the same credentials.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kamray23" target="_blank">kamray23</a>   <span class="timeago" data-date="2021-08-18 07:40:52 &#43;0000 UTC">2021-08-18 07:40:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I mean it is their fault, for a naïve implementation and trusting Windows.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-08-18 09:36:24 &#43;0000 UTC">2021-08-18 09:36:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s the mechanism meant for untrusted links, and it&#x27;s the prescribed way for instance to open a link in the user&#x27;s default browser.  If Chrome took that link and started sending the user&#x27;s password hash, that&#x27;d clearly be Chrome&#x27;s fault.  Same with, say, an ftp client that listened for ftp paths and would send replayable hashes as the first step.  It&#x27;s clearly SMB&#x27;s terrible protocol.  Yes they removed UNC paths to hack around this... but they shouldn&#x27;t have to.  Nope should they be expected to have known about this particular Windows footgun, IMO.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=notwhereyouare" target="_blank">notwhereyouare</a>   <span class="timeago" data-date="2021-08-17 21:05:51 &#43;0000 UTC">2021-08-17 21:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            and on the front page currently: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28210076</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=movedx" target="_blank">movedx</a>   <span class="timeago" data-date="2021-08-17 22:56:13 &#43;0000 UTC">2021-08-17 22:56:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m really, really annoyed that you&#x27;re being downvoted for providing citations: as f-ing requested!<p>Thank you. These will make for some interesting reading.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 21:05:36 &#43;0000 UTC">2021-08-17 21:05:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=infamouscow" target="_blank">infamouscow</a>   <span class="timeago" data-date="2021-08-17 20:58:49 &#43;0000 UTC">2021-08-17 20:58:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This really should be self-evident
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dng88" target="_blank">dng88</a>   <span class="timeago" data-date="2021-08-17 21:27:47 &#43;0000 UTC">2021-08-17 21:27:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would it be better if run in a vm?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=sunkenvicar" target="_blank">sunkenvicar</a>   <span class="timeago" data-date="2021-08-18 00:02:27 &#43;0000 UTC">2021-08-18 00:02:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because it is made in china.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=99mans" target="_blank">99mans</a>   <span class="timeago" data-date="2021-08-17 22:01:28 &#43;0000 UTC">2021-08-17 22:01:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because they can get away with it and use it to make more money from your &quot;experience&quot;.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=0xbadcafebee" target="_blank">0xbadcafebee</a>   <span class="timeago" data-date="2021-08-17 23:55:28 &#43;0000 UTC">2021-08-17 23:55:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s not really worth wondering. There are a million potential reasons that you and I don&#x27;t know or can&#x27;t come up with, but they may have a specific reason for.<p>You can probably prevent it with capabilities, or selinux, or with a container. Unless you just enjoy the fashion statement of tinfoil hats, it&#x27;s not worth it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=gigatexal" target="_blank">gigatexal</a>   <span class="timeago" data-date="2021-08-17 18:45:45 &#43;0000 UTC">2021-08-17 18:45:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Im on a Mac so I can’t issue the same … did you use strace on Linux?<p>This is enough for me to remove the app and just use it in the browser.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=saurik" target="_blank">saurik</a>   <span class="timeago" data-date="2021-08-17 20:39:10 &#43;0000 UTC">2021-08-17 20:39:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Im on a Mac so I can’t issue the same...<p>dtruss
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lsllc" target="_blank">lsllc</a>   <span class="timeago" data-date="2021-08-17 21:53:49 &#43;0000 UTC">2021-08-17 21:53:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sadly running dtruss on (modern) macOS requires disabling system integrity protection.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MrWiffles" target="_blank">MrWiffles</a>   <span class="timeago" data-date="2021-08-18 00:46:36 &#43;0000 UTC">2021-08-18 00:46:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t remember the option off-hand, but there&#x27;s a way to leave SIP enabled, but still allow dtruss too on modern MacOS. You&#x27;d have to Google it up, but that option does exist (I just can&#x27;t remember the name off hand). Saw it about ~4 weeks ago while doing some research.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beaugunderson" target="_blank">beaugunderson</a>   <span class="timeago" data-date="2021-08-18 06:28:04 &#43;0000 UTC">2021-08-18 06:28:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like you&#x27;re referring to this, from June: <a href="https:&#x2F;&#x2F;poweruser.blog&#x2F;using-dtrace-with-sip-enabled-3826a352e64b" rel="nofollow">https:&#x2F;&#x2F;poweruser.blog&#x2F;using-dtrace-with-sip-enabled-3826a35...</a><p>Sadly it&#x27;s a little more involved (a chroot which removes all codesigning bits) than a simple option, but I&#x27;m glad to have found a way to do it all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aFaid7see0ni" target="_blank">aFaid7see0ni</a>   <span class="timeago" data-date="2021-08-17 23:03:01 &#43;0000 UTC">2021-08-17 23:03:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zoom has a paid feature to view processes of other meeting attendees. Yes. Scary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Gene_Parmesan" target="_blank">Gene_Parmesan</a>   <span class="timeago" data-date="2021-08-17 23:23:08 &#43;0000 UTC">2021-08-17 23:23:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This seems to be a viral inaccuracy: <a href="https:&#x2F;&#x2F;www.howtogeek.com&#x2F;664624&#x2F;does-zoom-really-monitor-which-apps-youre-using-on-a-call&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.howtogeek.com&#x2F;664624&#x2F;does-zoom-really-monitor-wh...</a><p>That article claims that Zoom <i>does</i> have a feature allowing hosts to see whether people have the zoom window focused while someone is presenting, but it doesn&#x27;t allow the host to actually see running processes. Note that I can&#x27;t, nor do I claim to, vouch for the accuracy of the explanation in the link. Just something I found.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=EMM_386" target="_blank">EMM_386</a>   <span class="timeago" data-date="2021-08-18 00:45:45 &#43;0000 UTC">2021-08-18 00:45:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; That article claims that Zoom does have a feature allowing hosts to see whether people have the zoom window focused while someone is presenting<p>It used to but it was removed.<p><a href="https:&#x2F;&#x2F;support.zoom.us&#x2F;hc&#x2F;en-us&#x2F;articles&#x2F;115000538083-Attendee-attention-tracking" rel="nofollow">https:&#x2F;&#x2F;support.zoom.us&#x2F;hc&#x2F;en-us&#x2F;articles&#x2F;115000538083-Atten...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phgn" target="_blank">phgn</a>   <span class="timeago" data-date="2021-08-17 23:06:05 &#43;0000 UTC">2021-08-17 23:06:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t believe that, would be way too scary. Do you have a link?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pizza" target="_blank">pizza</a>   <span class="timeago" data-date="2021-08-17 23:06:01 &#43;0000 UTC">2021-08-17 23:06:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can you explain this? Not sure how to look this up
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=GekkePrutser" target="_blank">GekkePrutser</a>   <span class="timeago" data-date="2021-08-17 21:58:36 &#43;0000 UTC">2021-08-17 21:58:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I know a really good way to prevent it. Don&#x27;t use zoom :) Seriously they&#x27;ve done so many things that show they don&#x27;t care about privacy. Like that backdoor on Macs.<p>But if you really must, use the web version only.<p>If you can avoid it, jitsi is a great alternative. Much smoother video than teams and much lighter
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

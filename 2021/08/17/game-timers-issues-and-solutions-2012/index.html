@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/game-timers-issues-and-solutions-2012/">
+
+
+    <title>Game Timers: Issues and Solutions (2012) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Game Timers: Issues and Solutions (2012) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/game-timers-issues-and-solutions-2012/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/game-timers-issues-and-solutions-2012/">
+<meta name="twitter:title" content="Game Timers: Issues and Solutions (2012) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Game Timers: Issues and Solutions (2012) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T09:32:59JST",
+    "dateModified": "2021-08-17T09:32:59JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://www.fabiensanglard.net/timer_and_framerate/index.php">Game Timers: Issues and Solutions (2012)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 13:01:07 &#43;0000 UTC">2021-08-17 13:01:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The other problem with naively measuring the frame duration is that you&#x27;ll get sub-millisecond-jitter because modern operating systems are neiter &quot;hard realtime&quot; nor &quot;soft realtime&quot;, which in turn introduces micro-stutter because your game frames will be timed slightly differently than when your new frame shows up on screen (because of the fixed display refresh rate - unless of course a variable refresh rate is used like G-Sync).<p>This is also my main pet peeve on the web. You can&#x27;t measure a precise frame duration (made much worse by Spectre&#x2F;Meltdown mitigations), but you also can&#x27;t query the display refresh rate.<p>In the 80&#x27;s we took perfectly smooth scrolling and animations for granted, because most 80&#x27;s home computers and game consoles were proper hard-realtime systems. Counter-intuitively this is harder to achieve on modern PCs that are many thousand times faster.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=megameter" target="_blank">megameter</a>   <span class="timeago" data-date="2021-08-17 21:52:00 &#43;0000 UTC">2021-08-17 21:52:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The last time I implemented a timing loop I came up with an approach that would mitigate jitter and oscillation artifacts occurring due to OS overhead (though not solving the aspect of video refresh itself being misaligned). One of my major assumptions was that I could run the game at higher frequency than refresh and therefore rely on downsampling my output, vs the norm of many higher-end games where the base tick is interpolated up to refresh rate.<p>1. Derive ideal number of elapsed frames using elapsed time from start divided by framerate.<p>2. Run updates to &quot;catch up&quot; to ideal frames.<p>3. Observe &quot;rubberbanding&quot; artifact as game oscillates between too slow and too fast.<p>4. Add limits to how many catchup frames are allowed per render frame to stop the rubberbanding. Implement a notion of &quot;dropped frames&quot; instead, so that our ideal time accounting has a release valve when too much catchup is needed.<p>5. Now apply a low-pass filter to the amount of catchup frames over time, e.g. if you have a tick of 120hz but your monitor is at 60hz you are likely to see an occasional high frequency oscillation in how many tick frames are supplied per render frame, like [2,3,2,3,2,3]. Filtering can make this [2,2,2,3,3,3]. (It&#x27;s been a while since I did this, so I don&#x27;t recall my exact algorithm)<p>The end result of this effort is that wall-clock time is obeyed over the long-run(minus dropped frames) but the supplied frames are also able to maintain the same pacing for longer periods, which makes the moment-to-moment experience very predictable, hence smooth.<p>While I haven&#x27;t tried it, I think the equivalent thing when interpolating would be to freeze a certain issued delta time pace for some number of frames.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hinkley" target="_blank">hinkley</a>   <span class="timeago" data-date="2021-08-18 03:48:08 &#43;0000 UTC">2021-08-18 03:48:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I didn&#x27;t have &quot;real time&quot; but did have an online (as in 1s&#x2F;s) animation of telemetry data, and the product was such that &quot;smoother than smooth&quot; just meant we increased the maximum allowed charts until we were just back to &quot;smooth&quot;.  While adding a little latency helped from moment to moment, over a period of minutes you would see a pattern of stutters that was hard to ignore once you were aware of it.<p>Ultimately I had to fill the screen as best I could, if the paint happened ahead of the deadline I had to decide on painting ahead on the next couple of frames, or doing cleanup work. There was never enough time for both.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=MisterTea" target="_blank">MisterTea</a>   <span class="timeago" data-date="2021-08-17 15:31:15 &#43;0000 UTC">2021-08-17 15:31:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In the 80&#x27;s we took perfectly smooth scrolling and animations for granted, because most 80&#x27;s home computers and game consoles were proper hard-realtime systems.<p>Proper hard realtime means the software is designed to meet stringent time deadlines. If a deadline is missed then the system has failed.<p>Soft real time means you tolerate missing one or more deadlines if the system is designed to handle it.<p>The 80&#x27;s hardware only ran the game code so there was never any CPU contention. There was no kernel, scheduler, threads or processes. The programmers could wrap their heads round the simpler hardware and use all available tricks to optimize every clock tick to do useful work.<p>Nowadays we have stupid cheap multicore GHz CPU&#x27;s for a few dollars with GB of RAM so you brute force your way through everything on a general purpose OS like Linux.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 16:33:21 &#43;0000 UTC">2021-08-17 16:33:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, and also the video and audio chips were &quot;cycle-synchronized&quot; with the CPU (e.g. it was guaranteed that a fixed number of CPU cycles after the vsync interrupt you&#x27;d always end up at the exact same video raster position etc...).<p>OTH making the hardware components &quot;asynchronous&quot; and the timings &quot;unpredictable&quot; enabled today&#x27;s performance (e.g. by introducing caches and pipelines).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Pulcinella" target="_blank">Pulcinella</a>   <span class="timeago" data-date="2021-08-17 14:44:32 &#43;0000 UTC">2021-08-17 14:44:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe Unity has just recently (I.e. since October 2020) taken steps to help mitigate this microstutter, unless I am misunderstanding you.<p><a href="https:&#x2F;&#x2F;blog.unity.com&#x2F;technology&#x2F;fixing-time-deltatime-in-unity-2020-2-for-smoother-gameplay-what-did-it-take" rel="nofollow">https:&#x2F;&#x2F;blog.unity.com&#x2F;technology&#x2F;fixing-time-deltatime-in-u...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=devwastaken" target="_blank">devwastaken</a>   <span class="timeago" data-date="2021-08-17 15:19:22 &#43;0000 UTC">2021-08-17 15:19:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What&#x27;s preventing PC&#x27;s from having some realtime clock hardware component that could be used by software?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 17:33:09 &#43;0000 UTC">2021-08-17 17:33:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This isn&#x27;t the problem, those timers exist and are accessible (unless you&#x27;re in a web browser). The problem is that your code is essentially running at an unpredictable point in time within the current frame. E.g. if you measure the time duration between the same line of code at the start of your per-frame function you&#x27;ll get a tiny jitter and never exactly 16.66667 ms (assuming a 60Hz display). I&#x27;m not sure what&#x27;s the exact reason, but I guess there are many things that can throw off this sort of time measurement in a modern operating system (for instance process&#x2F;thread scheduling).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=krona" target="_blank">krona</a>   <span class="timeago" data-date="2021-08-17 15:41:08 &#43;0000 UTC">2021-08-17 15:41:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Modern CPU&#x27;s already have several counters for &#x27;nominal&#x27; cycles (i.e. cycles at a constant frequency). e.g. TSC instructions and Performance-Monitoring Counters.<p>Converting nominal cycles to time can be unreliable in some cases but not impossible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bsder" target="_blank">bsder</a>   <span class="timeago" data-date="2021-08-17 22:58:33 &#43;0000 UTC">2021-08-17 22:58:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is also my main pet peeve on the web. You can&#x27;t measure a precise frame duration (made much worse by Spectre&#x2F;Meltdown mitigations), but you also can&#x27;t query the display refresh rate.<p>Vulkan has extensions for measuring frame timings.  I suspect DirectX 12 does too, given how similar it is to Vulkan.<p>See: <a href="https:&#x2F;&#x2F;www.khronos.org&#x2F;registry&#x2F;vulkan&#x2F;specs&#x2F;1.2-extensions&#x2F;man&#x2F;html&#x2F;VK_GOOGLE_display_timing.html" rel="nofollow">https:&#x2F;&#x2F;www.khronos.org&#x2F;registry&#x2F;vulkan&#x2F;specs&#x2F;1.2-extensions...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bob1029" target="_blank">bob1029</a>   <span class="timeago" data-date="2021-08-17 13:12:00 &#43;0000 UTC">2021-08-17 13:12:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I feel like there are some ideas in Fintech that haven&#x27;t quite leaked over into the gaming space yet.<p>Has anyone investigated the idea of sacrificing an entire high priority thread to a timer loop that busy waits over a collection of pending timers? Most gaming PCs these days have more than enough cores to get away with the idea of a full-time high-precision timer thread.<p>In my experiments of this idea, I have had no trouble getting jitter under 100uS in managed languages (C#&#x2F;Java). Millions of timers scheduled seems to be no problem, assuming mild optimizations are employed (i.e. order by next desired execution tick). With all of this magic turned on, I still have 31 other cores to play with. Task.Delay looks like a preschool art project by comparison to the precision I get out of my (arguably dumb-as-hell) DIY timer impl.<p>I have used this approach to schedule client frame draws in a custom UI framework, and it is indistinguishable from butter on my computer and across reasonable networks. In my prototypes, the client input events are entirely decoupled from the frame draws by way of a separate ringbuffer&#x2F;batching abstraction. There is actually no locking in my architecture. Draws back to the client use immutable snapshots of state, so current updates can continue unfettered. The state is only ever mutated from a single thread.<p>Technically, I sacrifice ~2 threads in my architecture, as the ringbuffer also uses a busy wait technique.<p>All of this said, if you are willing to burn more power, use more cores, and think outside of the box just a bit, you can do some pretty amazing shit.<p>Consider these ideas at broader scale too - What if you could amortize the cost of that power-hungry timer thread for thousands of gamers instead of just 1? Are there maybe some additional benefits to moving 100% of the game state to the server and shipping x265 frames to the end users?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 13:18:00 &#43;0000 UTC">2021-08-17 13:18:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s much easier than that, you just need to use the display refresh rate as your time base.<p>In the end, the only important event is when your new frame shows up on screen, and this is (a) very precise, and (b) out of your control anyway, at least for traditional fixed-refresh-rate displays.<p>It doesn&#x27;t really matter where exactly within a frame-time-slice your per-frame-code runs, or how long it takes as long as it fits comfortably within one display refresh interval, the basic timer resolution that matters is the display refresh rate.<p>PS: it&#x27;s more difficult if you also need to minimize input- and networking-latency, that&#x27;s were it may make sense to to use separate threads I guess. But on desktop PCs (versus game consoles), so much also depends on the operating system playing ball...<p>PPS: busy looping probably isn&#x27;t a good idea when power consumption matters (e.g. on mobile)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jdmichal" target="_blank">jdmichal</a>   <span class="timeago" data-date="2021-08-17 14:04:48 &#43;0000 UTC">2021-08-17 14:04:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Consider these ideas at broader scale too - What if you could amortize the cost of that power-hungry timer thread for thousands of gamers instead of just 1? Are there maybe some additional benefits to moving 100% of the game state to the server and shipping x265 frames to the end users?<p>I don&#x27;t know of any online game that doesn&#x27;t track the official game state on the server.  This is required for anti-cheat reasons, if nothing else.  However, networking would typically be optimized to send small packets of information, and typically over UDP.  If a packet is missed, the next packet will just be overwriting it anyway, so no big deal.  Clients would basically just locally simulate game state and then reconcile that against the game state being received from the server.<p>Also, rendering has to be done per-client anyway, since each one has a different camera state.  So there&#x27;s no economy of scale for doing that on the server rather than the client.  In fact, there&#x27;s probably anti-economy:  Servers that aren&#x27;t rendering don&#x27;t need expensive video cards unless they&#x27;re using them for physics.<p>I have the understanding that more modern games do sometimes use TCP sockets.  And obviously modern bandwidth has made streaming frames realistically possible.  Hence the recent emergence of streaming game services.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-17 14:19:40 &#43;0000 UTC">2021-08-17 14:19:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I don&#x27;t know of any online game that doesn&#x27;t track the official game state on the server.<p>A lot of titles are more or less serverless peer-to-peer.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jdmichal" target="_blank">jdmichal</a>   <span class="timeago" data-date="2021-08-17 16:00:00 &#43;0000 UTC">2021-08-17 16:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Serverless&quot; as in one of the peers is nominated as the Source of Truth?  Or truly decentralized state?  Because the first option is just changing who owns the server.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-17 16:07:37 &#43;0000 UTC">2021-08-17 16:07:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Both.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fabiensanglard" target="_blank">fabiensanglard</a>   <span class="timeago" data-date="2021-08-17 12:45:57 &#43;0000 UTC">2021-08-17 12:45:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Written during one of these blizzard like I have only seen in Toronto.<p>This makes me want a French Vanilla from Tim Hortons.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 09:35:35 &#43;0000 UTC">2021-08-17 09:35:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The joy of &quot;discovering&quot; this approach was short lived: This system is very well known in the game industry and is actually the keystone of games such as Starcraft II or id Software engines !<p>Is it very well known in the game industry? I have trouble finding anything about it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalCoder" target="_blank">TacticalCoder</a>   <span class="timeago" data-date="2021-08-17 12:14:15 &#43;0000 UTC">2021-08-17 12:14:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yup it is well known since a long time.  Fun fact: I discovered that technique myself around 1991 (and still have the ASM + C source code for the DOS game using it).  The first time I remember it publicly described was on the GamaSutra website in a post-mortem for the first &quot;Age of Empire&quot; game.  GamaSutra was&#x2F;is a big deal among game devs so the technique became &quot;famous&quot; when that post-mortem was made.<p>I wrote about it in a thread here called: <i>&quot;Why bugs might feel “impossible”&quot;</i> about two months ago and someone commented that the game TerraNova (from 1996) had a fully deterministic engine.<p>BTW TFA say StarCraft 2 (2007) used the technique but Warcraft 3 (2003) was already using a deterministic engine. Save files for Warcraft 3 games (including multiplayer ones over the Internet) consisted in only recording the player inputs and the &quot;tick&quot; at which they happened.  This make for tiny savefiles, even for very long games.<p>So basically: several of us independently discovered that technique in the nineties.  There may have been games in the eighties already using such a technique but I don&#x27;t know any.<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27517074" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27517074</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 12:23:19 &#43;0000 UTC">2021-08-17 12:23:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was it this article?: <a href="https:&#x2F;&#x2F;www.gamasutra.com&#x2F;view&#x2F;news&#x2F;115711&#x2F;The_Game_Developer_Archives_Postmortem_Ensembles_Age_of_Empires.php" rel="nofollow">https:&#x2F;&#x2F;www.gamasutra.com&#x2F;view&#x2F;news&#x2F;115711&#x2F;The_Game_Develope...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TacticalCoder" target="_blank">TacticalCoder</a>   <span class="timeago" data-date="2021-08-17 12:31:34 &#43;0000 UTC">2021-08-17 12:31:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It was more than 20 years ago so I don&#x27;t remember: quickly skimming through it I don&#x27;t think so.  I still have emails somewhere I exchanged back then with the dev who wrote the article so I may be able to find the date.<p>But in any case: the technique ain&#x27;t new.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 12:37:14 &#43;0000 UTC">2021-08-17 12:37:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Now, I seriously question the notion of &quot;the internet never forgets things&quot;.
+I wonder how much valuable knowledge got lost from that era (the 90s).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=toast0" target="_blank">toast0</a>   <span class="timeago" data-date="2021-08-17 17:06:42 &#43;0000 UTC">2021-08-17 17:06:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;the internet never forgets things&quot; is more of an caution than a promise.<p>Don&#x27;t say stupid things that will look even worse in 10 years or sometimes fairly mainstream things that will look terrible in 40 years, because the internet never forgets.<p>But, you still need to archive stuff you want to reference later. Even if it&#x27;s still out there, it might be much harder to find.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IncRnd" target="_blank">IncRnd</a>   <span class="timeago" data-date="2021-08-17 15:43:41 &#43;0000 UTC">2021-08-17 15:43:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There were huge amounts of knowledge and techniques that were never preserved.  The Internet has forgotten many things about applied computer science.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=setr" target="_blank">setr</a>   <span class="timeago" data-date="2021-08-17 17:40:56 &#43;0000 UTC">2021-08-17 17:40:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There’s a reason webarchive exists — the internet forgets things constantly (another solution to the problem are things like ipfs)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=adzm" target="_blank">adzm</a>   <span class="timeago" data-date="2021-08-17 12:53:53 &#43;0000 UTC">2021-08-17 12:53:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There was a ton of weird random stuff on geocities that never got saved.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 10:52:13 &#43;0000 UTC">2021-08-17 10:52:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah extremely well known. Doesn’t mean everyone uses fixed time steps though or talks about it a lot when they do. But you’ll find the concept creeps up a lot in physic engines, deterministic networking&#x2F;gameplay and in discussions of engine architecture amongst other places.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 10:58:30 &#43;0000 UTC">2021-08-17 10:58:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am a little confused, isn&#x27;t this a &quot;fixed timestep&quot;?: <a href="https:&#x2F;&#x2F;www.gafferongames.com&#x2F;post&#x2F;fix_your_timestep&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.gafferongames.com&#x2F;post&#x2F;fix_your_timestep&#x2F;</a><p>Fabien calls it &quot;fixed timeslice&quot;. I find Fabien&#x27;s solution much simpler. It is quite different to Fiedler&#x27;s one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 11:03:18 &#43;0000 UTC">2021-08-17 11:03:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Whether you call it a step or slice doesn’t matter, tick is another common term for the same concept. Fabien’s solution is mentioned in Glenn’s. Glenn just takes it a stage further afterward and allows the fractional time remaining to be accounted for when rendering.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 11:35:13 &#43;0000 UTC">2021-08-17 11:35:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <p><pre><code>    while (running)
+    {
+        static std::uint32_t simulation_time{0U};
+        std::uint32_t const real_time = SDL_GetTicks();
+
+        process_input();
+
+        while (simulation_time &lt; real_time)
+        {
+            simulation_time += 16U;
+            update(16U);
+        }
+
+        render();
+    }
+</code></pre>
+As I understand it, the inner while loop&#x27;s is essentially playing &quot;catch up&quot; with the outer while.
+For simplicity&#x27;s sake, let&#x27;s assume that simulation_time is incremented to 1 in the inner while (simulation_time += 1U).
+Further, let us assume that simulation_time is 42 in the first iteration. Now, the inner while needs to execute 42 times until it fails the loop condition (42 &lt; 42).<p>On the second iteration, simulation_time is equal to 58 (42 + 16). The inner while executes (42 &lt; 58) 16 times now.<p>On the third iteration, simulation_time is equal to 59 (58 + 1). The inner while executes (58 &lt; 59) 1 time.<p>The real_time cannot stay the same, as it polls the number of ticks since SDL was initialized. So apparently, simulation_time is always smaller than real_time.<p>(If for some reason, real_time isn&#x27;t incremented in an iteration, then the inner loop will not get executed. However, I don&#x27;t see a case where it can happen.)<p>Now, inside the update function there is a position update akin to current_position += speed * 16U. Now with the above iterations:<p>- The first iteration, causes 42 update calls (so current_position is updated 42 times as well).<p>- The second iteration, causes 16 update calls.<p>- The third, calls update 1 time.<p>So we are advancing the position of something variable times. (We are also executing the inner while in variable amounts.)<p>Maybe I am missing something here, but why doesn&#x27;t the non-constant number of updates cause jitter? I really don&#x27;t understand why it works at all to be honest. I am trying to understand it fully.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 11:45:26 &#43;0000 UTC">2021-08-17 11:45:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The simulated time is incremented by 16ms per inner loop a roughly 60hz rate. You’re correct that the simulated time catches up to the real time. Just wrong about the number of sub-steps and how the timers proceed. Technically Fabian’s solution will likely run slightly ahead of real time because of the inner loop condition.<p>You do get jitter from a changing number of sub-steps per variable step which is why you want to do things like the interpolation in Glenn’s solution. This is also why you still want to do everything in your power as a game developer to reduce the variance in real step size.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=account42" target="_blank">account42</a>   <span class="timeago" data-date="2021-08-17 12:09:10 &#43;0000 UTC">2021-08-17 12:09:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; This is also why you still want to do everything in your power as a game developer to reduce the variance in real step size.<p>Well the main reason is that for either variable time slices or fixed time slices with interpolation, what the time for the simulation&#x2F;interpolation you want is that for the current frame, but you don&#x27;t have that until you render it. So what you do is assume that it will take about as long as the previous frame, which is a bad prediction if the frame time variance is too big. If you really want to eliminate the jitter you&#x27;d need to simulate&#x2F;interpolate for a time that you are guaranteed to be able to render the frame in and then make sure that the frame is displayed when that time elapses and not before. This of course increases latency so there is always a tradeoff.<p>Another cause for jitter is that even measuring the time between two successive frames can be difficult with modern GPUs - the CPU time at the start of the game loop doesn&#x27;t really cut it: <a href="https:&#x2F;&#x2F;medium.com&#x2F;@alen.ladavac&#x2F;the-elusive-frame-timing-168f899aec92" rel="nofollow">https:&#x2F;&#x2F;medium.com&#x2F;@alen.ladavac&#x2F;the-elusive-frame-timing-16...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-17 11:53:35 &#43;0000 UTC">2021-08-17 11:53:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The simulated time is incremented by 16ms per inner loop a roughly 60hz rate. You’re correct that the simulated time catches up to the real time. Just wrong about the number of sub-steps. Technically Fabian’s solution will likely run slightly ahead of real time because of the inner loop condition.<p>Can&#x27;t the inner while take 1 ms or 1 ns for an iteration? I don&#x27;t see how the inner while&#x27;s execution time is at roughly 16 ms.
+Okay, if my number of sub-steps is wrong, then I am really missing something here. Just trying to understand what exactly is wrong with my thinking.<p>It is supposed to be so simple, yet I have real trouble understanding it currently. I am basically stuck now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 11:56:00 &#43;0000 UTC">2021-08-17 11:56:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The inner loop can take as little time as it likes to actually do the update but it is accounted in simulated time by adding 16 to the timer and accounting for that in the update by passing in 16 as the amount of time to update for.<p>Real time is updated once at the start of the step then simulated time catches up in 16ms increments. So you get as many update calls as there are 16ms increments to simulated time before it exceeds real time.<p>This is all very simple but also pretty finicky to think through. I’d replicate the code in the language of your choice and step through it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=certeoun" target="_blank">certeoun</a>   <span class="timeago" data-date="2021-08-18 06:24:29 &#43;0000 UTC">2021-08-18 06:24:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think I finally got it now. I set myself up with roadblocks preventing me from seeing the tree in a forest.
+After learning what delta time (and variable timesteps) are, I finally understood what the core issue (frame rate independence) is and why you need a fixed timestep for it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 11:52:13 &#43;0000 UTC">2021-08-17 11:52:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hoseja" target="_blank">hoseja</a>   <span class="timeago" data-date="2021-08-17 13:04:10 &#43;0000 UTC">2021-08-17 13:04:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think many game industry techniques are very well described in the open.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fuball63" target="_blank">fuball63</a>   <span class="timeago" data-date="2021-08-17 13:48:37 &#43;0000 UTC">2021-08-17 13:48:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I learned about it reading the quake 2 sourcecode. In school or tutorial articles, they always teach the first technique, I find. &quot;Delta timing&quot; is what I knew it as.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TheHideout" target="_blank">TheHideout</a>   <span class="timeago" data-date="2021-08-17 13:38:22 &#43;0000 UTC">2021-08-17 13:38:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Related: If anyone is interested, I&#x27;ve been working on an ECS based mini-game framework in Rust [0] that runs with this idea. It has a 1200 hz simulation clock, 60 hz rendering clock, and 150 hz physics integrator (Euler). I&#x27;ve also posted some example mini-games that use it [1].<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;Syn-Nine&#x2F;mgfw" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Syn-Nine&#x2F;mgfw</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;Syn-Nine&#x2F;rust-mini-games&#x2F;tree&#x2F;main&#x2F;2d-games" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;Syn-Nine&#x2F;rust-mini-games&#x2F;tree&#x2F;main&#x2F;2d-gam...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 13:42:18 &#43;0000 UTC">2021-08-17 13:42:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please note that non-60Hz displays are surprisingly common (not just &quot;gamer monitors&quot; with 120, 240Hz etc..., but also odd refresh rates like 72, 75, 85, 90 and 100Hz)<p>Ideally the &#x27;render clock&#x27; would query the display refresh rate from the operating system, but this is harder than it sounds. The next best option is to measure the frame time, and then round to the next &quot;common&quot; refresh rate (AFAIK that&#x27;s the only way it works on the web for instance).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=TheHideout" target="_blank">TheHideout</a>   <span class="timeago" data-date="2021-08-17 13:51:03 &#43;0000 UTC">2021-08-17 13:51:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting. Thanks for the note.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vardump" target="_blank">vardump</a>   <span class="timeago" data-date="2021-08-17 14:55:09 &#43;0000 UTC">2021-08-17 14:55:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed, notably cheap 75 Hz displays have become surprisingly common lately.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=iamevn" target="_blank">iamevn</a>   <span class="timeago" data-date="2021-08-18 05:11:37 &#43;0000 UTC">2021-08-18 05:11:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            on my simple games I essentially do this which seems to work but I have concerns about it cascading out of control if a frame takes too long. any tips for dealing with that? so far I just aggressively profile to make sure my game logic has a good time buffer before it hits my timestep.<p><pre><code>  const TIMESTEP = 1&#x2F;60;
+  let since_last_frame = 0.0;
+  
+  function update(dt) {
+    since_last_frame += dt;
+    while (since_last_frame &gt; TIMESTEP) {
+      tick();
+      since_last_frame -= TIMESTEP;
+    }
+  }
+  
+  function tick() {
+    &#x2F;&#x2F; handle game logic at a fixed timestep
+  }</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mLuby" target="_blank">mLuby</a>   <span class="timeago" data-date="2021-08-17 12:46:44 &#43;0000 UTC">2021-08-17 12:46:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Regarding &quot;missing&quot; a collision due to the delta-time being too large, I thought the game industry standard is to &quot;backtrack&quot; (in math, not in ticks) to determine the correct collision point and go from there. Granted, that is a bit more complicated than just keeping the delta-t&#x2F;tick consistently small, but it is more correct.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kevingadd" target="_blank">kevingadd</a>   <span class="timeago" data-date="2021-08-17 12:47:17 &#43;0000 UTC">2021-08-17 12:47:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Before you can back track, you need to first recognize that you missed a collision
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mLuby" target="_blank">mLuby</a>   <span class="timeago" data-date="2021-08-17 14:02:03 &#43;0000 UTC">2021-08-17 14:02:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could be—it&#x27;s been a while since I read about the technique.<p>I thought a game engine doing this figured out the collisions <i>when the trajectories changed</i> so then it&#x27;s just a matter of rendering those known effects (rather than the more naive approach of checking each tick or frame whether anything&#x27;s collided). Note that doing this at impulse can cause the game to slow down when many objects are moved at the same time, like an explosion. I think it works pretty well because most game objects are stationary, or even immovable; also moving objects are rarely subject to new accelerations—they stay ballistic.<p>But IANAGameDev, so do correct me if you know something about this technique.<p><pre><code>  t=0
+    cube1 p=5,0 v=0,0 m&#x2F;s
+    cube2 p=1,0 v=2,0 m&#x2F;s
+    &#x2F;&#x2F; Game knows cube1 and 2 will collide at t=2
+  t=1
+    cube1 p=0,0 v=0,0 m&#x2F;s
+    cube2 p=3,0 v=2,0 m&#x2F;s
+    cube3 p=0,0 v=5,0 m&#x2F;s
+    &#x2F;&#x2F; Game knows cube1 and 2 AND 3 will collide at t=2
+  t=2
+    all cubes hit at 5,0</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=plopz" target="_blank">plopz</a>   <span class="timeago" data-date="2021-08-17 15:36:55 &#43;0000 UTC">2021-08-17 15:36:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Its pretty difficult to do quickly and with numerical robustness, specifically when you have rotation. Here&#x27;s a talk by the creator of Box2D while he was working for Blizzard on continuous collision detection.<p><a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=7_nKOET6zwI" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=7_nKOET6zwI</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mLuby" target="_blank">mLuby</a>   <span class="timeago" data-date="2021-08-17 18:04:48 &#43;0000 UTC">2021-08-17 18:04:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, that was an interesting talk. Apparently what I was describing is &quot;time of impact&quot; as that talk describes here: <a href="https:&#x2F;&#x2F;youtu.be&#x2F;7_nKOET6zwI?t=495" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;7_nKOET6zwI?t=495</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-17 14:22:14 &#43;0000 UTC">2021-08-17 14:22:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A lot of game physics engines are still pretty bad at this, which is why being able to clip through walls is such a common issue. Even in games where the physics are more or less solid, there are usually many bugs where fixed animations allow clipping through stuff (e.g. cover or hurdle-jumping animations), because those simply don&#x27;t interact with the physics engine at all - you only need to get to a start point that places the animation&#x27;s end point out of bounds and be able to trigger the animation.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=masklinn" target="_blank">masklinn</a>   <span class="timeago" data-date="2021-08-17 11:13:46 &#43;0000 UTC">2021-08-17 11:13:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m not a gamedev at all so I never really dug into it, but the issue I’ve always had there was how to handle input when executing multiple simulation steps within a single “execution frame”.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 12:11:37 &#43;0000 UTC">2021-08-17 12:11:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=meheleventyone" target="_blank">meheleventyone</a>   <span class="timeago" data-date="2021-08-17 11:30:11 &#43;0000 UTC">2021-08-17 11:30:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Depends on how input can be handled you could repoll between each sub-step but practically just sending in the same input to every sub-step works. Usually you aren’t doing many sub-steps per step anyway.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=stayfrosty420" target="_blank">stayfrosty420</a>   <span class="timeago" data-date="2021-08-17 12:37:27 &#43;0000 UTC">2021-08-17 12:37:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So is the the length of this slice equivalent the infamous &quot;tick rate&quot; that gamers often complain about?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skizm" target="_blank">skizm</a>   <span class="timeago" data-date="2021-08-17 12:54:42 &#43;0000 UTC">2021-08-17 12:54:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Tick rate usually means how many times a server calculates the state of the world in an online game. So a client can have 300fps, but the server might only calculate 128 ticks per second. If your computer&#x27;s FPS dips below that of the server&#x27;s tick rate (or your internet is bad) you start missing information. The client usually calculates things as if it has perfect information, and then when a tick comes in an tells your computer it is wrong, the client corrects itself. So the lower the tick rate on the server, the more times this happens (since your computer has made hundreds of calculations since the last tick came in) and it seems slower &#x2F; choppier.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=formerly_proven" target="_blank">formerly_proven</a>   <span class="timeago" data-date="2021-08-17 14:25:34 &#43;0000 UTC">2021-08-17 14:25:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some games solved the low-tickrate &#x2F; low-fps problem by timestamping user input independently and interpolating to the simulation, i.e. you can still hit things even with just say 10 ticks per second.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=uCantCauseUCant" target="_blank">uCantCauseUCant</a>   <span class="timeago" data-date="2021-08-17 14:44:43 &#43;0000 UTC">2021-08-17 14:44:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It can be reduced though, by training a model of the enemy player behaviour to more accurately predict and extra-polate on the others behaviour. (Not just assume linear continued behaviour). Of course, this means things like dissapearing shots, if the opponent didn&#x27;t fire.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=fabiensanglard" target="_blank">fabiensanglard</a>   <span class="timeago" data-date="2021-08-17 12:42:01 &#43;0000 UTC">2021-08-17 12:42:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=IncRnd" target="_blank">IncRnd</a>   <span class="timeago" data-date="2021-08-17 15:41:26 &#43;0000 UTC">2021-08-17 15:41:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t worry, we&#x27;ll get that solved in a jiffy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

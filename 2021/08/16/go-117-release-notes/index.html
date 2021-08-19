@@ -1,0 +1,3651 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/go-117-release-notes/">
+
+
+    <title>Go 1.17 Release Notes - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Go 1.17 Release Notes - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/go-117-release-notes/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/go-117-release-notes/">
+<meta name="twitter:title" content="Go 1.17 Release Notes - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Go 1.17 Release Notes - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T19:16:53JST",
+    "dateModified": "2021-08-16T19:16:53JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://golang.org/doc/go1.17">Go 1.17 Release Notes</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-16 22:14:05 &#43;0000 UTC">2021-08-16 22:14:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To me, the most interesting change is the performance improvement due to the new register-based calling convention. Your CPU-bound programs will magically get 5% faster when compiled with 1.17:<p>&gt; Go 1.17 implements a new way of passing function arguments and results using registers instead of the stack. Benchmarks for a representative set of Go packages and programs show performance improvements of about 5%, and a typical reduction in binary size of about 2%. This is currently enabled for Linux, macOS, and Windows on the 64-bit x86 architecture (the linux&#x2F;amd64, darwin&#x2F;amd64, and windows&#x2F;amd64 ports).<p>I love how they&#x27;re doing it in such an iterative fashion: even assembly functions don&#x27;t have to be rewritten. Then again, I guess doing it progressively like this is the only feasible way to avoid reworking all the low-level assembly routines in one fell swoop.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-16 23:25:35 &#43;0000 UTC">2021-08-16 23:25:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Wow, this update is awesome: my GoAWK interpreter (<a href="https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk</a>) runs a simple CPU-bound AWK program 38% faster when compiled with Go 1.17 (compared to 1.16).<p><pre><code>  $ time goawk_go1.16 &#x27;BEGIN { for (i=0; i&lt;100000000; i++) s += i; print(s) }&#x27;
+  4999999950000000
+  real    0m10.158s ...
+  $ time goawk_go1.17 &#x27;BEGIN { for (i=0; i&lt;100000000; i++) s += i; print(s) }&#x27;
+  4999999950000000
+  real    0m6.268s ...
+</code></pre>
+I wonder why it&#x27;s so much better than their advertised 5% perf improvement? Here&#x27;s a quick CPU profile: <a href="https:&#x2F;&#x2F;i.imgur.com&#x2F;csJyOYq.png" rel="nofollow">https:&#x2F;&#x2F;i.imgur.com&#x2F;csJyOYq.png</a> ... I don&#x27;t get too much out of it at a glance, just seems like everything&#x27;s a bunch faster.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=drchase" target="_blank">drchase</a>   <span class="timeago" data-date="2021-08-17 02:07:42 &#43;0000 UTC">2021-08-17 02:07:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hi, I&#x27;m one of the people who worked on it, and the guy who did the initial estimate back in early 2017.  5% is the geomean of a lot of benchmarks; a whole lot fall in the the 4-8% range, a few do worse because the new ABI creates new patterns of register use that don&#x27;t fit well with the current register allocator, and the fix was larger than we wanted to risk.  (See <a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;46216" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;46216</a> )
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=prattmic" target="_blank">prattmic</a>   <span class="timeago" data-date="2021-08-16 23:56:37 &#43;0000 UTC">2021-08-16 23:56:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The benefits come primarily from avoiding extra work spilling arguments to&#x2F;from the stack on function calls. If you are making lots and lots of function calls, particularly to small functions that can&#x27;t be inlined, there could certainly be much bigger improvements.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-17 02:55:07 &#43;0000 UTC">2021-08-17 02:55:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Overall for GoAWK I get an 18% speed increase on my micro-benchmarks between Go 1.16 and 1.17 (see <a href="https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk&#x2F;commit&#x2F;1f314f421273b3dc164ff4e5d41363f4ac4d160f" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk&#x2F;commit&#x2F;1f314f421273b3dc164f...</a>) and I measured an 8% speed increase on my &quot;slightly more real-world&quot; benchmarks (these ones: <a href="https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk&#x2F;blob&#x2F;master&#x2F;benchmark_awks.py" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;benhoyt&#x2F;goawk&#x2F;blob&#x2F;master&#x2F;benchmark_awks....</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=barsonme" target="_blank">barsonme</a>   <span class="timeago" data-date="2021-08-16 23:45:54 &#43;0000 UTC">2021-08-16 23:45:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            just an fyi: you can use the -diff_base flag to diff the profiles without opening both profiles side-by-side.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-16 23:54:10 &#43;0000 UTC">2021-08-16 23:54:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oh, good to know, thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_ph_" target="_blank">_ph_</a>   <span class="timeago" data-date="2021-08-17 08:10:12 &#43;0000 UTC">2021-08-17 08:10:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The speed gained depends a lot on the structure of the code benchmarked. Natively written Go code has more computation happening in local loops without many function calls, the optimization brings less effect.
+An interpreter often calls a function for every single directive executed. This means, you have a lot of function calls inside loops, sometimes for every single operation executed. This of course profits massively from this optimization.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Scaevolus" target="_blank">Scaevolus</a>   <span class="timeago" data-date="2021-08-17 04:10:56 &#43;0000 UTC">2021-08-17 04:10:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Look at the disassembly and observe how your function calls have far fewer push&#x2F;pop operations going on, and how the function prologues&#x2F;epilogues are smaller.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jen20" target="_blank">jen20</a>   <span class="timeago" data-date="2021-08-17 04:22:27 &#43;0000 UTC">2021-08-17 04:22:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This also likely improves compatibility with observability tooling which assumes the standard calling convention, which is welcome.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-17 04:55:44 &#43;0000 UTC">2021-08-17 04:55:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Note that this switches to <i>a</i> register-based calling convention, but it&#x27;s not the platform &quot;standard&quot; one. The Go authors describe the rationale for this here: <a href="https:&#x2F;&#x2F;go.googlesource.com&#x2F;proposal&#x2F;+&#x2F;master&#x2F;design&#x2F;40724-register-calling.md" rel="nofollow">https:&#x2F;&#x2F;go.googlesource.com&#x2F;proposal&#x2F;+&#x2F;master&#x2F;design&#x2F;40724-r...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=umvi" target="_blank">umvi</a>   <span class="timeago" data-date="2021-08-16 21:53:24 &#43;0000 UTC">2021-08-16 21:53:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At first I didn&#x27;t like Go because I thought it was too opinionated. But the more I used it, the more I found the tooling to be just heads and shoulders above similar languages like C&#x2F;C++.<p>I use VSCode a lot, and in VSCode you can press &quot;F12&quot; to jump to the location of a function definition. In Go I find myself deep diving into github libraries all the time just because F12 takes me there. That <i>never</i> happened with C&#x2F;C++ - the tooling was just too disparate and fragile.<p>My biggest complaint with Go is lack of generics. I mean technically you can achieve generics with an unholy empty interface&#x2F;reflection incantation but it&#x27;s a huge pain compared to C++.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jchw" target="_blank">jchw</a>   <span class="timeago" data-date="2021-08-17 04:24:13 &#43;0000 UTC">2021-08-17 04:24:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think people claiming modern C&#x2F;C++ tools are close to as good as Go’s are wrong, in my opinion. <i>With that having been said</i>, IMO if you want the C++ experience to be better, use Clangd and generate a compile_commands.json file. For many projects you can use wrappers like compiledb, or Bear, and some build systems like CMake can output it natively. Either way, once you have found a way to do this, and get it outputting into the project root, add a local ignore for it (in .git&#x2F;info&#x2F;exclude) and install the VSCode clangd extension.<p>Truly, it is night and day. I can get Real code intelligence on almost anything, including large C projects with custom Makefiles that compile cross-arch like Wine. It only ever has trouble with unusual translation unit patterns. (You can see this in Higan for example, which has .cpp files including other .cpp files; clangd seemingly fails to put them in the context of the intended translation unit.)<p>It’s not as good as Go, but it is life-changing for me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=initplus" target="_blank">initplus</a>   <span class="timeago" data-date="2021-08-16 23:26:11 &#43;0000 UTC">2021-08-16 23:26:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If you use C++ tools where your dependencies get pulled in and built from source like Go does, you get the same experience. If you only have prebuilt system libraries obviously this doesn&#x27;t work.<p>It&#x27;s not like Go&#x27;s tooling is that much better than the best modern C++ tools, but the ecosystem is so much more unified by having 1 blessed set of tooling. Rather than 20 different package managers&#x2F;(meta)build systems. No need to worry that I am using build system X, but I want to use a library using build system Y.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-17 01:40:16 &#43;0000 UTC">2021-08-17 01:40:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In C++, preprocessor and template magic in dependencies tends to break such IDE convenience features as &quot;go to definition&quot; or &quot;find all references&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kccqzy" target="_blank">kccqzy</a>   <span class="timeago" data-date="2021-08-17 03:55:22 &#43;0000 UTC">2021-08-17 03:55:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This almost doesn&#x27;t happen when your tools are good. At Google the Kythe tool (<a href="https:&#x2F;&#x2F;kythe.io" rel="nofollow">https:&#x2F;&#x2F;kythe.io</a>) gracefully deals with templates, macros, and much more. Both &quot;go to definition&quot; and &quot;find references&quot; just work with 99.9% of C++ code, including within complicated macros and templates.<p>(The one and only case I&#x27;ve ever found it doesn&#x27;t work is to find references to a function that&#x27;s only called via ADL in a widely used template that&#x27;s instantiated with thousands of different types.)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=yakubin" target="_blank">yakubin</a>   <span class="timeago" data-date="2021-08-17 09:57:05 &#43;0000 UTC">2021-08-17 09:57:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about SFINAE?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kccqzy" target="_blank">kccqzy</a>   <span class="timeago" data-date="2021-08-18 19:28:38 &#43;0000 UTC">2021-08-18 19:28:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Works. Because it uses the compiler to figure out what calls what, and so the compiler has already selected the right overload.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Groxx" target="_blank">Groxx</a>   <span class="timeago" data-date="2021-08-17 06:19:42 &#43;0000 UTC">2021-08-17 06:19:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            tbh I&#x27;ve had <i>dramatically</i> worse type-aware IDE features with Go than almost any other mainstream language. gopls routinely misses trivial things <i>in the same file</i>. Goland does substantially better, but it still has major problems gathering a complete call hierarchy, and basic things like moving a file to a different package (with no compilation issues, just import rewrites) still don&#x27;t work reliably.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throw149102" target="_blank">throw149102</a>   <span class="timeago" data-date="2021-08-16 22:19:27 &#43;0000 UTC">2021-08-16 22:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hate to be &quot;that guy&quot;, but you should try Rust. It also has amazing tooling, and is probably more comparable to C&#x2F;C++, considering you don&#x27;t have to use a garbage collector in Rust.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-16 23:29:28 &#43;0000 UTC">2021-08-16 23:29:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really like Rust, but in my mind it&#x27;s still relegated to the periphery of tasks that must be super fast (like C&#x2F;C++, to your point) and&#x2F;or low-level. Rust has made impressive strides at reducing the toil involved in compile-time memory management, but there is still a big productivity gap between the borrow checker and GC.<p>Frankly, people are making boatloads of money off of software written in Python and JS--languages which are both far less safe than Go and far slower and yet Go is on par with those languages with respect to productivity (I argue it&#x27;s more productive due to its static typing features, but others argue it&#x27;s less productive presumably because of the learning curve). Most software doesn&#x27;t need to be so fast or correct.<p>Also, I work in distributed systems and SaaS (software as a service). In this world, most errors are silly type errors (&quot;undefined is not a function&quot;, forgetting to `await` some async function, etc) that would be caught with a flat-footed type system like Go&#x27;s. Beyond that, the next largest bucket are issues that even a sophisticated type system like Rust&#x27;s wouldn&#x27;t help with, such as infrastructure issues (missing&#x2F;misconfiguration of some cloud permission, networking rule, etc), misconfiguration of the service, race condition with many processes accessing the same networked resource, deployment error, etc. This means that Rust&#x27;s stated advantages aren&#x27;t really as nice as they initially sound.<p>As a programmer, I can appreciate a super fast language with a strict type system; however, as an <i>engineer</i> or a <i>technologist</i>, Rust is rarely a good fit for me. Go seems to be a lot closer to the sweet spot, which makes sense because it was developed expressly with distributed systems in mind.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-17 00:05:31 &#43;0000 UTC">2021-08-17 00:05:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; In this world, most errors are silly type errors<p>I can’t speak to python, but typescript has basically fixed this problem overnight in the javascript ecosystem. The typescript compiler finds almost all small bugs like this while I’m coding. And as an added bonus, type hints allow the IDE to be much more helpful - adding to jump to function support, autocomplete, method parameter suggestions (or documentation on hover). And typescript is easier to read than javascript because you don’t have to guess what data type some variable is.<p>I love javascript’s quick and dirty nature, but I still use typescript instead of javascript now for any code I write that I expect to survive the week. (And as a bonus: you still get IDE type hints when calling typescript functions from raw javascript!)<p>Typescript’s type system is also more powerful than Go’s. It supports enums, genetics and type unions (eg x: string | number).<p>Go sits in the awkward place of having a worse type system and no significant advantages over typescript for me. It’s awkward to use go on the web. Go is faster than javascript on the server but that usually doesn’t matter. And when it does I can reach for C or Rust. Both of which work really well with native code, or with JS through wasm.<p>Rust is much harder to learn than Go - but personally I’ve climbed that hill already. Once you’re over that hill, Rust is much more expressive. On purpose both ways - go isn’t trying to be expressive, and rust is. I love rust’s parametric enums and output types in traits. Which I now sorely miss in other languages.<p>I can imagine Go shining a lot more brightly when working with a team which has mixed skill levels. Most of my work lately has been solo, so I don’t need gofmt to enforce a consistent code style, or anything like that. I do miss Go’s green threads. Rust’s afterthought scattergun approach with threads and futures feels like a mess. But I can’t see myself ever really using Go. It’s weak in areas I want it to be strong (eg the type system). And strong in areas I just don’t care much about. (Eg consistency).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tptacek" target="_blank">tptacek</a>   <span class="timeago" data-date="2021-08-17 03:01:33 &#43;0000 UTC">2021-08-17 03:01:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust is very expressive, but it also makes some tasks that are relatively simple in other languages much harder (anything involving tree structures, for instance), and some of what it gives you expressive control over is stuff you usually don&#x27;t need to think about at all in other languages.<p>Rust can do some things Go simply isn&#x27;t suited for right now; for instance, there is no way we&#x27;re getting kernel Go in the foreseeable future. You couldn&#x27;t reasonably build a browser, or browser components, in Go.<p>Both languages have their place. There is a lot of overlap, and the original comment about how one might prefer Rust if what they miss most in Go is generics makes sense. But the idea that the only thing you&#x27;d gain by choosing Go over Rust is easier development on big teams is just false. One language is GC&#x27;d, the other is borrow-checked. GC makes a lot of things faster to build. This debate ended in the mid-1990s.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-08-17 05:37:26 &#43;0000 UTC">2021-08-17 05:37:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Rust is very expressive, but it also makes some tasks that are relatively simple in other languages much harder (anything involving tree structures, for instance)<p>Much harder, not really.  Rust lets you add mutability, reference counting and thread safety to your data structures, you just need to know when to use these features.  Yes, Go has fully general GC but very few problem domains have a real need for general GC.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 12:34:57 &#43;0000 UTC">2021-08-17 12:34:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yes, Go has fully general GC but very few problem domains have a real need for general GC.<p>No, no one <i>needs</i> a GC, but many problem domains <i>need</i> productivity, and GC is the most productive way to manage memory to date. As previously mentioned, Rust has made truly impressive strides in improving productivity of borrow-checking, but it still remains quite far behind GC.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-17 13:13:26 &#43;0000 UTC">2021-08-17 13:13:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, having written a b-tree in rust recently I can confirm this. My child node pointers look like this:<p><pre><code>    enum Node&lt;E: EntryTraits, I: TreeIndex&lt;E&gt;&gt; {
+        Internal(Pin&lt;Box&lt;NodeInternal&lt;E, I&gt;&gt;&gt;),
+        Leaf(Pin&lt;Box&lt;NodeLeaf&lt;E, I&gt;&gt;&gt;),
+    }
+</code></pre>
+Yikes. I could probably clean this up a little, but not a lot.<p>I&#x27;ve been working on this code for months and I still have no idea if my internal b-tree functions should be taking a &amp;mut self, self: Pin&lt;&amp;mut Self&gt; or a NonNull&lt;...&gt; or something else. The compiled code is blazing fast, and being able to control behaviour so clearly with a few parametric type parameters is amazing.<p>But the process of figuring out the best way to code it up is awful, and it requires all of my attention and capacity. I doubt Rust will ever gain the sort of mainstream usage that javascript &amp; Go have because of how complicated otherwise simple problems can become. Its a great language for the linux kernel and web browsers. But I can&#x27;t imagine many normal programmers will want to build regular websites and apps in rust.<p>GC languages are slower, but credit where its due - they make it so much easier to just dive in and spend all your braincells thinking about your problem domain.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 04:32:10 &#43;0000 UTC">2021-08-17 04:32:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have been in plenty of hills since I wrote those first BASIC lines on a Timex 2068.<p>Just like consumers don&#x27;t care if their favourite music application is written in Electron, as long it plays their favourite album on their newly acquired speakers, they also don&#x27;t care what type system was used to deliver such experience.<p>With Go finally getting generics, it will be pretty alright, 99% of distributed computing applications need not care about zero GC code, only proper use of value types.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zzt123" target="_blank">zzt123</a>   <span class="timeago" data-date="2021-08-17 01:43:21 &#43;0000 UTC">2021-08-17 01:43:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Your point about Go shining a lot more brightly when working with a team which has mixed skill levels was one of the design goals of Go, so it seems they’ve succeeded on that front if you’ve come to that conclusion independently!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=silisili" target="_blank">silisili</a>   <span class="timeago" data-date="2021-08-17 02:39:33 &#43;0000 UTC">2021-08-17 02:39:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMO, Go is the easiest language to read by far.  Python can be, but lets one use a lot of hard to figure out magic.  Go is very much WYSIWYG, and to me that&#x27;s its greatest strength.  It&#x27;s easy for anyone to jump in about anywhere.  And that lends itself well to teamwork.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-17 07:01:27 &#43;0000 UTC">2021-08-17 07:01:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I find that&#x27;s only true so long as the problem you&#x27;re solving fits well into Go&#x27;s view of the world.<p>If you want to make a data structure holding the equivalent of a parametric enum (or tagged union from C), go is very awkward to use compared with richer languages like Swift or Rust. Go is also awkward if you want to implement custom generic data structures.<p>Eg, this[1] code I wrote a couple years ago for doing text based operational transform became about 1.5x longer in Go compared to rust or typescript because its so awkward to express a parametric enum in go. And it was much harder to read &amp; more buggy as a result. Sadly I lost the go version of the code. I&#x27;d be curious if someone with more go experience could do a better job, but I&#x27;m skeptical.<p>Hopefully the situation improves somewhat when generics land.<p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;josephg&#x2F;textot.rs&#x2F;blob&#x2F;03c84b7c35a375ba7dbb9c3db38923aaced4cccc&#x2F;src&#x2F;lib.rs" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;josephg&#x2F;textot.rs&#x2F;blob&#x2F;03c84b7c35a375ba7d...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 12:37:30 &#43;0000 UTC">2021-08-17 12:37:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I agree that enums are the thing that Go is lacking. I would really like first-class enums perhaps even more than generics. Hopefully we get them.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=readlikeasloth" target="_blank">readlikeasloth</a>   <span class="timeago" data-date="2021-08-17 07:22:30 &#43;0000 UTC">2021-08-17 07:22:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I can imagine Go shining a lot more brightly when working with a team which has mixed skill levels.<p>Thank you for expressing that thought. However: I came quite to the opposite conclusion. I´m currently working in a small team with members that are not so versatile in coding, coming from a JavaScript background. It has been surprisingly easy to teach them Spring Boot. You follow a typical layout and everything falls into its place. I have my reservation that the same holds true for Go. It feels like there is much more room for confusion. Do I use global functions or receivers? How do I inject my dependencies and where do manage them? How do I build constructors and do I really need them? I found surprisingly little advice on those topics.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-17 01:47:17 &#43;0000 UTC">2021-08-17 01:47:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; but there is still a big productivity gap between the borrow checker and GC.<p>The borrow checker and GC aren&#x27;t really doing the same thing though. One very important distinction in some fields (but unimportant in others) is that GC only really cares about memory resources. So you are (or should be) doing explicit <i>manual cleanup</i> for all non-memory resources in a GC language. Rust isn&#x27;t, in Rust we don&#x27;t write explicit resource cleanup for a programmable interrupt controller, or a file, or a database connection -- the resource knows how to manage itself, and Rust promises to tell it immediately when it falls out of use, whereas a GC can&#x27;t promise to <i>ever</i> clean up which is why Go doesn&#x27;t even bother providing a means to do this automatically for your non-memory resources when they&#x27;re garbage collected (Java does, but again, no promises it ever fires, so, don&#x27;t rely on this).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway34241" target="_blank">throwaway34241</a>   <span class="timeago" data-date="2021-08-17 02:27:55 &#43;0000 UTC">2021-08-17 02:27:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Go doesn&#x27;t even bother providing a means to do this automatically for your non-memory resources when they&#x27;re garbage collected (Java does, but again, no promises it ever fires, so, don&#x27;t rely on this).<p>It sounds like you are talking about finalizers?  If so, they exist in Go in a similar way to the Java feature [1].<p>[1] <a href="https:&#x2F;&#x2F;pkg.go.dev&#x2F;runtime#SetFinalizer" rel="nofollow">https:&#x2F;&#x2F;pkg.go.dev&#x2F;runtime#SetFinalizer</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 12:46:40 &#43;0000 UTC">2021-08-17 12:46:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Finalizers aren’t quite the same. They run when memory pressure exceeds some threshold, but the GC analog for borrow-checking is something that will clean up a resource when the pressure on the resource in question exceeds some threshold (e.g., file handles). And even then I’m not sure if that ticks all requirements for resource management.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway34241" target="_blank">throwaway34241</a>   <span class="timeago" data-date="2021-08-17 20:24:58 &#43;0000 UTC">2021-08-17 20:24:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I meant to respond only to the quoted section comparing Java and Go, which states that Go doesn&#x27;t have a way to do cleanup on GC (finalizers).  I agree with you (and the two other replies and the quoted section itself) that finalizers are not a replacement for RAII etc.<p>I don&#x27;t use them for resource cleanup, but I think they probably make sense for library authors as a back-up mechanism (for example, the standard library has a finalizer to close file handles, and the current runtime does GC every two minutes in the absence of memory pressure).  You can also explicitly run the GC in Go, and while generally there&#x27;s a lot of problems with that idea I could <i>maybe</i> imagine it being viable for certain unusual workloads.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=beltsazar" target="_blank">beltsazar</a>   <span class="timeago" data-date="2021-08-17 03:54:06 &#43;0000 UTC">2021-08-17 03:54:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You usually want to release non-memory resources deterministically, but finalizers in C#&#x2F;Java&#x2F;Go are not deterministic. That&#x27;s why finalizers usually are not used for resource management. Instead, C# has using statements, Java try-with-resources, Go defer statements.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sagichmal" target="_blank">sagichmal</a>   <span class="timeago" data-date="2021-08-17 03:24:32 &#43;0000 UTC">2021-08-17 03:24:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Finalizers are not guaranteed to run. They&#x27;re not ersatz destructors.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway34241" target="_blank">throwaway34241</a>   <span class="timeago" data-date="2021-08-17 03:45:02 &#43;0000 UTC">2021-08-17 03:45:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, if you look at the quote I was responding to, it appears they are saying Go doesn&#x27;t have finalizers, which is incorrect.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xpressvideoz" target="_blank">xpressvideoz</a>   <span class="timeago" data-date="2021-08-17 06:52:46 &#43;0000 UTC">2021-08-17 06:52:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Huh, I also thought Go had no concept of finalizers. That is a bit... awkward way to set a finalizer. But thinking it again, it may just be due to my unfamiliarity.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 04:36:17 &#43;0000 UTC">2021-08-17 04:36:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is a misconception, RAII like code can be achieved in two ways:<p>- defer (possibly add a go vet check for when missing it)<p>- when Go 1.18 brings generics, the withFunc pattern from FP where lambdas get given a resource released on function exist, thus having regions&#x2F;arena like resource management
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-17 11:36:29 &#43;0000 UTC">2021-08-17 11:36:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The description for go vet says, &quot;it should be used as guidance only&quot;. Go vet is in fact a linter (go lint is <i>also</i> a linter, but one focused on style).<p>So what you&#x27;re doing there is adding a <i>control</i> to try to mitigate the consequences of a language failing. Go doesn&#x27;t actually prevent you from getting this wrong, but a linter such as go vet can flag cases where it suspects you screwed up, and maybe you&#x27;ll catch the worst mistakes most of the time this way and by having usage conventions.<p>We shouldn&#x27;t mistake this for equivalent capability. The complicated cases that tempt people to ignore or switch off such linting are exactly the cases most likely to have an undetected problem.<p>So this is &quot;RAII like&quot; only in the sense that &quot;Just remember to do it properly&quot; is RAII like, and we could make exactly the same claim for C.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 13:12:10 &#43;0000 UTC">2021-08-17 13:12:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just like you need to use clang tidy to fix all the issues with writing proper C++ code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-17 16:54:36 &#43;0000 UTC">2021-08-17 16:54:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fair. However, there continues to be an unresolved tension in the C++ community about whether they want C++ to focus on its considerable legacy by ensuring enduring compatibility (&quot;No ABI breaks, ever!&quot;) or to continue growing and changing even if that means not everybody can follow (&quot;Performance trumps compatibility, ship it!&quot;). Although we can anticipate some sort of <i>compromise</i>, it just isn&#x27;t possible to have a C++ 2x that delivers everything the modernizers want yet still runs people&#x27;s technically conforming C++ 11 code unchanged with that binary DLL they&#x27;ve got no source code for. Some people will be unhappy, maybe <i>everybody</i> in the C++ community will end up unhappy.<p>In the &quot;no breaking changes&quot; case I agree that C++ objects that live in the free store are in the same place as Go, the programmer has a responsible which they may not fulfil, to manage this resource and a linter can only help mitigate this problem.<p>But plenty of people <i>including Stroustrup</i> want to do lifetime management, despite potential breaking changes from that, and under lifetime management the compiler has visibility into your object lifetimes and can reject programs which inadvertently leak.<p>Now, that doesn&#x27;t (can&#x27;t) make leaks impossible, but it means any leak is now in some sense &quot;on purpose&quot; and would happen for GC&#x27;d resources too, it isn&#x27;t just an accident. For example Rust&#x27;s mem::forget will prevent the drop happening for the object you&#x27;re forgetting, but it&#x27;s not as though you type mem::forget() by mistake. You clearly wanted to achieve that (e.g. you stole the underlying Unix file descriptor from a File and sent it over a socket to a separate process, so now cleaning up that descriptor is the Wrong Thing™) and incorrect usage is not the same category of error as forgetting a with clause in Python.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deathanatos" target="_blank">deathanatos</a>   <span class="timeago" data-date="2021-08-17 07:00:52 &#43;0000 UTC">2021-08-17 07:00:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            defer (&#x2F;using&#x2F;with) all require the programmer to remember, and write, O(use site) times, the code to release the resource.<p>RAII destructors, on the other hand, do not permit the coder (at the use site of the type) to forget, as the destructor is invoked automatically when the variable goes out of scope.<p>In my time reviewing Python (also GC, &quot;with&quot; provides a similar functionality), this is a <i>very</i> common error.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 08:44:06 &#43;0000 UTC">2021-08-17 08:44:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently you missed my go vet reference on purpose, just make all of us aware of it not being the same.<p>Same applies to using on .NET, where forgetting to call using on an IDisposable type can trigger a compiler error, via Roslyn plugins.<p>Also seem to be unaware how closure based RAII works on FP languages.<p>RAII isn&#x27;t triggered on heap allocated objects unless smart pointers are used everywhere.<p>Python doesn&#x27;t have a static analysis tool for with, nor does it support value types with stack allocation. Not all GC languages were born equal.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nemetroid" target="_blank">nemetroid</a>   <span class="timeago" data-date="2021-08-17 09:00:51 &#43;0000 UTC">2021-08-17 09:00:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; RAII isn&#x27;t triggered on heap allocated objects unless smart pointers are used everywhere.<p>It&#x27;s triggered unless you have memory leaks.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 13:12:43 &#43;0000 UTC">2021-08-17 13:12:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So it isn&#x27;t.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nemetroid" target="_blank">nemetroid</a>   <span class="timeago" data-date="2021-08-17 16:36:25 &#43;0000 UTC">2021-08-17 16:36:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Correct, but except in very special cases, memory leaks are themselves considered bugs. Using memory leaks as an example of RAII not always working is, in my mind, similar to saying Rust doesn&#x27;t prevent memory errors since it has the &quot;unsafe&quot; keyword.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 18:11:54 &#43;0000 UTC">2021-08-17 18:11:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Except when using system code you might have to pack pointers in OS IPC structures which don&#x27;t map into smart pointers.<p>Similar to forgetting memory in Rust, and then there is no miracle RAII.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nemetroid" target="_blank">nemetroid</a>   <span class="timeago" data-date="2021-08-17 18:46:45 &#43;0000 UTC">2021-08-17 18:46:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, if you&#x27;re not using RAII, RAII doesn&#x27;t work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 12:44:17 &#43;0000 UTC">2021-08-17 12:44:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Agreed, but per my original post, the additional safety that Rust affords protects against a very small share of bugs in SaaS applications. The value proposition isn’t good because you trade so much productivity for a small improvement in quality, and productivity is at a premium and quality (sadly) can be mitigated in other, less costly ways (e.g., progressively rolling out new changes, continuous deployment i.e., bugs can be patched in hours rather than months, etc).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-17 07:00:50 &#43;0000 UTC">2021-08-17 07:00:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have the opposite view on the type systems: Rust&#x27;s type system is really great for business logic because it&#x27;s really expressive (based on algebraic data types), but the language being made for low level stuff makes some things a pain. If you do something like DDD, ADTs really shine, especially when combined with pattern matching. I do agree that when you can afford a GC, Rust can be annoying.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Blikkentrekker" target="_blank">Blikkentrekker</a>   <span class="timeago" data-date="2021-08-17 01:57:27 &#43;0000 UTC">2021-08-17 01:57:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>I really like Rust, but in my mind it&#x27;s still relegated to the periphery of tasks that must be super fast (like C&#x2F;C++, to your point) and&#x2F;or low-level. Rust has made impressive strides at reducing the toil involved in compile-time memory management, but there is still a big productivity gap between the borrow checker and GC.</i><p>Even if it weren&#x27;t for the performance I would use <i>Rust</i> over <i>Go</i> due to the lack of generics alone, as well as the associated general philosophy of <i>Go</i> that boilerplate is good and one should repeat oneself as much as possible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 12:59:30 &#43;0000 UTC">2021-08-17 12:59:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I really, really like type systems, but I’ve built enough software to know that the returns for most applications diminish after a Go-like type system is in place, and there are many other factors that are more important than type systems (and Rust gets a lot of these right too!) such as performance, productivity, tooling breadth and quality (especially build tooling and package management), ecosystem, deployment&#x2F;distribution story, learning curve, readability, etc. Ultimately I’m of the opinion that as cool as type systems are, for most software they need to exist in service of productivity which means you need a basic type system that helps you but gets out of your way. Type systems can’t catch many classes of bugs that are increasingly prevalent in a world where our services are getting increasingly smaller (or rather, where more infrastructure and networking are being put in between the logical components of our application) and we’re often able to detect bug fixes before they impact a significant number of users (progressive deployments, automated rollbacks, continuous deployment, etc) but the discourse around type systems hasn’t caught up yet.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Blikkentrekker" target="_blank">Blikkentrekker</a>   <span class="timeago" data-date="2021-08-17 13:28:46 &#43;0000 UTC">2021-08-17 13:28:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It has nothing to do with catching bugs.<p>It has to do with that one sometimes has to write 80 lines of code in <i>Go</i> to to the same as 3 lines of <i>Rust</i> code due to having to repeat oneself all the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-17 14:07:20 &#43;0000 UTC">2021-08-17 14:07:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That’s an even more superficial concern. No one is bottlenecked on the rate at which they can type.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-08-17 18:18:48 &#43;0000 UTC">2021-08-17 18:18:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Maintainers are bottlenecked by the rate we can (re)read. Boilerplate is the problem that makes us want powerful languages; if it didn’t matter we could have stayed with assembly.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Blikkentrekker" target="_blank">Blikkentrekker</a>   <span class="timeago" data-date="2021-08-18 02:59:28 &#43;0000 UTC">2021-08-18 02:59:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            One especially is in the case where it&#x27;s boilerplate code that does not rely on any real deep thought but writes itself, and with the possibility of bugs in it, most of all. Anyone can make a simple typo or forget something in the endless boilerplate.<p>It also gets in the way of reading code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-16 23:17:13 &#43;0000 UTC">2021-08-16 23:17:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I hate to be &quot;that guy&quot; too, but coming from somebody who really likes Rust and is using it more and more (also at $dayjob now) we must admit that Go tooling is one step ahead. CPU profiler, allocation and heap profiler, lock contention profiler. It all comes out of the box.<p>Yes you have cargo flamegraph for profiling locally and you now have pprof-rs to mimick Go&#x27;s embedded pprof support. But allocation heap profiling is still something I struggle with.<p>I saw there was a pprof-rs PR with a heap profiler but there was some doubt as to whether it worked correctly; to get a feeling of how that approach would work but without having to fork pprof-rs I implemented the  <a href="https:&#x2F;&#x2F;github.com&#x2F;mkmik&#x2F;heappy" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;mkmik&#x2F;heappy</a>  crate which I can use to produce memory allocation flamegraphs (using the same &quot;go tool pprof&quot; tooling!) in real code I run and figure out if it works in practice before pushing it upstream.<p>But stuff you give for granted like figuring out which structure accounts for most used memory, is very hard to achieve. The servo project uses an internal macro that help you trace the object sizes but it&#x27;s hard to use outside the servo project.<p>The GC makes some things very easy, and it&#x27;s not just about programmers not having to care about memory; it&#x27;s also that the same reference tracing mechanism used to implement GC can be used to cheaply get profiling information.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kouteiheika" target="_blank">kouteiheika</a>   <span class="timeago" data-date="2021-08-17 03:23:24 &#43;0000 UTC">2021-08-17 03:23:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But allocation heap profiling is still something I struggle with.<p>Have you tried this one? <a href="https:&#x2F;&#x2F;github.com&#x2F;koute&#x2F;memory-profiler" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;koute&#x2F;memory-profiler</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nyanpasu64" target="_blank">nyanpasu64</a>   <span class="timeago" data-date="2021-08-17 04:59:52 &#43;0000 UTC">2021-08-17 04:59:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does this one compare to Heaptrack (which is a CLI&#x2F;GUI memory profiler that supports C++ and probably Rust as well)?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kouteiheika" target="_blank">kouteiheika</a>   <span class="timeago" data-date="2021-08-17 07:11:12 &#43;0000 UTC">2021-08-17 07:11:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are many differences, but the main ones are that it has less overhead when profiling, more thorough analysis features (Heaptrack&#x27;s GUI is relatively simple compared to it), and the next version will have scripting capabilities for analysis.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the8472" target="_blank">the8472</a>   <span class="timeago" data-date="2021-08-16 23:25:20 &#43;0000 UTC">2021-08-16 23:25:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; But allocation heap profiling is still something I struggle with.<p>Switch to a dumb allocator and then profile mmap calls or page faults? That should get you large allocations at least. It&#x27;s a pretty crude proxy. The other allocation profilers I&#x27;m aware of cause significant slowdowns.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 07:49:33 &#43;0000 UTC">2021-08-17 07:49:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry I don&#x27;t understand what you&#x27;re suggesting.<p>I currently intercept calls to 
+malloc&#x2F;calloc&#x2F;realloc&#x2F;... and capture stack traces. This way I know how much memory gets allocated for each allocation site. Since allocations usually go through constructor calls, the presence of a constructor in the stack trace can let you infer how many structures of a given type are been allocated. Knowing how big they are is more tricky since allocation for the whole struct and its parts doesn&#x27;t have to happen entirely in the constructor (some structures like vectors and hashmaps can grow, some structures can collect data from other sources and then hold onto them, etc)<p>Furthermore to know how the live memory is broken down between object type and allocation sites, you also need to track freed memory. This is significantly more tricky to do efficiently. I currently take an allocation sample every N bytes being allocated and use a poisson process estimator to scale the total allocated bytes.<p>The only ways I know to account for in use memory is to track every single allocation or to add some extra space for every allocation where we record whether a block had been sampled and of yes, what was its corresponding allocation event.<p>Can you please elaborate more on your suggestion?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=the8472" target="_blank">the8472</a>   <span class="timeago" data-date="2021-08-17 15:17:37 &#43;0000 UTC">2021-08-17 15:17:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looks like I misunderstood, I was suggesting something more indirect than tracing calls to malloc. If you&#x27;re already doing that then I&#x27;m not aware of any better low-overhead solutions. There are high-overhead options such as valgrind&#x27;s dhat.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=bombela" target="_blank">bombela</a>   <span class="timeago" data-date="2021-08-17 01:55:00 &#43;0000 UTC">2021-08-17 01:55:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about valgrind? <a href="https:&#x2F;&#x2F;valgrind.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;valgrind.org&#x2F;</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 06:48:55 &#43;0000 UTC">2021-08-17 06:48:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Valgrind is great, precise but slow.<p>The missing feature I was comparing was the ability of Go to provide good estimated heap and allocation profiles using minimal overhead on a production workload.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_008_jb_" target="_blank">_008_jb_</a>   <span class="timeago" data-date="2021-08-17 03:18:21 &#43;0000 UTC">2021-08-17 03:18:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, the desperate Rust promoter crew enters the Go thread ...<p>Rust is great for language enthusiats doing hobby projects or for learning. The Rust book is great. Rust has great language features.<p>Having that said, Rust is the right tool for the job for a very small niche. Basically, if you would have used C++ before and don&#x27;t need much developer reach or mature libraries. And only for the rare cases you really cannot affort a GC (even though Go&#x27;s GC is highly optimized).<p>Go on the other hand, is an industrial strength proven and mature general purpose language. It is the best fit for various kind of networking application. Especially APIs, but also infrastructure where you can live with an GC. CLIs are great with Go as well.<p>If you&#x27;re working on a professional grade project (where the GC is acceptable), Go is much superior than Rust in all regards.<p>Rust is advertised for years and years and didn&#x27;t have it&#x27;s breakthrough yet. This empirical fact cannot be ignored. There&#x27;re reasons for this, of course. Some are:<p>- Writing Rust consumes so much more mental power with so little gain. That mental energy should be directed to solving the problem.<p>- Go makes everything besides your problem at hand easy. You can focus on solving your problem, not fighting the Borrow Checker<p>- Rust&#x27;s ecosystem is not reliable. Many essential libs are one-man-shows. Version 0.1 everywhere.<p>- Rust is for and by language enthusiats. If you need to rely on libs for longer than a couple of years it is a hight risk for your project<p>- In terms of real world performance: Go is so close to Rust that there&#x27;re very very very few use cases that really need that marginal gain
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=asadawadia" target="_blank">asadawadia</a>   <span class="timeago" data-date="2021-08-16 22:29:34 &#43;0000 UTC">2021-08-16 22:29:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            why though? some perf gains?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=DenseComet" target="_blank">DenseComet</a>   <span class="timeago" data-date="2021-08-16 22:49:15 &#43;0000 UTC">2021-08-16 22:49:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go isn&#x27;t low level in the same way that Rust is. Both languages have their places, but Go seems to be more of a better Python&#x2F;JS, whereas Rust is a better C++.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=37ef_ced3" target="_blank">37ef_ced3</a>   <span class="timeago" data-date="2021-08-16 23:38:16 &#43;0000 UTC">2021-08-16 23:38:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go should be understood as a replacement for C and C++.<p>If you&#x27;re writing a compiler, or some other project where extreme high performance is not necessary (e.g., if you&#x27;re willing to be, say, a factor of 2 slower than C) then Go is a good choice.<p>Go&#x27;s performance is excellent, and should be sufficient for all but the most demanding applications. It&#x27;s not a crummy scripting language like Python&#x2F;JS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=munificent" target="_blank">munificent</a>   <span class="timeago" data-date="2021-08-16 23:58:04 &#43;0000 UTC">2021-08-16 23:58:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <i>&gt; Go should be understood as a replacement for C and C++.</i><p>I think Go is a good replacement for the things people used C and C++ for twenty years ago, but less of a replacement for the things people use C and C++ for today.<p>Back then, C&#x2F;C++ was your default &quot;write big server program that needs to go relatively fast&quot; language, and Go is targeting that. But in the meantime, Java got fast enough and hardware got cheap enough that Python, Ruby, and JavaScript have also eaten into that domain.<p>Today, I see C and C++ used primarily for embedded work and games. I don&#x27;t see Go as being a great fit for either of those.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zarzavat" target="_blank">zarzavat</a>   <span class="timeago" data-date="2021-08-17 00:02:48 &#43;0000 UTC">2021-08-17 00:02:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go is a replacement for a certain subset of C&#x2F;C++ projects that are I&#x2F;O heavy, e.g. web servers. However the GC precludes it from many uses of C&#x2F;C++, e.g. you couldn&#x27;t write an AAA game in it, or a kernel, or a toaster.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=asadawadia" target="_blank">asadawadia</a>   <span class="timeago" data-date="2021-08-18 14:13:39 &#43;0000 UTC">2021-08-18 14:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah but how often do we meet toaster devs?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=vp8989" target="_blank">vp8989</a>   <span class="timeago" data-date="2021-08-17 01:11:53 &#43;0000 UTC">2021-08-17 01:11:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            GC is quite problematic for web servers too. Lots of people &quot;solve&quot; that by giving AWS more money.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 05:22:14 &#43;0000 UTC">2021-08-17 05:22:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Web server workers, by definition, don&#x27;t run for extended periods. Making them the perfect candidate for GC languages.<p><pre><code>  1) Get request
+  2) Serve request
+  3) Get GC&#x27;d
+</code></pre>
+No memory issues.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vp8989" target="_blank">vp8989</a>   <span class="timeago" data-date="2021-08-17 11:39:38 &#43;0000 UTC">2021-08-17 11:39:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Serving web requests with ephemeral workers introduces some new problems though. Generally efficiency in this space comes from pooling, reusing connections, multiplexing etc ...<p>Ie. amortize expensive work over many requests.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Xenograph" target="_blank">Xenograph</a>   <span class="timeago" data-date="2021-08-17 03:53:14 &#43;0000 UTC">2021-08-17 03:53:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why is GC problematic for web servers?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vp8989" target="_blank">vp8989</a>   <span class="timeago" data-date="2021-08-17 11:33:25 &#43;0000 UTC">2021-08-17 11:33:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because GC will pause threads while requests are being served, this leads to latency spikes at the higher percentiles.<p>It introduces a whole distinct type of complexity into operating the server.<p>The latency of a request to your server is not just caused by the code that is ran to serve that request (which is how people intuitively would think about it), it can be caused by GC pauses that are happening because of the memory pressure caused by previous requests.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dilyevsky" target="_blank">dilyevsky</a>   <span class="timeago" data-date="2021-08-16 23:07:52 &#43;0000 UTC">2021-08-16 23:07:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Python&#x2F;Js are interpreted by default and not good system programming choices. Go is compiled. This comparison totally misses the mark. In fact Go was developed mostly as C++ but sometimes Python replacement at Google.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=atombender" target="_blank">atombender</a>   <span class="timeago" data-date="2021-08-16 23:39:53 &#43;0000 UTC">2021-08-16 23:39:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And yet Go seems to have not captured many C++ developers, but rather developers from languages like Python, Ruby, and JavaScript.<p>The Go team originally wanted to replace C++, especially inside Google, but they didn&#x27;t succeed. According to googlers on Hacker News, very few projects inside Google actually use Go.<p>The reason Go attracted these kinds of developers is precisely that it isn&#x27;t a systems programming language. Systems people want something like Rust instead.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 04:39:01 &#43;0000 UTC">2021-08-17 04:39:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lack of generics kept most of us away.<p>You don&#x27;t return to 1992 C++, thinking nah this is fine.<p>Companies like F-Secure are using Go for real system programming just fine.<p><a href="https:&#x2F;&#x2F;www.f-secure.com&#x2F;en&#x2F;consulting&#x2F;foundry&#x2F;usb-armory" rel="nofollow">https:&#x2F;&#x2F;www.f-secure.com&#x2F;en&#x2F;consulting&#x2F;foundry&#x2F;usb-armory</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dilyevsky" target="_blank">dilyevsky</a>   <span class="timeago" data-date="2021-08-17 16:39:35 &#43;0000 UTC">2021-08-17 16:39:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Under wider definition of “system software” you can consider db tech (etcd, cockroachdb, digraph) and compute management software (kubernetes, nomad, docker) to be included into that. Which is where Go is doing just fine. Lower level stuff is harder but because of gc not lack of generics
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 18:06:45 &#43;0000 UTC">2021-08-17 18:06:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            GC is just fine for OS development, as proven by Xerox PARC, ETHZ systems used in production.<p>The problem is more of mentality and not having management willing to push it down unbelievers no matter what, that prefers to recycle UNIX clones instead to save money.<p>Midori powered Asian Bing for a while and even then the Windows team did not believe it was possible.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dilyevsky" target="_blank">dilyevsky</a>   <span class="timeago" data-date="2021-08-16 23:57:41 &#43;0000 UTC">2021-08-16 23:57:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It def convinced me. I wrote c++ for almost 10 year before switching to Go. Even after c++11 have come out it was still night and day. Anecdotally the team i left at google rewrote some of my stuff from c++ in Go that I didn’t get to at the time
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_wldu" target="_blank">_wldu</a>   <span class="timeago" data-date="2021-08-17 00:27:26 &#43;0000 UTC">2021-08-17 00:27:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same experience here. 10 years ago, I wrote a lot of C++, today I write almost exclusively Go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vp8989" target="_blank">vp8989</a>   <span class="timeago" data-date="2021-08-17 01:20:28 &#43;0000 UTC">2021-08-17 01:20:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;The Go team originally wanted to replace C++, especially inside Google&quot;<p>Im glad you said that and I was not just imagining that myself. I remember following the Go language closely in its earlier days and it was often spoken about as a &quot;systems language&quot; but it actually seems to have ended up settling as a language to write servers for people who are sick of OOP but still like their imperative C style code.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vips7L" target="_blank">vips7L</a>   <span class="timeago" data-date="2021-08-17 12:46:01 &#43;0000 UTC">2021-08-17 12:46:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my opinion they should have pushed for D instead of Go. It’s leagues better as a systems language if you can tolerate GC or if you can’t you just don’t use the GC.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-16 23:30:21 &#43;0000 UTC">2021-08-16 23:30:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s just one of the ways to think about it. Java, .NET (I felt like adding these two to expand on the comparison), Python and JS are all languages with a relatively high level of abstraction and large and useful ecosystems surrounding them. They&#x27;re pretty popular for all sorts of application development, but all suffer from certain problems:<p><pre><code>  - Java has lots of brittle reflection in some libraries and JDK can be finicky, especially with GC tuning
+  - .NET needs a runtime, historically there&#x27;s Mono, now there was .NET Core and now there will be just .NET, though in some cases there&#x27;s also IL2CPP and so on
+  - Python not only generally runs slow, but also has problematic package management, especially with vent
+  - JS (Node in particular) has similar package management woes as well as really fast package deprecation
+</code></pre>
+Go at least partially solves some of those problems, by being compiled, having decent performance, somewhat rich ecosystem and passable package management, all while the language remains usable.<p>Lots of applications and some tools will get written in Go because of this, because it&#x27;s pretty reasonable to use in most cases.<p>In comparison, C, C++, Zig and Rust would all be better suited for systems level programming or embedded development - they typically let you write more performant and less memory hungry code, at the expense of foot guns and slower development.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kcartlidge" target="_blank">kcartlidge</a>   <span class="timeago" data-date="2021-08-17 20:29:36 &#43;0000 UTC">2021-08-17 20:29:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I do both C# and Go so have no axe to grind here. Just two small points though.<p>&gt; <i>.NET needs a runtime</i><p>It doesn&#x27;t. With a single command .NET Core can produce stand-alone single-file cross-platform deployables needing no SDK, Framework, runtime, or other dependency on the server.<p>&gt; <i>Go at least partially solves some of those problems, by being compiled, having decent performance, somewhat rich ecosystem and passable package management, all while the language remains usable.</i><p>It does, and I&#x27;ve been a big fan of Go for a fair few years now. However every point made in that sentence applies equally to .NET too.<p>The one area where Go beats C# (and most others) hands-down for me is the build time. It&#x27;s a whole order of magnitude (possibly several) faster than most alternatives.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=asadawadia" target="_blank">asadawadia</a>   <span class="timeago" data-date="2021-08-18 14:15:26 &#43;0000 UTC">2021-08-18 14:15:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;systems level programming or embedded development<p>Like building what?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-08-17 00:13:29 &#43;0000 UTC">2021-08-17 00:13:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            GC tuning is painful, but it’s quicker and more reliable than rewriting code hoping for same result.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=KronisLV" target="_blank">KronisLV</a>   <span class="timeago" data-date="2021-08-17 06:51:19 &#43;0000 UTC">2021-08-17 06:51:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Partially agreed, many times it&#x27;s just a patch over a codebase that&#x27;s stuck only running on JDK 8 - people expect tuning to be sufficient when the code is slowly rotting.<p>I&#x27;d argue that most systems that won&#x27;t die out eventually will need a rewrite, or alternatively, in the modern day we&#x27;ll see more and more polyglotic systems popping up.<p>Therefore it always makes sense to explore the best options for a particular bit of development, regardless of whether it&#x27;s Node, Python, Java, Go or something else.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=omginternets" target="_blank">omginternets</a>   <span class="timeago" data-date="2021-08-16 23:23:52 &#43;0000 UTC">2021-08-16 23:23:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It hits the mark because it targets the niche that was once occupied by interpreted languages.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway894345" target="_blank">throwaway894345</a>   <span class="timeago" data-date="2021-08-16 23:32:58 &#43;0000 UTC">2021-08-16 23:32:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            But it wasn&#x27;t just &quot;interpreted languages&quot;. Really the only interpreted languages in &quot;the niche&quot; were Python and a little bit of Ruby, but there was also a whole bunch of Java, C#, and C++.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=asadawadia" target="_blank">asadawadia</a>   <span class="timeago" data-date="2021-08-18 14:12:39 &#43;0000 UTC">2021-08-18 14:12:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That is not really a reason. What can I not build in Go that is easy to do in rust?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rowanG077" target="_blank">rowanG077</a>   <span class="timeago" data-date="2021-08-16 23:15:18 &#43;0000 UTC">2021-08-16 23:15:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No. More because Rust offers modern language features and it&#x27;s much easier to get code working then in Go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=candiddevmike" target="_blank">candiddevmike</a>   <span class="timeago" data-date="2021-08-16 21:55:21 &#43;0000 UTC">2021-08-16 21:55:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Generics are hopefully coming February 2022 with 1.18.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nappy-doo" target="_blank">nappy-doo</a>   <span class="timeago" data-date="2021-08-16 22:07:52 &#43;0000 UTC">2021-08-16 22:07:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Important note: it&#x27;s the preview release. Not everything will be done, there will be gaps. But the first parts of the work have already merged to master, and it&#x27;s coming.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=xwdv" target="_blank">xwdv</a>   <span class="timeago" data-date="2021-08-16 22:06:06 &#43;0000 UTC">2021-08-16 22:06:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This will be when I finally use Go for something then.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=azth" target="_blank">azth</a>   <span class="timeago" data-date="2021-08-17 12:52:04 &#43;0000 UTC">2021-08-17 12:52:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even with generics, it has so many issues:<p>* Error handling is error prone and awkward.<p>* No proper enums<p>* No sum types&#x2F;pattern matching<p>* Null pointers exist<p>* Its interfaces are very awkward. There are superior implementations of what they tried to do in other languages.<p>* Subpar IDE experience, made worse by how interfaces are implemented. You need an IDE for any non-trivial project.<p>* Very awkward choice to have visibility be determined by the case of the first letter in the function or variable. Simple changing of visibility to public will require larger diffs if it&#x27;s used a lot.<p>* No private visibility, only package private.<p>* Very crude import mechanism. Try to rename a package and see how the IDE fails to figure out what to change.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=saturn_vk" target="_blank">saturn_vk</a>   <span class="timeago" data-date="2021-08-18 06:44:04 &#43;0000 UTC">2021-08-18 06:44:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Funny, I&#x27;ve only ever used vim for go projects big and small, and the experience was excellent<p>Wouldn&#x27;t any visibility change require a large diff in all languages?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ggregoire" target="_blank">ggregoire</a>   <span class="timeago" data-date="2021-08-16 22:49:57 &#43;0000 UTC">2021-08-16 22:49:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Have you tried &quot;F2&quot; (rename symbol)? It&#x27;s amazing, it&#x27;s like a &quot;safe&quot; find &amp; replace all.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=klodolph" target="_blank">klodolph</a>   <span class="timeago" data-date="2021-08-16 22:09:41 &#43;0000 UTC">2021-08-16 22:09:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I&#x27;ve been using F12 a lot too, just to dive into random projects. It&#x27;s amazing how much this little feature means.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=flohofwoe" target="_blank">flohofwoe</a>   <span class="timeago" data-date="2021-08-17 08:40:54 &#43;0000 UTC">2021-08-17 08:40:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cross-platform Intellisense support in VSCode with the Microsoft C&#x2F;C++ extension has improved a lot lately, especially in combination with the CMake Tool extension to automatically discover header search paths and other compilation settings (it used to be very brittle in the beginning on Linux and Mac).<p>But if you&#x27;re coding C&#x2F;C++ in a &quot;proper&quot; IDE like Visual Studio, CLion or Xcode, such features are expected to work out of the box. IME, Intellisense-like features are usually only a pain to setup in &quot;non-integated&quot; development environments like Vim or other text editors.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=The_rationalist" target="_blank">The_rationalist</a>   <span class="timeago" data-date="2021-08-16 21:59:03 &#43;0000 UTC">2021-08-16 21:59:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If your reference point is C&#x2F;C++ then sure.. Go is a progress, but give more modern languages a try, like Kotlin, they sure are a major ergonomic and featureful evolution over go
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nestorD" target="_blank">nestorD</a>   <span class="timeago" data-date="2021-08-16 22:49:59 &#43;0000 UTC">2021-08-16 22:49:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s the sad truth. Go is not leap and bound better on that front, it is C&#x2F;C++ that has not catched up.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 17:56:35 &#43;0000 UTC">2021-08-17 17:56:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is more a limitation of VSCode than C++. Go to Definition for C++ works just fine in Visual Studio proper for many years now.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eweise" target="_blank">eweise</a>   <span class="timeago" data-date="2021-08-17 05:37:03 &#43;0000 UTC">2021-08-17 05:37:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;you can press &quot;F12&quot; to jump to the location of a function definition&quot; Seems like standard IDE functionality for at least 20 years.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=_008_jb_" target="_blank">_008_jb_</a>   <span class="timeago" data-date="2021-08-17 03:31:47 &#43;0000 UTC">2021-08-17 03:31:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I started using Go I was more than sceptical. I had to mirgrate a CLI tool written in Kotlin (still my favorite language) because the memory consumption was to high.<p>After a while I actually understood why Go is such a successful language &#x2F; ecosystem:<p>Go&#x27;s priority is to make projects easier. It is doing so by all it&#x27;s smaller and larger features respectivly skipped features. But one soon understands the big picture of the Go team. Go is designed by very experienced devs who knew what is important and what not.<p>In my Go projects, I don&#x27;t have to worry about:<p>- Memory safety<p>- Tooling<p>- Performance<p>- Structure (once I understood the package desgin philosophie)<p>- Difficult syntax<p>- Concurrency<p>- Libraries, as we can do most with the standard lib<p>- Maturenes and stability<p>Instead I focus on the things that count:<p>- Solve the problem at hand<p>- Create correct, stable and maintable software<p>And as this was not enough, the Go team comes around the corner with an 5 % average performace gift.<p>Awesome.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=systemvoltage" target="_blank">systemvoltage</a>   <span class="timeago" data-date="2021-08-17 05:06:03 &#43;0000 UTC">2021-08-17 05:06:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not a GO dev, has the debugging experience improved?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 05:28:41 &#43;0000 UTC">2021-08-17 05:28:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Dunno, 20 years in the business and I still debug with print statements.<p>It&#x27;s enough in 95% of cases and it works every time in every environment. In the time it takes me to get a debugger running and attached to a process, I&#x27;ve print-debugged it and fixed it already =)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maccard" target="_blank">maccard</a>   <span class="timeago" data-date="2021-08-17 10:16:03 &#43;0000 UTC">2021-08-17 10:16:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  In the time it takes me to get a debugger running and attached to a process,<p>In any modern editor or IDE, getting a debugger running and attached to a process usually amounts to opening a folder, adding a breakpoint and pressing F5
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 08:30:44 &#43;0000 UTC">2021-08-17 08:30:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Same here. I very rarely reach for a debugger. Especially with Go where you can recompile the binary very quickly.<p>I tend to reach for a debugger when doing post mortem debugging or when I work with C where that&#x27;s usually the easiest way to get a stack trace when a program crashes.<p>That said, time travel &#x2F; reverse debuggers can be quite useful indeed: see 
+<a href="http:&#x2F;&#x2F;choly.ca&#x2F;post&#x2F;debugging-go-with-rr&#x2F;" rel="nofollow">http:&#x2F;&#x2F;choly.ca&#x2F;post&#x2F;debugging-go-with-rr&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=harikb" target="_blank">harikb</a>   <span class="timeago" data-date="2021-08-17 06:55:41 &#43;0000 UTC">2021-08-17 06:55:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            VsCode or IntelliJ with delv works beautifully for most common tasks. But don’t compare to JVM&#x2F;Java. It does get trickier if you have many concurrent&#x2F;goroutines but that is not unique to Go.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pxue" target="_blank">pxue</a>   <span class="timeago" data-date="2021-08-16 22:47:41 &#43;0000 UTC">2021-08-16 22:47:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The go code I wrote in 2015 looks and works exactly the same way new Go code I&#x27;m writing today. Even with all the upgrades.<p>You have no idea how amazing that feels.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 04:42:21 &#43;0000 UTC">2021-08-17 04:42:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My C and C++ code for Windows 3.1 written in 1995 would compile just fine today on Windows 10.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 08:32:26 &#43;0000 UTC">2021-08-17 08:32:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I heard this a lot but I wonder if it&#x27;s still really true. I mean, can I literally open the latest visual studio and open an old project, hit build and it will just work?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 08:40:56 &#43;0000 UTC">2021-08-17 08:40:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Naturally it depends on what you are doing, but for regular Win16&#x2F;Win32 code that uses Windows type macros and no low level tricks pretty much so.<p>And even if you take Win16 out of the picture, Win32 exists since 1995.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ithkuil" target="_blank">ithkuil</a>   <span class="timeago" data-date="2021-08-17 08:54:42 &#43;0000 UTC">2021-08-17 08:54:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not doubting that the windows API has remained stable. I&#x27;d like to try if the tooling (e.g. IDE config format or makefile equivalent) has also received the same amount of attention to backward compat
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 13:10:52 &#43;0000 UTC">2021-08-17 13:10:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Again, depends on what you were using.<p>Borland C++ or Watcom, probably not much help.<p>Delphi, C++ Builder, Visual C++ for Windows 95&#x2F;2000 mostly work, naturally you might need to use the IDE wizards to upgrade project files, or fix tooling paths on the makefiles.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dbremner" target="_blank">dbremner</a>   <span class="timeago" data-date="2021-08-17 20:49:07 &#43;0000 UTC">2021-08-17 20:49:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;github.com&#x2F;dbremner&#x2F;cake" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dbremner&#x2F;cake</a> is a 16-bit Windows 1.0 application that I ported to Win64; most of the changes weren&#x27;t required.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=systemvoltage" target="_blank">systemvoltage</a>   <span class="timeago" data-date="2021-08-17 05:00:07 &#43;0000 UTC">2021-08-17 05:00:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As a person that gets anxiety from JS projects and how fast things move, I <i>love</i> this aspect of C. It puts the soul to ease.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=steren" target="_blank">steren</a>   <span class="timeago" data-date="2021-08-17 05:13:04 &#43;0000 UTC">2021-08-17 05:13:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The JS code you wrote 20 years ago still runs today (and much much faster)<p>The problem is not JS, more the dependencies you decided to take for your project.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pjmlp" target="_blank">pjmlp</a>   <span class="timeago" data-date="2021-08-17 06:40:06 &#43;0000 UTC">2021-08-17 06:40:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed. Going back to my example, stuff written with OWL won&#x27;t compile today.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=maccard" target="_blank">maccard</a>   <span class="timeago" data-date="2021-08-17 09:57:59 &#43;0000 UTC">2021-08-17 09:57:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The C++ I wrote in 2013 still looks and works the same as it did 8 years ago,  and I can write code in the same way, or opt in to newer features in C++14&#x2F;17 too. The C++ code that I wrote in 2007 (when I started writing C++) also still works.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 23:13:39 &#43;0000 UTC">2021-08-16 23:13:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rowanG077" target="_blank">rowanG077</a>   <span class="timeago" data-date="2021-08-16 23:18:54 &#43;0000 UTC">2021-08-16 23:18:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Isn&#x27;t that the case for the vast majority of languages though? The python,c,Haskell,js,language x code from 2015 works the same now as it did 5 years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slownews45" target="_blank">slownews45</a>   <span class="timeago" data-date="2021-08-16 23:29:52 &#43;0000 UTC">2021-08-16 23:29:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            python 2 -&gt; 3 was not easy (aka a total nightmare).<p>By 3.6 it was pretty good though and even migrations and dual code bases were easier because they went back and allowed things like u&quot;&quot; for unicode strings to continue to mean unicode strings in python 3 - before that they&#x27;d actually blocked unicode in 3 that was working well in 2.x code bases! It was a total in your face move to break the ecosystem even though supporting u&quot;&quot; would have been almost no cost in terms of improving compatibility with existing code. ASCII handling (important for things like web tech stacks header handling etc) also improved thankfully. 3.x made things a lot harder initially (and slower too).<p>Also a lot of code doesn&#x27;t look the same over time - the conventions (formatting) are either very poorly defined or change. Go seems to have pretty much one format from fmt<p>etc
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fny" target="_blank">fny</a>   <span class="timeago" data-date="2021-08-17 04:28:10 &#43;0000 UTC">2021-08-17 04:28:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Python was a unique shit show.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 17:59:02 &#43;0000 UTC">2021-08-17 17:59:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Python 3 should be considered a different language from Python 2, pretty much.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=slownews45" target="_blank">slownews45</a>   <span class="timeago" data-date="2021-08-17 20:07:53 &#43;0000 UTC">2021-08-17 20:07:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The level on intentional compatibility breaking was crazy.<p>The fact that they went out of their way to break python 2 unicode when running on python 3 was just totally nuts. Especially after making such a big deal about unicode!<p>I&#x27;ve never seen anything like it I don&#x27;t think? Maybe the new Perl that never really landed?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-08-17 22:12:38 &#43;0000 UTC">2021-08-17 22:12:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They’re still working on Raku, it just isn’t branded “Perl 6” anymore.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 20:33:11 &#43;0000 UTC">2021-08-17 20:33:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Well, there were good reasons to change the way py2 worked with Unicode, and I don&#x27;t think this could have been made right without severe breakage either way. The only thing that should have happened sooner is support for u&quot;&quot; literals.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=slownews45" target="_blank">slownews45</a>   <span class="timeago" data-date="2021-08-17 22:00:00 &#43;0000 UTC">2021-08-17 22:00:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I had developed with unicode in mind using u&quot;&quot;.<p>For some reason this was not good enough for the python 3 folks - they actively broke this code which was from folks who had SPECIFICALLy addressed unicode in their apps.<p>And yes, they could have supported u&quot;&quot; (and a number of other things).<p>They went - unicode is so critical we will break the world, and then for folks who had already supported unicode well or wanted to dual target a library they said your u&quot;&quot; approach to unicode is so bad we will break it.<p>Total BS in my book.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Strum355" target="_blank">Strum355</a>   <span class="timeago" data-date="2021-08-17 00:47:55 &#43;0000 UTC">2021-08-17 00:47:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ive had a number of python libraries (and Im not talking small, lesser known ones) that would depend on (and break in the absence of) specific quirks in Python versions that made upgrading python an unnecessary hassle.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pxue" target="_blank">pxue</a>   <span class="timeago" data-date="2021-08-16 23:33:11 &#43;0000 UTC">2021-08-16 23:33:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For JS, es6&#x2F;ecma2015 -&gt; ecma2021, lots of language changes.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rowanG077" target="_blank">rowanG077</a>   <span class="timeago" data-date="2021-08-16 23:43:16 &#43;0000 UTC">2021-08-16 23:43:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Of course changes but afaik it&#x27;s backwards compatible.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ricardobeat" target="_blank">ricardobeat</a>   <span class="timeago" data-date="2021-08-17 01:41:46 &#43;0000 UTC">2021-08-17 01:41:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t think the OP was making a point about backwards compatibility, but how the language itself has remained stable (sign of good design?). That is not the case for the majority of languages, except for maybe Ruby. Javascript in particular looks <i>nothing</i> like code from 6 years ago.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=systemvoltage" target="_blank">systemvoltage</a>   <span class="timeago" data-date="2021-08-17 05:04:25 &#43;0000 UTC">2021-08-17 05:04:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Furthermore, you rarely just plain JS. It&#x27;s always another behemoth framework such as React or Angular.<p>I challenge anyone to upgrade a project from Angular ver 5 to the latest. It&#x27;s possible but you&#x27;ll also question whether its possible for you to quit software engineering and learn woodworking.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=37ef_ced3" target="_blank">37ef_ced3</a>   <span class="timeago" data-date="2021-08-16 21:56:45 &#43;0000 UTC">2021-08-16 21:56:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            My appreciation for Go has been monotonically increasing for years.<p>The more Go code I write, the more I like the language, the tools, and the standard library.<p>Low-friction, high-quality software development.<p>If only I could use it professionally, instead of C++.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 05:26:24 &#43;0000 UTC">2021-08-17 05:26:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go is the choice of professionals IMO.<p>When you have a team of varying skill levels who need to deliver shit that works on a schedule and still have some kind of performance, you use Go.<p>Even more so if you need to hand off the maintenance to a team of randoms from god knows where and THEY need to be able to keep it running and add new features.<p>It doesn&#x27;t have the fanciest new EXPRESSIVE operators or anything exciting really. It just does the job, albeit verbosely.<p>You can do fancy shit on your own time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 17:59:43 &#43;0000 UTC">2021-08-17 17:59:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would argue that e.g. decent error handling is not &quot;fancy shit&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 18:38:54 &#43;0000 UTC">2021-08-17 18:38:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s perfectly decent, it forces you to explicitly handle or ignore every error.<p>It&#x27;s verbose as all hell, but on the other hand you&#x27;ll notice immediately if it&#x27;s missing.<p>Go is not a &quot;fun&quot; language by any means, but that doesn&#x27;t mean it&#x27;s not a productive one.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 20:32:15 &#43;0000 UTC">2021-08-17 20:32:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t see how it <i>forces</i> you to ignore? You don&#x27;t have to be explicit to ignore the returned error code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-18 08:29:43 &#43;0000 UTC">2021-08-18 08:29:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what the underscore is for, explicit ignore. And it&#x27;s a huge code smell.<p>You instantly notice it because the if err != nil -template is missing after it =)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-18 09:08:14 &#43;0000 UTC">2021-08-18 09:08:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Sorry, I didn&#x27;t word that well. What I meant is that you can ignore the returned value altogether, including the error.<p><a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;20803" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;20803</a><p>In contrast, e.g. Zig <i>requires</i> you to use _ if you want to ignore.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kubb" target="_blank">kubb</a>   <span class="timeago" data-date="2021-08-16 23:43:31 &#43;0000 UTC">2021-08-16 23:43:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’ve been using Go at a large software company for 4 years. It does the job, my biggest complaints are the low capacity for abstraction, verbosity and ergonomic pain points. It can do certain things  well, but in a large enough project you’ll inevitably find that it doesn’t give you the best tools for certain types of problems.<p>I don’t know what to think about the upcoming generics. It feels late to make such a big change so long after the language has been established. At least a plan for it should have been integrated into the language from the start.<p>It feels like a missed opportunity - an effort with similar funding but a more sound theoretical foundation than being Newsqueak 3.0 could have become an industry game changer. Instead it fills a niche, which is a success, albeit smaller.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vp8989" target="_blank">vp8989</a>   <span class="timeago" data-date="2021-08-17 01:27:19 &#43;0000 UTC">2021-08-17 01:27:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;It feels like a missed opportunity&quot;<p>I agree with that. I think looking back on it, Go arrived on to the scene at a perfect time where lots of people were rearchitecting so there was lots of natural appetite in the industry for a new language. Go vacuumed up a lot of this opportunity but ultimately hasn&#x27;t really evolved the practice of software engineering all that much.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-08-17 05:39:23 &#43;0000 UTC">2021-08-17 05:39:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; feels late to make such a big change<p>This is recoverable. The Java world was also saddled with a decade of awful pre-generic code, but we burned almost all of it to the ground and started over.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=int_19h" target="_blank">int_19h</a>   <span class="timeago" data-date="2021-08-17 18:01:01 &#43;0000 UTC">2021-08-17 18:01:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The need to tackle generics later resulted in design decisions such as type erasure, which even today are still limiting the evolution of Java.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=erik_seaberg" target="_blank">erik_seaberg</a>   <span class="timeago" data-date="2021-08-17 19:59:11 &#43;0000 UTC">2021-08-17 19:59:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yeah, that was an unforced error. Fundamental changes to a language can and should rely on upgrading deployed runtime libraries.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=zozbot234" target="_blank">zozbot234</a>   <span class="timeago" data-date="2021-08-17 14:48:27 &#43;0000 UTC">2021-08-17 14:48:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; an effort with similar funding but a more sound theoretical foundation than being Newsqueak 3.0 could have become an industry game changer.<p>That&#x27;s a pretty good description of Rust 0.x.  Might ring a bell.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=avl999" target="_blank">avl999</a>   <span class="timeago" data-date="2021-08-16 22:09:30 &#43;0000 UTC">2021-08-16 22:09:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go is my favorite language to write code in. I was very skeptical when I first started learning it for a new job with error handling that looked archaic in comparison to exceptions but once I got the hang of it it has quickly become my preferred language of choice for any project.<p>Once generics are finally added the language should basically be a no-brainer for any serious production code.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-08-16 23:44:24 &#43;0000 UTC">2021-08-16 23:44:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            From a distance it looks difficult to write in. For example, two recommended ways to delete from a slice:<p><pre><code>    a = append(a[:i], a[i+1:]...)
+    &#x2F;&#x2F; or
+    a = a[:i+copy(a[i:], a[i+1:])]
+</code></pre>
+Both seem harder than necessary.<p>Is that code just idiomatic, and Go programmers recognize it instantly? Or maybe they don&#x27;t deal with slices that often?<p><a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;wiki&#x2F;SliceTricks" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;wiki&#x2F;SliceTricks</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-17 00:06:17 &#43;0000 UTC">2021-08-17 00:06:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With the introduction of generics in Go 1.18 and the accompanying &quot;slices&quot; package (<a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;45955" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;45955</a>), we might soon write that as:<p><pre><code>  a = slices.Delete(a, i, i+1)
+</code></pre>
+That said, in code I write, I rarely need to do an in-place delete from a slice. I think it&#x27;s rare enough that recognizing the idiom is okay.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lanstin" target="_blank">lanstin</a>   <span class="timeago" data-date="2021-08-18 17:54:09 &#43;0000 UTC">2021-08-18 17:54:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because in-place delete is slow and you want to avoid algorithms with a lot of in-place deletes.  So it&#x27;s ok to have it be awkard, it&#x27;s like the names of rare elements being longer than the names of common elements, not an issue.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=azth" target="_blank">azth</a>   <span class="timeago" data-date="2021-08-17 13:05:08 &#43;0000 UTC">2021-08-17 13:05:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s so weird why they&#x27;re adding a slices package instead of making them functions on the slice itself. They did the same with strings.<p>Compare<p><pre><code>    strings.ToUpper(strings.Replace(strings.Trim(s), &quot;a&quot;, &quot;b&quot;)))
+</code></pre>
+Instead of<p><pre><code>    s.Trim().Replace(&quot;a, &quot;b&quot;).ToUpper()</code></pre>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=benhoyt" target="_blank">benhoyt</a>   <span class="timeago" data-date="2021-08-17 21:16:28 &#43;0000 UTC">2021-08-17 21:16:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For better or worse, this is by design. See: <a href="https:&#x2F;&#x2F;golang.org&#x2F;doc&#x2F;faq#methods_on_basics" rel="nofollow">https:&#x2F;&#x2F;golang.org&#x2F;doc&#x2F;faq#methods_on_basics</a><p>It&#x27;s &quot;to avoid complicating questions about the interface (in the Go type sense) of basic types&quot;. It also allows separating the builtin functions, of which there are very few (they have to be in the core language spec), from the stdlib functions like strings.ToUpper, which there are many many more of and are added to more quickly than the builtins.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=azth" target="_blank">azth</a>   <span class="timeago" data-date="2021-08-17 22:41:21 &#43;0000 UTC">2021-08-17 22:41:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m not sure what their answer means. They used a similar hand wavy answer about why the language has null pointers. &quot;Complication&quot; here refers to how complicated their implementation of the compiler is, not the end user complication, which is what they traded off (simpler compiler for more complex user code).<p>I didn&#x27;t get the last point. builtin functions are there (for a big part) because the language doesn&#x27;t have generics. Functions on types can be added without affecting the interface, since strings don&#x27;t implement any interface (at least not on purpose, another problem with golang). Java constantly enriches standard library types with more useful methods.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barsonme" target="_blank">barsonme</a>   <span class="timeago" data-date="2021-08-16 23:53:20 &#43;0000 UTC">2021-08-16 23:53:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, you deal with slices all the time. You just recognize the idiom.<p>You can restructure it if you don&#x27;t need to preserve order:<p><pre><code>    a[i] = a[len(a)-1] 
+    a = a[:len(a)-1]
+</code></pre>
+In general* Go does not hide complexity from you. It&#x27;s a blessing and a curse.<p>*: because the Internet is a nitpicky place.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 00:31:57 &#43;0000 UTC">2021-08-17 00:31:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This has been my experience as well: I had to fix a bug in a Go codebase recently, and the fix required me to de-duplicate an unordered collection of elements. It turns out that there&#x27;s (1) no built-in way to do this, and (2) there isn&#x27;t even a built-in set structure in Go, so you can&#x27;t do the obvious solution without explicitly using a map with a chaff value. Stack Overflow has <i>dozens</i> of duplicate questions for this, all with ridiculous O(n^2) or buggy (or both) answers.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jrockway" target="_blank">jrockway</a>   <span class="timeago" data-date="2021-08-17 00:57:51 &#43;0000 UTC">2021-08-17 00:57:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            map[T]struct{} is the set type in Go.  (Note that struct{} is represented with 0 bytes of memory, so it&#x27;s not chaff.)<p>You might like the slices proposal for utility functions like these: <a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;45955" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;issues&#x2F;45955</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 01:16:59 &#43;0000 UTC">2021-08-17 01:16:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks. I wasn&#x27;t aware that struct{} is zero-sized, so that plugs that hole.<p>I&#x27;ll admit freely that I&#x27;m not a proficient Go programmer, so it&#x27;s easier for me to see the things I don&#x27;t like than the things that Gophers praise. But even this solution leaves me unsatisfied, in contrast to what I&#x27;d reach for in Rust or even C++: it requires that I know that struct{} is zero-sized, and I <i>still</i> have to do the manual legwork of writing a CS101 dedupe function.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tialaramex" target="_blank">tialaramex</a>   <span class="timeago" data-date="2021-08-17 02:00:09 &#43;0000 UTC">2021-08-17 02:00:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Zero Size optimisations are a thing in Rust too though, and I don&#x27;t think an empty struct being zero size is any more surprising than Rust&#x27;s empty tuple being zero size.<p>Like, if you tell Rust you want 4 million empty tuples in a vector, it will give you a vector with exactly 4 million empty tuples in it and <i>no heap allocation</i> because those empty tuples don&#x27;t take space, so, 4 million of them also doesn&#x27;t take up any space.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=woodruffw" target="_blank">woodruffw</a>   <span class="timeago" data-date="2021-08-17 02:07:35 &#43;0000 UTC">2021-08-17 02:07:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The key difference being knowledge: I don&#x27;t have to know `HashSet` is really just a map with a ZST to use it efficiently. All I need to know is that I don&#x27;t <i>need</i> a value, and the ecosystem obliges me. This in contrast to Go, where I <i>need</i> to know that `struct{}` is a ZST, that the &quot;right&quot; way to do a set is to use it as the map value, &amp;c.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=typical182" target="_blank">typical182</a>   <span class="timeago" data-date="2021-08-17 02:40:13 &#43;0000 UTC">2021-08-17 02:40:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is also a WIP Go proposal for adding a set to the standard library using the upcoming generics:<p><a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;discussions&#x2F;47331" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;go&#x2F;discussions&#x2F;47331</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bombela" target="_blank">bombela</a>   <span class="timeago" data-date="2021-08-17 02:01:02 &#43;0000 UTC">2021-08-17 02:01:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fun thing, is Rust employs the same trick. The HashSet&lt;T&gt; is an alias for HashMap&lt;T, ()&gt;. &quot;()&quot; is the unit type. Which is zero-sized.<p>Because Rust has generics, it is more ergonomic though.<p><a href="https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;collections&#x2F;struct.HashSet.html" rel="nofollow">https:&#x2F;&#x2F;doc.rust-lang.org&#x2F;std&#x2F;collections&#x2F;struct.HashSet.htm...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=kjksf" target="_blank">kjksf</a>   <span class="timeago" data-date="2021-08-17 00:10:21 &#43;0000 UTC">2021-08-17 00:10:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You can find things to complain in any language, including the languages that YOU use.<p>For every complain like that in Go I&#x27;ll find a hundred in C++, ten in Java &#x2F; JavaScript &#x2F; Python.<p>As to your question, as a full-time Go programmer: this doesn&#x27;t come up often.<p>When it does, I google &quot;slice tricks&quot; and copy &amp; paste the formula.<p>It&#x27;ll be fixed by next release because generics will enable writing a function that does that and that function will be in standard library.<p>Why wasn&#x27;t this fixed before generics? Because the only way to do it would be via a compiler built-in function and Go team is rightfully reluctant to bloat the language &#x2F; compiler for minor functionality like that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-08-17 02:51:48 &#43;0000 UTC">2021-08-17 02:51:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Oof, I have no desire to spark a language war. Every language has its warts for sure.<p>It seems strange to not provide slice.erase as a primitive operation, and instead to recommend implementing it in terms of append. Usually removing from a vector does not require allocation. Still it may be for the best with upcoming generics, fewer builtins is good.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_ph_" target="_blank">_ph_</a>   <span class="timeago" data-date="2021-08-17 08:15:00 &#43;0000 UTC">2021-08-17 08:15:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This is an interesting point. On the first glance, it looks like a very obvious missing piece and having to hand-write such expressions feels like unnecessary painful.<p>On the second glance, one can see why probably it was left out: there are two fundamental different ways to implement the deletion. You can copy the last element into the slot of the deleted element, or you can move all elements after the deleted one place to the left. The latter is what you implemented and preserves the ordering, which often is desirable. The former is way more efficient, if you don&#x27;t need to preserve the order. A default implementation would probably choose to preserve the order and thus introduce a systematic inefficiency which is easy to be avoided.<p>Fortunately, with the introduction of generics and especially the new slice package, this discussion becomes moot.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=bilinguliar" target="_blank">bilinguliar</a>   <span class="timeago" data-date="2021-08-17 06:51:01 &#43;0000 UTC">2021-08-17 06:51:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It is not only hard for you, but it is also hard for a computer. And Go expresses this perfectly. 
+Once you hide this behind a convenient `slice.Delete(x)`, you may end up with a codebase that bleeds performance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=avl999" target="_blank">avl999</a>   <span class="timeago" data-date="2021-08-17 02:39:01 &#43;0000 UTC">2021-08-17 02:39:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Dealing with any kind of collections will often require you to write more code than you are used to, see the other post in this thread about someone complaining about a lack of Set type. Most of these problems are due to the fact that the language doesn&#x27;t have generics yet, however generics are coming soon and once they do arrive we will have a robust collection and concurrent collection library to alleviate for most of these problems.<p>For now you just have to accept these quirks as part of the tradeoff of working with the language. I don&#x27;t find it that big of a deal esp with the solution on the horizon.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jdsleppy" target="_blank">jdsleppy</a>   <span class="timeago" data-date="2021-08-17 00:10:06 &#43;0000 UTC">2021-08-17 00:10:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            With two years of working in Go at two companies, I have never had to write that. I can&#x27;t remember writing the equivalent in Python over even more years, either. The 99% case is building a list&#x2F;slice, not removing from one.<p>Have you ever had to remove elements from a list&#x2F;slice?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ridiculous_fish" target="_blank">ridiculous_fish</a>   <span class="timeago" data-date="2021-08-17 01:30:01 &#43;0000 UTC">2021-08-17 01:30:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, a sorted vector is a common data structure for frequent queries and infrequent updates.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jrockway" target="_blank">jrockway</a>   <span class="timeago" data-date="2021-08-17 01:00:24 &#43;0000 UTC">2021-08-17 01:00:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            gopls seems to be integrating some of the &quot;tricks&quot; into editor completion.  This one isn&#x27;t there, but other idioms are.  (With gopls &gt; 0.7.0, it&#x27;s enabled by default.  Details: <a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;tools&#x2F;releases&#x2F;tag&#x2F;gopls%2Fv0.7.0" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;tools&#x2F;releases&#x2F;tag&#x2F;gopls%2Fv0.7.0</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yobert" target="_blank">yobert</a>   <span class="timeago" data-date="2021-08-16 23:51:00 &#43;0000 UTC">2021-08-16 23:51:00 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use slices all the time, but very rarely need to delete out of the middle of them. So it seems like a bit of an edge case to me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=matthewmacleod" target="_blank">matthewmacleod</a>   <span class="timeago" data-date="2021-08-16 22:31:51 &#43;0000 UTC">2021-08-16 22:31:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A couple of nice tweaks that I&#x27;m happy to see.<p>I didn&#x27;t completely expect it, but I now find myself reaching for Go first when writing something like a small script or utility that I&#x27;d previously have written in something like Ruby or Python. It all feels much more solid.<p>That said… I really chafe against the anaemic type system when writing anything a larger than that. I hate not being able to communicate things like &quot;this can never be nil and if it&#x27;s is then it&#x27;s an error&quot; to the compiler. I resent having to write three lines of boilerplate every time I want to reverse a flipping 10-item slice, and the design decisions leading to the existence of `time.IsZero()` are bordering on criminal.<p>I don&#x27;t know if I&#x27;m the odd one out for feeling like that – parts of the language and ecosystem are just absolutely wonderful to work with, but the unergonomic sharp edges bother me so much that I end up finding it really _annoying_ to write a lot of it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jrockway" target="_blank">jrockway</a>   <span class="timeago" data-date="2021-08-17 01:05:51 &#43;0000 UTC">2021-08-17 01:05:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I resent having to write three lines of boilerplate every time I want to reverse a slice.<p>Up above I talk about gopls&#x27;s postfix completions, and reversing a slice is one: <a href="https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;tools&#x2F;releases&#x2F;tag&#x2F;gopls%2Fv0.7.0" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;golang&#x2F;tools&#x2F;releases&#x2F;tag&#x2F;gopls%2Fv0.7.0</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cpeterso" target="_blank">cpeterso</a>   <span class="timeago" data-date="2021-08-16 23:39:33 &#43;0000 UTC">2021-08-16 23:39:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; the design decisions leading to the existence of `time.IsZero()` are bordering on criminal.<p>What&#x27;s the rationale for Time.IsZero()? Seems like every use case for Time.IsZero() I think of is a code smell. The 1970 epoch is an implementation detail that should be hidden or configurable. People probably use IsZero() as a sentinel value to indicate &quot;undefined time&quot;, even though the 1970 epoch is a valid point in time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kjksf" target="_blank">kjksf</a>   <span class="timeago" data-date="2021-08-17 00:24:12 &#43;0000 UTC">2021-08-17 00:24:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            .IsZero() is a pragmatic solution given the constraints of the system (i.e. Go language).<p>Go has a notion of &quot;zero value&quot;. When you don&#x27;t assign a value explicitly it&#x27;ll be set by the compiler to &quot;zero value&quot; of that type.<p>This is much better than C&#x2F;C++ of &quot;random value&quot;.<p>For primitive types, the compiler decides what &quot;zero value&quot; is. For structs, each component is set to its zero value.<p>For good reasons (language simplicity) Go doesn&#x27;t allow the user to declare what the zero value is (something that you can do in e.g. C++ via a constructor).<p>Time is a struct. Its zero value is the same as for any other struct and not meaningful time value.<p>It&#x27;s a pragmatic necessity to be able to query &quot;is this time value an unset time value?&quot;. A pragmatic solution for this need is to provide IsZero() method on Time struct.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jrockway" target="_blank">jrockway</a>   <span class="timeago" data-date="2021-08-17 01:03:49 &#43;0000 UTC">2021-08-17 01:03:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go&#x27;s zero time is not at 1970.  It&#x27;s at year 1.<p><pre><code>    &#x2F;&#x2F; IsZero reports whether t represents the zero time instant,
+    &#x2F;&#x2F; January 1, year 1, 00:00:00 UTC.
+    func (t Time) IsZero() bool {
+            return t.sec() == 0 &amp;&amp; t.nsec() == 0
+    }</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=machinecontrol" target="_blank">machinecontrol</a>   <span class="timeago" data-date="2021-08-16 21:45:23 &#43;0000 UTC">2021-08-16 21:45:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It looks like the language is really maturing. The changes are all fairly minor optimizations and improvements to the stdlib.
+Impressed with the Go team’s discipline for simplicity and stability.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=est31" target="_blank">est31</a>   <span class="timeago" data-date="2021-08-16 21:57:57 &#43;0000 UTC">2021-08-16 21:57:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Between the 1 release in 2012 and the 1.13 release in 2019, this has been the development model of the language. So it&#x27;s nothing <i>new</i> in Go&#x27;s evolution.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=harikb" target="_blank">harikb</a>   <span class="timeago" data-date="2021-08-16 21:57:16 &#43;0000 UTC">2021-08-16 21:57:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Module authors may deprecate a module by adding a &#x2F;&#x2F; Deprecated: comment to go.mod, then tagging a new version. go get now prints a warning if a module needed to build packages named on the command line is deprecated.<p>Very good for the ecosystem. Nudge folks to upgrade from broken&#x2F;insecure versions
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=leo_bloom" target="_blank">leo_bloom</a>   <span class="timeago" data-date="2021-08-16 22:00:34 &#43;0000 UTC">2021-08-16 22:00:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; We’ve also introduced pruned module graphs in this release. Modules that specify go 1.17 or higher in their go.mod file will have their module graphs include only the immediate dependencies of other Go 1.17 modules, not their full transitive dependencies.<p>This is a very welcome change and make the go.mod much more obvious to understand. Hooray!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-16 22:13:13 &#43;0000 UTC">2021-08-16 22:13:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Two recent related threads:<p><i>Go 1.17 Beta</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27462884" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27462884</a> - June 2021 (118 comments)<p><i>Go 1.17 is deprecating the traditional use of &#x27;go get&#x27;</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27630625" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=27630625</a> - June 2021 (215 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=peterohler" target="_blank">peterohler</a>   <span class="timeago" data-date="2021-08-17 00:15:09 &#43;0000 UTC">2021-08-17 00:15:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just tried [OjG](<a href="https:&#x2F;&#x2F;github.com&#x2F;ohler55&#x2F;ojg" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;ohler55&#x2F;ojg</a>) and saw anywhere from zero to 20% faster on the various benchmarks. Nice improvement overall. Hats off to the golang maintainers.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tech_dreamer" target="_blank">tech_dreamer</a>   <span class="timeago" data-date="2021-08-16 21:53:04 &#43;0000 UTC">2021-08-16 21:53:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Golang release no longer excites me in a good way - I know my old aws hosted apps continue to work, as do my pet projects
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=colesantiago" target="_blank">colesantiago</a>   <span class="timeago" data-date="2021-08-16 21:56:41 &#43;0000 UTC">2021-08-16 21:56:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            are release notes supposed to be exciting?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=staticassertion" target="_blank">staticassertion</a>   <span class="timeago" data-date="2021-08-16 22:01:29 &#43;0000 UTC">2021-08-16 22:01:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think they mean &quot;no longer excites me, in a good way&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xwdv" target="_blank">xwdv</a>   <span class="timeago" data-date="2021-08-16 22:05:39 &#43;0000 UTC">2021-08-16 22:05:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Usually they fill me with dread.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=skybrian" target="_blank">skybrian</a>   <span class="timeago" data-date="2021-08-16 21:56:17 &#43;0000 UTC">2021-08-16 21:56:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Apparently type parameter compiler work was supposed to get merged just after 1.17. [1] Does anyone know if it’s still on?<p>[1] <a href="https:&#x2F;&#x2F;groups.google.com&#x2F;g&#x2F;golang-dev&#x2F;c&#x2F;U7eW9i0cqmo&#x2F;m&#x2F;ffs0tyIYBAAJ" rel="nofollow">https:&#x2F;&#x2F;groups.google.com&#x2F;g&#x2F;golang-dev&#x2F;c&#x2F;U7eW9i0cqmo&#x2F;m&#x2F;ffs0t...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nappy-doo" target="_blank">nappy-doo</a>   <span class="timeago" data-date="2021-08-16 22:01:57 &#43;0000 UTC">2021-08-16 22:01:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The merge has already happened. The generic preview is going to be in 1.18 (early 2022).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=4ad" target="_blank">4ad</a>   <span class="timeago" data-date="2021-08-16 22:06:04 &#43;0000 UTC">2021-08-16 22:06:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s already in, it has to be requested by the user with `-gcflags=&#x27;-G=3&#x27;`. Of course, the feature is in heavy development and not ready for production use, YMMV.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rawoke083600" target="_blank">rawoke083600</a>   <span class="timeago" data-date="2021-08-17 06:57:15 &#43;0000 UTC">2021-08-17 06:57:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lol Good Little Go ! :)
+Still one of my favourite languages whenever &quot;heavy lifting&quot; or concurrency is required (really they make it stupidly easy).<p>Now add pattern matching please !
+Well done to everyone that worked on Go ! It&#x27;s still a pleasure to use.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=kplex" target="_blank">kplex</a>   <span class="timeago" data-date="2021-08-16 21:51:13 &#43;0000 UTC">2021-08-16 21:51:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Worth it if only for the go.mod tidy-up, how that made it into a release in the first place baffles me.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 22:02:11 &#43;0000 UTC">2021-08-16 22:02:11 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zz865" target="_blank">zz865</a>   <span class="timeago" data-date="2021-08-16 21:59:06 &#43;0000 UTC">2021-08-16 21:59:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Anyone seen jobs for business applications? Go seems to have a sweet spot for systems. I&#x27;d like to replace Java at my work but no one else is doing it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pgwhalen" target="_blank">pgwhalen</a>   <span class="timeago" data-date="2021-08-16 22:36:43 &#43;0000 UTC">2021-08-16 22:36:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I use (and enjoy using) both Go and Java at work, and Go is in my opinion very much a Java replacement more than it is, say, a Python or C++ replacement.  It is absolutely suitable for business logic, and I&#x27;ve never been quite sure what its designers mean when they say it&#x27;s a systems language.  Yes, you can squeeze great performance out of it, but you can with Java as well.<p>The way I see it, both Go and Java are crawling towards the same ideal: a compiled, statically typed, garbage collected, modern enough program language targeted for a majority of back-end concerns.  Go has to close the gap mostly just with generics; and Java with memory layout (Valhalla), concurrency (Loom), and ergonomics (Amber); but they will both be there in 3-5 years.<p>Take this with a grain of salt if you like, but while I probably find it more fun to program in Go, I don&#x27;t think there&#x27;s a compelling reason to switch a large codebase from Java to Go.  It often feels like my company is needlessly divided by programming languages even though they solve fairly similar problems.  It&#x27;s one thing to move off of a dying language, but Java is certainly not that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=zz865" target="_blank">zz865</a>   <span class="timeago" data-date="2021-08-17 05:02:27 &#43;0000 UTC">2021-08-17 05:02:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, that sounds about right. Throw Rust in there too, its an interesting time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 05:32:03 &#43;0000 UTC">2021-08-17 05:32:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The difference between Java, Go and Rust is that you can teach the first two to any fresh out of school CS grad in a week or two and have them be productive.<p>Not so much with Rust.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pgwhalen" target="_blank">pgwhalen</a>   <span class="timeago" data-date="2021-08-17 16:32:51 &#43;0000 UTC">2021-08-17 16:32:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust is a great language too (I&#x27;m in the process of learning it), but I would definitely not put it in the same category as Java and Go in terms of the problems it is good at solving.  It fits much more with C&#x2F;C++.<p>There is a huge class of problems that don&#x27;t need the precision (especially around memory) that Rust demands from the programmer.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jdavis703" target="_blank">jdavis703</a>   <span class="timeago" data-date="2021-08-16 22:03:07 &#43;0000 UTC">2021-08-16 22:03:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            While we’re not building a “business” application we are building a large web application on Go. It’s definitely not just for systems work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=debarshri" target="_blank">debarshri</a>   <span class="timeago" data-date="2021-08-16 22:01:47 &#43;0000 UTC">2021-08-16 22:01:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When I used to work for traffic enforcement company, their whole backend was written in golang.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=denysvitali" target="_blank">denysvitali</a>   <span class="timeago" data-date="2021-08-17 06:27:59 &#43;0000 UTC">2021-08-17 06:27:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Go 1.17 adds support of 64-bit ARM architecture on Windows (the windows&#x2F;arm64 port). This port supports cgo.<p>Yay!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=hakube" target="_blank">hakube</a>   <span class="timeago" data-date="2021-08-16 23:56:48 &#43;0000 UTC">2021-08-16 23:56:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you add dependencies and in Go? I&#x27;m still confused. I use the VSCode extension and the code I wrote that uses external packages gets deleted when I save my file even though the package is installed
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jizzlepizzle" target="_blank">jizzlepizzle</a>   <span class="timeago" data-date="2021-08-17 00:08:21 &#43;0000 UTC">2021-08-17 00:08:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the vscode extension automatically formats your go file and removes any packages that aren&#x27;t used in the code.<p><a href="https:&#x2F;&#x2F;code.visualstudio.com&#x2F;docs&#x2F;languages&#x2F;go#_formatting" rel="nofollow">https:&#x2F;&#x2F;code.visualstudio.com&#x2F;docs&#x2F;languages&#x2F;go#_formatting</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=galleywest" target="_blank">galleywest</a>   <span class="timeago" data-date="2021-08-17 00:03:33 &#43;0000 UTC">2021-08-17 00:03:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you using the imports in your file? The VS Code Go addon has &quot;format on save&quot; enabled by default and Go will not compile if there are unused imports - so VS Code deletes the unused imports on save by default.<p>Otherwise try a &quot;go mod init&quot; in the root of your project.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Techasura" target="_blank">Techasura</a>   <span class="timeago" data-date="2021-08-16 21:52:01 &#43;0000 UTC">2021-08-16 21:52:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Never tried to write Go before, maybe it’s time that I stop by.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=itake" target="_blank">itake</a>   <span class="timeago" data-date="2021-08-16 21:53:23 &#43;0000 UTC">2021-08-16 21:53:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            what about this release makes you want to try it?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nwmcsween" target="_blank">nwmcsween</a>   <span class="timeago" data-date="2021-08-16 22:33:43 &#43;0000 UTC">2021-08-16 22:33:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s meh for a language, it&#x27;s simple which is what they are trying to achieve but it all comes with trade offs like all programming languages. I would say a large portion of a language is how you mesh with the syntax and tooling around it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theshrike79" target="_blank">theshrike79</a>   <span class="timeago" data-date="2021-08-17 05:35:25 &#43;0000 UTC">2021-08-17 05:35:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Go being &quot;meh&quot; is one of its best parts.<p>It doesn&#x27;t encourage you to do fancy language tricks, it kindly directs you to get your shit done, compiled and delivered.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 02:49:26 &#43;0000 UTC">2021-08-17 02:49:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

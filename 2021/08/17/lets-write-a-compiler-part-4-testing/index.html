@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/lets-write-a-compiler-part-4-testing/">
+
+
+    <title>Let&#39;s write a compiler, part 4: Testing - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Let&#39;s write a compiler, part 4: Testing - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/lets-write-a-compiler-part-4-testing/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/lets-write-a-compiler-part-4-testing/">
+<meta name="twitter:title" content="Let&#39;s write a compiler, part 4: Testing - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Let\u0027s write a compiler, part 4: Testing - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T13:29:19JST",
+    "dateModified": "2021-08-17T13:29:19JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://briancallahan.net/blog/20210817.html">Let&#39;s write a compiler, part 4: Testing</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=p4bl0" target="_blank">p4bl0</a>   <span class="timeago" data-date="2021-08-17 13:41:29 &#43;0000 UTC">2021-08-17 13:41:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For context, there was some discussion here on HN about parts 1 and 3 of this series:<p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28183062" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28183062</a><p><a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28197876" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=28197876</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rightbyte" target="_blank">rightbyte</a>   <span class="timeago" data-date="2021-08-17 14:01:02 &#43;0000 UTC">2021-08-17 14:01:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Looking at the code it feels more like an assembler than a compiler since there is no mess and it outputs C code.<p>But it is very clean and nice. I like the pattern.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ModernMech" target="_blank">ModernMech</a>   <span class="timeago" data-date="2021-08-17 16:26:18 &#43;0000 UTC">2021-08-17 16:26:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It seems like we&#x27;re going to have the same discussion on this topic every day until all parts are posted.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Joker_vD" target="_blank">Joker_vD</a>   <span class="timeago" data-date="2021-08-17 15:07:33 &#43;0000 UTC">2021-08-17 15:07:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; more like an assembler than a compiler since there is no mess and it outputs C code.<p>Yes, translating between closely related languages is often like this: the mapping between their constructs is 1-to-1 and almost trivial. But try translating e.g. λ-calculus into C in one go, without separate lambda-lifting&#x2F;closure-converting steps: it&#x27;s absolutely doable but quite messy.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chrisseaton" target="_blank">chrisseaton</a>   <span class="timeago" data-date="2021-08-17 15:40:55 &#43;0000 UTC">2021-08-17 15:40:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; feels more like an assembler than a compiler<p>Yes it&#x27;s a kind of transpiler, or template compiler, a typically 1-1 mapping.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=monocasa" target="_blank">monocasa</a>   <span class="timeago" data-date="2021-08-17 18:27:46 &#43;0000 UTC">2021-08-17 18:27:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            When absolute compiler perf isn&#x27;t required, I love nanopass compilers for this.  Each pass slowly massages a slightly different IR towards the final form and there isn&#x27;t really a limit to how different the code source and end target can be, just needs more passes.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

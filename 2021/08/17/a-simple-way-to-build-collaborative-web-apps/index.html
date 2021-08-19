@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/a-simple-way-to-build-collaborative-web-apps/">
+
+
+    <title>A simple way to build collaborative web apps - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="A simple way to build collaborative web apps - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/a-simple-way-to-build-collaborative-web-apps/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/a-simple-way-to-build-collaborative-web-apps/">
+<meta name="twitter:title" content="A simple way to build collaborative web apps - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "A simple way to build collaborative web apps - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T13:42:37JST",
+    "dateModified": "2021-08-17T13:42:37JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://zjy.cloud/posts/collaborative-web-apps">A simple way to build collaborative web apps</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sambroner" target="_blank">sambroner</a>   <span class="timeago" data-date="2021-08-17 15:37:55 &#43;0000 UTC">2021-08-17 15:37:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m really glad to see an article like this. I&#x27;ve worked in the space for a while (Fluid Framework) and there&#x27;s a growing number of libraries addressing realtime collab. One of the key things that many folks miss is that building a collaborative app with real time coauthoring is tricky. Setting up a websocket and hoping for the best won&#x27;t work.<p>The libraries are also not functionally equivalent. Some use OT, some use CRDTs, some persist state, some are basically websocket wrappers, fairly different perf guarantees in both memory &amp; latency etc. The very different capabilities make it complicated to evaluate all the tools at once.<p>Obviously I&#x27;m partial the Fluid Framework, but not many realtime coauthoring libraries have made it as easy to get started as Replicache. Kudos to them!<p>A few solutions with notes...<p><pre><code>  - Fluid Framework - My old work... service announced at Microsoft Build &#x27;21 and will be available on Azure
+  - yJS - CRDTs. Great integration with many open source projects (no service)
+  - Automerge - CRDTs. Started by Martin Kleppman, used by many at Ink &amp; Switch (no service)
+  - Replicache - Seen here, founder has done a great job with previous dev tools (service integration)
+  - Codox.io - Written by Chengzheng Sun, who is super impressive and wrote one of my fav CRDT&#x2F;OT papers
+  - Chronofold - CRDTs. Oriented towards versioned text. I&#x27;m mostly unfamiliar
+  - Convergence.io - Looks good, but I haven&#x27;t dug in
+  - Liveblocks.io - Seems to focus on live interactions without storing state
+  - derbyjs - Somewhat defunct. Cool, early effort.
+  - ShareJS&#x2F;ShareDB - Somewhat defunct, but the code and thinking is very readable&#x2F;understandable and there are good OSS integrations
+  - Firebase - Not the typical model people think of for RTC, but frequently used nonetheless
+</code></pre>
+I should add... I talk to many folks in the space. People are very welcoming and excited to help each other. Really fun space right now.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nikodunk" target="_blank">nikodunk</a>   <span class="timeago" data-date="2021-08-17 21:43:23 &#43;0000 UTC">2021-08-17 21:43:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ve used YJS and can strongly recommend. <a href="https:&#x2F;&#x2F;github.com&#x2F;yjs&#x2F;yjs" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;yjs&#x2F;yjs</a><p>Built a Google Docs like rich text collaborator for a client on Express&#x2F;Psql and React. Worked like a charm. The hardest part was dealing with ports on AWS to be honest.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BackBlast" target="_blank">BackBlast</a>   <span class="timeago" data-date="2021-08-17 22:54:19 &#43;0000 UTC">2021-08-17 22:54:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;ll have to look at some of these, I&#x27;ve reviewed some of these but not all.  You are missing some I&#x27;m familiar with.<p>PouchDB+CouchDB work well out of the box with minimal fuss for open pieces you can just plug into this role.  PouchDB handles the client&#x27;s state persist and replication on the client, couchdb is the reliable cloud service you can replicate to.<p>Meteor, at least their pre-apollo stack had realtime collab type features with their mini-mongo client and oplog tailing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=winrid" target="_blank">winrid</a>   <span class="timeago" data-date="2021-08-18 03:10:08 &#43;0000 UTC">2021-08-18 03:10:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            DerbyJS and ShareDB&#x2F;Racer are meant to go together.<p>I know of one big company using it extensively, hundreds of millions of messages a day! :)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=moralestapia" target="_blank">moralestapia</a>   <span class="timeago" data-date="2021-08-18 03:39:44 &#43;0000 UTC">2021-08-18 03:39:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Could you share more info about the use case?<p>Like a Google Docs kind of thing or w?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=winrid" target="_blank">winrid</a>   <span class="timeago" data-date="2021-08-18 04:42:24 &#43;0000 UTC">2021-08-18 04:42:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In this case, the entire product uses it. Every button, field, list, is &quot;live&quot; with derby+sharedb and scaled by horizontally scaling redis and the DB.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=vyrotek" target="_blank">vyrotek</a>   <span class="timeago" data-date="2021-08-17 19:25:20 &#43;0000 UTC">2021-08-17 19:25:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Fluid Framework looks pretty cool! I somehow missed the Build announcement about this.<p>Maybe it&#x27;s just me, but it has a SignalR + Orleans sort of vibe to it when I think about the types of problems it solves. I will definitely be digging into this a bit more.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=moralestapia" target="_blank">moralestapia</a>   <span class="timeago" data-date="2021-08-18 03:44:14 &#43;0000 UTC">2021-08-18 03:44:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There&#x27;s algo GUN [1], but I tried it and it&#x27;s too opinionated for my taste. For those who like it, it seems to be quite good.<p>1: <a href="https:&#x2F;&#x2F;gun.eco&#x2F;" rel="nofollow">https:&#x2F;&#x2F;gun.eco&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=craig_asp" target="_blank">craig_asp</a>   <span class="timeago" data-date="2021-08-17 14:46:16 &#43;0000 UTC">2021-08-17 14:46:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            We implemented all that manually, more or less in swift (and sqlite), then react+redux, and on the back end - postgres and python+flask. Works flawlessly so far. We do have the same setup more or less, with listeners triggering UI updates and push messages signalling the clients to fetch data from the server. Then, on the server, we have two dbs -&gt; one where we store each update or create message, in a postgres-based queue, and another one, in a normalised format which we use for login (it&#x27;s way faster than replaying all messages from the queue).
+There are complexities when you move beyond one or two tables, though - like maintaining relations, ensuring things get done in the correct order, that they get merged (we merge all attributes of each item - e.g. one client can change color, and the if another changes the text content of the item these will get merged), etc.<p>We gave up on the websocket part and implemented basic polling, because they were not supported by App Engine at the time (things might have moved on since then, which is a couple of years ago). Yet, for a note&#x2F;todo&#x2F;habit tracking app, it simply doesn&#x27;t need to be real-time from our experience.<p>Have a play at <a href="https:&#x2F;&#x2F;www.mindpad.io&#x2F;app&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.mindpad.io&#x2F;app&#x2F;</a>. You can see how it works if you open up the web app in two incognito tabs, or on an iPhone and the web.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=albertgoeswoof" target="_blank">albertgoeswoof</a>   <span class="timeago" data-date="2021-08-17 21:50:12 &#43;0000 UTC">2021-08-17 21:50:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This stack reminds me of Meteor, which came out nearly a decade ago(!). <a href="https:&#x2F;&#x2F;meteor.com" rel="nofollow">https:&#x2F;&#x2F;meteor.com</a><p>It never really took off in the mainstream - I think because it was before many developers really trusted JS on the server, and a &quot;full stack&quot; framework is quite a big commitment for a team to shift to. Also most CRUD apps don&#x27;t need real time collab.<p>I remember being amazed when changes were instantly propagated between my phone and laptop browsers with almost zero lag. This was the demo that sold it for me <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=MGbmW9bwJh4" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=MGbmW9bwJh4</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thezjy" target="_blank">thezjy</a>   <span class="timeago" data-date="2021-08-18 01:34:49 &#43;0000 UTC">2021-08-18 01:34:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Author here. Thanks for mentioning Meteor, which also impressed me a lot when it first came out. I think it didn&#x27;t take off because it tries to do too much (frontend + backend + db). And one smart move by Replicache is that it tries to integrate nicely with the rest of your stack.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=valzam" target="_blank">valzam</a>   <span class="timeago" data-date="2021-08-18 02:17:54 &#43;0000 UTC">2021-08-18 02:17:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I built my first big software project in Meteor! It was great, really a shame that it didn&#x27;t take off. As you said I think it tries to do too much. Hell, at some point they even introduced their own package manager. It might be good for solo developers but as soon as you have a bit more bandwith I think you give up too much control.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-17 15:27:12 &#43;0000 UTC">2021-08-17 15:27:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I haven&#x27;t yet done this but based on some research it seems to me like the core of any collaborative app today (that wants to avoid Firebase and the other hosted platforms like Replicache seems to be) is easiest served by picking some CRDT library.<p>There are a couple of open-source CRDT libraries that provide both clients and servers (yjs [0] and automerge [1] are two big ones for JavaScript I&#x27;m aware of).<p>My basic assumption is that as long as you put all your relevant data into one of these data structures and have the CRDT library hook into a server for storing the data, you&#x27;re basically done.<p>This may be a simplistic view of the problem though. For example I&#x27;ve heard people mention that CRDTs can be space inefficient so you may want&#x2F;have to do periodic compaction.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;yjs&#x2F;yjs" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;yjs&#x2F;yjs</a><p>[1] <a href="https:&#x2F;&#x2F;github.com&#x2F;automerge&#x2F;automerge" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;automerge&#x2F;automerge</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=feanaro" target="_blank">feanaro</a>   <span class="timeago" data-date="2021-08-17 18:52:35 &#43;0000 UTC">2021-08-17 18:52:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You probably don&#x27;t want to use Automerge. See <a href="https:&#x2F;&#x2F;josephg.com&#x2F;blog&#x2F;crdts-go-brrr&#x2F;" rel="nofollow">https:&#x2F;&#x2F;josephg.com&#x2F;blog&#x2F;crdts-go-brrr&#x2F;</a> for a nice CRDT optimization story.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-17 18:58:18 &#43;0000 UTC">2021-08-17 18:58:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Interesting! I know there was a large performance refactor that was merged in May [0]. This post you link was written in June of this year. Unclear if the performance fix is related to the reported issues and unsure if it still exists or not.<p>At the very least, the automerge maintainers seem to be very actively tackling performance problems.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;automerge&#x2F;automerge&#x2F;pull&#x2F;253" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;automerge&#x2F;automerge&#x2F;pull&#x2F;253</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-17 23:15:02 &#43;0000 UTC">2021-08-17 23:15:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yep, the version of automerge I benchmarked for that blog post includes automerge’s performance branch changes.<p>They’re working on it, but it’ll be awhile before automerge gets close to Yjs in terms of performance.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-18 00:13:49 &#43;0000 UTC">2021-08-18 00:13:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Replicache is not hosted - it&#x27;s client-side only. You bring your own backend.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brunoqc" target="_blank">brunoqc</a>   <span class="timeago" data-date="2021-08-17 16:15:28 &#43;0000 UTC">2021-08-17 16:15:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Would Chronofold works for this too?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=eatonphil" target="_blank">eatonphil</a>   <span class="timeago" data-date="2021-08-17 16:19:08 &#43;0000 UTC">2021-08-17 16:19:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            If this [0] is what you&#x27;re talking about, at the moment yjs and automerge are significantly more full-featured and used by many major companies.<p>[0] <a href="https:&#x2F;&#x2F;github.com&#x2F;dkellner&#x2F;chronofold" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;dkellner&#x2F;chronofold</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=brunoqc" target="_blank">brunoqc</a>   <span class="timeago" data-date="2021-08-17 16:32:29 &#43;0000 UTC">2021-08-17 16:32:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks!
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tabtab" target="_blank">tabtab</a>   <span class="timeago" data-date="2021-08-17 20:42:48 &#43;0000 UTC">2021-08-17 20:42:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>is easiest served by picking some CRDT library.</i><p>RDBMS A.C.I.D. and transactions are also capable of much of the same.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=idontevengohere" target="_blank">idontevengohere</a>   <span class="timeago" data-date="2021-08-17 14:58:23 &#43;0000 UTC">2021-08-17 14:58:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Really interesting...you can build a similar (websocket&#x2F;db backed) app with LiveView out of the box, no? Any idea how well that&#x27;d hold up against this solution?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=valzam" target="_blank">valzam</a>   <span class="timeago" data-date="2021-08-18 02:19:56 &#43;0000 UTC">2021-08-18 02:19:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The big difference is that with CRDTs you can make edits offline and they will get merged with other changes when you come back online. Websocket&#x2F;db really only works when you always online.<p>That being said you can totally implement collab without CRDTs and if you don&#x27;t particularly need offline it should be easier.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=paulgb" target="_blank">paulgb</a>   <span class="timeago" data-date="2021-08-17 18:58:55 &#43;0000 UTC">2021-08-17 18:58:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does LiveView have any conflict resolution, or would it just be last-write-wins?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_virtu" target="_blank">_virtu</a>   <span class="timeago" data-date="2021-08-17 15:53:08 &#43;0000 UTC">2021-08-17 15:53:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            This was my first thought as well.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nesarkvechnep" target="_blank">nesarkvechnep</a>   <span class="timeago" data-date="2021-08-17 15:58:05 &#43;0000 UTC">2021-08-17 15:58:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;m interested how this stacks against Phoenix Channels + Presence.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=deathtrader666" target="_blank">deathtrader666</a>   <span class="timeago" data-date="2021-08-17 19:16:02 &#43;0000 UTC">2021-08-17 19:16:02 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, it would be great if someone with this experience can chime in, especially since Phoenix has CRDTs built-in.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thezjy" target="_blank">thezjy</a>   <span class="timeago" data-date="2021-08-18 01:48:19 &#43;0000 UTC">2021-08-18 01:48:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Replicache&#x27;s creator Aaron has a pretty good Twitter thread explaining the difference among Replicache, WebSocket and (classic) CRDTs. I will summarize briefly here:<p>- WebSocket (and Phoenix Channel) is just a communication method. To maintain consistency and resolve conflict, you need something like Replicache.<p>- CRDTs are more suitable for p2p scenario while Replicache works better for client-server apps.<p>- Phoenix&#x27;s Presence is built with CRDT but it&#x27;s just a single feature, not a general CRDT toolkit.<p>The thread: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;aboodman&#x2F;status&#x2F;1410441402366922762" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;aboodman&#x2F;status&#x2F;1410441402366922762</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ec109685" target="_blank">ec109685</a>   <span class="timeago" data-date="2021-08-18 07:09:24 &#43;0000 UTC">2021-08-18 07:09:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Also, a bit of the underlying plumbing here: <a href="https:&#x2F;&#x2F;twitter.com&#x2F;aboodman&#x2F;status&#x2F;1323352541887754240" rel="nofollow">https:&#x2F;&#x2F;twitter.com&#x2F;aboodman&#x2F;status&#x2F;1323352541887754240</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-17 19:57:08 &#43;0000 UTC">2021-08-17 19:57:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I remember listening to an episode of the Exponent podcast, in which Ben Thompson said something like (paraphrasing from memory):<p>&gt; People who love &quot;native apps&quot; can complain about Electron all they want—but there&#x27;s simply no replacement for the real-time collaboration offered by web-based apps like Figma!<p>As someone who&#x27;s not exactly thrilled with Electron and its memory usage—is there a reason the two go together? Is there a reason we can&#x27;t build collaborative apps in Cocoa and GTK? I think these systems are awesome, I just think they&#x27;d be even better if they weren&#x27;t also running full web browsers!
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SilverRed" target="_blank">SilverRed</a>   <span class="timeago" data-date="2021-08-18 05:02:13 &#43;0000 UTC">2021-08-18 05:02:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;in Cocoa and GTK?<p>This is reason enough. Already you now have to build the UI twice because there is no GUI framework that actually looks good on all OSs. You see this all the time where apps made on linux but technically work on macos just work terrible or look super ugly on macos.<p>You also have to remember windows, ios and android. When you build something targeting web browsers you only have to worry about screen sizes rather than OSs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BackBlast" target="_blank">BackBlast</a>   <span class="timeago" data-date="2021-08-17 20:47:45 &#43;0000 UTC">2021-08-17 20:47:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It could totally be done natively.  The obstacle is how much of the stack you have to write and maintain.  There are js libraries that do most of this heavy lifting for you, and CRDTs are pretty new to most devs.<p>It&#x27;s just much much easier and cost effective to build a single code base and hit many many targets platforms with it.<p>Computing history has also shown that publishing efficient lean software doesn&#x27;t help in the market.  At least not over time to market, getting the key features right, and your ongoing costs.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rl3" target="_blank">rl3</a>   <span class="timeago" data-date="2021-08-17 20:20:53 &#43;0000 UTC">2021-08-17 20:20:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Figma’s performance is excellent due in large part to the fact they compile a lot of native code to Wasm. Electron or not it’s still fast.<p>To answer your question, collaborative apps ideally need to target the widest possible audience. Barring a massive budget, the best way to accomplish this is to also have a singular compile&#x2F;build target. In most cases, that’s the web platform.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Wowfunhappy" target="_blank">Wowfunhappy</a>   <span class="timeago" data-date="2021-08-17 21:22:01 &#43;0000 UTC">2021-08-17 21:22:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Figma&#x27;s performance is impressive for an Electron app, but it does choke on very large files, which Sketch would have handled without a care. It&#x27;s not great.<p>If Sketch had had Figma&#x27;s collaboration features, we wouldn&#x27;t have switched. But during the pandemic it was necessary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rl3" target="_blank">rl3</a>   <span class="timeago" data-date="2021-08-18 10:57:28 &#43;0000 UTC">2021-08-18 10:57:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, that&#x27;s a shame. Good to know, thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=timwis" target="_blank">timwis</a>   <span class="timeago" data-date="2021-08-17 14:34:10 &#43;0000 UTC">2021-08-17 14:34:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What about conflict resolution? If two users update the same record&#x2F;field around the same time? Isn’t that the trickiest part of real time?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=tmikaeld" target="_blank">tmikaeld</a>   <span class="timeago" data-date="2021-08-17 14:37:12 &#43;0000 UTC">2021-08-17 14:37:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s what Replicache[0] solves, it provides for Causal+ Consistency across the entire system.<p>&quot;This means that transactions are guaranteed to be applied atomically, in the same order, across all clients. Further, all clients will see an order of transactions that is compatible with causal history. Basically: all clients will end up seeing the same thing, and you&#x27;re not going to have any weirdly reordered or dropped messages.&quot;<p>[0] <a href="https:&#x2F;&#x2F;doc.replicache.dev&#x2F;design" rel="nofollow">https:&#x2F;&#x2F;doc.replicache.dev&#x2F;design</a><p>Note: There&#x27;s more in their links, but the linked sites are down..
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=btown" target="_blank">btown</a>   <span class="timeago" data-date="2021-08-17 15:57:03 &#43;0000 UTC">2021-08-17 15:57:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It appears Replicache doesn&#x27;t use CRDTs since it has a central source of truth: <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22175530" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22175530</a><p>See also the commentary here: <a href="https:&#x2F;&#x2F;doc.replicache.dev&#x2F;guide&#x2F;local-mutations" rel="nofollow">https:&#x2F;&#x2F;doc.replicache.dev&#x2F;guide&#x2F;local-mutations</a><p>This sounds a lot like Operational Transform but without the transform part - it assumes that locally applied mutations can be undone and rebased without user interaction. But I feel like the Google Wave team would have a lot of objections to the idea that this can just be ignored. If your state is just a group of key value stores where last write wins and everyone can agree on who&#x27;s last, that&#x27;s fine, but text&#x2F;token streams require a notion of transformation that I&#x27;m worried Replicache simply glosses over.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Chris_Newton" target="_blank">Chris_Newton</a>   <span class="timeago" data-date="2021-08-17 18:56:24 &#43;0000 UTC">2021-08-17 18:56:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Indeed, there can never be one universal solution to this, because the problem is one of specification rather than (only) implementation.<p>For example, suppose we have an edit&#x2F;delete conflict, where two clients concurrently interact with the same entity in your data model. In a simple case, we can decide to “resurrect” the affected entity and apply the edit, which is the option that never results in significant data loss and so might be a reasonable behaviour if no user interaction is involved.<p>Now, what if there were other consequences of deleting that entity? Maybe the client that deleted the entity then created a new entity that would violate some uniqueness constraint if both existed simultaneously. Or maybe it wasn’t the originally deleted entity that would violate that constraint, but some related one that was also deleted implicitly because of a cascade. How should we reconcile these changes, if simply allowing either one to take precedence means discarding data from the other?<p>At least if all clients are communicating in close to real time, it’s unlikely that any one of them will diverge far from the others before they get resynchronised, so the scope for awkward conflicts is limited. But in general, we might also need to support offline working for extended periods, when multiple clients might come back with longer sequences of potentially conflicting operations, and there’s no general way to resolve that without the intervention of users who can make intelligent decisions about intent, or at least a set of automated rules that makes sense in the context of that specific application. And in the latter case, we’d still probably want to prove that our chosen rules were internally consistent and covered all possible situations, which might not be easy.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-18 08:06:23 &#43;0000 UTC">2021-08-18 08:06:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; How should we reconcile these changes, if simply allowing either one to take precedence means discarding data from the other?<p>Exactly. This is why Replicache expresses change as high-level operations, like createPost or deletePerson that are application-defined.<p>Replicache doesn&#x27;t try to automatically merge the effects of concurrent mutations, it just replays the mutations in the same order on each client. It&#x27;s up to the implementation of the mutation to decide what the correct result is, and that answer can and often does change when the mutation is replayed on top of different states.<p>Because Replicache mutations are atomic, applications can also enforce invariants such as uniqueness or even more complex app-level invariants.<p>Imagine, for example, a calendaring application. An application built with Replicache can enforce the invariant that a room is only booked by one event in one time slice even under concurrent edits, just using normal programmatic validation. It&#x27;s hard to do this kind of thing with CRDTs or other approaches to automatic merging because the data model knows nothing about the application&#x27;s constraints.<p>It&#x27;s a pretty simple-minded system, actually, but our experience is that it is a nice way to think about these problems and provides good results for many types of data, in particular structured data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=soco" target="_blank">soco</a>   <span class="timeago" data-date="2021-08-17 20:42:06 &#43;0000 UTC">2021-08-17 20:42:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The good old CAP theorem hits again...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-17 22:23:09 &#43;0000 UTC">2021-08-17 22:23:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I’m not sure if you are understanding that when Replicache rebases operations locally it actually re-executes code which can have arbitrary effects. This design yields a lot of flexibility to preserve intent: the function can look at current state of world and decide to do something different.<p>Now, it is true that OT is considered the gold standard for certain kinds of collaborative editing, in particular unstructured text. But CRDTs are quickly catching up and I believe that any CRDT should by definition be implementable on top of Replicache.<p>Its also quite a lot easier to implement a Replicache backend than an ot backend.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-17 23:21:58 &#43;0000 UTC">2021-08-17 23:21:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don’t know enough to comment on replicache, but you can also do OT on top of an operation based CRDT. For diamond types we’re making it support both - so if you want to, applications can do OT (which is simple, small, and fast) to talk to a server (or local proxy process), and then that process can do p2p server to server replication using CRDTs.<p>The result is we need way less complexity in the browser, or in applications. And still get all the advantages crdts bring - namely, no need for a central server acting as the source of truth.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-18 08:12:43 &#43;0000 UTC">2021-08-18 08:12:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Cool, I need to look into this more.<p>I think for many customers the authoritative server is an advantage. It&#x27;s useful in SaaS apps for the server to be able to override the clients, for all kinds of reasons -- antiabuse, authorization, extra validation rules, or just fixing bugs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=josephg" target="_blank">josephg</a>   <span class="timeago" data-date="2021-08-19 01:03:46 &#43;0000 UTC">2021-08-19 01:03:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Yes, I completely agree. And I think we want both:<p>- A fast and well written CRDT that works in p2p networks should also work great for server-to-server replication in a data center (or across data centers).<p>- OT algorithms designed to work with centralized servers are simple, efficient, easy to code up and easy to work with. And they provide a really nice API for local applications to do IPC. CRDT libraries can expose OT endpoints just fine.<p>I&#x27;m still not 100% sure about what the best approach is in the P2P case. Embedding (&#x2F; linking) a CRDT library into every application would also work fine, but its complicated to get everything working across languages. And harder to update. The other option is running a single system &#x2F; applicatoin wide CRDT-like service which manages credentials, that applications talk to like LSP &#x2F; D-Bus. In that case, applications can just talk OT (which is much simpler).<p>Either approach would work.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tmikaeld" target="_blank">tmikaeld</a>   <span class="timeago" data-date="2021-08-17 16:44:47 &#43;0000 UTC">2021-08-17 16:44:47 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I&#x27;d rather it was configurable, since there&#x27;s different use-cases for both and it can be in the same app. So you&#x27;re definitely making a valid point.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tabtab" target="_blank">tabtab</a>   <span class="timeago" data-date="2021-08-17 20:46:42 &#43;0000 UTC">2021-08-17 20:46:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How one wants to see them could depend; that&#x27;s why I recommend using an RDBMS. One can &quot;play back&quot; transactions using different orders and filters. If teams get confused or accidentally &quot;step on each others toes&quot;, then one may need to review different scenarios to see what was intended by two or more parties.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 14:45:53 &#43;0000 UTC">2021-08-17 14:45:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zealotux" target="_blank">Zealotux</a>   <span class="timeago" data-date="2021-08-17 14:37:29 &#43;0000 UTC">2021-08-17 14:37:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Figma&#x27;s blog has a few valuable articles on that subject: <a href="https:&#x2F;&#x2F;www.figma.com&#x2F;blog&#x2F;how-figmas-multiplayer-technology-works&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.figma.com&#x2F;blog&#x2F;how-figmas-multiplayer-technology...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Gabrielwxf" target="_blank">Gabrielwxf</a>   <span class="timeago" data-date="2021-08-17 14:37:19 &#43;0000 UTC">2021-08-17 14:37:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I suppose, as mentioned in the essay, it&#x27;s handled by Replicache.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=amelius" target="_blank">amelius</a>   <span class="timeago" data-date="2021-08-17 21:34:27 &#43;0000 UTC">2021-08-17 21:34:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Trickiest part is probably adding fine-grained access control rules.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tommoor" target="_blank">tommoor</a>   <span class="timeago" data-date="2021-08-17 14:47:29 &#43;0000 UTC">2021-08-17 14:47:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I believe it uses a CRDT hosted by a third party service.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=BackBlast" target="_blank">BackBlast</a>   <span class="timeago" data-date="2021-08-17 20:40:24 &#43;0000 UTC">2021-08-17 20:40:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could build this with couchdb multi master regional servers and pouchdb on the client and have full consistency with the replication both to clients and servers as well as conflict resolution (in case of collision) done for you.<p>This route seems like a lot of extra work for pretty similar functionality.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=winrid" target="_blank">winrid</a>   <span class="timeago" data-date="2021-08-18 03:23:30 &#43;0000 UTC">2021-08-18 03:23:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At FastComments we store every change as an event, which can either be pushed or polled. Clients subscribe, and poll on reconnect.<p>Also, integrations use polling: <a href="https:&#x2F;&#x2F;github.com&#x2F;FastComments&#x2F;fastcomments-integrations&#x2F;tree&#x2F;main&#x2F;core" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;FastComments&#x2F;fastcomments-integrations&#x2F;tr...</a><p>The integrations work kind of like DB slave replication. They do an initial sync and then maintain state via the event stream.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=theanirudh" target="_blank">theanirudh</a>   <span class="timeago" data-date="2021-08-18 04:36:31 &#43;0000 UTC">2021-08-18 04:36:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Great article! Is there something similar to Replicache that is targeted towards simple multiplayer games? Im building a multiplayer version of a clicker game like Universal Paperclips[0] and dealing with similar the problems that Replicache tries to solve.<p>[0] <a href="https:&#x2F;&#x2F;www.decisionproblem.com&#x2F;paperclips&#x2F;index2.html" rel="nofollow">https:&#x2F;&#x2F;www.decisionproblem.com&#x2F;paperclips&#x2F;index2.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Zealotux" target="_blank">Zealotux</a>   <span class="timeago" data-date="2021-08-17 14:45:48 &#43;0000 UTC">2021-08-17 14:45:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So far I&#x27;ve managed to keep the state in my side-project in sync with Websockets and Redux, Replicache sounds like the kind of solution I&#x27;d love to use, but boy the pricing makes it impossible to even consider.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=ZeroCool2u" target="_blank">ZeroCool2u</a>   <span class="timeago" data-date="2021-08-17 15:28:20 &#43;0000 UTC">2021-08-17 15:28:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t have any plans to use Replicache, but I went and looked at the pricing and I was kind of struck by your comment. Looking at it, it seems pretty fair to me? Especially under 10k MAC&#x27;s. It seems like a flat rate &#x2F; month is pretty nice too. Plus, it&#x27;s free for all non-commercial use.<p>Am I wildly off base here? Is it just that middle tier jump to over 10k that is a no go?<p>Again, I don&#x27;t have a horse in this race or even my own startup, just trying to understand if my own judgement is way off.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zealotux" target="_blank">Zealotux</a>   <span class="timeago" data-date="2021-08-17 15:45:32 &#43;0000 UTC">2021-08-17 15:45:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would quickly be in the $500&#x2F;mo tier and that would be a consequent cost to handle since I don&#x27;t really make that kind of profit yet. But I have to agree anything beyond 10K is very reasonable given the features.
+I just kind of wish they had an more affordable bracket between 500 and 10K but they probably have reasons not to.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=memco" target="_blank">memco</a>   <span class="timeago" data-date="2021-08-17 16:56:31 &#43;0000 UTC">2021-08-17 16:56:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Very nice writeup! However, the example did not fully work for me. I could perform CRUD on a single tab, but opening the list in multiple tabs did not replicate the list or actions. Seeing this in the console:<p><pre><code>  [Error] Could not connect to the server.
+  [Error] Fetch API cannot load https:&#x2F;&#x2F;damp-fire-554.fly.dev&#x2F;replicache-pull?list_id=kx1I-gXPWwOxU9teRUJ_c due to access control checks.
+  [Error] Failed to load resource: Could not connect to the server. (replicache-pull, line 0)
+</code></pre>
+Safari 14.2 on macOS 10.15.7.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thezjy" target="_blank">thezjy</a>   <span class="timeago" data-date="2021-08-18 03:34:37 &#43;0000 UTC">2021-08-18 03:34:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems like a CORS related bug on Safari. I tested on Safari 15 and couldn&#x27;t reproduce it.<p><a href="https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;63141448&#x2F;safari-fetch-api-cannot-load-due-to-access-control-checks-after-reload" rel="nofollow">https:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;63141448&#x2F;safari-fetch-ap...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=davedx" target="_blank">davedx</a>   <span class="timeago" data-date="2021-08-17 17:06:53 &#43;0000 UTC">2021-08-17 17:06:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s a nice summary of how to use these technologies, but considering it states avoiding vendor lock-in is a goal, I was surprised to see it using fly.io and a managed cockroachDB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrkurt" target="_blank">mrkurt</a>   <span class="timeago" data-date="2021-08-17 17:28:05 &#43;0000 UTC">2021-08-17 17:28:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It didn&#x27;t actually use CockroachDB, they ended up using Postgres + Read Replicas.<p>I work on Fly.io, but there&#x27;s very little vendor lock in here. We can&#x27;t afford to lock people in, we&#x27;re too small. We need to make their existing stuff work with zero friction.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=sirtimbly" target="_blank">sirtimbly</a>   <span class="timeago" data-date="2021-08-17 20:48:13 &#43;0000 UTC">2021-08-17 20:48:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A 225K gzipped .wasm file download for a client-side state management and persisistence layer is not great. It is competitive with some similar solutions, but still a lot for any web app&#x27;s performance budget
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=SilverRed" target="_blank">SilverRed</a>   <span class="timeago" data-date="2021-08-18 05:11:04 &#43;0000 UTC">2021-08-18 05:11:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            0.2MB seems fine for a fully featured web app. Loading up the average website today typically loads tens of MB for an index page.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-17 21:22:52 &#43;0000 UTC">2021-08-17 21:22:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The release build is 100k brotli I believe. It’s possible this site is using the dev binary.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thezjy" target="_blank">thezjy</a>   <span class="timeago" data-date="2021-08-18 01:28:56 &#43;0000 UTC">2021-08-18 01:28:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It uses the production binary, originally 604.59 KB and after brotli (Vercel uses brotli by default) 213.90 KB.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=aboodman" target="_blank">aboodman</a>   <span class="timeago" data-date="2021-08-18 08:14:42 &#43;0000 UTC">2021-08-18 08:14:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, when I brotli compress it locally, it&#x27;s 188 (which is where I remembered 100 from) but I guess it uses different settings than the auto-brotli in Vercel.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=Gabrielwxf" target="_blank">Gabrielwxf</a>   <span class="timeago" data-date="2021-08-17 14:48:37 &#43;0000 UTC">2021-08-17 14:48:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Dealing with a global database brings in much complexity that is not essential to the subject matter of this article, which will wait for another piece.<p>Excellent write. It would be great to know why CockroachDB failed your needs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=thezjy" target="_blank">thezjy</a>   <span class="timeago" data-date="2021-08-18 01:29:37 &#43;0000 UTC">2021-08-18 01:29:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks! Wait for my next article. Hope it won&#x27;t be long.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ec109685" target="_blank">ec109685</a>   <span class="timeago" data-date="2021-08-18 04:20:33 &#43;0000 UTC">2021-08-18 04:20:33 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the solid article.<p>Definitely interested in understanding end user benefit of the distributed database given one of purposes of library is to hide write latency and there needs to be coordination for every write.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=awinter-py" target="_blank">awinter-py</a>   <span class="timeago" data-date="2021-08-18 00:53:01 &#43;0000 UTC">2021-08-18 00:53:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            fascinating that they claim offline-first too<p>web apps are sorely lacking a core storage technology<p>whoever gets their first may not make a lot of money but they&#x27;ll be more influential than react (because the schema design will penetrate native dev as well)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-18 03:42:13 &#43;0000 UTC">2021-08-18 03:42:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

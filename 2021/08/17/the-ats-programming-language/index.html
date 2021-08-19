@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/17/the-ats-programming-language/">
+
+
+    <title>The ATS Programming Language - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="The ATS Programming Language - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/the-ats-programming-language/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/17/the-ats-programming-language/">
+<meta name="twitter:title" content="The ATS Programming Language - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "The ATS Programming Language - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-17T20:47:39JST",
+    "dateModified": "2021-08-17T20:47:39JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="http://www.ats-lang.org/">The ATS Programming Language</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-17 21:39:05 &#43;0000 UTC">2021-08-17 21:39:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Past related threads:<p><i>ATS: Why Linear Types Are the Future of Systems Programming</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26191219" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=26191219</a> - Feb 2021 (1 comment)<p><i>Type-Safe Pointers in ATS</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22726512" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=22726512</a> - March 2020 (8 comments)<p><i>The ATS Programming Language</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19404347" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=19404347</a> - March 2019 (38 comments)<p><i>Casting in ATS</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16058803" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16058803</a> - Jan 2018 (12 comments)<p><i>The ATS Programming Language – Unleashing the Potentials of Types and Templates</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10570444" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=10570444</a> - Nov 2015 (9 comments)<p><i>ATS: a dependently-typed systems programming language?</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=3340010" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=3340010</a> - Dec 2011 (5 comments)<p><i>Sharing Linear Resources in ATS</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=2487512" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=2487512</a> - April 2011 (1 comment)<p><i>Safer C Code Using ATS</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1397984" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1397984</a> - June 2010 (2 comments)<p><i>ATS - Applied Type System Programming Language</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1357229" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=1357229</a> - May 2010 (3 comments)<p><i>ATS programming language</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=449453" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=449453</a> - Jan 2009 (1 comment)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lolski" target="_blank">lolski</a>   <span class="timeago" data-date="2021-08-17 22:55:31 &#43;0000 UTC">2021-08-17 22:55:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            these are interesting. thanks.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dan-robertson" target="_blank">dan-robertson</a>   <span class="timeago" data-date="2021-08-17 22:38:15 &#43;0000 UTC">2021-08-17 22:38:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Vanessa McHale has a great set of blog posts about ATS. They touch on technical aspects of the language and it’s type system as well as practical aspects and real-world performance of compiled programs. The list is here:<p><a href="http:&#x2F;&#x2F;blog.vmchale.com&#x2F;category&#x2F;ATS" rel="nofollow">http:&#x2F;&#x2F;blog.vmchale.com&#x2F;category&#x2F;ATS</a><p>If you click the ‘next’ link a few times you can go through several pages to earlier posts that introduce the language.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=rtfeldman" target="_blank">rtfeldman</a>   <span class="timeago" data-date="2021-08-17 21:25:16 &#43;0000 UTC">2021-08-17 21:25:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Some entertaining talks introducing the language, by &#x2F;u&#x2F;deech:<p>&quot;A Tase Of ATS&quot; at Compose Conf 2019:<p><a href="https:&#x2F;&#x2F;youtu.be&#x2F;ADN6B1Wk5Ts" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;ADN6B1Wk5Ts</a><p>&quot;A (Not So Gentle) Introduction To Systems Programming In ATS&quot; at Strange Loop 2017:<p><a href="https:&#x2F;&#x2F;youtu.be&#x2F;zt0OQb1DBko" rel="nofollow">https:&#x2F;&#x2F;youtu.be&#x2F;zt0OQb1DBko</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jetrink" target="_blank">jetrink</a>   <span class="timeago" data-date="2021-08-17 22:18:41 &#43;0000 UTC">2021-08-17 22:18:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            What does tase mean in this context?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=diskzero" target="_blank">diskzero</a>   <span class="timeago" data-date="2021-08-17 23:01:07 &#43;0000 UTC">2021-08-17 23:01:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            To be shot with a Taser.
+<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Taser" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Taser</a><p>I am assuming this is a play on words, as the usual word used would be &quot;Taste&quot;
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-17 22:25:15 &#43;0000 UTC">2021-08-17 22:25:15 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=doublec" target="_blank">doublec</a>   <span class="timeago" data-date="2021-08-17 23:50:28 &#43;0000 UTC">2021-08-17 23:50:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I have a few ATS related posts, talking about the safety aspects of it <a href="https:&#x2F;&#x2F;bluishcoder.co.nz&#x2F;tags&#x2F;ats&#x2F;index.html" rel="nofollow">https:&#x2F;&#x2F;bluishcoder.co.nz&#x2F;tags&#x2F;ats&#x2F;index.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=henning" target="_blank">henning</a>   <span class="timeago" data-date="2021-08-17 21:27:57 &#43;0000 UTC">2021-08-17 21:27:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The end-boss of programming languages.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yewenjie" target="_blank">yewenjie</a>   <span class="timeago" data-date="2021-08-18 06:56:41 &#43;0000 UTC">2021-08-18 06:56:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I would really recommend a modern look and HTTPS to the website though.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=fulafel" target="_blank">fulafel</a>   <span class="timeago" data-date="2021-08-18 06:44:27 &#43;0000 UTC">2021-08-18 06:44:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Is there a recent Rust vs ATS comparison? I found only this reddit thread: <a href="https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;rust&#x2F;comments&#x2F;73j4p5&#x2F;a_not_so_gentle_introduction_to_systems&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.reddit.com&#x2F;r&#x2F;rust&#x2F;comments&#x2F;73j4p5&#x2F;a_not_so_gentl...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lolski" target="_blank">lolski</a>   <span class="timeago" data-date="2021-08-17 22:56:56 &#43;0000 UTC">2021-08-17 22:56:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            the website looks like it was made in the 90s however don&#x27;t let that fool you
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=galaxyLogic" target="_blank">galaxyLogic</a>   <span class="timeago" data-date="2021-08-18 04:55:45 &#43;0000 UTC">2021-08-18 04:55:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The web-sites I create look much like that, but that is not my goal. I would like to look modern.<p>Can you say what in particular makes it look like 90s? And what could be done to make it look more current?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=Zababa" target="_blank">Zababa</a>   <span class="timeago" data-date="2021-08-18 08:27:51 &#43;0000 UTC">2021-08-18 08:27:51 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For me the annoying part that screams &quot;old website&quot; in a bad way is having two column for two different contents. I&#x27;d like to have one main content and be able to zoom on it easily. Outside of that, I think the &quot;holy grail&quot; design (<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Holy_grail_(web_design)" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Holy_grail_(web_design)</a>) and the muted colors are a characteristic of old web design.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tannhaeuser" target="_blank">tannhaeuser</a>   <span class="timeago" data-date="2021-08-18 09:48:31 &#43;0000 UTC">2021-08-18 09:48:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Not responsive, presenting the same layout on mobile and desktop<p>3-column grail layout (not bad per se, and not badly done at all, just something that was chased in the 90&#x2F;00s to the extent that it looks dated - still could be ok for the intended target audience)<p>Why are there two nav menus? The horizontal menu appears to contain the same links as the vertical one, or the first couple items of it<p>Center body text doesn&#x27;t have margin&#x2F;padding<p>In general, allow content to have space rather than trying to cram everything into the first page impression; there are exceptions, though<p>What&#x27;s the central message&#x2F;tagline for the ATS site? The teaser syntax examples in the right column, with proper typo, are about the stuff that should be featured as central or only content<p>+1 for crafting a site for your project in the first place
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=riffraff" target="_blank">riffraff</a>   <span class="timeago" data-date="2021-08-18 07:59:26 &#43;0000 UTC">2021-08-18 07:59:26 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I am no designer, but I would guess:<p>* underlined links in sidebar (we are familiar with sidebars now, we know we can click those, this looks like a page made with &lt;frame&gt;)<p>* same for top nav bar<p>* solid non-subtle background colors (more subtle ones or patterns these days are more common these days)<p>* too many font sizes<p>* odd intermix of rounded corners (very round!) and square ones<p>* unstyled textual header (if you just adopt a &quot;visual&quot; font for the title it will look nicer)<p>I don&#x27;t mind it, anyway.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-18 08:10:12 &#43;0000 UTC">2021-08-18 08:10:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; * underlined links in sidebar (we are familiar with sidebars now, we know we can click those, this looks like a page made with &lt;frame&gt;)<p>please no. my parents had an internet connection since 1996, and they have SO MUCH TROUBLE with links that aren&#x27;t underlined, especially on the phone. It&#x27;s one of the most basic affordances of the web.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=riffraff" target="_blank">riffraff</a>   <span class="timeago" data-date="2021-08-18 12:30:54 &#43;0000 UTC">2021-08-18 12:30:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Are you sure about this? I agree this is the case for generic links, but it seems odd for the navigation ones.<p>Basically every site I could think of (NYT, Yahoo!, BBC, Google&#x2F;GMail, HuPo, Amazon) has navbars without underline.<p>Even the site for &quot;Don&#x27;t Make Me Think!&quot;[0] avoids them.<p>[0] <a href="https:&#x2F;&#x2F;sensible.com&#x2F;dont-make-me-think&#x2F;" rel="nofollow">https:&#x2F;&#x2F;sensible.com&#x2F;dont-make-me-think&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lolski" target="_blank">lolski</a>   <span class="timeago" data-date="2021-08-18 11:12:35 &#43;0000 UTC">2021-08-18 11:12:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The one that adds a lot to the retro look for me was the colour scheme - look at how each section has different colours.<p>The combination of typography, colour scheme, borders, corners, and margin used doesn&#x27;t add up to a &quot;unified look and feel&quot;.<p>Anyways, I made the discussion go off tangent here talking about the website and not the language itself :D
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=tartoran" target="_blank">tartoran</a>   <span class="timeago" data-date="2021-08-18 05:34:38 &#43;0000 UTC">2021-08-18 05:34:38 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Layers and layers of styling, all sorts of frameworks and web trinkets. I like the style of this website, it is simple and not overwhelming. It does look older but old in UI&#x2F;UX doesn’t mean worse, it could mean better in many ways. However, the left banner overlaps the content and it makes reading the content on my phone nearly impossible so I guess it’s got its flaws.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mejutoco" target="_blank">mejutoco</a>   <span class="timeago" data-date="2021-08-18 08:51:25 &#43;0000 UTC">2021-08-18 08:51:25 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IMHO, it is mainly The default styling of links (blue with underline)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=hknapp" target="_blank">hknapp</a>   <span class="timeago" data-date="2021-08-18 01:43:01 &#43;0000 UTC">2021-08-18 01:43:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The design oddly makes me take it more seriously.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=riidom" target="_blank">riidom</a>   <span class="timeago" data-date="2021-08-17 23:13:49 &#43;0000 UTC">2021-08-17 23:13:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            when you see &quot;online&quot; written as &quot;on-line&quot;
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dan-robertson" target="_blank">dan-robertson</a>   <span class="timeago" data-date="2021-08-18 06:20:40 &#43;0000 UTC">2021-08-18 06:20:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I often read online as “on the web” and on-line as referring to algorithms that are supposed to incrementally produce their output based on an input stream of unknown length, eg an on-line algorithm for estimating medians.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=riidom" target="_blank">riidom</a>   <span class="timeago" data-date="2021-08-18 07:30:45 &#43;0000 UTC">2021-08-18 07:30:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Just learned about that difference. In terms of an web-based code editor with a result panel, both definitions fit a little bit, I guess.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lolski" target="_blank">lolski</a>   <span class="timeago" data-date="2021-08-17 22:59:31 &#43;0000 UTC">2021-08-17 22:59:31 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            and the fact that it&#x27;s hosted in sourceforge
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jp0d" target="_blank">jp0d</a>   <span class="timeago" data-date="2021-08-18 00:56:01 &#43;0000 UTC">2021-08-18 00:56:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Does anyone use it? I couldn&#x27;t find a list of businesses who use it.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=treebog" target="_blank">treebog</a>   <span class="timeago" data-date="2021-08-18 03:48:17 &#43;0000 UTC">2021-08-18 03:48:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s on the far bleeding edge as far as languages go, so I doubt any businesses use it. The largest practical ATS program I know of is polyglot: <a href="https:&#x2F;&#x2F;github.com&#x2F;vmchale&#x2F;polyglot" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;vmchale&#x2F;polyglot</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=grumpyprole" target="_blank">grumpyprole</a>   <span class="timeago" data-date="2021-08-18 07:58:32 &#43;0000 UTC">2021-08-18 07:58:32 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Rust seems very popular despite also being bleeding edge. I am surprised there isn&#x27;t more public industry interest in ATS, it looks very principled and well designed.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=chriswarbo" target="_blank">chriswarbo</a>   <span class="timeago" data-date="2021-08-18 10:40:50 &#43;0000 UTC">2021-08-18 10:40:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            ATS seems like a &quot;Worse is Better&quot; approach to dependent types and linear types. It exposes all of their power at the type level, and the value level allows both ML-style high level programming <i>and</i> C-level bit-banging. That&#x27;s <i>really</i> useful for<p>Yet to actually <i>use</i> that power, developers are pretty much left to implement everything themselves.<p>The nice thing about Rust&#x27;s borrow-checking approach is that common patterns can be inferred and checked. Linear types ATS offer the same power, but force developers to jump through more hoops &#x27;manually&#x27; (and likewise for dependent types, compared to the fancy inference&#x2F;proof-search approaches of languages like Idris)
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jp0d" target="_blank">jp0d</a>   <span class="timeago" data-date="2021-08-18 11:23:53 &#43;0000 UTC">2021-08-18 11:23:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks for the descriptive answer mate. I honestly don&#x27;t know much about it. But I&#x27;ve read about the LISP family and ML family of languages. There are too many to choose from. I&#x27;ve decided to learn F# and have been going through some tutorials. I&#x27;m enjoying it quite a lot. ATS sounds like a good combo of abstraction meets bare metal.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jp0d" target="_blank">jp0d</a>   <span class="timeago" data-date="2021-08-18 05:36:56 &#43;0000 UTC">2021-08-18 05:36:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks man. It&#x27;s difficult to keep track as I&#x27;ve seen so many new languages on HN. This one seemed like an important one.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=moonchild" target="_blank">moonchild</a>   <span class="timeago" data-date="2021-08-18 08:35:45 &#43;0000 UTC">2021-08-18 08:35:45 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The ATS compiler is also written in ATS.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pabs3" target="_blank">pabs3</a>   <span class="timeago" data-date="2021-08-19 12:41:23 &#43;0000 UTC">2021-08-19 12:41:23 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How do you bootstrap the ATS compiler from source if you don&#x27;t have binaries?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=detaro" target="_blank">detaro</a>   <span class="timeago" data-date="2021-08-19 12:43:40 &#43;0000 UTC">2021-08-19 12:43:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There is more than one compiler: <a href="http:&#x2F;&#x2F;www.ats-lang.org&#x2F;Implements.html" rel="nofollow">http:&#x2F;&#x2F;www.ats-lang.org&#x2F;Implements.html</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=yamazakiwi" target="_blank">yamazakiwi</a>   <span class="timeago" data-date="2021-08-17 21:22:06 &#43;0000 UTC">2021-08-17 21:22:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I thought this was going to be some sort of scripting language for Applicant Tracking Systems
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/19/datamining-wikipedia-for-fun-and-profit/">
+
+
+    <title>Data-Mining Wikipedia for Fun and Profit - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Data-Mining Wikipedia for Fun and Profit - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/datamining-wikipedia-for-fun-and-profit/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/19/datamining-wikipedia-for-fun-and-profit/">
+<meta name="twitter:title" content="Data-Mining Wikipedia for Fun and Profit - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Data-Mining Wikipedia for Fun and Profit - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-19T14:17:33JST",
+    "dateModified": "2021-08-19T14:17:33JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://billpg.com/data-mining-wikipedia/">Data-Mining Wikipedia for Fun and Profit</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=humanistbot" target="_blank">humanistbot</a>   <span class="timeago" data-date="2021-08-19 14:58:09 &#43;0000 UTC">2021-08-19 14:58:09 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Please don&#x27;t scrape raw HTML from Wikipedia. They do a lot of work to make their content accessible in so many machine-readable formats, from the raw XML dumps (<a href="https:&#x2F;&#x2F;dumps.wikimedia.org" rel="nofollow">https:&#x2F;&#x2F;dumps.wikimedia.org</a>) to the fully-featured API with a nice sandbox (<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Special:ApiSandbox" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Special:ApiSandbox</a>) and Wikidata (<a href="https:&#x2F;&#x2F;wikidata.org" rel="nofollow">https:&#x2F;&#x2F;wikidata.org</a>).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cldellow" target="_blank">cldellow</a>   <span class="timeago" data-date="2021-08-19 15:14:37 &#43;0000 UTC">2021-08-19 15:14:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The infoboxes, which is what this guy is scraping, are much easier to scrape from the HTML than from the XML dumps.<p>The reason is that the dumps just have pointers to templates, and you need to understand quite a bit about Wikipedia&#x27;s bespoke rendering system to know how to fully realize them (or use a constantly-evolving library like wtf_wikipedia [1] to parse them).<p>The rendered HTML, on the other hand, is designed for humans, and so what you see is what you get.<p>[1]: <a href="https:&#x2F;&#x2F;github.com&#x2F;spencermountain&#x2F;wtf_wikipedia" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;spencermountain&#x2F;wtf_wikipedia</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lou1306" target="_blank">lou1306</a>   <span class="timeago" data-date="2021-08-19 15:24:42 &#43;0000 UTC">2021-08-19 15:24:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Still, I guess you could get the dumps and do a local Wikimedia setup based on them, and then crawl <i>that</i> instead?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=cldellow" target="_blank">cldellow</a>   <span class="timeago" data-date="2021-08-19 15:33:22 &#43;0000 UTC">2021-08-19 15:33:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You could, and if he was doing this on the entire corpus that&#x27;d be the responsible thing to do.<p>But, his project really was very reasonable:<p>- it fetched ~2,400 pages<p>- he cached them after first fetch<p>- Wikipedia aggressively caches anonymous page views (eg the Queen Elizabeth page has a cache age of 82,000 seconds)<p>English Wikipedia does about 250,000,000 pageviews&#x2F;day. This guy&#x27;s use was 0.001% of traffic on that day.<p>I get the slippery slope arguments, but to me, it just doesn&#x27;t apply. As someone who has donated $1,000 to Wikipedia in the past, I&#x27;m totally happy to have those funds spent supporting use cases like this, rather than demanding that people who want to benefit from Wikipedia be able to set up a MySQL server, spend hours doing the import, install and configure a PHP server, etc, etc.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=habibur" target="_blank">habibur</a>   <span class="timeago" data-date="2021-08-19 15:51:04 &#43;0000 UTC">2021-08-19 15:51:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;  This guy&#x27;s use was 0.001% of traffic on that day<p>For 1 person consuming from one of the most popular sites on the web, this really reads big.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cldellow" target="_blank">cldellow</a>   <span class="timeago" data-date="2021-08-19 16:01:56 &#43;0000 UTC">2021-08-19 16:01:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            He was probably one of the biggest users that day, so that makes sense.<p>The 2,400 pages, assuming a 50 KB average gzipped size, equate to 120 MB of transfer. I&#x27;m assuming CPU usage is negligible due to CDN caching, and so bandwidth is the main cost. 120 MB is orders of magnitude less transfer than the 18.5 GB dump.<p>Instead of the dumps, he could have used the API -- but would that have significantly changed the costs to the Wikimedia foundation? I think probably not. In my experience, the happy path (serving anonymous HTML) is going to be aggressively optimized for costs, eg caching, CDNs, negotiated bandwidth discounts.<p>If we accept that these kinds of projects are permissible (which no one seems to be debating, just the manner in which he did the project!), I think the way this guy went about doing it was not actually as bad as people are making it out to be.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jancsika" target="_blank">jancsika</a>   <span class="timeago" data-date="2021-08-19 15:59:19 &#43;0000 UTC">2021-08-19 15:59:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; The infoboxes, which is what this guy is scraping, are much easier to scrape from the HTML than from the XML dumps.<p>How is it possible that &quot;give me all the infoboxes, please&quot; is more than a single query, download, or even URL at this point?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ceejayoz" target="_blank">ceejayoz</a>   <span class="timeago" data-date="2021-08-19 16:13:59 &#43;0000 UTC">2021-08-19 16:13:59 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The problem lies in <i>parsing</i> them.<p>Look at the template for a subway line infobox, for example. <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Template:Bakerloo_line_RDT" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Template:Bakerloo_line_RDT</a><p>It&#x27;s a whole little clever language (<a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Wikipedia:Route_diagram_template" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Wikipedia:Route_diagram_templa...</a>) for making complex diagrams out of rather simple pictograms (<a href="https:&#x2F;&#x2F;commons.wikimedia.org&#x2F;wiki&#x2F;Template:Bsicon" rel="nofollow">https:&#x2F;&#x2F;commons.wikimedia.org&#x2F;wiki&#x2F;Template:Bsicon</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=cldellow" target="_blank">cldellow</a>   <span class="timeago" data-date="2021-08-19 16:18:03 &#43;0000 UTC">2021-08-19 16:18:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Even just being able to download a tarball of the HTML of the infoboxes would be really powerful, setting aside the difficulty of, say, translating them into a consistent JSON format.<p>That plus a few other key things (categories, opening paragraph, redirects, pageview data) enable a lot of powerful analysis.<p>That actually might be kind of a neat thing to publish. Hmmmm.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=squeaky-clean" target="_blank">squeaky-clean</a>   <span class="timeago" data-date="2021-08-19 16:37:18 &#43;0000 UTC">2021-08-19 16:37:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The infoboxes aren&#x27;t standardized at all. The HTML they generate is.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=whall6" target="_blank">whall6</a>   <span class="timeago" data-date="2021-08-19 15:06:42 &#43;0000 UTC">2021-08-19 15:06:42 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Genuine question from a non-programmer: why? Is it because the volume of requests increases load on the servers&#x2F;costs?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=michaelbuckbee" target="_blank">michaelbuckbee</a>   <span class="timeago" data-date="2021-08-19 15:10:04 &#43;0000 UTC">2021-08-19 15:10:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            That&#x27;s part of it, but also it&#x27;s typically much more difficult and there&#x27;s an element of &quot;why are you making this so much harder on yourself&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=jcun4128" target="_blank">jcun4128</a>   <span class="timeago" data-date="2021-08-19 15:55:52 &#43;0000 UTC">2021-08-19 15:55:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Can make it even harder, use Puppeteer to take screenshots then pass it to an OCR to get the text.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thechao" target="_blank">thechao</a>   <span class="timeago" data-date="2021-08-19 16:56:50 &#43;0000 UTC">2021-08-19 16:56:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            <a href="https:&#x2F;&#x2F;xkcd.com&#x2F;378&#x2F;" rel="nofollow">https:&#x2F;&#x2F;xkcd.com&#x2F;378&#x2F;</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=billpg" target="_blank">billpg</a>   <span class="timeago" data-date="2021-08-19 15:15:20 &#43;0000 UTC">2021-08-19 15:15:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Author of original article here.)<p>That&#x27;s the great thing about HtmlAgilityPack, extracting data from HTML is really easy. I might even say even easier than if I had the page in some table-based data system.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=SlimyHog" target="_blank">SlimyHog</a>   <span class="timeago" data-date="2021-08-19 15:19:24 &#43;0000 UTC">2021-08-19 15:19:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The HTML is more volatile and subject to change than other sources though
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FalconSensei" target="_blank">FalconSensei</a>   <span class="timeago" data-date="2021-08-19 16:32:46 &#43;0000 UTC">2021-08-19 16:32:46 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t remember the last time wikipedia changed the infobox though
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nonameiguess" target="_blank">nonameiguess</a>   <span class="timeago" data-date="2021-08-19 15:20:52 &#43;0000 UTC">2021-08-19 15:20:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Unlike APIs, html class&#x2F;tag names or whatever provide no stability guarantees. The site owner can break your parser whenever they want for any reason. They <i>can</i> do that with an API, but usually won&#x27;t since some guarantee of stability is the point of an API.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=matkoniecz" target="_blank">matkoniecz</a>   <span class="timeago" data-date="2021-08-19 15:36:03 &#43;0000 UTC">2021-08-19 15:36:03 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Scrapping, especially on a large scale, can put a noticeable strain on servers.<p>Bulk downloads (database dumps) are much cheaper to serve for someone crawling millions of pages.<p>It gets even more significant if generation of reply is resource intensive (not sure is Wikipedia qualifying for that but complex templates may cause this).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=spoonjim" target="_blank">spoonjim</a>   <span class="timeago" data-date="2021-08-19 15:57:28 &#43;0000 UTC">2021-08-19 15:57:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            How does scraping raw HTML from Wikipedia hurt them? I&#x27;d think they could serve the HTML from cache more likely than the API call.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=traceroute66" target="_blank">traceroute66</a>   <span class="timeago" data-date="2021-08-19 15:08:52 &#43;0000 UTC">2021-08-19 15:08:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IANAL but since the pages are published under Creative Commons Attribution-ShareAlike, if someone wishes to collect the text on the basis of the HTML version then there&#x27;s not much you can do about it.<p>Wikimedia no doubt have caching, CDNs and all that jazz in place so the likely impact on infrastructure is probably de-minimis in the grand scheme of things (the thousands or millions of humans who visit the site every second).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=learc83" target="_blank">learc83</a>   <span class="timeago" data-date="2021-08-19 15:10:43 &#43;0000 UTC">2021-08-19 15:10:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt;IANAL but since the pages are published under Creative Commons Attribution-ShareAlike, if someone wishes to collect the text on the basis of the HTML version then there&#x27;s not much you can do about it.<p>They said <i>please</i> don&#x27;t, not don&#x27;t do it or they&#x27;ll sue you.<p>But content license and site terms of use are different things.<p>From their terms of use you aren’t allowed to<p>&gt; [Disrupt] the services by placing an undue burden on a Project website or the networks or servers connected with a Project website;<p>Wikipedia is also well within their rights to implement scraping countermeasures.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=traceroute66" target="_blank">traceroute66</a>   <span class="timeago" data-date="2021-08-19 16:03:17 &#43;0000 UTC">2021-08-19 16:03:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; [Disrupt] the services by placing an undue burden on a Project website or the networks or servers connected with a Project website;<p>Two things:<p><pre><code>  1) The English wikipedia *alone* gets 250 million page views per day !  So you would have to be doing an awful lot to cause &quot;undue burden&quot;.
+
+  2) The Wikipedia robots.txt page openly implies that crawling (and therefore scraping) is acceptable *as long as* you do it in a rate-limited fashion, e.g.:
+
+  &gt;Friendly, low-speed bots are welcome viewing article pages, but not dynamically-generated pages please.
+
+  &gt; There are a lot of pages on this site, and there are some misbehaved spiders out there that go _way_ too fast.
+
+  &gt;Sorry, wget in its recursive mode is a frequent problem. Please read the man page and use it properly; there is a --wait option you can use to set the delay between hits, for instance.</code></pre>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=_jal" target="_blank">_jal</a>   <span class="timeago" data-date="2021-08-19 15:19:27 &#43;0000 UTC">2021-08-19 15:19:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &quot;Who&#x27;s gonna stop me&quot; is kind of a crappy attitude to take with a cooperative project like Wikipedia.<p>I mean, sure, you can do a lot of things you shouldn&#x27;t with freely available services. There&#x27;s even an economics term that describes this: the Tragedy of the Commons.<p>Individual fish poachers&#x27; hauls are also, individually, de-minimis.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=billpg" target="_blank">billpg</a>   <span class="timeago" data-date="2021-08-19 15:08:52 &#43;0000 UTC">2021-08-19 15:08:52 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Author here)<p>In an act of divine justice, my website is down.<p><a href="https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20210711201037&#x2F;https:&#x2F;&#x2F;billpg.com&#x2F;data-mining-wikipedia&#x2F;" rel="nofollow">https:&#x2F;&#x2F;web.archive.org&#x2F;web&#x2F;20210711201037&#x2F;https:&#x2F;&#x2F;billpg.co...</a><p>(I&#x27;ll send you a donation. Thank you!)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=papercrane" target="_blank">papercrane</a>   <span class="timeago" data-date="2021-08-19 14:49:30 &#43;0000 UTC">2021-08-19 14:49:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For this particular problem I wonder if wikidata would be better instead of scraping the HTML.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=billpg" target="_blank">billpg</a>   <span class="timeago" data-date="2021-08-19 14:57:12 &#43;0000 UTC">2021-08-19 14:57:12 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            (Author here.)<p>Perhaps, but I already know how to scrape HTML and I know the data I wanted to pull out was in there. I have no idea how to query wikidata and it could have ended up being a blind alley.<p>Also, it was only my reading your comment just now that told me wikidata was even a thing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=shock-value" target="_blank">shock-value</a>   <span class="timeago" data-date="2021-08-19 15:03:41 &#43;0000 UTC">2021-08-19 15:03:41 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Generally Wikidata would definitely be the way to go here, though I just now tried to retrace your graph in Wikidata and it seems to be missing at least one relation (Ada of Holland  has no children listed -- <a href="https:&#x2F;&#x2F;www.wikidata.org&#x2F;wiki&#x2F;Q16156475" rel="nofollow">https:&#x2F;&#x2F;www.wikidata.org&#x2F;wiki&#x2F;Q16156475</a>).
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=3pt14159" target="_blank">3pt14159</a>   <span class="timeago" data-date="2021-08-19 15:04:29 &#43;0000 UTC">2021-08-19 15:04:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Don&#x27;t worry about the haters. You needed a paltry amount of data and you got it with the tools you had and knew.<p>When I was analyzing Wikipedia about 10 years ago for fun and, later, actual profit. I did the responsible thing and downloaded one of their megadumps because I needed every English page. That&#x27;s what people here are concerned about, but it doesn&#x27;t matter for your use case.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=papercrane" target="_blank">papercrane</a>   <span class="timeago" data-date="2021-08-19 15:55:07 &#43;0000 UTC">2021-08-19 15:55:07 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Hard to use it if you don&#x27;t know about it!<p>I only thought of it myself because you mentioned the problem with deducing which parent is the mother and which is the father, and I remember in wikidata those are separate fields.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=mistrial9" target="_blank">mistrial9</a>   <span class="timeago" data-date="2021-08-19 15:02:24 &#43;0000 UTC">2021-08-19 15:02:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            earth calling ivory tower, earth calling ivory tower<p>superior RDF triples are like martian language to millions of humans<p>over
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=udp" target="_blank">udp</a>   <span class="timeago" data-date="2021-08-19 15:03:57 &#43;0000 UTC">2021-08-19 15:03:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The ivory tower is working on it: <a href="https:&#x2F;&#x2F;github.com&#x2F;w3c&#x2F;EasierRDF" rel="nofollow">https:&#x2F;&#x2F;github.com&#x2F;w3c&#x2F;EasierRDF</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=squeaky-clean" target="_blank">squeaky-clean</a>   <span class="timeago" data-date="2021-08-19 16:38:56 &#43;0000 UTC">2021-08-19 16:38:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Like people on the other comment have said, if you&#x27;ve actually tried getting data from wikidata&#x2F;wikipedia you very quickly learn the HTML is much easier to parse than the results wikidata gives you.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=brodo" target="_blank">brodo</a>   <span class="timeago" data-date="2021-08-19 15:00:14 &#43;0000 UTC">2021-08-19 15:00:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It’s so sad that almost nobody knows or uses SPARQL…
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=matkoniecz" target="_blank">matkoniecz</a>   <span class="timeago" data-date="2021-08-19 15:10:20 &#43;0000 UTC">2021-08-19 15:10:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In my experience SPARQL is really hard to use, and Wikidata data quality is really low. To the point that one of my larger project is trying to filter data to make it usable for my usecase.<p>Yes, I made some improvements ( <a href="https:&#x2F;&#x2F;www.wikidata.org&#x2F;wiki&#x2F;Special:Contributions&#x2F;Mateusz_Konieczny" rel="nofollow">https:&#x2F;&#x2F;www.wikidata.org&#x2F;wiki&#x2F;Special:Contributions&#x2F;Mateusz_...</a> ).<p>But overall I would not encourage using it, if I would know how much work it takes to get usable data I would not bother with it.<p>Queries as simple as &quot;is this entry describing event, bridge or neither&quot; are requiring extreme effort to get right in a reliable way, including maintaining private list of patches and exemptions.<p>And bots creating millions of known duplicated entries and expecting people to resolve this manually is quite discouraging. Creating Wikidata entries for Cebuano Wikipedia &#x27;articles&#x27; was accepted, despite that Cebuano botpedia is nearly completely bot-generated.<p>And that is without unclear legal status. Yes, they can legally import databases covered by database rights - but they should either make clear that Wikidata is a legal quagmire in EU or forbid such imports. But Wikidata community did neither.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=guidovranken" target="_blank">guidovranken</a>   <span class="timeago" data-date="2021-08-19 15:24:39 &#43;0000 UTC">2021-08-19 15:24:39 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            At least the last times I checked, the WikiData SPARQL server was extremely slow, frequently timing out.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=lacksconfidence" target="_blank">lacksconfidence</a>   <span class="timeago" data-date="2021-08-19 16:24:27 &#43;0000 UTC">2021-08-19 16:24:27 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            seems to depend on the query. I can issue straight forward queries that visit a few hundred thousand triples easily. But when i write a query that visits tens of millions of triples it times out.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=devbas" target="_blank">devbas</a>   <span class="timeago" data-date="2021-08-19 15:09:18 &#43;0000 UTC">2021-08-19 15:09:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Because the syntax is relatively complex and it is difficult to judge which endpoints and definitions to use.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pphysch" target="_blank">pphysch</a>   <span class="timeago" data-date="2021-08-19 15:10:43 &#43;0000 UTC">2021-08-19 15:10:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why should more people know SPARQL?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=powera" target="_blank">powera</a>   <span class="timeago" data-date="2021-08-19 14:57:13 &#43;0000 UTC">2021-08-19 14:57:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Definitely.  There&#x27;s even a public query service ( <a href="https:&#x2F;&#x2F;query.wikidata.org&#x2F;" rel="nofollow">https:&#x2F;&#x2F;query.wikidata.org&#x2F;</a> ) which can do a lot of this (though SQL is not good with searching for chains).
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 15:05:43 &#43;0000 UTC">2021-08-19 15:05:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=mrVentures" target="_blank">mrVentures</a>   <span class="timeago" data-date="2021-08-19 15:06:44 &#43;0000 UTC">2021-08-19 15:06:44 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Lol I love that it was edited out right away. I probably agree with that decision but this was a really cool project. I have followed a few YouTube channels which make graphic visualizations for Generations and I think they would really appreciate if you shared this Tech with them
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=barbinbrad" target="_blank">barbinbrad</a>   <span class="timeago" data-date="2021-08-19 15:44:40 &#43;0000 UTC">2021-08-19 15:44:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For anyone who is interested: I used to work with a guy named Richard Wang, who indexed Wikipedia as his training data set in order to do named entity recognition. He&#x27;d be a good person to talk for anyone pursuing this.<p>Here&#x27;s a demo: <a href="https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=SyhaxCjrZFw" rel="nofollow">https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v=SyhaxCjrZFw</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-19 16:03:54 &#43;0000 UTC">2021-08-19 16:03:54 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lizhang" target="_blank">lizhang</a>   <span class="timeago" data-date="2021-08-19 15:06:48 &#43;0000 UTC">2021-08-19 15:06:48 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Where&#x27;s the profit?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=billpg" target="_blank">billpg</a>   <span class="timeago" data-date="2021-08-19 15:59:06 &#43;0000 UTC">2021-08-19 15:59:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            For three minutes, something I wrote was cited on Wikipedia.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=ad404b8a372f2b9" target="_blank">ad404b8a372f2b9</a>   <span class="timeago" data-date="2021-08-19 15:48:22 &#43;0000 UTC">2021-08-19 15:48:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Good question, as a data-hoarder mining has always been fun but I was interested in seeing the profit. I&#x27;ve yet to find any monetary value in the troves of data I accumulate.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+

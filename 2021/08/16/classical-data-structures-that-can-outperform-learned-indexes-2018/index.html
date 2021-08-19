@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="pinterest" content="nopin">
+<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+<meta name="generator" content="Hugo 0.87.0" />
+
+
+
+<link rel="canonical" href="https://davidejones.github.io/hugo-hn/2021/08/16/classical-data-structures-that-can-outperform-learned-indexes-2018/">
+
+
+    <title>Classical data structures that can outperform learned indexes (2018) - Hugo Hacker News</title>
+    
+<meta name="description" content="">
+
+<meta property="og:title" content="Classical data structures that can outperform learned indexes (2018) - Hugo Hacker News">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/classical-data-structures-that-can-outperform-learned-indexes-2018/">
+<meta property="og:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+<meta property="og:site_name" content="Hugo Hacker News">
+<meta property="og:description" content="">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="Hugo Hacker News">
+<meta name="twitter:url" content="https://davidejones.github.io/hugo-hn/2021/08/16/classical-data-structures-that-can-outperform-learned-indexes-2018/">
+<meta name="twitter:title" content="Classical data structures that can outperform learned indexes (2018) - Hugo Hacker News">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://davidejones.github.io/hugo-hn/images/default.png">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "NewsArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id":"https:\/\/davidejones.github.io\/hugo-hn\/"
+    },
+    "headline": "Classical data structures that can outperform learned indexes (2018) - Hugo Hacker News",
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:\/\/davidejones.github.io\/hugo-hn\/images\/default.png",
+      "height": 800,
+      "width": 800
+    },
+    "datePublished": "2021-08-16T06:21:19JST",
+    "dateModified": "2021-08-16T06:21:19JST",
+    "author": {
+      "@type": "Person",
+      "name": "Hugo Hacker News"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Hugo Hacker News",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/davidejones.github.io\/hugo-hn\/images/logo.png",
+        "width": 600,
+        "height": 60
+      }
+    },
+    "description": ""
+  }
+</script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+    
+    
+    
+    
+        
+    
+    
+    <link href="https://davidejones.github.io/hugo-hn/style.min.130df59cea3bafd8a515eeb4a51c215616cb41f2a9520765b9f1574d3cfedf2c485abb4a8d785adcd7acdc2400797ba6abffe5b0bb4612cb79bc0b884aac89e8.css" rel="stylesheet" />
+</head>
+<body class="post">
+    <header>
+        <a href="https://davidejones.github.io/hugo-hn/">Hugo Hacker News</a>
+        <nav>
+            <ul>
+                
+                    <li><a href="/hugo-hn/">new</a></li>
+                
+                    <li><a href="/hugo-hn/comments/">comments</a></li>
+                
+                    <li><a href="/hugo-hn/categories/show/">show</a></li>
+                
+                    <li><a href="/hugo-hn/categories/ask/">ask</a></li>
+                
+                    <li><a href="/hugo-hn/categories/jobs/">jobs</a></li>
+                
+                    <li><a href="https://news.ycombinator.com/submit">submit</a></li>
+                
+            </ul>
+        </nav>
+        <select onchange="myChangeHandler(this)">
+            
+                <option value="/hugo-hn/">new</option>
+            
+                <option value="/hugo-hn/comments/">comments</option>
+            
+                <option value="/hugo-hn/categories/show/">show</option>
+            
+                <option value="/hugo-hn/categories/ask/">ask</option>
+            
+                <option value="/hugo-hn/categories/jobs/">jobs</option>
+            
+                <option value="https://news.ycombinator.com/submit">submit</option>
+            
+        </select>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1><a href="https://dawn.cs.stanford.edu//2018/01/11/index-baselines/">Classical data structures that can outperform learned indexes (2018)</a></h1>
+        
+    </header>
+    
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-16 07:28:55 &#43;0000 UTC">2021-08-16 07:28:55 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Why do cuckoo hashing advertisements always sound like snake oil sales pitches?<p>Claim: &quot;A simple and beautiful technique that can achieve 99% occupancy and serve all lookups with just two memory accesses thanks to the power of two choices.&quot;<p>Great, so apparently I can achieve 99% occupancy?<p>Reality [1]: &quot;Insertions succeed in expected constant time [...] as long as the number of keys is kept <i>below half</i> of the capacity of the hash table, i.e., <i>the load factor is below 50%</i>.&quot;<p>Ok so never mind...<p>[1] <a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cuckoo_hashing#Theory" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cuckoo_hashing#Theory</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=FreakLegion" target="_blank">FreakLegion</a>   <span class="timeago" data-date="2021-08-16 09:25:57 &#43;0000 UTC">2021-08-16 09:25:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; <i>Ok so never mind...</i><p>Keep reading, specifically the Variations section. 50% occupancy is for constructions with a per-bucket capacity of 1. At a capacity of 2, occupancy improves to a little under 90%, and at 4 to just under 98%. The linked write-up uses 8, which does in fact achieve very high occupancy.<p>They could&#x27;ve done better, though. By using <i>windows</i> instead of <i>buckets</i> (i.e. allowing the buckets to overlap), a capacity of 2 already yields &gt; 96% occupancy, and 4 reaches 99.9%, so smaller <i>and</i> faster (lookups examine fewer keys on average). This approach is detailed in &quot;3.5-Way Cuckoo Hashing for the Price of 2-and-a-Bit&quot;.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-16 09:43:53 &#43;0000 UTC">2021-08-16 09:43:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Thanks, that explains what they&#x27;re saying now. But I&#x27;m still skeptical. How achievable is 98% fill for 4-element buckets in the first place? Intuitively I feel like you&#x27;d frequently have to scrap the table and rehash or enlarge it... is that not the case?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=FreakLegion" target="_blank">FreakLegion</a>   <span class="timeago" data-date="2021-08-17 20:49:53 &#43;0000 UTC">2021-08-17 20:49:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Like with Bloom filters (which also draw their power from hashing items into multiple buckets), the statistical guarantees are quite strong, and things work well in practice.<p>There are other options for the insertion algorithm than the standard random walk, too. E.g. take a look at page 18 of &quot;Load Thresholds for Cuckoo Hashing with Overlapping Blocks&quot; [1] for empirical data on 2-3 hash functions for 2-3 size windows. They don&#x27;t show 4- or 8-size windows, but you get the gist.<p>Like nullc says below, it&#x27;s trivial to tune things for your requirements. Want fast insertions? Overprovision. Want more predictable insertions? Use a smarter insertion algorithm. Want small tables? Use more hash functions and&#x2F;or larger buckets. Want fast queries? Keep the hash count and bucket sizes small.<p>Rehashing isn&#x27;t really a concern beyond the case of 2 hash functions and non-overlapping buckets of size 1.<p>1. <a href="https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1707.06855.pdf" rel="nofollow">https:&#x2F;&#x2F;arxiv.org&#x2F;pdf&#x2F;1707.06855.pdf</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jasonwatkinspdx" target="_blank">jasonwatkinspdx</a>   <span class="timeago" data-date="2021-08-16 18:28:06 &#43;0000 UTC">2021-08-16 18:28:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            So, for the complete formal answer get Mitzenmacher&#x27;s book: <a href="https:&#x2F;&#x2F;www.amazon.com&#x2F;Probability-Computing-Randomized-Algorithms-Probabilistic&#x2F;dp&#x2F;0521835402" rel="nofollow">https:&#x2F;&#x2F;www.amazon.com&#x2F;Probability-Computing-Randomized-Algo...</a><p>There are incrementally resizing versions, generally under the name Levelized Hashing. The most state of the art versions of these are lock free. (example: <a href="https:&#x2F;&#x2F;www.usenix.org&#x2F;conference&#x2F;atc20&#x2F;presentation&#x2F;chen" rel="nofollow">https:&#x2F;&#x2F;www.usenix.org&#x2F;conference&#x2F;atc20&#x2F;presentation&#x2F;chen</a>)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phkahler" target="_blank">phkahler</a>   <span class="timeago" data-date="2021-08-16 16:04:10 &#43;0000 UTC">2021-08-16 16:04:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Seems like a good point. If you&#x27;re at 90+ percent occupancy you&#x27;re going to run into trouble adding more data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway81523" target="_blank">throwaway81523</a>   <span class="timeago" data-date="2021-08-16 08:03:20 &#43;0000 UTC">2021-08-16 08:03:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            IIRC you can get to high occupancy by doing enough rehashes.  After that, if you do no more insertions and only lookups, it is a good deal since each lookup takes at most two memory accesses.  So this is useful if you are willing to spend a long time building what will then be a read-only table.  Obviously there are uses for that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dataflow" target="_blank">dataflow</a>   <span class="timeago" data-date="2021-08-16 08:22:21 &#43;0000 UTC">2021-08-16 08:22:21 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; IIRC you can get to high occupancy by doing enough rehashes.<p>Yeah so how many total insertions (as part of the rehashing) do you expect to have to do to achieve 99% occupancy? Wouldn&#x27;t it be even worse than O(n^2)?<p>And if you&#x27;re going to spend a lot of time rebuilding the hash table all the time, then why not just use a perfect hash generator?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=throwaway81523" target="_blank">throwaway81523</a>   <span class="timeago" data-date="2021-08-16 08:30:14 &#43;0000 UTC">2021-08-16 08:30:14 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Large perfect hash tables have to store an awful lot of information.  I don&#x27;t remember quite how it&#x27;s done but it&#x27;s not a free lunch.  The hash function itself has a size that grows with the total size of all the keys.<p>I don&#x27;t know offhand how many rehashes you need to get 98% occupancy with cuckoo hashing.  There may be ways to optimize it by sharding the table into smaller ones.  I&#x27;ll re-read the wikipedia article when I get a chance.  It&#x27;s a fun algorithm and I&#x27;ve sometimes looked for places to use it.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-16 23:54:19 &#43;0000 UTC">2021-08-16 23:54:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; Yeah so how many total insertions (as part of the rehashing) do you expect to have to do to achieve 99% occupancy? Wouldn&#x27;t it be even worse than<p>It depends on your bucket sizes and how many hashes you use.<p>If you attempt 99% occupancy with 2 hashes and 4 entries per bucket, then you are going to be doing a LOT of kicking.  92% with that geometry, OTOH, is fine and will end up with just a couple kicks per insert on average.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=signa11" target="_blank">signa11</a>   <span class="timeago" data-date="2021-08-16 08:03:29 &#43;0000 UTC">2021-08-16 08:03:29 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            i found this  (<a href="https:&#x2F;&#x2F;codecapsule.com&#x2F;?s=hashing" rel="nofollow">https:&#x2F;&#x2F;codecapsule.com&#x2F;?s=hashing</a>) to be quite instructive as an overview of various hashing techniques. check it out for some fun ?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=" target="_blank"></a>   <span class="timeago" data-date="2021-08-16 09:23:10 &#43;0000 UTC">2021-08-16 09:23:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=truenindb" target="_blank">truenindb</a>   <span class="timeago" data-date="2021-08-16 07:43:10 &#43;0000 UTC">2021-08-16 07:43:10 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It&#x27;s because the internet is a perfect sterling engine, guaranteeing that all eyeballs will be monotized in an adiabatic flow. It is know as &quot;The Permanent November of ImaginosVictory Law&quot; to those of us that have been using the internet since Salman Rushdie invented email, which is one of the best exemplars of a good protocol since Google Wave.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=lrem" target="_blank">lrem</a>   <span class="timeago" data-date="2021-08-16 08:00:49 &#43;0000 UTC">2021-08-16 08:00:49 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Was this generated with some GPT3-like or something?
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=orf" target="_blank">orf</a>   <span class="timeago" data-date="2021-08-16 09:16:05 &#43;0000 UTC">2021-08-16 09:16:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I think so, the only result on Google for “ ImaginosVictory” is that very comment.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=chana_masala" target="_blank">chana_masala</a>   <span class="timeago" data-date="2021-08-16 08:05:35 &#43;0000 UTC">2021-08-16 08:05:35 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Do you have an ICO I buy into?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=xarope" target="_blank">xarope</a>   <span class="timeago" data-date="2021-08-16 07:47:40 &#43;0000 UTC">2021-08-16 07:47:40 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            bingo?
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=DiabloD3" target="_blank">DiabloD3</a>   <span class="timeago" data-date="2021-08-16 09:05:16 &#43;0000 UTC">2021-08-16 09:05:16 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            I don&#x27;t know who&#x27;s running a GPT bot on HN, but this is a beautiful work of art.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=the_duke" target="_blank">the_duke</a>   <span class="timeago" data-date="2021-08-16 07:43:01 &#43;0000 UTC">2021-08-16 07:43:01 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            It wasn&#x27;t clear to me  how Cuckoo hash tables are supposed to work if both locations are full.<p>Here is the relevant explanation from Wikipedia :<p>&gt; The new key is inserted in one of its two possible locations, &quot;kicking out&quot;, that is, displacing, any key that might already reside in this location. This displaced key is then inserted in its alternative location, again kicking out any key that might reside there. The process continues in the same way until an empty position is found, completing the algorithm. However, it is possible for this insertion process to fail, by entering an infinite loop or by finding a very long chain (longer than a preset threshold that is logarithmic in the table size). In this case, the hash table is rebuilt in-place using new hash functions<p><a href="https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cuckoo_hashing#Operation" rel="nofollow">https:&#x2F;&#x2F;en.wikipedia.org&#x2F;wiki&#x2F;Cuckoo_hashing#Operation</a><p>Sound like with high occupancy the table would need to be rebuilt constantly.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-16 09:51:17 &#43;0000 UTC">2021-08-16 09:51:17 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Ah, O(wildly erratic) insertion. Great for that jittery feel to your programs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=j-pb" target="_blank">j-pb</a>   <span class="timeago" data-date="2021-08-16 10:46:22 &#43;0000 UTC">2021-08-16 10:46:22 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Since you double the table size after failing to insert&#x2F;displace above a constant threshhold, e.g. 8. You have O(1) insert performance. You don&#x27;t need to rehash the table either, you can add additional hash functions on each grow, or reuse your existing hash function and use bit masking, (that one does require a copy of the table, albeit no rehashing, and copying chunks is something our CPUs are really good at)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=adrianN" target="_blank">adrianN</a>   <span class="timeago" data-date="2021-08-16 11:47:57 &#43;0000 UTC">2021-08-16 11:47:57 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Most popular data structures only provide average case guarantees with bad worst-case bounds. Dynamic arrays also have O(wildly erratic) append. I think for most use cases this is perfectly fine and does not result in any perceivable jitter in programs.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-16 12:09:18 &#43;0000 UTC">2021-08-16 12:09:18 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            They do in fact not have erratic behavior, they are quite predictable. The cuckooing process, on the other hand, is not predictable by design.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-16 12:22:56 &#43;0000 UTC">2021-08-16 12:22:56 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Recently went on a deep dive about sorting algorithm actual predictability and for latency-sensitive workloads, most things you&#x27;d use because &#x27;simple&#x2F;standard&#x27; (quicksort, mergesort...) don&#x27;t shine, with their horrid &#x2F;worst case&#x2F; complexity, but also depending a lot on your input data. Quicksort with a badly chosen pivot, for example, has caused me headaches recently.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=phkahler" target="_blank">phkahler</a>   <span class="timeago" data-date="2021-08-16 16:13:28 &#43;0000 UTC">2021-08-16 16:13:28 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Heapsort is O(n * Log(n)) worst case. It is also O(n * Log(n)) in most cases, including already sorted data. Most implementations also seem to have a slightly larger constant factor than quicksort, but I think that&#x27;s largely due to implementation details (one should not actually swap values that are likely to be immediately swapped again).<p>Which one is right really does come down to a decision based on how much you care about Typical&#x2F;Average&#x2F;WorstCase time complexity and the actual size of your data set.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=karpierz" target="_blank">karpierz</a>   <span class="timeago" data-date="2021-08-16 13:15:30 &#43;0000 UTC">2021-08-16 13:15:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Mergesort worst case is O(nlog(n)). If there&#x27;s a downside to it, it&#x27;s that you need to allocate memory.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=touisteur" target="_blank">touisteur</a>   <span class="timeago" data-date="2021-08-17 22:15:58 &#43;0000 UTC">2021-08-17 22:15:58 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Which is where you get problematic tail latencies. Or your data fits on the stack.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=jcelerier" target="_blank">jcelerier</a>   <span class="timeago" data-date="2021-08-16 16:43:04 &#43;0000 UTC">2021-08-16 16:43:04 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            &gt; I think for most use cases this is perfectly fine and does not result in any perceivable jitter in programs.<p>we must not use the same programs :-(
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-16 23:51:53 &#43;0000 UTC">2021-08-16 23:51:53 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            A below transition fullness the insertion process takes N kicks with exponentially decreasing probability (for some constants depending on the fullness level and number of hash functions).  E.g. 1&#x2F;2^n kicks.<p>Not something you can really describe as wildly erratic.<p>If latency is particularly critical in your application, you could couple the hash table with a small &quot;stash&quot; map and perform a constant maximum number of kicks per insert, and when you reach the limit stick the current straggler in the map to be continued on the next insertion. As long as the constant maximum is well above the average the map will stay empty most of the time.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=toxik" target="_blank">toxik</a>   <span class="timeago" data-date="2021-08-17 09:09:34 &#43;0000 UTC">2021-08-17 09:09:34 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The fact that you&#x27;re talking about probabilities sort of proves my point. You&#x27;re instead saying it could be worse, and I&#x27;m saying random execution times in your critical paths is generally undesirable. It depends on your application of course, but if you have anything realtime or near realtime, I would definitely take consistent execution times.<p>There is a related e-mail from IdSoft&#x27;s John Carmack about this at [1] which I found very interesting.<p>[1] <a href="http:&#x2F;&#x2F;number-none.com&#x2F;blow&#x2F;blog&#x2F;programming&#x2F;2014&#x2F;09&#x2F;26&#x2F;carmack-on-inlined-code.html" rel="nofollow">http:&#x2F;&#x2F;number-none.com&#x2F;blow&#x2F;blog&#x2F;programming&#x2F;2014&#x2F;09&#x2F;26&#x2F;carm...</a>
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=nullc" target="_blank">nullc</a>   <span class="timeago" data-date="2021-08-18 05:48:36 &#43;0000 UTC">2021-08-18 05:48:36 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            There are &#x27;random&#x27; execution times in the critical paths of essentially everything on a modern general purpose computer, unfortunately.<p>What matters for realtime operation is that the worst case is bounded and that the bound is acceptable.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=TimonKnigge" target="_blank">TimonKnigge</a>   <span class="timeago" data-date="2021-08-16 08:14:19 &#43;0000 UTC">2021-08-16 08:14:19 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            In the linked article they resolve collisions via chaining:<p>&gt;  A typical hash function distributes keys randomly across the slots in a hash table, causing some slots to be empty, while others have collisions, which require some form of chaining of items<p>I.e. each field in the table is a linked list of values that hash to this position, and the new value is inserted in the shortest of the two lists it hashes to.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=eutectic" target="_blank">eutectic</a>   <span class="timeago" data-date="2021-08-16 09:15:37 &#43;0000 UTC">2021-08-16 09:15:37 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            No, chaining is presented as an alternative to Cuckoo hashing.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=pclmulqdq" target="_blank">pclmulqdq</a>   <span class="timeago" data-date="2021-08-16 12:34:08 &#43;0000 UTC">2021-08-16 12:34:08 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            The learned index paper struck me as a bit of a marketing gimmick, but this paper also smells a bit.  The central sleight of hand that both papers pull without admitting it is that they are creating mostly-read data structures (or in the first half of the learned index paper, read-only data structures).  The learned index paper then compares them to read-write data structures and claims a win.<p>Due to cache locality, cuckoo hashing usually underperforms compared to linear probing hash tables, except when you want super high density and you don&#x27;t expect to do much inserting.  It gets especially bad if the keys or values are large. 99% of the time, you&#x27;re better off with something other than cuckoo hashing.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=resters" target="_blank">resters</a>   <span class="timeago" data-date="2021-08-16 13:58:20 &#43;0000 UTC">2021-08-16 13:58:20 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Learned indexes are an optimization technique that can help a lot in specific scenarios, but the authors were not under the impression that they are applicable to most use-cases.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=thesz" target="_blank">thesz</a>   <span class="timeago" data-date="2021-08-16 22:53:24 &#43;0000 UTC">2021-08-16 22:53:24 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Logarithmic method can transform static structures (what you call read-only, which means high cost of change) into dynamic ones.<p>Examples include B-trees (log structured merge trees, the most famous example of application of logarithmic method), kd-trees, sorted arrays (cache oblivious lookahead arrays - COLA) and more.<p>Usually, some variant of merge operation is much more efficient than application of changes. It is obvious for sorted arrays (merge sort). It is true for kd-trees - they can be efficiently constructed from sorted data and it is easy to fetch sorted data from kd-trees. It is also quite true for B-trees. B-trees degrade when under random data load (and hugely so), but they are doing well when changes are in order. Log structured merge trees make static (under random data load) B-trees dynamic again.<p>The merge operation for learned indices is, well, learning from two sources and merge information. My not so big experience with machine learning tells me that adjusting model is easier than training it anew.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=rurban" target="_blank">rurban</a>   <span class="timeago" data-date="2021-08-17 13:51:06 &#43;0000 UTC">2021-08-17 13:51:06 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            And modern data structures always outperform classical ones.<p>Why cuckoo when you usually use swiss tables or stanford tables for longs? Or <a href="https:&#x2F;&#x2F;greg7mdp.github.io&#x2F;parallel-hashmap&#x2F;" rel="nofollow">https:&#x2F;&#x2F;greg7mdp.github.io&#x2F;parallel-hashmap&#x2F;</a> for concurrent htables?<p>Learned indices (ie dynamic data structures optimized to the data) usually outperform these as well if they are properly optimized. Which can be neural nets, but also perfect hashes or just better dynamic lookup methods. Like three-way array lookups, properly compressed, as with Unicode. Not everything needs to be a NN, though it helps if you see no structure in the data.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=dang" target="_blank">dang</a>   <span class="timeago" data-date="2021-08-16 19:29:13 &#43;0000 UTC">2021-08-16 19:29:13 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Discussed at the time:<p><i>Classical Data Structures That Can Outperform Learned Indexes</i> - <a href="https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16138857" rel="nofollow">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=16138857</a> - Jan 2018 (20 comments)
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment hasChildren">
+        <p><a href="https://news.ycombinator.com/user?id=dicroce" target="_blank">dicroce</a>   <span class="timeago" data-date="2021-08-16 12:38:43 &#43;0000 UTC">2021-08-16 12:38:43 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            As I read this I thought &quot;interesting. I would have thought probing would be better on modern computers with memory pre-fetching&quot;... Then I come to the comments and find out im not the only one thinking that.
+        </div>
+        <div class="children">
+            
+                
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=pclmulqdq" target="_blank">pclmulqdq</a>   <span class="timeago" data-date="2021-08-16 12:46:50 &#43;0000 UTC">2021-08-16 12:46:50 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            You&#x27;re right, benchmarks have shown that probing is better until you reach ~90% capacity.  Cuckoo hashing sufferers from terrible memory locality, and you can only make up for it when a probing table would have worse locality.
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=anonu" target="_blank">anonu</a>   <span class="timeago" data-date="2021-08-16 15:13:30 &#43;0000 UTC">2021-08-16 15:13:30 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Another great lesson that you can&#x27;t slap &quot;AI&quot; on everything...
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+            
+
+
+    
+    <div class="comment ">
+        <p><a href="https://news.ycombinator.com/user?id=truenindb" target="_blank">truenindb</a>   <span class="timeago" data-date="2021-08-16 07:39:05 &#43;0000 UTC">2021-08-16 07:39:05 &#43;0000 UTC</span> [ - ]</p>
+        <div class="body">
+            Look you don&#x27;t need to learn any algorithms because SQL will allow the computer to algorithm for you. SQL will guarantee ACID properties and also BASE properties. You are going to be rich. Simply buy Larry Ellison a boat and a bunch of ads on the back of the economist to socially prove to the finance world and the folks from Dave Graeber&#x27;s actually very good essay that has not yet been followed up with the great american novel, and you are gonna be rich with no algorithms not done by the computer.
+Don&#x27;t worry, the computer is gonna take care of it, you  won&#x27;t need handwriting or food.
+Here is a link to Mr. Graeber&#x27;s high quality novel, &quot;On the phenomenon of bullshit jobs&quot;: <a href="https:&#x2F;&#x2F;www.theatlantic.com&#x2F;magazine&#x2F;archive&#x2F;2004&#x2F;07&#x2F;i-agree-with-me&#x2F;303373&#x2F;" rel="nofollow">https:&#x2F;&#x2F;www.theatlantic.com&#x2F;magazine&#x2F;archive&#x2F;2004&#x2F;07&#x2F;i-agree...</a>
+        </div>
+        <div class="children">
+            
+        </div>
+    </div>
+
+
+        
+    
+</article>
+
+    </main>
+    <footer>
+        <span class="h-logo">&copy; Hugo Hacker News</span><br/>
+        Site created By <a href="https://davidejones.com" target="_blank">David E Jones</a> Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> and the <a href="https://github.com/HackerNews/API" target="_blank">Hacker News api</a>.
+        <ul>
+            
+                <li><a href="/hugo-hn/guidelines/">Guidelines</a></li>
+            
+                <li><a href="/hugo-hn/faq/">FAQ</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Support</a></li>
+            
+                <li><a href="https://github.com/HackerNews/API">API</a></li>
+            
+                <li><a href="/hugo-hn/security/">Security</a></li>
+            
+                <li><a href="/hugo-hn/lists/">Lists</a></li>
+            
+                <li><a href="https://news.ycombinator.com/bookmarklet.html">Bookmarklet</a></li>
+            
+                <li><a href="/hugo-hn/dmca/">DMCA</a></li>
+            
+                <li><a href="http://www.ycombinator.com/apply/">Apply to YC</a></li>
+            
+                <li><a href="mailto:hn@ycombinator.com">Contact</a></li>
+            
+        </ul>
+    </footer>
+
+    
+    
+    
+    
+    
+    
+    <script type="text/javascript" src="https://davidejones.github.io/hugo-hn/main.01d140732eee0e8adfdb7a7f714755097c6676bfb8e8bf27645ce342b2ed12a481b08f6838c413c20bff3acf20f6159b3336339a220ff5ec5e45eb7877106361.js"  integrity="sha512-AdFAcy7uDorf23p/cUdVCXxmdr&#43;46L8nZFzjQrLtEqSBsI9oOMQTwgv/Os8g9hWbMzYzmiIP9exeRet4dxBjYQ=="  crossorigin="anonymous" defer></script>
+</body>
+</html>
+
