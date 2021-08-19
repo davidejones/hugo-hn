@@ -153,8 +153,8 @@ def main():
     num_workers = int(os.environ.get('num_workers', 100))
 
     # create dirs
-    Path('./content/en/post/').mkdir(exist_ok=True)
-    Path('./data/post/').mkdir(exist_ok=True)
+    Path('./content/en/post/').mkdir(parents=True, exist_ok=True)
+    Path('./data/post/').mkdir(parents=True, exist_ok=True)
 
     # Download all json and create files
     asyncio.run(start(num_workers))
